@@ -53,19 +53,6 @@ void drawTrain()
 */
 }
 
-void putM0(void)
-{
-	cpct_setVideoMode(0);
-
-	cpct_setPalette(paletteTrains, 16);
-}
-
-void putM2(void)
-{
-	cpct_setVideoMode(2);
-
-	cpct_setPalette(paletteMenusM2, 2);
-}
 
 void main(void)
 {
@@ -95,12 +82,12 @@ void main(void)
 	putM2();
 
 	do{
-		cpct_clearScreen(0b11111111);
-
 		menuChoice = drawMenu(menuMain,3);
 
 		if(menuChoice==0)
 		{
+			putM1();
+			
 			game();
 
 			putM2();

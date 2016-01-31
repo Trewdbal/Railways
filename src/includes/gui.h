@@ -1,3 +1,24 @@
+void putM0(void)
+{
+	cpct_setVideoMode(0);
+
+	cpct_setPalette(paletteTrains, 16);
+}
+
+void putM1(void)
+{
+	cpct_setVideoMode(1);
+
+	cpct_setPalette(paletteMenusM1, 4);
+}
+
+void putM2(void)
+{
+	cpct_setVideoMode(2);
+
+	cpct_setPalette(paletteMenusM2, 2);
+	cpct_clearScreen(0b11111111);
+}
 
 void drawBoxM0(int width_, int height_)
 {
@@ -44,16 +65,29 @@ void drawBoxM2(int width_, int height_)
 	cpct_drawSolidBox(pvid, 0b11111111, width_-2, height_-2);
 }
 
-void drawMenuEntry(char **menu , u8 nbEntry, u8 iSelect)
+void EraseMenuEntry(char **menu, u8 nbEntry, u8 iSelect)
+{
+	u8 *p_video;
+
+	// Erase selection bar
+	p_video = cpct_getScreenPtr(SCR_VMEM, 32, (201-nbEntry*10)/2+iSelect*10);
+	cpct_drawSolidBox(p_video, 0b11111111, 17, 10);
+
+	// Re-draw text
+	p_video = cpct_getScreenPtr(SCR_VMEM, (82-strlen(menu[iSelect]))/2, (202-nbEntry*10)/2+iSelect*10);
+	cpct_drawStringM2 (menu[iSelect], p_video, 0);
+}
+
+void drawMenuEntry(char **menu, u8 nbEntry, u8 iSelect)
 {
 	int i;
-	u8 *pvideo;
+	u8 *p_video;
 	u8 penSelected = 0;
-	drawBoxM2(30,nbEntry*12);
+//	drawBoxM2(30,nbEntry*12);
 
 	// Draw selection bar
-	pvideo = cpct_getScreenPtr(SCR_VMEM, 32, (201-nbEntry*10)/2+iSelect*10);
-	cpct_drawSolidBox(pvideo, 0b00000000, 17, 10);
+	p_video = cpct_getScreenPtr(SCR_VMEM, 32, (201-nbEntry*10)/2+iSelect*10);
+	cpct_drawSolidBox(p_video, 0b00000000, 17, 10);
 
 	// Wait loop
 	for(i=0; i<14000; i++) {}
@@ -66,8 +100,8 @@ void drawMenuEntry(char **menu , u8 nbEntry, u8 iSelect)
 		else
 			penSelected = 0;
 
-		pvideo = cpct_getScreenPtr(SCR_VMEM, (82-strlen(menu[i]))/2, (202-nbEntry*10)/2+i*10);
-		cpct_drawStringM2 (menu[i], pvideo, penSelected);
+		p_video = cpct_getScreenPtr(SCR_VMEM, (82-strlen(menu[i]))/2, (202-nbEntry*10)/2+i*10);
+		cpct_drawStringM2 (menu[i], p_video, penSelected);
 	}
 }
 
@@ -76,6 +110,8 @@ u8 drawMenu(char **menu, u8 nbEntry)
 	int i;
 	u8 iSelect=0;
 
+	drawBoxM2(30,nbEntry*12);
+	
 	drawMenuEntry(menu, nbEntry, iSelect);
 
 	do{
@@ -83,6 +119,8 @@ u8 drawMenu(char **menu, u8 nbEntry)
 
 		if ( cpct_isKeyPressed(Key_CursorUp) )
 		{
+			EraseMenuEntry(menu, nbEntry, iSelect);
+
 			if(iSelect ==0)
 				iSelect = nbEntry-1;
 			else
@@ -93,6 +131,8 @@ u8 drawMenu(char **menu, u8 nbEntry)
 
 		if ( cpct_isKeyPressed(Key_CursorDown) )
 		{
+			EraseMenuEntry(menu, nbEntry, iSelect);
+
 			if(iSelect == nbEntry-1)
 				iSelect = 0;
 			else
@@ -102,7 +142,7 @@ u8 drawMenu(char **menu, u8 nbEntry)
 		}
 	} 
 	while(!cpct_isKeyPressed(Key_Return));
-	
+
 	// Wait loop
 	for(i=0; i<14000; i++) {}
 
@@ -119,25 +159,25 @@ u8 drawMenu(char **menu, u8 nbEntry)
 u8 drawWindow(char **text, u8 nbLine, u8 button)
 {
 	u8 i;
-	u8 *pvideo;
+	u8 *p_video;
 	u8 valueReturn=0;
 	const char *buttonTxt;
 
 	if(button == 0)
-	buttonTxt = "<OK>";
+		buttonTxt = "<OK>";
 	else
-	buttonTxt = "<OK>  <Cancel>";
+		buttonTxt = "<OK>  <Cancel>";
 
 	drawBoxM2(30,(nbLine+2)*12);
 
 	for(i=0; i<nbLine; i++)
 	{
-		pvideo = cpct_getScreenPtr(SCR_VMEM, (82-strlen(text[i]))/2, (202-(nbLine+2)*10)/2+i*10);
-		cpct_drawStringM2 (text[i], pvideo, 0);
+		p_video = cpct_getScreenPtr(SCR_VMEM, (82-strlen(text[i]))/2, (202-(nbLine+2)*10)/2+i*10);
+		cpct_drawStringM2 (text[i], p_video, 0);
 	}
 
-		pvideo = cpct_getScreenPtr(SCR_VMEM, (82-strlen(buttonTxt))/2, (202-(nbLine+2)*10)/2+(nbLine+1)*10);
-		cpct_drawStringM2 (buttonTxt, pvideo, 0);
+	p_video = cpct_getScreenPtr(SCR_VMEM, (82-strlen(buttonTxt))/2, (202-(nbLine+2)*10)/2+(nbLine+1)*10);
+	cpct_drawStringM2 (buttonTxt, p_video, 0);
 
 
 	do{

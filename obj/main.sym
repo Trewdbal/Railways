@@ -7,14 +7,20 @@ Symbol Table
     .__.ABS.                                                    =  0000 G
     .__.CPU.                                                    =  0000 L
     .__.H$L.                                                    =  0000 L
-  0 ___str_0                                                       080C R
-  0 ___str_1                                                       0811 R
-  0 ___str_2                                                       115A R
-  0 ___str_3                                                       1163 R
-  0 ___str_4                                                       116B R
-  0 ___str_5                                                       1170 R
-  0 ___str_6                                                       1179 R
-  0 ___str_7                                                       117A R
+  0 _EraseMenuEntry                                                04D9 GR
+  0 ___str_0                                                       093A R
+  0 ___str_1                                                       093F R
+  0 ___str_10                                                      1399 R
+  0 ___str_11                                                      13A2 R
+  0 ___str_12                                                      13A3 R
+  0 ___str_2                                                       0E35 R
+  0 ___str_3                                                       0E45 R
+  0 ___str_4                                                       0E55 R
+  0 ___str_5                                                       0E64 R
+  0 ___str_6                                                       0E6F R
+  0 ___str_7                                                       1383 R
+  0 ___str_8                                                       138C R
+  0 ___str_9                                                       1394 R
     __divsint                                                      **** GX
     __moduchar                                                     **** GX
     _cpct_disableFirmware                                          **** GX
@@ -34,39 +40,41 @@ Symbol Table
     _cpct_setPalette                                               **** GX
     _cpct_setRandomSeedUniform_u8                                  **** GX
     _cpct_setVideoMode                                             **** GX
-  0 _drawBoxM0                                                     0000 GR
-  0 _drawBoxM2                                                     03B0 GR
-  0 _drawCursor                                                    0820 GR
-  0 _drawMenu                                                      05D5 GR
-  0 _drawMenuEntry                                                 0490 GR
-  0 _drawTile                                                      0ADA GR
-  0 _drawTrain                                                     102F GR
-  0 _drawWindow                                                    0683 GR
-  0 _drawWorld                                                     0BE5 GR
-  0 _dwellings1                                                    01F0 GR
-  0 _dwellings2                                                    0230 GR
-  0 _dwellings3                                                    0270 GR
-  0 _farm1                                                         02F0 GR
-  0 _farm2                                                         0330 GR
-  0 _forest                                                        01B0 GR
-  0 _game                                                          0CA7 GR
-  0 _generateWorld                                                 091B GR
-  0 _grass1                                                        0130 GR
-  0 _grass2                                                        0170 GR
-  0 _livestock                                                     0370 GR
-  0 _main                                                          1057 GR
-  0 _paletteMenusM1                                                012A GR
-  0 _paletteMenusM2                                                012E GR
-  0 _paletteTrains                                                 011A GR
+  0 _drawBoxM0                                                     02DF GR
+  0 _drawBoxM2                                                     03F9 GR
+  0 _drawCursor                                                    094E GR
+  0 _drawMenu                                                      06C3 GR
+  0 _drawMenuEntry                                                 0593 GR
+  0 _drawTile                                                      0C08 GR
+  0 _drawTrain                                                     1288 GR
+  0 _drawWindow                                                    07B1 GR
+  0 _drawWorld                                                     0D13 GR
+  0 _dwellings1                                                    00E9 GR
+  0 _dwellings2                                                    0129 GR
+  0 _dwellings3                                                    0169 GR
+  0 _farm1                                                         01E9 GR
+  0 _farm2                                                         0229 GR
+  0 _forest                                                        00A9 GR
+  0 _game                                                          0E76 GR
+  0 _generateWorld                                                 0A49 GR
+  0 _grass1                                                        0029 GR
 ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 2.
 Hexadecimal [16-Bits]
 
 Symbol Table
 
-  0 _putM0                                                         1030 GR
-  0 _putM2                                                         1043 GR
+  0 _grass2                                                        0069 GR
+  0 _livestock                                                     0269 GR
+  0 _main                                                          1289 GR
+  0 _menuTile                                                      0DD5 GR
+  0 _paletteMenusM1                                                0023 GR
+  0 _paletteMenusM2                                                0027 GR
+  0 _paletteTrains                                                 0013 GR
+  0 _putM0                                                         0000 GR
+  0 _putM1                                                         02A9 GR
+  0 _putM2                                                         02BD GR
     _strlen                                                        **** GX
-  0 _water                                                         02B0 GR
+  0 _water                                                         01A9 GR
 
 
 ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 3.
@@ -74,7 +82,7 @@ Hexadecimal [16-Bits]
 
 Area Table
 
-   0 _CODE                                      size 1195   flags    0
+   0 _CODE                                      size 13BE   flags    0
    1 _DATA                                      size    0   flags    0
    2 _INITIALIZED                               size    0   flags    0
    3 _DABS                                      size    0   flags    8

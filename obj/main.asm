@@ -1,7 +1,7 @@
 ;--------------------------------------------------------
 ; File Created by SDCC : free open source ANSI-C Compiler
 ; Version 3.5.4 #9329 (Linux)
-; This file was generated Sun Jan 31 15:56:36 2016
+; This file was generated Sun Jan 31 17:17:31 2016
 ;--------------------------------------------------------
 	.module main
 	.optsdcc -mz80
@@ -10,10 +10,9 @@
 ; Public variables in this module
 ;--------------------------------------------------------
 	.globl _main
-	.globl _putM2
-	.globl _putM0
 	.globl _drawTrain
 	.globl _game
+	.globl _menuTile
 	.globl _drawWorld
 	.globl _drawTile
 	.globl _generateWorld
@@ -21,8 +20,12 @@
 	.globl _drawWindow
 	.globl _drawMenu
 	.globl _drawMenuEntry
+	.globl _EraseMenuEntry
 	.globl _drawBoxM2
 	.globl _drawBoxM0
+	.globl _putM2
+	.globl _putM1
+	.globl _putM0
 	.globl _strlen
 	.globl _cpct_setRandomSeedUniform_u8
 	.globl _cpct_getRandomUniform_u8_f
@@ -85,183 +88,23 @@
 ; code
 ;--------------------------------------------------------
 	.area _CODE
-;src/includes/gui.h:2: void drawBoxM0(int width_, int height_)
+;src/includes/gui.h:1: void putM0(void)
 ;	---------------------------------
-; Function drawBoxM0
+; Function putM0
 ; ---------------------------------
-_drawBoxM0::
-	push	ix
-	ld	ix,#0
-	add	ix,sp
-	ld	hl,#-7
-	add	hl,sp
-	ld	sp,hl
-;src/includes/gui.h:7: int left = (80-width_)/2;
-	ld	a,#0x50
-	sub	a, 4 (ix)
-	ld	d,a
-	ld	a,#0x00
-	sbc	a, 5 (ix)
-	ld	e,a
-	ld	l, d
-	ld	h, e
-	bit	7, e
-	jr	Z,00103$
-	ld	l, d
-	ld	h, e
-	inc	hl
-00103$:
-	ld	-7 (ix),l
-	ld	-6 (ix),h
-	sra	-6 (ix)
-	rr	-7 (ix)
-;src/includes/gui.h:8: int top = (200-height_)/2;
-	ld	a,#0xC8
-	sub	a, 6 (ix)
-	ld	c,a
-	ld	a,#0x00
-	sbc	a, 7 (ix)
-	ld	b,a
-	ld	h,c
-	ld	d,b
-	bit	7, b
-	jr	Z,00104$
-	inc	bc
-	ld	h,c
-	ld	d,b
-00104$:
-	ld	e, h
-	sra	d
-	rr	e
-;src/includes/gui.h:10: cpct_clearScreen(cpct_px2byteM0(9,9));
-	push	de
-	ld	hl,#0x0909
-	push	hl
-	call	_cpct_px2byteM0
-	ld	h,l
-	ld	bc,#0x4000
-	push	bc
-	push	hl
-	inc	sp
-	ld	hl,#0xC000
-	push	hl
-	call	_cpct_memset
-	pop	de
-;src/includes/gui.h:13: pvid = cpct_getScreenPtr(SCR_VMEM, left+1, top+4);
-	ld	-3 (ix), e
-	ld	h, e
-	inc	h
-	inc	h
-	inc	h
-	inc	h
-	ld	a,-7 (ix)
-	inc	a
-	ld	-4 (ix),a
-	push	de
-	push	hl
-	inc	sp
-	ld	a,-4 (ix)
+_putM0::
+;src/includes/gui.h:3: cpct_setVideoMode(0);
+	xor	a, a
 	push	af
 	inc	sp
-	ld	hl,#0xC000
-	push	hl
-	call	_cpct_getScreenPtr
-	pop	de
-	ld	c, l
-	ld	b, h
-;src/includes/gui.h:14: cpct_drawSolidBox(pvid, cpct_px2byteM0(2,2), width_, height_);
-	ld	a,6 (ix)
-	ld	-5 (ix),a
-	ld	a,4 (ix)
-	ld	-2 (ix),a
+	call	_cpct_setVideoMode
+	inc	sp
+;src/includes/gui.h:5: cpct_setPalette(paletteTrains, 16);
+	ld	hl,#_paletteTrains
+	ld	bc,#0x0010
 	push	bc
-	push	de
-	ld	hl,#0x0202
 	push	hl
-	call	_cpct_px2byteM0
-	ld	-1 (ix),l
-	pop	de
-	pop	bc
-	push	de
-	ld	h,-5 (ix)
-	ld	l,-2 (ix)
-	push	hl
-	ld	a,-1 (ix)
-	push	af
-	inc	sp
-	push	bc
-	call	_cpct_drawSolidBox
-	pop	af
-	pop	af
-	inc	sp
-	pop	de
-;src/includes/gui.h:17: pvid = cpct_getScreenPtr(SCR_VMEM, left, top);
-	ld	h,e
-	ld	d,-7 (ix)
-	push	hl
-	inc	sp
-	push	de
-	inc	sp
-	ld	hl,#0xC000
-	push	hl
-	call	_cpct_getScreenPtr
-;src/includes/gui.h:18: cpct_drawSolidBox(pvid, cpct_px2byteM0(6,6), width_, height_);
-	push	hl
-	ld	hl,#0x0606
-	push	hl
-	call	_cpct_px2byteM0
-	ld	b,l
-	pop	de
-	ld	h,-5 (ix)
-	ld	l,-2 (ix)
-	push	hl
-	push	bc
-	inc	sp
-	push	de
-	call	_cpct_drawSolidBox
-	pop	af
-	pop	af
-	inc	sp
-;src/includes/gui.h:21: pvid = cpct_getScreenPtr(SCR_VMEM, left+1, top+2);
-	ld	h,-3 (ix)
-	inc	h
-	inc	h
-	push	hl
-	inc	sp
-	ld	a,-4 (ix)
-	push	af
-	inc	sp
-	ld	hl,#0xC000
-	push	hl
-	call	_cpct_getScreenPtr
-	ex	de,hl
-;src/includes/gui.h:22: cpct_drawSolidBox(pvid, cpct_px2byteM0(0,0), width_-2, height_-4);
-	ld	a,6 (ix)
-	add	a,#0xFC
-	ld	c,a
-	ld	b,4 (ix)
-	dec	b
-	dec	b
-	push	bc
-	push	de
-	ld	hl,#0x0000
-	push	hl
-	call	_cpct_px2byteM0
-	ld	-1 (ix),l
-	pop	de
-	pop	bc
-	ld	a,c
-	push	af
-	inc	sp
-	push	bc
-	inc	sp
-	ld	a,-1 (ix)
-	push	af
-	inc	sp
-	push	de
-	call	_cpct_drawSolidBox
-	ld	sp,ix
-	pop	ix
+	call	_cpct_setPalette
 	ret
 _paletteTrains:
 	.db #0x00	; 0
@@ -938,7 +781,230 @@ _livestock:
 	.db #0x0F	; 15
 	.db #0x0F	; 15
 	.db #0x0F	; 15
-;src/includes/gui.h:26: void drawBoxM2(int width_, int height_)
+;src/includes/gui.h:8: void putM1(void)
+;	---------------------------------
+; Function putM1
+; ---------------------------------
+_putM1::
+;src/includes/gui.h:10: cpct_setVideoMode(1);
+	ld	a,#0x01
+	push	af
+	inc	sp
+	call	_cpct_setVideoMode
+	inc	sp
+;src/includes/gui.h:12: cpct_setPalette(paletteMenusM1, 4);
+	ld	hl,#_paletteMenusM1
+	ld	bc,#0x0004
+	push	bc
+	push	hl
+	call	_cpct_setPalette
+	ret
+;src/includes/gui.h:15: void putM2(void)
+;	---------------------------------
+; Function putM2
+; ---------------------------------
+_putM2::
+;src/includes/gui.h:17: cpct_setVideoMode(2);
+	ld	a,#0x02
+	push	af
+	inc	sp
+	call	_cpct_setVideoMode
+	inc	sp
+;src/includes/gui.h:19: cpct_setPalette(paletteMenusM2, 2);
+	ld	hl,#_paletteMenusM2
+	ld	bc,#0x0002
+	push	bc
+	push	hl
+	call	_cpct_setPalette
+;src/includes/gui.h:20: cpct_clearScreen(0b11111111);
+	ld	hl,#0x4000
+	push	hl
+	ld	a,#0xFF
+	push	af
+	inc	sp
+	ld	h, #0xC0
+	push	hl
+	call	_cpct_memset
+	ret
+;src/includes/gui.h:23: void drawBoxM0(int width_, int height_)
+;	---------------------------------
+; Function drawBoxM0
+; ---------------------------------
+_drawBoxM0::
+	push	ix
+	ld	ix,#0
+	add	ix,sp
+	ld	hl,#-7
+	add	hl,sp
+	ld	sp,hl
+;src/includes/gui.h:28: int left = (80-width_)/2;
+	ld	a,#0x50
+	sub	a, 4 (ix)
+	ld	d,a
+	ld	a,#0x00
+	sbc	a, 5 (ix)
+	ld	e,a
+	ld	l, d
+	ld	h, e
+	bit	7, e
+	jr	Z,00103$
+	ld	l, d
+	ld	h, e
+	inc	hl
+00103$:
+	ld	-7 (ix),l
+	ld	-6 (ix),h
+	sra	-6 (ix)
+	rr	-7 (ix)
+;src/includes/gui.h:29: int top = (200-height_)/2;
+	ld	a,#0xC8
+	sub	a, 6 (ix)
+	ld	c,a
+	ld	a,#0x00
+	sbc	a, 7 (ix)
+	ld	b,a
+	ld	h,c
+	ld	d,b
+	bit	7, b
+	jr	Z,00104$
+	inc	bc
+	ld	h,c
+	ld	d,b
+00104$:
+	ld	e, h
+	sra	d
+	rr	e
+;src/includes/gui.h:31: cpct_clearScreen(cpct_px2byteM0(9,9));
+	push	de
+	ld	hl,#0x0909
+	push	hl
+	call	_cpct_px2byteM0
+	ld	h,l
+	ld	bc,#0x4000
+	push	bc
+	push	hl
+	inc	sp
+	ld	hl,#0xC000
+	push	hl
+	call	_cpct_memset
+	pop	de
+;src/includes/gui.h:34: pvid = cpct_getScreenPtr(SCR_VMEM, left+1, top+4);
+	ld	-5 (ix), e
+	ld	h, e
+	inc	h
+	inc	h
+	inc	h
+	inc	h
+	ld	a,-7 (ix)
+	inc	a
+	ld	-2 (ix),a
+	push	de
+	push	hl
+	inc	sp
+	ld	a,-2 (ix)
+	push	af
+	inc	sp
+	ld	hl,#0xC000
+	push	hl
+	call	_cpct_getScreenPtr
+	pop	de
+	ld	c, l
+	ld	b, h
+;src/includes/gui.h:35: cpct_drawSolidBox(pvid, cpct_px2byteM0(2,2), width_, height_);
+	ld	a,6 (ix)
+	ld	-4 (ix),a
+	ld	a,4 (ix)
+	ld	-3 (ix),a
+	push	bc
+	push	de
+	ld	hl,#0x0202
+	push	hl
+	call	_cpct_px2byteM0
+	ld	-1 (ix),l
+	pop	de
+	pop	bc
+	push	de
+	ld	h,-4 (ix)
+	ld	l,-3 (ix)
+	push	hl
+	ld	a,-1 (ix)
+	push	af
+	inc	sp
+	push	bc
+	call	_cpct_drawSolidBox
+	pop	af
+	pop	af
+	inc	sp
+	pop	de
+;src/includes/gui.h:38: pvid = cpct_getScreenPtr(SCR_VMEM, left, top);
+	ld	h,e
+	ld	d,-7 (ix)
+	push	hl
+	inc	sp
+	push	de
+	inc	sp
+	ld	hl,#0xC000
+	push	hl
+	call	_cpct_getScreenPtr
+;src/includes/gui.h:39: cpct_drawSolidBox(pvid, cpct_px2byteM0(6,6), width_, height_);
+	push	hl
+	ld	hl,#0x0606
+	push	hl
+	call	_cpct_px2byteM0
+	ld	b,l
+	pop	de
+	ld	h,-4 (ix)
+	ld	l,-3 (ix)
+	push	hl
+	push	bc
+	inc	sp
+	push	de
+	call	_cpct_drawSolidBox
+	pop	af
+	pop	af
+	inc	sp
+;src/includes/gui.h:42: pvid = cpct_getScreenPtr(SCR_VMEM, left+1, top+2);
+	ld	h,-5 (ix)
+	inc	h
+	inc	h
+	push	hl
+	inc	sp
+	ld	a,-2 (ix)
+	push	af
+	inc	sp
+	ld	hl,#0xC000
+	push	hl
+	call	_cpct_getScreenPtr
+	ex	de,hl
+;src/includes/gui.h:43: cpct_drawSolidBox(pvid, cpct_px2byteM0(0,0), width_-2, height_-4);
+	ld	a,6 (ix)
+	add	a,#0xFC
+	ld	c,a
+	ld	b,4 (ix)
+	dec	b
+	dec	b
+	push	bc
+	push	de
+	ld	hl,#0x0000
+	push	hl
+	call	_cpct_px2byteM0
+	ld	-1 (ix),l
+	pop	de
+	pop	bc
+	ld	a,c
+	push	af
+	inc	sp
+	push	bc
+	inc	sp
+	ld	a,-1 (ix)
+	push	af
+	inc	sp
+	push	de
+	call	_cpct_drawSolidBox
+	ld	sp,ix
+	pop	ix
+	ret
+;src/includes/gui.h:47: void drawBoxM2(int width_, int height_)
 ;	---------------------------------
 ; Function drawBoxM2
 ; ---------------------------------
@@ -949,7 +1015,7 @@ _drawBoxM2::
 	ld	hl,#-6
 	add	hl,sp
 	ld	sp,hl
-;src/includes/gui.h:31: int left = (80-width_)/2;
+;src/includes/gui.h:52: int left = (80-width_)/2;
 	ld	a,#0x50
 	sub	a, 4 (ix)
 	ld	c,a
@@ -967,7 +1033,7 @@ _drawBoxM2::
 	ld	e, h
 	sra	d
 	rr	e
-;src/includes/gui.h:32: int top = (200-height_)/2;
+;src/includes/gui.h:53: int top = (200-height_)/2;
 	ld	a,#0xC8
 	sub	a, 6 (ix)
 	ld	c,a
@@ -986,12 +1052,12 @@ _drawBoxM2::
 	ld	-5 (ix),l
 	sra	-5 (ix)
 	rr	-6 (ix)
-;src/includes/gui.h:35: pvid = cpct_getScreenPtr(SCR_VMEM, left+2, top+5);
+;src/includes/gui.h:56: pvid = cpct_getScreenPtr(SCR_VMEM, left+2, top+5);
 	ld	a,-6 (ix)
-	ld	-4 (ix), a
+	ld	-2 (ix), a
 	add	a, #0x05
 	ld	c,a
-	ld	-3 (ix), e
+	ld	-1 (ix), e
 	ld	h, e
 	inc	h
 	inc	h
@@ -1005,13 +1071,13 @@ _drawBoxM2::
 	push	hl
 	call	_cpct_getScreenPtr
 	pop	de
-;src/includes/gui.h:36: cpct_drawSolidBox(pvid, 0b00000000, width_-1, height_);
+;src/includes/gui.h:57: cpct_drawSolidBox(pvid, 0b00000000, width_-1, height_);
 	ld	b,6 (ix)
 	ld	c,4 (ix)
 	ld	a,c
 	add	a,#0xFF
-	ld	-2 (ix),l
-	ld	-1 (ix),h
+	ld	-4 (ix),l
+	ld	-3 (ix),h
 	push	bc
 	push	de
 	push	bc
@@ -1021,8 +1087,8 @@ _drawBoxM2::
 	xor	a, a
 	push	af
 	inc	sp
-	ld	l,-2 (ix)
-	ld	h,-1 (ix)
+	ld	l,-4 (ix)
+	ld	h,-3 (ix)
 	push	hl
 	call	_cpct_drawSolidBox
 	pop	af
@@ -1030,7 +1096,7 @@ _drawBoxM2::
 	inc	sp
 	pop	de
 	pop	bc
-;src/includes/gui.h:39: pvid = cpct_getScreenPtr(SCR_VMEM, left, top);
+;src/includes/gui.h:60: pvid = cpct_getScreenPtr(SCR_VMEM, left, top);
 	ld	h,-6 (ix)
 	ld	d,e
 	push	bc
@@ -1042,7 +1108,7 @@ _drawBoxM2::
 	push	hl
 	call	_cpct_getScreenPtr
 	pop	bc
-;src/includes/gui.h:40: cpct_drawSolidBox(pvid, 0b11111000, width_, height_);
+;src/includes/gui.h:61: cpct_drawSolidBox(pvid, 0b11111000, width_, height_);
 	ld	a,4 (ix)
 	ex	de,hl
 	push	bc
@@ -1057,10 +1123,10 @@ _drawBoxM2::
 	pop	af
 	inc	sp
 	pop	bc
-;src/includes/gui.h:43: pvid = cpct_getScreenPtr(SCR_VMEM, left+1, top+1);
-	ld	h,-4 (ix)
+;src/includes/gui.h:64: pvid = cpct_getScreenPtr(SCR_VMEM, left+1, top+1);
+	ld	h,-2 (ix)
 	inc	h
-	ld	d,-3 (ix)
+	ld	d,-1 (ix)
 	inc	d
 	push	bc
 	push	hl
@@ -1073,7 +1139,7 @@ _drawBoxM2::
 	pop	bc
 	ld	e, l
 	ld	d, h
-;src/includes/gui.h:44: cpct_drawSolidBox(pvid, 0b11111111, width_-2, height_-2);
+;src/includes/gui.h:65: cpct_drawSolidBox(pvid, 0b11111111, width_-2, height_-2);
 	ld	h,6 (ix)
 	dec	h
 	dec	h
@@ -1089,7 +1155,146 @@ _drawBoxM2::
 	ld	sp,ix
 	pop	ix
 	ret
-;src/includes/gui.h:47: void drawMenuEntry(char **menu , u8 nbEntry, u8 iSelect)
+;src/includes/gui.h:68: void EraseMenuEntry(char **menu, u8 nbEntry, u8 iSelect)
+;	---------------------------------
+; Function EraseMenuEntry
+; ---------------------------------
+_EraseMenuEntry::
+	push	ix
+	ld	ix,#0
+	add	ix,sp
+	dec	sp
+;src/includes/gui.h:73: p_video = cpct_getScreenPtr(SCR_VMEM, 32, (201-nbEntry*10)/2+iSelect*10);
+	ld	c,6 (ix)
+	ld	b,#0x00
+	ld	l, c
+	ld	h, b
+	add	hl, hl
+	add	hl, hl
+	add	hl, bc
+	add	hl, hl
+	ld	c,l
+	ld	b,h
+	ld	a,#0xC9
+	sub	a, c
+	ld	d,a
+	ld	a,#0x00
+	sbc	a, b
+	ld	e,a
+	ld	l, d
+	ld	h, e
+	bit	7, e
+	jr	Z,00103$
+	ld	l, d
+	ld	h, e
+	inc	hl
+00103$:
+	sra	h
+	rr	l
+	ld	d,l
+	ld	a,7 (ix)
+	ld	e,a
+	add	a, a
+	add	a, a
+	add	a, e
+	add	a, a
+	ld	-1 (ix),a
+	ld	a,d
+	add	a, -1 (ix)
+	push	bc
+	ld	d,a
+	ld	e,#0x20
+	push	de
+	ld	hl,#0xC000
+	push	hl
+	call	_cpct_getScreenPtr
+	pop	bc
+;src/includes/gui.h:74: cpct_drawSolidBox(p_video, 0b11111111, 17, 10);
+	ex	de,hl
+	push	bc
+	ld	hl,#0x0A11
+	push	hl
+	ld	a,#0xFF
+	push	af
+	inc	sp
+	push	de
+	call	_cpct_drawSolidBox
+	pop	af
+	pop	af
+	inc	sp
+	pop	bc
+;src/includes/gui.h:77: p_video = cpct_getScreenPtr(SCR_VMEM, (82-strlen(menu[iSelect]))/2, (202-nbEntry*10)/2+iSelect*10);
+	ld	a,#0xCA
+	sub	a, c
+	ld	d,a
+	ld	a,#0x00
+	sbc	a, b
+	ld	e,a
+	ld	l, d
+	ld	h, e
+	bit	7, e
+	jr	Z,00104$
+	ld	l, d
+	ld	h, e
+	inc	hl
+00104$:
+	sra	h
+	rr	l
+	ld	a,l
+	add	a, -1 (ix)
+	ld	c,a
+	ld	l,7 (ix)
+	ld	h,#0x00
+	add	hl, hl
+	ex	de,hl
+	ld	l,4 (ix)
+	ld	h,5 (ix)
+	add	hl,de
+	push	hl
+	ld	e,(hl)
+	inc	hl
+	ld	d,(hl)
+	push	bc
+	push	de
+	call	_strlen
+	pop	af
+	ex	de,hl
+	pop	bc
+	pop	hl
+	ld	a,#0x52
+	sub	a, e
+	ld	e,a
+	ld	a,#0x00
+	sbc	a, d
+	ld	d,a
+	srl	d
+	rr	e
+	push	hl
+	ld	d, c
+	push	de
+	ld	bc,#0xC000
+	push	bc
+	call	_cpct_getScreenPtr
+	ld	c,l
+	ld	b,h
+	pop	hl
+;src/includes/gui.h:78: cpct_drawStringM2 (menu[iSelect], p_video, 0);
+	ld	e,(hl)
+	inc	hl
+	ld	d,(hl)
+	xor	a, a
+	push	af
+	inc	sp
+	push	bc
+	push	de
+	call	_cpct_drawStringM2
+	pop	af
+	pop	af
+	inc	sp
+	inc	sp
+	pop	ix
+	ret
+;src/includes/gui.h:81: void drawMenuEntry(char **menu, u8 nbEntry, u8 iSelect)
 ;	---------------------------------
 ; Function drawMenuEntry
 ; ---------------------------------
@@ -1100,22 +1305,7 @@ _drawMenuEntry::
 	ld	hl,#-6
 	add	hl,sp
 	ld	sp,hl
-;src/includes/gui.h:52: drawBoxM2(30,nbEntry*12);
-	ld	c,6 (ix)
-	ld	b,#0x00
-	ld	l, c
-	ld	h, b
-	add	hl, hl
-	add	hl, bc
-	add	hl, hl
-	add	hl, hl
-	push	hl
-	ld	hl,#0x001E
-	push	hl
-	call	_drawBoxM2
-	pop	af
-	pop	af
-;src/includes/gui.h:55: pvideo = cpct_getScreenPtr(SCR_VMEM, 32, (201-nbEntry*10)/2+iSelect*10);
+;src/includes/gui.h:89: p_video = cpct_getScreenPtr(SCR_VMEM, 32, (201-nbEntry*10)/2+iSelect*10);
 	ld	c,6 (ix)
 	ld	b,#0x00
 	ld	l, c
@@ -1158,7 +1348,7 @@ _drawMenuEntry::
 	push	hl
 	call	_cpct_getScreenPtr
 	pop	bc
-;src/includes/gui.h:56: cpct_drawSolidBox(pvideo, 0b00000000, 17, 10);
+;src/includes/gui.h:90: cpct_drawSolidBox(p_video, 0b00000000, 17, 10);
 	ex	de,hl
 	push	bc
 	ld	hl,#0x0A11
@@ -1172,20 +1362,20 @@ _drawMenuEntry::
 	pop	af
 	inc	sp
 	pop	bc
-;src/includes/gui.h:59: for(i=0; i<14000; i++) {}
+;src/includes/gui.h:93: for(i=0; i<14000; i++) {}
 	ld	hl,#0x36B0
 00108$:
 	dec	hl
 	ld	a,h
 	or	a,l
 	jr	NZ,00108$
-;src/includes/gui.h:62: for(i=0; i<nbEntry; i++)
+;src/includes/gui.h:96: for(i=0; i<nbEntry; i++)
 	ld	a,#0xCA
 	sub	a, c
-	ld	-2 (ix),a
+	ld	-4 (ix),a
 	ld	a,#0x00
 	sbc	a, b
-	ld	-1 (ix), a
+	ld	-3 (ix), a
 	rlca
 	and	a,#0x01
 	ld	e,a
@@ -1202,7 +1392,7 @@ _drawMenuEntry::
 	xor	a, #0x80
 00146$:
 	jp	P,00112$
-;src/includes/gui.h:64: if(i==iSelect)
+;src/includes/gui.h:98: if(i==iSelect)
 	ld	d,7 (ix)
 	ld	b,#0x00
 	ld	a,-6 (ix)
@@ -1211,21 +1401,21 @@ _drawMenuEntry::
 	ld	a,-5 (ix)
 	sub	a, b
 	jr	NZ,00103$
-;src/includes/gui.h:65: penSelected = 1;
+;src/includes/gui.h:99: penSelected = 1;
 	ld	c,#0x01
 	jr	00104$
 00103$:
-;src/includes/gui.h:67: penSelected = 0;
+;src/includes/gui.h:101: penSelected = 0;
 	ld	c,#0x00
 00104$:
-;src/includes/gui.h:69: pvideo = cpct_getScreenPtr(SCR_VMEM, (82-strlen(menu[i]))/2, (202-nbEntry*10)/2+i*10);
-	ld	l,-2 (ix)
-	ld	h,-1 (ix)
+;src/includes/gui.h:103: p_video = cpct_getScreenPtr(SCR_VMEM, (82-strlen(menu[i]))/2, (202-nbEntry*10)/2+i*10);
+	ld	l,-4 (ix)
+	ld	h,-3 (ix)
 	ld	a,e
 	or	a, a
 	jr	Z,00115$
-	ld	l,-2 (ix)
-	ld	h,-1 (ix)
+	ld	l,-4 (ix)
+	ld	h,-3 (ix)
 	inc	hl
 00115$:
 	sra	h
@@ -1241,7 +1431,7 @@ _drawMenuEntry::
 	pop	de
 	ld	a,b
 	add	a, l
-	ld	-3 (ix),a
+	ld	-1 (ix),a
 	ld	d,-6 (ix)
 	ld	b,-5 (ix)
 	sla	d
@@ -1273,11 +1463,11 @@ _drawMenuEntry::
 	ld	h,a
 	srl	h
 	rr	l
-	ld	-4 (ix),l
+	ld	-2 (ix),l
 	push	bc
 	push	de
-	ld	h,-3 (ix)
-	ld	l,-4 (ix)
+	ld	h,-1 (ix)
+	ld	l,-2 (ix)
 	push	hl
 	ld	hl,#0xC000
 	push	hl
@@ -1286,7 +1476,7 @@ _drawMenuEntry::
 	pop	bc
 	push	hl
 	pop	iy
-;src/includes/gui.h:70: cpct_drawStringM2 (menu[i], pvideo, penSelected);
+;src/includes/gui.h:104: cpct_drawStringM2 (menu[i], p_video, penSelected);
 	ld	l, d
 	ld	h, b
 	ld	a, (hl)
@@ -1304,7 +1494,7 @@ _drawMenuEntry::
 	pop	af
 	inc	sp
 	pop	de
-;src/includes/gui.h:62: for(i=0; i<nbEntry; i++)
+;src/includes/gui.h:96: for(i=0; i<nbEntry; i++)
 	inc	-6 (ix)
 	jp	NZ,00110$
 	inc	-5 (ix)
@@ -1313,7 +1503,7 @@ _drawMenuEntry::
 	ld	sp, ix
 	pop	ix
 	ret
-;src/includes/gui.h:74: u8 drawMenu(char **menu, u8 nbEntry)
+;src/includes/gui.h:108: u8 drawMenu(char **menu, u8 nbEntry)
 ;	---------------------------------
 ; Function drawMenu
 ; ---------------------------------
@@ -1322,10 +1512,24 @@ _drawMenu::
 	ld	ix,#0
 	add	ix,sp
 	push	af
-;src/includes/gui.h:77: u8 iSelect=0;
+;src/includes/gui.h:111: u8 iSelect=0;
+	ld	b,#0x00
+;src/includes/gui.h:113: drawBoxM2(30,nbEntry*12);
+	ld	e,6 (ix)
 	ld	d,#0x00
-;src/includes/gui.h:79: drawMenuEntry(menu, nbEntry, iSelect);
-	push	de
+	ld	l, e
+	ld	h, d
+	add	hl, hl
+	add	hl, de
+	add	hl, hl
+	add	hl, hl
+	push	bc
+	push	hl
+	ld	hl,#0x001E
+	push	hl
+	call	_drawBoxM2
+	pop	af
+	pop	af
 	xor	a, a
 	push	af
 	inc	sp
@@ -1338,34 +1542,48 @@ _drawMenu::
 	call	_drawMenuEntry
 	pop	af
 	pop	af
-	pop	de
-;src/includes/gui.h:81: do{
-	ld	e,6 (ix)
-	dec	e
+	pop	bc
+;src/includes/gui.h:117: do{
+	ld	c,6 (ix)
+	dec	c
 00111$:
-;src/includes/gui.h:82: cpct_scanKeyboard(); 
-	push	de
+;src/includes/gui.h:118: cpct_scanKeyboard(); 
+	push	bc
 	call	_cpct_scanKeyboard
 	ld	hl,#0x0100
 	call	_cpct_isKeyPressed
 	ld	a,l
-	pop	de
+	pop	bc
 	or	a, a
 	jr	Z,00105$
-;src/includes/gui.h:86: if(iSelect ==0)
-	ld	a,d
+;src/includes/gui.h:122: EraseMenuEntry(menu, nbEntry, iSelect);
+	push	bc
+	push	bc
+	inc	sp
+	ld	a,6 (ix)
+	push	af
+	inc	sp
+	ld	l,4 (ix)
+	ld	h,5 (ix)
+	push	hl
+	call	_EraseMenuEntry
+	pop	af
+	pop	af
+	pop	bc
+;src/includes/gui.h:124: if(iSelect ==0)
+	ld	a,b
 	or	a, a
 	jr	NZ,00102$
-;src/includes/gui.h:87: iSelect = nbEntry-1;
-	ld	d,e
+;src/includes/gui.h:125: iSelect = nbEntry-1;
+	ld	b,c
 	jr	00103$
 00102$:
-;src/includes/gui.h:89: iSelect--;
-	dec	d
+;src/includes/gui.h:127: iSelect--;
+	dec	b
 00103$:
-;src/includes/gui.h:91: drawMenuEntry(menu, nbEntry, iSelect);
-	push	de
-	push	de
+;src/includes/gui.h:129: drawMenuEntry(menu, nbEntry, iSelect);
+	push	bc
+	push	bc
 	inc	sp
 	ld	a,6 (ix)
 	push	af
@@ -1376,38 +1594,53 @@ _drawMenu::
 	call	_drawMenuEntry
 	pop	af
 	pop	af
-	pop	de
+	pop	bc
 00105$:
-;src/includes/gui.h:94: if ( cpct_isKeyPressed(Key_CursorDown) )
-	push	de
+;src/includes/gui.h:132: if ( cpct_isKeyPressed(Key_CursorDown) )
+	push	bc
 	ld	hl,#0x0400
 	call	_cpct_isKeyPressed
-	ld	a,l
-	pop	de
+	ld	e,l
+	pop	bc
+	ld	a,e
 	or	a, a
 	jr	Z,00112$
-;src/includes/gui.h:96: if(iSelect == nbEntry-1)
-	ld	c,6 (ix)
-	ld	b,#0x00
-	dec	bc
-	ld	-2 (ix),d
+;src/includes/gui.h:134: EraseMenuEntry(menu, nbEntry, iSelect);
+	push	bc
+	push	bc
+	inc	sp
+	ld	a,6 (ix)
+	push	af
+	inc	sp
+	ld	l,4 (ix)
+	ld	h,5 (ix)
+	push	hl
+	call	_EraseMenuEntry
+	pop	af
+	pop	af
+	pop	bc
+;src/includes/gui.h:136: if(iSelect == nbEntry-1)
+	ld	e,6 (ix)
+	ld	d,#0x00
+	dec	de
+	ld	-2 (ix),b
 	ld	-1 (ix),#0x00
-	ld	a,c
+	ld	a,e
 	sub	a, -2 (ix)
 	jr	NZ,00107$
-	ld	a,b
+	ld	a,d
 	sub	a, -1 (ix)
 	jr	NZ,00107$
-;src/includes/gui.h:97: iSelect = 0;
-	ld	d,#0x00
+;src/includes/gui.h:137: iSelect = 0;
+	ld	b,#0x00
 	jr	00108$
 00107$:
-;src/includes/gui.h:99: iSelect++;
-	inc	d
+;src/includes/gui.h:139: iSelect++;
+	inc	b
 00108$:
-;src/includes/gui.h:101: drawMenuEntry(menu, nbEntry, iSelect);
-	push	de
-	push	de
+;src/includes/gui.h:141: drawMenuEntry(menu, nbEntry, iSelect);
+	push	bc
+	push	bc
 	inc	sp
 	ld	a,6 (ix)
 	push	af
@@ -1418,33 +1651,32 @@ _drawMenu::
 	call	_drawMenuEntry
 	pop	af
 	pop	af
-	pop	de
+	pop	bc
 00112$:
-;src/includes/gui.h:104: while(!cpct_isKeyPressed(Key_Return));
-	push	de
+;src/includes/gui.h:144: while(!cpct_isKeyPressed(Key_Return));
+	push	bc
 	ld	hl,#0x0402
 	call	_cpct_isKeyPressed
 	ld	a,l
-	pop	de
+	pop	bc
 	or	a, a
-	jr	Z,00111$
-;src/includes/gui.h:107: for(i=0; i<14000; i++) {}
+	jp	Z,00111$
+;src/includes/gui.h:147: for(i=0; i<14000; i++) {}
 	ld	hl,#0x36B0
 00117$:
-	ld	c,l
-	ld	b,h
-	dec	bc
-	ld	l, c
-	ld	a,b
+	ex	de,hl
+	dec	de
+	ld	l, e
+	ld	a,d
 	ld	h,a
-	or	a,c
+	or	a,e
 	jr	NZ,00117$
-;src/includes/gui.h:109: return iSelect;
-	ld	l,d
+;src/includes/gui.h:149: return iSelect;
+	ld	l,b
 	ld	sp, ix
 	pop	ix
 	ret
-;src/includes/gui.h:119: u8 drawWindow(char **text, u8 nbLine, u8 button)
+;src/includes/gui.h:159: u8 drawWindow(char **text, u8 nbLine, u8 button)
 ;	---------------------------------
 ; Function drawWindow
 ; ---------------------------------
@@ -1455,20 +1687,20 @@ _drawWindow::
 	ld	hl,#-11
 	add	hl,sp
 	ld	sp,hl
-;src/includes/gui.h:123: u8 valueReturn=0;
-	ld	-10 (ix),#0x00
-;src/includes/gui.h:126: if(button == 0)
+;src/includes/gui.h:163: u8 valueReturn=0;
+	ld	-11 (ix),#0x00
+;src/includes/gui.h:166: if(button == 0)
 	ld	a,7 (ix)
 	or	a, a
 	jr	NZ,00102$
-;src/includes/gui.h:127: buttonTxt = "<OK>";
+;src/includes/gui.h:167: buttonTxt = "<OK>";
 	ld	de,#___str_0
 	jr	00103$
 00102$:
-;src/includes/gui.h:129: buttonTxt = "<OK>  <Cancel>";
+;src/includes/gui.h:169: buttonTxt = "<OK>  <Cancel>";
 	ld	de,#___str_1+0
 00103$:
-;src/includes/gui.h:131: drawBoxM2(30,(nbLine+2)*12);
+;src/includes/gui.h:171: drawBoxM2(30,(nbLine+2)*12);
 	ld	c,6 (ix)
 	ld	b,#0x00
 	inc	bc
@@ -1489,7 +1721,7 @@ _drawWindow::
 	pop	af
 	pop	de
 	pop	bc
-;src/includes/gui.h:133: for(i=0; i<nbLine; i++)
+;src/includes/gui.h:173: for(i=0; i<nbLine; i++)
 	ld	l, c
 	ld	h, b
 	add	hl, hl
@@ -1498,55 +1730,55 @@ _drawWindow::
 	add	hl, hl
 	ld	a,#0xCA
 	sub	a, l
-	ld	-2 (ix),a
+	ld	-8 (ix),a
 	ld	a,#0x00
 	sbc	a, h
-	ld	-1 (ix), a
+	ld	-7 (ix), a
 	rlca
 	and	a,#0x01
-	ld	-7 (ix),a
-	ld	-11 (ix),#0x00
-	ld	-9 (ix),#0x00
+	ld	-1 (ix),a
+	ld	-10 (ix),#0x00
+	ld	-4 (ix),#0x00
 00114$:
-;src/includes/gui.h:135: pvideo = cpct_getScreenPtr(SCR_VMEM, (82-strlen(text[i]))/2, (202-(nbLine+2)*10)/2+i*10);
-	ld	a,-2 (ix)
+;src/includes/gui.h:175: p_video = cpct_getScreenPtr(SCR_VMEM, (82-strlen(text[i]))/2, (202-(nbLine+2)*10)/2+i*10);
+	ld	a,-8 (ix)
 	add	a, #0x01
-	ld	-4 (ix),a
-	ld	a,-1 (ix)
+	ld	-6 (ix),a
+	ld	a,-7 (ix)
 	adc	a, #0x00
-	ld	-3 (ix),a
-;src/includes/gui.h:133: for(i=0; i<nbLine; i++)
-	ld	a,-11 (ix)
+	ld	-5 (ix),a
+;src/includes/gui.h:173: for(i=0; i<nbLine; i++)
+	ld	a,-10 (ix)
 	sub	a, 6 (ix)
 	jp	NC,00104$
-;src/includes/gui.h:135: pvideo = cpct_getScreenPtr(SCR_VMEM, (82-strlen(text[i]))/2, (202-(nbLine+2)*10)/2+i*10);
-	ld	l,-2 (ix)
-	ld	h,-1 (ix)
-	ld	a,-7 (ix)
+;src/includes/gui.h:175: p_video = cpct_getScreenPtr(SCR_VMEM, (82-strlen(text[i]))/2, (202-(nbLine+2)*10)/2+i*10);
+	ld	l,-8 (ix)
+	ld	h,-7 (ix)
+	ld	a,-1 (ix)
 	or	a, a
 	jr	Z,00118$
-	ld	l,-4 (ix)
-	ld	h,-3 (ix)
+	ld	l,-6 (ix)
+	ld	h,-5 (ix)
 00118$:
 	sra	h
 	rr	l
-	ld	h,-9 (ix)
+	ld	h,-4 (ix)
 	ld	a,l
 	add	a, h
-	ld	-8 (ix),a
-	ld	l,-11 (ix)
+	ld	-9 (ix),a
+	ld	l,-10 (ix)
 	ld	h,#0x00
 	add	hl, hl
 	ld	b,l
 	ld	c,h
 	ld	a,4 (ix)
 	add	a, b
-	ld	-6 (ix),a
+	ld	-3 (ix),a
 	ld	a,5 (ix)
 	adc	a, c
-	ld	-5 (ix),a
-	ld	l,-6 (ix)
-	ld	h,-5 (ix)
+	ld	-2 (ix),a
+	ld	l,-3 (ix)
+	ld	h,-2 (ix)
 	ld	c,(hl)
 	inc	hl
 	ld	b,(hl)
@@ -1565,7 +1797,7 @@ _drawWindow::
 	rr	l
 	ld	b,l
 	push	de
-	ld	a,-8 (ix)
+	ld	a,-9 (ix)
 	push	af
 	inc	sp
 	push	bc
@@ -1576,9 +1808,9 @@ _drawWindow::
 	pop	de
 	push	hl
 	pop	iy
-;src/includes/gui.h:136: cpct_drawStringM2 (text[i], pvideo, 0);
-	ld	l,-6 (ix)
-	ld	h,-5 (ix)
+;src/includes/gui.h:176: cpct_drawStringM2 (text[i], p_video, 0);
+	ld	l,-3 (ix)
+	ld	h,-2 (ix)
 	ld	c,(hl)
 	inc	hl
 	ld	b,(hl)
@@ -1593,21 +1825,21 @@ _drawWindow::
 	pop	af
 	inc	sp
 	pop	de
-;src/includes/gui.h:133: for(i=0; i<nbLine; i++)
-	ld	a,-9 (ix)
+;src/includes/gui.h:173: for(i=0; i<nbLine; i++)
+	ld	a,-4 (ix)
 	add	a, #0x0A
-	ld	-9 (ix),a
-	inc	-11 (ix)
+	ld	-4 (ix),a
+	inc	-10 (ix)
 	jp	00114$
 00104$:
-;src/includes/gui.h:139: pvideo = cpct_getScreenPtr(SCR_VMEM, (82-strlen(buttonTxt))/2, (202-(nbLine+2)*10)/2+(nbLine+1)*10);
-	ld	b,-2 (ix)
-	ld	h,-1 (ix)
-	ld	a,-7 (ix)
+;src/includes/gui.h:179: p_video = cpct_getScreenPtr(SCR_VMEM, (82-strlen(buttonTxt))/2, (202-(nbLine+2)*10)/2+(nbLine+1)*10);
+	ld	b,-8 (ix)
+	ld	h,-7 (ix)
+	ld	a,-1 (ix)
 	or	a, a
 	jr	Z,00119$
-	ld	b,-4 (ix)
-	ld	h,-3 (ix)
+	ld	b,-6 (ix)
+	ld	h,-5 (ix)
 00119$:
 	sra	h
 	rr	b
@@ -1646,7 +1878,7 @@ _drawWindow::
 	push	hl
 	call	_cpct_getScreenPtr
 	pop	de
-;src/includes/gui.h:140: cpct_drawStringM2 (buttonTxt, pvideo, 0);
+;src/includes/gui.h:180: cpct_drawStringM2 (buttonTxt, p_video, 0);
 	ld	c, l
 	ld	b, h
 	xor	a, a
@@ -1658,29 +1890,29 @@ _drawWindow::
 	pop	af
 	pop	af
 	inc	sp
-;src/includes/gui.h:143: do{
+;src/includes/gui.h:183: do{
 00110$:
-;src/includes/gui.h:144: cpct_scanKeyboard(); 
+;src/includes/gui.h:184: cpct_scanKeyboard(); 
 	call	_cpct_scanKeyboard
-;src/includes/gui.h:146: if ( cpct_isKeyPressed(Key_Return) )
+;src/includes/gui.h:186: if ( cpct_isKeyPressed(Key_Return) )
 	ld	hl,#0x0402
 	call	_cpct_isKeyPressed
 	ld	a,l
 	or	a, a
 	jr	Z,00106$
-;src/includes/gui.h:147: valueReturn=1;
-	ld	-10 (ix),#0x01
+;src/includes/gui.h:187: valueReturn=1;
+	ld	-11 (ix),#0x01
 00106$:
-;src/includes/gui.h:149: if ( cpct_isKeyPressed(Key_Esc) )
+;src/includes/gui.h:189: if ( cpct_isKeyPressed(Key_Esc) )
 	ld	hl,#0x0408
 	call	_cpct_isKeyPressed
 	ld	a,l
 	or	a, a
 	jr	Z,00111$
-;src/includes/gui.h:150: valueReturn=0;
-	ld	-10 (ix),#0x00
+;src/includes/gui.h:190: valueReturn=0;
+	ld	-11 (ix),#0x00
 00111$:
-;src/includes/gui.h:152: while(!cpct_isKeyPressed(Key_Return) && !cpct_isKeyPressed(Key_Esc));
+;src/includes/gui.h:192: while(!cpct_isKeyPressed(Key_Return) && !cpct_isKeyPressed(Key_Esc));
 	ld	hl,#0x0402
 	call	_cpct_isKeyPressed
 	ld	a,l
@@ -1692,8 +1924,8 @@ _drawWindow::
 	or	a, a
 	jr	Z,00110$
 00112$:
-;src/includes/gui.h:154: return valueReturn;
-	ld	l,-10 (ix)
+;src/includes/gui.h:194: return valueReturn;
+	ld	l,-11 (ix)
 	ld	sp, ix
 	pop	ix
 	ret
@@ -2535,536 +2767,18 @@ _drawWorld::
 	inc	sp
 	pop	ix
 	ret
-;src/includes/game.h:1: void game()
+;src/includes/game.h:1: void menuTile(u8* p_world, u8 x, u8 y)
 ;	---------------------------------
-; Function game
+; Function menuTile
 ; ---------------------------------
-_game::
+_menuTile::
 	push	ix
 	ld	ix,#0
 	add	ix,sp
-	ld	hl,#-3875
+	ld	hl,#-10
 	add	hl,sp
 	ld	sp,hl
-;src/includes/game.h:4: int ulx = 0;
-	ld	-28 (ix),#0x00
-	ld	-27 (ix),#0x00
-;src/includes/game.h:5: int uly = 0;
-	ld	-26 (ix),#0x00
-	ld	-25 (ix),#0x00
-;src/includes/game.h:6: int xCursor = 10;
-	ld	-33 (ix),#0x0A
-	ld	-32 (ix),#0x00
-;src/includes/game.h:7: int yCursor = 6;
-	ld	-35 (ix),#0x06
-	ld	-34 (ix),#0x00
-;src/includes/game.h:9: u8 exit=0;
-	ld	-29 (ix),#0x00
-;src/includes/game.h:11: cpct_setVideoMode(1);
-	ld	a,#0x01
-	push	af
-	inc	sp
-	call	_cpct_setVideoMode
-	inc	sp
-;src/includes/game.h:12: cpct_setPalette(paletteMenusM1, 4);
-	ld	hl,#0x0004
-	push	hl
-	ld	hl,#_paletteMenusM1
-	push	hl
-	call	_cpct_setPalette
-;src/includes/game.h:13: cpct_clearScreen(cpct_px2byteM1(0,0,0,0));
-	ld	hl,#0x0000
-	push	hl
-	ld	l, #0x00
-	push	hl
-	call	_cpct_px2byteM1
-	pop	af
-	pop	af
-	ld	h,l
-	ld	bc,#0x4000
-	push	bc
-	push	hl
-	inc	sp
-	ld	hl,#0xC000
-	push	hl
-	call	_cpct_memset
-;src/includes/game.h:15: generateWorld(p_world);
-	ld	hl,#0x0000
-	add	hl,sp
-	ld	-6 (ix),l
-	ld	-5 (ix),h
-	ld	l,-6 (ix)
-	ld	h,-5 (ix)
-	push	hl
-	call	_generateWorld
-	pop	af
-;src/includes/game.h:17: drawWorld(p_world, ulx, uly);
-	ld	a,-6 (ix)
-	ld	-20 (ix),a
-	ld	a,-5 (ix)
-	ld	-19 (ix),a
-	ld	hl,#0x0000
-	push	hl
-	ld	l,-20 (ix)
-	ld	h,-19 (ix)
-	push	hl
-	call	_drawWorld
-	pop	af
-	pop	af
-;src/includes/game.h:19: do{
-	ld	a,-6 (ix)
-	ld	-20 (ix),a
-	ld	a,-5 (ix)
-	ld	-19 (ix),a
-	ld	a,-6 (ix)
-	ld	-14 (ix),a
-	ld	a,-5 (ix)
-	ld	-13 (ix),a
-	ld	a,-6 (ix)
-	ld	-22 (ix),a
-	ld	a,-5 (ix)
-	ld	-21 (ix),a
-	ld	a,-6 (ix)
-	ld	-12 (ix),a
-	ld	a,-5 (ix)
-	ld	-11 (ix),a
-	ld	a,-6 (ix)
-	ld	-10 (ix),a
-	ld	a,-5 (ix)
-	ld	-9 (ix),a
-	ld	a,-6 (ix)
-	ld	-18 (ix),a
-	ld	a,-5 (ix)
-	ld	-17 (ix),a
-	ld	a,-6 (ix)
-	ld	-16 (ix),a
-	ld	a,-5 (ix)
-	ld	-15 (ix),a
-00133$:
-;src/includes/game.h:20: cpct_scanKeyboard(); 
-	call	_cpct_scanKeyboard
-;src/includes/game.h:22: if ( cpct_isKeyPressed(Key_CursorUp) )
-	ld	hl,#0x0100
-	call	_cpct_isKeyPressed
-	ld	d,l
-;src/includes/game.h:24: drawTile(p_world, ulx, uly, xCursor, yCursor);
-	ld	a,-33 (ix)
-	ld	-4 (ix),a
-	ld	a,-26 (ix)
-	ld	-1 (ix),a
-	ld	a,-28 (ix)
-	ld	-23 (ix),a
-;src/includes/game.h:22: if ( cpct_isKeyPressed(Key_CursorUp) )
-	ld	a,d
-	or	a, a
-	jp	Z,00107$
-;src/includes/game.h:24: drawTile(p_world, ulx, uly, xCursor, yCursor);
-	ld	a,-35 (ix)
-	ld	-24 (ix),a
-	ld	a,-14 (ix)
-	ld	-8 (ix),a
-	ld	a,-13 (ix)
-	ld	-7 (ix),a
-	ld	h,-24 (ix)
-	ld	l,-4 (ix)
-	push	hl
-	ld	h,-1 (ix)
-	ld	l,-23 (ix)
-	push	hl
-	ld	l,-8 (ix)
-	ld	h,-7 (ix)
-	push	hl
-	call	_drawTile
-	ld	hl,#6
-	add	hl,sp
-	ld	sp,hl
-;src/includes/game.h:26: yCursor-=1;
-	ld	l,-35 (ix)
-	ld	h,-34 (ix)
-	dec	hl
-	ld	-35 (ix),l
-	ld	-34 (ix),h
-;src/includes/game.h:29: if(yCursor<0)
-	bit	7, -34 (ix)
-	jr	Z,00153$
-;src/includes/game.h:31: yCursor=0;
-	ld	-35 (ix),#0x00
-	ld	-34 (ix),#0x00
-;src/includes/game.h:34: if(uly>0)
-	xor	a, a
-	cp	a, -26 (ix)
-	sbc	a, -25 (ix)
-	jp	PO, 00230$
-	xor	a, #0x80
-00230$:
-	jp	P,00153$
-;src/includes/game.h:36: uly-=1;
-	ld	l,-26 (ix)
-	ld	h,-25 (ix)
-	dec	hl
-	ld	-26 (ix),l
-	ld	-25 (ix),h
-;src/includes/game.h:24: drawTile(p_world, ulx, uly, xCursor, yCursor);
-	ld	a,-26 (ix)
-	ld	-1 (ix),a
-;src/includes/game.h:37: drawWorld(p_world, ulx, uly);
-	ld	e,-20 (ix)
-	ld	d,-19 (ix)
-	ld	a,-1 (ix)
-	push	af
-	inc	sp
-	ld	a,-23 (ix)
-	push	af
-	inc	sp
-	push	de
-	call	_drawWorld
-	pop	af
-	pop	af
-;src/includes/game.h:42: for(i=0; i<14000; i++) {}
-00153$:
-	ld	de,#0x36B0
-00138$:
-	dec	de
-	ld	a,d
-	or	a,e
-	jr	NZ,00138$
-00107$:
-;src/includes/game.h:45: if ( cpct_isKeyPressed(Key_CursorDown) )
-	ld	hl,#0x0400
-	call	_cpct_isKeyPressed
-	ld	a,l
-	or	a, a
-	jp	Z,00114$
-;src/includes/game.h:47: drawTile(p_world, ulx, uly, xCursor, yCursor);
-	ld	a,-35 (ix)
-	ld	-8 (ix),a
-	ld	a,-12 (ix)
-	ld	-3 (ix),a
-	ld	a,-11 (ix)
-	ld	-2 (ix),a
-	ld	h,-8 (ix)
-	ld	l,-4 (ix)
-	push	hl
-	ld	h,-1 (ix)
-	ld	l,-23 (ix)
-	push	hl
-	ld	l,-3 (ix)
-	ld	h,-2 (ix)
-	push	hl
-	call	_drawTile
-	ld	hl,#6
-	add	hl,sp
-	ld	sp,hl
-;src/includes/game.h:48: yCursor+=1;
-	inc	-35 (ix)
-	jr	NZ,00231$
-	inc	-34 (ix)
-00231$:
-;src/includes/game.h:49: if(yCursor>NBTILE_H-1)
-	ld	a,#0x0B
-	cp	a, -35 (ix)
-	ld	a,#0x00
-	sbc	a, -34 (ix)
-	jp	PO, 00232$
-	xor	a, #0x80
-00232$:
-	jp	P,00158$
-;src/includes/game.h:51: yCursor=NBTILE_H-1;
-	ld	-35 (ix),#0x0B
-	ld	-34 (ix),#0x00
-;src/includes/game.h:52: if(uly<HEIGHT-NBTILE_H)
-	ld	a,-26 (ix)
-	sub	a, #0x24
-	ld	a,-25 (ix)
-	rla
-	ccf
-	rra
-	sbc	a, #0x80
-	jr	NC,00158$
-;src/includes/game.h:54: uly+=1;
-	inc	-26 (ix)
-	jr	NZ,00233$
-	inc	-25 (ix)
-00233$:
-;src/includes/game.h:24: drawTile(p_world, ulx, uly, xCursor, yCursor);
-	ld	a,-26 (ix)
-	ld	-1 (ix),a
-;src/includes/game.h:55: drawWorld(p_world, ulx, uly);
-	ld	a,-22 (ix)
-	ld	-3 (ix),a
-	ld	a,-21 (ix)
-	ld	-2 (ix),a
-	ld	h,-1 (ix)
-	ld	l,-23 (ix)
-	push	hl
-	ld	l,-3 (ix)
-	ld	h,-2 (ix)
-	push	hl
-	call	_drawWorld
-	pop	af
-	pop	af
-;src/includes/game.h:60: for(i=0; i<5000; i++) {}
-00158$:
-	ld	-31 (ix),#0x88
-	ld	-30 (ix),#0x13
-00141$:
-	ld	l,-31 (ix)
-	ld	h,-30 (ix)
-	dec	hl
-	ld	-31 (ix),l
-	ld	-30 (ix), h
-	ld	a, h
-	or	a,-31 (ix)
-	jr	NZ,00141$
-00114$:
-;src/includes/game.h:63: if ( cpct_isKeyPressed(Key_CursorLeft) )
-	ld	hl,#0x0101
-	call	_cpct_isKeyPressed
-	ld	d,l
-;src/includes/game.h:24: drawTile(p_world, ulx, uly, xCursor, yCursor);
-	ld	a,-35 (ix)
-	ld	-3 (ix),a
-;src/includes/game.h:63: if ( cpct_isKeyPressed(Key_CursorLeft) )
-	ld	a,d
-	or	a, a
-	jp	Z,00121$
-;src/includes/game.h:65: drawTile(p_world, ulx, uly, xCursor, yCursor);
-	ld	e,-18 (ix)
-	ld	d,-17 (ix)
-	ld	a,-3 (ix)
-	push	af
-	inc	sp
-	ld	a,-4 (ix)
-	push	af
-	inc	sp
-	ld	a,-1 (ix)
-	push	af
-	inc	sp
-	ld	a,-23 (ix)
-	push	af
-	inc	sp
-	push	de
-	call	_drawTile
-	ld	hl,#6
-	add	hl,sp
-	ld	sp,hl
-;src/includes/game.h:66: xCursor-=1;
-	ld	l,-33 (ix)
-	ld	h,-32 (ix)
-	dec	hl
-	ld	-33 (ix),l
-	ld	-32 (ix),h
-;src/includes/game.h:67: if(xCursor<0)
-	bit	7, -32 (ix)
-	jr	Z,00163$
-;src/includes/game.h:69: xCursor=0;
-	ld	-33 (ix),#0x00
-	ld	-32 (ix),#0x00
-;src/includes/game.h:70: if(ulx>0)
-	xor	a, a
-	cp	a, -28 (ix)
-	sbc	a, -27 (ix)
-	jp	PO, 00234$
-	xor	a, #0x80
-00234$:
-	jp	P,00163$
-;src/includes/game.h:72: ulx-=1;
-	ld	l,-28 (ix)
-	ld	h,-27 (ix)
-	dec	hl
-	ld	-28 (ix),l
-	ld	-27 (ix),h
-;src/includes/game.h:24: drawTile(p_world, ulx, uly, xCursor, yCursor);
-	ld	a,-28 (ix)
-	ld	-23 (ix),a
-;src/includes/game.h:73: drawWorld(p_world, ulx, uly);
-	ld	e,-10 (ix)
-	ld	d,-9 (ix)
-	ld	a,-1 (ix)
-	push	af
-	inc	sp
-	ld	a,-23 (ix)
-	push	af
-	inc	sp
-	push	de
-	call	_drawWorld
-	pop	af
-	pop	af
-;src/includes/game.h:78: for(i=0; i<14000; i++) {}
-00163$:
-	ld	de,#0x36B0
-00144$:
-	dec	de
-	ld	a,d
-	or	a,e
-	jr	NZ,00144$
-00121$:
-;src/includes/game.h:81: if ( cpct_isKeyPressed(Key_CursorRight) )
-	ld	hl,#0x0200
-	call	_cpct_isKeyPressed
-	ld	a,l
-	or	a, a
-	jp	Z,00128$
-;src/includes/game.h:83: drawTile(p_world, ulx, uly, xCursor, yCursor);
-	ld	d,-33 (ix)
-	ld	c,-6 (ix)
-	ld	b,-5 (ix)
-	ld	a,-3 (ix)
-	push	af
-	inc	sp
-	push	de
-	inc	sp
-	ld	a,-1 (ix)
-	push	af
-	inc	sp
-	ld	a,-23 (ix)
-	push	af
-	inc	sp
-	push	bc
-	call	_drawTile
-	ld	hl,#6
-	add	hl,sp
-	ld	sp,hl
-;src/includes/game.h:84: xCursor+=1;
-	inc	-33 (ix)
-	jr	NZ,00235$
-	inc	-32 (ix)
-00235$:
-;src/includes/game.h:85: if(xCursor>NBTILE_W-1)
-	ld	a,#0x13
-	cp	a, -33 (ix)
-	ld	a,#0x00
-	sbc	a, -32 (ix)
-	jp	PO, 00236$
-	xor	a, #0x80
-00236$:
-	jp	P,00168$
-;src/includes/game.h:87: xCursor=NBTILE_W-1;
-	ld	-33 (ix),#0x13
-	ld	-32 (ix),#0x00
-;src/includes/game.h:88: if(ulx<WIDTH-NBTILE_W)
-	ld	a,-28 (ix)
-	sub	a, #0x3C
-	ld	a,-27 (ix)
-	rla
-	ccf
-	rra
-	sbc	a, #0x80
-	jr	NC,00168$
-;src/includes/game.h:90: ulx+=1;
-	inc	-28 (ix)
-	jr	NZ,00237$
-	inc	-27 (ix)
-00237$:
-;src/includes/game.h:91: drawWorld(p_world, ulx, uly);
-	ld	b,-28 (ix)
-	ld	e,-16 (ix)
-	ld	d,-15 (ix)
-	ld	a,-1 (ix)
-	push	af
-	inc	sp
-	push	bc
-	inc	sp
-	push	de
-	call	_drawWorld
-	pop	af
-	pop	af
-;src/includes/game.h:96: for(i=0; i<14000; i++) {}
-00168$:
-	ld	de,#0x36B0
-00147$:
-	dec	de
-	ld	a,d
-	or	a,e
-	jr	NZ,00147$
-00128$:
-;src/includes/game.h:99: if ( cpct_isKeyPressed(Key_Esc) )
-	ld	hl,#0x0408
-	call	_cpct_isKeyPressed
-	ld	a,l
-	or	a, a
-	jr	Z,00130$
-;src/includes/game.h:101: exit=1;
-	ld	-29 (ix),#0x01
-00130$:
-;src/includes/game.h:104: if ( cpct_isKeyPressed(Key_Return) )
-	ld	hl,#0x0402
-	call	_cpct_isKeyPressed
-;src/includes/game.h:110: drawCursor(xCursor, yCursor, 0);
-	ld	d,-33 (ix)
-	xor	a, a
-	push	af
-	inc	sp
-	ld	a,-3 (ix)
-	push	af
-	inc	sp
-	push	de
-	inc	sp
-	call	_drawCursor
-	pop	af
-	inc	sp
-;src/includes/game.h:112: while(!exit);
-	ld	a,-29 (ix)
-	or	a, a
-	jp	Z,00133$
-	ld	sp, ix
-	pop	ix
-	ret
-;src/main.c:16: void drawTrain() 
-;	---------------------------------
-; Function drawTrain
-; ---------------------------------
-_drawTrain::
-;src/main.c:54: }
-	ret
-;src/main.c:56: void putM0(void)
-;	---------------------------------
-; Function putM0
-; ---------------------------------
-_putM0::
-;src/main.c:58: cpct_setVideoMode(0);
-	xor	a, a
-	push	af
-	inc	sp
-	call	_cpct_setVideoMode
-	inc	sp
-;src/main.c:60: cpct_setPalette(paletteTrains, 16);
-	ld	hl,#_paletteTrains
-	ld	bc,#0x0010
-	push	bc
-	push	hl
-	call	_cpct_setPalette
-	ret
-;src/main.c:63: void putM2(void)
-;	---------------------------------
-; Function putM2
-; ---------------------------------
-_putM2::
-;src/main.c:65: cpct_setVideoMode(2);
-	ld	a,#0x02
-	push	af
-	inc	sp
-	call	_cpct_setVideoMode
-	inc	sp
-;src/main.c:67: cpct_setPalette(paletteMenusM2, 2);
-	ld	hl,#_paletteMenusM2
-	ld	bc,#0x0002
-	push	bc
-	push	hl
-	call	_cpct_setPalette
-	ret
-;src/main.c:70: void main(void)
-;	---------------------------------
-; Function main
-; ---------------------------------
-_main::
-	push	ix
-	ld	ix,#0
-	add	ix,sp
-	ld	hl,#-18
-	add	hl,sp
-	ld	sp,hl
-;src/main.c:75: const char *menuMain[] = { 
+;src/includes/game.h:5: const char *txtMenuTile[] = { 
 	ld	hl,#0x0000
 	add	hl,sp
 	ld	e,l
@@ -3086,21 +2800,654 @@ _main::
 	ld	(hl),c
 	inc	hl
 	ld	(hl),b
-;src/main.c:81: const char *windowCredit[] = { 
 	ld	hl,#0x0006
+	add	hl,de
+	ld	bc,#___str_5+0
+	ld	(hl),c
+	inc	hl
+	ld	(hl),b
+	ld	hl,#0x0008
+	add	hl,de
+	ld	bc,#___str_6+0
+	ld	(hl),c
+	inc	hl
+	ld	(hl),b
+;src/includes/game.h:13: putM2();
+	push	de
+	call	_putM2
+	pop	de
+;src/includes/game.h:16: do{
+00101$:
+;src/includes/game.h:17: menuChoice = drawMenu(txtMenuTile,5);
+	ld	c, e
+	ld	b, d
+	push	de
+	ld	a,#0x05
+	push	af
+	inc	sp
+	push	bc
+	call	_drawMenu
+	pop	af
+	inc	sp
+	ld	a,l
+	pop	de
+;src/includes/game.h:26: while(menuChoice!=4);
+	sub	a, #0x04
+	jr	NZ,00101$
+;src/includes/game.h:28: putM1();
+	call	_putM1
+	ld	sp, ix
+	pop	ix
+	ret
+___str_2:
+	.ascii "About this tile"
+	.db 0x00
+___str_3:
+	.ascii "Begin a railway"
+	.db 0x00
+___str_4:
+	.ascii "Railroad depot"
+	.db 0x00
+___str_5:
+	.ascii "Accounting"
+	.db 0x00
+___str_6:
+	.ascii "Resume"
+	.db 0x00
+;src/includes/game.h:32: void game()
+;	---------------------------------
+; Function game
+; ---------------------------------
+_game::
+	push	ix
+	ld	ix,#0
+	add	ix,sp
+	ld	hl,#-3869
+	add	hl,sp
+	ld	sp,hl
+;src/includes/game.h:35: u8 ulx = 0;
+	ld	iy,#0
+	add	iy,sp
+	ld	0 (iy),#0x00
+;src/includes/game.h:36: u8 uly = 0;
+	ld	iy,#1
+	add	iy,sp
+	ld	0 (iy),#0x00
+;src/includes/game.h:37: int xCursor = 10;
+	ld	-24 (ix),#0x0A
+	ld	-23 (ix),#0x00
+;src/includes/game.h:38: int yCursor = 6;
+	ld	hl, #3
+	add	hl, sp
+	ld	(hl), #0x06
+	inc	hl
+	ld	(hl), #0x00
+;src/includes/game.h:40: u8 exit=0;
+	ld	iy,#2
+	add	iy,sp
+	ld	0 (iy),#0x00
+;src/includes/game.h:42: cpct_clearScreen(cpct_px2byteM1(0,0,0,0));
+	ld	hl,#0x0000
+	push	hl
+	ld	l, #0x00
+	push	hl
+	call	_cpct_px2byteM1
+	pop	af
+	pop	af
+	ld	h,l
+	ld	bc,#0x4000
+	push	bc
+	push	hl
+	inc	sp
+	ld	hl,#0xC000
+	push	hl
+	call	_cpct_memset
+;src/includes/game.h:44: generateWorld(p_world);
+	ld	hl,#0x0005
+	add	hl,sp
+	ld	-7 (ix),l
+	ld	-6 (ix),h
+	ld	l,-7 (ix)
+	ld	h,-6 (ix)
+	push	hl
+	call	_generateWorld
+	pop	af
+;src/includes/game.h:46: drawWorld(p_world, ulx, uly);
+	ld	a,-7 (ix)
+	ld	-9 (ix),a
+	ld	a,-6 (ix)
+	ld	-8 (ix),a
+	ld	hl,#0x0000
+	push	hl
+	ld	l,-9 (ix)
+	ld	h,-8 (ix)
+	push	hl
+	call	_drawWorld
+	pop	af
+	pop	af
+;src/includes/game.h:48: do{
+	ld	a,-7 (ix)
+	ld	-9 (ix),a
+	ld	a,-6 (ix)
+	ld	-8 (ix),a
+	ld	a,-7 (ix)
+	ld	-11 (ix),a
+	ld	a,-6 (ix)
+	ld	-10 (ix),a
+	ld	a,-7 (ix)
+	ld	-20 (ix),a
+	ld	a,-6 (ix)
+	ld	-19 (ix),a
+	ld	a,-7 (ix)
+	ld	-18 (ix),a
+	ld	a,-6 (ix)
+	ld	-17 (ix),a
+	ld	a,-7 (ix)
+	ld	-5 (ix),a
+	ld	a,-6 (ix)
+	ld	-4 (ix),a
+	ld	a,-7 (ix)
+	ld	-22 (ix),a
+	ld	a,-6 (ix)
+	ld	-21 (ix),a
+	ld	a,-7 (ix)
+	ld	-2 (ix),a
+	ld	a,-6 (ix)
+	ld	-1 (ix),a
+	ld	a,-7 (ix)
+	ld	-14 (ix),a
+	ld	a,-6 (ix)
+	ld	-13 (ix),a
+	ld	a,-7 (ix)
+	ld	-16 (ix),a
+	ld	a,-6 (ix)
+	ld	-15 (ix),a
+00133$:
+;src/includes/game.h:49: cpct_scanKeyboard(); 
+	call	_cpct_scanKeyboard
+;src/includes/game.h:51: if ( cpct_isKeyPressed(Key_CursorUp) )
+	ld	hl,#0x0100
+	call	_cpct_isKeyPressed
+	ld	d,l
+;src/includes/game.h:53: drawTile(p_world, ulx, uly, xCursor, yCursor);
+	ld	a,-24 (ix)
+	ld	-3 (ix),a
+;src/includes/game.h:51: if ( cpct_isKeyPressed(Key_CursorUp) )
+	ld	a,d
+	or	a, a
+	jp	Z,00107$
+;src/includes/game.h:53: drawTile(p_world, ulx, uly, xCursor, yCursor);
+	ld	iy,#3
+	add	iy,sp
+	ld	h,0 (iy)
+	ld	e,-11 (ix)
+	ld	d,-10 (ix)
+	push	hl
+	inc	sp
+	ld	a,-3 (ix)
+	push	af
+	inc	sp
+	ld	iy,#3
+	add	iy,sp
+	ld	a,0 (iy)
+	push	af
+	inc	sp
+	ld	iy,#3
+	add	iy,sp
+	ld	a,0 (iy)
+	push	af
+	inc	sp
+	push	de
+	call	_drawTile
+	ld	hl,#6
+	add	hl,sp
+	ld	sp,hl
+;src/includes/game.h:55: yCursor-=1;
+	ld	iy,#3
+	add	iy,sp
+	ld	l,0 (iy)
+	ld	h,1 (iy)
+	dec	hl
+	ld	0 (iy),l
+	ld	1 (iy),h
+;src/includes/game.h:58: if(yCursor<0)
+	bit	7,1 (iy)
+	jr	Z,00153$
+;src/includes/game.h:60: yCursor=0;
+	ld	0 (iy),#0x00
+	ld	1 (iy),#0x00
+;src/includes/game.h:63: if(uly>0)
+	ld	iy,#1
+	add	iy,sp
+	ld	a,0 (iy)
+	or	a, a
+	jr	Z,00153$
+;src/includes/game.h:65: uly-=1;
+	dec	0 (iy)
+;src/includes/game.h:66: drawWorld(p_world, ulx, uly);
+	ld	e,-9 (ix)
+	ld	d,-8 (ix)
+	ld	a,0 (iy)
+	push	af
+	inc	sp
+	ld	iy,#1
+	add	iy,sp
+	ld	a,0 (iy)
+	push	af
+	inc	sp
+	push	de
+	call	_drawWorld
+	pop	af
+	pop	af
+;src/includes/game.h:71: for(i=0; i<14000; i++) {}
+00153$:
+	ld	de,#0x36B0
+00138$:
+	dec	de
+	ld	a,d
+	or	a,e
+	jr	NZ,00138$
+00107$:
+;src/includes/game.h:74: if ( cpct_isKeyPressed(Key_CursorDown) )
+	ld	hl,#0x0400
+	call	_cpct_isKeyPressed
+	ld	a,l
+	or	a, a
+	jp	Z,00114$
+;src/includes/game.h:76: drawTile(p_world, ulx, uly, xCursor, yCursor);
+	ld	iy,#3
+	add	iy,sp
+	ld	h,0 (iy)
+	ld	e,-18 (ix)
+	ld	d,-17 (ix)
+	push	hl
+	inc	sp
+	ld	a,-3 (ix)
+	push	af
+	inc	sp
+	ld	iy,#3
+	add	iy,sp
+	ld	a,0 (iy)
+	push	af
+	inc	sp
+	ld	iy,#3
+	add	iy,sp
+	ld	a,0 (iy)
+	push	af
+	inc	sp
+	push	de
+	call	_drawTile
+	ld	hl,#6
+	add	hl,sp
+	ld	sp,hl
+;src/includes/game.h:77: yCursor+=1;
+	ld	iy,#3
+	add	iy,sp
+	inc	0 (iy)
+	jr	NZ,00234$
+	inc	1 (iy)
+00234$:
+;src/includes/game.h:78: if(yCursor>NBTILE_H-1)
+	ld	a,#0x0B
+	cp	a, 0 (iy)
+	ld	a,#0x00
+	sbc	a, 1 (iy)
+	jp	PO, 00235$
+	xor	a, #0x80
+00235$:
+	jp	P,00158$
+;src/includes/game.h:80: yCursor=NBTILE_H-1;
+	ld	iy,#3
+	add	iy,sp
+	ld	0 (iy),#0x0B
+	ld	1 (iy),#0x00
+;src/includes/game.h:81: if(uly<HEIGHT-NBTILE_H)
+	ld	iy,#1
+	add	iy,sp
+	ld	a,0 (iy)
+	sub	a, #0x24
+	jr	NC,00158$
+;src/includes/game.h:83: uly+=1;
+	inc	0 (iy)
+;src/includes/game.h:84: drawWorld(p_world, ulx, uly);
+	ld	e,-20 (ix)
+	ld	d,-19 (ix)
+	ld	a,0 (iy)
+	push	af
+	inc	sp
+	ld	iy,#1
+	add	iy,sp
+	ld	a,0 (iy)
+	push	af
+	inc	sp
+	push	de
+	call	_drawWorld
+	pop	af
+	pop	af
+;src/includes/game.h:89: for(i=0; i<5000; i++) {}
+00158$:
+	ld	de,#0x1388
+00141$:
+	dec	de
+	ld	a,d
+	or	a,e
+	jr	NZ,00141$
+00114$:
+;src/includes/game.h:92: if ( cpct_isKeyPressed(Key_CursorLeft) )
+	ld	hl,#0x0101
+	call	_cpct_isKeyPressed
+	ld	d,l
+;src/includes/game.h:53: drawTile(p_world, ulx, uly, xCursor, yCursor);
+	ld	iy,#3
+	add	iy,sp
+	ld	a,0 (iy)
+	ld	-12 (ix),a
+;src/includes/game.h:92: if ( cpct_isKeyPressed(Key_CursorLeft) )
+	ld	a,d
+	or	a, a
+	jp	Z,00121$
+;src/includes/game.h:94: drawTile(p_world, ulx, uly, xCursor, yCursor);
+	ld	e,-22 (ix)
+	ld	d,-21 (ix)
+	ld	a,-12 (ix)
+	push	af
+	inc	sp
+	ld	a,-3 (ix)
+	push	af
+	inc	sp
+	ld	iy,#3
+	add	iy,sp
+	ld	a,0 (iy)
+	push	af
+	inc	sp
+	ld	iy,#3
+	add	iy,sp
+	ld	a,0 (iy)
+	push	af
+	inc	sp
+	push	de
+	call	_drawTile
+	ld	hl,#6
+	add	hl,sp
+	ld	sp,hl
+;src/includes/game.h:95: xCursor-=1;
+	ld	l,-24 (ix)
+	ld	h,-23 (ix)
+	dec	hl
+	ld	-24 (ix),l
+	ld	-23 (ix),h
+;src/includes/game.h:96: if(xCursor<0)
+	bit	7, -23 (ix)
+	jr	Z,00163$
+;src/includes/game.h:98: xCursor=0;
+	ld	-24 (ix),#0x00
+	ld	-23 (ix),#0x00
+;src/includes/game.h:99: if(ulx>0)
+	ld	iy,#0
+	add	iy,sp
+	ld	a,0 (iy)
+	or	a, a
+	jr	Z,00163$
+;src/includes/game.h:101: ulx-=1;
+	dec	0 (iy)
+;src/includes/game.h:102: drawWorld(p_world, ulx, uly);
+	ld	e,-5 (ix)
+	ld	d,-4 (ix)
+	ld	iy,#1
+	add	iy,sp
+	ld	a,0 (iy)
+	push	af
+	inc	sp
+	ld	iy,#1
+	add	iy,sp
+	ld	a,0 (iy)
+	push	af
+	inc	sp
+	push	de
+	call	_drawWorld
+	pop	af
+	pop	af
+;src/includes/game.h:107: for(i=0; i<14000; i++) {}
+00163$:
+	ld	de,#0x36B0
+00144$:
+	dec	de
+	ld	a,d
+	or	a,e
+	jr	NZ,00144$
+00121$:
+;src/includes/game.h:110: if ( cpct_isKeyPressed(Key_CursorRight) )
+	ld	hl,#0x0200
+	call	_cpct_isKeyPressed
+	ld	a,l
+	or	a, a
+	jp	Z,00128$
+;src/includes/game.h:112: drawTile(p_world, ulx, uly, xCursor, yCursor);
+	ld	d,-24 (ix)
+	ld	c,-14 (ix)
+	ld	b,-13 (ix)
+	ld	a,-12 (ix)
+	push	af
+	inc	sp
+	push	de
+	inc	sp
+	ld	iy,#3
+	add	iy,sp
+	ld	a,0 (iy)
+	push	af
+	inc	sp
+	ld	iy,#3
+	add	iy,sp
+	ld	a,0 (iy)
+	push	af
+	inc	sp
+	push	bc
+	call	_drawTile
+	ld	hl,#6
+	add	hl,sp
+	ld	sp,hl
+;src/includes/game.h:113: xCursor+=1;
+	inc	-24 (ix)
+	jr	NZ,00236$
+	inc	-23 (ix)
+00236$:
+;src/includes/game.h:114: if(xCursor>NBTILE_W-1)
+	ld	a,#0x13
+	cp	a, -24 (ix)
+	ld	a,#0x00
+	sbc	a, -23 (ix)
+	jp	PO, 00237$
+	xor	a, #0x80
+00237$:
+	jp	P,00168$
+;src/includes/game.h:116: xCursor=NBTILE_W-1;
+	ld	-24 (ix),#0x13
+	ld	-23 (ix),#0x00
+;src/includes/game.h:117: if(ulx<WIDTH-NBTILE_W)
+	ld	iy,#0
+	add	iy,sp
+	ld	a,0 (iy)
+	sub	a, #0x3C
+	jr	NC,00168$
+;src/includes/game.h:119: ulx+=1;
+	inc	0 (iy)
+;src/includes/game.h:120: drawWorld(p_world, ulx, uly);
+	ld	e,-2 (ix)
+	ld	d,-1 (ix)
+	ld	iy,#1
+	add	iy,sp
+	ld	a,0 (iy)
+	push	af
+	inc	sp
+	ld	iy,#1
+	add	iy,sp
+	ld	a,0 (iy)
+	push	af
+	inc	sp
+	push	de
+	call	_drawWorld
+	pop	af
+	pop	af
+;src/includes/game.h:125: for(i=0; i<14000; i++) {}
+00168$:
+	ld	de,#0x36B0
+00147$:
+	dec	de
+	ld	a,d
+	or	a,e
+	jr	NZ,00147$
+00128$:
+;src/includes/game.h:128: if ( cpct_isKeyPressed(Key_Esc) )
+	ld	hl,#0x0408
+	call	_cpct_isKeyPressed
+	ld	a,l
+	or	a, a
+	jr	Z,00130$
+;src/includes/game.h:130: exit=1;
+	ld	iy,#2
+	add	iy,sp
+	ld	0 (iy),#0x01
+00130$:
+;src/includes/game.h:133: if ( cpct_isKeyPressed(Key_Return) )
+	ld	hl,#0x0402
+	call	_cpct_isKeyPressed
+	ld	a,l
+	or	a, a
+	jr	Z,00132$
+;src/includes/game.h:135: menuTile(p_world, ulx+xCursor, uly+yCursor);
+	ld	iy,#3
+	add	iy,sp
+	ld	l,0 (iy)
+	ld	iy,#1
+	add	iy,sp
+	ld	a, 0 (iy)
+	add	a, l
+	ld	c,a
+	ld	l,-24 (ix)
+	ld	iy,#0
+	add	iy,sp
+	ld	a, 0 (iy)
+	add	a, l
+	ld	e,a
+	ld	l,-16 (ix)
+	ld	h,-15 (ix)
+	ld	d, c
+	push	de
+	push	hl
+	call	_menuTile
+	pop	af
+	pop	af
+;src/includes/game.h:136: cpct_clearScreen(cpct_px2byteM1(0,0,0,0));	
+	ld	hl,#0x0000
+	push	hl
+	ld	l, #0x00
+	push	hl
+	call	_cpct_px2byteM1
+	pop	af
+	pop	af
+	ld	h,l
+	ld	bc,#0x4000
+	push	bc
+	push	hl
+	inc	sp
+	ld	hl,#0xC000
+	push	hl
+	call	_cpct_memset
+;src/includes/game.h:137: drawWorld(p_world, ulx, uly);
+	ld	e,-7 (ix)
+	ld	d,-6 (ix)
+	ld	iy,#1
+	add	iy,sp
+	ld	a,0 (iy)
+	push	af
+	inc	sp
+	ld	iy,#1
+	add	iy,sp
+	ld	a,0 (iy)
+	push	af
+	inc	sp
+	push	de
+	call	_drawWorld
+	pop	af
+	pop	af
+00132$:
+;src/includes/game.h:140: drawCursor(xCursor, yCursor, 0);
+	ld	d,-24 (ix)
+	xor	a, a
+	push	af
+	inc	sp
+	ld	a,-12 (ix)
+	push	af
+	inc	sp
+	push	de
+	inc	sp
+	call	_drawCursor
+	pop	af
+	inc	sp
+;src/includes/game.h:142: while(!exit);
+	ld	iy,#2
+	add	iy,sp
+	ld	a,0 (iy)
+	or	a, a
+	jp	Z,00133$
+	ld	sp, ix
+	pop	ix
+	ret
+;src/main.c:16: void drawTrain() 
+;	---------------------------------
+; Function drawTrain
+; ---------------------------------
+_drawTrain::
+;src/main.c:54: }
+	ret
+;src/main.c:57: void main(void)
+;	---------------------------------
+; Function main
+; ---------------------------------
+_main::
+	push	ix
+	ld	ix,#0
+	add	ix,sp
+	ld	hl,#-19
+	add	hl,sp
+	ld	sp,hl
+;src/main.c:62: const char *menuMain[] = { 
+	ld	hl,#0x0000
+	add	hl,sp
+	ld	e,l
+	ld	d,h
+	ld	(hl),#<(___str_7)
+	inc	hl
+	ld	(hl),#>(___str_7)
+	ld	l, e
+	ld	h, d
+	inc	hl
+	inc	hl
+	ld	bc,#___str_8+0
+	ld	(hl),c
+	inc	hl
+	ld	(hl),b
+	ld	hl,#0x0004
+	add	hl,de
+	ld	bc,#___str_9+0
+	ld	(hl),c
+	inc	hl
+	ld	(hl),b
+;src/main.c:68: const char *windowCredit[] = { 
+	ld	hl,#0x0009
 	add	hl,sp
 	ld	-4 (ix),l
 	ld	-3 (ix),h
 	ld	l,-4 (ix)
 	ld	h,-3 (ix)
-	ld	(hl),#<(___str_5)
+	ld	(hl),#<(___str_10)
 	inc	hl
-	ld	(hl),#>(___str_5)
+	ld	(hl),#>(___str_10)
 	ld	l,-4 (ix)
 	ld	h,-3 (ix)
 	inc	hl
 	inc	hl
-	ld	bc,#___str_6+0
+	ld	bc,#___str_11+0
 	ld	(hl),c
 	inc	hl
 	ld	(hl),b
@@ -3110,17 +3457,17 @@ _main::
 	ld	a,-3 (ix)
 	adc	a, #0x00
 	ld	h,a
-	ld	bc,#___str_7+0
+	ld	bc,#___str_12+0
 	ld	(hl),c
 	inc	hl
 	ld	(hl),b
-;src/main.c:87: firmware = cpct_disableFirmware();
+;src/main.c:74: firmware = cpct_disableFirmware();
 	push	de
 	call	_cpct_disableFirmware
 	pop	de
-	ld	-6 (ix),l
-	ld	-5 (ix),h
-;src/main.c:89: cpct_fw2hw(paletteTrains, 16);
+	ld	-13 (ix),l
+	ld	-12 (ix),h
+;src/main.c:76: cpct_fw2hw(paletteTrains, 16);
 	ld	hl,#_paletteTrains
 	push	de
 	ld	bc,#0x0010
@@ -3128,7 +3475,7 @@ _main::
 	push	hl
 	call	_cpct_fw2hw
 	pop	de
-;src/main.c:90: cpct_fw2hw(paletteMenusM2, 2);
+;src/main.c:77: cpct_fw2hw(paletteMenusM2, 2);
 	ld	hl,#_paletteMenusM2
 	push	de
 	ld	bc,#0x0002
@@ -3136,7 +3483,7 @@ _main::
 	push	hl
 	call	_cpct_fw2hw
 	pop	de
-;src/main.c:91: cpct_fw2hw(paletteMenusM1, 4);
+;src/main.c:78: cpct_fw2hw(paletteMenusM1, 4);
 	ld	hl,#_paletteMenusM1
 	push	de
 	ld	bc,#0x0004
@@ -3144,7 +3491,7 @@ _main::
 	push	hl
 	call	_cpct_fw2hw
 	pop	de
-;src/main.c:93: cpct_setBorder(paletteTrains[12]);
+;src/main.c:80: cpct_setBorder(paletteTrains[12]);
 	ld	a, (#_paletteTrains + 12)
 	push	de
 	ld	d,a
@@ -3153,20 +3500,11 @@ _main::
 	call	_cpct_setPALColour
 	call	_putM2
 	pop	de
-;src/main.c:97: do{
+;src/main.c:84: do{
 	ld	-2 (ix),e
 	ld	-1 (ix),d
 00105$:
-;src/main.c:98: cpct_clearScreen(0b11111111);
-	ld	hl,#0x4000
-	push	hl
-	ld	a,#0xFF
-	push	af
-	inc	sp
-	ld	h, #0xC0
-	push	hl
-	call	_cpct_memset
-;src/main.c:100: menuChoice = drawMenu(menuMain,3);
+;src/main.c:85: menuChoice = drawMenu(menuMain,3);
 	ld	e,-2 (ix)
 	ld	d,-1 (ix)
 	ld	a,#0x03
@@ -3176,65 +3514,64 @@ _main::
 	call	_drawMenu
 	pop	af
 	inc	sp
-	ld	d,l
-;src/main.c:102: if(menuChoice==0)
-	ld	a,d
+;src/main.c:87: if(menuChoice==0)
+	ld	-11 (ix), l
+	ld	a, l
 	or	a, a
 	jr	NZ,00102$
-;src/main.c:104: game();
-	push	de
+;src/main.c:89: putM1();
+	call	_putM1
+;src/main.c:91: game();
 	call	_game
+;src/main.c:93: putM2();
 	call	_putM2
-	pop	de
 00102$:
-;src/main.c:109: if(menuChoice==1)
-	ld	a,d
+;src/main.c:96: if(menuChoice==1)
+	ld	a,-11 (ix)
 	dec	a
 	jr	NZ,00106$
-;src/main.c:110: drawWindow(windowCredit,3,0);
-	ld	c,-4 (ix)
-	ld	b,-3 (ix)
-	push	de
+;src/main.c:97: drawWindow(windowCredit,3,0);
+	ld	e,-4 (ix)
+	ld	d,-3 (ix)
 	ld	hl,#0x0003
 	push	hl
-	push	bc
+	push	de
 	call	_drawWindow
 	pop	af
 	pop	af
-	pop	de
 00106$:
-;src/main.c:112: while(menuChoice!=2);
-	ld	a,d
+;src/main.c:99: while(menuChoice!=2);
+	ld	a,-11 (ix)
 	sub	a, #0x02
 	jr	NZ,00105$
-;src/main.c:114: cpct_setVideoMode(0);
+;src/main.c:101: cpct_setVideoMode(0);
 	xor	a, a
 	push	af
 	inc	sp
 	call	_cpct_setVideoMode
 	inc	sp
-;src/main.c:115: cpct_reenableFirmware(firmware);
-	ld	l,-6 (ix)
-	ld	h,-5 (ix)
+;src/main.c:102: cpct_reenableFirmware(firmware);
+	ld	l,-13 (ix)
+	ld	h,-12 (ix)
 	call	_cpct_reenableFirmware
 	ld	sp, ix
 	pop	ix
 	ret
-___str_2:
+___str_7:
 	.ascii "New game"
 	.db 0x00
-___str_3:
+___str_8:
 	.ascii "Credits"
 	.db 0x00
-___str_4:
+___str_9:
 	.ascii "Quit"
 	.db 0x00
-___str_5:
-	.ascii "Railwayz"
+___str_10:
+	.ascii "Railways"
 	.db 0x00
-___str_6:
+___str_11:
 	.db 0x00
-___str_7:
+___str_12:
 	.ascii "Trewdbal  Productions 2016"
 	.db 0x00
 	.area _CODE

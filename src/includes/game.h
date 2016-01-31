@@ -1,15 +1,44 @@
+void menuTile(u8* p_world, u8 x, u8 y)
+{
+	u8 menuChoice;
+
+	const char *txtMenuTile[] = { 
+		"About this tile",
+		"Begin a railway",
+		"Railroad depot",
+		"Accounting",
+		"Resume",
+	};
+
+	putM2();
+
+
+	do{
+		menuChoice = drawMenu(txtMenuTile,5);
+
+		if(menuChoice==0)
+		{
+
+
+		}
+
+	}
+	while(menuChoice!=4);
+
+	putM1();
+
+}
+
 void game()
 {
 	u8 p_world[WIDTH*HEIGHT];
-	int ulx = 0;
-	int uly = 0;
+	u8 ulx = 0;
+	u8 uly = 0;
 	int xCursor = 10;
 	int yCursor = 6;
 	int i;
 	u8 exit=0;
 
-	cpct_setVideoMode(1);
-	cpct_setPalette(paletteMenusM1, 4);
 	cpct_clearScreen(cpct_px2byteM1(0,0,0,0));
 
 	generateWorld(p_world);
@@ -103,8 +132,9 @@ void game()
 
 		if ( cpct_isKeyPressed(Key_Return) )
 		{
-
-		
+			menuTile(p_world, ulx+xCursor, uly+yCursor);
+			cpct_clearScreen(cpct_px2byteM1(0,0,0,0));	
+			drawWorld(p_world, ulx, uly);
 		}
 
 		drawCursor(xCursor, yCursor, 0);
