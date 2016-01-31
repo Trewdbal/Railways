@@ -83,7 +83,6 @@ void drawMenuEntry(char **menu, u8 nbEntry, u8 iSelect)
 	int i;
 	u8 *p_video;
 	u8 penSelected = 0;
-//	drawBoxM2(30,nbEntry*12);
 
 	// Draw selection bar
 	p_video = cpct_getScreenPtr(SCR_VMEM, 32, (201-nbEntry*10)/2+iSelect*10);
@@ -109,6 +108,8 @@ u8 drawMenu(char **menu, u8 nbEntry)
 {
 	int i;
 	u8 iSelect=0;
+
+	cpct_clearScreen(0b11111111);
 
 	drawBoxM2(30,nbEntry*12);
 	
@@ -168,7 +169,7 @@ u8 drawWindow(char **text, u8 nbLine, u8 button)
 	else
 		buttonTxt = "<OK>  <Cancel>";
 
-	drawBoxM2(30,(nbLine+2)*12);
+	drawBoxM2(50,(nbLine+2)*12);
 
 	for(i=0; i<nbLine; i++)
 	{

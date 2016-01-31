@@ -1,10 +1,104 @@
+void windowInfoTile(u8 *p_world, u8 x, u8 y)
+{
+	const char *txtWindowInfoTile[4];
+
+	switch(p_world[y*WIDTH+x])
+	{
+		case GRASS1:
+		case GRASS2:
+			txtWindowInfoTile[0] = "Grassland";
+			txtWindowInfoTile[1] = "";
+			txtWindowInfoTile[2] = "Production: nothing";
+			txtWindowInfoTile[3] = "Demand: nothing";
+			break;
+		case DWELLINGS1:
+		case DWELLINGS2:
+		case DWELLINGS3:
+			txtWindowInfoTile[0] = "City";
+			txtWindowInfoTile[1] = "";
+			txtWindowInfoTile[2] = "Production: Passengers, mail";
+			txtWindowInfoTile[3] = "Demand: Passenger, mail, food, goods";
+			break;
+		case FARM1:
+		case FARM2:
+			txtWindowInfoTile[0] = "Farm";
+			txtWindowInfoTile[1] = "";
+			txtWindowInfoTile[2] = "Production: Cereal";
+			txtWindowInfoTile[3] = "Demand: Nothing";
+			break;
+		case WATER:
+			txtWindowInfoTile[0] = "Water";
+			txtWindowInfoTile[1] = "";
+			txtWindowInfoTile[2] = "Production: Nothing";
+			txtWindowInfoTile[3] = "Demand: Nothing";
+			break;
+		case FOREST:
+			txtWindowInfoTile[0] = "Forest";
+			txtWindowInfoTile[1] = "";
+			txtWindowInfoTile[2] = "Production: Nothing";
+			txtWindowInfoTile[3] = "Demand: Nothing";
+			break;
+		case LIVESTOCK:
+			txtWindowInfoTile[0] = "Livestock farming";
+			txtWindowInfoTile[1] = "";
+			txtWindowInfoTile[2] = "Production: Livestock, wool";
+			txtWindowInfoTile[3] = "Demand: Cereal";
+			break;
+	}
+
+	drawWindow(txtWindowInfoTile, 4, 0);
+}
+
+void menuStations(u8* p_world, u8 x, u8 y)
+{
+	u8 result;
+	
+	const char *txtMenuSizeStation[] = { 
+		"Small",
+		"Medium",
+		"Large",
+	};
+	
+	const char *txtMenuOrientationStation[] = { 
+		"East - West",
+		"North - South",
+	};
+	
+	result = drawMenu(txtMenuSizeStation,3);
+	result = result + 100*drawMenu(txtMenuOrientationStation,2);
+
+	switch(result)
+	{
+		case 0:
+			p_world[y*WIDTH+x] = SSEW;
+			break;
+		case 100:
+			p_world[y*WIDTH+x] = SSNS;
+			break;
+		case 1:
+			p_world[y*WIDTH+x] = SMEW;
+			break;
+		case 101:
+			p_world[y*WIDTH+x] = SMNS;
+			break;
+		case 2:
+			p_world[y*WIDTH+x] = SLEW;
+			break;
+		case 102:
+			p_world[y*WIDTH+x] = SLNS;
+			break;
+	}
+}
+
+
 void menuTile(u8* p_world, u8 x, u8 y)
 {
 	u8 menuChoice;
 
 	const char *txtMenuTile[] = { 
 		"About this tile",
-		"Begin a railway",
+		"Build a railway",
+		"Build a station",
 		"Railroad depot",
 		"Accounting",
 		"Resume",
@@ -12,18 +106,19 @@ void menuTile(u8* p_world, u8 x, u8 y)
 
 	putM2();
 
-
 	do{
-		menuChoice = drawMenu(txtMenuTile,5);
+		menuChoice = drawMenu(txtMenuTile,6);
 
 		if(menuChoice==0)
+			windowInfoTile(p_world, x, y);
+		else if(menuChoice==2)
 		{
-
-
+			menuStations(p_world, x, y);
+			menuChoice=5;
 		}
 
 	}
-	while(menuChoice!=4);
+	while(menuChoice!=5);
 
 	putM1();
 
@@ -86,7 +181,7 @@ void game()
 			}
 
 			// Wait loop
-			for(i=0; i<5000; i++) {}
+			for(i=0; i<14000; i++) {}
 		}
 
 		if ( cpct_isKeyPressed(Key_CursorLeft) )

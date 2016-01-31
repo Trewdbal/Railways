@@ -8,10 +8,10 @@
 #define HEIGHT 48
 #define NBFARM 60
 #define NBURBAN 30
-#define NBFOREST 100
+#define FOREST_DENSITY 0.12
 #define NBLIVESTOCK 20
 
-enum {GRASS1, GRASS2, DWELLINGS1, DWELLINGS2, DWELLINGS3, FARM1, FARM2, WATER, FOREST, LIVESTOCK};
+enum {GRASS1, GRASS2, DWELLINGS1, DWELLINGS2, DWELLINGS3, FARM1, FARM2, WATER, FOREST, LIVESTOCK, SSNS, SSEW, SMNS, SMEW, SLNS, SLEW};
 
 void drawCursor(u8 x, u8 y, u8 color)
 {
@@ -36,19 +36,37 @@ void generateWorld(u8 *p_world)
 	int iy;
 	int shift;
 
+	//	generateGradients();
+
 	cpct_setRandomSeedUniform_u8(0);
 
 	for(iy=0; iy<HEIGHT*WIDTH;iy++)
 	{
 		p_world[iy] = cpct_getRandomUniform_u8_f(0)%2;
 	}
-
+	/*
 	// Forests
-	for(ix=0; ix<NBFOREST; ix++)
+	for(iy=0; iy<8; iy++)
 	{
-		iy = cpct_getRandomUniform_u8_f(0)*15; // (WIDTH*HEIGHT)/255;
-		p_world[iy] = FOREST;
+
+	for(ix=0; ix<10; ix++)
+	{
+	perlipn = perlin((float)ix/WIDTH, (float)iy/HEIGHT);
+	if(perlipn>FOREST_DENSITY)
+	{
+	for(shifty=0;shifty<6;shifty++)
+	for(shiftx=0;shiftx<8;shiftx++)
+
+	p_world[(iy*6+shifty)*WIDTH+((ix*8)+shiftx)] = FOREST;
 	}
+
+	}
+
+	sprintf(buff, "%f",perlipn );
+	cpct_drawStringM1 (buff, SCR_VMEM, 0, 1);
+
+	}
+	 */
 
 	// Farms
 	cpct_setRandomSeedUniform_u8(1);
@@ -101,7 +119,7 @@ void drawTile(u8 *p_world, u8 x_, u8 y_, u8 ix, u8 iy)
 	int adress = (y_+iy)*WIDTH+x_+ix;
 
 	p_video = cpct_getScreenPtr(SCR_VMEM, ix*TILESIZE_W, iy*TILESIZE_H);
-	
+
 	switch(p_world[adress])
 	{
 		case GRASS1:
@@ -110,29 +128,47 @@ void drawTile(u8 *p_world, u8 x_, u8 y_, u8 ix, u8 iy)
 		case GRASS2:
 			cpct_drawSprite(grass2, p_video, TILESIZE_W, TILESIZE_H);
 			break;
-			case DWELLINGS1:
+		case DWELLINGS1:
 			cpct_drawSprite(dwellings1, p_video, TILESIZE_W, TILESIZE_H);
 			break;
-			case DWELLINGS2:
+		case DWELLINGS2:
 			cpct_drawSprite(dwellings2, p_video, TILESIZE_W, TILESIZE_H);
 			break;
-			case DWELLINGS3:
+		case DWELLINGS3:
 			cpct_drawSprite(dwellings3, p_video, TILESIZE_W, TILESIZE_H);
 			break;
-			case FARM1:
+		case FARM1:
 			cpct_drawSprite(farm1, p_video, TILESIZE_W, TILESIZE_H);
 			break;
-			case FARM2:
+		case FARM2:
 			cpct_drawSprite(farm2, p_video, TILESIZE_W, TILESIZE_H);
 			break;
-			case WATER:
+		case WATER:
 			cpct_drawSprite(water, p_video, TILESIZE_W, TILESIZE_H);
 			break;
-			case FOREST:
+		case FOREST:
 			cpct_drawSprite(forest, p_video, TILESIZE_W, TILESIZE_H);
 			break;
-			case LIVESTOCK:
+		case LIVESTOCK:
 			cpct_drawSprite(livestock, p_video, TILESIZE_W, TILESIZE_H);
+			break;
+		case  SSNS:
+			cpct_drawSprite(station_small_ns, p_video, TILESIZE_W, TILESIZE_H);
+			break;
+		case  SSEW:
+			cpct_drawSprite(station_small_ew, p_video, TILESIZE_W, TILESIZE_H);
+			break;
+		case  SMNS:
+			cpct_drawSprite(station_medium_ns, p_video, TILESIZE_W, TILESIZE_H);
+			break;
+		case  SMEW:
+			cpct_drawSprite(station_medium_ew, p_video, TILESIZE_W, TILESIZE_H);
+			break;
+		case  SLNS:
+			cpct_drawSprite(station_large_ns, p_video, TILESIZE_W, TILESIZE_H);
+			break;
+		case  SLEW:
+			cpct_drawSprite(station_large_ew, p_video, TILESIZE_W, TILESIZE_H);
 			break;
 	}
 }
