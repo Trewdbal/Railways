@@ -79,7 +79,7 @@ void main(void)
 	};
 
 	const char *windowCredit[] = { 
-		"Railwayz",
+		"Railways",
 		"",
 		"Trewdbal  Productions 2016",
 	};
