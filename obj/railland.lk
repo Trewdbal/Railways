@@ -1,0 +1,12 @@
+-mjwx
+-i obj/railland.ihx
+-b _CODE = 0x4000
+-b _DATA = 0x0000
+-u
+-k /home/arnaud/Téléchargements/cpctelera-1.3/cpctelera/tools/sdcc-3.5.0/bin/../share/sdcc/lib/z80
+-k /home/arnaud/Téléchargements/cpctelera-1.3/cpctelera/tools/sdcc-3.5.0/share/sdcc/lib/z80
+-l /home/arnaud/Téléchargements/cpctelera-1.3/cpctelera/cpctelera.lib
+-l z80
+obj/main.rel
+
+-e

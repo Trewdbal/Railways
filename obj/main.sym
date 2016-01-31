@@ -1,0 +1,86 @@
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 1.
+Hexadecimal [16-Bits]
+
+Symbol Table
+
+    .__.$$$.                                                    =  2710 L
+    .__.ABS.                                                    =  0000 G
+    .__.CPU.                                                    =  0000 L
+    .__.H$L.                                                    =  0000 L
+  0 ___str_0                                                       080C R
+  0 ___str_1                                                       0811 R
+  0 ___str_2                                                       115A R
+  0 ___str_3                                                       1163 R
+  0 ___str_4                                                       116B R
+  0 ___str_5                                                       1170 R
+  0 ___str_6                                                       1179 R
+  0 ___str_7                                                       117A R
+    __divsint                                                      **** GX
+    __moduchar                                                     **** GX
+    _cpct_disableFirmware                                          **** GX
+    _cpct_drawSolidBox                                             **** GX
+    _cpct_drawSprite                                               **** GX
+    _cpct_drawStringM2                                             **** GX
+    _cpct_fw2hw                                                    **** GX
+    _cpct_getRandomUniform_u8_f                                    **** GX
+    _cpct_getScreenPtr                                             **** GX
+    _cpct_isKeyPressed                                             **** GX
+    _cpct_memset                                                   **** GX
+    _cpct_px2byteM0                                                **** GX
+    _cpct_px2byteM1                                                **** GX
+    _cpct_reenableFirmware                                         **** GX
+    _cpct_scanKeyboard                                             **** GX
+    _cpct_setPALColour                                             **** GX
+    _cpct_setPalette                                               **** GX
+    _cpct_setRandomSeedUniform_u8                                  **** GX
+    _cpct_setVideoMode                                             **** GX
+  0 _drawBoxM0                                                     0000 GR
+  0 _drawBoxM2                                                     03B0 GR
+  0 _drawCursor                                                    0820 GR
+  0 _drawMenu                                                      05D5 GR
+  0 _drawMenuEntry                                                 0490 GR
+  0 _drawTile                                                      0ADA GR
+  0 _drawTrain                                                     102F GR
+  0 _drawWindow                                                    0683 GR
+  0 _drawWorld                                                     0BE5 GR
+  0 _dwellings1                                                    01F0 GR
+  0 _dwellings2                                                    0230 GR
+  0 _dwellings3                                                    0270 GR
+  0 _farm1                                                         02F0 GR
+  0 _farm2                                                         0330 GR
+  0 _forest                                                        01B0 GR
+  0 _game                                                          0CA7 GR
+  0 _generateWorld                                                 091B GR
+  0 _grass1                                                        0130 GR
+  0 _grass2                                                        0170 GR
+  0 _livestock                                                     0370 GR
+  0 _main                                                          1057 GR
+  0 _paletteMenusM1                                                012A GR
+  0 _paletteMenusM2                                                012E GR
+  0 _paletteTrains                                                 011A GR
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 2.
+Hexadecimal [16-Bits]
+
+Symbol Table
+
+  0 _putM0                                                         1030 GR
+  0 _putM2                                                         1043 GR
+    _strlen                                                        **** GX
+  0 _water                                                         02B0 GR
+
+
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 3.
+Hexadecimal [16-Bits]
+
+Area Table
+
+   0 _CODE                                      size 1195   flags    0
+   1 _DATA                                      size    0   flags    0
+   2 _INITIALIZED                               size    0   flags    0
+   3 _DABS                                      size    0   flags    8
+   4 _HOME                                      size    0   flags    0
+   5 _GSINIT                                    size    0   flags    0
+   6 _GSFINAL                                   size    0   flags    0
+   7 _INITIALIZER                               size    0   flags    0
+   8 _CABS                                      size    0   flags    8
+
