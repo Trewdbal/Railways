@@ -98,6 +98,13 @@ void menuTile(u8 x, u8 y)
 		"Resume",
 	};
 
+	const char *txtWindowDestroy[] = { 
+		"Destroy this place will cost 100 $",
+		"",
+		"Continue ?",
+	};
+
+
 	putM2();
 
 	do{
@@ -108,6 +115,13 @@ void menuTile(u8 x, u8 y)
 		else if(menuChoice==2)
 		{
 			menuStations();
+			menuChoice=6;
+		}
+		else if(menuChoice==3)
+		{
+			if(	drawWindow(txtWindowDestroy,3,1) == 1)
+				p_world[x+y*WIDTH] = GRASS1;
+
 			menuChoice=6;
 		}
 
@@ -244,7 +258,17 @@ void game()
 
 		if ( cpct_isKeyPressed(Key_Esc) )
 		{
-			exit=1;
+			// if standard cursor, call menu Tile
+			if(CURSOR_MODE==NONE)
+				exit=1;
+			else if(CURSOR_MODE>=T_SSNS && CURSOR_MODE<=T_SLEW)
+			{
+				CURSOR_MODE=NONE;
+				drawTile(ulx, uly, xCursor, yCursor);
+			}
+
+			// Wait loop
+			for(i=0; i<14000; i++) {}
 		}
 
 		if ( cpct_isKeyPressed(Key_Return) )
@@ -252,18 +276,18 @@ void game()
 			// if standard cursor, call menu Tile
 			if(CURSOR_MODE==NONE)
 			{
-			menuTile(ulx+xCursor, uly+yCursor);
-			cpct_clearScreen(cpct_px2byteM1(0,0,0,0));	
-			drawWorld(ulx, uly);
+				menuTile(ulx+xCursor, uly+yCursor);
+				cpct_clearScreen(cpct_px2byteM1(0,0,0,0));	
+				drawWorld(ulx, uly);
 			}
 			// If station cursor, apply the station tile
 			else if(CURSOR_MODE>=T_SSNS && CURSOR_MODE<=T_SLEW)
 			{
-				p_world[ulx+xCursor+uly+yCursor*WIDTH]=CURSOR_MODE+9;
+				p_world[ulx+xCursor+(uly+yCursor)*WIDTH]=CURSOR_MODE+9;
 				CURSOR_MODE=NONE;
 			}
-			
-				// Wait loop
+
+			// Wait loop
 			for(i=0; i<14000; i++) {}
 
 		}

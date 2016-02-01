@@ -26,20 +26,23 @@ Symbol Table
   0 ___str_21                                                      165A R
   0 ___str_22                                                      1660 R
   0 ___str_23                                                      1667 R
-  0 ___str_24                                                      1703 R
-  0 ___str_25                                                      1713 R
-  0 ___str_26                                                      1723 R
-  0 ___str_27                                                      1733 R
-  0 ___str_28                                                      173B R
-  0 ___str_29                                                      174A R
+  0 ___str_24                                                      1786 R
+  0 ___str_25                                                      1796 R
+  0 ___str_26                                                      17A6 R
+  0 ___str_27                                                      17B6 R
+  0 ___str_28                                                      17BE R
+  0 ___str_29                                                      17CD R
   0 ___str_3                                                       14DA R
-  0 ___str_30                                                      1755 R
-  0 ___str_31                                                      1BE4 R
-  0 ___str_32                                                      1BED R
-  0 ___str_33                                                      1BF5 R
-  0 ___str_34                                                      1BFA R
-  0 ___str_35                                                      1C03 R
-  0 ___str_36                                                      1C04 R
+  0 ___str_30                                                      17D8 R
+  0 ___str_31                                                      17DF R
+  0 ___str_32                                                      1802 R
+  0 ___str_33                                                      1803 R
+  0 ___str_34                                                      1CDD R
+  0 ___str_35                                                      1CE6 R
+  0 ___str_36                                                      1CEE R
+  0 ___str_37                                                      1CF3 R
+  0 ___str_38                                                      1CFC R
+  0 ___str_39                                                      1CFD R
   0 ___str_4                                                       14DB R
   0 ___str_5                                                       14EF R
   0 ___str_6                                                       14FF R
@@ -55,14 +58,14 @@ Symbol Table
     _cpct_drawStringM2                                             **** GX
     _cpct_fw2hw                                                    **** GX
     _cpct_getRandomUniform_u8_f                                    **** GX
-    _cpct_getScreenPtr                                             **** GX
-    _cpct_isKeyPressed                                             **** GX
-    _cpct_memset                                                   **** GX
 ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 2.
 Hexadecimal [16-Bits]
 
 Symbol Table
 
+    _cpct_getScreenPtr                                             **** GX
+    _cpct_isKeyPressed                                             **** GX
+    _cpct_memset                                                   **** GX
     _cpct_px2byteM0                                                **** GX
     _cpct_px2byteM1                                                **** GX
     _cpct_reenableFirmware                                         **** GX
@@ -77,7 +80,7 @@ Symbol Table
   0 _drawMenu                                                      0AC3 GR
   0 _drawMenuEntry                                                 0993 GR
   0 _drawTile                                                      105B GR
-  0 _drawTrain                                                     1AE9 GR
+  0 _drawTrain                                                     1BE2 GR
   0 _drawWindow                                                    0BC1 GR
   0 _drawWorld                                                     1283 GR
   0 _dwellings1                                                    00E9 GR
@@ -86,12 +89,12 @@ Symbol Table
   0 _farm1                                                         01E9 GR
   0 _farm2                                                         0229 GR
   0 _forest                                                        00A9 GR
-  0 _game                                                          175C GR
+  0 _game                                                          180E GR
   0 _generateWorld                                                 0ED9 GR
   0 _grass1                                                        0029 GR
   0 _grass2                                                        0069 GR
   0 _livestock                                                     0269 GR
-  0 _main                                                          1AEA GR
+  0 _main                                                          1BE3 GR
   0 _menuStations                                                  15F8 GR
   0 _menuTile                                                      166D GR
   1 _p_world                                                       0000 GR
@@ -115,14 +118,14 @@ Symbol Table
   0 _station_large_ns                                              03A9 GR
   0 _station_medium_ew                                             0369 GR
   0 _station_medium_ns                                             0329 GR
-  0 _station_small_ew                                              02E9 GR
-  0 _station_small_ns                                              02A9 GR
-    _strlen                                                        **** GX
 ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 3.
 Hexadecimal [16-Bits]
 
 Symbol Table
 
+  0 _station_small_ew                                              02E9 GR
+  0 _station_small_ns                                              02A9 GR
+    _strlen                                                        **** GX
   0 _water                                                         01A9 GR
   0 _windowInfoTile                                                133B GR
 
@@ -132,7 +135,7 @@ Hexadecimal [16-Bits]
 
 Area Table
 
-   0 _CODE                                      size 1C1F   flags    0
+   0 _CODE                                      size 1D18   flags    0
    1 _DATA                                      size  F00   flags    0
    2 _INITIALIZED                               size    1   flags    0
    3 _DABS                                      size    0   flags    8
