@@ -160,23 +160,53 @@ void drawTile(u8 x_, u8 y_, u8 ix, u8 iy)
 		case LIVESTOCK:
 			cpct_drawSprite(livestock, p_video, TILESIZE_W, TILESIZE_H);
 			break;
-		case  SSNS:
+		case SSNS:
 			cpct_drawSprite(station_small_ns, p_video, TILESIZE_W, TILESIZE_H);
 			break;
-		case  SSEW:
+		case SSEW:
 			cpct_drawSprite(station_small_ew, p_video, TILESIZE_W, TILESIZE_H);
 			break;
-		case  SMNS:
+		case SMNS:
 			cpct_drawSprite(station_medium_ns, p_video, TILESIZE_W, TILESIZE_H);
 			break;
-		case  SMEW:
+		case SMEW:
 			cpct_drawSprite(station_medium_ew, p_video, TILESIZE_W, TILESIZE_H);
 			break;
-		case  SLNS:
+		case SLNS:
 			cpct_drawSprite(station_large_ns, p_video, TILESIZE_W, TILESIZE_H);
 			break;
-		case  SLEW:
+		case SLEW:
 			cpct_drawSprite(station_large_ew, p_video, TILESIZE_W, TILESIZE_H);
+			break;
+		case REW:
+			cpct_drawSprite(rail_ew, p_video, TILESIZE_W, TILESIZE_H);	
+			break;
+		case RNS:
+			cpct_drawSprite(rail_ns, p_video, TILESIZE_W, TILESIZE_H);	
+			break;
+		case REN:
+			cpct_drawSprite(rail_en, p_video, TILESIZE_W, TILESIZE_H);	
+			break;
+		case RES:
+			cpct_drawSprite(rail_es, p_video, TILESIZE_W, TILESIZE_H);	
+			break;
+		case RWN:
+			cpct_drawSprite(rail_wn, p_video, TILESIZE_W, TILESIZE_H);	
+			break;
+		case RWS:
+			cpct_drawSprite(rail_ws, p_video, TILESIZE_W, TILESIZE_H);	
+			break;
+		case REWN:
+			cpct_drawSprite(rail_ew_n, p_video, TILESIZE_W, TILESIZE_H);	
+			break;
+		case REWS:
+			cpct_drawSprite(rail_ew_s, p_video, TILESIZE_W, TILESIZE_H);	
+			break;
+		case RNSE:
+			cpct_drawSprite(rail_ns_e, p_video, TILESIZE_W, TILESIZE_H);	
+			break;
+		case RNSW:
+			cpct_drawSprite(rail_ns_w, p_video, TILESIZE_W, TILESIZE_H);
 			break;
 	}
 }
