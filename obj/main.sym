@@ -7,22 +7,47 @@ Symbol Table
     .__.ABS.                                                    =  0000 G
     .__.CPU.                                                    =  0000 L
     .__.H$L.                                                    =  0000 L
-  0 _EraseMenuEntry                                                04D9 GR
-  0 ___str_0                                                       093A R
-  0 ___str_1                                                       093F R
-  0 ___str_10                                                      1399 R
-  0 ___str_11                                                      13A2 R
-  0 ___str_12                                                      13A3 R
-  0 ___str_2                                                       0E35 R
-  0 ___str_3                                                       0E45 R
-  0 ___str_4                                                       0E55 R
-  0 ___str_5                                                       0E64 R
-  0 ___str_6                                                       0E6F R
-  0 ___str_7                                                       1383 R
-  0 ___str_8                                                       138C R
-  0 ___str_9                                                       1394 R
+  2 _CURSOR_MODE                                                   0000 GR
+  0 _EraseMenuEntry                                                0659 GR
+  0 ___str_0                                                       0ACA R
+  0 ___str_1                                                       0ACF R
+  0 ___str_10                                                      1217 R
+  0 ___str_11                                                      122A R
+  0 ___str_12                                                      123A R
+  0 ___str_13                                                      1240 R
+  0 ___str_14                                                      1254 R
+  0 ___str_15                                                      125B R
+  0 ___str_16                                                      126D R
+  0 ___str_17                                                      1289 R
+  0 ___str_18                                                      1298 R
+  0 ___str_19                                                      12AC R
+  0 ___str_2                                                       119C R
+  0 ___str_20                                                      12BA R
+  0 ___str_21                                                      1326 R
+  0 ___str_22                                                      132C R
+  0 ___str_23                                                      1333 R
+  0 ___str_24                                                      13C5 R
+  0 ___str_25                                                      13D5 R
+  0 ___str_26                                                      13E5 R
+  0 ___str_27                                                      13F5 R
+  0 ___str_28                                                      1404 R
+  0 ___str_29                                                      140F R
+  0 ___str_3                                                       11A6 R
+  0 ___str_30                                                      189F R
+  0 ___str_31                                                      18A8 R
+  0 ___str_32                                                      18B0 R
+  0 ___str_33                                                      18B5 R
+  0 ___str_34                                                      18BE R
+  0 ___str_35                                                      18BF R
+  0 ___str_4                                                       11A7 R
+  0 ___str_5                                                       11BB R
+  0 ___str_6                                                       11CB R
+  0 ___str_7                                                       11D0 R
+  0 ___str_8                                                       11ED R
+  0 ___str_9                                                       1212 R
     __divsint                                                      **** GX
     __moduchar                                                     **** GX
+  7 __xinit__CURSOR_MODE                                           0000 R
     _cpct_disableFirmware                                          **** GX
     _cpct_drawSolidBox                                             **** GX
     _cpct_drawSprite                                               **** GX
@@ -33,6 +58,11 @@ Symbol Table
     _cpct_isKeyPressed                                             **** GX
     _cpct_memset                                                   **** GX
     _cpct_px2byteM0                                                **** GX
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 2.
+Hexadecimal [16-Bits]
+
+Symbol Table
+
     _cpct_px2byteM1                                                **** GX
     _cpct_reenableFirmware                                         **** GX
     _cpct_scanKeyboard                                             **** GX
@@ -40,41 +70,45 @@ Symbol Table
     _cpct_setPalette                                               **** GX
     _cpct_setRandomSeedUniform_u8                                  **** GX
     _cpct_setVideoMode                                             **** GX
-  0 _drawBoxM0                                                     02DF GR
-  0 _drawBoxM2                                                     03F9 GR
-  0 _drawCursor                                                    094E GR
-  0 _drawMenu                                                      06C3 GR
-  0 _drawMenuEntry                                                 0593 GR
-  0 _drawTile                                                      0C08 GR
-  0 _drawTrain                                                     1288 GR
-  0 _drawWindow                                                    07B1 GR
-  0 _drawWorld                                                     0D13 GR
+  0 _drawBoxM0                                                     045F GR
+  0 _drawBoxM2                                                     0579 GR
+  0 _drawCursor                                                    0ADE GR
+  0 _drawMenu                                                      0843 GR
+  0 _drawMenuEntry                                                 0713 GR
+  0 _drawTile                                                      0DDB GR
+  0 _drawTrain                                                     17A4 GR
+  0 _drawWindow                                                    0941 GR
+  0 _drawWorld                                                     0F4F GR
   0 _dwellings1                                                    00E9 GR
   0 _dwellings2                                                    0129 GR
   0 _dwellings3                                                    0169 GR
   0 _farm1                                                         01E9 GR
   0 _farm2                                                         0229 GR
   0 _forest                                                        00A9 GR
-  0 _game                                                          0E76 GR
-  0 _generateWorld                                                 0A49 GR
+  0 _game                                                          1416 GR
+  0 _generateWorld                                                 0C59 GR
   0 _grass1                                                        0029 GR
-ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 2.
-Hexadecimal [16-Bits]
-
-Symbol Table
-
   0 _grass2                                                        0069 GR
   0 _livestock                                                     0269 GR
-  0 _main                                                          1289 GR
-  0 _menuTile                                                      0DD5 GR
+  0 _main                                                          17A5 GR
+  0 _menuStations                                                  12C4 GR
+  0 _menuTile                                                      1339 GR
+  1 _p_world                                                       0000 GR
   0 _paletteMenusM1                                                0023 GR
   0 _paletteMenusM2                                                0027 GR
   0 _paletteTrains                                                 0013 GR
   0 _putM0                                                         0000 GR
-  0 _putM1                                                         02A9 GR
-  0 _putM2                                                         02BD GR
+  0 _putM1                                                         0429 GR
+  0 _putM2                                                         043D GR
+  0 _station_large_ew                                              03E9 GR
+  0 _station_large_ns                                              03A9 GR
+  0 _station_medium_ew                                             0369 GR
+  0 _station_medium_ns                                             0329 GR
+  0 _station_small_ew                                              02E9 GR
+  0 _station_small_ns                                              02A9 GR
     _strlen                                                        **** GX
   0 _water                                                         01A9 GR
+  0 _windowInfoTile                                                1007 GR
 
 
 ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 3.
@@ -82,13 +116,13 @@ Hexadecimal [16-Bits]
 
 Area Table
 
-   0 _CODE                                      size 13BE   flags    0
-   1 _DATA                                      size    0   flags    0
-   2 _INITIALIZED                               size    0   flags    0
+   0 _CODE                                      size 18DA   flags    0
+   1 _DATA                                      size  F00   flags    0
+   2 _INITIALIZED                               size    1   flags    0
    3 _DABS                                      size    0   flags    8
    4 _HOME                                      size    0   flags    0
    5 _GSINIT                                    size    0   flags    0
    6 _GSFINAL                                   size    0   flags    0
-   7 _INITIALIZER                               size    0   flags    0
+   7 _INITIALIZER                               size    1   flags    0
    8 _CABS                                      size    0   flags    8
 

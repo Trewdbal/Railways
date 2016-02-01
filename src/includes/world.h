@@ -1,36 +1,44 @@
-#define NBTILE_W 20
-#define NBTILE_H 12
-#define TILESIZE_W 4
-#define TILESIZE_H 16
-#define NBSCREEN_W 4
-#define NBSCREEN_H 4
-#define WIDTH 80
-#define HEIGHT 48
-#define NBFARM 60
-#define NBURBAN 30
-#define FOREST_DENSITY 0.12
-#define NBLIVESTOCK 20
-
-enum {GRASS1, GRASS2, DWELLINGS1, DWELLINGS2, DWELLINGS3, FARM1, FARM2, WATER, FOREST, LIVESTOCK, SSNS, SSEW, SMNS, SMEW, SLNS, SLEW};
-
 void drawCursor(u8 x, u8 y, u8 color)
 {
 	u8 *p_video;
-
 	p_video = cpct_getScreenPtr(SCR_VMEM, x*TILESIZE_W, y*TILESIZE_H);
-	cpct_memset (p_video, cpct_px2byteM1(color,color,color,color), 4);
-	p_video = cpct_getScreenPtr(SCR_VMEM, x*TILESIZE_W, y*TILESIZE_H+1);
-	cpct_memset (p_video, cpct_px2byteM1(color,color,color,color), 4);
+
+	switch(CURSOR_MODE)
+	{
+		case NONE:
+			cpct_memset (p_video, cpct_px2byteM1(color,color,color,color), 4);
+			p_video = cpct_getScreenPtr(SCR_VMEM, x*TILESIZE_W, y*TILESIZE_H+1);
+			cpct_memset (p_video, cpct_px2byteM1(color,color,color,color), 4);
 
 
-	p_video = cpct_getScreenPtr(SCR_VMEM, x*TILESIZE_W, (y+1)*TILESIZE_H-1);
-	cpct_memset (p_video, cpct_px2byteM1(color,color,color,color), 4);
-	p_video = cpct_getScreenPtr(SCR_VMEM, x*TILESIZE_W, (y+1)*TILESIZE_H-2);
-	cpct_memset (p_video, cpct_px2byteM1(color,color,color,color), 4);
-
+			p_video = cpct_getScreenPtr(SCR_VMEM, x*TILESIZE_W, (y+1)*TILESIZE_H-1);
+			cpct_memset (p_video, cpct_px2byteM1(color,color,color,color), 4);
+			p_video = cpct_getScreenPtr(SCR_VMEM, x*TILESIZE_W, (y+1)*TILESIZE_H-2);
+			cpct_memset (p_video, cpct_px2byteM1(color,color,color,color), 4);
+			break;
+		case T_SSNS:
+			cpct_drawSprite(station_small_ns, p_video, TILESIZE_W, TILESIZE_H);
+			break;
+			break;
+		case T_SSEW:
+			cpct_drawSprite(station_small_ew, p_video, TILESIZE_W, TILESIZE_H);
+			break;
+		case T_SMNS:
+			cpct_drawSprite(station_medium_ns, p_video, TILESIZE_W, TILESIZE_H);
+			break;
+		case T_SMEW:
+			cpct_drawSprite(station_medium_ew, p_video, TILESIZE_W, TILESIZE_H);
+			break;
+		case T_SLNS:
+			cpct_drawSprite(station_large_ns, p_video, TILESIZE_W, TILESIZE_H);
+			break;
+		case T_SLEW:
+			cpct_drawSprite(station_large_ew, p_video, TILESIZE_W, TILESIZE_H);
+			break;
+	}
 }
 
-void generateWorld(u8 *p_world)
+void generateWorld()
 {
 	int ix;
 	int iy;
@@ -113,7 +121,7 @@ void generateWorld(u8 *p_world)
 	}
 }
 
-void drawTile(u8 *p_world, u8 x_, u8 y_, u8 ix, u8 iy)
+void drawTile(u8 x_, u8 y_, u8 ix, u8 iy)
 {
 	u8 *p_video;
 	int adress = (y_+iy)*WIDTH+x_+ix;
@@ -173,7 +181,7 @@ void drawTile(u8 *p_world, u8 x_, u8 y_, u8 ix, u8 iy)
 	}
 }
 
-void drawWorld(u8 *p_world, u8 x_, u8 y_)
+void drawWorld(u8 x_, u8 y_)
 {
 	u8 ix;
 	u8 iy;
@@ -185,7 +193,7 @@ void drawWorld(u8 *p_world, u8 x_, u8 y_)
 	{
 		for(ix=0; ix<NBTILE_W;ix++)
 		{
-			drawTile(p_world, x_, y_, ix, iy);
+			drawTile(x_, y_, ix, iy);
 		}
 	}
 

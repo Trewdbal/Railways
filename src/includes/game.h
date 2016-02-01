@@ -1,4 +1,4 @@
-void windowInfoTile(u8 *p_world, u8 x, u8 y)
+void windowInfoTile(u8 x, u8 y)
 {
 	const char *txtWindowInfoTile[4];
 
@@ -44,54 +44,47 @@ void windowInfoTile(u8 *p_world, u8 x, u8 y)
 			txtWindowInfoTile[2] = "Production: Livestock, wool";
 			txtWindowInfoTile[3] = "Demand: Cereal";
 			break;
+		default:
+			txtWindowInfoTile[0] = "Not yet implemented";
+			txtWindowInfoTile[1] = "";
+			txtWindowInfoTile[2] = "Production: ?";
+			txtWindowInfoTile[3] = "Demand: ?";
+
 	}
 
 	drawWindow(txtWindowInfoTile, 4, 0);
 }
 
-void menuStations(u8* p_world, u8 x, u8 y)
+void menuStations()
 {
 	u8 result;
-	
+
 	const char *txtMenuSizeStation[] = { 
 		"Small",
 		"Medium",
 		"Large",
 	};
-	
-	const char *txtMenuOrientationStation[] = { 
-		"East - West",
-		"North - South",
-	};
-	
+
 	result = drawMenu(txtMenuSizeStation,3);
-	result = result + 100*drawMenu(txtMenuOrientationStation,2);
 
 	switch(result)
 	{
 		case 0:
-			p_world[y*WIDTH+x] = SSEW;
+			CURSOR_MODE=T_SSEW;
 			break;
-		case 100:
-			p_world[y*WIDTH+x] = SSNS;
-			break;
+
 		case 1:
-			p_world[y*WIDTH+x] = SMEW;
+			CURSOR_MODE=T_SMEW;
 			break;
-		case 101:
-			p_world[y*WIDTH+x] = SMNS;
-			break;
+
 		case 2:
-			p_world[y*WIDTH+x] = SLEW;
-			break;
-		case 102:
-			p_world[y*WIDTH+x] = SLNS;
+			CURSOR_MODE=T_SLEW;
 			break;
 	}
 }
 
 
-void menuTile(u8* p_world, u8 x, u8 y)
+void menuTile(u8 x, u8 y)
 {
 	u8 menuChoice;
 
@@ -99,6 +92,7 @@ void menuTile(u8* p_world, u8 x, u8 y)
 		"About this tile",
 		"Build a railway",
 		"Build a station",
+		"Destroy",
 		"Railroad depot",
 		"Accounting",
 		"Resume",
@@ -107,18 +101,18 @@ void menuTile(u8* p_world, u8 x, u8 y)
 	putM2();
 
 	do{
-		menuChoice = drawMenu(txtMenuTile,6);
+		menuChoice = drawMenu(txtMenuTile,7);
 
 		if(menuChoice==0)
-			windowInfoTile(p_world, x, y);
+			windowInfoTile(x, y);
 		else if(menuChoice==2)
 		{
-			menuStations(p_world, x, y);
-			menuChoice=5;
+			menuStations();
+			menuChoice=6;
 		}
 
 	}
-	while(menuChoice!=5);
+	while(menuChoice!=6);
 
 	putM1();
 
@@ -126,9 +120,9 @@ void menuTile(u8* p_world, u8 x, u8 y)
 
 void game()
 {
-	u8 p_world[WIDTH*HEIGHT];
-	u8 ulx = 0;
-	u8 uly = 0;
+
+	int ulx = 0;
+	int uly = 0;
 	int xCursor = 10;
 	int yCursor = 6;
 	int i;
@@ -136,16 +130,16 @@ void game()
 
 	cpct_clearScreen(cpct_px2byteM1(0,0,0,0));
 
-	generateWorld(p_world);
+	generateWorld();
 
-	drawWorld(p_world, ulx, uly);
+	drawWorld(ulx, uly);
 
 	do{
 		cpct_scanKeyboard(); 
 
 		if ( cpct_isKeyPressed(Key_CursorUp) )
 		{
-			drawTile(p_world, ulx, uly, xCursor, yCursor);
+			drawTile(ulx, uly, xCursor, yCursor);
 
 			yCursor-=1;
 
@@ -158,7 +152,7 @@ void game()
 				if(uly>0)
 				{
 					uly-=1;
-					drawWorld(p_world, ulx, uly);
+					drawWorld(ulx, uly);
 				}
 			}
 
@@ -168,7 +162,7 @@ void game()
 
 		if ( cpct_isKeyPressed(Key_CursorDown) )
 		{
-			drawTile(p_world, ulx, uly, xCursor, yCursor);
+			drawTile(ulx, uly, xCursor, yCursor);
 			yCursor+=1;
 			if(yCursor>NBTILE_H-1)
 			{
@@ -176,7 +170,7 @@ void game()
 				if(uly<HEIGHT-NBTILE_H)
 				{
 					uly+=1;
-					drawWorld(p_world, ulx, uly);
+					drawWorld(ulx, uly);
 				}
 			}
 
@@ -186,7 +180,7 @@ void game()
 
 		if ( cpct_isKeyPressed(Key_CursorLeft) )
 		{
-			drawTile(p_world, ulx, uly, xCursor, yCursor);
+			drawTile(ulx, uly, xCursor, yCursor);
 			xCursor-=1;
 			if(xCursor<0)
 			{
@@ -194,7 +188,7 @@ void game()
 				if(ulx>0)
 				{
 					ulx-=1;
-					drawWorld(p_world, ulx, uly);
+					drawWorld(ulx, uly);
 				}
 			}
 
@@ -204,7 +198,7 @@ void game()
 
 		if ( cpct_isKeyPressed(Key_CursorRight) )
 		{
-			drawTile(p_world, ulx, uly, xCursor, yCursor);
+			drawTile(ulx, uly, xCursor, yCursor);
 			xCursor+=1;
 			if(xCursor>NBTILE_W-1)
 			{
@@ -212,10 +206,38 @@ void game()
 				if(ulx<WIDTH-NBTILE_W)
 				{
 					ulx+=1;
-					drawWorld(p_world, ulx, uly);
+					drawWorld(ulx, uly);
 				}
 			}
 
+			// Wait loop
+			for(i=0; i<14000; i++) {}
+		}
+
+
+		if ( cpct_isKeyPressed(Key_Space) )
+		{
+			switch(CURSOR_MODE)
+			{
+				case T_SSNS:
+					CURSOR_MODE=T_SSEW;
+					break;
+				case T_SSEW:
+					CURSOR_MODE=T_SSNS;
+					break;
+				case T_SMNS:
+					CURSOR_MODE=T_SMEW;
+					break;
+				case T_SMEW:
+					CURSOR_MODE=T_SMNS;
+					break;
+				case T_SLNS:
+					CURSOR_MODE=T_SLEW;
+					break;
+				case T_SLEW:
+					CURSOR_MODE=T_SLNS;
+					break;
+			}
 			// Wait loop
 			for(i=0; i<14000; i++) {}
 		}
@@ -227,9 +249,23 @@ void game()
 
 		if ( cpct_isKeyPressed(Key_Return) )
 		{
-			menuTile(p_world, ulx+xCursor, uly+yCursor);
+			// if standard cursor, call menu Tile
+			if(CURSOR_MODE==NONE)
+			{
+			menuTile(ulx+xCursor, uly+yCursor);
 			cpct_clearScreen(cpct_px2byteM1(0,0,0,0));	
-			drawWorld(p_world, ulx, uly);
+			drawWorld(ulx, uly);
+			}
+			// If station cursor, apply the station tile
+			else if(CURSOR_MODE>=T_SSNS && CURSOR_MODE<=T_SLEW)
+			{
+				p_world[ulx+xCursor+uly+yCursor*WIDTH]=CURSOR_MODE+9;
+				CURSOR_MODE=NONE;
+			}
+			
+				// Wait loop
+			for(i=0; i<14000; i++) {}
+
 		}
 
 		drawCursor(xCursor, yCursor, 0);
