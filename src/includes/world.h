@@ -19,7 +19,6 @@ void drawCursor(u8 x, u8 y, u8 color)
 		case T_SSNS:
 			cpct_drawSprite(station_small_ns, p_video, TILESIZE_W, TILESIZE_H);
 			break;
-			break;
 		case T_SSEW:
 			cpct_drawSprite(station_small_ew, p_video, TILESIZE_W, TILESIZE_H);
 			break;
@@ -34,6 +33,36 @@ void drawCursor(u8 x, u8 y, u8 color)
 			break;
 		case T_SLEW:
 			cpct_drawSprite(station_large_ew, p_video, TILESIZE_W, TILESIZE_H);
+			break;
+		case T_REW:
+			cpct_drawSprite(rail_ew, p_video, TILESIZE_W, TILESIZE_H);	
+			break;
+		case T_RNS:
+			cpct_drawSprite(rail_ns, p_video, TILESIZE_W, TILESIZE_H);	
+			break;
+		case T_REN:
+			cpct_drawSprite(rail_en, p_video, TILESIZE_W, TILESIZE_H);	
+			break;
+		case T_RES:
+			cpct_drawSprite(rail_es, p_video, TILESIZE_W, TILESIZE_H);	
+			break;
+		case T_RWN:
+			cpct_drawSprite(rail_wn, p_video, TILESIZE_W, TILESIZE_H);	
+			break;
+		case T_RWS:
+			cpct_drawSprite(rail_ws, p_video, TILESIZE_W, TILESIZE_H);	
+			break;
+		case T_REWN:
+			cpct_drawSprite(rail_ew_n, p_video, TILESIZE_W, TILESIZE_H);	
+			break;
+		case T_REWS:
+			cpct_drawSprite(rail_ew_s, p_video, TILESIZE_W, TILESIZE_H);	
+			break;
+		case T_RNSE:
+			cpct_drawSprite(rail_ns_e, p_video, TILESIZE_W, TILESIZE_H);	
+			break;
+		case T_RNSW:
+			cpct_drawSprite(rail_ns_w, p_video, TILESIZE_W, TILESIZE_H);
 			break;
 	}
 }

@@ -1,7 +1,7 @@
                               1 ;--------------------------------------------------------
                               2 ; File Created by SDCC : free open source ANSI-C Compiler
                               3 ; Version 3.5.4 #9329 (Linux)
-                              4 ; This file was generated Mon Feb  1 22:11:01 2016
+                              4 ; This file was generated Wed Feb  3 17:10:22 2016
                               5 ;--------------------------------------------------------
                               6 	.module main
                               7 	.optsdcc -mz80
@@ -84,14 +84,14 @@
                              84 ; ram data
                              85 ;--------------------------------------------------------
                              86 	.area _DATA
-   60DF                      87 _p_world::
-   60DF                      88 	.ds 3840
+   61A8                      87 _p_world::
+   61A8                      88 	.ds 3840
                              89 ;--------------------------------------------------------
                              90 ; ram data
                              91 ;--------------------------------------------------------
                              92 	.area _INITIALIZED
-   6FDF                      93 _CURSOR_MODE::
-   6FDF                      94 	.ds 1
+   70A8                      93 _CURSOR_MODE::
+   70A8                      94 	.ds 1
                              95 ;--------------------------------------------------------
                              96 ; absolute external ram data
                              97 ;--------------------------------------------------------
@@ -121,14 +121,14 @@
    4000 AF            [ 4]  121 	xor	a, a
    4001 F5            [11]  122 	push	af
    4002 33            [ 6]  123 	inc	sp
-   4003 CD 05 5F      [17]  124 	call	_cpct_setVideoMode
+   4003 CD CE 5F      [17]  124 	call	_cpct_setVideoMode
    4006 33            [ 6]  125 	inc	sp
                             126 ;src/includes/gui.h:5: cpct_setPalette(paletteTrains, 16);
    4007 21 13 40      [10]  127 	ld	hl,#_paletteTrains
    400A 01 10 00      [10]  128 	ld	bc,#0x0010
    400D C5            [11]  129 	push	bc
    400E E5            [11]  130 	push	hl
-   400F CD 1D 5D      [17]  131 	call	_cpct_setPalette
+   400F CD E6 5D      [17]  131 	call	_cpct_setPalette
    4012 C9            [10]  132 	ret
    4013                     133 _paletteTrains:
    4013 00                  134 	.db #0x00	; 0
@@ -1854,14 +1854,14 @@
    46A9 3E 01         [ 7] 1854 	ld	a,#0x01
    46AB F5            [11] 1855 	push	af
    46AC 33            [ 6] 1856 	inc	sp
-   46AD CD 05 5F      [17] 1857 	call	_cpct_setVideoMode
+   46AD CD CE 5F      [17] 1857 	call	_cpct_setVideoMode
    46B0 33            [ 6] 1858 	inc	sp
                            1859 ;src/includes/gui.h:12: cpct_setPalette(paletteMenusM1, 4);
    46B1 21 23 40      [10] 1860 	ld	hl,#_paletteMenusM1
    46B4 01 04 00      [10] 1861 	ld	bc,#0x0004
    46B7 C5            [11] 1862 	push	bc
    46B8 E5            [11] 1863 	push	hl
-   46B9 CD 1D 5D      [17] 1864 	call	_cpct_setPalette
+   46B9 CD E6 5D      [17] 1864 	call	_cpct_setPalette
    46BC C9            [10] 1865 	ret
                            1866 ;src/includes/gui.h:15: void putM2(void)
                            1867 ;	---------------------------------
@@ -1872,14 +1872,14 @@
    46BD 3E 02         [ 7] 1872 	ld	a,#0x02
    46BF F5            [11] 1873 	push	af
    46C0 33            [ 6] 1874 	inc	sp
-   46C1 CD 05 5F      [17] 1875 	call	_cpct_setVideoMode
+   46C1 CD CE 5F      [17] 1875 	call	_cpct_setVideoMode
    46C4 33            [ 6] 1876 	inc	sp
                            1877 ;src/includes/gui.h:19: cpct_setPalette(paletteMenusM2, 2);
    46C5 21 27 40      [10] 1878 	ld	hl,#_paletteMenusM2
    46C8 01 02 00      [10] 1879 	ld	bc,#0x0002
    46CB C5            [11] 1880 	push	bc
    46CC E5            [11] 1881 	push	hl
-   46CD CD 1D 5D      [17] 1882 	call	_cpct_setPalette
+   46CD CD E6 5D      [17] 1882 	call	_cpct_setPalette
                            1883 ;src/includes/gui.h:20: cpct_clearScreen(0b11111111);
    46D0 21 00 40      [10] 1884 	ld	hl,#0x4000
    46D3 E5            [11] 1885 	push	hl
@@ -1888,7 +1888,7 @@
    46D7 33            [ 6] 1888 	inc	sp
    46D8 26 C0         [ 7] 1889 	ld	h, #0xC0
    46DA E5            [11] 1890 	push	hl
-   46DB CD 33 5F      [17] 1891 	call	_cpct_memset
+   46DB CD FC 5F      [17] 1891 	call	_cpct_memset
    46DE C9            [10] 1892 	ret
                            1893 ;src/includes/gui.h:23: void drawBoxM0(int width_, int height_)
                            1894 ;	---------------------------------
@@ -1942,7 +1942,7 @@
    4729 D5            [11] 1942 	push	de
    472A 21 09 09      [10] 1943 	ld	hl,#0x0909
    472D E5            [11] 1944 	push	hl
-   472E CD 17 5F      [17] 1945 	call	_cpct_px2byteM0
+   472E CD E0 5F      [17] 1945 	call	_cpct_px2byteM0
    4731 65            [ 4] 1946 	ld	h,l
    4732 01 00 40      [10] 1947 	ld	bc,#0x4000
    4735 C5            [11] 1948 	push	bc
@@ -1950,10 +1950,10 @@
    4737 33            [ 6] 1950 	inc	sp
    4738 21 00 C0      [10] 1951 	ld	hl,#0xC000
    473B E5            [11] 1952 	push	hl
-   473C CD 33 5F      [17] 1953 	call	_cpct_memset
+   473C CD FC 5F      [17] 1953 	call	_cpct_memset
    473F D1            [10] 1954 	pop	de
                            1955 ;src/includes/gui.h:34: pvid = cpct_getScreenPtr(SCR_VMEM, left+1, top+4);
-   4740 DD 73 FF      [19] 1956 	ld	-1 (ix), e
+   4740 DD 73 FB      [19] 1956 	ld	-5 (ix), e
    4743 63            [ 4] 1957 	ld	h, e
    4744 24            [ 4] 1958 	inc	h
    4745 24            [ 4] 1959 	inc	h
@@ -1970,32 +1970,32 @@
    4756 33            [ 6] 1970 	inc	sp
    4757 21 00 C0      [10] 1971 	ld	hl,#0xC000
    475A E5            [11] 1972 	push	hl
-   475B CD 32 60      [17] 1973 	call	_cpct_getScreenPtr
+   475B CD FB 60      [17] 1973 	call	_cpct_getScreenPtr
    475E D1            [10] 1974 	pop	de
    475F 4D            [ 4] 1975 	ld	c, l
    4760 44            [ 4] 1976 	ld	b, h
                            1977 ;src/includes/gui.h:35: cpct_drawSolidBox(pvid, cpct_px2byteM0(2,2), width_, height_);
    4761 DD 7E 06      [19] 1978 	ld	a,6 (ix)
-   4764 DD 77 FB      [19] 1979 	ld	-5 (ix),a
+   4764 DD 77 FD      [19] 1979 	ld	-3 (ix),a
    4767 DD 7E 04      [19] 1980 	ld	a,4 (ix)
-   476A DD 77 FD      [19] 1981 	ld	-3 (ix),a
+   476A DD 77 FE      [19] 1981 	ld	-2 (ix),a
    476D C5            [11] 1982 	push	bc
    476E D5            [11] 1983 	push	de
    476F 21 02 02      [10] 1984 	ld	hl,#0x0202
    4772 E5            [11] 1985 	push	hl
-   4773 CD 17 5F      [17] 1986 	call	_cpct_px2byteM0
-   4776 DD 75 FE      [19] 1987 	ld	-2 (ix),l
+   4773 CD E0 5F      [17] 1986 	call	_cpct_px2byteM0
+   4776 DD 75 FF      [19] 1987 	ld	-1 (ix),l
    4779 D1            [10] 1988 	pop	de
    477A C1            [10] 1989 	pop	bc
    477B D5            [11] 1990 	push	de
-   477C DD 66 FB      [19] 1991 	ld	h,-5 (ix)
-   477F DD 6E FD      [19] 1992 	ld	l,-3 (ix)
+   477C DD 66 FD      [19] 1991 	ld	h,-3 (ix)
+   477F DD 6E FE      [19] 1992 	ld	l,-2 (ix)
    4782 E5            [11] 1993 	push	hl
-   4783 DD 7E FE      [19] 1994 	ld	a,-2 (ix)
+   4783 DD 7E FF      [19] 1994 	ld	a,-1 (ix)
    4786 F5            [11] 1995 	push	af
    4787 33            [ 6] 1996 	inc	sp
    4788 C5            [11] 1997 	push	bc
-   4789 CD 79 5F      [17] 1998 	call	_cpct_drawSolidBox
+   4789 CD 42 60      [17] 1998 	call	_cpct_drawSolidBox
    478C F1            [10] 1999 	pop	af
    478D F1            [10] 2000 	pop	af
    478E 33            [ 6] 2001 	inc	sp
@@ -2009,26 +2009,26 @@
    4797 33            [ 6] 2009 	inc	sp
    4798 21 00 C0      [10] 2010 	ld	hl,#0xC000
    479B E5            [11] 2011 	push	hl
-   479C CD 32 60      [17] 2012 	call	_cpct_getScreenPtr
+   479C CD FB 60      [17] 2012 	call	_cpct_getScreenPtr
                            2013 ;src/includes/gui.h:39: cpct_drawSolidBox(pvid, cpct_px2byteM0(6,6), width_, height_);
    479F E5            [11] 2014 	push	hl
    47A0 21 06 06      [10] 2015 	ld	hl,#0x0606
    47A3 E5            [11] 2016 	push	hl
-   47A4 CD 17 5F      [17] 2017 	call	_cpct_px2byteM0
+   47A4 CD E0 5F      [17] 2017 	call	_cpct_px2byteM0
    47A7 45            [ 4] 2018 	ld	b,l
    47A8 D1            [10] 2019 	pop	de
-   47A9 DD 66 FB      [19] 2020 	ld	h,-5 (ix)
-   47AC DD 6E FD      [19] 2021 	ld	l,-3 (ix)
+   47A9 DD 66 FD      [19] 2020 	ld	h,-3 (ix)
+   47AC DD 6E FE      [19] 2021 	ld	l,-2 (ix)
    47AF E5            [11] 2022 	push	hl
    47B0 C5            [11] 2023 	push	bc
    47B1 33            [ 6] 2024 	inc	sp
    47B2 D5            [11] 2025 	push	de
-   47B3 CD 79 5F      [17] 2026 	call	_cpct_drawSolidBox
+   47B3 CD 42 60      [17] 2026 	call	_cpct_drawSolidBox
    47B6 F1            [10] 2027 	pop	af
    47B7 F1            [10] 2028 	pop	af
    47B8 33            [ 6] 2029 	inc	sp
                            2030 ;src/includes/gui.h:42: pvid = cpct_getScreenPtr(SCR_VMEM, left+1, top+2);
-   47B9 DD 66 FF      [19] 2031 	ld	h,-1 (ix)
+   47B9 DD 66 FB      [19] 2031 	ld	h,-5 (ix)
    47BC 24            [ 4] 2032 	inc	h
    47BD 24            [ 4] 2033 	inc	h
    47BE E5            [11] 2034 	push	hl
@@ -2038,7 +2038,7 @@
    47C4 33            [ 6] 2038 	inc	sp
    47C5 21 00 C0      [10] 2039 	ld	hl,#0xC000
    47C8 E5            [11] 2040 	push	hl
-   47C9 CD 32 60      [17] 2041 	call	_cpct_getScreenPtr
+   47C9 CD FB 60      [17] 2041 	call	_cpct_getScreenPtr
    47CC EB            [ 4] 2042 	ex	de,hl
                            2043 ;src/includes/gui.h:43: cpct_drawSolidBox(pvid, cpct_px2byteM0(0,0), width_-2, height_-4);
    47CD DD 7E 06      [19] 2044 	ld	a,6 (ix)
@@ -2051,8 +2051,8 @@
    47D9 D5            [11] 2051 	push	de
    47DA 21 00 00      [10] 2052 	ld	hl,#0x0000
    47DD E5            [11] 2053 	push	hl
-   47DE CD 17 5F      [17] 2054 	call	_cpct_px2byteM0
-   47E1 DD 75 FE      [19] 2055 	ld	-2 (ix),l
+   47DE CD E0 5F      [17] 2054 	call	_cpct_px2byteM0
+   47E1 DD 75 FF      [19] 2055 	ld	-1 (ix),l
    47E4 D1            [10] 2056 	pop	de
    47E5 C1            [10] 2057 	pop	bc
    47E6 79            [ 4] 2058 	ld	a,c
@@ -2060,11 +2060,11 @@
    47E8 33            [ 6] 2060 	inc	sp
    47E9 C5            [11] 2061 	push	bc
    47EA 33            [ 6] 2062 	inc	sp
-   47EB DD 7E FE      [19] 2063 	ld	a,-2 (ix)
+   47EB DD 7E FF      [19] 2063 	ld	a,-1 (ix)
    47EE F5            [11] 2064 	push	af
    47EF 33            [ 6] 2065 	inc	sp
    47F0 D5            [11] 2066 	push	de
-   47F1 CD 79 5F      [17] 2067 	call	_cpct_drawSolidBox
+   47F1 CD 42 60      [17] 2067 	call	_cpct_drawSolidBox
    47F4 DD F9         [10] 2068 	ld	sp,ix
    47F6 DD E1         [14] 2069 	pop	ix
    47F8 C9            [10] 2070 	ret
@@ -2118,10 +2118,10 @@
    483F DD CB FA 1E   [23] 2118 	rr	-6 (ix)
                            2119 ;src/includes/gui.h:56: pvid = cpct_getScreenPtr(SCR_VMEM, left+2, top+5);
    4843 DD 7E FA      [19] 2120 	ld	a,-6 (ix)
-   4846 DD 77 FD      [19] 2121 	ld	-3 (ix), a
+   4846 DD 77 FC      [19] 2121 	ld	-4 (ix), a
    4849 C6 05         [ 7] 2122 	add	a, #0x05
    484B 4F            [ 4] 2123 	ld	c,a
-   484C DD 73 FC      [19] 2124 	ld	-4 (ix), e
+   484C DD 73 FD      [19] 2124 	ld	-3 (ix), e
    484F 63            [ 4] 2125 	ld	h, e
    4850 24            [ 4] 2126 	inc	h
    4851 24            [ 4] 2127 	inc	h
@@ -2133,7 +2133,7 @@
    4857 33            [ 6] 2133 	inc	sp
    4858 21 00 C0      [10] 2134 	ld	hl,#0xC000
    485B E5            [11] 2135 	push	hl
-   485C CD 32 60      [17] 2136 	call	_cpct_getScreenPtr
+   485C CD FB 60      [17] 2136 	call	_cpct_getScreenPtr
    485F D1            [10] 2137 	pop	de
                            2138 ;src/includes/gui.h:57: cpct_drawSolidBox(pvid, 0b00000000, width_-1, height_);
    4860 DD 46 06      [19] 2139 	ld	b,6 (ix)
@@ -2154,7 +2154,7 @@
    4878 DD 6E FE      [19] 2154 	ld	l,-2 (ix)
    487B DD 66 FF      [19] 2155 	ld	h,-1 (ix)
    487E E5            [11] 2156 	push	hl
-   487F CD 79 5F      [17] 2157 	call	_cpct_drawSolidBox
+   487F CD 42 60      [17] 2157 	call	_cpct_drawSolidBox
    4882 F1            [10] 2158 	pop	af
    4883 F1            [10] 2159 	pop	af
    4884 33            [ 6] 2160 	inc	sp
@@ -2170,7 +2170,7 @@
    488F 33            [ 6] 2170 	inc	sp
    4890 21 00 C0      [10] 2171 	ld	hl,#0xC000
    4893 E5            [11] 2172 	push	hl
-   4894 CD 32 60      [17] 2173 	call	_cpct_getScreenPtr
+   4894 CD FB 60      [17] 2173 	call	_cpct_getScreenPtr
    4897 C1            [10] 2174 	pop	bc
                            2175 ;src/includes/gui.h:61: cpct_drawSolidBox(pvid, 0b11111000, width_, height_);
    4898 DD 7E 04      [19] 2176 	ld	a,4 (ix)
@@ -2182,15 +2182,15 @@
    48A0 0E F8         [ 7] 2182 	ld	c,#0xF8
    48A2 C5            [11] 2183 	push	bc
    48A3 D5            [11] 2184 	push	de
-   48A4 CD 79 5F      [17] 2185 	call	_cpct_drawSolidBox
+   48A4 CD 42 60      [17] 2185 	call	_cpct_drawSolidBox
    48A7 F1            [10] 2186 	pop	af
    48A8 F1            [10] 2187 	pop	af
    48A9 33            [ 6] 2188 	inc	sp
    48AA C1            [10] 2189 	pop	bc
                            2190 ;src/includes/gui.h:64: pvid = cpct_getScreenPtr(SCR_VMEM, left+1, top+1);
-   48AB DD 66 FD      [19] 2191 	ld	h,-3 (ix)
+   48AB DD 66 FC      [19] 2191 	ld	h,-4 (ix)
    48AE 24            [ 4] 2192 	inc	h
-   48AF DD 56 FC      [19] 2193 	ld	d,-4 (ix)
+   48AF DD 56 FD      [19] 2193 	ld	d,-3 (ix)
    48B2 14            [ 4] 2194 	inc	d
    48B3 C5            [11] 2195 	push	bc
    48B4 E5            [11] 2196 	push	hl
@@ -2199,7 +2199,7 @@
    48B7 33            [ 6] 2199 	inc	sp
    48B8 21 00 C0      [10] 2200 	ld	hl,#0xC000
    48BB E5            [11] 2201 	push	hl
-   48BC CD 32 60      [17] 2202 	call	_cpct_getScreenPtr
+   48BC CD FB 60      [17] 2202 	call	_cpct_getScreenPtr
    48BF C1            [10] 2203 	pop	bc
    48C0 5D            [ 4] 2204 	ld	e, l
    48C1 54            [ 4] 2205 	ld	d, h
@@ -2215,7 +2215,7 @@
    48CD 0E FF         [ 7] 2215 	ld	c,#0xFF
    48CF C5            [11] 2216 	push	bc
    48D0 D5            [11] 2217 	push	de
-   48D1 CD 79 5F      [17] 2218 	call	_cpct_drawSolidBox
+   48D1 CD 42 60      [17] 2218 	call	_cpct_drawSolidBox
    48D4 DD F9         [10] 2219 	ld	sp,ix
    48D6 DD E1         [14] 2220 	pop	ix
    48D8 C9            [10] 2221 	ret
@@ -2271,7 +2271,7 @@
    4918 D5            [11] 2271 	push	de
    4919 21 00 C0      [10] 2272 	ld	hl,#0xC000
    491C E5            [11] 2273 	push	hl
-   491D CD 32 60      [17] 2274 	call	_cpct_getScreenPtr
+   491D CD FB 60      [17] 2274 	call	_cpct_getScreenPtr
    4920 C1            [10] 2275 	pop	bc
                            2276 ;src/includes/gui.h:74: cpct_drawSolidBox(p_video, 0b11111111, 17, 10);
    4921 EB            [ 4] 2277 	ex	de,hl
@@ -2282,7 +2282,7 @@
    4929 F5            [11] 2282 	push	af
    492A 33            [ 6] 2283 	inc	sp
    492B D5            [11] 2284 	push	de
-   492C CD 79 5F      [17] 2285 	call	_cpct_drawSolidBox
+   492C CD 42 60      [17] 2285 	call	_cpct_drawSolidBox
    492F F1            [10] 2286 	pop	af
    4930 F1            [10] 2287 	pop	af
    4931 33            [ 6] 2288 	inc	sp
@@ -2320,7 +2320,7 @@
    495E 56            [ 7] 2320 	ld	d,(hl)
    495F C5            [11] 2321 	push	bc
    4960 D5            [11] 2322 	push	de
-   4961 CD 5A 5F      [17] 2323 	call	_strlen
+   4961 CD 23 60      [17] 2323 	call	_strlen
    4964 F1            [10] 2324 	pop	af
    4965 EB            [ 4] 2325 	ex	de,hl
    4966 C1            [10] 2326 	pop	bc
@@ -2338,7 +2338,7 @@
    4976 D5            [11] 2338 	push	de
    4977 01 00 C0      [10] 2339 	ld	bc,#0xC000
    497A C5            [11] 2340 	push	bc
-   497B CD 32 60      [17] 2341 	call	_cpct_getScreenPtr
+   497B CD FB 60      [17] 2341 	call	_cpct_getScreenPtr
    497E 4D            [ 4] 2342 	ld	c,l
    497F 44            [ 4] 2343 	ld	b,h
    4980 E1            [10] 2344 	pop	hl
@@ -2351,7 +2351,7 @@
    4986 33            [ 6] 2351 	inc	sp
    4987 C5            [11] 2352 	push	bc
    4988 D5            [11] 2353 	push	de
-   4989 CD 4C 5D      [17] 2354 	call	_cpct_drawStringM2
+   4989 CD 15 5E      [17] 2354 	call	_cpct_drawStringM2
    498C F1            [10] 2355 	pop	af
    498D F1            [10] 2356 	pop	af
    498E 33            [ 6] 2357 	inc	sp
@@ -2410,7 +2410,7 @@
    49D0 D5            [11] 2410 	push	de
    49D1 21 00 C0      [10] 2411 	ld	hl,#0xC000
    49D4 E5            [11] 2412 	push	hl
-   49D5 CD 32 60      [17] 2413 	call	_cpct_getScreenPtr
+   49D5 CD FB 60      [17] 2413 	call	_cpct_getScreenPtr
    49D8 C1            [10] 2414 	pop	bc
                            2415 ;src/includes/gui.h:89: cpct_drawSolidBox(p_video, 0b00000000, 17, 10);
    49D9 EB            [ 4] 2416 	ex	de,hl
@@ -2421,7 +2421,7 @@
    49E0 F5            [11] 2421 	push	af
    49E1 33            [ 6] 2422 	inc	sp
    49E2 D5            [11] 2423 	push	de
-   49E3 CD 79 5F      [17] 2424 	call	_cpct_drawSolidBox
+   49E3 CD 42 60      [17] 2424 	call	_cpct_drawSolidBox
    49E6 F1            [10] 2425 	pop	af
    49E7 F1            [10] 2426 	pop	af
    49E8 33            [ 6] 2427 	inc	sp
@@ -2436,10 +2436,10 @@
                            2436 ;src/includes/gui.h:95: for(i=0; i<nbEntry; i++)
    49F2 3E CA         [ 7] 2437 	ld	a,#0xCA
    49F4 91            [ 4] 2438 	sub	a, c
-   49F5 DD 77 FD      [19] 2439 	ld	-3 (ix),a
+   49F5 DD 77 FC      [19] 2439 	ld	-4 (ix),a
    49F8 3E 00         [ 7] 2440 	ld	a,#0x00
    49FA 98            [ 4] 2441 	sbc	a, b
-   49FB DD 77 FE      [19] 2442 	ld	-2 (ix), a
+   49FB DD 77 FD      [19] 2442 	ld	-3 (ix), a
    49FE 07            [ 4] 2443 	rlca
    49FF E6 01         [ 7] 2444 	and	a,#0x01
    4A01 5F            [ 4] 2445 	ld	e,a
@@ -2473,13 +2473,13 @@
    4A30 0E 00         [ 7] 2473 	ld	c,#0x00
    4A32                    2474 00104$:
                            2475 ;src/includes/gui.h:102: p_video = cpct_getScreenPtr(SCR_VMEM, (82-strlen(menu[i]))/2, (202-nbEntry*10)/2+i*10);
-   4A32 DD 6E FD      [19] 2476 	ld	l,-3 (ix)
-   4A35 DD 66 FE      [19] 2477 	ld	h,-2 (ix)
+   4A32 DD 6E FC      [19] 2476 	ld	l,-4 (ix)
+   4A35 DD 66 FD      [19] 2477 	ld	h,-3 (ix)
    4A38 7B            [ 4] 2478 	ld	a,e
    4A39 B7            [ 4] 2479 	or	a, a
    4A3A 28 07         [12] 2480 	jr	Z,00115$
-   4A3C DD 6E FD      [19] 2481 	ld	l,-3 (ix)
-   4A3F DD 66 FE      [19] 2482 	ld	h,-2 (ix)
+   4A3C DD 6E FC      [19] 2481 	ld	l,-4 (ix)
+   4A3F DD 66 FD      [19] 2482 	ld	h,-3 (ix)
    4A42 23            [ 6] 2483 	inc	hl
    4A43                    2484 00115$:
    4A43 CB 2C         [ 8] 2485 	sra	h
@@ -2515,7 +2515,7 @@
    4A71 C5            [11] 2515 	push	bc
    4A72 D5            [11] 2516 	push	de
    4A73 E5            [11] 2517 	push	hl
-   4A74 CD 5A 5F      [17] 2518 	call	_strlen
+   4A74 CD 23 60      [17] 2518 	call	_strlen
    4A77 F1            [10] 2519 	pop	af
    4A78 D1            [10] 2520 	pop	de
    4A79 C1            [10] 2521 	pop	bc
@@ -2527,15 +2527,15 @@
    4A81 67            [ 4] 2527 	ld	h,a
    4A82 CB 3C         [ 8] 2528 	srl	h
    4A84 CB 1D         [ 8] 2529 	rr	l
-   4A86 DD 75 FC      [19] 2530 	ld	-4 (ix),l
+   4A86 DD 75 FE      [19] 2530 	ld	-2 (ix),l
    4A89 C5            [11] 2531 	push	bc
    4A8A D5            [11] 2532 	push	de
    4A8B DD 66 FF      [19] 2533 	ld	h,-1 (ix)
-   4A8E DD 6E FC      [19] 2534 	ld	l,-4 (ix)
+   4A8E DD 6E FE      [19] 2534 	ld	l,-2 (ix)
    4A91 E5            [11] 2535 	push	hl
    4A92 21 00 C0      [10] 2536 	ld	hl,#0xC000
    4A95 E5            [11] 2537 	push	hl
-   4A96 CD 32 60      [17] 2538 	call	_cpct_getScreenPtr
+   4A96 CD FB 60      [17] 2538 	call	_cpct_getScreenPtr
    4A99 D1            [10] 2539 	pop	de
    4A9A C1            [10] 2540 	pop	bc
    4A9B E5            [11] 2541 	push	hl
@@ -2553,7 +2553,7 @@
    4AA7 33            [ 6] 2553 	inc	sp
    4AA8 FD E5         [15] 2554 	push	iy
    4AAA E5            [11] 2555 	push	hl
-   4AAB CD 4C 5D      [17] 2556 	call	_cpct_drawStringM2
+   4AAB CD 15 5E      [17] 2556 	call	_cpct_drawStringM2
    4AAE F1            [10] 2557 	pop	af
    4AAF F1            [10] 2558 	pop	af
    4AB0 33            [ 6] 2559 	inc	sp
@@ -2587,7 +2587,7 @@
    4AD6 33            [ 6] 2587 	inc	sp
    4AD7 26 C0         [ 7] 2588 	ld	h, #0xC0
    4AD9 E5            [11] 2589 	push	hl
-   4ADA CD 33 5F      [17] 2590 	call	_cpct_memset
+   4ADA CD FC 5F      [17] 2590 	call	_cpct_memset
    4ADD C1            [10] 2591 	pop	bc
                            2592 ;src/includes/gui.h:114: drawBoxM2(30,nbEntry*12);
    4ADE DD 5E 06      [19] 2593 	ld	e,6 (ix)
@@ -2624,9 +2624,9 @@
    4B0D                    2624 00111$:
                            2625 ;src/includes/gui.h:119: cpct_scanKeyboard(); 
    4B0D C5            [11] 2626 	push	bc
-   4B0E CD 52 60      [17] 2627 	call	_cpct_scanKeyboard
+   4B0E CD 1B 61      [17] 2627 	call	_cpct_scanKeyboard
    4B11 21 00 01      [10] 2628 	ld	hl,#0x0100
-   4B14 CD 34 5D      [17] 2629 	call	_cpct_isKeyPressed
+   4B14 CD FD 5D      [17] 2629 	call	_cpct_isKeyPressed
    4B17 7D            [ 4] 2630 	ld	a,l
    4B18 C1            [10] 2631 	pop	bc
    4B19 B7            [ 4] 2632 	or	a, a
@@ -2674,7 +2674,7 @@
                            2674 ;src/includes/gui.h:133: if ( cpct_isKeyPressed(Key_CursorDown) )
    4B4E C5            [11] 2675 	push	bc
    4B4F 21 00 04      [10] 2676 	ld	hl,#0x0400
-   4B52 CD 34 5D      [17] 2677 	call	_cpct_isKeyPressed
+   4B52 CD FD 5D      [17] 2677 	call	_cpct_isKeyPressed
    4B55 5D            [ 4] 2678 	ld	e,l
    4B56 C1            [10] 2679 	pop	bc
    4B57 7B            [ 4] 2680 	ld	a,e
@@ -2731,7 +2731,7 @@
                            2731 ;src/includes/gui.h:145: while(!cpct_isKeyPressed(Key_Return));
    4BA3 C5            [11] 2732 	push	bc
    4BA4 21 02 04      [10] 2733 	ld	hl,#0x0402
-   4BA7 CD 34 5D      [17] 2734 	call	_cpct_isKeyPressed
+   4BA7 CD FD 5D      [17] 2734 	call	_cpct_isKeyPressed
    4BAA 7D            [ 4] 2735 	ld	a,l
    4BAB C1            [10] 2736 	pop	bc
    4BAC B7            [ 4] 2737 	or	a, a
@@ -2811,17 +2811,17 @@
    4C0A DD 77 FF      [19] 2811 	ld	-1 (ix), a
    4C0D 07            [ 4] 2812 	rlca
    4C0E E6 01         [ 7] 2813 	and	a,#0x01
-   4C10 DD 77 F9      [19] 2814 	ld	-7 (ix),a
+   4C10 DD 77 F7      [19] 2814 	ld	-9 (ix),a
    4C13 DD 36 F6 00   [19] 2815 	ld	-10 (ix),#0x00
-   4C17 DD 36 F7 00   [19] 2816 	ld	-9 (ix),#0x00
+   4C17 DD 36 FD 00   [19] 2816 	ld	-3 (ix),#0x00
    4C1B                    2817 00114$:
                            2818 ;src/includes/gui.h:176: p_video = cpct_getScreenPtr(SCR_VMEM, (82-strlen(text[i]))/2, (202-(nbLine+2)*10)/2+i*10);
    4C1B DD 7E FE      [19] 2819 	ld	a,-2 (ix)
    4C1E C6 01         [ 7] 2820 	add	a, #0x01
-   4C20 DD 77 FC      [19] 2821 	ld	-4 (ix),a
+   4C20 DD 77 FB      [19] 2821 	ld	-5 (ix),a
    4C23 DD 7E FF      [19] 2822 	ld	a,-1 (ix)
    4C26 CE 00         [ 7] 2823 	adc	a, #0x00
-   4C28 DD 77 FD      [19] 2824 	ld	-3 (ix),a
+   4C28 DD 77 FC      [19] 2824 	ld	-4 (ix),a
                            2825 ;src/includes/gui.h:174: for(i=0; i<nbLine; i++)
    4C2B DD 7E F6      [19] 2826 	ld	a,-10 (ix)
    4C2E DD 96 06      [19] 2827 	sub	a, 6 (ix)
@@ -2829,18 +2829,18 @@
                            2829 ;src/includes/gui.h:176: p_video = cpct_getScreenPtr(SCR_VMEM, (82-strlen(text[i]))/2, (202-(nbLine+2)*10)/2+i*10);
    4C34 DD 6E FE      [19] 2830 	ld	l,-2 (ix)
    4C37 DD 66 FF      [19] 2831 	ld	h,-1 (ix)
-   4C3A DD 7E F9      [19] 2832 	ld	a,-7 (ix)
+   4C3A DD 7E F7      [19] 2832 	ld	a,-9 (ix)
    4C3D B7            [ 4] 2833 	or	a, a
    4C3E 28 06         [12] 2834 	jr	Z,00118$
-   4C40 DD 6E FC      [19] 2835 	ld	l,-4 (ix)
-   4C43 DD 66 FD      [19] 2836 	ld	h,-3 (ix)
+   4C40 DD 6E FB      [19] 2835 	ld	l,-5 (ix)
+   4C43 DD 66 FC      [19] 2836 	ld	h,-4 (ix)
    4C46                    2837 00118$:
    4C46 CB 2C         [ 8] 2838 	sra	h
    4C48 CB 1D         [ 8] 2839 	rr	l
-   4C4A DD 66 F7      [19] 2840 	ld	h,-9 (ix)
+   4C4A DD 66 FD      [19] 2840 	ld	h,-3 (ix)
    4C4D 7D            [ 4] 2841 	ld	a,l
    4C4E 84            [ 4] 2842 	add	a, h
-   4C4F DD 77 F8      [19] 2843 	ld	-8 (ix),a
+   4C4F DD 77 FA      [19] 2843 	ld	-6 (ix),a
    4C52 DD 6E F6      [19] 2844 	ld	l,-10 (ix)
    4C55 26 00         [ 7] 2845 	ld	h,#0x00
    4C57 29            [11] 2846 	add	hl, hl
@@ -2848,18 +2848,18 @@
    4C59 4C            [ 4] 2848 	ld	c,h
    4C5A DD 7E 04      [19] 2849 	ld	a,4 (ix)
    4C5D 80            [ 4] 2850 	add	a, b
-   4C5E DD 77 FA      [19] 2851 	ld	-6 (ix),a
+   4C5E DD 77 F8      [19] 2851 	ld	-8 (ix),a
    4C61 DD 7E 05      [19] 2852 	ld	a,5 (ix)
    4C64 89            [ 4] 2853 	adc	a, c
-   4C65 DD 77 FB      [19] 2854 	ld	-5 (ix),a
-   4C68 DD 6E FA      [19] 2855 	ld	l,-6 (ix)
-   4C6B DD 66 FB      [19] 2856 	ld	h,-5 (ix)
+   4C65 DD 77 F9      [19] 2854 	ld	-7 (ix),a
+   4C68 DD 6E F8      [19] 2855 	ld	l,-8 (ix)
+   4C6B DD 66 F9      [19] 2856 	ld	h,-7 (ix)
    4C6E 4E            [ 7] 2857 	ld	c,(hl)
    4C6F 23            [ 6] 2858 	inc	hl
    4C70 46            [ 7] 2859 	ld	b,(hl)
    4C71 D5            [11] 2860 	push	de
    4C72 C5            [11] 2861 	push	bc
-   4C73 CD 5A 5F      [17] 2862 	call	_strlen
+   4C73 CD 23 60      [17] 2862 	call	_strlen
    4C76 F1            [10] 2863 	pop	af
    4C77 D1            [10] 2864 	pop	de
    4C78 3E 52         [ 7] 2865 	ld	a,#0x52
@@ -2872,20 +2872,20 @@
    4C82 CB 1D         [ 8] 2872 	rr	l
    4C84 45            [ 4] 2873 	ld	b,l
    4C85 D5            [11] 2874 	push	de
-   4C86 DD 7E F8      [19] 2875 	ld	a,-8 (ix)
+   4C86 DD 7E FA      [19] 2875 	ld	a,-6 (ix)
    4C89 F5            [11] 2876 	push	af
    4C8A 33            [ 6] 2877 	inc	sp
    4C8B C5            [11] 2878 	push	bc
    4C8C 33            [ 6] 2879 	inc	sp
    4C8D 21 00 C0      [10] 2880 	ld	hl,#0xC000
    4C90 E5            [11] 2881 	push	hl
-   4C91 CD 32 60      [17] 2882 	call	_cpct_getScreenPtr
+   4C91 CD FB 60      [17] 2882 	call	_cpct_getScreenPtr
    4C94 D1            [10] 2883 	pop	de
    4C95 E5            [11] 2884 	push	hl
    4C96 FD E1         [14] 2885 	pop	iy
                            2886 ;src/includes/gui.h:177: cpct_drawStringM2 (text[i], p_video, 0);
-   4C98 DD 6E FA      [19] 2887 	ld	l,-6 (ix)
-   4C9B DD 66 FB      [19] 2888 	ld	h,-5 (ix)
+   4C98 DD 6E F8      [19] 2887 	ld	l,-8 (ix)
+   4C9B DD 66 F9      [19] 2888 	ld	h,-7 (ix)
    4C9E 4E            [ 7] 2889 	ld	c,(hl)
    4C9F 23            [ 6] 2890 	inc	hl
    4CA0 46            [ 7] 2891 	ld	b,(hl)
@@ -2895,26 +2895,26 @@
    4CA4 33            [ 6] 2895 	inc	sp
    4CA5 FD E5         [15] 2896 	push	iy
    4CA7 C5            [11] 2897 	push	bc
-   4CA8 CD 4C 5D      [17] 2898 	call	_cpct_drawStringM2
+   4CA8 CD 15 5E      [17] 2898 	call	_cpct_drawStringM2
    4CAB F1            [10] 2899 	pop	af
    4CAC F1            [10] 2900 	pop	af
    4CAD 33            [ 6] 2901 	inc	sp
    4CAE D1            [10] 2902 	pop	de
                            2903 ;src/includes/gui.h:174: for(i=0; i<nbLine; i++)
-   4CAF DD 7E F7      [19] 2904 	ld	a,-9 (ix)
+   4CAF DD 7E FD      [19] 2904 	ld	a,-3 (ix)
    4CB2 C6 0A         [ 7] 2905 	add	a, #0x0A
-   4CB4 DD 77 F7      [19] 2906 	ld	-9 (ix),a
+   4CB4 DD 77 FD      [19] 2906 	ld	-3 (ix),a
    4CB7 DD 34 F6      [23] 2907 	inc	-10 (ix)
    4CBA C3 1B 4C      [10] 2908 	jp	00114$
    4CBD                    2909 00104$:
                            2910 ;src/includes/gui.h:180: p_video = cpct_getScreenPtr(SCR_VMEM, (82-strlen(buttonTxt))/2, (202-(nbLine+2)*10)/2+(nbLine+1)*10);
    4CBD DD 46 FE      [19] 2911 	ld	b,-2 (ix)
    4CC0 DD 66 FF      [19] 2912 	ld	h,-1 (ix)
-   4CC3 DD 7E F9      [19] 2913 	ld	a,-7 (ix)
+   4CC3 DD 7E F7      [19] 2913 	ld	a,-9 (ix)
    4CC6 B7            [ 4] 2914 	or	a, a
    4CC7 28 06         [12] 2915 	jr	Z,00119$
-   4CC9 DD 46 FC      [19] 2916 	ld	b,-4 (ix)
-   4CCC DD 66 FD      [19] 2917 	ld	h,-3 (ix)
+   4CC9 DD 46 FB      [19] 2916 	ld	b,-5 (ix)
+   4CCC DD 66 FC      [19] 2917 	ld	h,-4 (ix)
    4CCF                    2918 00119$:
    4CCF CB 2C         [ 8] 2919 	sra	h
    4CD1 CB 18         [ 8] 2920 	rr	b
@@ -2931,7 +2931,7 @@
    4CDF C5            [11] 2931 	push	bc
    4CE0 D5            [11] 2932 	push	de
    4CE1 D5            [11] 2933 	push	de
-   4CE2 CD 5A 5F      [17] 2934 	call	_strlen
+   4CE2 CD 23 60      [17] 2934 	call	_strlen
    4CE5 F1            [10] 2935 	pop	af
    4CE6 D1            [10] 2936 	pop	de
    4CE7 C1            [10] 2937 	pop	bc
@@ -2951,7 +2951,7 @@
    4CF9 33            [ 6] 2951 	inc	sp
    4CFA 21 00 C0      [10] 2952 	ld	hl,#0xC000
    4CFD E5            [11] 2953 	push	hl
-   4CFE CD 32 60      [17] 2954 	call	_cpct_getScreenPtr
+   4CFE CD FB 60      [17] 2954 	call	_cpct_getScreenPtr
    4D01 D1            [10] 2955 	pop	de
                            2956 ;src/includes/gui.h:181: cpct_drawStringM2 (buttonTxt, p_video, 0);
    4D02 4D            [ 4] 2957 	ld	c, l
@@ -2961,17 +2961,17 @@
    4D06 33            [ 6] 2961 	inc	sp
    4D07 C5            [11] 2962 	push	bc
    4D08 D5            [11] 2963 	push	de
-   4D09 CD 4C 5D      [17] 2964 	call	_cpct_drawStringM2
+   4D09 CD 15 5E      [17] 2964 	call	_cpct_drawStringM2
    4D0C F1            [10] 2965 	pop	af
    4D0D F1            [10] 2966 	pop	af
    4D0E 33            [ 6] 2967 	inc	sp
                            2968 ;src/includes/gui.h:184: do{
    4D0F                    2969 00110$:
                            2970 ;src/includes/gui.h:185: cpct_scanKeyboard(); 
-   4D0F CD 52 60      [17] 2971 	call	_cpct_scanKeyboard
+   4D0F CD 1B 61      [17] 2971 	call	_cpct_scanKeyboard
                            2972 ;src/includes/gui.h:187: if ( cpct_isKeyPressed(Key_Return) )
    4D12 21 02 04      [10] 2973 	ld	hl,#0x0402
-   4D15 CD 34 5D      [17] 2974 	call	_cpct_isKeyPressed
+   4D15 CD FD 5D      [17] 2974 	call	_cpct_isKeyPressed
    4D18 7D            [ 4] 2975 	ld	a,l
    4D19 B7            [ 4] 2976 	or	a, a
    4D1A 28 04         [12] 2977 	jr	Z,00106$
@@ -2980,7 +2980,7 @@
    4D20                    2980 00106$:
                            2981 ;src/includes/gui.h:190: if ( cpct_isKeyPressed(Key_Esc) )
    4D20 21 08 04      [10] 2982 	ld	hl,#0x0408
-   4D23 CD 34 5D      [17] 2983 	call	_cpct_isKeyPressed
+   4D23 CD FD 5D      [17] 2983 	call	_cpct_isKeyPressed
    4D26 7D            [ 4] 2984 	ld	a,l
    4D27 B7            [ 4] 2985 	or	a, a
    4D28 28 04         [12] 2986 	jr	Z,00111$
@@ -2989,12 +2989,12 @@
    4D2E                    2989 00111$:
                            2990 ;src/includes/gui.h:193: while(!cpct_isKeyPressed(Key_Return) && !cpct_isKeyPressed(Key_Esc));
    4D2E 21 02 04      [10] 2991 	ld	hl,#0x0402
-   4D31 CD 34 5D      [17] 2992 	call	_cpct_isKeyPressed
+   4D31 CD FD 5D      [17] 2992 	call	_cpct_isKeyPressed
    4D34 7D            [ 4] 2993 	ld	a,l
    4D35 B7            [ 4] 2994 	or	a, a
    4D36 20 0A         [12] 2995 	jr	NZ,00112$
    4D38 21 08 04      [10] 2996 	ld	hl,#0x0408
-   4D3B CD 34 5D      [17] 2997 	call	_cpct_isKeyPressed
+   4D3B CD FD 5D      [17] 2997 	call	_cpct_isKeyPressed
    4D3E 7D            [ 4] 2998 	ld	a,l
    4D3F B7            [ 4] 2999 	or	a, a
    4D40 28 CD         [12] 3000 	jr	Z,00110$
@@ -3020,7 +3020,7 @@
    4D5E DD E5         [15] 3018 	push	ix
    4D60 DD 21 00 00   [14] 3019 	ld	ix,#0
    4D64 DD 39         [15] 3020 	add	ix,sp
-   4D66 F5            [11] 3021 	push	af
+   4D66 3B            [ 6] 3021 	dec	sp
                            3022 ;src/includes/world.h:4: p_video = cpct_getScreenPtr(SCR_VMEM, x*TILESIZE_W, y*TILESIZE_H);
    4D67 DD 7E 05      [19] 3023 	ld	a,5 (ix)
    4D6A 07            [ 4] 3024 	rlca
@@ -3028,2565 +3028,2711 @@
    4D6C 07            [ 4] 3026 	rlca
    4D6D 07            [ 4] 3027 	rlca
    4D6E E6 F0         [ 7] 3028 	and	a,#0xF0
-   4D70 DD 77 FE      [19] 3029 	ld	-2 (ix),a
-   4D73 DD 7E 04      [19] 3030 	ld	a,4 (ix)
-   4D76 87            [ 4] 3031 	add	a, a
-   4D77 87            [ 4] 3032 	add	a, a
-   4D78 DD 77 FF      [19] 3033 	ld	-1 (ix),a
-   4D7B DD 66 FE      [19] 3034 	ld	h,-2 (ix)
-   4D7E DD 6E FF      [19] 3035 	ld	l,-1 (ix)
-   4D81 E5            [11] 3036 	push	hl
-   4D82 21 00 C0      [10] 3037 	ld	hl,#0xC000
-   4D85 E5            [11] 3038 	push	hl
-   4D86 CD 32 60      [17] 3039 	call	_cpct_getScreenPtr
-   4D89 4D            [ 4] 3040 	ld	c, l
-   4D8A 44            [ 4] 3041 	ld	b, h
-                           3042 ;src/includes/world.h:6: switch(CURSOR_MODE)
-   4D8B 3E 06         [ 7] 3043 	ld	a,#0x06
-   4D8D FD 21 DF 6F   [14] 3044 	ld	iy,#_CURSOR_MODE
-   4D91 FD 96 00      [19] 3045 	sub	a, 0 (iy)
-   4D94 DA D4 4E      [10] 3046 	jp	C,00109$
-                           3047 ;src/includes/world.h:9: cpct_memset (p_video, cpct_px2byteM1(color,color,color,color), 4);
-                           3048 ;src/includes/world.h:6: switch(CURSOR_MODE)
-   4D97 FD 21 DF 6F   [14] 3049 	ld	iy,#_CURSOR_MODE
-   4D9B FD 5E 00      [19] 3050 	ld	e,0 (iy)
-   4D9E 16 00         [ 7] 3051 	ld	d,#0x00
-   4DA0 21 A7 4D      [10] 3052 	ld	hl,#00115$
-   4DA3 19            [11] 3053 	add	hl,de
-   4DA4 19            [11] 3054 	add	hl,de
-   4DA5 19            [11] 3055 	add	hl,de
-   4DA6 E9            [ 4] 3056 	jp	(hl)
-   4DA7                    3057 00115$:
-   4DA7 C3 BC 4D      [10] 3058 	jp	00101$
-   4DAA C3 82 4E      [10] 3059 	jp	00102$
-   4DAD C3 90 4E      [10] 3060 	jp	00103$
-   4DB0 C3 9E 4E      [10] 3061 	jp	00104$
-   4DB3 C3 AC 4E      [10] 3062 	jp	00105$
-   4DB6 C3 BA 4E      [10] 3063 	jp	00106$
-   4DB9 C3 C8 4E      [10] 3064 	jp	00107$
-                           3065 ;src/includes/world.h:8: case NONE:
-   4DBC                    3066 00101$:
-                           3067 ;src/includes/world.h:9: cpct_memset (p_video, cpct_px2byteM1(color,color,color,color), 4);
-   4DBC C5            [11] 3068 	push	bc
-   4DBD DD 66 06      [19] 3069 	ld	h,6 (ix)
-   4DC0 DD 6E 06      [19] 3070 	ld	l,6 (ix)
-   4DC3 E5            [11] 3071 	push	hl
-   4DC4 DD 66 06      [19] 3072 	ld	h,6 (ix)
-   4DC7 DD 6E 06      [19] 3073 	ld	l,6 (ix)
-   4DCA E5            [11] 3074 	push	hl
-   4DCB CD 41 5F      [17] 3075 	call	_cpct_px2byteM1
-   4DCE F1            [10] 3076 	pop	af
-   4DCF F1            [10] 3077 	pop	af
-   4DD0 65            [ 4] 3078 	ld	h,l
-   4DD1 C1            [10] 3079 	pop	bc
-   4DD2 11 04 00      [10] 3080 	ld	de,#0x0004
-   4DD5 D5            [11] 3081 	push	de
-   4DD6 E5            [11] 3082 	push	hl
-   4DD7 33            [ 6] 3083 	inc	sp
-   4DD8 C5            [11] 3084 	push	bc
-   4DD9 CD 33 5F      [17] 3085 	call	_cpct_memset
-                           3086 ;src/includes/world.h:10: p_video = cpct_getScreenPtr(SCR_VMEM, x*TILESIZE_W, y*TILESIZE_H+1);
-   4DDC DD 66 FE      [19] 3087 	ld	h,-2 (ix)
-   4DDF 24            [ 4] 3088 	inc	h
-   4DE0 E5            [11] 3089 	push	hl
-   4DE1 33            [ 6] 3090 	inc	sp
-   4DE2 DD 7E FF      [19] 3091 	ld	a,-1 (ix)
-   4DE5 F5            [11] 3092 	push	af
-   4DE6 33            [ 6] 3093 	inc	sp
-   4DE7 21 00 C0      [10] 3094 	ld	hl,#0xC000
-   4DEA E5            [11] 3095 	push	hl
-   4DEB CD 32 60      [17] 3096 	call	_cpct_getScreenPtr
-                           3097 ;src/includes/world.h:11: cpct_memset (p_video, cpct_px2byteM1(color,color,color,color), 4);
-   4DEE E5            [11] 3098 	push	hl
-   4DEF DD 66 06      [19] 3099 	ld	h,6 (ix)
-   4DF2 DD 6E 06      [19] 3100 	ld	l,6 (ix)
-   4DF5 E5            [11] 3101 	push	hl
-   4DF6 DD 66 06      [19] 3102 	ld	h,6 (ix)
-   4DF9 DD 6E 06      [19] 3103 	ld	l,6 (ix)
-   4DFC E5            [11] 3104 	push	hl
-   4DFD CD 41 5F      [17] 3105 	call	_cpct_px2byteM1
-   4E00 F1            [10] 3106 	pop	af
-   4E01 F1            [10] 3107 	pop	af
-   4E02 4D            [ 4] 3108 	ld	c,l
-   4E03 D1            [10] 3109 	pop	de
-   4E04 21 04 00      [10] 3110 	ld	hl,#0x0004
-   4E07 E5            [11] 3111 	push	hl
-   4E08 79            [ 4] 3112 	ld	a,c
-   4E09 F5            [11] 3113 	push	af
-   4E0A 33            [ 6] 3114 	inc	sp
-   4E0B D5            [11] 3115 	push	de
-   4E0C CD 33 5F      [17] 3116 	call	_cpct_memset
-                           3117 ;src/includes/world.h:14: p_video = cpct_getScreenPtr(SCR_VMEM, x*TILESIZE_W, (y+1)*TILESIZE_H-1);
-   4E0F DD 7E 05      [19] 3118 	ld	a,5 (ix)
-   4E12 3C            [ 4] 3119 	inc	a
-   4E13 07            [ 4] 3120 	rlca
-   4E14 07            [ 4] 3121 	rlca
-   4E15 07            [ 4] 3122 	rlca
-   4E16 07            [ 4] 3123 	rlca
-   4E17 E6 F0         [ 7] 3124 	and	a,#0xF0
-   4E19 DD 77 FE      [19] 3125 	ld	-2 (ix), a
-   4E1C 67            [ 4] 3126 	ld	h, a
-   4E1D 25            [ 4] 3127 	dec	h
-   4E1E E5            [11] 3128 	push	hl
-   4E1F 33            [ 6] 3129 	inc	sp
-   4E20 DD 7E FF      [19] 3130 	ld	a,-1 (ix)
-   4E23 F5            [11] 3131 	push	af
-   4E24 33            [ 6] 3132 	inc	sp
-   4E25 21 00 C0      [10] 3133 	ld	hl,#0xC000
-   4E28 E5            [11] 3134 	push	hl
-   4E29 CD 32 60      [17] 3135 	call	_cpct_getScreenPtr
-                           3136 ;src/includes/world.h:15: cpct_memset (p_video, cpct_px2byteM1(color,color,color,color), 4);
-   4E2C E5            [11] 3137 	push	hl
-   4E2D DD 66 06      [19] 3138 	ld	h,6 (ix)
-   4E30 DD 6E 06      [19] 3139 	ld	l,6 (ix)
-   4E33 E5            [11] 3140 	push	hl
-   4E34 DD 66 06      [19] 3141 	ld	h,6 (ix)
-   4E37 DD 6E 06      [19] 3142 	ld	l,6 (ix)
-   4E3A E5            [11] 3143 	push	hl
-   4E3B CD 41 5F      [17] 3144 	call	_cpct_px2byteM1
-   4E3E F1            [10] 3145 	pop	af
-   4E3F F1            [10] 3146 	pop	af
-   4E40 4D            [ 4] 3147 	ld	c,l
-   4E41 D1            [10] 3148 	pop	de
-   4E42 21 04 00      [10] 3149 	ld	hl,#0x0004
-   4E45 E5            [11] 3150 	push	hl
-   4E46 79            [ 4] 3151 	ld	a,c
-   4E47 F5            [11] 3152 	push	af
-   4E48 33            [ 6] 3153 	inc	sp
-   4E49 D5            [11] 3154 	push	de
-   4E4A CD 33 5F      [17] 3155 	call	_cpct_memset
-                           3156 ;src/includes/world.h:16: p_video = cpct_getScreenPtr(SCR_VMEM, x*TILESIZE_W, (y+1)*TILESIZE_H-2);
-   4E4D DD 66 FE      [19] 3157 	ld	h,-2 (ix)
-   4E50 25            [ 4] 3158 	dec	h
-   4E51 25            [ 4] 3159 	dec	h
-   4E52 E5            [11] 3160 	push	hl
-   4E53 33            [ 6] 3161 	inc	sp
-   4E54 DD 7E FF      [19] 3162 	ld	a,-1 (ix)
-   4E57 F5            [11] 3163 	push	af
-   4E58 33            [ 6] 3164 	inc	sp
-   4E59 21 00 C0      [10] 3165 	ld	hl,#0xC000
-   4E5C E5            [11] 3166 	push	hl
-   4E5D CD 32 60      [17] 3167 	call	_cpct_getScreenPtr
-                           3168 ;src/includes/world.h:17: cpct_memset (p_video, cpct_px2byteM1(color,color,color,color), 4);
-   4E60 E5            [11] 3169 	push	hl
-   4E61 DD 66 06      [19] 3170 	ld	h,6 (ix)
-   4E64 DD 6E 06      [19] 3171 	ld	l,6 (ix)
-   4E67 E5            [11] 3172 	push	hl
-   4E68 DD 66 06      [19] 3173 	ld	h,6 (ix)
-   4E6B DD 6E 06      [19] 3174 	ld	l,6 (ix)
-   4E6E E5            [11] 3175 	push	hl
-   4E6F CD 41 5F      [17] 3176 	call	_cpct_px2byteM1
-   4E72 F1            [10] 3177 	pop	af
-   4E73 F1            [10] 3178 	pop	af
-   4E74 65            [ 4] 3179 	ld	h,l
-   4E75 D1            [10] 3180 	pop	de
-   4E76 01 04 00      [10] 3181 	ld	bc,#0x0004
-   4E79 C5            [11] 3182 	push	bc
-   4E7A E5            [11] 3183 	push	hl
-   4E7B 33            [ 6] 3184 	inc	sp
-   4E7C D5            [11] 3185 	push	de
-   4E7D CD 33 5F      [17] 3186 	call	_cpct_memset
-                           3187 ;src/includes/world.h:18: break;
-   4E80 18 52         [12] 3188 	jr	00109$
-                           3189 ;src/includes/world.h:19: case T_SSNS:
-   4E82                    3190 00102$:
-                           3191 ;src/includes/world.h:20: cpct_drawSprite(station_small_ns, p_video, TILESIZE_W, TILESIZE_H);
-   4E82 11 A9 42      [10] 3192 	ld	de,#_station_small_ns
-   4E85 21 04 10      [10] 3193 	ld	hl,#0x1004
-   4E88 E5            [11] 3194 	push	hl
-   4E89 C5            [11] 3195 	push	bc
-   4E8A D5            [11] 3196 	push	de
-   4E8B CD 6D 5D      [17] 3197 	call	_cpct_drawSprite
-                           3198 ;src/includes/world.h:21: break;
-   4E8E 18 44         [12] 3199 	jr	00109$
-                           3200 ;src/includes/world.h:23: case T_SSEW:
-   4E90                    3201 00103$:
-                           3202 ;src/includes/world.h:24: cpct_drawSprite(station_small_ew, p_video, TILESIZE_W, TILESIZE_H);
-   4E90 11 E9 42      [10] 3203 	ld	de,#_station_small_ew
-   4E93 21 04 10      [10] 3204 	ld	hl,#0x1004
-   4E96 E5            [11] 3205 	push	hl
-   4E97 C5            [11] 3206 	push	bc
-   4E98 D5            [11] 3207 	push	de
-   4E99 CD 6D 5D      [17] 3208 	call	_cpct_drawSprite
-                           3209 ;src/includes/world.h:25: break;
-   4E9C 18 36         [12] 3210 	jr	00109$
-                           3211 ;src/includes/world.h:26: case T_SMNS:
-   4E9E                    3212 00104$:
-                           3213 ;src/includes/world.h:27: cpct_drawSprite(station_medium_ns, p_video, TILESIZE_W, TILESIZE_H);
-   4E9E 11 29 43      [10] 3214 	ld	de,#_station_medium_ns
-   4EA1 21 04 10      [10] 3215 	ld	hl,#0x1004
-   4EA4 E5            [11] 3216 	push	hl
-   4EA5 C5            [11] 3217 	push	bc
-   4EA6 D5            [11] 3218 	push	de
-   4EA7 CD 6D 5D      [17] 3219 	call	_cpct_drawSprite
-                           3220 ;src/includes/world.h:28: break;
-   4EAA 18 28         [12] 3221 	jr	00109$
-                           3222 ;src/includes/world.h:29: case T_SMEW:
-   4EAC                    3223 00105$:
-                           3224 ;src/includes/world.h:30: cpct_drawSprite(station_medium_ew, p_video, TILESIZE_W, TILESIZE_H);
-   4EAC 11 69 43      [10] 3225 	ld	de,#_station_medium_ew
-   4EAF 21 04 10      [10] 3226 	ld	hl,#0x1004
-   4EB2 E5            [11] 3227 	push	hl
-   4EB3 C5            [11] 3228 	push	bc
-   4EB4 D5            [11] 3229 	push	de
-   4EB5 CD 6D 5D      [17] 3230 	call	_cpct_drawSprite
-                           3231 ;src/includes/world.h:31: break;
-   4EB8 18 1A         [12] 3232 	jr	00109$
-                           3233 ;src/includes/world.h:32: case T_SLNS:
-   4EBA                    3234 00106$:
-                           3235 ;src/includes/world.h:33: cpct_drawSprite(station_large_ns, p_video, TILESIZE_W, TILESIZE_H);
-   4EBA 11 A9 43      [10] 3236 	ld	de,#_station_large_ns
-   4EBD 21 04 10      [10] 3237 	ld	hl,#0x1004
-   4EC0 E5            [11] 3238 	push	hl
-   4EC1 C5            [11] 3239 	push	bc
-   4EC2 D5            [11] 3240 	push	de
-   4EC3 CD 6D 5D      [17] 3241 	call	_cpct_drawSprite
-                           3242 ;src/includes/world.h:34: break;
-   4EC6 18 0C         [12] 3243 	jr	00109$
-                           3244 ;src/includes/world.h:35: case T_SLEW:
-   4EC8                    3245 00107$:
-                           3246 ;src/includes/world.h:36: cpct_drawSprite(station_large_ew, p_video, TILESIZE_W, TILESIZE_H);
-   4EC8 11 E9 43      [10] 3247 	ld	de,#_station_large_ew
-   4ECB 21 04 10      [10] 3248 	ld	hl,#0x1004
-   4ECE E5            [11] 3249 	push	hl
-   4ECF C5            [11] 3250 	push	bc
-   4ED0 D5            [11] 3251 	push	de
-   4ED1 CD 6D 5D      [17] 3252 	call	_cpct_drawSprite
-                           3253 ;src/includes/world.h:38: }
-   4ED4                    3254 00109$:
-   4ED4 DD F9         [10] 3255 	ld	sp, ix
-   4ED6 DD E1         [14] 3256 	pop	ix
-   4ED8 C9            [10] 3257 	ret
-                           3258 ;src/includes/world.h:41: void generateWorld()
-                           3259 ;	---------------------------------
-                           3260 ; Function generateWorld
-                           3261 ; ---------------------------------
-   4ED9                    3262 _generateWorld::
-   4ED9 DD E5         [15] 3263 	push	ix
-   4EDB DD 21 00 00   [14] 3264 	ld	ix,#0
-   4EDF DD 39         [15] 3265 	add	ix,sp
-   4EE1 F5            [11] 3266 	push	af
-   4EE2 F5            [11] 3267 	push	af
-                           3268 ;src/includes/world.h:49: cpct_setRandomSeedUniform_u8(0);
-   4EE3 2E 00         [ 7] 3269 	ld	l,#0x00
-   4EE5 CD 18 5D      [17] 3270 	call	_cpct_setRandomSeedUniform_u8
-                           3271 ;src/includes/world.h:51: for(iy=0; iy<HEIGHT*WIDTH;iy++)
-   4EE8 11 00 00      [10] 3272 	ld	de,#0x0000
-   4EEB                    3273 00114$:
-                           3274 ;src/includes/world.h:53: p_world[iy] = cpct_getRandomUniform_u8_f(0)%2;
-   4EEB 21 DF 60      [10] 3275 	ld	hl,#_p_world
-   4EEE 19            [11] 3276 	add	hl,de
-   4EEF E5            [11] 3277 	push	hl
-   4EF0 D5            [11] 3278 	push	de
-   4EF1 2E 00         [ 7] 3279 	ld	l,#0x00
-   4EF3 CD F4 5E      [17] 3280 	call	_cpct_getRandomUniform_u8_f
-   4EF6 7D            [ 4] 3281 	ld	a,l
-   4EF7 D1            [10] 3282 	pop	de
-   4EF8 E1            [10] 3283 	pop	hl
-   4EF9 E6 01         [ 7] 3284 	and	a, #0x01
-   4EFB 77            [ 7] 3285 	ld	(hl),a
-                           3286 ;src/includes/world.h:51: for(iy=0; iy<HEIGHT*WIDTH;iy++)
-   4EFC 13            [ 6] 3287 	inc	de
-   4EFD 7A            [ 4] 3288 	ld	a,d
-   4EFE EE 80         [ 7] 3289 	xor	a, #0x80
-   4F00 D6 8F         [ 7] 3290 	sub	a, #0x8F
-   4F02 38 E7         [12] 3291 	jr	C,00114$
-                           3292 ;src/includes/world.h:80: cpct_setRandomSeedUniform_u8(1);
-   4F04 2E 01         [ 7] 3293 	ld	l,#0x01
-   4F06 CD 18 5D      [17] 3294 	call	_cpct_setRandomSeedUniform_u8
-                           3295 ;src/includes/world.h:82: for(ix=0; ix<NBFARM; ix++)
-   4F09 21 00 00      [10] 3296 	ld	hl,#0x0000
-   4F0C E3            [19] 3297 	ex	(sp), hl
-   4F0D                    3298 00116$:
-                           3299 ;src/includes/world.h:84: iy = cpct_getRandomUniform_u8_f(1)*15; // (WIDTH*HEIGHT)/255;
-   4F0D 2E 01         [ 7] 3300 	ld	l,#0x01
-   4F0F CD F4 5E      [17] 3301 	call	_cpct_getRandomUniform_u8_f
-   4F12 4D            [ 4] 3302 	ld	c,l
-   4F13 06 00         [ 7] 3303 	ld	b,#0x00
-   4F15 69            [ 4] 3304 	ld	l, c
-   4F16 60            [ 4] 3305 	ld	h, b
-   4F17 29            [11] 3306 	add	hl, hl
-   4F18 09            [11] 3307 	add	hl, bc
-   4F19 29            [11] 3308 	add	hl, hl
-   4F1A 09            [11] 3309 	add	hl, bc
-   4F1B 29            [11] 3310 	add	hl, hl
-   4F1C 09            [11] 3311 	add	hl, bc
-                           3312 ;src/includes/world.h:86: shift = cpct_getRandomUniform_u8_f(1)%10;
-   4F1D E5            [11] 3313 	push	hl
-   4F1E 2E 01         [ 7] 3314 	ld	l,#0x01
-   4F20 CD F4 5E      [17] 3315 	call	_cpct_getRandomUniform_u8_f
-   4F23 45            [ 4] 3316 	ld	b,l
-   4F24 3E 0A         [ 7] 3317 	ld	a,#0x0A
-   4F26 F5            [11] 3318 	push	af
-   4F27 33            [ 6] 3319 	inc	sp
-   4F28 C5            [11] 3320 	push	bc
-   4F29 33            [ 6] 3321 	inc	sp
-   4F2A CD 12 5E      [17] 3322 	call	__moduchar
-   4F2D F1            [10] 3323 	pop	af
-   4F2E D1            [10] 3324 	pop	de
-   4F2F 26 00         [ 7] 3325 	ld	h,#0x00
-                           3326 ;src/includes/world.h:87: shift=iy-shift+5;
-   4F31 7B            [ 4] 3327 	ld	a,e
-   4F32 95            [ 4] 3328 	sub	a, l
-   4F33 6F            [ 4] 3329 	ld	l,a
-   4F34 7A            [ 4] 3330 	ld	a,d
-   4F35 9C            [ 4] 3331 	sbc	a, h
-   4F36 67            [ 4] 3332 	ld	h,a
-   4F37 01 05 00      [10] 3333 	ld	bc,#0x0005
-   4F3A 09            [11] 3334 	add	hl,bc
-                           3335 ;src/includes/world.h:89: if(shift>0 && shift<WIDTH*HEIGHT)
-   4F3B AF            [ 4] 3336 	xor	a, a
-   4F3C BD            [ 4] 3337 	cp	a, l
-   4F3D 9C            [ 4] 3338 	sbc	a, h
-   4F3E E2 43 4F      [10] 3339 	jp	PO, 00180$
-   4F41 EE 80         [ 7] 3340 	xor	a, #0x80
-   4F43                    3341 00180$:
-   4F43 F2 5E 4F      [10] 3342 	jp	P,00117$
-   4F46 7C            [ 4] 3343 	ld	a,h
-   4F47 EE 80         [ 7] 3344 	xor	a, #0x80
-   4F49 D6 8F         [ 7] 3345 	sub	a, #0x8F
-   4F4B 30 11         [12] 3346 	jr	NC,00117$
-                           3347 ;src/includes/world.h:90: p_world[shift] = (u8)cpct_getRandomUniform_u8_f(1)%2+5;
-   4F4D 11 DF 60      [10] 3348 	ld	de,#_p_world
-   4F50 19            [11] 3349 	add	hl,de
-   4F51 E5            [11] 3350 	push	hl
-   4F52 2E 01         [ 7] 3351 	ld	l,#0x01
-   4F54 CD F4 5E      [17] 3352 	call	_cpct_getRandomUniform_u8_f
-   4F57 7D            [ 4] 3353 	ld	a,l
-   4F58 E1            [10] 3354 	pop	hl
-   4F59 E6 01         [ 7] 3355 	and	a, #0x01
-   4F5B C6 05         [ 7] 3356 	add	a, #0x05
-   4F5D 77            [ 7] 3357 	ld	(hl),a
-   4F5E                    3358 00117$:
-                           3359 ;src/includes/world.h:82: for(ix=0; ix<NBFARM; ix++)
-   4F5E DD 34 FC      [23] 3360 	inc	-4 (ix)
-   4F61 20 03         [12] 3361 	jr	NZ,00181$
-   4F63 DD 34 FD      [23] 3362 	inc	-3 (ix)
-   4F66                    3363 00181$:
-   4F66 DD 7E FC      [19] 3364 	ld	a,-4 (ix)
-   4F69 D6 3C         [ 7] 3365 	sub	a, #0x3C
-   4F6B DD 7E FD      [19] 3366 	ld	a,-3 (ix)
-   4F6E 17            [ 4] 3367 	rla
-   4F6F 3F            [ 4] 3368 	ccf
-   4F70 1F            [ 4] 3369 	rra
-   4F71 DE 80         [ 7] 3370 	sbc	a, #0x80
-   4F73 38 98         [12] 3371 	jr	C,00116$
-                           3372 ;src/includes/world.h:95: cpct_setRandomSeedUniform_u8(2);
-   4F75 2E 02         [ 7] 3373 	ld	l,#0x02
-   4F77 CD 18 5D      [17] 3374 	call	_cpct_setRandomSeedUniform_u8
-                           3375 ;src/includes/world.h:97: for(ix=0; ix<NBURBAN; ix++)
-   4F7A 21 00 00      [10] 3376 	ld	hl,#0x0000
-   4F7D E3            [19] 3377 	ex	(sp), hl
-   4F7E                    3378 00118$:
-                           3379 ;src/includes/world.h:99: iy = cpct_getRandomUniform_u8_f(2)*15; // (WIDTH*HEIGHT)/255;
-   4F7E 2E 02         [ 7] 3380 	ld	l,#0x02
-   4F80 CD F4 5E      [17] 3381 	call	_cpct_getRandomUniform_u8_f
-   4F83 4D            [ 4] 3382 	ld	c,l
-   4F84 06 00         [ 7] 3383 	ld	b,#0x00
-   4F86 69            [ 4] 3384 	ld	l, c
-   4F87 60            [ 4] 3385 	ld	h, b
-   4F88 29            [11] 3386 	add	hl, hl
-   4F89 09            [11] 3387 	add	hl, bc
-   4F8A 29            [11] 3388 	add	hl, hl
-   4F8B 09            [11] 3389 	add	hl, bc
-   4F8C 29            [11] 3390 	add	hl, hl
-   4F8D 09            [11] 3391 	add	hl, bc
-                           3392 ;src/includes/world.h:101: shift = cpct_getRandomUniform_u8_f(2)%10;
-   4F8E E5            [11] 3393 	push	hl
-   4F8F 2E 02         [ 7] 3394 	ld	l,#0x02
-   4F91 CD F4 5E      [17] 3395 	call	_cpct_getRandomUniform_u8_f
-   4F94 45            [ 4] 3396 	ld	b,l
-   4F95 3E 0A         [ 7] 3397 	ld	a,#0x0A
-   4F97 F5            [11] 3398 	push	af
-   4F98 33            [ 6] 3399 	inc	sp
-   4F99 C5            [11] 3400 	push	bc
-   4F9A 33            [ 6] 3401 	inc	sp
-   4F9B CD 12 5E      [17] 3402 	call	__moduchar
-   4F9E F1            [10] 3403 	pop	af
-   4F9F D1            [10] 3404 	pop	de
-   4FA0 26 00         [ 7] 3405 	ld	h,#0x00
-                           3406 ;src/includes/world.h:102: shift=iy-shift+5;
-   4FA2 7B            [ 4] 3407 	ld	a,e
-   4FA3 95            [ 4] 3408 	sub	a, l
-   4FA4 4F            [ 4] 3409 	ld	c,a
-   4FA5 7A            [ 4] 3410 	ld	a,d
-   4FA6 9C            [ 4] 3411 	sbc	a, h
-   4FA7 47            [ 4] 3412 	ld	b,a
-   4FA8 03            [ 6] 3413 	inc	bc
-   4FA9 03            [ 6] 3414 	inc	bc
-   4FAA 03            [ 6] 3415 	inc	bc
-   4FAB 03            [ 6] 3416 	inc	bc
-   4FAC 03            [ 6] 3417 	inc	bc
-                           3418 ;src/includes/world.h:104: if(shift>0 && shift<WIDTH*HEIGHT)
-   4FAD AF            [ 4] 3419 	xor	a, a
-   4FAE B9            [ 4] 3420 	cp	a, c
-   4FAF 98            [ 4] 3421 	sbc	a, b
-   4FB0 E2 B5 4F      [10] 3422 	jp	PO, 00182$
-   4FB3 EE 80         [ 7] 3423 	xor	a, #0x80
-   4FB5                    3424 00182$:
-   4FB5 F2 D9 4F      [10] 3425 	jp	P,00119$
-   4FB8 78            [ 4] 3426 	ld	a,b
-   4FB9 EE 80         [ 7] 3427 	xor	a, #0x80
-   4FBB D6 8F         [ 7] 3428 	sub	a, #0x8F
-   4FBD 30 1A         [12] 3429 	jr	NC,00119$
-                           3430 ;src/includes/world.h:105: p_world[shift] = (u8)cpct_getRandomUniform_u8_f(2)%3+2;
-   4FBF 21 DF 60      [10] 3431 	ld	hl,#_p_world
-   4FC2 09            [11] 3432 	add	hl,bc
-   4FC3 E5            [11] 3433 	push	hl
-   4FC4 2E 02         [ 7] 3434 	ld	l,#0x02
-   4FC6 CD F4 5E      [17] 3435 	call	_cpct_getRandomUniform_u8_f
-   4FC9 45            [ 4] 3436 	ld	b,l
-   4FCA 3E 03         [ 7] 3437 	ld	a,#0x03
-   4FCC F5            [11] 3438 	push	af
-   4FCD 33            [ 6] 3439 	inc	sp
-   4FCE C5            [11] 3440 	push	bc
-   4FCF 33            [ 6] 3441 	inc	sp
-   4FD0 CD 12 5E      [17] 3442 	call	__moduchar
-   4FD3 F1            [10] 3443 	pop	af
-   4FD4 7D            [ 4] 3444 	ld	a,l
-   4FD5 D1            [10] 3445 	pop	de
-   4FD6 C6 02         [ 7] 3446 	add	a, #0x02
-   4FD8 12            [ 7] 3447 	ld	(de),a
-   4FD9                    3448 00119$:
-                           3449 ;src/includes/world.h:97: for(ix=0; ix<NBURBAN; ix++)
-   4FD9 DD 34 FC      [23] 3450 	inc	-4 (ix)
-   4FDC 20 03         [12] 3451 	jr	NZ,00183$
-   4FDE DD 34 FD      [23] 3452 	inc	-3 (ix)
-   4FE1                    3453 00183$:
-   4FE1 DD 7E FC      [19] 3454 	ld	a,-4 (ix)
-   4FE4 D6 1E         [ 7] 3455 	sub	a, #0x1E
-   4FE6 DD 7E FD      [19] 3456 	ld	a,-3 (ix)
-   4FE9 17            [ 4] 3457 	rla
-   4FEA 3F            [ 4] 3458 	ccf
-   4FEB 1F            [ 4] 3459 	rra
-   4FEC DE 80         [ 7] 3460 	sbc	a, #0x80
-   4FEE 38 8E         [12] 3461 	jr	C,00118$
-                           3462 ;src/includes/world.h:110: cpct_setRandomSeedUniform_u8(3);
-   4FF0 2E 03         [ 7] 3463 	ld	l,#0x03
-   4FF2 CD 18 5D      [17] 3464 	call	_cpct_setRandomSeedUniform_u8
-                           3465 ;src/includes/world.h:112: for(ix=0; ix<NBLIVESTOCK; ix++)
-   4FF5 11 00 00      [10] 3466 	ld	de,#0x0000
-   4FF8                    3467 00120$:
-                           3468 ;src/includes/world.h:114: iy = cpct_getRandomUniform_u8_f(3)*15; // (WIDTH*HEIGHT)/255;
-   4FF8 D5            [11] 3469 	push	de
-   4FF9 2E 03         [ 7] 3470 	ld	l,#0x03
-   4FFB CD F4 5E      [17] 3471 	call	_cpct_getRandomUniform_u8_f
-   4FFE D1            [10] 3472 	pop	de
-   4FFF 4D            [ 4] 3473 	ld	c,l
-   5000 06 00         [ 7] 3474 	ld	b,#0x00
-   5002 69            [ 4] 3475 	ld	l, c
-   5003 60            [ 4] 3476 	ld	h, b
-   5004 29            [11] 3477 	add	hl, hl
-   5005 09            [11] 3478 	add	hl, bc
-   5006 29            [11] 3479 	add	hl, hl
-   5007 09            [11] 3480 	add	hl, bc
-   5008 29            [11] 3481 	add	hl, hl
-   5009 09            [11] 3482 	add	hl, bc
-   500A DD 75 FE      [19] 3483 	ld	-2 (ix),l
-   500D DD 74 FF      [19] 3484 	ld	-1 (ix),h
-                           3485 ;src/includes/world.h:116: shift = cpct_getRandomUniform_u8_f(3)%10;
-   5010 D5            [11] 3486 	push	de
-   5011 2E 03         [ 7] 3487 	ld	l,#0x03
-   5013 CD F4 5E      [17] 3488 	call	_cpct_getRandomUniform_u8_f
-   5016 45            [ 4] 3489 	ld	b,l
-   5017 3E 0A         [ 7] 3490 	ld	a,#0x0A
-   5019 F5            [11] 3491 	push	af
-   501A 33            [ 6] 3492 	inc	sp
-   501B C5            [11] 3493 	push	bc
-   501C 33            [ 6] 3494 	inc	sp
-   501D CD 12 5E      [17] 3495 	call	__moduchar
-   5020 F1            [10] 3496 	pop	af
-   5021 D1            [10] 3497 	pop	de
-   5022 26 00         [ 7] 3498 	ld	h,#0x00
-                           3499 ;src/includes/world.h:117: shift=iy-shift+5;
-   5024 DD 7E FE      [19] 3500 	ld	a,-2 (ix)
-   5027 95            [ 4] 3501 	sub	a, l
-   5028 6F            [ 4] 3502 	ld	l,a
-   5029 DD 7E FF      [19] 3503 	ld	a,-1 (ix)
-   502C 9C            [ 4] 3504 	sbc	a, h
-   502D 67            [ 4] 3505 	ld	h,a
-   502E 01 05 00      [10] 3506 	ld	bc,#0x0005
-   5031 09            [11] 3507 	add	hl,bc
-                           3508 ;src/includes/world.h:119: if(shift>0 && shift<WIDTH*HEIGHT)
-   5032 AF            [ 4] 3509 	xor	a, a
-   5033 BD            [ 4] 3510 	cp	a, l
-   5034 9C            [ 4] 3511 	sbc	a, h
-   5035 E2 3A 50      [10] 3512 	jp	PO, 00184$
-   5038 EE 80         [ 7] 3513 	xor	a, #0x80
-   503A                    3514 00184$:
-   503A F2 4A 50      [10] 3515 	jp	P,00121$
-   503D 7C            [ 4] 3516 	ld	a,h
-   503E EE 80         [ 7] 3517 	xor	a, #0x80
-   5040 D6 8F         [ 7] 3518 	sub	a, #0x8F
-   5042 30 06         [12] 3519 	jr	NC,00121$
-                           3520 ;src/includes/world.h:120: p_world[shift] = LIVESTOCK;
-   5044 01 DF 60      [10] 3521 	ld	bc,#_p_world
-   5047 09            [11] 3522 	add	hl,bc
-   5048 36 09         [10] 3523 	ld	(hl),#0x09
-   504A                    3524 00121$:
-                           3525 ;src/includes/world.h:112: for(ix=0; ix<NBLIVESTOCK; ix++)
-   504A 13            [ 6] 3526 	inc	de
-   504B 7B            [ 4] 3527 	ld	a,e
-   504C D6 13         [ 7] 3528 	sub	a, #0x13
-   504E 7A            [ 4] 3529 	ld	a,d
-   504F 17            [ 4] 3530 	rla
-   5050 3F            [ 4] 3531 	ccf
-   5051 1F            [ 4] 3532 	rra
-   5052 DE 80         [ 7] 3533 	sbc	a, #0x80
-   5054 38 A2         [12] 3534 	jr	C,00120$
-   5056 DD F9         [10] 3535 	ld	sp, ix
-   5058 DD E1         [14] 3536 	pop	ix
-   505A C9            [10] 3537 	ret
-                           3538 ;src/includes/world.h:124: void drawTile(u8 x_, u8 y_, u8 ix, u8 iy)
-                           3539 ;	---------------------------------
-                           3540 ; Function drawTile
-                           3541 ; ---------------------------------
-   505B                    3542 _drawTile::
-   505B DD E5         [15] 3543 	push	ix
-   505D DD 21 00 00   [14] 3544 	ld	ix,#0
-   5061 DD 39         [15] 3545 	add	ix,sp
-                           3546 ;src/includes/world.h:127: int adress = (y_+iy)*WIDTH+x_+ix;
-   5063 DD 6E 05      [19] 3547 	ld	l,5 (ix)
-   5066 26 00         [ 7] 3548 	ld	h,#0x00
-   5068 DD 5E 07      [19] 3549 	ld	e,7 (ix)
-   506B 16 00         [ 7] 3550 	ld	d,#0x00
-   506D 19            [11] 3551 	add	hl,de
-   506E 4D            [ 4] 3552 	ld	c, l
-   506F 44            [ 4] 3553 	ld	b, h
-   5070 29            [11] 3554 	add	hl, hl
-   5071 29            [11] 3555 	add	hl, hl
-   5072 09            [11] 3556 	add	hl, bc
-   5073 29            [11] 3557 	add	hl, hl
-   5074 29            [11] 3558 	add	hl, hl
-   5075 29            [11] 3559 	add	hl, hl
-   5076 29            [11] 3560 	add	hl, hl
-   5077 DD 5E 04      [19] 3561 	ld	e,4 (ix)
-   507A 16 00         [ 7] 3562 	ld	d,#0x00
-   507C 19            [11] 3563 	add	hl,de
-   507D DD 5E 06      [19] 3564 	ld	e,6 (ix)
-   5080 16 00         [ 7] 3565 	ld	d,#0x00
-   5082 19            [11] 3566 	add	hl,de
-   5083 5D            [ 4] 3567 	ld	e, l
-   5084 54            [ 4] 3568 	ld	d, h
-                           3569 ;src/includes/world.h:129: p_video = cpct_getScreenPtr(SCR_VMEM, ix*TILESIZE_W, iy*TILESIZE_H);
-   5085 DD 7E 07      [19] 3570 	ld	a,7 (ix)
-   5088 07            [ 4] 3571 	rlca
-   5089 07            [ 4] 3572 	rlca
-   508A 07            [ 4] 3573 	rlca
-   508B 07            [ 4] 3574 	rlca
-   508C E6 F0         [ 7] 3575 	and	a,#0xF0
-   508E 67            [ 4] 3576 	ld	h,a
-   508F DD 7E 06      [19] 3577 	ld	a,6 (ix)
-   5092 87            [ 4] 3578 	add	a, a
-   5093 87            [ 4] 3579 	add	a, a
-   5094 D5            [11] 3580 	push	de
-   5095 E5            [11] 3581 	push	hl
-   5096 33            [ 6] 3582 	inc	sp
-   5097 F5            [11] 3583 	push	af
-   5098 33            [ 6] 3584 	inc	sp
-   5099 21 00 C0      [10] 3585 	ld	hl,#0xC000
-   509C E5            [11] 3586 	push	hl
-   509D CD 32 60      [17] 3587 	call	_cpct_getScreenPtr
-   50A0 D1            [10] 3588 	pop	de
-   50A1 4D            [ 4] 3589 	ld	c, l
-   50A2 44            [ 4] 3590 	ld	b, h
-                           3591 ;src/includes/world.h:131: switch(p_world[adress])
-   50A3 21 DF 60      [10] 3592 	ld	hl,#_p_world
-   50A6 19            [11] 3593 	add	hl,de
-   50A7 5E            [ 7] 3594 	ld	e,(hl)
-   50A8 3E 19         [ 7] 3595 	ld	a,#0x19
-   50AA 93            [ 4] 3596 	sub	a, e
-   50AB DA 80 52      [10] 3597 	jp	C,00128$
-   50AE 16 00         [ 7] 3598 	ld	d,#0x00
-   50B0 21 B7 50      [10] 3599 	ld	hl,#00134$
-   50B3 19            [11] 3600 	add	hl,de
-   50B4 19            [11] 3601 	add	hl,de
-   50B5 19            [11] 3602 	add	hl,de
-   50B6 E9            [ 4] 3603 	jp	(hl)
-   50B7                    3604 00134$:
-   50B7 C3 05 51      [10] 3605 	jp	00101$
-   50BA C3 14 51      [10] 3606 	jp	00102$
-   50BD C3 23 51      [10] 3607 	jp	00103$
-   50C0 C3 32 51      [10] 3608 	jp	00104$
-   50C3 C3 41 51      [10] 3609 	jp	00105$
-   50C6 C3 50 51      [10] 3610 	jp	00106$
-   50C9 C3 5F 51      [10] 3611 	jp	00107$
-   50CC C3 6E 51      [10] 3612 	jp	00108$
-   50CF C3 7D 51      [10] 3613 	jp	00109$
-   50D2 C3 8C 51      [10] 3614 	jp	00110$
-   50D5 C3 9B 51      [10] 3615 	jp	00111$
-   50D8 C3 AA 51      [10] 3616 	jp	00112$
-   50DB C3 B9 51      [10] 3617 	jp	00113$
-   50DE C3 C8 51      [10] 3618 	jp	00114$
-   50E1 C3 D7 51      [10] 3619 	jp	00115$
-   50E4 C3 E6 51      [10] 3620 	jp	00116$
-   50E7 C3 F5 51      [10] 3621 	jp	00117$
-   50EA C3 04 52      [10] 3622 	jp	00118$
-   50ED C3 12 52      [10] 3623 	jp	00119$
-   50F0 C3 20 52      [10] 3624 	jp	00120$
-   50F3 C3 2E 52      [10] 3625 	jp	00121$
-   50F6 C3 3C 52      [10] 3626 	jp	00122$
-   50F9 C3 4A 52      [10] 3627 	jp	00123$
-   50FC C3 58 52      [10] 3628 	jp	00124$
-   50FF C3 66 52      [10] 3629 	jp	00125$
-   5102 C3 74 52      [10] 3630 	jp	00126$
-                           3631 ;src/includes/world.h:133: case GRASS1:
-   5105                    3632 00101$:
-                           3633 ;src/includes/world.h:134: cpct_drawSprite(grass1, p_video, TILESIZE_W, TILESIZE_H);
-   5105 11 29 40      [10] 3634 	ld	de,#_grass1
-   5108 21 04 10      [10] 3635 	ld	hl,#0x1004
-   510B E5            [11] 3636 	push	hl
-   510C C5            [11] 3637 	push	bc
-   510D D5            [11] 3638 	push	de
-   510E CD 6D 5D      [17] 3639 	call	_cpct_drawSprite
-                           3640 ;src/includes/world.h:135: break;
-   5111 C3 80 52      [10] 3641 	jp	00128$
-                           3642 ;src/includes/world.h:136: case GRASS2:
-   5114                    3643 00102$:
-                           3644 ;src/includes/world.h:137: cpct_drawSprite(grass2, p_video, TILESIZE_W, TILESIZE_H);
-   5114 11 69 40      [10] 3645 	ld	de,#_grass2
-   5117 21 04 10      [10] 3646 	ld	hl,#0x1004
-   511A E5            [11] 3647 	push	hl
-   511B C5            [11] 3648 	push	bc
-   511C D5            [11] 3649 	push	de
-   511D CD 6D 5D      [17] 3650 	call	_cpct_drawSprite
-                           3651 ;src/includes/world.h:138: break;
-   5120 C3 80 52      [10] 3652 	jp	00128$
-                           3653 ;src/includes/world.h:139: case DWELLINGS1:
-   5123                    3654 00103$:
-                           3655 ;src/includes/world.h:140: cpct_drawSprite(dwellings1, p_video, TILESIZE_W, TILESIZE_H);
-   5123 11 E9 40      [10] 3656 	ld	de,#_dwellings1
-   5126 21 04 10      [10] 3657 	ld	hl,#0x1004
-   5129 E5            [11] 3658 	push	hl
-   512A C5            [11] 3659 	push	bc
-   512B D5            [11] 3660 	push	de
-   512C CD 6D 5D      [17] 3661 	call	_cpct_drawSprite
-                           3662 ;src/includes/world.h:141: break;
-   512F C3 80 52      [10] 3663 	jp	00128$
-                           3664 ;src/includes/world.h:142: case DWELLINGS2:
-   5132                    3665 00104$:
-                           3666 ;src/includes/world.h:143: cpct_drawSprite(dwellings2, p_video, TILESIZE_W, TILESIZE_H);
-   5132 11 29 41      [10] 3667 	ld	de,#_dwellings2
-   5135 21 04 10      [10] 3668 	ld	hl,#0x1004
-   5138 E5            [11] 3669 	push	hl
-   5139 C5            [11] 3670 	push	bc
-   513A D5            [11] 3671 	push	de
-   513B CD 6D 5D      [17] 3672 	call	_cpct_drawSprite
-                           3673 ;src/includes/world.h:144: break;
-   513E C3 80 52      [10] 3674 	jp	00128$
-                           3675 ;src/includes/world.h:145: case DWELLINGS3:
-   5141                    3676 00105$:
-                           3677 ;src/includes/world.h:146: cpct_drawSprite(dwellings3, p_video, TILESIZE_W, TILESIZE_H);
-   5141 11 69 41      [10] 3678 	ld	de,#_dwellings3
-   5144 21 04 10      [10] 3679 	ld	hl,#0x1004
-   5147 E5            [11] 3680 	push	hl
-   5148 C5            [11] 3681 	push	bc
-   5149 D5            [11] 3682 	push	de
-   514A CD 6D 5D      [17] 3683 	call	_cpct_drawSprite
-                           3684 ;src/includes/world.h:147: break;
-   514D C3 80 52      [10] 3685 	jp	00128$
-                           3686 ;src/includes/world.h:148: case FARM1:
-   5150                    3687 00106$:
-                           3688 ;src/includes/world.h:149: cpct_drawSprite(farm1, p_video, TILESIZE_W, TILESIZE_H);
-   5150 11 E9 41      [10] 3689 	ld	de,#_farm1
-   5153 21 04 10      [10] 3690 	ld	hl,#0x1004
-   5156 E5            [11] 3691 	push	hl
-   5157 C5            [11] 3692 	push	bc
-   5158 D5            [11] 3693 	push	de
-   5159 CD 6D 5D      [17] 3694 	call	_cpct_drawSprite
-                           3695 ;src/includes/world.h:150: break;
-   515C C3 80 52      [10] 3696 	jp	00128$
-                           3697 ;src/includes/world.h:151: case FARM2:
-   515F                    3698 00107$:
-                           3699 ;src/includes/world.h:152: cpct_drawSprite(farm2, p_video, TILESIZE_W, TILESIZE_H);
-   515F 11 29 42      [10] 3700 	ld	de,#_farm2
-   5162 21 04 10      [10] 3701 	ld	hl,#0x1004
-   5165 E5            [11] 3702 	push	hl
-   5166 C5            [11] 3703 	push	bc
-   5167 D5            [11] 3704 	push	de
-   5168 CD 6D 5D      [17] 3705 	call	_cpct_drawSprite
-                           3706 ;src/includes/world.h:153: break;
-   516B C3 80 52      [10] 3707 	jp	00128$
-                           3708 ;src/includes/world.h:154: case WATER:
-   516E                    3709 00108$:
-                           3710 ;src/includes/world.h:155: cpct_drawSprite(water, p_video, TILESIZE_W, TILESIZE_H);
-   516E 11 A9 41      [10] 3711 	ld	de,#_water
-   5171 21 04 10      [10] 3712 	ld	hl,#0x1004
-   5174 E5            [11] 3713 	push	hl
-   5175 C5            [11] 3714 	push	bc
-   5176 D5            [11] 3715 	push	de
-   5177 CD 6D 5D      [17] 3716 	call	_cpct_drawSprite
-                           3717 ;src/includes/world.h:156: break;
-   517A C3 80 52      [10] 3718 	jp	00128$
-                           3719 ;src/includes/world.h:157: case FOREST:
-   517D                    3720 00109$:
-                           3721 ;src/includes/world.h:158: cpct_drawSprite(forest, p_video, TILESIZE_W, TILESIZE_H);
-   517D 11 A9 40      [10] 3722 	ld	de,#_forest
-   5180 21 04 10      [10] 3723 	ld	hl,#0x1004
-   5183 E5            [11] 3724 	push	hl
-   5184 C5            [11] 3725 	push	bc
-   5185 D5            [11] 3726 	push	de
-   5186 CD 6D 5D      [17] 3727 	call	_cpct_drawSprite
-                           3728 ;src/includes/world.h:159: break;
-   5189 C3 80 52      [10] 3729 	jp	00128$
-                           3730 ;src/includes/world.h:160: case LIVESTOCK:
-   518C                    3731 00110$:
-                           3732 ;src/includes/world.h:161: cpct_drawSprite(livestock, p_video, TILESIZE_W, TILESIZE_H);
-   518C 11 69 42      [10] 3733 	ld	de,#_livestock
-   518F 21 04 10      [10] 3734 	ld	hl,#0x1004
-   5192 E5            [11] 3735 	push	hl
-   5193 C5            [11] 3736 	push	bc
-   5194 D5            [11] 3737 	push	de
-   5195 CD 6D 5D      [17] 3738 	call	_cpct_drawSprite
-                           3739 ;src/includes/world.h:162: break;
-   5198 C3 80 52      [10] 3740 	jp	00128$
-                           3741 ;src/includes/world.h:163: case SSNS:
-   519B                    3742 00111$:
-                           3743 ;src/includes/world.h:164: cpct_drawSprite(station_small_ns, p_video, TILESIZE_W, TILESIZE_H);
-   519B 11 A9 42      [10] 3744 	ld	de,#_station_small_ns
-   519E 21 04 10      [10] 3745 	ld	hl,#0x1004
-   51A1 E5            [11] 3746 	push	hl
-   51A2 C5            [11] 3747 	push	bc
-   51A3 D5            [11] 3748 	push	de
-   51A4 CD 6D 5D      [17] 3749 	call	_cpct_drawSprite
-                           3750 ;src/includes/world.h:165: break;
-   51A7 C3 80 52      [10] 3751 	jp	00128$
-                           3752 ;src/includes/world.h:166: case SSEW:
-   51AA                    3753 00112$:
-                           3754 ;src/includes/world.h:167: cpct_drawSprite(station_small_ew, p_video, TILESIZE_W, TILESIZE_H);
-   51AA 11 E9 42      [10] 3755 	ld	de,#_station_small_ew
-   51AD 21 04 10      [10] 3756 	ld	hl,#0x1004
-   51B0 E5            [11] 3757 	push	hl
-   51B1 C5            [11] 3758 	push	bc
-   51B2 D5            [11] 3759 	push	de
-   51B3 CD 6D 5D      [17] 3760 	call	_cpct_drawSprite
-                           3761 ;src/includes/world.h:168: break;
-   51B6 C3 80 52      [10] 3762 	jp	00128$
-                           3763 ;src/includes/world.h:169: case SMNS:
-   51B9                    3764 00113$:
-                           3765 ;src/includes/world.h:170: cpct_drawSprite(station_medium_ns, p_video, TILESIZE_W, TILESIZE_H);
-   51B9 11 29 43      [10] 3766 	ld	de,#_station_medium_ns
-   51BC 21 04 10      [10] 3767 	ld	hl,#0x1004
-   51BF E5            [11] 3768 	push	hl
-   51C0 C5            [11] 3769 	push	bc
-   51C1 D5            [11] 3770 	push	de
-   51C2 CD 6D 5D      [17] 3771 	call	_cpct_drawSprite
-                           3772 ;src/includes/world.h:171: break;
-   51C5 C3 80 52      [10] 3773 	jp	00128$
-                           3774 ;src/includes/world.h:172: case SMEW:
-   51C8                    3775 00114$:
-                           3776 ;src/includes/world.h:173: cpct_drawSprite(station_medium_ew, p_video, TILESIZE_W, TILESIZE_H);
-   51C8 11 69 43      [10] 3777 	ld	de,#_station_medium_ew
-   51CB 21 04 10      [10] 3778 	ld	hl,#0x1004
-   51CE E5            [11] 3779 	push	hl
-   51CF C5            [11] 3780 	push	bc
-   51D0 D5            [11] 3781 	push	de
-   51D1 CD 6D 5D      [17] 3782 	call	_cpct_drawSprite
-                           3783 ;src/includes/world.h:174: break;
-   51D4 C3 80 52      [10] 3784 	jp	00128$
-                           3785 ;src/includes/world.h:175: case SLNS:
-   51D7                    3786 00115$:
-                           3787 ;src/includes/world.h:176: cpct_drawSprite(station_large_ns, p_video, TILESIZE_W, TILESIZE_H);
-   51D7 11 A9 43      [10] 3788 	ld	de,#_station_large_ns
-   51DA 21 04 10      [10] 3789 	ld	hl,#0x1004
-   51DD E5            [11] 3790 	push	hl
-   51DE C5            [11] 3791 	push	bc
-   51DF D5            [11] 3792 	push	de
-   51E0 CD 6D 5D      [17] 3793 	call	_cpct_drawSprite
-                           3794 ;src/includes/world.h:177: break;
-   51E3 C3 80 52      [10] 3795 	jp	00128$
-                           3796 ;src/includes/world.h:178: case SLEW:
-   51E6                    3797 00116$:
-                           3798 ;src/includes/world.h:179: cpct_drawSprite(station_large_ew, p_video, TILESIZE_W, TILESIZE_H);
-   51E6 11 E9 43      [10] 3799 	ld	de,#_station_large_ew
-   51E9 21 04 10      [10] 3800 	ld	hl,#0x1004
-   51EC E5            [11] 3801 	push	hl
-   51ED C5            [11] 3802 	push	bc
-   51EE D5            [11] 3803 	push	de
-   51EF CD 6D 5D      [17] 3804 	call	_cpct_drawSprite
-                           3805 ;src/includes/world.h:180: break;
-   51F2 C3 80 52      [10] 3806 	jp	00128$
-                           3807 ;src/includes/world.h:181: case REW:
-   51F5                    3808 00117$:
-                           3809 ;src/includes/world.h:182: cpct_drawSprite(rail_ew, p_video, TILESIZE_W, TILESIZE_H);	
-   51F5 11 29 44      [10] 3810 	ld	de,#_rail_ew
-   51F8 21 04 10      [10] 3811 	ld	hl,#0x1004
-   51FB E5            [11] 3812 	push	hl
-   51FC C5            [11] 3813 	push	bc
-   51FD D5            [11] 3814 	push	de
-   51FE CD 6D 5D      [17] 3815 	call	_cpct_drawSprite
-                           3816 ;src/includes/world.h:183: break;
-   5201 C3 80 52      [10] 3817 	jp	00128$
-                           3818 ;src/includes/world.h:184: case RNS:
-   5204                    3819 00118$:
-                           3820 ;src/includes/world.h:185: cpct_drawSprite(rail_ns, p_video, TILESIZE_W, TILESIZE_H);	
-   5204 11 69 44      [10] 3821 	ld	de,#_rail_ns
-   5207 21 04 10      [10] 3822 	ld	hl,#0x1004
-   520A E5            [11] 3823 	push	hl
-   520B C5            [11] 3824 	push	bc
-   520C D5            [11] 3825 	push	de
-   520D CD 6D 5D      [17] 3826 	call	_cpct_drawSprite
-                           3827 ;src/includes/world.h:186: break;
-   5210 18 6E         [12] 3828 	jr	00128$
-                           3829 ;src/includes/world.h:187: case REN:
-   5212                    3830 00119$:
-                           3831 ;src/includes/world.h:188: cpct_drawSprite(rail_en, p_video, TILESIZE_W, TILESIZE_H);	
-   5212 11 A9 44      [10] 3832 	ld	de,#_rail_en
-   5215 21 04 10      [10] 3833 	ld	hl,#0x1004
-   5218 E5            [11] 3834 	push	hl
-   5219 C5            [11] 3835 	push	bc
-   521A D5            [11] 3836 	push	de
-   521B CD 6D 5D      [17] 3837 	call	_cpct_drawSprite
-                           3838 ;src/includes/world.h:189: break;
-   521E 18 60         [12] 3839 	jr	00128$
-                           3840 ;src/includes/world.h:190: case RES:
-   5220                    3841 00120$:
-                           3842 ;src/includes/world.h:191: cpct_drawSprite(rail_es, p_video, TILESIZE_W, TILESIZE_H);	
-   5220 11 E9 44      [10] 3843 	ld	de,#_rail_es
-   5223 21 04 10      [10] 3844 	ld	hl,#0x1004
-   5226 E5            [11] 3845 	push	hl
-   5227 C5            [11] 3846 	push	bc
-   5228 D5            [11] 3847 	push	de
-   5229 CD 6D 5D      [17] 3848 	call	_cpct_drawSprite
-                           3849 ;src/includes/world.h:192: break;
-   522C 18 52         [12] 3850 	jr	00128$
-                           3851 ;src/includes/world.h:193: case RWN:
-   522E                    3852 00121$:
-                           3853 ;src/includes/world.h:194: cpct_drawSprite(rail_wn, p_video, TILESIZE_W, TILESIZE_H);	
-   522E 11 29 45      [10] 3854 	ld	de,#_rail_wn
-   5231 21 04 10      [10] 3855 	ld	hl,#0x1004
-   5234 E5            [11] 3856 	push	hl
-   5235 C5            [11] 3857 	push	bc
-   5236 D5            [11] 3858 	push	de
-   5237 CD 6D 5D      [17] 3859 	call	_cpct_drawSprite
-                           3860 ;src/includes/world.h:195: break;
-   523A 18 44         [12] 3861 	jr	00128$
-                           3862 ;src/includes/world.h:196: case RWS:
-   523C                    3863 00122$:
-                           3864 ;src/includes/world.h:197: cpct_drawSprite(rail_ws, p_video, TILESIZE_W, TILESIZE_H);	
-   523C 11 69 45      [10] 3865 	ld	de,#_rail_ws
-   523F 21 04 10      [10] 3866 	ld	hl,#0x1004
-   5242 E5            [11] 3867 	push	hl
-   5243 C5            [11] 3868 	push	bc
-   5244 D5            [11] 3869 	push	de
-   5245 CD 6D 5D      [17] 3870 	call	_cpct_drawSprite
-                           3871 ;src/includes/world.h:198: break;
-   5248 18 36         [12] 3872 	jr	00128$
-                           3873 ;src/includes/world.h:199: case REWN:
-   524A                    3874 00123$:
-                           3875 ;src/includes/world.h:200: cpct_drawSprite(rail_ew_n, p_video, TILESIZE_W, TILESIZE_H);	
-   524A 11 A9 45      [10] 3876 	ld	de,#_rail_ew_n
-   524D 21 04 10      [10] 3877 	ld	hl,#0x1004
-   5250 E5            [11] 3878 	push	hl
-   5251 C5            [11] 3879 	push	bc
-   5252 D5            [11] 3880 	push	de
-   5253 CD 6D 5D      [17] 3881 	call	_cpct_drawSprite
-                           3882 ;src/includes/world.h:201: break;
-   5256 18 28         [12] 3883 	jr	00128$
-                           3884 ;src/includes/world.h:202: case REWS:
-   5258                    3885 00124$:
-                           3886 ;src/includes/world.h:203: cpct_drawSprite(rail_ew_s, p_video, TILESIZE_W, TILESIZE_H);	
-   5258 11 E9 45      [10] 3887 	ld	de,#_rail_ew_s
-   525B 21 04 10      [10] 3888 	ld	hl,#0x1004
-   525E E5            [11] 3889 	push	hl
-   525F C5            [11] 3890 	push	bc
-   5260 D5            [11] 3891 	push	de
-   5261 CD 6D 5D      [17] 3892 	call	_cpct_drawSprite
-                           3893 ;src/includes/world.h:204: break;
-   5264 18 1A         [12] 3894 	jr	00128$
-                           3895 ;src/includes/world.h:205: case RNSE:
-   5266                    3896 00125$:
-                           3897 ;src/includes/world.h:206: cpct_drawSprite(rail_ns_e, p_video, TILESIZE_W, TILESIZE_H);	
-   5266 11 69 46      [10] 3898 	ld	de,#_rail_ns_e
-   5269 21 04 10      [10] 3899 	ld	hl,#0x1004
-   526C E5            [11] 3900 	push	hl
-   526D C5            [11] 3901 	push	bc
-   526E D5            [11] 3902 	push	de
-   526F CD 6D 5D      [17] 3903 	call	_cpct_drawSprite
-                           3904 ;src/includes/world.h:207: break;
-   5272 18 0C         [12] 3905 	jr	00128$
-                           3906 ;src/includes/world.h:208: case RNSW:
-   5274                    3907 00126$:
-                           3908 ;src/includes/world.h:209: cpct_drawSprite(rail_ns_w, p_video, TILESIZE_W, TILESIZE_H);
-   5274 11 29 46      [10] 3909 	ld	de,#_rail_ns_w
-   5277 21 04 10      [10] 3910 	ld	hl,#0x1004
-   527A E5            [11] 3911 	push	hl
-   527B C5            [11] 3912 	push	bc
-   527C D5            [11] 3913 	push	de
-   527D CD 6D 5D      [17] 3914 	call	_cpct_drawSprite
-                           3915 ;src/includes/world.h:211: }
-   5280                    3916 00128$:
-   5280 DD E1         [14] 3917 	pop	ix
-   5282 C9            [10] 3918 	ret
-                           3919 ;src/includes/world.h:214: void drawWorld(u8 x_, u8 y_)
-                           3920 ;	---------------------------------
-                           3921 ; Function drawWorld
-                           3922 ; ---------------------------------
-   5283                    3923 _drawWorld::
-   5283 DD E5         [15] 3924 	push	ix
-   5285 DD 21 00 00   [14] 3925 	ld	ix,#0
-   5289 DD 39         [15] 3926 	add	ix,sp
-   528B 3B            [ 6] 3927 	dec	sp
-                           3928 ;src/includes/world.h:222: for(iy=0; iy<NBTILE_H;iy++)
-   528C 16 00         [ 7] 3929 	ld	d,#0x00
-                           3930 ;src/includes/world.h:224: for(ix=0; ix<NBTILE_W;ix++)
-   528E                    3931 00109$:
-   528E 1E 00         [ 7] 3932 	ld	e,#0x00
-   5290                    3933 00103$:
-                           3934 ;src/includes/world.h:226: drawTile(x_, y_, ix, iy);
-   5290 D5            [11] 3935 	push	de
-   5291 D5            [11] 3936 	push	de
-   5292 DD 66 05      [19] 3937 	ld	h,5 (ix)
-   5295 DD 6E 04      [19] 3938 	ld	l,4 (ix)
-   5298 E5            [11] 3939 	push	hl
-   5299 CD 5B 50      [17] 3940 	call	_drawTile
-   529C F1            [10] 3941 	pop	af
-   529D F1            [10] 3942 	pop	af
-   529E D1            [10] 3943 	pop	de
-                           3944 ;src/includes/world.h:224: for(ix=0; ix<NBTILE_W;ix++)
-   529F 1C            [ 4] 3945 	inc	e
-   52A0 7B            [ 4] 3946 	ld	a,e
-   52A1 D6 14         [ 7] 3947 	sub	a, #0x14
-   52A3 38 EB         [12] 3948 	jr	C,00103$
-                           3949 ;src/includes/world.h:222: for(iy=0; iy<NBTILE_H;iy++)
-   52A5 14            [ 4] 3950 	inc	d
-   52A6 7A            [ 4] 3951 	ld	a,d
-   52A7 D6 0C         [ 7] 3952 	sub	a, #0x0C
-   52A9 38 E3         [12] 3953 	jr	C,00109$
-                           3954 ;src/includes/world.h:232: scrollx = x_* (WIDTH-TILESIZE_W)/(WIDTH-NBTILE_W);
-   52AB DD 4E 04      [19] 3955 	ld	c,4 (ix)
-   52AE 06 00         [ 7] 3956 	ld	b,#0x00
-   52B0 69            [ 4] 3957 	ld	l, c
-   52B1 60            [ 4] 3958 	ld	h, b
-   52B2 29            [11] 3959 	add	hl, hl
-   52B3 29            [11] 3960 	add	hl, hl
-   52B4 29            [11] 3961 	add	hl, hl
-   52B5 09            [11] 3962 	add	hl, bc
-   52B6 29            [11] 3963 	add	hl, hl
-   52B7 09            [11] 3964 	add	hl, bc
-   52B8 29            [11] 3965 	add	hl, hl
-   52B9 29            [11] 3966 	add	hl, hl
-   52BA 01 3C 00      [10] 3967 	ld	bc,#0x003C
-   52BD C5            [11] 3968 	push	bc
-   52BE E5            [11] 3969 	push	hl
-   52BF CD 83 60      [17] 3970 	call	__divsint
-   52C2 F1            [10] 3971 	pop	af
-   52C3 F1            [10] 3972 	pop	af
-   52C4 55            [ 4] 3973 	ld	d,l
-                           3974 ;src/includes/world.h:233: scrolly = y_* (HEIGHT*TILESIZE_W-TILESIZE_H)/(HEIGHT-NBTILE_H);
-   52C5 DD 4E 05      [19] 3975 	ld	c,5 (ix)
-   52C8 06 00         [ 7] 3976 	ld	b,#0x00
-   52CA 69            [ 4] 3977 	ld	l, c
-   52CB 60            [ 4] 3978 	ld	h, b
-   52CC 29            [11] 3979 	add	hl, hl
-   52CD 29            [11] 3980 	add	hl, hl
-   52CE 09            [11] 3981 	add	hl, bc
-   52CF 29            [11] 3982 	add	hl, hl
-   52D0 09            [11] 3983 	add	hl, bc
-   52D1 29            [11] 3984 	add	hl, hl
-   52D2 29            [11] 3985 	add	hl, hl
-   52D3 29            [11] 3986 	add	hl, hl
-   52D4 29            [11] 3987 	add	hl, hl
-   52D5 D5            [11] 3988 	push	de
-   52D6 01 24 00      [10] 3989 	ld	bc,#0x0024
-   52D9 C5            [11] 3990 	push	bc
-   52DA E5            [11] 3991 	push	hl
-   52DB CD 83 60      [17] 3992 	call	__divsint
-   52DE F1            [10] 3993 	pop	af
-   52DF F1            [10] 3994 	pop	af
-   52E0 D1            [10] 3995 	pop	de
-   52E1 DD 75 FF      [19] 3996 	ld	-1 (ix),l
-                           3997 ;src/includes/world.h:235: p_video = cpct_getScreenPtr(SCR_VMEM, scrollx, 0);
-   52E4 AF            [ 4] 3998 	xor	a, a
-   52E5 F5            [11] 3999 	push	af
-   52E6 33            [ 6] 4000 	inc	sp
-   52E7 D5            [11] 4001 	push	de
-   52E8 33            [ 6] 4002 	inc	sp
-   52E9 21 00 C0      [10] 4003 	ld	hl,#0xC000
-   52EC E5            [11] 4004 	push	hl
-   52ED CD 32 60      [17] 4005 	call	_cpct_getScreenPtr
-                           4006 ;src/includes/world.h:236: cpct_drawSolidBox(p_video, cpct_px2byteM1(0,0,0,0), 4, TILESIZE_W);
-   52F0 E5            [11] 4007 	push	hl
-   52F1 21 00 00      [10] 4008 	ld	hl,#0x0000
-   52F4 E5            [11] 4009 	push	hl
-   52F5 2E 00         [ 7] 4010 	ld	l, #0x00
-   52F7 E5            [11] 4011 	push	hl
-   52F8 CD 41 5F      [17] 4012 	call	_cpct_px2byteM1
-   52FB F1            [10] 4013 	pop	af
-   52FC F1            [10] 4014 	pop	af
-   52FD 45            [ 4] 4015 	ld	b,l
-   52FE D1            [10] 4016 	pop	de
-   52FF 21 04 04      [10] 4017 	ld	hl,#0x0404
-   5302 E5            [11] 4018 	push	hl
-   5303 C5            [11] 4019 	push	bc
-   5304 33            [ 6] 4020 	inc	sp
-   5305 D5            [11] 4021 	push	de
-   5306 CD 79 5F      [17] 4022 	call	_cpct_drawSolidBox
-   5309 F1            [10] 4023 	pop	af
-   530A F1            [10] 4024 	pop	af
-   530B 33            [ 6] 4025 	inc	sp
-                           4026 ;src/includes/world.h:238: p_video = cpct_getScreenPtr(SCR_VMEM, 0, scrolly);
-   530C DD 7E FF      [19] 4027 	ld	a,-1 (ix)
-   530F F5            [11] 4028 	push	af
-   5310 33            [ 6] 4029 	inc	sp
-   5311 AF            [ 4] 4030 	xor	a, a
-   5312 F5            [11] 4031 	push	af
-   5313 33            [ 6] 4032 	inc	sp
-   5314 21 00 C0      [10] 4033 	ld	hl,#0xC000
-   5317 E5            [11] 4034 	push	hl
-   5318 CD 32 60      [17] 4035 	call	_cpct_getScreenPtr
-                           4036 ;src/includes/world.h:239: cpct_drawSolidBox(p_video, cpct_px2byteM1(0,0,0,0), 1, TILESIZE_H);
-   531B E5            [11] 4037 	push	hl
-   531C 21 00 00      [10] 4038 	ld	hl,#0x0000
-   531F E5            [11] 4039 	push	hl
-   5320 2E 00         [ 7] 4040 	ld	l, #0x00
-   5322 E5            [11] 4041 	push	hl
-   5323 CD 41 5F      [17] 4042 	call	_cpct_px2byteM1
-   5326 F1            [10] 4043 	pop	af
-   5327 F1            [10] 4044 	pop	af
-   5328 45            [ 4] 4045 	ld	b,l
-   5329 D1            [10] 4046 	pop	de
-   532A 21 01 10      [10] 4047 	ld	hl,#0x1001
-   532D E5            [11] 4048 	push	hl
-   532E C5            [11] 4049 	push	bc
-   532F 33            [ 6] 4050 	inc	sp
-   5330 D5            [11] 4051 	push	de
-   5331 CD 79 5F      [17] 4052 	call	_cpct_drawSolidBox
-   5334 F1            [10] 4053 	pop	af
-   5335 F1            [10] 4054 	pop	af
-   5336 33            [ 6] 4055 	inc	sp
-   5337 33            [ 6] 4056 	inc	sp
-   5338 DD E1         [14] 4057 	pop	ix
-   533A C9            [10] 4058 	ret
-                           4059 ;src/includes/game.h:1: void windowInfoTile(u8 x, u8 y)
-                           4060 ;	---------------------------------
-                           4061 ; Function windowInfoTile
-                           4062 ; ---------------------------------
-   533B                    4063 _windowInfoTile::
-   533B DD E5         [15] 4064 	push	ix
-   533D DD 21 00 00   [14] 4065 	ld	ix,#0
-   5341 DD 39         [15] 4066 	add	ix,sp
-   5343 21 F8 FF      [10] 4067 	ld	hl,#-8
-   5346 39            [11] 4068 	add	hl,sp
-   5347 F9            [ 6] 4069 	ld	sp,hl
-                           4070 ;src/includes/game.h:5: switch(p_world[y*WIDTH+x])
-   5348 DD 4E 05      [19] 4071 	ld	c,5 (ix)
-   534B 06 00         [ 7] 4072 	ld	b,#0x00
-   534D 69            [ 4] 4073 	ld	l, c
-   534E 60            [ 4] 4074 	ld	h, b
-   534F 29            [11] 4075 	add	hl, hl
-   5350 29            [11] 4076 	add	hl, hl
-   5351 09            [11] 4077 	add	hl, bc
-   5352 29            [11] 4078 	add	hl, hl
-   5353 29            [11] 4079 	add	hl, hl
-   5354 29            [11] 4080 	add	hl, hl
-   5355 29            [11] 4081 	add	hl, hl
-   5356 DD 5E 04      [19] 4082 	ld	e,4 (ix)
-   5359 16 00         [ 7] 4083 	ld	d,#0x00
-   535B 19            [11] 4084 	add	hl,de
-   535C 11 DF 60      [10] 4085 	ld	de,#_p_world
-   535F 19            [11] 4086 	add	hl,de
-   5360 4E            [ 7] 4087 	ld	c,(hl)
-   5361 3E 09         [ 7] 4088 	ld	a,#0x09
-   5363 91            [ 4] 4089 	sub	a, c
-   5364 DA 95 54      [10] 4090 	jp	C,00111$
-   5367 59            [ 4] 4091 	ld	e,c
-   5368 16 00         [ 7] 4092 	ld	d,#0x00
-   536A 21 71 53      [10] 4093 	ld	hl,#00119$
-   536D 19            [11] 4094 	add	hl,de
-   536E 19            [11] 4095 	add	hl,de
-   536F 19            [11] 4096 	add	hl,de
-   5370 E9            [ 4] 4097 	jp	(hl)
-   5371                    4098 00119$:
-   5371 C3 8F 53      [10] 4099 	jp	00101$
-   5374 C3 8F 53      [10] 4100 	jp	00102$
-   5377 C3 BB 53      [10] 4101 	jp	00103$
-   537A C3 BB 53      [10] 4102 	jp	00104$
-   537D C3 BB 53      [10] 4103 	jp	00105$
-   5380 C3 E7 53      [10] 4104 	jp	00106$
-   5383 C3 E7 53      [10] 4105 	jp	00107$
-   5386 C3 13 54      [10] 4106 	jp	00108$
-   5389 C3 3F 54      [10] 4107 	jp	00109$
-   538C C3 6A 54      [10] 4108 	jp	00110$
-                           4109 ;src/includes/game.h:7: case GRASS1:
-   538F                    4110 00101$:
-                           4111 ;src/includes/game.h:8: case GRASS2:
-   538F                    4112 00102$:
-                           4113 ;src/includes/game.h:9: txtWindowInfoTile[0] = "Grassland";
-   538F 21 00 00      [10] 4114 	ld	hl,#0x0000
-   5392 39            [11] 4115 	add	hl,sp
-   5393 5D            [ 4] 4116 	ld	e,l
-   5394 54            [ 4] 4117 	ld	d,h
-   5395 36 D0         [10] 4118 	ld	(hl),#<(___str_2)
-   5397 23            [ 6] 4119 	inc	hl
-   5398 36 54         [10] 4120 	ld	(hl),#>(___str_2)
-                           4121 ;src/includes/game.h:10: txtWindowInfoTile[1] = "";
-   539A 6B            [ 4] 4122 	ld	l, e
-   539B 62            [ 4] 4123 	ld	h, d
-   539C 23            [ 6] 4124 	inc	hl
-   539D 23            [ 6] 4125 	inc	hl
-   539E 01 DA 54      [10] 4126 	ld	bc,#___str_3+0
-   53A1 71            [ 7] 4127 	ld	(hl),c
-   53A2 23            [ 6] 4128 	inc	hl
-   53A3 70            [ 7] 4129 	ld	(hl),b
-                           4130 ;src/includes/game.h:11: txtWindowInfoTile[2] = "Production: nothing";
-   53A4 21 04 00      [10] 4131 	ld	hl,#0x0004
-   53A7 19            [11] 4132 	add	hl,de
-   53A8 01 DB 54      [10] 4133 	ld	bc,#___str_4+0
-   53AB 71            [ 7] 4134 	ld	(hl),c
-   53AC 23            [ 6] 4135 	inc	hl
-   53AD 70            [ 7] 4136 	ld	(hl),b
-                           4137 ;src/includes/game.h:12: txtWindowInfoTile[3] = "Demand: nothing";
-   53AE 21 06 00      [10] 4138 	ld	hl,#0x0006
-   53B1 19            [11] 4139 	add	hl,de
-   53B2 11 EF 54      [10] 4140 	ld	de,#___str_5+0
-   53B5 73            [ 7] 4141 	ld	(hl),e
-   53B6 23            [ 6] 4142 	inc	hl
-   53B7 72            [ 7] 4143 	ld	(hl),d
-                           4144 ;src/includes/game.h:13: break;
-   53B8 C3 BE 54      [10] 4145 	jp	00112$
-                           4146 ;src/includes/game.h:14: case DWELLINGS1:
-   53BB                    4147 00103$:
-                           4148 ;src/includes/game.h:15: case DWELLINGS2:
-   53BB                    4149 00104$:
-                           4150 ;src/includes/game.h:16: case DWELLINGS3:
-   53BB                    4151 00105$:
-                           4152 ;src/includes/game.h:17: txtWindowInfoTile[0] = "City";
-   53BB 21 00 00      [10] 4153 	ld	hl,#0x0000
-   53BE 39            [11] 4154 	add	hl,sp
-   53BF 5D            [ 4] 4155 	ld	e,l
-   53C0 54            [ 4] 4156 	ld	d,h
-   53C1 36 FF         [10] 4157 	ld	(hl),#<(___str_6)
-   53C3 23            [ 6] 4158 	inc	hl
-   53C4 36 54         [10] 4159 	ld	(hl),#>(___str_6)
-                           4160 ;src/includes/game.h:18: txtWindowInfoTile[1] = "";
-   53C6 6B            [ 4] 4161 	ld	l, e
-   53C7 62            [ 4] 4162 	ld	h, d
-   53C8 23            [ 6] 4163 	inc	hl
-   53C9 23            [ 6] 4164 	inc	hl
-   53CA 01 DA 54      [10] 4165 	ld	bc,#___str_3+0
-   53CD 71            [ 7] 4166 	ld	(hl),c
-   53CE 23            [ 6] 4167 	inc	hl
-   53CF 70            [ 7] 4168 	ld	(hl),b
-                           4169 ;src/includes/game.h:19: txtWindowInfoTile[2] = "Production: Passengers, mail";
-   53D0 21 04 00      [10] 4170 	ld	hl,#0x0004
-   53D3 19            [11] 4171 	add	hl,de
-   53D4 01 04 55      [10] 4172 	ld	bc,#___str_7+0
-   53D7 71            [ 7] 4173 	ld	(hl),c
-   53D8 23            [ 6] 4174 	inc	hl
-   53D9 70            [ 7] 4175 	ld	(hl),b
-                           4176 ;src/includes/game.h:20: txtWindowInfoTile[3] = "Demand: Passenger, mail, food, goods";
-   53DA 21 06 00      [10] 4177 	ld	hl,#0x0006
-   53DD 19            [11] 4178 	add	hl,de
-   53DE 11 21 55      [10] 4179 	ld	de,#___str_8+0
-   53E1 73            [ 7] 4180 	ld	(hl),e
-   53E2 23            [ 6] 4181 	inc	hl
-   53E3 72            [ 7] 4182 	ld	(hl),d
-                           4183 ;src/includes/game.h:21: break;
-   53E4 C3 BE 54      [10] 4184 	jp	00112$
-                           4185 ;src/includes/game.h:22: case FARM1:
-   53E7                    4186 00106$:
-                           4187 ;src/includes/game.h:23: case FARM2:
-   53E7                    4188 00107$:
-                           4189 ;src/includes/game.h:24: txtWindowInfoTile[0] = "Farm";
-   53E7 21 00 00      [10] 4190 	ld	hl,#0x0000
-   53EA 39            [11] 4191 	add	hl,sp
-   53EB 5D            [ 4] 4192 	ld	e,l
-   53EC 54            [ 4] 4193 	ld	d,h
-   53ED 36 46         [10] 4194 	ld	(hl),#<(___str_9)
-   53EF 23            [ 6] 4195 	inc	hl
-   53F0 36 55         [10] 4196 	ld	(hl),#>(___str_9)
-                           4197 ;src/includes/game.h:25: txtWindowInfoTile[1] = "";
-   53F2 6B            [ 4] 4198 	ld	l, e
-   53F3 62            [ 4] 4199 	ld	h, d
-   53F4 23            [ 6] 4200 	inc	hl
-   53F5 23            [ 6] 4201 	inc	hl
-   53F6 01 DA 54      [10] 4202 	ld	bc,#___str_3+0
-   53F9 71            [ 7] 4203 	ld	(hl),c
-   53FA 23            [ 6] 4204 	inc	hl
-   53FB 70            [ 7] 4205 	ld	(hl),b
-                           4206 ;src/includes/game.h:26: txtWindowInfoTile[2] = "Production: Cereal";
-   53FC 21 04 00      [10] 4207 	ld	hl,#0x0004
-   53FF 19            [11] 4208 	add	hl,de
-   5400 01 4B 55      [10] 4209 	ld	bc,#___str_10+0
-   5403 71            [ 7] 4210 	ld	(hl),c
-   5404 23            [ 6] 4211 	inc	hl
-   5405 70            [ 7] 4212 	ld	(hl),b
-                           4213 ;src/includes/game.h:27: txtWindowInfoTile[3] = "Demand: Nothing";
-   5406 21 06 00      [10] 4214 	ld	hl,#0x0006
-   5409 19            [11] 4215 	add	hl,de
-   540A 11 5E 55      [10] 4216 	ld	de,#___str_11+0
-   540D 73            [ 7] 4217 	ld	(hl),e
-   540E 23            [ 6] 4218 	inc	hl
-   540F 72            [ 7] 4219 	ld	(hl),d
-                           4220 ;src/includes/game.h:28: break;
-   5410 C3 BE 54      [10] 4221 	jp	00112$
-                           4222 ;src/includes/game.h:29: case WATER:
-   5413                    4223 00108$:
-                           4224 ;src/includes/game.h:30: txtWindowInfoTile[0] = "Water";
-   5413 21 00 00      [10] 4225 	ld	hl,#0x0000
-   5416 39            [11] 4226 	add	hl,sp
-   5417 5D            [ 4] 4227 	ld	e,l
-   5418 54            [ 4] 4228 	ld	d,h
-   5419 36 6E         [10] 4229 	ld	(hl),#<(___str_12)
-   541B 23            [ 6] 4230 	inc	hl
-   541C 36 55         [10] 4231 	ld	(hl),#>(___str_12)
-                           4232 ;src/includes/game.h:31: txtWindowInfoTile[1] = "";
-   541E 6B            [ 4] 4233 	ld	l, e
-   541F 62            [ 4] 4234 	ld	h, d
-   5420 23            [ 6] 4235 	inc	hl
-   5421 23            [ 6] 4236 	inc	hl
-   5422 01 DA 54      [10] 4237 	ld	bc,#___str_3+0
-   5425 71            [ 7] 4238 	ld	(hl),c
-   5426 23            [ 6] 4239 	inc	hl
-   5427 70            [ 7] 4240 	ld	(hl),b
-                           4241 ;src/includes/game.h:32: txtWindowInfoTile[2] = "Production: Nothing";
-   5428 21 04 00      [10] 4242 	ld	hl,#0x0004
-   542B 19            [11] 4243 	add	hl,de
-   542C 01 74 55      [10] 4244 	ld	bc,#___str_13+0
-   542F 71            [ 7] 4245 	ld	(hl),c
-   5430 23            [ 6] 4246 	inc	hl
-   5431 70            [ 7] 4247 	ld	(hl),b
-                           4248 ;src/includes/game.h:33: txtWindowInfoTile[3] = "Demand: Nothing";
-   5432 21 06 00      [10] 4249 	ld	hl,#0x0006
-   5435 19            [11] 4250 	add	hl,de
-   5436 11 5E 55      [10] 4251 	ld	de,#___str_11+0
-   5439 73            [ 7] 4252 	ld	(hl),e
-   543A 23            [ 6] 4253 	inc	hl
-   543B 72            [ 7] 4254 	ld	(hl),d
-                           4255 ;src/includes/game.h:34: break;
-   543C C3 BE 54      [10] 4256 	jp	00112$
-                           4257 ;src/includes/game.h:35: case FOREST:
-   543F                    4258 00109$:
-                           4259 ;src/includes/game.h:36: txtWindowInfoTile[0] = "Forest";
-   543F 21 00 00      [10] 4260 	ld	hl,#0x0000
-   5442 39            [11] 4261 	add	hl,sp
-   5443 5D            [ 4] 4262 	ld	e,l
-   5444 54            [ 4] 4263 	ld	d,h
-   5445 36 88         [10] 4264 	ld	(hl),#<(___str_14)
-   5447 23            [ 6] 4265 	inc	hl
-   5448 36 55         [10] 4266 	ld	(hl),#>(___str_14)
-                           4267 ;src/includes/game.h:37: txtWindowInfoTile[1] = "";
-   544A 6B            [ 4] 4268 	ld	l, e
-   544B 62            [ 4] 4269 	ld	h, d
-   544C 23            [ 6] 4270 	inc	hl
-   544D 23            [ 6] 4271 	inc	hl
-   544E 01 DA 54      [10] 4272 	ld	bc,#___str_3+0
-   5451 71            [ 7] 4273 	ld	(hl),c
-   5452 23            [ 6] 4274 	inc	hl
-   5453 70            [ 7] 4275 	ld	(hl),b
-                           4276 ;src/includes/game.h:38: txtWindowInfoTile[2] = "Production: Nothing";
-   5454 21 04 00      [10] 4277 	ld	hl,#0x0004
-   5457 19            [11] 4278 	add	hl,de
-   5458 01 74 55      [10] 4279 	ld	bc,#___str_13+0
-   545B 71            [ 7] 4280 	ld	(hl),c
-   545C 23            [ 6] 4281 	inc	hl
-   545D 70            [ 7] 4282 	ld	(hl),b
-                           4283 ;src/includes/game.h:39: txtWindowInfoTile[3] = "Demand: Nothing";
-   545E 21 06 00      [10] 4284 	ld	hl,#0x0006
-   5461 19            [11] 4285 	add	hl,de
-   5462 11 5E 55      [10] 4286 	ld	de,#___str_11+0
-   5465 73            [ 7] 4287 	ld	(hl),e
-   5466 23            [ 6] 4288 	inc	hl
-   5467 72            [ 7] 4289 	ld	(hl),d
-                           4290 ;src/includes/game.h:40: break;
-   5468 18 54         [12] 4291 	jr	00112$
-                           4292 ;src/includes/game.h:41: case LIVESTOCK:
-   546A                    4293 00110$:
-                           4294 ;src/includes/game.h:42: txtWindowInfoTile[0] = "Livestock farming";
-   546A 21 00 00      [10] 4295 	ld	hl,#0x0000
-   546D 39            [11] 4296 	add	hl,sp
-   546E 5D            [ 4] 4297 	ld	e,l
-   546F 54            [ 4] 4298 	ld	d,h
-   5470 36 8F         [10] 4299 	ld	(hl),#<(___str_15)
-   5472 23            [ 6] 4300 	inc	hl
-   5473 36 55         [10] 4301 	ld	(hl),#>(___str_15)
-                           4302 ;src/includes/game.h:43: txtWindowInfoTile[1] = "";
-   5475 6B            [ 4] 4303 	ld	l, e
-   5476 62            [ 4] 4304 	ld	h, d
-   5477 23            [ 6] 4305 	inc	hl
-   5478 23            [ 6] 4306 	inc	hl
-   5479 01 DA 54      [10] 4307 	ld	bc,#___str_3+0
-   547C 71            [ 7] 4308 	ld	(hl),c
-   547D 23            [ 6] 4309 	inc	hl
-   547E 70            [ 7] 4310 	ld	(hl),b
-                           4311 ;src/includes/game.h:44: txtWindowInfoTile[2] = "Production: Livestock, wool";
-   547F 21 04 00      [10] 4312 	ld	hl,#0x0004
-   5482 19            [11] 4313 	add	hl,de
-   5483 01 A1 55      [10] 4314 	ld	bc,#___str_16+0
-   5486 71            [ 7] 4315 	ld	(hl),c
-   5487 23            [ 6] 4316 	inc	hl
-   5488 70            [ 7] 4317 	ld	(hl),b
-                           4318 ;src/includes/game.h:45: txtWindowInfoTile[3] = "Demand: Cereal";
-   5489 21 06 00      [10] 4319 	ld	hl,#0x0006
-   548C 19            [11] 4320 	add	hl,de
-   548D 11 BD 55      [10] 4321 	ld	de,#___str_17+0
-   5490 73            [ 7] 4322 	ld	(hl),e
-   5491 23            [ 6] 4323 	inc	hl
-   5492 72            [ 7] 4324 	ld	(hl),d
-                           4325 ;src/includes/game.h:46: break;
-   5493 18 29         [12] 4326 	jr	00112$
-                           4327 ;src/includes/game.h:47: default:
-   5495                    4328 00111$:
-                           4329 ;src/includes/game.h:48: txtWindowInfoTile[0] = "Not yet implemented";
-   5495 21 00 00      [10] 4330 	ld	hl,#0x0000
-   5498 39            [11] 4331 	add	hl,sp
-   5499 5D            [ 4] 4332 	ld	e,l
-   549A 54            [ 4] 4333 	ld	d,h
-   549B 36 CC         [10] 4334 	ld	(hl),#<(___str_18)
-   549D 23            [ 6] 4335 	inc	hl
-   549E 36 55         [10] 4336 	ld	(hl),#>(___str_18)
-                           4337 ;src/includes/game.h:49: txtWindowInfoTile[1] = "";
-   54A0 6B            [ 4] 4338 	ld	l, e
-   54A1 62            [ 4] 4339 	ld	h, d
-   54A2 23            [ 6] 4340 	inc	hl
-   54A3 23            [ 6] 4341 	inc	hl
-   54A4 01 DA 54      [10] 4342 	ld	bc,#___str_3+0
-   54A7 71            [ 7] 4343 	ld	(hl),c
-   54A8 23            [ 6] 4344 	inc	hl
-   54A9 70            [ 7] 4345 	ld	(hl),b
-                           4346 ;src/includes/game.h:50: txtWindowInfoTile[2] = "Production: ?";
-   54AA 21 04 00      [10] 4347 	ld	hl,#0x0004
-   54AD 19            [11] 4348 	add	hl,de
-   54AE 01 E0 55      [10] 4349 	ld	bc,#___str_19+0
-   54B1 71            [ 7] 4350 	ld	(hl),c
-   54B2 23            [ 6] 4351 	inc	hl
-   54B3 70            [ 7] 4352 	ld	(hl),b
-                           4353 ;src/includes/game.h:51: txtWindowInfoTile[3] = "Demand: ?";
-   54B4 21 06 00      [10] 4354 	ld	hl,#0x0006
-   54B7 19            [11] 4355 	add	hl,de
-   54B8 11 EE 55      [10] 4356 	ld	de,#___str_20+0
-   54BB 73            [ 7] 4357 	ld	(hl),e
-   54BC 23            [ 6] 4358 	inc	hl
-   54BD 72            [ 7] 4359 	ld	(hl),d
-                           4360 ;src/includes/game.h:53: }
-   54BE                    4361 00112$:
-                           4362 ;src/includes/game.h:55: drawWindow(txtWindowInfoTile, 4, 0);
-   54BE 21 00 00      [10] 4363 	ld	hl,#0x0000
-   54C1 39            [11] 4364 	add	hl,sp
-   54C2 EB            [ 4] 4365 	ex	de,hl
-   54C3 21 04 00      [10] 4366 	ld	hl,#0x0004
-   54C6 E5            [11] 4367 	push	hl
-   54C7 D5            [11] 4368 	push	de
-   54C8 CD C1 4B      [17] 4369 	call	_drawWindow
-   54CB DD F9         [10] 4370 	ld	sp,ix
-   54CD DD E1         [14] 4371 	pop	ix
-   54CF C9            [10] 4372 	ret
-   54D0                    4373 ___str_2:
-   54D0 47 72 61 73 73 6C  4374 	.ascii "Grassland"
+   4D70 5F            [ 4] 3029 	ld	e,a
+   4D71 DD 7E 04      [19] 3030 	ld	a,4 (ix)
+   4D74 87            [ 4] 3031 	add	a, a
+   4D75 87            [ 4] 3032 	add	a, a
+   4D76 57            [ 4] 3033 	ld	d,a
+   4D77 D5            [11] 3034 	push	de
+   4D78 7B            [ 4] 3035 	ld	a,e
+   4D79 F5            [11] 3036 	push	af
+   4D7A 33            [ 6] 3037 	inc	sp
+   4D7B D5            [11] 3038 	push	de
+   4D7C 33            [ 6] 3039 	inc	sp
+   4D7D 21 00 C0      [10] 3040 	ld	hl,#0xC000
+   4D80 E5            [11] 3041 	push	hl
+   4D81 CD FB 60      [17] 3042 	call	_cpct_getScreenPtr
+   4D84 D1            [10] 3043 	pop	de
+   4D85 4D            [ 4] 3044 	ld	c, l
+   4D86 44            [ 4] 3045 	ld	b, h
+                           3046 ;src/includes/world.h:6: switch(CURSOR_MODE)
+   4D87 3E 10         [ 7] 3047 	ld	a,#0x10
+   4D89 FD 21 A8 70   [14] 3048 	ld	iy,#_CURSOR_MODE
+   4D8D FD 96 00      [19] 3049 	sub	a, 0 (iy)
+   4D90 DA 8F 4F      [10] 3050 	jp	C,00119$
+   4D93 D5            [11] 3051 	push	de
+   4D94 FD 21 A8 70   [14] 3052 	ld	iy,#_CURSOR_MODE
+   4D98 FD 5E 00      [19] 3053 	ld	e,0 (iy)
+   4D9B 16 00         [ 7] 3054 	ld	d,#0x00
+   4D9D 21 A5 4D      [10] 3055 	ld	hl,#00125$
+   4DA0 19            [11] 3056 	add	hl,de
+   4DA1 19            [11] 3057 	add	hl,de
+   4DA2 19            [11] 3058 	add	hl,de
+   4DA3 D1            [10] 3059 	pop	de
+   4DA4 E9            [ 4] 3060 	jp	(hl)
+   4DA5                    3061 00125$:
+   4DA5 C3 D8 4D      [10] 3062 	jp	00101$
+   4DA8 C3 AA 4E      [10] 3063 	jp	00102$
+   4DAB C3 B9 4E      [10] 3064 	jp	00103$
+   4DAE C3 C8 4E      [10] 3065 	jp	00104$
+   4DB1 C3 D7 4E      [10] 3066 	jp	00105$
+   4DB4 C3 E6 4E      [10] 3067 	jp	00106$
+   4DB7 C3 F5 4E      [10] 3068 	jp	00107$
+   4DBA C3 04 4F      [10] 3069 	jp	00108$
+   4DBD C3 13 4F      [10] 3070 	jp	00109$
+   4DC0 C3 21 4F      [10] 3071 	jp	00110$
+   4DC3 C3 2F 4F      [10] 3072 	jp	00111$
+   4DC6 C3 3D 4F      [10] 3073 	jp	00112$
+   4DC9 C3 4B 4F      [10] 3074 	jp	00113$
+   4DCC C3 59 4F      [10] 3075 	jp	00114$
+   4DCF C3 67 4F      [10] 3076 	jp	00115$
+   4DD2 C3 75 4F      [10] 3077 	jp	00116$
+   4DD5 C3 83 4F      [10] 3078 	jp	00117$
+                           3079 ;src/includes/world.h:8: case NONE:
+   4DD8                    3080 00101$:
+                           3081 ;src/includes/world.h:9: cpct_memset (p_video, cpct_px2byteM1(color,color,color,color), 4);
+   4DD8 C5            [11] 3082 	push	bc
+   4DD9 D5            [11] 3083 	push	de
+   4DDA DD 66 06      [19] 3084 	ld	h,6 (ix)
+   4DDD DD 6E 06      [19] 3085 	ld	l,6 (ix)
+   4DE0 E5            [11] 3086 	push	hl
+   4DE1 DD 66 06      [19] 3087 	ld	h,6 (ix)
+   4DE4 DD 6E 06      [19] 3088 	ld	l,6 (ix)
+   4DE7 E5            [11] 3089 	push	hl
+   4DE8 CD 0A 60      [17] 3090 	call	_cpct_px2byteM1
+   4DEB F1            [10] 3091 	pop	af
+   4DEC F1            [10] 3092 	pop	af
+   4DED DD 75 FF      [19] 3093 	ld	-1 (ix),l
+   4DF0 D1            [10] 3094 	pop	de
+   4DF1 C1            [10] 3095 	pop	bc
+   4DF2 D5            [11] 3096 	push	de
+   4DF3 21 04 00      [10] 3097 	ld	hl,#0x0004
+   4DF6 E5            [11] 3098 	push	hl
+   4DF7 DD 7E FF      [19] 3099 	ld	a,-1 (ix)
+   4DFA F5            [11] 3100 	push	af
+   4DFB 33            [ 6] 3101 	inc	sp
+   4DFC C5            [11] 3102 	push	bc
+   4DFD CD FC 5F      [17] 3103 	call	_cpct_memset
+   4E00 D1            [10] 3104 	pop	de
+                           3105 ;src/includes/world.h:10: p_video = cpct_getScreenPtr(SCR_VMEM, x*TILESIZE_W, y*TILESIZE_H+1);
+   4E01 63            [ 4] 3106 	ld	h,e
+   4E02 24            [ 4] 3107 	inc	h
+   4E03 D5            [11] 3108 	push	de
+   4E04 E5            [11] 3109 	push	hl
+   4E05 33            [ 6] 3110 	inc	sp
+   4E06 D5            [11] 3111 	push	de
+   4E07 33            [ 6] 3112 	inc	sp
+   4E08 21 00 C0      [10] 3113 	ld	hl,#0xC000
+   4E0B E5            [11] 3114 	push	hl
+   4E0C CD FB 60      [17] 3115 	call	_cpct_getScreenPtr
+   4E0F D1            [10] 3116 	pop	de
+                           3117 ;src/includes/world.h:11: cpct_memset (p_video, cpct_px2byteM1(color,color,color,color), 4);
+   4E10 E5            [11] 3118 	push	hl
+   4E11 D5            [11] 3119 	push	de
+   4E12 DD 66 06      [19] 3120 	ld	h,6 (ix)
+   4E15 DD 6E 06      [19] 3121 	ld	l,6 (ix)
+   4E18 E5            [11] 3122 	push	hl
+   4E19 DD 66 06      [19] 3123 	ld	h,6 (ix)
+   4E1C DD 6E 06      [19] 3124 	ld	l,6 (ix)
+   4E1F E5            [11] 3125 	push	hl
+   4E20 CD 0A 60      [17] 3126 	call	_cpct_px2byteM1
+   4E23 F1            [10] 3127 	pop	af
+   4E24 F1            [10] 3128 	pop	af
+   4E25 5D            [ 4] 3129 	ld	e,l
+   4E26 F1            [10] 3130 	pop	af
+   4E27 57            [ 4] 3131 	ld	d,a
+   4E28 C1            [10] 3132 	pop	bc
+   4E29 D5            [11] 3133 	push	de
+   4E2A 21 04 00      [10] 3134 	ld	hl,#0x0004
+   4E2D E5            [11] 3135 	push	hl
+   4E2E 7B            [ 4] 3136 	ld	a,e
+   4E2F F5            [11] 3137 	push	af
+   4E30 33            [ 6] 3138 	inc	sp
+   4E31 C5            [11] 3139 	push	bc
+   4E32 CD FC 5F      [17] 3140 	call	_cpct_memset
+   4E35 D1            [10] 3141 	pop	de
+                           3142 ;src/includes/world.h:14: p_video = cpct_getScreenPtr(SCR_VMEM, x*TILESIZE_W, (y+1)*TILESIZE_H-1);
+   4E36 DD 7E 05      [19] 3143 	ld	a,5 (ix)
+   4E39 3C            [ 4] 3144 	inc	a
+   4E3A 07            [ 4] 3145 	rlca
+   4E3B 07            [ 4] 3146 	rlca
+   4E3C 07            [ 4] 3147 	rlca
+   4E3D 07            [ 4] 3148 	rlca
+   4E3E E6 F0         [ 7] 3149 	and	a,#0xF0
+   4E40 5F            [ 4] 3150 	ld	e,a
+   4E41 63            [ 4] 3151 	ld	h,e
+   4E42 25            [ 4] 3152 	dec	h
+   4E43 D5            [11] 3153 	push	de
+   4E44 E5            [11] 3154 	push	hl
+   4E45 33            [ 6] 3155 	inc	sp
+   4E46 D5            [11] 3156 	push	de
+   4E47 33            [ 6] 3157 	inc	sp
+   4E48 21 00 C0      [10] 3158 	ld	hl,#0xC000
+   4E4B E5            [11] 3159 	push	hl
+   4E4C CD FB 60      [17] 3160 	call	_cpct_getScreenPtr
+   4E4F D1            [10] 3161 	pop	de
+                           3162 ;src/includes/world.h:15: cpct_memset (p_video, cpct_px2byteM1(color,color,color,color), 4);
+   4E50 E5            [11] 3163 	push	hl
+   4E51 D5            [11] 3164 	push	de
+   4E52 DD 66 06      [19] 3165 	ld	h,6 (ix)
+   4E55 DD 6E 06      [19] 3166 	ld	l,6 (ix)
+   4E58 E5            [11] 3167 	push	hl
+   4E59 DD 66 06      [19] 3168 	ld	h,6 (ix)
+   4E5C DD 6E 06      [19] 3169 	ld	l,6 (ix)
+   4E5F E5            [11] 3170 	push	hl
+   4E60 CD 0A 60      [17] 3171 	call	_cpct_px2byteM1
+   4E63 F1            [10] 3172 	pop	af
+   4E64 F1            [10] 3173 	pop	af
+   4E65 DD 75 FF      [19] 3174 	ld	-1 (ix),l
+   4E68 D1            [10] 3175 	pop	de
+   4E69 C1            [10] 3176 	pop	bc
+   4E6A D5            [11] 3177 	push	de
+   4E6B 21 04 00      [10] 3178 	ld	hl,#0x0004
+   4E6E E5            [11] 3179 	push	hl
+   4E6F DD 7E FF      [19] 3180 	ld	a,-1 (ix)
+   4E72 F5            [11] 3181 	push	af
+   4E73 33            [ 6] 3182 	inc	sp
+   4E74 C5            [11] 3183 	push	bc
+   4E75 CD FC 5F      [17] 3184 	call	_cpct_memset
+   4E78 D1            [10] 3185 	pop	de
+                           3186 ;src/includes/world.h:16: p_video = cpct_getScreenPtr(SCR_VMEM, x*TILESIZE_W, (y+1)*TILESIZE_H-2);
+   4E79 63            [ 4] 3187 	ld	h,e
+   4E7A 25            [ 4] 3188 	dec	h
+   4E7B 25            [ 4] 3189 	dec	h
+   4E7C E5            [11] 3190 	push	hl
+   4E7D 33            [ 6] 3191 	inc	sp
+   4E7E D5            [11] 3192 	push	de
+   4E7F 33            [ 6] 3193 	inc	sp
+   4E80 21 00 C0      [10] 3194 	ld	hl,#0xC000
+   4E83 E5            [11] 3195 	push	hl
+   4E84 CD FB 60      [17] 3196 	call	_cpct_getScreenPtr
+                           3197 ;src/includes/world.h:17: cpct_memset (p_video, cpct_px2byteM1(color,color,color,color), 4);
+   4E87 E5            [11] 3198 	push	hl
+   4E88 DD 66 06      [19] 3199 	ld	h,6 (ix)
+   4E8B DD 6E 06      [19] 3200 	ld	l,6 (ix)
+   4E8E E5            [11] 3201 	push	hl
+   4E8F DD 66 06      [19] 3202 	ld	h,6 (ix)
+   4E92 DD 6E 06      [19] 3203 	ld	l,6 (ix)
+   4E95 E5            [11] 3204 	push	hl
+   4E96 CD 0A 60      [17] 3205 	call	_cpct_px2byteM1
+   4E99 F1            [10] 3206 	pop	af
+   4E9A F1            [10] 3207 	pop	af
+   4E9B 65            [ 4] 3208 	ld	h,l
+   4E9C D1            [10] 3209 	pop	de
+   4E9D 01 04 00      [10] 3210 	ld	bc,#0x0004
+   4EA0 C5            [11] 3211 	push	bc
+   4EA1 E5            [11] 3212 	push	hl
+   4EA2 33            [ 6] 3213 	inc	sp
+   4EA3 D5            [11] 3214 	push	de
+   4EA4 CD FC 5F      [17] 3215 	call	_cpct_memset
+                           3216 ;src/includes/world.h:18: break;
+   4EA7 C3 8F 4F      [10] 3217 	jp	00119$
+                           3218 ;src/includes/world.h:19: case T_SSNS:
+   4EAA                    3219 00102$:
+                           3220 ;src/includes/world.h:20: cpct_drawSprite(station_small_ns, p_video, TILESIZE_W, TILESIZE_H);
+   4EAA 11 A9 42      [10] 3221 	ld	de,#_station_small_ns
+   4EAD 21 04 10      [10] 3222 	ld	hl,#0x1004
+   4EB0 E5            [11] 3223 	push	hl
+   4EB1 C5            [11] 3224 	push	bc
+   4EB2 D5            [11] 3225 	push	de
+   4EB3 CD 36 5E      [17] 3226 	call	_cpct_drawSprite
+                           3227 ;src/includes/world.h:21: break;
+   4EB6 C3 8F 4F      [10] 3228 	jp	00119$
+                           3229 ;src/includes/world.h:22: case T_SSEW:
+   4EB9                    3230 00103$:
+                           3231 ;src/includes/world.h:23: cpct_drawSprite(station_small_ew, p_video, TILESIZE_W, TILESIZE_H);
+   4EB9 11 E9 42      [10] 3232 	ld	de,#_station_small_ew
+   4EBC 21 04 10      [10] 3233 	ld	hl,#0x1004
+   4EBF E5            [11] 3234 	push	hl
+   4EC0 C5            [11] 3235 	push	bc
+   4EC1 D5            [11] 3236 	push	de
+   4EC2 CD 36 5E      [17] 3237 	call	_cpct_drawSprite
+                           3238 ;src/includes/world.h:24: break;
+   4EC5 C3 8F 4F      [10] 3239 	jp	00119$
+                           3240 ;src/includes/world.h:25: case T_SMNS:
+   4EC8                    3241 00104$:
+                           3242 ;src/includes/world.h:26: cpct_drawSprite(station_medium_ns, p_video, TILESIZE_W, TILESIZE_H);
+   4EC8 11 29 43      [10] 3243 	ld	de,#_station_medium_ns
+   4ECB 21 04 10      [10] 3244 	ld	hl,#0x1004
+   4ECE E5            [11] 3245 	push	hl
+   4ECF C5            [11] 3246 	push	bc
+   4ED0 D5            [11] 3247 	push	de
+   4ED1 CD 36 5E      [17] 3248 	call	_cpct_drawSprite
+                           3249 ;src/includes/world.h:27: break;
+   4ED4 C3 8F 4F      [10] 3250 	jp	00119$
+                           3251 ;src/includes/world.h:28: case T_SMEW:
+   4ED7                    3252 00105$:
+                           3253 ;src/includes/world.h:29: cpct_drawSprite(station_medium_ew, p_video, TILESIZE_W, TILESIZE_H);
+   4ED7 11 69 43      [10] 3254 	ld	de,#_station_medium_ew
+   4EDA 21 04 10      [10] 3255 	ld	hl,#0x1004
+   4EDD E5            [11] 3256 	push	hl
+   4EDE C5            [11] 3257 	push	bc
+   4EDF D5            [11] 3258 	push	de
+   4EE0 CD 36 5E      [17] 3259 	call	_cpct_drawSprite
+                           3260 ;src/includes/world.h:30: break;
+   4EE3 C3 8F 4F      [10] 3261 	jp	00119$
+                           3262 ;src/includes/world.h:31: case T_SLNS:
+   4EE6                    3263 00106$:
+                           3264 ;src/includes/world.h:32: cpct_drawSprite(station_large_ns, p_video, TILESIZE_W, TILESIZE_H);
+   4EE6 11 A9 43      [10] 3265 	ld	de,#_station_large_ns
+   4EE9 21 04 10      [10] 3266 	ld	hl,#0x1004
+   4EEC E5            [11] 3267 	push	hl
+   4EED C5            [11] 3268 	push	bc
+   4EEE D5            [11] 3269 	push	de
+   4EEF CD 36 5E      [17] 3270 	call	_cpct_drawSprite
+                           3271 ;src/includes/world.h:33: break;
+   4EF2 C3 8F 4F      [10] 3272 	jp	00119$
+                           3273 ;src/includes/world.h:34: case T_SLEW:
+   4EF5                    3274 00107$:
+                           3275 ;src/includes/world.h:35: cpct_drawSprite(station_large_ew, p_video, TILESIZE_W, TILESIZE_H);
+   4EF5 11 E9 43      [10] 3276 	ld	de,#_station_large_ew
+   4EF8 21 04 10      [10] 3277 	ld	hl,#0x1004
+   4EFB E5            [11] 3278 	push	hl
+   4EFC C5            [11] 3279 	push	bc
+   4EFD D5            [11] 3280 	push	de
+   4EFE CD 36 5E      [17] 3281 	call	_cpct_drawSprite
+                           3282 ;src/includes/world.h:36: break;
+   4F01 C3 8F 4F      [10] 3283 	jp	00119$
+                           3284 ;src/includes/world.h:37: case T_REW:
+   4F04                    3285 00108$:
+                           3286 ;src/includes/world.h:38: cpct_drawSprite(rail_ew, p_video, TILESIZE_W, TILESIZE_H);	
+   4F04 11 29 44      [10] 3287 	ld	de,#_rail_ew
+   4F07 21 04 10      [10] 3288 	ld	hl,#0x1004
+   4F0A E5            [11] 3289 	push	hl
+   4F0B C5            [11] 3290 	push	bc
+   4F0C D5            [11] 3291 	push	de
+   4F0D CD 36 5E      [17] 3292 	call	_cpct_drawSprite
+                           3293 ;src/includes/world.h:39: break;
+   4F10 C3 8F 4F      [10] 3294 	jp	00119$
+                           3295 ;src/includes/world.h:40: case T_RNS:
+   4F13                    3296 00109$:
+                           3297 ;src/includes/world.h:41: cpct_drawSprite(rail_ns, p_video, TILESIZE_W, TILESIZE_H);	
+   4F13 11 69 44      [10] 3298 	ld	de,#_rail_ns
+   4F16 21 04 10      [10] 3299 	ld	hl,#0x1004
+   4F19 E5            [11] 3300 	push	hl
+   4F1A C5            [11] 3301 	push	bc
+   4F1B D5            [11] 3302 	push	de
+   4F1C CD 36 5E      [17] 3303 	call	_cpct_drawSprite
+                           3304 ;src/includes/world.h:42: break;
+   4F1F 18 6E         [12] 3305 	jr	00119$
+                           3306 ;src/includes/world.h:43: case T_REN:
+   4F21                    3307 00110$:
+                           3308 ;src/includes/world.h:44: cpct_drawSprite(rail_en, p_video, TILESIZE_W, TILESIZE_H);	
+   4F21 11 A9 44      [10] 3309 	ld	de,#_rail_en
+   4F24 21 04 10      [10] 3310 	ld	hl,#0x1004
+   4F27 E5            [11] 3311 	push	hl
+   4F28 C5            [11] 3312 	push	bc
+   4F29 D5            [11] 3313 	push	de
+   4F2A CD 36 5E      [17] 3314 	call	_cpct_drawSprite
+                           3315 ;src/includes/world.h:45: break;
+   4F2D 18 60         [12] 3316 	jr	00119$
+                           3317 ;src/includes/world.h:46: case T_RES:
+   4F2F                    3318 00111$:
+                           3319 ;src/includes/world.h:47: cpct_drawSprite(rail_es, p_video, TILESIZE_W, TILESIZE_H);	
+   4F2F 11 E9 44      [10] 3320 	ld	de,#_rail_es
+   4F32 21 04 10      [10] 3321 	ld	hl,#0x1004
+   4F35 E5            [11] 3322 	push	hl
+   4F36 C5            [11] 3323 	push	bc
+   4F37 D5            [11] 3324 	push	de
+   4F38 CD 36 5E      [17] 3325 	call	_cpct_drawSprite
+                           3326 ;src/includes/world.h:48: break;
+   4F3B 18 52         [12] 3327 	jr	00119$
+                           3328 ;src/includes/world.h:49: case T_RWN:
+   4F3D                    3329 00112$:
+                           3330 ;src/includes/world.h:50: cpct_drawSprite(rail_wn, p_video, TILESIZE_W, TILESIZE_H);	
+   4F3D 11 29 45      [10] 3331 	ld	de,#_rail_wn
+   4F40 21 04 10      [10] 3332 	ld	hl,#0x1004
+   4F43 E5            [11] 3333 	push	hl
+   4F44 C5            [11] 3334 	push	bc
+   4F45 D5            [11] 3335 	push	de
+   4F46 CD 36 5E      [17] 3336 	call	_cpct_drawSprite
+                           3337 ;src/includes/world.h:51: break;
+   4F49 18 44         [12] 3338 	jr	00119$
+                           3339 ;src/includes/world.h:52: case T_RWS:
+   4F4B                    3340 00113$:
+                           3341 ;src/includes/world.h:53: cpct_drawSprite(rail_ws, p_video, TILESIZE_W, TILESIZE_H);	
+   4F4B 11 69 45      [10] 3342 	ld	de,#_rail_ws
+   4F4E 21 04 10      [10] 3343 	ld	hl,#0x1004
+   4F51 E5            [11] 3344 	push	hl
+   4F52 C5            [11] 3345 	push	bc
+   4F53 D5            [11] 3346 	push	de
+   4F54 CD 36 5E      [17] 3347 	call	_cpct_drawSprite
+                           3348 ;src/includes/world.h:54: break;
+   4F57 18 36         [12] 3349 	jr	00119$
+                           3350 ;src/includes/world.h:55: case T_REWN:
+   4F59                    3351 00114$:
+                           3352 ;src/includes/world.h:56: cpct_drawSprite(rail_ew_n, p_video, TILESIZE_W, TILESIZE_H);	
+   4F59 11 A9 45      [10] 3353 	ld	de,#_rail_ew_n
+   4F5C 21 04 10      [10] 3354 	ld	hl,#0x1004
+   4F5F E5            [11] 3355 	push	hl
+   4F60 C5            [11] 3356 	push	bc
+   4F61 D5            [11] 3357 	push	de
+   4F62 CD 36 5E      [17] 3358 	call	_cpct_drawSprite
+                           3359 ;src/includes/world.h:57: break;
+   4F65 18 28         [12] 3360 	jr	00119$
+                           3361 ;src/includes/world.h:58: case T_REWS:
+   4F67                    3362 00115$:
+                           3363 ;src/includes/world.h:59: cpct_drawSprite(rail_ew_s, p_video, TILESIZE_W, TILESIZE_H);	
+   4F67 11 E9 45      [10] 3364 	ld	de,#_rail_ew_s
+   4F6A 21 04 10      [10] 3365 	ld	hl,#0x1004
+   4F6D E5            [11] 3366 	push	hl
+   4F6E C5            [11] 3367 	push	bc
+   4F6F D5            [11] 3368 	push	de
+   4F70 CD 36 5E      [17] 3369 	call	_cpct_drawSprite
+                           3370 ;src/includes/world.h:60: break;
+   4F73 18 1A         [12] 3371 	jr	00119$
+                           3372 ;src/includes/world.h:61: case T_RNSE:
+   4F75                    3373 00116$:
+                           3374 ;src/includes/world.h:62: cpct_drawSprite(rail_ns_e, p_video, TILESIZE_W, TILESIZE_H);	
+   4F75 11 69 46      [10] 3375 	ld	de,#_rail_ns_e
+   4F78 21 04 10      [10] 3376 	ld	hl,#0x1004
+   4F7B E5            [11] 3377 	push	hl
+   4F7C C5            [11] 3378 	push	bc
+   4F7D D5            [11] 3379 	push	de
+   4F7E CD 36 5E      [17] 3380 	call	_cpct_drawSprite
+                           3381 ;src/includes/world.h:63: break;
+   4F81 18 0C         [12] 3382 	jr	00119$
+                           3383 ;src/includes/world.h:64: case T_RNSW:
+   4F83                    3384 00117$:
+                           3385 ;src/includes/world.h:65: cpct_drawSprite(rail_ns_w, p_video, TILESIZE_W, TILESIZE_H);
+   4F83 11 29 46      [10] 3386 	ld	de,#_rail_ns_w
+   4F86 21 04 10      [10] 3387 	ld	hl,#0x1004
+   4F89 E5            [11] 3388 	push	hl
+   4F8A C5            [11] 3389 	push	bc
+   4F8B D5            [11] 3390 	push	de
+   4F8C CD 36 5E      [17] 3391 	call	_cpct_drawSprite
+                           3392 ;src/includes/world.h:67: }
+   4F8F                    3393 00119$:
+   4F8F 33            [ 6] 3394 	inc	sp
+   4F90 DD E1         [14] 3395 	pop	ix
+   4F92 C9            [10] 3396 	ret
+                           3397 ;src/includes/world.h:70: void generateWorld()
+                           3398 ;	---------------------------------
+                           3399 ; Function generateWorld
+                           3400 ; ---------------------------------
+   4F93                    3401 _generateWorld::
+   4F93 DD E5         [15] 3402 	push	ix
+   4F95 DD 21 00 00   [14] 3403 	ld	ix,#0
+   4F99 DD 39         [15] 3404 	add	ix,sp
+   4F9B F5            [11] 3405 	push	af
+   4F9C F5            [11] 3406 	push	af
+                           3407 ;src/includes/world.h:78: cpct_setRandomSeedUniform_u8(0);
+   4F9D 2E 00         [ 7] 3408 	ld	l,#0x00
+   4F9F CD E1 5D      [17] 3409 	call	_cpct_setRandomSeedUniform_u8
+                           3410 ;src/includes/world.h:80: for(iy=0; iy<HEIGHT*WIDTH;iy++)
+   4FA2 11 00 00      [10] 3411 	ld	de,#0x0000
+   4FA5                    3412 00114$:
+                           3413 ;src/includes/world.h:82: p_world[iy] = cpct_getRandomUniform_u8_f(0)%2;
+   4FA5 21 A8 61      [10] 3414 	ld	hl,#_p_world
+   4FA8 19            [11] 3415 	add	hl,de
+   4FA9 E5            [11] 3416 	push	hl
+   4FAA D5            [11] 3417 	push	de
+   4FAB 2E 00         [ 7] 3418 	ld	l,#0x00
+   4FAD CD BD 5F      [17] 3419 	call	_cpct_getRandomUniform_u8_f
+   4FB0 7D            [ 4] 3420 	ld	a,l
+   4FB1 D1            [10] 3421 	pop	de
+   4FB2 E1            [10] 3422 	pop	hl
+   4FB3 E6 01         [ 7] 3423 	and	a, #0x01
+   4FB5 77            [ 7] 3424 	ld	(hl),a
+                           3425 ;src/includes/world.h:80: for(iy=0; iy<HEIGHT*WIDTH;iy++)
+   4FB6 13            [ 6] 3426 	inc	de
+   4FB7 7A            [ 4] 3427 	ld	a,d
+   4FB8 EE 80         [ 7] 3428 	xor	a, #0x80
+   4FBA D6 8F         [ 7] 3429 	sub	a, #0x8F
+   4FBC 38 E7         [12] 3430 	jr	C,00114$
+                           3431 ;src/includes/world.h:109: cpct_setRandomSeedUniform_u8(1);
+   4FBE 2E 01         [ 7] 3432 	ld	l,#0x01
+   4FC0 CD E1 5D      [17] 3433 	call	_cpct_setRandomSeedUniform_u8
+                           3434 ;src/includes/world.h:111: for(ix=0; ix<NBFARM; ix++)
+   4FC3 21 00 00      [10] 3435 	ld	hl,#0x0000
+   4FC6 E3            [19] 3436 	ex	(sp), hl
+   4FC7                    3437 00116$:
+                           3438 ;src/includes/world.h:113: iy = cpct_getRandomUniform_u8_f(1)*15; // (WIDTH*HEIGHT)/255;
+   4FC7 2E 01         [ 7] 3439 	ld	l,#0x01
+   4FC9 CD BD 5F      [17] 3440 	call	_cpct_getRandomUniform_u8_f
+   4FCC 4D            [ 4] 3441 	ld	c,l
+   4FCD 06 00         [ 7] 3442 	ld	b,#0x00
+   4FCF 69            [ 4] 3443 	ld	l, c
+   4FD0 60            [ 4] 3444 	ld	h, b
+   4FD1 29            [11] 3445 	add	hl, hl
+   4FD2 09            [11] 3446 	add	hl, bc
+   4FD3 29            [11] 3447 	add	hl, hl
+   4FD4 09            [11] 3448 	add	hl, bc
+   4FD5 29            [11] 3449 	add	hl, hl
+   4FD6 09            [11] 3450 	add	hl, bc
+                           3451 ;src/includes/world.h:115: shift = cpct_getRandomUniform_u8_f(1)%10;
+   4FD7 E5            [11] 3452 	push	hl
+   4FD8 2E 01         [ 7] 3453 	ld	l,#0x01
+   4FDA CD BD 5F      [17] 3454 	call	_cpct_getRandomUniform_u8_f
+   4FDD 45            [ 4] 3455 	ld	b,l
+   4FDE 3E 0A         [ 7] 3456 	ld	a,#0x0A
+   4FE0 F5            [11] 3457 	push	af
+   4FE1 33            [ 6] 3458 	inc	sp
+   4FE2 C5            [11] 3459 	push	bc
+   4FE3 33            [ 6] 3460 	inc	sp
+   4FE4 CD DB 5E      [17] 3461 	call	__moduchar
+   4FE7 F1            [10] 3462 	pop	af
+   4FE8 D1            [10] 3463 	pop	de
+   4FE9 26 00         [ 7] 3464 	ld	h,#0x00
+                           3465 ;src/includes/world.h:116: shift=iy-shift+5;
+   4FEB 7B            [ 4] 3466 	ld	a,e
+   4FEC 95            [ 4] 3467 	sub	a, l
+   4FED 6F            [ 4] 3468 	ld	l,a
+   4FEE 7A            [ 4] 3469 	ld	a,d
+   4FEF 9C            [ 4] 3470 	sbc	a, h
+   4FF0 67            [ 4] 3471 	ld	h,a
+   4FF1 01 05 00      [10] 3472 	ld	bc,#0x0005
+   4FF4 09            [11] 3473 	add	hl,bc
+                           3474 ;src/includes/world.h:118: if(shift>0 && shift<WIDTH*HEIGHT)
+   4FF5 AF            [ 4] 3475 	xor	a, a
+   4FF6 BD            [ 4] 3476 	cp	a, l
+   4FF7 9C            [ 4] 3477 	sbc	a, h
+   4FF8 E2 FD 4F      [10] 3478 	jp	PO, 00180$
+   4FFB EE 80         [ 7] 3479 	xor	a, #0x80
+   4FFD                    3480 00180$:
+   4FFD F2 18 50      [10] 3481 	jp	P,00117$
+   5000 7C            [ 4] 3482 	ld	a,h
+   5001 EE 80         [ 7] 3483 	xor	a, #0x80
+   5003 D6 8F         [ 7] 3484 	sub	a, #0x8F
+   5005 30 11         [12] 3485 	jr	NC,00117$
+                           3486 ;src/includes/world.h:119: p_world[shift] = (u8)cpct_getRandomUniform_u8_f(1)%2+5;
+   5007 11 A8 61      [10] 3487 	ld	de,#_p_world
+   500A 19            [11] 3488 	add	hl,de
+   500B E5            [11] 3489 	push	hl
+   500C 2E 01         [ 7] 3490 	ld	l,#0x01
+   500E CD BD 5F      [17] 3491 	call	_cpct_getRandomUniform_u8_f
+   5011 7D            [ 4] 3492 	ld	a,l
+   5012 E1            [10] 3493 	pop	hl
+   5013 E6 01         [ 7] 3494 	and	a, #0x01
+   5015 C6 05         [ 7] 3495 	add	a, #0x05
+   5017 77            [ 7] 3496 	ld	(hl),a
+   5018                    3497 00117$:
+                           3498 ;src/includes/world.h:111: for(ix=0; ix<NBFARM; ix++)
+   5018 DD 34 FC      [23] 3499 	inc	-4 (ix)
+   501B 20 03         [12] 3500 	jr	NZ,00181$
+   501D DD 34 FD      [23] 3501 	inc	-3 (ix)
+   5020                    3502 00181$:
+   5020 DD 7E FC      [19] 3503 	ld	a,-4 (ix)
+   5023 D6 3C         [ 7] 3504 	sub	a, #0x3C
+   5025 DD 7E FD      [19] 3505 	ld	a,-3 (ix)
+   5028 17            [ 4] 3506 	rla
+   5029 3F            [ 4] 3507 	ccf
+   502A 1F            [ 4] 3508 	rra
+   502B DE 80         [ 7] 3509 	sbc	a, #0x80
+   502D 38 98         [12] 3510 	jr	C,00116$
+                           3511 ;src/includes/world.h:124: cpct_setRandomSeedUniform_u8(2);
+   502F 2E 02         [ 7] 3512 	ld	l,#0x02
+   5031 CD E1 5D      [17] 3513 	call	_cpct_setRandomSeedUniform_u8
+                           3514 ;src/includes/world.h:126: for(ix=0; ix<NBURBAN; ix++)
+   5034 21 00 00      [10] 3515 	ld	hl,#0x0000
+   5037 E3            [19] 3516 	ex	(sp), hl
+   5038                    3517 00118$:
+                           3518 ;src/includes/world.h:128: iy = cpct_getRandomUniform_u8_f(2)*15; // (WIDTH*HEIGHT)/255;
+   5038 2E 02         [ 7] 3519 	ld	l,#0x02
+   503A CD BD 5F      [17] 3520 	call	_cpct_getRandomUniform_u8_f
+   503D 4D            [ 4] 3521 	ld	c,l
+   503E 06 00         [ 7] 3522 	ld	b,#0x00
+   5040 69            [ 4] 3523 	ld	l, c
+   5041 60            [ 4] 3524 	ld	h, b
+   5042 29            [11] 3525 	add	hl, hl
+   5043 09            [11] 3526 	add	hl, bc
+   5044 29            [11] 3527 	add	hl, hl
+   5045 09            [11] 3528 	add	hl, bc
+   5046 29            [11] 3529 	add	hl, hl
+   5047 09            [11] 3530 	add	hl, bc
+                           3531 ;src/includes/world.h:130: shift = cpct_getRandomUniform_u8_f(2)%10;
+   5048 E5            [11] 3532 	push	hl
+   5049 2E 02         [ 7] 3533 	ld	l,#0x02
+   504B CD BD 5F      [17] 3534 	call	_cpct_getRandomUniform_u8_f
+   504E 45            [ 4] 3535 	ld	b,l
+   504F 3E 0A         [ 7] 3536 	ld	a,#0x0A
+   5051 F5            [11] 3537 	push	af
+   5052 33            [ 6] 3538 	inc	sp
+   5053 C5            [11] 3539 	push	bc
+   5054 33            [ 6] 3540 	inc	sp
+   5055 CD DB 5E      [17] 3541 	call	__moduchar
+   5058 F1            [10] 3542 	pop	af
+   5059 D1            [10] 3543 	pop	de
+   505A 26 00         [ 7] 3544 	ld	h,#0x00
+                           3545 ;src/includes/world.h:131: shift=iy-shift+5;
+   505C 7B            [ 4] 3546 	ld	a,e
+   505D 95            [ 4] 3547 	sub	a, l
+   505E 4F            [ 4] 3548 	ld	c,a
+   505F 7A            [ 4] 3549 	ld	a,d
+   5060 9C            [ 4] 3550 	sbc	a, h
+   5061 47            [ 4] 3551 	ld	b,a
+   5062 03            [ 6] 3552 	inc	bc
+   5063 03            [ 6] 3553 	inc	bc
+   5064 03            [ 6] 3554 	inc	bc
+   5065 03            [ 6] 3555 	inc	bc
+   5066 03            [ 6] 3556 	inc	bc
+                           3557 ;src/includes/world.h:133: if(shift>0 && shift<WIDTH*HEIGHT)
+   5067 AF            [ 4] 3558 	xor	a, a
+   5068 B9            [ 4] 3559 	cp	a, c
+   5069 98            [ 4] 3560 	sbc	a, b
+   506A E2 6F 50      [10] 3561 	jp	PO, 00182$
+   506D EE 80         [ 7] 3562 	xor	a, #0x80
+   506F                    3563 00182$:
+   506F F2 93 50      [10] 3564 	jp	P,00119$
+   5072 78            [ 4] 3565 	ld	a,b
+   5073 EE 80         [ 7] 3566 	xor	a, #0x80
+   5075 D6 8F         [ 7] 3567 	sub	a, #0x8F
+   5077 30 1A         [12] 3568 	jr	NC,00119$
+                           3569 ;src/includes/world.h:134: p_world[shift] = (u8)cpct_getRandomUniform_u8_f(2)%3+2;
+   5079 21 A8 61      [10] 3570 	ld	hl,#_p_world
+   507C 09            [11] 3571 	add	hl,bc
+   507D E5            [11] 3572 	push	hl
+   507E 2E 02         [ 7] 3573 	ld	l,#0x02
+   5080 CD BD 5F      [17] 3574 	call	_cpct_getRandomUniform_u8_f
+   5083 45            [ 4] 3575 	ld	b,l
+   5084 3E 03         [ 7] 3576 	ld	a,#0x03
+   5086 F5            [11] 3577 	push	af
+   5087 33            [ 6] 3578 	inc	sp
+   5088 C5            [11] 3579 	push	bc
+   5089 33            [ 6] 3580 	inc	sp
+   508A CD DB 5E      [17] 3581 	call	__moduchar
+   508D F1            [10] 3582 	pop	af
+   508E 7D            [ 4] 3583 	ld	a,l
+   508F D1            [10] 3584 	pop	de
+   5090 C6 02         [ 7] 3585 	add	a, #0x02
+   5092 12            [ 7] 3586 	ld	(de),a
+   5093                    3587 00119$:
+                           3588 ;src/includes/world.h:126: for(ix=0; ix<NBURBAN; ix++)
+   5093 DD 34 FC      [23] 3589 	inc	-4 (ix)
+   5096 20 03         [12] 3590 	jr	NZ,00183$
+   5098 DD 34 FD      [23] 3591 	inc	-3 (ix)
+   509B                    3592 00183$:
+   509B DD 7E FC      [19] 3593 	ld	a,-4 (ix)
+   509E D6 1E         [ 7] 3594 	sub	a, #0x1E
+   50A0 DD 7E FD      [19] 3595 	ld	a,-3 (ix)
+   50A3 17            [ 4] 3596 	rla
+   50A4 3F            [ 4] 3597 	ccf
+   50A5 1F            [ 4] 3598 	rra
+   50A6 DE 80         [ 7] 3599 	sbc	a, #0x80
+   50A8 38 8E         [12] 3600 	jr	C,00118$
+                           3601 ;src/includes/world.h:139: cpct_setRandomSeedUniform_u8(3);
+   50AA 2E 03         [ 7] 3602 	ld	l,#0x03
+   50AC CD E1 5D      [17] 3603 	call	_cpct_setRandomSeedUniform_u8
+                           3604 ;src/includes/world.h:141: for(ix=0; ix<NBLIVESTOCK; ix++)
+   50AF 11 00 00      [10] 3605 	ld	de,#0x0000
+   50B2                    3606 00120$:
+                           3607 ;src/includes/world.h:143: iy = cpct_getRandomUniform_u8_f(3)*15; // (WIDTH*HEIGHT)/255;
+   50B2 D5            [11] 3608 	push	de
+   50B3 2E 03         [ 7] 3609 	ld	l,#0x03
+   50B5 CD BD 5F      [17] 3610 	call	_cpct_getRandomUniform_u8_f
+   50B8 D1            [10] 3611 	pop	de
+   50B9 4D            [ 4] 3612 	ld	c,l
+   50BA 06 00         [ 7] 3613 	ld	b,#0x00
+   50BC 69            [ 4] 3614 	ld	l, c
+   50BD 60            [ 4] 3615 	ld	h, b
+   50BE 29            [11] 3616 	add	hl, hl
+   50BF 09            [11] 3617 	add	hl, bc
+   50C0 29            [11] 3618 	add	hl, hl
+   50C1 09            [11] 3619 	add	hl, bc
+   50C2 29            [11] 3620 	add	hl, hl
+   50C3 09            [11] 3621 	add	hl, bc
+   50C4 DD 75 FE      [19] 3622 	ld	-2 (ix),l
+   50C7 DD 74 FF      [19] 3623 	ld	-1 (ix),h
+                           3624 ;src/includes/world.h:145: shift = cpct_getRandomUniform_u8_f(3)%10;
+   50CA D5            [11] 3625 	push	de
+   50CB 2E 03         [ 7] 3626 	ld	l,#0x03
+   50CD CD BD 5F      [17] 3627 	call	_cpct_getRandomUniform_u8_f
+   50D0 45            [ 4] 3628 	ld	b,l
+   50D1 3E 0A         [ 7] 3629 	ld	a,#0x0A
+   50D3 F5            [11] 3630 	push	af
+   50D4 33            [ 6] 3631 	inc	sp
+   50D5 C5            [11] 3632 	push	bc
+   50D6 33            [ 6] 3633 	inc	sp
+   50D7 CD DB 5E      [17] 3634 	call	__moduchar
+   50DA F1            [10] 3635 	pop	af
+   50DB D1            [10] 3636 	pop	de
+   50DC 26 00         [ 7] 3637 	ld	h,#0x00
+                           3638 ;src/includes/world.h:146: shift=iy-shift+5;
+   50DE DD 7E FE      [19] 3639 	ld	a,-2 (ix)
+   50E1 95            [ 4] 3640 	sub	a, l
+   50E2 6F            [ 4] 3641 	ld	l,a
+   50E3 DD 7E FF      [19] 3642 	ld	a,-1 (ix)
+   50E6 9C            [ 4] 3643 	sbc	a, h
+   50E7 67            [ 4] 3644 	ld	h,a
+   50E8 01 05 00      [10] 3645 	ld	bc,#0x0005
+   50EB 09            [11] 3646 	add	hl,bc
+                           3647 ;src/includes/world.h:148: if(shift>0 && shift<WIDTH*HEIGHT)
+   50EC AF            [ 4] 3648 	xor	a, a
+   50ED BD            [ 4] 3649 	cp	a, l
+   50EE 9C            [ 4] 3650 	sbc	a, h
+   50EF E2 F4 50      [10] 3651 	jp	PO, 00184$
+   50F2 EE 80         [ 7] 3652 	xor	a, #0x80
+   50F4                    3653 00184$:
+   50F4 F2 04 51      [10] 3654 	jp	P,00121$
+   50F7 7C            [ 4] 3655 	ld	a,h
+   50F8 EE 80         [ 7] 3656 	xor	a, #0x80
+   50FA D6 8F         [ 7] 3657 	sub	a, #0x8F
+   50FC 30 06         [12] 3658 	jr	NC,00121$
+                           3659 ;src/includes/world.h:149: p_world[shift] = LIVESTOCK;
+   50FE 01 A8 61      [10] 3660 	ld	bc,#_p_world
+   5101 09            [11] 3661 	add	hl,bc
+   5102 36 09         [10] 3662 	ld	(hl),#0x09
+   5104                    3663 00121$:
+                           3664 ;src/includes/world.h:141: for(ix=0; ix<NBLIVESTOCK; ix++)
+   5104 13            [ 6] 3665 	inc	de
+   5105 7B            [ 4] 3666 	ld	a,e
+   5106 D6 13         [ 7] 3667 	sub	a, #0x13
+   5108 7A            [ 4] 3668 	ld	a,d
+   5109 17            [ 4] 3669 	rla
+   510A 3F            [ 4] 3670 	ccf
+   510B 1F            [ 4] 3671 	rra
+   510C DE 80         [ 7] 3672 	sbc	a, #0x80
+   510E 38 A2         [12] 3673 	jr	C,00120$
+   5110 DD F9         [10] 3674 	ld	sp, ix
+   5112 DD E1         [14] 3675 	pop	ix
+   5114 C9            [10] 3676 	ret
+                           3677 ;src/includes/world.h:153: void drawTile(u8 x_, u8 y_, u8 ix, u8 iy)
+                           3678 ;	---------------------------------
+                           3679 ; Function drawTile
+                           3680 ; ---------------------------------
+   5115                    3681 _drawTile::
+   5115 DD E5         [15] 3682 	push	ix
+   5117 DD 21 00 00   [14] 3683 	ld	ix,#0
+   511B DD 39         [15] 3684 	add	ix,sp
+                           3685 ;src/includes/world.h:156: int adress = (y_+iy)*WIDTH+x_+ix;
+   511D DD 6E 05      [19] 3686 	ld	l,5 (ix)
+   5120 26 00         [ 7] 3687 	ld	h,#0x00
+   5122 DD 5E 07      [19] 3688 	ld	e,7 (ix)
+   5125 16 00         [ 7] 3689 	ld	d,#0x00
+   5127 19            [11] 3690 	add	hl,de
+   5128 4D            [ 4] 3691 	ld	c, l
+   5129 44            [ 4] 3692 	ld	b, h
+   512A 29            [11] 3693 	add	hl, hl
+   512B 29            [11] 3694 	add	hl, hl
+   512C 09            [11] 3695 	add	hl, bc
+   512D 29            [11] 3696 	add	hl, hl
+   512E 29            [11] 3697 	add	hl, hl
+   512F 29            [11] 3698 	add	hl, hl
+   5130 29            [11] 3699 	add	hl, hl
+   5131 DD 5E 04      [19] 3700 	ld	e,4 (ix)
+   5134 16 00         [ 7] 3701 	ld	d,#0x00
+   5136 19            [11] 3702 	add	hl,de
+   5137 DD 5E 06      [19] 3703 	ld	e,6 (ix)
+   513A 16 00         [ 7] 3704 	ld	d,#0x00
+   513C 19            [11] 3705 	add	hl,de
+   513D 5D            [ 4] 3706 	ld	e, l
+   513E 54            [ 4] 3707 	ld	d, h
+                           3708 ;src/includes/world.h:158: p_video = cpct_getScreenPtr(SCR_VMEM, ix*TILESIZE_W, iy*TILESIZE_H);
+   513F DD 7E 07      [19] 3709 	ld	a,7 (ix)
+   5142 07            [ 4] 3710 	rlca
+   5143 07            [ 4] 3711 	rlca
+   5144 07            [ 4] 3712 	rlca
+   5145 07            [ 4] 3713 	rlca
+   5146 E6 F0         [ 7] 3714 	and	a,#0xF0
+   5148 67            [ 4] 3715 	ld	h,a
+   5149 DD 7E 06      [19] 3716 	ld	a,6 (ix)
+   514C 87            [ 4] 3717 	add	a, a
+   514D 87            [ 4] 3718 	add	a, a
+   514E D5            [11] 3719 	push	de
+   514F E5            [11] 3720 	push	hl
+   5150 33            [ 6] 3721 	inc	sp
+   5151 F5            [11] 3722 	push	af
+   5152 33            [ 6] 3723 	inc	sp
+   5153 21 00 C0      [10] 3724 	ld	hl,#0xC000
+   5156 E5            [11] 3725 	push	hl
+   5157 CD FB 60      [17] 3726 	call	_cpct_getScreenPtr
+   515A D1            [10] 3727 	pop	de
+   515B 4D            [ 4] 3728 	ld	c, l
+   515C 44            [ 4] 3729 	ld	b, h
+                           3730 ;src/includes/world.h:160: switch(p_world[adress])
+   515D 21 A8 61      [10] 3731 	ld	hl,#_p_world
+   5160 19            [11] 3732 	add	hl,de
+   5161 5E            [ 7] 3733 	ld	e,(hl)
+   5162 3E 19         [ 7] 3734 	ld	a,#0x19
+   5164 93            [ 4] 3735 	sub	a, e
+   5165 DA 3A 53      [10] 3736 	jp	C,00128$
+   5168 16 00         [ 7] 3737 	ld	d,#0x00
+   516A 21 71 51      [10] 3738 	ld	hl,#00134$
+   516D 19            [11] 3739 	add	hl,de
+   516E 19            [11] 3740 	add	hl,de
+   516F 19            [11] 3741 	add	hl,de
+   5170 E9            [ 4] 3742 	jp	(hl)
+   5171                    3743 00134$:
+   5171 C3 BF 51      [10] 3744 	jp	00101$
+   5174 C3 CE 51      [10] 3745 	jp	00102$
+   5177 C3 DD 51      [10] 3746 	jp	00103$
+   517A C3 EC 51      [10] 3747 	jp	00104$
+   517D C3 FB 51      [10] 3748 	jp	00105$
+   5180 C3 0A 52      [10] 3749 	jp	00106$
+   5183 C3 19 52      [10] 3750 	jp	00107$
+   5186 C3 28 52      [10] 3751 	jp	00108$
+   5189 C3 37 52      [10] 3752 	jp	00109$
+   518C C3 46 52      [10] 3753 	jp	00110$
+   518F C3 55 52      [10] 3754 	jp	00111$
+   5192 C3 64 52      [10] 3755 	jp	00112$
+   5195 C3 73 52      [10] 3756 	jp	00113$
+   5198 C3 82 52      [10] 3757 	jp	00114$
+   519B C3 91 52      [10] 3758 	jp	00115$
+   519E C3 A0 52      [10] 3759 	jp	00116$
+   51A1 C3 AF 52      [10] 3760 	jp	00117$
+   51A4 C3 BE 52      [10] 3761 	jp	00118$
+   51A7 C3 CC 52      [10] 3762 	jp	00119$
+   51AA C3 DA 52      [10] 3763 	jp	00120$
+   51AD C3 E8 52      [10] 3764 	jp	00121$
+   51B0 C3 F6 52      [10] 3765 	jp	00122$
+   51B3 C3 04 53      [10] 3766 	jp	00123$
+   51B6 C3 12 53      [10] 3767 	jp	00124$
+   51B9 C3 20 53      [10] 3768 	jp	00125$
+   51BC C3 2E 53      [10] 3769 	jp	00126$
+                           3770 ;src/includes/world.h:162: case GRASS1:
+   51BF                    3771 00101$:
+                           3772 ;src/includes/world.h:163: cpct_drawSprite(grass1, p_video, TILESIZE_W, TILESIZE_H);
+   51BF 11 29 40      [10] 3773 	ld	de,#_grass1
+   51C2 21 04 10      [10] 3774 	ld	hl,#0x1004
+   51C5 E5            [11] 3775 	push	hl
+   51C6 C5            [11] 3776 	push	bc
+   51C7 D5            [11] 3777 	push	de
+   51C8 CD 36 5E      [17] 3778 	call	_cpct_drawSprite
+                           3779 ;src/includes/world.h:164: break;
+   51CB C3 3A 53      [10] 3780 	jp	00128$
+                           3781 ;src/includes/world.h:165: case GRASS2:
+   51CE                    3782 00102$:
+                           3783 ;src/includes/world.h:166: cpct_drawSprite(grass2, p_video, TILESIZE_W, TILESIZE_H);
+   51CE 11 69 40      [10] 3784 	ld	de,#_grass2
+   51D1 21 04 10      [10] 3785 	ld	hl,#0x1004
+   51D4 E5            [11] 3786 	push	hl
+   51D5 C5            [11] 3787 	push	bc
+   51D6 D5            [11] 3788 	push	de
+   51D7 CD 36 5E      [17] 3789 	call	_cpct_drawSprite
+                           3790 ;src/includes/world.h:167: break;
+   51DA C3 3A 53      [10] 3791 	jp	00128$
+                           3792 ;src/includes/world.h:168: case DWELLINGS1:
+   51DD                    3793 00103$:
+                           3794 ;src/includes/world.h:169: cpct_drawSprite(dwellings1, p_video, TILESIZE_W, TILESIZE_H);
+   51DD 11 E9 40      [10] 3795 	ld	de,#_dwellings1
+   51E0 21 04 10      [10] 3796 	ld	hl,#0x1004
+   51E3 E5            [11] 3797 	push	hl
+   51E4 C5            [11] 3798 	push	bc
+   51E5 D5            [11] 3799 	push	de
+   51E6 CD 36 5E      [17] 3800 	call	_cpct_drawSprite
+                           3801 ;src/includes/world.h:170: break;
+   51E9 C3 3A 53      [10] 3802 	jp	00128$
+                           3803 ;src/includes/world.h:171: case DWELLINGS2:
+   51EC                    3804 00104$:
+                           3805 ;src/includes/world.h:172: cpct_drawSprite(dwellings2, p_video, TILESIZE_W, TILESIZE_H);
+   51EC 11 29 41      [10] 3806 	ld	de,#_dwellings2
+   51EF 21 04 10      [10] 3807 	ld	hl,#0x1004
+   51F2 E5            [11] 3808 	push	hl
+   51F3 C5            [11] 3809 	push	bc
+   51F4 D5            [11] 3810 	push	de
+   51F5 CD 36 5E      [17] 3811 	call	_cpct_drawSprite
+                           3812 ;src/includes/world.h:173: break;
+   51F8 C3 3A 53      [10] 3813 	jp	00128$
+                           3814 ;src/includes/world.h:174: case DWELLINGS3:
+   51FB                    3815 00105$:
+                           3816 ;src/includes/world.h:175: cpct_drawSprite(dwellings3, p_video, TILESIZE_W, TILESIZE_H);
+   51FB 11 69 41      [10] 3817 	ld	de,#_dwellings3
+   51FE 21 04 10      [10] 3818 	ld	hl,#0x1004
+   5201 E5            [11] 3819 	push	hl
+   5202 C5            [11] 3820 	push	bc
+   5203 D5            [11] 3821 	push	de
+   5204 CD 36 5E      [17] 3822 	call	_cpct_drawSprite
+                           3823 ;src/includes/world.h:176: break;
+   5207 C3 3A 53      [10] 3824 	jp	00128$
+                           3825 ;src/includes/world.h:177: case FARM1:
+   520A                    3826 00106$:
+                           3827 ;src/includes/world.h:178: cpct_drawSprite(farm1, p_video, TILESIZE_W, TILESIZE_H);
+   520A 11 E9 41      [10] 3828 	ld	de,#_farm1
+   520D 21 04 10      [10] 3829 	ld	hl,#0x1004
+   5210 E5            [11] 3830 	push	hl
+   5211 C5            [11] 3831 	push	bc
+   5212 D5            [11] 3832 	push	de
+   5213 CD 36 5E      [17] 3833 	call	_cpct_drawSprite
+                           3834 ;src/includes/world.h:179: break;
+   5216 C3 3A 53      [10] 3835 	jp	00128$
+                           3836 ;src/includes/world.h:180: case FARM2:
+   5219                    3837 00107$:
+                           3838 ;src/includes/world.h:181: cpct_drawSprite(farm2, p_video, TILESIZE_W, TILESIZE_H);
+   5219 11 29 42      [10] 3839 	ld	de,#_farm2
+   521C 21 04 10      [10] 3840 	ld	hl,#0x1004
+   521F E5            [11] 3841 	push	hl
+   5220 C5            [11] 3842 	push	bc
+   5221 D5            [11] 3843 	push	de
+   5222 CD 36 5E      [17] 3844 	call	_cpct_drawSprite
+                           3845 ;src/includes/world.h:182: break;
+   5225 C3 3A 53      [10] 3846 	jp	00128$
+                           3847 ;src/includes/world.h:183: case WATER:
+   5228                    3848 00108$:
+                           3849 ;src/includes/world.h:184: cpct_drawSprite(water, p_video, TILESIZE_W, TILESIZE_H);
+   5228 11 A9 41      [10] 3850 	ld	de,#_water
+   522B 21 04 10      [10] 3851 	ld	hl,#0x1004
+   522E E5            [11] 3852 	push	hl
+   522F C5            [11] 3853 	push	bc
+   5230 D5            [11] 3854 	push	de
+   5231 CD 36 5E      [17] 3855 	call	_cpct_drawSprite
+                           3856 ;src/includes/world.h:185: break;
+   5234 C3 3A 53      [10] 3857 	jp	00128$
+                           3858 ;src/includes/world.h:186: case FOREST:
+   5237                    3859 00109$:
+                           3860 ;src/includes/world.h:187: cpct_drawSprite(forest, p_video, TILESIZE_W, TILESIZE_H);
+   5237 11 A9 40      [10] 3861 	ld	de,#_forest
+   523A 21 04 10      [10] 3862 	ld	hl,#0x1004
+   523D E5            [11] 3863 	push	hl
+   523E C5            [11] 3864 	push	bc
+   523F D5            [11] 3865 	push	de
+   5240 CD 36 5E      [17] 3866 	call	_cpct_drawSprite
+                           3867 ;src/includes/world.h:188: break;
+   5243 C3 3A 53      [10] 3868 	jp	00128$
+                           3869 ;src/includes/world.h:189: case LIVESTOCK:
+   5246                    3870 00110$:
+                           3871 ;src/includes/world.h:190: cpct_drawSprite(livestock, p_video, TILESIZE_W, TILESIZE_H);
+   5246 11 69 42      [10] 3872 	ld	de,#_livestock
+   5249 21 04 10      [10] 3873 	ld	hl,#0x1004
+   524C E5            [11] 3874 	push	hl
+   524D C5            [11] 3875 	push	bc
+   524E D5            [11] 3876 	push	de
+   524F CD 36 5E      [17] 3877 	call	_cpct_drawSprite
+                           3878 ;src/includes/world.h:191: break;
+   5252 C3 3A 53      [10] 3879 	jp	00128$
+                           3880 ;src/includes/world.h:192: case SSNS:
+   5255                    3881 00111$:
+                           3882 ;src/includes/world.h:193: cpct_drawSprite(station_small_ns, p_video, TILESIZE_W, TILESIZE_H);
+   5255 11 A9 42      [10] 3883 	ld	de,#_station_small_ns
+   5258 21 04 10      [10] 3884 	ld	hl,#0x1004
+   525B E5            [11] 3885 	push	hl
+   525C C5            [11] 3886 	push	bc
+   525D D5            [11] 3887 	push	de
+   525E CD 36 5E      [17] 3888 	call	_cpct_drawSprite
+                           3889 ;src/includes/world.h:194: break;
+   5261 C3 3A 53      [10] 3890 	jp	00128$
+                           3891 ;src/includes/world.h:195: case SSEW:
+   5264                    3892 00112$:
+                           3893 ;src/includes/world.h:196: cpct_drawSprite(station_small_ew, p_video, TILESIZE_W, TILESIZE_H);
+   5264 11 E9 42      [10] 3894 	ld	de,#_station_small_ew
+   5267 21 04 10      [10] 3895 	ld	hl,#0x1004
+   526A E5            [11] 3896 	push	hl
+   526B C5            [11] 3897 	push	bc
+   526C D5            [11] 3898 	push	de
+   526D CD 36 5E      [17] 3899 	call	_cpct_drawSprite
+                           3900 ;src/includes/world.h:197: break;
+   5270 C3 3A 53      [10] 3901 	jp	00128$
+                           3902 ;src/includes/world.h:198: case SMNS:
+   5273                    3903 00113$:
+                           3904 ;src/includes/world.h:199: cpct_drawSprite(station_medium_ns, p_video, TILESIZE_W, TILESIZE_H);
+   5273 11 29 43      [10] 3905 	ld	de,#_station_medium_ns
+   5276 21 04 10      [10] 3906 	ld	hl,#0x1004
+   5279 E5            [11] 3907 	push	hl
+   527A C5            [11] 3908 	push	bc
+   527B D5            [11] 3909 	push	de
+   527C CD 36 5E      [17] 3910 	call	_cpct_drawSprite
+                           3911 ;src/includes/world.h:200: break;
+   527F C3 3A 53      [10] 3912 	jp	00128$
+                           3913 ;src/includes/world.h:201: case SMEW:
+   5282                    3914 00114$:
+                           3915 ;src/includes/world.h:202: cpct_drawSprite(station_medium_ew, p_video, TILESIZE_W, TILESIZE_H);
+   5282 11 69 43      [10] 3916 	ld	de,#_station_medium_ew
+   5285 21 04 10      [10] 3917 	ld	hl,#0x1004
+   5288 E5            [11] 3918 	push	hl
+   5289 C5            [11] 3919 	push	bc
+   528A D5            [11] 3920 	push	de
+   528B CD 36 5E      [17] 3921 	call	_cpct_drawSprite
+                           3922 ;src/includes/world.h:203: break;
+   528E C3 3A 53      [10] 3923 	jp	00128$
+                           3924 ;src/includes/world.h:204: case SLNS:
+   5291                    3925 00115$:
+                           3926 ;src/includes/world.h:205: cpct_drawSprite(station_large_ns, p_video, TILESIZE_W, TILESIZE_H);
+   5291 11 A9 43      [10] 3927 	ld	de,#_station_large_ns
+   5294 21 04 10      [10] 3928 	ld	hl,#0x1004
+   5297 E5            [11] 3929 	push	hl
+   5298 C5            [11] 3930 	push	bc
+   5299 D5            [11] 3931 	push	de
+   529A CD 36 5E      [17] 3932 	call	_cpct_drawSprite
+                           3933 ;src/includes/world.h:206: break;
+   529D C3 3A 53      [10] 3934 	jp	00128$
+                           3935 ;src/includes/world.h:207: case SLEW:
+   52A0                    3936 00116$:
+                           3937 ;src/includes/world.h:208: cpct_drawSprite(station_large_ew, p_video, TILESIZE_W, TILESIZE_H);
+   52A0 11 E9 43      [10] 3938 	ld	de,#_station_large_ew
+   52A3 21 04 10      [10] 3939 	ld	hl,#0x1004
+   52A6 E5            [11] 3940 	push	hl
+   52A7 C5            [11] 3941 	push	bc
+   52A8 D5            [11] 3942 	push	de
+   52A9 CD 36 5E      [17] 3943 	call	_cpct_drawSprite
+                           3944 ;src/includes/world.h:209: break;
+   52AC C3 3A 53      [10] 3945 	jp	00128$
+                           3946 ;src/includes/world.h:210: case REW:
+   52AF                    3947 00117$:
+                           3948 ;src/includes/world.h:211: cpct_drawSprite(rail_ew, p_video, TILESIZE_W, TILESIZE_H);	
+   52AF 11 29 44      [10] 3949 	ld	de,#_rail_ew
+   52B2 21 04 10      [10] 3950 	ld	hl,#0x1004
+   52B5 E5            [11] 3951 	push	hl
+   52B6 C5            [11] 3952 	push	bc
+   52B7 D5            [11] 3953 	push	de
+   52B8 CD 36 5E      [17] 3954 	call	_cpct_drawSprite
+                           3955 ;src/includes/world.h:212: break;
+   52BB C3 3A 53      [10] 3956 	jp	00128$
+                           3957 ;src/includes/world.h:213: case RNS:
+   52BE                    3958 00118$:
+                           3959 ;src/includes/world.h:214: cpct_drawSprite(rail_ns, p_video, TILESIZE_W, TILESIZE_H);	
+   52BE 11 69 44      [10] 3960 	ld	de,#_rail_ns
+   52C1 21 04 10      [10] 3961 	ld	hl,#0x1004
+   52C4 E5            [11] 3962 	push	hl
+   52C5 C5            [11] 3963 	push	bc
+   52C6 D5            [11] 3964 	push	de
+   52C7 CD 36 5E      [17] 3965 	call	_cpct_drawSprite
+                           3966 ;src/includes/world.h:215: break;
+   52CA 18 6E         [12] 3967 	jr	00128$
+                           3968 ;src/includes/world.h:216: case REN:
+   52CC                    3969 00119$:
+                           3970 ;src/includes/world.h:217: cpct_drawSprite(rail_en, p_video, TILESIZE_W, TILESIZE_H);	
+   52CC 11 A9 44      [10] 3971 	ld	de,#_rail_en
+   52CF 21 04 10      [10] 3972 	ld	hl,#0x1004
+   52D2 E5            [11] 3973 	push	hl
+   52D3 C5            [11] 3974 	push	bc
+   52D4 D5            [11] 3975 	push	de
+   52D5 CD 36 5E      [17] 3976 	call	_cpct_drawSprite
+                           3977 ;src/includes/world.h:218: break;
+   52D8 18 60         [12] 3978 	jr	00128$
+                           3979 ;src/includes/world.h:219: case RES:
+   52DA                    3980 00120$:
+                           3981 ;src/includes/world.h:220: cpct_drawSprite(rail_es, p_video, TILESIZE_W, TILESIZE_H);	
+   52DA 11 E9 44      [10] 3982 	ld	de,#_rail_es
+   52DD 21 04 10      [10] 3983 	ld	hl,#0x1004
+   52E0 E5            [11] 3984 	push	hl
+   52E1 C5            [11] 3985 	push	bc
+   52E2 D5            [11] 3986 	push	de
+   52E3 CD 36 5E      [17] 3987 	call	_cpct_drawSprite
+                           3988 ;src/includes/world.h:221: break;
+   52E6 18 52         [12] 3989 	jr	00128$
+                           3990 ;src/includes/world.h:222: case RWN:
+   52E8                    3991 00121$:
+                           3992 ;src/includes/world.h:223: cpct_drawSprite(rail_wn, p_video, TILESIZE_W, TILESIZE_H);	
+   52E8 11 29 45      [10] 3993 	ld	de,#_rail_wn
+   52EB 21 04 10      [10] 3994 	ld	hl,#0x1004
+   52EE E5            [11] 3995 	push	hl
+   52EF C5            [11] 3996 	push	bc
+   52F0 D5            [11] 3997 	push	de
+   52F1 CD 36 5E      [17] 3998 	call	_cpct_drawSprite
+                           3999 ;src/includes/world.h:224: break;
+   52F4 18 44         [12] 4000 	jr	00128$
+                           4001 ;src/includes/world.h:225: case RWS:
+   52F6                    4002 00122$:
+                           4003 ;src/includes/world.h:226: cpct_drawSprite(rail_ws, p_video, TILESIZE_W, TILESIZE_H);	
+   52F6 11 69 45      [10] 4004 	ld	de,#_rail_ws
+   52F9 21 04 10      [10] 4005 	ld	hl,#0x1004
+   52FC E5            [11] 4006 	push	hl
+   52FD C5            [11] 4007 	push	bc
+   52FE D5            [11] 4008 	push	de
+   52FF CD 36 5E      [17] 4009 	call	_cpct_drawSprite
+                           4010 ;src/includes/world.h:227: break;
+   5302 18 36         [12] 4011 	jr	00128$
+                           4012 ;src/includes/world.h:228: case REWN:
+   5304                    4013 00123$:
+                           4014 ;src/includes/world.h:229: cpct_drawSprite(rail_ew_n, p_video, TILESIZE_W, TILESIZE_H);	
+   5304 11 A9 45      [10] 4015 	ld	de,#_rail_ew_n
+   5307 21 04 10      [10] 4016 	ld	hl,#0x1004
+   530A E5            [11] 4017 	push	hl
+   530B C5            [11] 4018 	push	bc
+   530C D5            [11] 4019 	push	de
+   530D CD 36 5E      [17] 4020 	call	_cpct_drawSprite
+                           4021 ;src/includes/world.h:230: break;
+   5310 18 28         [12] 4022 	jr	00128$
+                           4023 ;src/includes/world.h:231: case REWS:
+   5312                    4024 00124$:
+                           4025 ;src/includes/world.h:232: cpct_drawSprite(rail_ew_s, p_video, TILESIZE_W, TILESIZE_H);	
+   5312 11 E9 45      [10] 4026 	ld	de,#_rail_ew_s
+   5315 21 04 10      [10] 4027 	ld	hl,#0x1004
+   5318 E5            [11] 4028 	push	hl
+   5319 C5            [11] 4029 	push	bc
+   531A D5            [11] 4030 	push	de
+   531B CD 36 5E      [17] 4031 	call	_cpct_drawSprite
+                           4032 ;src/includes/world.h:233: break;
+   531E 18 1A         [12] 4033 	jr	00128$
+                           4034 ;src/includes/world.h:234: case RNSE:
+   5320                    4035 00125$:
+                           4036 ;src/includes/world.h:235: cpct_drawSprite(rail_ns_e, p_video, TILESIZE_W, TILESIZE_H);	
+   5320 11 69 46      [10] 4037 	ld	de,#_rail_ns_e
+   5323 21 04 10      [10] 4038 	ld	hl,#0x1004
+   5326 E5            [11] 4039 	push	hl
+   5327 C5            [11] 4040 	push	bc
+   5328 D5            [11] 4041 	push	de
+   5329 CD 36 5E      [17] 4042 	call	_cpct_drawSprite
+                           4043 ;src/includes/world.h:236: break;
+   532C 18 0C         [12] 4044 	jr	00128$
+                           4045 ;src/includes/world.h:237: case RNSW:
+   532E                    4046 00126$:
+                           4047 ;src/includes/world.h:238: cpct_drawSprite(rail_ns_w, p_video, TILESIZE_W, TILESIZE_H);
+   532E 11 29 46      [10] 4048 	ld	de,#_rail_ns_w
+   5331 21 04 10      [10] 4049 	ld	hl,#0x1004
+   5334 E5            [11] 4050 	push	hl
+   5335 C5            [11] 4051 	push	bc
+   5336 D5            [11] 4052 	push	de
+   5337 CD 36 5E      [17] 4053 	call	_cpct_drawSprite
+                           4054 ;src/includes/world.h:240: }
+   533A                    4055 00128$:
+   533A DD E1         [14] 4056 	pop	ix
+   533C C9            [10] 4057 	ret
+                           4058 ;src/includes/world.h:243: void drawWorld(u8 x_, u8 y_)
+                           4059 ;	---------------------------------
+                           4060 ; Function drawWorld
+                           4061 ; ---------------------------------
+   533D                    4062 _drawWorld::
+   533D DD E5         [15] 4063 	push	ix
+   533F DD 21 00 00   [14] 4064 	ld	ix,#0
+   5343 DD 39         [15] 4065 	add	ix,sp
+   5345 3B            [ 6] 4066 	dec	sp
+                           4067 ;src/includes/world.h:251: for(iy=0; iy<NBTILE_H;iy++)
+   5346 16 00         [ 7] 4068 	ld	d,#0x00
+                           4069 ;src/includes/world.h:253: for(ix=0; ix<NBTILE_W;ix++)
+   5348                    4070 00109$:
+   5348 1E 00         [ 7] 4071 	ld	e,#0x00
+   534A                    4072 00103$:
+                           4073 ;src/includes/world.h:255: drawTile(x_, y_, ix, iy);
+   534A D5            [11] 4074 	push	de
+   534B D5            [11] 4075 	push	de
+   534C DD 66 05      [19] 4076 	ld	h,5 (ix)
+   534F DD 6E 04      [19] 4077 	ld	l,4 (ix)
+   5352 E5            [11] 4078 	push	hl
+   5353 CD 15 51      [17] 4079 	call	_drawTile
+   5356 F1            [10] 4080 	pop	af
+   5357 F1            [10] 4081 	pop	af
+   5358 D1            [10] 4082 	pop	de
+                           4083 ;src/includes/world.h:253: for(ix=0; ix<NBTILE_W;ix++)
+   5359 1C            [ 4] 4084 	inc	e
+   535A 7B            [ 4] 4085 	ld	a,e
+   535B D6 14         [ 7] 4086 	sub	a, #0x14
+   535D 38 EB         [12] 4087 	jr	C,00103$
+                           4088 ;src/includes/world.h:251: for(iy=0; iy<NBTILE_H;iy++)
+   535F 14            [ 4] 4089 	inc	d
+   5360 7A            [ 4] 4090 	ld	a,d
+   5361 D6 0C         [ 7] 4091 	sub	a, #0x0C
+   5363 38 E3         [12] 4092 	jr	C,00109$
+                           4093 ;src/includes/world.h:261: scrollx = x_* (WIDTH-TILESIZE_W)/(WIDTH-NBTILE_W);
+   5365 DD 4E 04      [19] 4094 	ld	c,4 (ix)
+   5368 06 00         [ 7] 4095 	ld	b,#0x00
+   536A 69            [ 4] 4096 	ld	l, c
+   536B 60            [ 4] 4097 	ld	h, b
+   536C 29            [11] 4098 	add	hl, hl
+   536D 29            [11] 4099 	add	hl, hl
+   536E 29            [11] 4100 	add	hl, hl
+   536F 09            [11] 4101 	add	hl, bc
+   5370 29            [11] 4102 	add	hl, hl
+   5371 09            [11] 4103 	add	hl, bc
+   5372 29            [11] 4104 	add	hl, hl
+   5373 29            [11] 4105 	add	hl, hl
+   5374 01 3C 00      [10] 4106 	ld	bc,#0x003C
+   5377 C5            [11] 4107 	push	bc
+   5378 E5            [11] 4108 	push	hl
+   5379 CD 4C 61      [17] 4109 	call	__divsint
+   537C F1            [10] 4110 	pop	af
+   537D F1            [10] 4111 	pop	af
+   537E 55            [ 4] 4112 	ld	d,l
+                           4113 ;src/includes/world.h:262: scrolly = y_* (HEIGHT*TILESIZE_W-TILESIZE_H)/(HEIGHT-NBTILE_H);
+   537F DD 4E 05      [19] 4114 	ld	c,5 (ix)
+   5382 06 00         [ 7] 4115 	ld	b,#0x00
+   5384 69            [ 4] 4116 	ld	l, c
+   5385 60            [ 4] 4117 	ld	h, b
+   5386 29            [11] 4118 	add	hl, hl
+   5387 29            [11] 4119 	add	hl, hl
+   5388 09            [11] 4120 	add	hl, bc
+   5389 29            [11] 4121 	add	hl, hl
+   538A 09            [11] 4122 	add	hl, bc
+   538B 29            [11] 4123 	add	hl, hl
+   538C 29            [11] 4124 	add	hl, hl
+   538D 29            [11] 4125 	add	hl, hl
+   538E 29            [11] 4126 	add	hl, hl
+   538F D5            [11] 4127 	push	de
+   5390 01 24 00      [10] 4128 	ld	bc,#0x0024
+   5393 C5            [11] 4129 	push	bc
+   5394 E5            [11] 4130 	push	hl
+   5395 CD 4C 61      [17] 4131 	call	__divsint
+   5398 F1            [10] 4132 	pop	af
+   5399 F1            [10] 4133 	pop	af
+   539A D1            [10] 4134 	pop	de
+   539B DD 75 FF      [19] 4135 	ld	-1 (ix),l
+                           4136 ;src/includes/world.h:264: p_video = cpct_getScreenPtr(SCR_VMEM, scrollx, 0);
+   539E AF            [ 4] 4137 	xor	a, a
+   539F F5            [11] 4138 	push	af
+   53A0 33            [ 6] 4139 	inc	sp
+   53A1 D5            [11] 4140 	push	de
+   53A2 33            [ 6] 4141 	inc	sp
+   53A3 21 00 C0      [10] 4142 	ld	hl,#0xC000
+   53A6 E5            [11] 4143 	push	hl
+   53A7 CD FB 60      [17] 4144 	call	_cpct_getScreenPtr
+                           4145 ;src/includes/world.h:265: cpct_drawSolidBox(p_video, cpct_px2byteM1(0,0,0,0), 4, TILESIZE_W);
+   53AA E5            [11] 4146 	push	hl
+   53AB 21 00 00      [10] 4147 	ld	hl,#0x0000
+   53AE E5            [11] 4148 	push	hl
+   53AF 2E 00         [ 7] 4149 	ld	l, #0x00
+   53B1 E5            [11] 4150 	push	hl
+   53B2 CD 0A 60      [17] 4151 	call	_cpct_px2byteM1
+   53B5 F1            [10] 4152 	pop	af
+   53B6 F1            [10] 4153 	pop	af
+   53B7 45            [ 4] 4154 	ld	b,l
+   53B8 D1            [10] 4155 	pop	de
+   53B9 21 04 04      [10] 4156 	ld	hl,#0x0404
+   53BC E5            [11] 4157 	push	hl
+   53BD C5            [11] 4158 	push	bc
+   53BE 33            [ 6] 4159 	inc	sp
+   53BF D5            [11] 4160 	push	de
+   53C0 CD 42 60      [17] 4161 	call	_cpct_drawSolidBox
+   53C3 F1            [10] 4162 	pop	af
+   53C4 F1            [10] 4163 	pop	af
+   53C5 33            [ 6] 4164 	inc	sp
+                           4165 ;src/includes/world.h:267: p_video = cpct_getScreenPtr(SCR_VMEM, 0, scrolly);
+   53C6 DD 7E FF      [19] 4166 	ld	a,-1 (ix)
+   53C9 F5            [11] 4167 	push	af
+   53CA 33            [ 6] 4168 	inc	sp
+   53CB AF            [ 4] 4169 	xor	a, a
+   53CC F5            [11] 4170 	push	af
+   53CD 33            [ 6] 4171 	inc	sp
+   53CE 21 00 C0      [10] 4172 	ld	hl,#0xC000
+   53D1 E5            [11] 4173 	push	hl
+   53D2 CD FB 60      [17] 4174 	call	_cpct_getScreenPtr
+                           4175 ;src/includes/world.h:268: cpct_drawSolidBox(p_video, cpct_px2byteM1(0,0,0,0), 1, TILESIZE_H);
+   53D5 E5            [11] 4176 	push	hl
+   53D6 21 00 00      [10] 4177 	ld	hl,#0x0000
+   53D9 E5            [11] 4178 	push	hl
+   53DA 2E 00         [ 7] 4179 	ld	l, #0x00
+   53DC E5            [11] 4180 	push	hl
+   53DD CD 0A 60      [17] 4181 	call	_cpct_px2byteM1
+   53E0 F1            [10] 4182 	pop	af
+   53E1 F1            [10] 4183 	pop	af
+   53E2 45            [ 4] 4184 	ld	b,l
+   53E3 D1            [10] 4185 	pop	de
+   53E4 21 01 10      [10] 4186 	ld	hl,#0x1001
+   53E7 E5            [11] 4187 	push	hl
+   53E8 C5            [11] 4188 	push	bc
+   53E9 33            [ 6] 4189 	inc	sp
+   53EA D5            [11] 4190 	push	de
+   53EB CD 42 60      [17] 4191 	call	_cpct_drawSolidBox
+   53EE F1            [10] 4192 	pop	af
+   53EF F1            [10] 4193 	pop	af
+   53F0 33            [ 6] 4194 	inc	sp
+   53F1 33            [ 6] 4195 	inc	sp
+   53F2 DD E1         [14] 4196 	pop	ix
+   53F4 C9            [10] 4197 	ret
+                           4198 ;src/includes/game.h:1: void windowInfoTile(u8 x, u8 y)
+                           4199 ;	---------------------------------
+                           4200 ; Function windowInfoTile
+                           4201 ; ---------------------------------
+   53F5                    4202 _windowInfoTile::
+   53F5 DD E5         [15] 4203 	push	ix
+   53F7 DD 21 00 00   [14] 4204 	ld	ix,#0
+   53FB DD 39         [15] 4205 	add	ix,sp
+   53FD 21 F8 FF      [10] 4206 	ld	hl,#-8
+   5400 39            [11] 4207 	add	hl,sp
+   5401 F9            [ 6] 4208 	ld	sp,hl
+                           4209 ;src/includes/game.h:5: switch(p_world[y*WIDTH+x])
+   5402 DD 4E 05      [19] 4210 	ld	c,5 (ix)
+   5405 06 00         [ 7] 4211 	ld	b,#0x00
+   5407 69            [ 4] 4212 	ld	l, c
+   5408 60            [ 4] 4213 	ld	h, b
+   5409 29            [11] 4214 	add	hl, hl
+   540A 29            [11] 4215 	add	hl, hl
+   540B 09            [11] 4216 	add	hl, bc
+   540C 29            [11] 4217 	add	hl, hl
+   540D 29            [11] 4218 	add	hl, hl
+   540E 29            [11] 4219 	add	hl, hl
+   540F 29            [11] 4220 	add	hl, hl
+   5410 DD 5E 04      [19] 4221 	ld	e,4 (ix)
+   5413 16 00         [ 7] 4222 	ld	d,#0x00
+   5415 19            [11] 4223 	add	hl,de
+   5416 11 A8 61      [10] 4224 	ld	de,#_p_world
+   5419 19            [11] 4225 	add	hl,de
+   541A 4E            [ 7] 4226 	ld	c,(hl)
+   541B 3E 09         [ 7] 4227 	ld	a,#0x09
+   541D 91            [ 4] 4228 	sub	a, c
+   541E DA 4F 55      [10] 4229 	jp	C,00111$
+   5421 59            [ 4] 4230 	ld	e,c
+   5422 16 00         [ 7] 4231 	ld	d,#0x00
+   5424 21 2B 54      [10] 4232 	ld	hl,#00119$
+   5427 19            [11] 4233 	add	hl,de
+   5428 19            [11] 4234 	add	hl,de
+   5429 19            [11] 4235 	add	hl,de
+   542A E9            [ 4] 4236 	jp	(hl)
+   542B                    4237 00119$:
+   542B C3 49 54      [10] 4238 	jp	00101$
+   542E C3 49 54      [10] 4239 	jp	00102$
+   5431 C3 75 54      [10] 4240 	jp	00103$
+   5434 C3 75 54      [10] 4241 	jp	00104$
+   5437 C3 75 54      [10] 4242 	jp	00105$
+   543A C3 A1 54      [10] 4243 	jp	00106$
+   543D C3 A1 54      [10] 4244 	jp	00107$
+   5440 C3 CD 54      [10] 4245 	jp	00108$
+   5443 C3 F9 54      [10] 4246 	jp	00109$
+   5446 C3 24 55      [10] 4247 	jp	00110$
+                           4248 ;src/includes/game.h:7: case GRASS1:
+   5449                    4249 00101$:
+                           4250 ;src/includes/game.h:8: case GRASS2:
+   5449                    4251 00102$:
+                           4252 ;src/includes/game.h:9: txtWindowInfoTile[0] = "Grassland";
+   5449 21 00 00      [10] 4253 	ld	hl,#0x0000
+   544C 39            [11] 4254 	add	hl,sp
+   544D 5D            [ 4] 4255 	ld	e,l
+   544E 54            [ 4] 4256 	ld	d,h
+   544F 36 8A         [10] 4257 	ld	(hl),#<(___str_2)
+   5451 23            [ 6] 4258 	inc	hl
+   5452 36 55         [10] 4259 	ld	(hl),#>(___str_2)
+                           4260 ;src/includes/game.h:10: txtWindowInfoTile[1] = "";
+   5454 6B            [ 4] 4261 	ld	l, e
+   5455 62            [ 4] 4262 	ld	h, d
+   5456 23            [ 6] 4263 	inc	hl
+   5457 23            [ 6] 4264 	inc	hl
+   5458 01 94 55      [10] 4265 	ld	bc,#___str_3+0
+   545B 71            [ 7] 4266 	ld	(hl),c
+   545C 23            [ 6] 4267 	inc	hl
+   545D 70            [ 7] 4268 	ld	(hl),b
+                           4269 ;src/includes/game.h:11: txtWindowInfoTile[2] = "Production: nothing";
+   545E 21 04 00      [10] 4270 	ld	hl,#0x0004
+   5461 19            [11] 4271 	add	hl,de
+   5462 01 95 55      [10] 4272 	ld	bc,#___str_4+0
+   5465 71            [ 7] 4273 	ld	(hl),c
+   5466 23            [ 6] 4274 	inc	hl
+   5467 70            [ 7] 4275 	ld	(hl),b
+                           4276 ;src/includes/game.h:12: txtWindowInfoTile[3] = "Demand: nothing";
+   5468 21 06 00      [10] 4277 	ld	hl,#0x0006
+   546B 19            [11] 4278 	add	hl,de
+   546C 11 A9 55      [10] 4279 	ld	de,#___str_5+0
+   546F 73            [ 7] 4280 	ld	(hl),e
+   5470 23            [ 6] 4281 	inc	hl
+   5471 72            [ 7] 4282 	ld	(hl),d
+                           4283 ;src/includes/game.h:13: break;
+   5472 C3 78 55      [10] 4284 	jp	00112$
+                           4285 ;src/includes/game.h:14: case DWELLINGS1:
+   5475                    4286 00103$:
+                           4287 ;src/includes/game.h:15: case DWELLINGS2:
+   5475                    4288 00104$:
+                           4289 ;src/includes/game.h:16: case DWELLINGS3:
+   5475                    4290 00105$:
+                           4291 ;src/includes/game.h:17: txtWindowInfoTile[0] = "City";
+   5475 21 00 00      [10] 4292 	ld	hl,#0x0000
+   5478 39            [11] 4293 	add	hl,sp
+   5479 5D            [ 4] 4294 	ld	e,l
+   547A 54            [ 4] 4295 	ld	d,h
+   547B 36 B9         [10] 4296 	ld	(hl),#<(___str_6)
+   547D 23            [ 6] 4297 	inc	hl
+   547E 36 55         [10] 4298 	ld	(hl),#>(___str_6)
+                           4299 ;src/includes/game.h:18: txtWindowInfoTile[1] = "";
+   5480 6B            [ 4] 4300 	ld	l, e
+   5481 62            [ 4] 4301 	ld	h, d
+   5482 23            [ 6] 4302 	inc	hl
+   5483 23            [ 6] 4303 	inc	hl
+   5484 01 94 55      [10] 4304 	ld	bc,#___str_3+0
+   5487 71            [ 7] 4305 	ld	(hl),c
+   5488 23            [ 6] 4306 	inc	hl
+   5489 70            [ 7] 4307 	ld	(hl),b
+                           4308 ;src/includes/game.h:19: txtWindowInfoTile[2] = "Production: Passengers, mail";
+   548A 21 04 00      [10] 4309 	ld	hl,#0x0004
+   548D 19            [11] 4310 	add	hl,de
+   548E 01 BE 55      [10] 4311 	ld	bc,#___str_7+0
+   5491 71            [ 7] 4312 	ld	(hl),c
+   5492 23            [ 6] 4313 	inc	hl
+   5493 70            [ 7] 4314 	ld	(hl),b
+                           4315 ;src/includes/game.h:20: txtWindowInfoTile[3] = "Demand: Passenger, mail, food, goods";
+   5494 21 06 00      [10] 4316 	ld	hl,#0x0006
+   5497 19            [11] 4317 	add	hl,de
+   5498 11 DB 55      [10] 4318 	ld	de,#___str_8+0
+   549B 73            [ 7] 4319 	ld	(hl),e
+   549C 23            [ 6] 4320 	inc	hl
+   549D 72            [ 7] 4321 	ld	(hl),d
+                           4322 ;src/includes/game.h:21: break;
+   549E C3 78 55      [10] 4323 	jp	00112$
+                           4324 ;src/includes/game.h:22: case FARM1:
+   54A1                    4325 00106$:
+                           4326 ;src/includes/game.h:23: case FARM2:
+   54A1                    4327 00107$:
+                           4328 ;src/includes/game.h:24: txtWindowInfoTile[0] = "Farm";
+   54A1 21 00 00      [10] 4329 	ld	hl,#0x0000
+   54A4 39            [11] 4330 	add	hl,sp
+   54A5 5D            [ 4] 4331 	ld	e,l
+   54A6 54            [ 4] 4332 	ld	d,h
+   54A7 36 00         [10] 4333 	ld	(hl),#<(___str_9)
+   54A9 23            [ 6] 4334 	inc	hl
+   54AA 36 56         [10] 4335 	ld	(hl),#>(___str_9)
+                           4336 ;src/includes/game.h:25: txtWindowInfoTile[1] = "";
+   54AC 6B            [ 4] 4337 	ld	l, e
+   54AD 62            [ 4] 4338 	ld	h, d
+   54AE 23            [ 6] 4339 	inc	hl
+   54AF 23            [ 6] 4340 	inc	hl
+   54B0 01 94 55      [10] 4341 	ld	bc,#___str_3+0
+   54B3 71            [ 7] 4342 	ld	(hl),c
+   54B4 23            [ 6] 4343 	inc	hl
+   54B5 70            [ 7] 4344 	ld	(hl),b
+                           4345 ;src/includes/game.h:26: txtWindowInfoTile[2] = "Production: Cereal";
+   54B6 21 04 00      [10] 4346 	ld	hl,#0x0004
+   54B9 19            [11] 4347 	add	hl,de
+   54BA 01 05 56      [10] 4348 	ld	bc,#___str_10+0
+   54BD 71            [ 7] 4349 	ld	(hl),c
+   54BE 23            [ 6] 4350 	inc	hl
+   54BF 70            [ 7] 4351 	ld	(hl),b
+                           4352 ;src/includes/game.h:27: txtWindowInfoTile[3] = "Demand: Nothing";
+   54C0 21 06 00      [10] 4353 	ld	hl,#0x0006
+   54C3 19            [11] 4354 	add	hl,de
+   54C4 11 18 56      [10] 4355 	ld	de,#___str_11+0
+   54C7 73            [ 7] 4356 	ld	(hl),e
+   54C8 23            [ 6] 4357 	inc	hl
+   54C9 72            [ 7] 4358 	ld	(hl),d
+                           4359 ;src/includes/game.h:28: break;
+   54CA C3 78 55      [10] 4360 	jp	00112$
+                           4361 ;src/includes/game.h:29: case WATER:
+   54CD                    4362 00108$:
+                           4363 ;src/includes/game.h:30: txtWindowInfoTile[0] = "Water";
+   54CD 21 00 00      [10] 4364 	ld	hl,#0x0000
+   54D0 39            [11] 4365 	add	hl,sp
+   54D1 5D            [ 4] 4366 	ld	e,l
+   54D2 54            [ 4] 4367 	ld	d,h
+   54D3 36 28         [10] 4368 	ld	(hl),#<(___str_12)
+   54D5 23            [ 6] 4369 	inc	hl
+   54D6 36 56         [10] 4370 	ld	(hl),#>(___str_12)
+                           4371 ;src/includes/game.h:31: txtWindowInfoTile[1] = "";
+   54D8 6B            [ 4] 4372 	ld	l, e
+   54D9 62            [ 4] 4373 	ld	h, d
+   54DA 23            [ 6] 4374 	inc	hl
+   54DB 23            [ 6] 4375 	inc	hl
+   54DC 01 94 55      [10] 4376 	ld	bc,#___str_3+0
+   54DF 71            [ 7] 4377 	ld	(hl),c
+   54E0 23            [ 6] 4378 	inc	hl
+   54E1 70            [ 7] 4379 	ld	(hl),b
+                           4380 ;src/includes/game.h:32: txtWindowInfoTile[2] = "Production: Nothing";
+   54E2 21 04 00      [10] 4381 	ld	hl,#0x0004
+   54E5 19            [11] 4382 	add	hl,de
+   54E6 01 2E 56      [10] 4383 	ld	bc,#___str_13+0
+   54E9 71            [ 7] 4384 	ld	(hl),c
+   54EA 23            [ 6] 4385 	inc	hl
+   54EB 70            [ 7] 4386 	ld	(hl),b
+                           4387 ;src/includes/game.h:33: txtWindowInfoTile[3] = "Demand: Nothing";
+   54EC 21 06 00      [10] 4388 	ld	hl,#0x0006
+   54EF 19            [11] 4389 	add	hl,de
+   54F0 11 18 56      [10] 4390 	ld	de,#___str_11+0
+   54F3 73            [ 7] 4391 	ld	(hl),e
+   54F4 23            [ 6] 4392 	inc	hl
+   54F5 72            [ 7] 4393 	ld	(hl),d
+                           4394 ;src/includes/game.h:34: break;
+   54F6 C3 78 55      [10] 4395 	jp	00112$
+                           4396 ;src/includes/game.h:35: case FOREST:
+   54F9                    4397 00109$:
+                           4398 ;src/includes/game.h:36: txtWindowInfoTile[0] = "Forest";
+   54F9 21 00 00      [10] 4399 	ld	hl,#0x0000
+   54FC 39            [11] 4400 	add	hl,sp
+   54FD 5D            [ 4] 4401 	ld	e,l
+   54FE 54            [ 4] 4402 	ld	d,h
+   54FF 36 42         [10] 4403 	ld	(hl),#<(___str_14)
+   5501 23            [ 6] 4404 	inc	hl
+   5502 36 56         [10] 4405 	ld	(hl),#>(___str_14)
+                           4406 ;src/includes/game.h:37: txtWindowInfoTile[1] = "";
+   5504 6B            [ 4] 4407 	ld	l, e
+   5505 62            [ 4] 4408 	ld	h, d
+   5506 23            [ 6] 4409 	inc	hl
+   5507 23            [ 6] 4410 	inc	hl
+   5508 01 94 55      [10] 4411 	ld	bc,#___str_3+0
+   550B 71            [ 7] 4412 	ld	(hl),c
+   550C 23            [ 6] 4413 	inc	hl
+   550D 70            [ 7] 4414 	ld	(hl),b
+                           4415 ;src/includes/game.h:38: txtWindowInfoTile[2] = "Production: Nothing";
+   550E 21 04 00      [10] 4416 	ld	hl,#0x0004
+   5511 19            [11] 4417 	add	hl,de
+   5512 01 2E 56      [10] 4418 	ld	bc,#___str_13+0
+   5515 71            [ 7] 4419 	ld	(hl),c
+   5516 23            [ 6] 4420 	inc	hl
+   5517 70            [ 7] 4421 	ld	(hl),b
+                           4422 ;src/includes/game.h:39: txtWindowInfoTile[3] = "Demand: Nothing";
+   5518 21 06 00      [10] 4423 	ld	hl,#0x0006
+   551B 19            [11] 4424 	add	hl,de
+   551C 11 18 56      [10] 4425 	ld	de,#___str_11+0
+   551F 73            [ 7] 4426 	ld	(hl),e
+   5520 23            [ 6] 4427 	inc	hl
+   5521 72            [ 7] 4428 	ld	(hl),d
+                           4429 ;src/includes/game.h:40: break;
+   5522 18 54         [12] 4430 	jr	00112$
+                           4431 ;src/includes/game.h:41: case LIVESTOCK:
+   5524                    4432 00110$:
+                           4433 ;src/includes/game.h:42: txtWindowInfoTile[0] = "Livestock farming";
+   5524 21 00 00      [10] 4434 	ld	hl,#0x0000
+   5527 39            [11] 4435 	add	hl,sp
+   5528 5D            [ 4] 4436 	ld	e,l
+   5529 54            [ 4] 4437 	ld	d,h
+   552A 36 49         [10] 4438 	ld	(hl),#<(___str_15)
+   552C 23            [ 6] 4439 	inc	hl
+   552D 36 56         [10] 4440 	ld	(hl),#>(___str_15)
+                           4441 ;src/includes/game.h:43: txtWindowInfoTile[1] = "";
+   552F 6B            [ 4] 4442 	ld	l, e
+   5530 62            [ 4] 4443 	ld	h, d
+   5531 23            [ 6] 4444 	inc	hl
+   5532 23            [ 6] 4445 	inc	hl
+   5533 01 94 55      [10] 4446 	ld	bc,#___str_3+0
+   5536 71            [ 7] 4447 	ld	(hl),c
+   5537 23            [ 6] 4448 	inc	hl
+   5538 70            [ 7] 4449 	ld	(hl),b
+                           4450 ;src/includes/game.h:44: txtWindowInfoTile[2] = "Production: Livestock, wool";
+   5539 21 04 00      [10] 4451 	ld	hl,#0x0004
+   553C 19            [11] 4452 	add	hl,de
+   553D 01 5B 56      [10] 4453 	ld	bc,#___str_16+0
+   5540 71            [ 7] 4454 	ld	(hl),c
+   5541 23            [ 6] 4455 	inc	hl
+   5542 70            [ 7] 4456 	ld	(hl),b
+                           4457 ;src/includes/game.h:45: txtWindowInfoTile[3] = "Demand: Cereal";
+   5543 21 06 00      [10] 4458 	ld	hl,#0x0006
+   5546 19            [11] 4459 	add	hl,de
+   5547 11 77 56      [10] 4460 	ld	de,#___str_17+0
+   554A 73            [ 7] 4461 	ld	(hl),e
+   554B 23            [ 6] 4462 	inc	hl
+   554C 72            [ 7] 4463 	ld	(hl),d
+                           4464 ;src/includes/game.h:46: break;
+   554D 18 29         [12] 4465 	jr	00112$
+                           4466 ;src/includes/game.h:47: default:
+   554F                    4467 00111$:
+                           4468 ;src/includes/game.h:48: txtWindowInfoTile[0] = "Not yet implemented";
+   554F 21 00 00      [10] 4469 	ld	hl,#0x0000
+   5552 39            [11] 4470 	add	hl,sp
+   5553 5D            [ 4] 4471 	ld	e,l
+   5554 54            [ 4] 4472 	ld	d,h
+   5555 36 86         [10] 4473 	ld	(hl),#<(___str_18)
+   5557 23            [ 6] 4474 	inc	hl
+   5558 36 56         [10] 4475 	ld	(hl),#>(___str_18)
+                           4476 ;src/includes/game.h:49: txtWindowInfoTile[1] = "";
+   555A 6B            [ 4] 4477 	ld	l, e
+   555B 62            [ 4] 4478 	ld	h, d
+   555C 23            [ 6] 4479 	inc	hl
+   555D 23            [ 6] 4480 	inc	hl
+   555E 01 94 55      [10] 4481 	ld	bc,#___str_3+0
+   5561 71            [ 7] 4482 	ld	(hl),c
+   5562 23            [ 6] 4483 	inc	hl
+   5563 70            [ 7] 4484 	ld	(hl),b
+                           4485 ;src/includes/game.h:50: txtWindowInfoTile[2] = "Production: ?";
+   5564 21 04 00      [10] 4486 	ld	hl,#0x0004
+   5567 19            [11] 4487 	add	hl,de
+   5568 01 9A 56      [10] 4488 	ld	bc,#___str_19+0
+   556B 71            [ 7] 4489 	ld	(hl),c
+   556C 23            [ 6] 4490 	inc	hl
+   556D 70            [ 7] 4491 	ld	(hl),b
+                           4492 ;src/includes/game.h:51: txtWindowInfoTile[3] = "Demand: ?";
+   556E 21 06 00      [10] 4493 	ld	hl,#0x0006
+   5571 19            [11] 4494 	add	hl,de
+   5572 11 A8 56      [10] 4495 	ld	de,#___str_20+0
+   5575 73            [ 7] 4496 	ld	(hl),e
+   5576 23            [ 6] 4497 	inc	hl
+   5577 72            [ 7] 4498 	ld	(hl),d
+                           4499 ;src/includes/game.h:53: }
+   5578                    4500 00112$:
+                           4501 ;src/includes/game.h:55: drawWindow(txtWindowInfoTile, 4, 0);
+   5578 21 00 00      [10] 4502 	ld	hl,#0x0000
+   557B 39            [11] 4503 	add	hl,sp
+   557C EB            [ 4] 4504 	ex	de,hl
+   557D 21 04 00      [10] 4505 	ld	hl,#0x0004
+   5580 E5            [11] 4506 	push	hl
+   5581 D5            [11] 4507 	push	de
+   5582 CD C1 4B      [17] 4508 	call	_drawWindow
+   5585 DD F9         [10] 4509 	ld	sp,ix
+   5587 DD E1         [14] 4510 	pop	ix
+   5589 C9            [10] 4511 	ret
+   558A                    4512 ___str_2:
+   558A 47 72 61 73 73 6C  4513 	.ascii "Grassland"
         61 6E 64
-   54D9 00                 4375 	.db 0x00
-   54DA                    4376 ___str_3:
-   54DA 00                 4377 	.db 0x00
-   54DB                    4378 ___str_4:
-   54DB 50 72 6F 64 75 63  4379 	.ascii "Production: nothing"
+   5593 00                 4514 	.db 0x00
+   5594                    4515 ___str_3:
+   5594 00                 4516 	.db 0x00
+   5595                    4517 ___str_4:
+   5595 50 72 6F 64 75 63  4518 	.ascii "Production: nothing"
         74 69 6F 6E 3A 20
         6E 6F 74 68 69 6E
         67
-   54EE 00                 4380 	.db 0x00
-   54EF                    4381 ___str_5:
-   54EF 44 65 6D 61 6E 64  4382 	.ascii "Demand: nothing"
+   55A8 00                 4519 	.db 0x00
+   55A9                    4520 ___str_5:
+   55A9 44 65 6D 61 6E 64  4521 	.ascii "Demand: nothing"
         3A 20 6E 6F 74 68
         69 6E 67
-   54FE 00                 4383 	.db 0x00
-   54FF                    4384 ___str_6:
-   54FF 43 69 74 79        4385 	.ascii "City"
-   5503 00                 4386 	.db 0x00
-   5504                    4387 ___str_7:
-   5504 50 72 6F 64 75 63  4388 	.ascii "Production: Passengers, mail"
+   55B8 00                 4522 	.db 0x00
+   55B9                    4523 ___str_6:
+   55B9 43 69 74 79        4524 	.ascii "City"
+   55BD 00                 4525 	.db 0x00
+   55BE                    4526 ___str_7:
+   55BE 50 72 6F 64 75 63  4527 	.ascii "Production: Passengers, mail"
         74 69 6F 6E 3A 20
         50 61 73 73 65 6E
         67 65 72 73 2C 20
         6D 61 69 6C
-   5520 00                 4389 	.db 0x00
-   5521                    4390 ___str_8:
-   5521 44 65 6D 61 6E 64  4391 	.ascii "Demand: Passenger, mail, food, goods"
+   55DA 00                 4528 	.db 0x00
+   55DB                    4529 ___str_8:
+   55DB 44 65 6D 61 6E 64  4530 	.ascii "Demand: Passenger, mail, food, goods"
         3A 20 50 61 73 73
         65 6E 67 65 72 2C
         20 6D 61 69 6C 2C
         20 66 6F 6F 64 2C
         20 67 6F 6F 64 73
-   5545 00                 4392 	.db 0x00
-   5546                    4393 ___str_9:
-   5546 46 61 72 6D        4394 	.ascii "Farm"
-   554A 00                 4395 	.db 0x00
-   554B                    4396 ___str_10:
-   554B 50 72 6F 64 75 63  4397 	.ascii "Production: Cereal"
+   55FF 00                 4531 	.db 0x00
+   5600                    4532 ___str_9:
+   5600 46 61 72 6D        4533 	.ascii "Farm"
+   5604 00                 4534 	.db 0x00
+   5605                    4535 ___str_10:
+   5605 50 72 6F 64 75 63  4536 	.ascii "Production: Cereal"
         74 69 6F 6E 3A 20
         43 65 72 65 61 6C
-   555D 00                 4398 	.db 0x00
-   555E                    4399 ___str_11:
-   555E 44 65 6D 61 6E 64  4400 	.ascii "Demand: Nothing"
+   5617 00                 4537 	.db 0x00
+   5618                    4538 ___str_11:
+   5618 44 65 6D 61 6E 64  4539 	.ascii "Demand: Nothing"
         3A 20 4E 6F 74 68
         69 6E 67
-   556D 00                 4401 	.db 0x00
-   556E                    4402 ___str_12:
-   556E 57 61 74 65 72     4403 	.ascii "Water"
-   5573 00                 4404 	.db 0x00
-   5574                    4405 ___str_13:
-   5574 50 72 6F 64 75 63  4406 	.ascii "Production: Nothing"
+   5627 00                 4540 	.db 0x00
+   5628                    4541 ___str_12:
+   5628 57 61 74 65 72     4542 	.ascii "Water"
+   562D 00                 4543 	.db 0x00
+   562E                    4544 ___str_13:
+   562E 50 72 6F 64 75 63  4545 	.ascii "Production: Nothing"
         74 69 6F 6E 3A 20
         4E 6F 74 68 69 6E
         67
-   5587 00                 4407 	.db 0x00
-   5588                    4408 ___str_14:
-   5588 46 6F 72 65 73 74  4409 	.ascii "Forest"
-   558E 00                 4410 	.db 0x00
-   558F                    4411 ___str_15:
-   558F 4C 69 76 65 73 74  4412 	.ascii "Livestock farming"
+   5641 00                 4546 	.db 0x00
+   5642                    4547 ___str_14:
+   5642 46 6F 72 65 73 74  4548 	.ascii "Forest"
+   5648 00                 4549 	.db 0x00
+   5649                    4550 ___str_15:
+   5649 4C 69 76 65 73 74  4551 	.ascii "Livestock farming"
         6F 63 6B 20 66 61
         72 6D 69 6E 67
-   55A0 00                 4413 	.db 0x00
-   55A1                    4414 ___str_16:
-   55A1 50 72 6F 64 75 63  4415 	.ascii "Production: Livestock, wool"
+   565A 00                 4552 	.db 0x00
+   565B                    4553 ___str_16:
+   565B 50 72 6F 64 75 63  4554 	.ascii "Production: Livestock, wool"
         74 69 6F 6E 3A 20
         4C 69 76 65 73 74
         6F 63 6B 2C 20 77
         6F 6F 6C
-   55BC 00                 4416 	.db 0x00
-   55BD                    4417 ___str_17:
-   55BD 44 65 6D 61 6E 64  4418 	.ascii "Demand: Cereal"
+   5676 00                 4555 	.db 0x00
+   5677                    4556 ___str_17:
+   5677 44 65 6D 61 6E 64  4557 	.ascii "Demand: Cereal"
         3A 20 43 65 72 65
         61 6C
-   55CB 00                 4419 	.db 0x00
-   55CC                    4420 ___str_18:
-   55CC 4E 6F 74 20 79 65  4421 	.ascii "Not yet implemented"
+   5685 00                 4558 	.db 0x00
+   5686                    4559 ___str_18:
+   5686 4E 6F 74 20 79 65  4560 	.ascii "Not yet implemented"
         74 20 69 6D 70 6C
         65 6D 65 6E 74 65
         64
-   55DF 00                 4422 	.db 0x00
-   55E0                    4423 ___str_19:
-   55E0 50 72 6F 64 75 63  4424 	.ascii "Production: ?"
+   5699 00                 4561 	.db 0x00
+   569A                    4562 ___str_19:
+   569A 50 72 6F 64 75 63  4563 	.ascii "Production: ?"
         74 69 6F 6E 3A 20
         3F
-   55ED 00                 4425 	.db 0x00
-   55EE                    4426 ___str_20:
-   55EE 44 65 6D 61 6E 64  4427 	.ascii "Demand: ?"
+   56A7 00                 4564 	.db 0x00
+   56A8                    4565 ___str_20:
+   56A8 44 65 6D 61 6E 64  4566 	.ascii "Demand: ?"
         3A 20 3F
-   55F7 00                 4428 	.db 0x00
-                           4429 ;src/includes/game.h:58: void menuStations()
-                           4430 ;	---------------------------------
-                           4431 ; Function menuStations
-                           4432 ; ---------------------------------
-   55F8                    4433 _menuStations::
-   55F8 DD E5         [15] 4434 	push	ix
-   55FA DD 21 00 00   [14] 4435 	ld	ix,#0
-   55FE DD 39         [15] 4436 	add	ix,sp
-   5600 21 FA FF      [10] 4437 	ld	hl,#-6
-   5603 39            [11] 4438 	add	hl,sp
-   5604 F9            [ 6] 4439 	ld	sp,hl
-                           4440 ;src/includes/game.h:62: const char *txtMenuSizeStation[] = { 
-   5605 21 00 00      [10] 4441 	ld	hl,#0x0000
-   5608 39            [11] 4442 	add	hl,sp
-   5609 5D            [ 4] 4443 	ld	e,l
-   560A 54            [ 4] 4444 	ld	d,h
-   560B 36 5A         [10] 4445 	ld	(hl),#<(___str_21)
-   560D 23            [ 6] 4446 	inc	hl
-   560E 36 56         [10] 4447 	ld	(hl),#>(___str_21)
-   5610 6B            [ 4] 4448 	ld	l, e
-   5611 62            [ 4] 4449 	ld	h, d
-   5612 23            [ 6] 4450 	inc	hl
-   5613 23            [ 6] 4451 	inc	hl
-   5614 01 60 56      [10] 4452 	ld	bc,#___str_22+0
-   5617 71            [ 7] 4453 	ld	(hl),c
-   5618 23            [ 6] 4454 	inc	hl
-   5619 70            [ 7] 4455 	ld	(hl),b
-   561A 21 04 00      [10] 4456 	ld	hl,#0x0004
-   561D 19            [11] 4457 	add	hl,de
-   561E 01 67 56      [10] 4458 	ld	bc,#___str_23+0
-   5621 71            [ 7] 4459 	ld	(hl),c
-   5622 23            [ 6] 4460 	inc	hl
-   5623 70            [ 7] 4461 	ld	(hl),b
-                           4462 ;src/includes/game.h:68: result = drawMenu(txtMenuSizeStation,3);
-   5624 3E 03         [ 7] 4463 	ld	a,#0x03
-   5626 F5            [11] 4464 	push	af
-   5627 33            [ 6] 4465 	inc	sp
-   5628 D5            [11] 4466 	push	de
-   5629 CD C3 4A      [17] 4467 	call	_drawMenu
-   562C F1            [10] 4468 	pop	af
-   562D 33            [ 6] 4469 	inc	sp
-   562E 5D            [ 4] 4470 	ld	e,l
-                           4471 ;src/includes/game.h:70: switch(result)
-   562F 3E 02         [ 7] 4472 	ld	a,#0x02
-   5631 93            [ 4] 4473 	sub	a, e
-   5632 38 21         [12] 4474 	jr	C,00105$
-   5634 16 00         [ 7] 4475 	ld	d,#0x00
-   5636 21 3C 56      [10] 4476 	ld	hl,#00111$
-   5639 19            [11] 4477 	add	hl,de
-   563A 19            [11] 4478 	add	hl,de
-                           4479 ;src/includes/game.h:72: case 0:
-   563B E9            [ 4] 4480 	jp	(hl)
-   563C                    4481 00111$:
-   563C 18 04         [12] 4482 	jr	00101$
-   563E 18 09         [12] 4483 	jr	00102$
-   5640 18 0E         [12] 4484 	jr	00103$
-   5642                    4485 00101$:
-                           4486 ;src/includes/game.h:73: CURSOR_MODE=T_SSEW;
-   5642 21 DF 6F      [10] 4487 	ld	hl,#_CURSOR_MODE + 0
-   5645 36 02         [10] 4488 	ld	(hl), #0x02
-                           4489 ;src/includes/game.h:74: break;
-   5647 18 0C         [12] 4490 	jr	00105$
-                           4491 ;src/includes/game.h:76: case 1:
-   5649                    4492 00102$:
-                           4493 ;src/includes/game.h:77: CURSOR_MODE=T_SMEW;
-   5649 21 DF 6F      [10] 4494 	ld	hl,#_CURSOR_MODE + 0
-   564C 36 04         [10] 4495 	ld	(hl), #0x04
-                           4496 ;src/includes/game.h:78: break;
-   564E 18 05         [12] 4497 	jr	00105$
-                           4498 ;src/includes/game.h:80: case 2:
-   5650                    4499 00103$:
-                           4500 ;src/includes/game.h:81: CURSOR_MODE=T_SLEW;
-   5650 21 DF 6F      [10] 4501 	ld	hl,#_CURSOR_MODE + 0
-   5653 36 06         [10] 4502 	ld	(hl), #0x06
-                           4503 ;src/includes/game.h:83: }
-   5655                    4504 00105$:
-   5655 DD F9         [10] 4505 	ld	sp, ix
-   5657 DD E1         [14] 4506 	pop	ix
-   5659 C9            [10] 4507 	ret
-   565A                    4508 ___str_21:
-   565A 53 6D 61 6C 6C     4509 	.ascii "Small"
-   565F 00                 4510 	.db 0x00
-   5660                    4511 ___str_22:
-   5660 4D 65 64 69 75 6D  4512 	.ascii "Medium"
-   5666 00                 4513 	.db 0x00
-   5667                    4514 ___str_23:
-   5667 4C 61 72 67 65     4515 	.ascii "Large"
-   566C 00                 4516 	.db 0x00
-                           4517 ;src/includes/game.h:87: void menuTile(u8 x, u8 y)
-                           4518 ;	---------------------------------
-                           4519 ; Function menuTile
-                           4520 ; ---------------------------------
-   566D                    4521 _menuTile::
-   566D DD E5         [15] 4522 	push	ix
-   566F DD 21 00 00   [14] 4523 	ld	ix,#0
-   5673 DD 39         [15] 4524 	add	ix,sp
-   5675 21 E8 FF      [10] 4525 	ld	hl,#-24
-   5678 39            [11] 4526 	add	hl,sp
-   5679 F9            [ 6] 4527 	ld	sp,hl
-                           4528 ;src/includes/game.h:91: const char *txtMenuTile[] = { 
-   567A 21 06 00      [10] 4529 	ld	hl,#0x0006
-   567D 39            [11] 4530 	add	hl,sp
-   567E 5D            [ 4] 4531 	ld	e,l
-   567F 54            [ 4] 4532 	ld	d,h
-   5680 36 86         [10] 4533 	ld	(hl),#<(___str_24)
-   5682 23            [ 6] 4534 	inc	hl
-   5683 36 57         [10] 4535 	ld	(hl),#>(___str_24)
-   5685 6B            [ 4] 4536 	ld	l, e
-   5686 62            [ 4] 4537 	ld	h, d
-   5687 23            [ 6] 4538 	inc	hl
-   5688 23            [ 6] 4539 	inc	hl
-   5689 01 96 57      [10] 4540 	ld	bc,#___str_25+0
-   568C 71            [ 7] 4541 	ld	(hl),c
-   568D 23            [ 6] 4542 	inc	hl
-   568E 70            [ 7] 4543 	ld	(hl),b
-   568F 21 04 00      [10] 4544 	ld	hl,#0x0004
-   5692 19            [11] 4545 	add	hl,de
-   5693 01 A6 57      [10] 4546 	ld	bc,#___str_26+0
-   5696 71            [ 7] 4547 	ld	(hl),c
-   5697 23            [ 6] 4548 	inc	hl
-   5698 70            [ 7] 4549 	ld	(hl),b
-   5699 21 06 00      [10] 4550 	ld	hl,#0x0006
-   569C 19            [11] 4551 	add	hl,de
-   569D 01 B6 57      [10] 4552 	ld	bc,#___str_27+0
-   56A0 71            [ 7] 4553 	ld	(hl),c
-   56A1 23            [ 6] 4554 	inc	hl
-   56A2 70            [ 7] 4555 	ld	(hl),b
-   56A3 21 08 00      [10] 4556 	ld	hl,#0x0008
-   56A6 19            [11] 4557 	add	hl,de
-   56A7 01 BE 57      [10] 4558 	ld	bc,#___str_28+0
-   56AA 71            [ 7] 4559 	ld	(hl),c
-   56AB 23            [ 6] 4560 	inc	hl
-   56AC 70            [ 7] 4561 	ld	(hl),b
-   56AD 21 0A 00      [10] 4562 	ld	hl,#0x000A
-   56B0 19            [11] 4563 	add	hl,de
-   56B1 01 CD 57      [10] 4564 	ld	bc,#___str_29+0
-   56B4 71            [ 7] 4565 	ld	(hl),c
-   56B5 23            [ 6] 4566 	inc	hl
-   56B6 70            [ 7] 4567 	ld	(hl),b
-   56B7 21 0C 00      [10] 4568 	ld	hl,#0x000C
-   56BA 19            [11] 4569 	add	hl,de
-   56BB 01 D8 57      [10] 4570 	ld	bc,#___str_30+0
-   56BE 71            [ 7] 4571 	ld	(hl),c
-   56BF 23            [ 6] 4572 	inc	hl
-   56C0 70            [ 7] 4573 	ld	(hl),b
-                           4574 ;src/includes/game.h:101: const char *txtWindowDestroy[] = { 
-   56C1 21 00 00      [10] 4575 	ld	hl,#0x0000
-   56C4 39            [11] 4576 	add	hl,sp
-   56C5 4D            [ 4] 4577 	ld	c,l
-   56C6 44            [ 4] 4578 	ld	b,h
-   56C7 36 DF         [10] 4579 	ld	(hl),#<(___str_31)
-   56C9 23            [ 6] 4580 	inc	hl
-   56CA 36 57         [10] 4581 	ld	(hl),#>(___str_31)
-   56CC 21 02 00      [10] 4582 	ld	hl,#0x0002
-   56CF 09            [11] 4583 	add	hl,bc
-   56D0 DD 75 FE      [19] 4584 	ld	-2 (ix),l
-   56D3 DD 74 FF      [19] 4585 	ld	-1 (ix),h
-   56D6 DD 6E FE      [19] 4586 	ld	l,-2 (ix)
-   56D9 DD 66 FF      [19] 4587 	ld	h,-1 (ix)
-   56DC 36 02         [10] 4588 	ld	(hl),#<(___str_32)
-   56DE 23            [ 6] 4589 	inc	hl
-   56DF 36 58         [10] 4590 	ld	(hl),#>(___str_32)
-   56E1 21 04 00      [10] 4591 	ld	hl,#0x0004
-   56E4 09            [11] 4592 	add	hl,bc
-   56E5 DD 75 FE      [19] 4593 	ld	-2 (ix),l
-   56E8 DD 74 FF      [19] 4594 	ld	-1 (ix),h
-   56EB DD 6E FE      [19] 4595 	ld	l,-2 (ix)
-   56EE DD 66 FF      [19] 4596 	ld	h,-1 (ix)
-   56F1 36 03         [10] 4597 	ld	(hl),#<(___str_33)
-   56F3 23            [ 6] 4598 	inc	hl
-   56F4 36 58         [10] 4599 	ld	(hl),#>(___str_33)
-                           4600 ;src/includes/game.h:108: putM2();
-   56F6 C5            [11] 4601 	push	bc
-   56F7 D5            [11] 4602 	push	de
-   56F8 CD BD 46      [17] 4603 	call	_putM2
-   56FB D1            [10] 4604 	pop	de
-   56FC C1            [10] 4605 	pop	bc
-                           4606 ;src/includes/game.h:110: do{
-   56FD D5            [11] 4607 	push	de
-   56FE DD 5E 05      [19] 4608 	ld	e,5 (ix)
-   5701 16 00         [ 7] 4609 	ld	d,#0x00
-   5703 6B            [ 4] 4610 	ld	l, e
-   5704 62            [ 4] 4611 	ld	h, d
-   5705 29            [11] 4612 	add	hl, hl
-   5706 29            [11] 4613 	add	hl, hl
-   5707 19            [11] 4614 	add	hl, de
-   5708 29            [11] 4615 	add	hl, hl
-   5709 29            [11] 4616 	add	hl, hl
-   570A 29            [11] 4617 	add	hl, hl
-   570B 29            [11] 4618 	add	hl, hl
-   570C D1            [10] 4619 	pop	de
-   570D DD 75 FE      [19] 4620 	ld	-2 (ix),l
-   5710 DD 74 FF      [19] 4621 	ld	-1 (ix),h
-   5713 DD 71 FC      [19] 4622 	ld	-4 (ix),c
-   5716 DD 70 FD      [19] 4623 	ld	-3 (ix),b
-   5719                    4624 00111$:
-                           4625 ;src/includes/game.h:111: menuChoice = drawMenu(txtMenuTile,7);
-   5719 4B            [ 4] 4626 	ld	c, e
-   571A 42            [ 4] 4627 	ld	b, d
-   571B D5            [11] 4628 	push	de
-   571C 3E 07         [ 7] 4629 	ld	a,#0x07
-   571E F5            [11] 4630 	push	af
-   571F 33            [ 6] 4631 	inc	sp
-   5720 C5            [11] 4632 	push	bc
-   5721 CD C3 4A      [17] 4633 	call	_drawMenu
-   5724 F1            [10] 4634 	pop	af
-   5725 33            [ 6] 4635 	inc	sp
-   5726 D1            [10] 4636 	pop	de
-   5727 45            [ 4] 4637 	ld	b,l
-                           4638 ;src/includes/game.h:113: if(menuChoice==0)
-   5728 78            [ 4] 4639 	ld	a,b
-   5729 B7            [ 4] 4640 	or	a, a
-   572A 20 11         [12] 4641 	jr	NZ,00109$
-                           4642 ;src/includes/game.h:114: windowInfoTile(x, y);
-   572C C5            [11] 4643 	push	bc
-   572D D5            [11] 4644 	push	de
-   572E DD 66 05      [19] 4645 	ld	h,5 (ix)
-   5731 DD 6E 04      [19] 4646 	ld	l,4 (ix)
-   5734 E5            [11] 4647 	push	hl
-   5735 CD 3B 53      [17] 4648 	call	_windowInfoTile
-   5738 F1            [10] 4649 	pop	af
-   5739 D1            [10] 4650 	pop	de
-   573A C1            [10] 4651 	pop	bc
-   573B 18 3C         [12] 4652 	jr	00112$
-   573D                    4653 00109$:
-                           4654 ;src/includes/game.h:115: else if(menuChoice==2)
-   573D 78            [ 4] 4655 	ld	a,b
-   573E D6 02         [ 7] 4656 	sub	a, #0x02
-   5740 20 09         [12] 4657 	jr	NZ,00106$
-                           4658 ;src/includes/game.h:117: menuStations();
-   5742 D5            [11] 4659 	push	de
-   5743 CD F8 55      [17] 4660 	call	_menuStations
-   5746 D1            [10] 4661 	pop	de
-                           4662 ;src/includes/game.h:118: menuChoice=6;
-   5747 06 06         [ 7] 4663 	ld	b,#0x06
-   5749 18 2E         [12] 4664 	jr	00112$
-   574B                    4665 00106$:
-                           4666 ;src/includes/game.h:120: else if(menuChoice==3)
-   574B 78            [ 4] 4667 	ld	a,b
-   574C D6 03         [ 7] 4668 	sub	a, #0x03
-   574E 20 29         [12] 4669 	jr	NZ,00112$
-                           4670 ;src/includes/game.h:122: if(	drawWindow(txtWindowDestroy,3,1) == 1)
-   5750 DD 4E FC      [19] 4671 	ld	c,-4 (ix)
-   5753 DD 46 FD      [19] 4672 	ld	b,-3 (ix)
-   5756 D5            [11] 4673 	push	de
-   5757 21 03 01      [10] 4674 	ld	hl,#0x0103
-   575A E5            [11] 4675 	push	hl
-   575B C5            [11] 4676 	push	bc
-   575C CD C1 4B      [17] 4677 	call	_drawWindow
-   575F F1            [10] 4678 	pop	af
-   5760 F1            [10] 4679 	pop	af
-   5761 D1            [10] 4680 	pop	de
-   5762 2D            [ 4] 4681 	dec	l
-   5763 20 12         [12] 4682 	jr	NZ,00102$
-                           4683 ;src/includes/game.h:123: p_world[x+y*WIDTH] = GRASS1;
-   5765 DD 6E 04      [19] 4684 	ld	l,4 (ix)
-   5768 26 00         [ 7] 4685 	ld	h,#0x00
-   576A DD 4E FE      [19] 4686 	ld	c,-2 (ix)
-   576D DD 46 FF      [19] 4687 	ld	b,-1 (ix)
-   5770 09            [11] 4688 	add	hl,bc
-   5771 01 DF 60      [10] 4689 	ld	bc,#_p_world
-   5774 09            [11] 4690 	add	hl,bc
-   5775 36 00         [10] 4691 	ld	(hl),#0x00
-   5777                    4692 00102$:
-                           4693 ;src/includes/game.h:125: menuChoice=6;
-   5777 06 06         [ 7] 4694 	ld	b,#0x06
-   5779                    4695 00112$:
-                           4696 ;src/includes/game.h:129: while(menuChoice!=6);
-   5779 78            [ 4] 4697 	ld	a,b
-   577A D6 06         [ 7] 4698 	sub	a, #0x06
-   577C 20 9B         [12] 4699 	jr	NZ,00111$
-                           4700 ;src/includes/game.h:131: putM1();
-   577E CD A9 46      [17] 4701 	call	_putM1
-   5781 DD F9         [10] 4702 	ld	sp, ix
-   5783 DD E1         [14] 4703 	pop	ix
-   5785 C9            [10] 4704 	ret
-   5786                    4705 ___str_24:
-   5786 41 62 6F 75 74 20  4706 	.ascii "About this tile"
+   56B1 00                 4567 	.db 0x00
+                           4568 ;src/includes/game.h:58: void menuStations()
+                           4569 ;	---------------------------------
+                           4570 ; Function menuStations
+                           4571 ; ---------------------------------
+   56B2                    4572 _menuStations::
+   56B2 DD E5         [15] 4573 	push	ix
+   56B4 DD 21 00 00   [14] 4574 	ld	ix,#0
+   56B8 DD 39         [15] 4575 	add	ix,sp
+   56BA 21 FA FF      [10] 4576 	ld	hl,#-6
+   56BD 39            [11] 4577 	add	hl,sp
+   56BE F9            [ 6] 4578 	ld	sp,hl
+                           4579 ;src/includes/game.h:62: const char *txtMenuSizeStation[] = { 
+   56BF 21 00 00      [10] 4580 	ld	hl,#0x0000
+   56C2 39            [11] 4581 	add	hl,sp
+   56C3 5D            [ 4] 4582 	ld	e,l
+   56C4 54            [ 4] 4583 	ld	d,h
+   56C5 36 14         [10] 4584 	ld	(hl),#<(___str_21)
+   56C7 23            [ 6] 4585 	inc	hl
+   56C8 36 57         [10] 4586 	ld	(hl),#>(___str_21)
+   56CA 6B            [ 4] 4587 	ld	l, e
+   56CB 62            [ 4] 4588 	ld	h, d
+   56CC 23            [ 6] 4589 	inc	hl
+   56CD 23            [ 6] 4590 	inc	hl
+   56CE 01 1A 57      [10] 4591 	ld	bc,#___str_22+0
+   56D1 71            [ 7] 4592 	ld	(hl),c
+   56D2 23            [ 6] 4593 	inc	hl
+   56D3 70            [ 7] 4594 	ld	(hl),b
+   56D4 21 04 00      [10] 4595 	ld	hl,#0x0004
+   56D7 19            [11] 4596 	add	hl,de
+   56D8 01 21 57      [10] 4597 	ld	bc,#___str_23+0
+   56DB 71            [ 7] 4598 	ld	(hl),c
+   56DC 23            [ 6] 4599 	inc	hl
+   56DD 70            [ 7] 4600 	ld	(hl),b
+                           4601 ;src/includes/game.h:68: result = drawMenu(txtMenuSizeStation,3);
+   56DE 3E 03         [ 7] 4602 	ld	a,#0x03
+   56E0 F5            [11] 4603 	push	af
+   56E1 33            [ 6] 4604 	inc	sp
+   56E2 D5            [11] 4605 	push	de
+   56E3 CD C3 4A      [17] 4606 	call	_drawMenu
+   56E6 F1            [10] 4607 	pop	af
+   56E7 33            [ 6] 4608 	inc	sp
+   56E8 5D            [ 4] 4609 	ld	e,l
+                           4610 ;src/includes/game.h:70: switch(result)
+   56E9 3E 02         [ 7] 4611 	ld	a,#0x02
+   56EB 93            [ 4] 4612 	sub	a, e
+   56EC 38 21         [12] 4613 	jr	C,00105$
+   56EE 16 00         [ 7] 4614 	ld	d,#0x00
+   56F0 21 F6 56      [10] 4615 	ld	hl,#00111$
+   56F3 19            [11] 4616 	add	hl,de
+   56F4 19            [11] 4617 	add	hl,de
+                           4618 ;src/includes/game.h:72: case 0:
+   56F5 E9            [ 4] 4619 	jp	(hl)
+   56F6                    4620 00111$:
+   56F6 18 04         [12] 4621 	jr	00101$
+   56F8 18 09         [12] 4622 	jr	00102$
+   56FA 18 0E         [12] 4623 	jr	00103$
+   56FC                    4624 00101$:
+                           4625 ;src/includes/game.h:73: CURSOR_MODE=T_SSEW;
+   56FC 21 A8 70      [10] 4626 	ld	hl,#_CURSOR_MODE + 0
+   56FF 36 02         [10] 4627 	ld	(hl), #0x02
+                           4628 ;src/includes/game.h:74: break;
+   5701 18 0C         [12] 4629 	jr	00105$
+                           4630 ;src/includes/game.h:76: case 1:
+   5703                    4631 00102$:
+                           4632 ;src/includes/game.h:77: CURSOR_MODE=T_SMEW;
+   5703 21 A8 70      [10] 4633 	ld	hl,#_CURSOR_MODE + 0
+   5706 36 04         [10] 4634 	ld	(hl), #0x04
+                           4635 ;src/includes/game.h:78: break;
+   5708 18 05         [12] 4636 	jr	00105$
+                           4637 ;src/includes/game.h:80: case 2:
+   570A                    4638 00103$:
+                           4639 ;src/includes/game.h:81: CURSOR_MODE=T_SLEW;
+   570A 21 A8 70      [10] 4640 	ld	hl,#_CURSOR_MODE + 0
+   570D 36 06         [10] 4641 	ld	(hl), #0x06
+                           4642 ;src/includes/game.h:83: }
+   570F                    4643 00105$:
+   570F DD F9         [10] 4644 	ld	sp, ix
+   5711 DD E1         [14] 4645 	pop	ix
+   5713 C9            [10] 4646 	ret
+   5714                    4647 ___str_21:
+   5714 53 6D 61 6C 6C     4648 	.ascii "Small"
+   5719 00                 4649 	.db 0x00
+   571A                    4650 ___str_22:
+   571A 4D 65 64 69 75 6D  4651 	.ascii "Medium"
+   5720 00                 4652 	.db 0x00
+   5721                    4653 ___str_23:
+   5721 4C 61 72 67 65     4654 	.ascii "Large"
+   5726 00                 4655 	.db 0x00
+                           4656 ;src/includes/game.h:86: void menuTile(u8 x, u8 y)
+                           4657 ;	---------------------------------
+                           4658 ; Function menuTile
+                           4659 ; ---------------------------------
+   5727                    4660 _menuTile::
+   5727 DD E5         [15] 4661 	push	ix
+   5729 DD 21 00 00   [14] 4662 	ld	ix,#0
+   572D DD 39         [15] 4663 	add	ix,sp
+   572F 21 E6 FF      [10] 4664 	ld	hl,#-26
+   5732 39            [11] 4665 	add	hl,sp
+   5733 F9            [ 6] 4666 	ld	sp,hl
+                           4667 ;src/includes/game.h:90: const char *txtMenuTile[] = { 
+   5734 21 00 00      [10] 4668 	ld	hl,#0x0000
+   5737 39            [11] 4669 	add	hl,sp
+   5738 5D            [ 4] 4670 	ld	e,l
+   5739 54            [ 4] 4671 	ld	d,h
+   573A 36 4F         [10] 4672 	ld	(hl),#<(___str_24)
+   573C 23            [ 6] 4673 	inc	hl
+   573D 36 58         [10] 4674 	ld	(hl),#>(___str_24)
+   573F 6B            [ 4] 4675 	ld	l, e
+   5740 62            [ 4] 4676 	ld	h, d
+   5741 23            [ 6] 4677 	inc	hl
+   5742 23            [ 6] 4678 	inc	hl
+   5743 01 5F 58      [10] 4679 	ld	bc,#___str_25+0
+   5746 71            [ 7] 4680 	ld	(hl),c
+   5747 23            [ 6] 4681 	inc	hl
+   5748 70            [ 7] 4682 	ld	(hl),b
+   5749 21 04 00      [10] 4683 	ld	hl,#0x0004
+   574C 19            [11] 4684 	add	hl,de
+   574D 01 6F 58      [10] 4685 	ld	bc,#___str_26+0
+   5750 71            [ 7] 4686 	ld	(hl),c
+   5751 23            [ 6] 4687 	inc	hl
+   5752 70            [ 7] 4688 	ld	(hl),b
+   5753 21 06 00      [10] 4689 	ld	hl,#0x0006
+   5756 19            [11] 4690 	add	hl,de
+   5757 01 7F 58      [10] 4691 	ld	bc,#___str_27+0
+   575A 71            [ 7] 4692 	ld	(hl),c
+   575B 23            [ 6] 4693 	inc	hl
+   575C 70            [ 7] 4694 	ld	(hl),b
+   575D 21 08 00      [10] 4695 	ld	hl,#0x0008
+   5760 19            [11] 4696 	add	hl,de
+   5761 01 87 58      [10] 4697 	ld	bc,#___str_28+0
+   5764 71            [ 7] 4698 	ld	(hl),c
+   5765 23            [ 6] 4699 	inc	hl
+   5766 70            [ 7] 4700 	ld	(hl),b
+   5767 21 0A 00      [10] 4701 	ld	hl,#0x000A
+   576A 19            [11] 4702 	add	hl,de
+   576B 01 96 58      [10] 4703 	ld	bc,#___str_29+0
+   576E 71            [ 7] 4704 	ld	(hl),c
+   576F 23            [ 6] 4705 	inc	hl
+   5770 70            [ 7] 4706 	ld	(hl),b
+   5771 21 0C 00      [10] 4707 	ld	hl,#0x000C
+   5774 19            [11] 4708 	add	hl,de
+   5775 01 A1 58      [10] 4709 	ld	bc,#___str_30+0
+   5778 71            [ 7] 4710 	ld	(hl),c
+   5779 23            [ 6] 4711 	inc	hl
+   577A 70            [ 7] 4712 	ld	(hl),b
+                           4713 ;src/includes/game.h:100: const char *txtWindowDestroy[] = { 
+   577B 21 0E 00      [10] 4714 	ld	hl,#0x000E
+   577E 39            [11] 4715 	add	hl,sp
+   577F 4D            [ 4] 4716 	ld	c,l
+   5780 44            [ 4] 4717 	ld	b,h
+   5781 36 A8         [10] 4718 	ld	(hl),#<(___str_31)
+   5783 23            [ 6] 4719 	inc	hl
+   5784 36 58         [10] 4720 	ld	(hl),#>(___str_31)
+   5786 21 02 00      [10] 4721 	ld	hl,#0x0002
+   5789 09            [11] 4722 	add	hl,bc
+   578A DD 75 FE      [19] 4723 	ld	-2 (ix),l
+   578D DD 74 FF      [19] 4724 	ld	-1 (ix),h
+   5790 DD 6E FE      [19] 4725 	ld	l,-2 (ix)
+   5793 DD 66 FF      [19] 4726 	ld	h,-1 (ix)
+   5796 36 CB         [10] 4727 	ld	(hl),#<(___str_32)
+   5798 23            [ 6] 4728 	inc	hl
+   5799 36 58         [10] 4729 	ld	(hl),#>(___str_32)
+   579B 21 04 00      [10] 4730 	ld	hl,#0x0004
+   579E 09            [11] 4731 	add	hl,bc
+   579F DD 75 FE      [19] 4732 	ld	-2 (ix),l
+   57A2 DD 74 FF      [19] 4733 	ld	-1 (ix),h
+   57A5 DD 6E FE      [19] 4734 	ld	l,-2 (ix)
+   57A8 DD 66 FF      [19] 4735 	ld	h,-1 (ix)
+   57AB 36 CC         [10] 4736 	ld	(hl),#<(___str_33)
+   57AD 23            [ 6] 4737 	inc	hl
+   57AE 36 58         [10] 4738 	ld	(hl),#>(___str_33)
+                           4739 ;src/includes/game.h:107: putM2();
+   57B0 C5            [11] 4740 	push	bc
+   57B1 D5            [11] 4741 	push	de
+   57B2 CD BD 46      [17] 4742 	call	_putM2
+   57B5 D1            [10] 4743 	pop	de
+   57B6 C1            [10] 4744 	pop	bc
+                           4745 ;src/includes/game.h:109: do{
+   57B7 D5            [11] 4746 	push	de
+   57B8 DD 5E 05      [19] 4747 	ld	e,5 (ix)
+   57BB 16 00         [ 7] 4748 	ld	d,#0x00
+   57BD 6B            [ 4] 4749 	ld	l, e
+   57BE 62            [ 4] 4750 	ld	h, d
+   57BF 29            [11] 4751 	add	hl, hl
+   57C0 29            [11] 4752 	add	hl, hl
+   57C1 19            [11] 4753 	add	hl, de
+   57C2 29            [11] 4754 	add	hl, hl
+   57C3 29            [11] 4755 	add	hl, hl
+   57C4 29            [11] 4756 	add	hl, hl
+   57C5 29            [11] 4757 	add	hl, hl
+   57C6 D1            [10] 4758 	pop	de
+   57C7 DD 75 FE      [19] 4759 	ld	-2 (ix),l
+   57CA DD 74 FF      [19] 4760 	ld	-1 (ix),h
+   57CD DD 71 FC      [19] 4761 	ld	-4 (ix),c
+   57D0 DD 70 FD      [19] 4762 	ld	-3 (ix),b
+   57D3 DD 73 FA      [19] 4763 	ld	-6 (ix),e
+   57D6 DD 72 FB      [19] 4764 	ld	-5 (ix),d
+   57D9                    4765 00114$:
+                           4766 ;src/includes/game.h:110: menuChoice = drawMenu(txtMenuTile,7);
+   57D9 DD 5E FA      [19] 4767 	ld	e,-6 (ix)
+   57DC DD 56 FB      [19] 4768 	ld	d,-5 (ix)
+   57DF 3E 07         [ 7] 4769 	ld	a,#0x07
+   57E1 F5            [11] 4770 	push	af
+   57E2 33            [ 6] 4771 	inc	sp
+   57E3 D5            [11] 4772 	push	de
+   57E4 CD C3 4A      [17] 4773 	call	_drawMenu
+   57E7 F1            [10] 4774 	pop	af
+   57E8 33            [ 6] 4775 	inc	sp
+   57E9 55            [ 4] 4776 	ld	d,l
+                           4777 ;src/includes/game.h:112: if(menuChoice==0)
+   57EA 7A            [ 4] 4778 	ld	a,d
+   57EB B7            [ 4] 4779 	or	a, a
+   57EC 20 0F         [12] 4780 	jr	NZ,00112$
+                           4781 ;src/includes/game.h:113: windowInfoTile(x, y);
+   57EE D5            [11] 4782 	push	de
+   57EF DD 66 05      [19] 4783 	ld	h,5 (ix)
+   57F2 DD 6E 04      [19] 4784 	ld	l,4 (ix)
+   57F5 E5            [11] 4785 	push	hl
+   57F6 CD F5 53      [17] 4786 	call	_windowInfoTile
+   57F9 F1            [10] 4787 	pop	af
+   57FA D1            [10] 4788 	pop	de
+   57FB 18 45         [12] 4789 	jr	00115$
+   57FD                    4790 00112$:
+                           4791 ;src/includes/game.h:114: else if(menuChoice==1)
+   57FD 7A            [ 4] 4792 	ld	a,d
+   57FE 3D            [ 4] 4793 	dec	a
+   57FF 20 09         [12] 4794 	jr	NZ,00109$
+                           4795 ;src/includes/game.h:116: CURSOR_MODE=T_REW;
+   5801 21 A8 70      [10] 4796 	ld	hl,#_CURSOR_MODE + 0
+   5804 36 07         [10] 4797 	ld	(hl), #0x07
+                           4798 ;src/includes/game.h:117: menuChoice=6;
+   5806 16 06         [ 7] 4799 	ld	d,#0x06
+   5808 18 38         [12] 4800 	jr	00115$
+   580A                    4801 00109$:
+                           4802 ;src/includes/game.h:119: else if(menuChoice==2)
+   580A 7A            [ 4] 4803 	ld	a,d
+   580B D6 02         [ 7] 4804 	sub	a, #0x02
+   580D 20 07         [12] 4805 	jr	NZ,00106$
+                           4806 ;src/includes/game.h:121: menuStations();
+   580F CD B2 56      [17] 4807 	call	_menuStations
+                           4808 ;src/includes/game.h:122: menuChoice=6;
+   5812 16 06         [ 7] 4809 	ld	d,#0x06
+   5814 18 2C         [12] 4810 	jr	00115$
+   5816                    4811 00106$:
+                           4812 ;src/includes/game.h:124: else if(menuChoice==3)
+   5816 7A            [ 4] 4813 	ld	a,d
+   5817 D6 03         [ 7] 4814 	sub	a, #0x03
+   5819 20 27         [12] 4815 	jr	NZ,00115$
+                           4816 ;src/includes/game.h:126: if(	drawWindow(txtWindowDestroy,3,1) == 1)
+   581B DD 5E FC      [19] 4817 	ld	e,-4 (ix)
+   581E DD 56 FD      [19] 4818 	ld	d,-3 (ix)
+   5821 21 03 01      [10] 4819 	ld	hl,#0x0103
+   5824 E5            [11] 4820 	push	hl
+   5825 D5            [11] 4821 	push	de
+   5826 CD C1 4B      [17] 4822 	call	_drawWindow
+   5829 F1            [10] 4823 	pop	af
+   582A F1            [10] 4824 	pop	af
+   582B 2D            [ 4] 4825 	dec	l
+   582C 20 12         [12] 4826 	jr	NZ,00102$
+                           4827 ;src/includes/game.h:127: p_world[x+y*WIDTH] = GRASS1;
+   582E DD 6E 04      [19] 4828 	ld	l,4 (ix)
+   5831 26 00         [ 7] 4829 	ld	h,#0x00
+   5833 DD 5E FE      [19] 4830 	ld	e,-2 (ix)
+   5836 DD 56 FF      [19] 4831 	ld	d,-1 (ix)
+   5839 19            [11] 4832 	add	hl,de
+   583A 11 A8 61      [10] 4833 	ld	de,#_p_world
+   583D 19            [11] 4834 	add	hl,de
+   583E 36 00         [10] 4835 	ld	(hl),#0x00
+   5840                    4836 00102$:
+                           4837 ;src/includes/game.h:129: menuChoice=6;
+   5840 16 06         [ 7] 4838 	ld	d,#0x06
+   5842                    4839 00115$:
+                           4840 ;src/includes/game.h:133: while(menuChoice!=6);
+   5842 7A            [ 4] 4841 	ld	a,d
+   5843 D6 06         [ 7] 4842 	sub	a, #0x06
+   5845 20 92         [12] 4843 	jr	NZ,00114$
+                           4844 ;src/includes/game.h:135: putM1();
+   5847 CD A9 46      [17] 4845 	call	_putM1
+   584A DD F9         [10] 4846 	ld	sp, ix
+   584C DD E1         [14] 4847 	pop	ix
+   584E C9            [10] 4848 	ret
+   584F                    4849 ___str_24:
+   584F 41 62 6F 75 74 20  4850 	.ascii "About this tile"
         74 68 69 73 20 74
         69 6C 65
-   5795 00                 4707 	.db 0x00
-   5796                    4708 ___str_25:
-   5796 42 75 69 6C 64 20  4709 	.ascii "Build a railway"
+   585E 00                 4851 	.db 0x00
+   585F                    4852 ___str_25:
+   585F 42 75 69 6C 64 20  4853 	.ascii "Build a railway"
         61 20 72 61 69 6C
         77 61 79
-   57A5 00                 4710 	.db 0x00
-   57A6                    4711 ___str_26:
-   57A6 42 75 69 6C 64 20  4712 	.ascii "Build a station"
+   586E 00                 4854 	.db 0x00
+   586F                    4855 ___str_26:
+   586F 42 75 69 6C 64 20  4856 	.ascii "Build a station"
         61 20 73 74 61 74
         69 6F 6E
-   57B5 00                 4713 	.db 0x00
-   57B6                    4714 ___str_27:
-   57B6 44 65 73 74 72 6F  4715 	.ascii "Destroy"
+   587E 00                 4857 	.db 0x00
+   587F                    4858 ___str_27:
+   587F 44 65 73 74 72 6F  4859 	.ascii "Destroy"
         79
-   57BD 00                 4716 	.db 0x00
-   57BE                    4717 ___str_28:
-   57BE 52 61 69 6C 72 6F  4718 	.ascii "Railroad depot"
+   5886 00                 4860 	.db 0x00
+   5887                    4861 ___str_28:
+   5887 52 61 69 6C 72 6F  4862 	.ascii "Railroad depot"
         61 64 20 64 65 70
         6F 74
-   57CC 00                 4719 	.db 0x00
-   57CD                    4720 ___str_29:
-   57CD 41 63 63 6F 75 6E  4721 	.ascii "Accounting"
+   5895 00                 4863 	.db 0x00
+   5896                    4864 ___str_29:
+   5896 41 63 63 6F 75 6E  4865 	.ascii "Accounting"
         74 69 6E 67
-   57D7 00                 4722 	.db 0x00
-   57D8                    4723 ___str_30:
-   57D8 52 65 73 75 6D 65  4724 	.ascii "Resume"
-   57DE 00                 4725 	.db 0x00
-   57DF                    4726 ___str_31:
-   57DF 44 65 73 74 72 6F  4727 	.ascii "Destroy this place will cost 100 $"
+   58A0 00                 4866 	.db 0x00
+   58A1                    4867 ___str_30:
+   58A1 52 65 73 75 6D 65  4868 	.ascii "Resume"
+   58A7 00                 4869 	.db 0x00
+   58A8                    4870 ___str_31:
+   58A8 44 65 73 74 72 6F  4871 	.ascii "Destroy this place will cost 100 $"
         79 20 74 68 69 73
         20 70 6C 61 63 65
         20 77 69 6C 6C 20
         63 6F 73 74 20 31
         30 30 20 24
-   5801 00                 4728 	.db 0x00
-   5802                    4729 ___str_32:
-   5802 00                 4730 	.db 0x00
-   5803                    4731 ___str_33:
-   5803 43 6F 6E 74 69 6E  4732 	.ascii "Continue ?"
+   58CA 00                 4872 	.db 0x00
+   58CB                    4873 ___str_32:
+   58CB 00                 4874 	.db 0x00
+   58CC                    4875 ___str_33:
+   58CC 43 6F 6E 74 69 6E  4876 	.ascii "Continue ?"
         75 65 20 3F
-   580D 00                 4733 	.db 0x00
-                           4734 ;src/includes/game.h:135: void game()
-                           4735 ;	---------------------------------
-                           4736 ; Function game
-                           4737 ; ---------------------------------
-   580E                    4738 _game::
-   580E DD E5         [15] 4739 	push	ix
-   5810 DD 21 00 00   [14] 4740 	ld	ix,#0
-   5814 DD 39         [15] 4741 	add	ix,sp
-   5816 21 F1 FF      [10] 4742 	ld	hl,#-15
-   5819 39            [11] 4743 	add	hl,sp
-   581A F9            [ 6] 4744 	ld	sp,hl
-                           4745 ;src/includes/game.h:138: int ulx = 0;
-   581B DD 36 F5 00   [19] 4746 	ld	-11 (ix),#0x00
-   581F DD 36 F6 00   [19] 4747 	ld	-10 (ix),#0x00
-                           4748 ;src/includes/game.h:139: int uly = 0;
-   5823 DD 36 F7 00   [19] 4749 	ld	-9 (ix),#0x00
-   5827 DD 36 F8 00   [19] 4750 	ld	-8 (ix),#0x00
-                           4751 ;src/includes/game.h:140: int xCursor = 10;
-   582B DD 36 F9 0A   [19] 4752 	ld	-7 (ix),#0x0A
-   582F DD 36 FA 00   [19] 4753 	ld	-6 (ix),#0x00
-                           4754 ;src/includes/game.h:141: int yCursor = 6;
-   5833 DD 36 F3 06   [19] 4755 	ld	-13 (ix),#0x06
-   5837 DD 36 F4 00   [19] 4756 	ld	-12 (ix),#0x00
-                           4757 ;src/includes/game.h:143: u8 exit=0;
-   583B DD 36 FB 00   [19] 4758 	ld	-5 (ix),#0x00
-                           4759 ;src/includes/game.h:145: cpct_clearScreen(cpct_px2byteM1(0,0,0,0));
-   583F 21 00 00      [10] 4760 	ld	hl,#0x0000
-   5842 E5            [11] 4761 	push	hl
-   5843 2E 00         [ 7] 4762 	ld	l, #0x00
-   5845 E5            [11] 4763 	push	hl
-   5846 CD 41 5F      [17] 4764 	call	_cpct_px2byteM1
-   5849 F1            [10] 4765 	pop	af
-   584A F1            [10] 4766 	pop	af
-   584B 65            [ 4] 4767 	ld	h,l
-   584C 01 00 40      [10] 4768 	ld	bc,#0x4000
-   584F C5            [11] 4769 	push	bc
-   5850 E5            [11] 4770 	push	hl
-   5851 33            [ 6] 4771 	inc	sp
-   5852 21 00 C0      [10] 4772 	ld	hl,#0xC000
-   5855 E5            [11] 4773 	push	hl
-   5856 CD 33 5F      [17] 4774 	call	_cpct_memset
-                           4775 ;src/includes/game.h:147: generateWorld();
-   5859 CD D9 4E      [17] 4776 	call	_generateWorld
-                           4777 ;src/includes/game.h:149: drawWorld(ulx, uly);
-   585C 21 00 00      [10] 4778 	ld	hl,#0x0000
-   585F E5            [11] 4779 	push	hl
-   5860 CD 83 52      [17] 4780 	call	_drawWorld
-   5863 F1            [10] 4781 	pop	af
-                           4782 ;src/includes/game.h:151: do{
-   5864                    4783 00157$:
-                           4784 ;src/includes/game.h:152: cpct_scanKeyboard(); 
-   5864 CD 52 60      [17] 4785 	call	_cpct_scanKeyboard
-                           4786 ;src/includes/game.h:154: if ( cpct_isKeyPressed(Key_CursorUp) )
-   5867 21 00 01      [10] 4787 	ld	hl,#0x0100
-   586A CD 34 5D      [17] 4788 	call	_cpct_isKeyPressed
-                           4789 ;src/includes/game.h:156: drawTile(ulx, uly, xCursor, yCursor);
-   586D DD 7E F9      [19] 4790 	ld	a,-7 (ix)
-   5870 DD 77 FF      [19] 4791 	ld	-1 (ix),a
-   5873 DD 7E F7      [19] 4792 	ld	a,-9 (ix)
-   5876 DD 77 FE      [19] 4793 	ld	-2 (ix),a
-   5879 DD 7E F5      [19] 4794 	ld	a,-11 (ix)
-   587C DD 77 FD      [19] 4795 	ld	-3 (ix),a
-                           4796 ;src/includes/game.h:154: if ( cpct_isKeyPressed(Key_CursorUp) )
-   587F 7D            [ 4] 4797 	ld	a,l
-   5880 B7            [ 4] 4798 	or	a, a
-   5881 28 6C         [12] 4799 	jr	Z,00107$
-                           4800 ;src/includes/game.h:156: drawTile(ulx, uly, xCursor, yCursor);
-   5883 DD 7E F3      [19] 4801 	ld	a,-13 (ix)
-   5886 DD 77 FC      [19] 4802 	ld	-4 (ix), a
-   5889 F5            [11] 4803 	push	af
-   588A 33            [ 6] 4804 	inc	sp
-   588B DD 7E FF      [19] 4805 	ld	a,-1 (ix)
-   588E F5            [11] 4806 	push	af
-   588F 33            [ 6] 4807 	inc	sp
-   5890 DD 7E FE      [19] 4808 	ld	a,-2 (ix)
-   5893 F5            [11] 4809 	push	af
-   5894 33            [ 6] 4810 	inc	sp
-   5895 DD 7E FD      [19] 4811 	ld	a,-3 (ix)
-   5898 F5            [11] 4812 	push	af
-   5899 33            [ 6] 4813 	inc	sp
-   589A CD 5B 50      [17] 4814 	call	_drawTile
-   589D F1            [10] 4815 	pop	af
-   589E F1            [10] 4816 	pop	af
-                           4817 ;src/includes/game.h:158: yCursor-=1;
-   589F DD 6E F3      [19] 4818 	ld	l,-13 (ix)
-   58A2 DD 66 F4      [19] 4819 	ld	h,-12 (ix)
-   58A5 2B            [ 6] 4820 	dec	hl
-   58A6 DD 75 F3      [19] 4821 	ld	-13 (ix),l
-   58A9 DD 74 F4      [19] 4822 	ld	-12 (ix),h
-                           4823 ;src/includes/game.h:161: if(yCursor<0)
-   58AC DD CB F4 7E   [20] 4824 	bit	7, -12 (ix)
-   58B0 28 35         [12] 4825 	jr	Z,00186$
-                           4826 ;src/includes/game.h:163: yCursor=0;
-   58B2 DD 36 F3 00   [19] 4827 	ld	-13 (ix),#0x00
-   58B6 DD 36 F4 00   [19] 4828 	ld	-12 (ix),#0x00
-                           4829 ;src/includes/game.h:166: if(uly>0)
-   58BA AF            [ 4] 4830 	xor	a, a
-   58BB DD BE F7      [19] 4831 	cp	a, -9 (ix)
-   58BE DD 9E F8      [19] 4832 	sbc	a, -8 (ix)
-   58C1 E2 C6 58      [10] 4833 	jp	PO, 00321$
-   58C4 EE 80         [ 7] 4834 	xor	a, #0x80
-   58C6                    4835 00321$:
-   58C6 F2 E7 58      [10] 4836 	jp	P,00186$
-                           4837 ;src/includes/game.h:168: uly-=1;
-   58C9 DD 6E F7      [19] 4838 	ld	l,-9 (ix)
-   58CC DD 66 F8      [19] 4839 	ld	h,-8 (ix)
-   58CF 2B            [ 6] 4840 	dec	hl
-   58D0 DD 75 F7      [19] 4841 	ld	-9 (ix),l
-   58D3 DD 74 F8      [19] 4842 	ld	-8 (ix),h
-                           4843 ;src/includes/game.h:156: drawTile(ulx, uly, xCursor, yCursor);
-   58D6 DD 7E F7      [19] 4844 	ld	a,-9 (ix)
-                           4845 ;src/includes/game.h:169: drawWorld(ulx, uly);
-   58D9 DD 77 FE      [19] 4846 	ld	-2 (ix), a
-   58DC F5            [11] 4847 	push	af
-   58DD 33            [ 6] 4848 	inc	sp
-   58DE DD 7E FD      [19] 4849 	ld	a,-3 (ix)
-   58E1 F5            [11] 4850 	push	af
-   58E2 33            [ 6] 4851 	inc	sp
-   58E3 CD 83 52      [17] 4852 	call	_drawWorld
-   58E6 F1            [10] 4853 	pop	af
-                           4854 ;src/includes/game.h:174: for(i=0; i<14000; i++) {}
-   58E7                    4855 00186$:
-   58E7 11 B0 36      [10] 4856 	ld	de,#0x36B0
-   58EA                    4857 00162$:
-   58EA 1B            [ 6] 4858 	dec	de
-   58EB 7A            [ 4] 4859 	ld	a,d
-   58EC B3            [ 4] 4860 	or	a,e
-   58ED 20 FB         [12] 4861 	jr	NZ,00162$
-   58EF                    4862 00107$:
-                           4863 ;src/includes/game.h:177: if ( cpct_isKeyPressed(Key_CursorDown) )
-   58EF 21 00 04      [10] 4864 	ld	hl,#0x0400
-   58F2 CD 34 5D      [17] 4865 	call	_cpct_isKeyPressed
-   58F5 7D            [ 4] 4866 	ld	a,l
-   58F6 B7            [ 4] 4867 	or	a, a
-   58F7 28 73         [12] 4868 	jr	Z,00114$
-                           4869 ;src/includes/game.h:179: drawTile(ulx, uly, xCursor, yCursor);
-   58F9 DD 66 F3      [19] 4870 	ld	h,-13 (ix)
-   58FC E5            [11] 4871 	push	hl
-   58FD 33            [ 6] 4872 	inc	sp
-   58FE DD 7E FF      [19] 4873 	ld	a,-1 (ix)
-   5901 F5            [11] 4874 	push	af
-   5902 33            [ 6] 4875 	inc	sp
-   5903 DD 7E FE      [19] 4876 	ld	a,-2 (ix)
-   5906 F5            [11] 4877 	push	af
-   5907 33            [ 6] 4878 	inc	sp
-   5908 DD 7E FD      [19] 4879 	ld	a,-3 (ix)
-   590B F5            [11] 4880 	push	af
-   590C 33            [ 6] 4881 	inc	sp
-   590D CD 5B 50      [17] 4882 	call	_drawTile
-   5910 F1            [10] 4883 	pop	af
-   5911 F1            [10] 4884 	pop	af
-                           4885 ;src/includes/game.h:180: yCursor+=1;
-   5912 DD 34 F3      [23] 4886 	inc	-13 (ix)
-   5915 20 03         [12] 4887 	jr	NZ,00322$
-   5917 DD 34 F4      [23] 4888 	inc	-12 (ix)
-   591A                    4889 00322$:
-                           4890 ;src/includes/game.h:181: if(yCursor>NBTILE_H-1)
-   591A 3E 0B         [ 7] 4891 	ld	a,#0x0B
-   591C DD BE F3      [19] 4892 	cp	a, -13 (ix)
-   591F 3E 00         [ 7] 4893 	ld	a,#0x00
-   5921 DD 9E F4      [19] 4894 	sbc	a, -12 (ix)
-   5924 E2 29 59      [10] 4895 	jp	PO, 00323$
-   5927 EE 80         [ 7] 4896 	xor	a, #0x80
-   5929                    4897 00323$:
-   5929 F2 5C 59      [10] 4898 	jp	P,00191$
-                           4899 ;src/includes/game.h:183: yCursor=NBTILE_H-1;
-   592C DD 36 F3 0B   [19] 4900 	ld	-13 (ix),#0x0B
-   5930 DD 36 F4 00   [19] 4901 	ld	-12 (ix),#0x00
-                           4902 ;src/includes/game.h:184: if(uly<HEIGHT-NBTILE_H)
-   5934 DD 7E F7      [19] 4903 	ld	a,-9 (ix)
-   5937 D6 24         [ 7] 4904 	sub	a, #0x24
-   5939 DD 7E F8      [19] 4905 	ld	a,-8 (ix)
-   593C 17            [ 4] 4906 	rla
-   593D 3F            [ 4] 4907 	ccf
-   593E 1F            [ 4] 4908 	rra
-   593F DE 80         [ 7] 4909 	sbc	a, #0x80
-   5941 30 19         [12] 4910 	jr	NC,00191$
-                           4911 ;src/includes/game.h:186: uly+=1;
-   5943 DD 34 F7      [23] 4912 	inc	-9 (ix)
-   5946 20 03         [12] 4913 	jr	NZ,00324$
-   5948 DD 34 F8      [23] 4914 	inc	-8 (ix)
-   594B                    4915 00324$:
-                           4916 ;src/includes/game.h:156: drawTile(ulx, uly, xCursor, yCursor);
-   594B DD 7E F7      [19] 4917 	ld	a,-9 (ix)
-                           4918 ;src/includes/game.h:187: drawWorld(ulx, uly);
-   594E DD 77 FE      [19] 4919 	ld	-2 (ix), a
-   5951 F5            [11] 4920 	push	af
-   5952 33            [ 6] 4921 	inc	sp
-   5953 DD 7E FD      [19] 4922 	ld	a,-3 (ix)
-   5956 F5            [11] 4923 	push	af
-   5957 33            [ 6] 4924 	inc	sp
-   5958 CD 83 52      [17] 4925 	call	_drawWorld
-   595B F1            [10] 4926 	pop	af
-                           4927 ;src/includes/game.h:192: for(i=0; i<14000; i++) {}
-   595C                    4928 00191$:
-   595C 21 B0 36      [10] 4929 	ld	hl,#0x36B0
-   595F E3            [19] 4930 	ex	(sp), hl
-   5960                    4931 00165$:
-   5960 E1            [10] 4932 	pop	hl
-   5961 E5            [11] 4933 	push	hl
-   5962 2B            [ 6] 4934 	dec	hl
-   5963 E3            [19] 4935 	ex	(sp), hl
-   5964 DD 7E F2      [19] 4936 	ld	a,-14 (ix)
-   5967 DD B6 F1      [19] 4937 	or	a,-15 (ix)
-   596A 20 F4         [12] 4938 	jr	NZ,00165$
-   596C                    4939 00114$:
-                           4940 ;src/includes/game.h:195: if ( cpct_isKeyPressed(Key_CursorLeft) )
-   596C 21 01 01      [10] 4941 	ld	hl,#0x0101
-   596F CD 34 5D      [17] 4942 	call	_cpct_isKeyPressed
-                           4943 ;src/includes/game.h:156: drawTile(ulx, uly, xCursor, yCursor);
-   5972 DD 7E F3      [19] 4944 	ld	a,-13 (ix)
-   5975 DD 77 FC      [19] 4945 	ld	-4 (ix),a
-                           4946 ;src/includes/game.h:195: if ( cpct_isKeyPressed(Key_CursorLeft) )
-   5978 7D            [ 4] 4947 	ld	a,l
-   5979 B7            [ 4] 4948 	or	a, a
-   597A 28 6C         [12] 4949 	jr	Z,00121$
-                           4950 ;src/includes/game.h:197: drawTile(ulx, uly, xCursor, yCursor);
-   597C DD 7E FC      [19] 4951 	ld	a,-4 (ix)
-   597F F5            [11] 4952 	push	af
-   5980 33            [ 6] 4953 	inc	sp
-   5981 DD 7E FF      [19] 4954 	ld	a,-1 (ix)
-   5984 F5            [11] 4955 	push	af
-   5985 33            [ 6] 4956 	inc	sp
-   5986 DD 7E FE      [19] 4957 	ld	a,-2 (ix)
-   5989 F5            [11] 4958 	push	af
-   598A 33            [ 6] 4959 	inc	sp
-   598B DD 7E FD      [19] 4960 	ld	a,-3 (ix)
-   598E F5            [11] 4961 	push	af
-   598F 33            [ 6] 4962 	inc	sp
-   5990 CD 5B 50      [17] 4963 	call	_drawTile
-   5993 F1            [10] 4964 	pop	af
-   5994 F1            [10] 4965 	pop	af
-                           4966 ;src/includes/game.h:198: xCursor-=1;
-   5995 DD 6E F9      [19] 4967 	ld	l,-7 (ix)
-   5998 DD 66 FA      [19] 4968 	ld	h,-6 (ix)
-   599B 2B            [ 6] 4969 	dec	hl
-   599C DD 75 F9      [19] 4970 	ld	-7 (ix),l
-   599F DD 74 FA      [19] 4971 	ld	-6 (ix),h
-                           4972 ;src/includes/game.h:199: if(xCursor<0)
-   59A2 DD CB FA 7E   [20] 4973 	bit	7, -6 (ix)
-   59A6 28 38         [12] 4974 	jr	Z,00196$
-                           4975 ;src/includes/game.h:201: xCursor=0;
-   59A8 DD 36 F9 00   [19] 4976 	ld	-7 (ix),#0x00
-   59AC DD 36 FA 00   [19] 4977 	ld	-6 (ix),#0x00
-                           4978 ;src/includes/game.h:202: if(ulx>0)
-   59B0 AF            [ 4] 4979 	xor	a, a
-   59B1 DD BE F5      [19] 4980 	cp	a, -11 (ix)
-   59B4 DD 9E F6      [19] 4981 	sbc	a, -10 (ix)
-   59B7 E2 BC 59      [10] 4982 	jp	PO, 00325$
-   59BA EE 80         [ 7] 4983 	xor	a, #0x80
-   59BC                    4984 00325$:
-   59BC F2 E0 59      [10] 4985 	jp	P,00196$
-                           4986 ;src/includes/game.h:204: ulx-=1;
-   59BF DD 6E F5      [19] 4987 	ld	l,-11 (ix)
-   59C2 DD 66 F6      [19] 4988 	ld	h,-10 (ix)
-   59C5 2B            [ 6] 4989 	dec	hl
-   59C6 DD 75 F5      [19] 4990 	ld	-11 (ix),l
-   59C9 DD 74 F6      [19] 4991 	ld	-10 (ix),h
-                           4992 ;src/includes/game.h:156: drawTile(ulx, uly, xCursor, yCursor);
-   59CC DD 7E F5      [19] 4993 	ld	a,-11 (ix)
-   59CF DD 77 FD      [19] 4994 	ld	-3 (ix),a
-                           4995 ;src/includes/game.h:205: drawWorld(ulx, uly);
-   59D2 DD 7E FE      [19] 4996 	ld	a,-2 (ix)
-   59D5 F5            [11] 4997 	push	af
-   59D6 33            [ 6] 4998 	inc	sp
-   59D7 DD 7E FD      [19] 4999 	ld	a,-3 (ix)
-   59DA F5            [11] 5000 	push	af
-   59DB 33            [ 6] 5001 	inc	sp
-   59DC CD 83 52      [17] 5002 	call	_drawWorld
-   59DF F1            [10] 5003 	pop	af
-                           5004 ;src/includes/game.h:210: for(i=0; i<14000; i++) {}
-   59E0                    5005 00196$:
-   59E0 11 B0 36      [10] 5006 	ld	de,#0x36B0
-   59E3                    5007 00168$:
-   59E3 1B            [ 6] 5008 	dec	de
-   59E4 7A            [ 4] 5009 	ld	a,d
-   59E5 B3            [ 4] 5010 	or	a,e
-   59E6 20 FB         [12] 5011 	jr	NZ,00168$
-   59E8                    5012 00121$:
-                           5013 ;src/includes/game.h:213: if ( cpct_isKeyPressed(Key_CursorRight) )
-   59E8 21 00 02      [10] 5014 	ld	hl,#0x0200
-   59EB CD 34 5D      [17] 5015 	call	_cpct_isKeyPressed
-   59EE 7D            [ 4] 5016 	ld	a,l
-   59EF B7            [ 4] 5017 	or	a, a
-   59F0 28 6E         [12] 5018 	jr	Z,00128$
-                           5019 ;src/includes/game.h:215: drawTile(ulx, uly, xCursor, yCursor);
-   59F2 DD 56 F9      [19] 5020 	ld	d,-7 (ix)
-   59F5 DD 7E FC      [19] 5021 	ld	a,-4 (ix)
-   59F8 F5            [11] 5022 	push	af
-   59F9 33            [ 6] 5023 	inc	sp
-   59FA D5            [11] 5024 	push	de
-   59FB 33            [ 6] 5025 	inc	sp
-   59FC DD 7E FE      [19] 5026 	ld	a,-2 (ix)
-   59FF F5            [11] 5027 	push	af
-   5A00 33            [ 6] 5028 	inc	sp
-   5A01 DD 7E FD      [19] 5029 	ld	a,-3 (ix)
-   5A04 F5            [11] 5030 	push	af
-   5A05 33            [ 6] 5031 	inc	sp
-   5A06 CD 5B 50      [17] 5032 	call	_drawTile
-   5A09 F1            [10] 5033 	pop	af
-   5A0A F1            [10] 5034 	pop	af
-                           5035 ;src/includes/game.h:216: xCursor+=1;
-   5A0B DD 34 F9      [23] 5036 	inc	-7 (ix)
-   5A0E 20 03         [12] 5037 	jr	NZ,00326$
-   5A10 DD 34 FA      [23] 5038 	inc	-6 (ix)
-   5A13                    5039 00326$:
-                           5040 ;src/includes/game.h:217: if(xCursor>NBTILE_W-1)
-   5A13 3E 13         [ 7] 5041 	ld	a,#0x13
-   5A15 DD BE F9      [19] 5042 	cp	a, -7 (ix)
-   5A18 3E 00         [ 7] 5043 	ld	a,#0x00
-   5A1A DD 9E FA      [19] 5044 	sbc	a, -6 (ix)
-   5A1D E2 22 5A      [10] 5045 	jp	PO, 00327$
-   5A20 EE 80         [ 7] 5046 	xor	a, #0x80
-   5A22                    5047 00327$:
-   5A22 F2 58 5A      [10] 5048 	jp	P,00201$
-                           5049 ;src/includes/game.h:219: xCursor=NBTILE_W-1;
-   5A25 DD 36 F9 13   [19] 5050 	ld	-7 (ix),#0x13
-   5A29 DD 36 FA 00   [19] 5051 	ld	-6 (ix),#0x00
-                           5052 ;src/includes/game.h:220: if(ulx<WIDTH-NBTILE_W)
-   5A2D DD 7E F5      [19] 5053 	ld	a,-11 (ix)
-   5A30 D6 3C         [ 7] 5054 	sub	a, #0x3C
-   5A32 DD 7E F6      [19] 5055 	ld	a,-10 (ix)
-   5A35 17            [ 4] 5056 	rla
-   5A36 3F            [ 4] 5057 	ccf
-   5A37 1F            [ 4] 5058 	rra
-   5A38 DE 80         [ 7] 5059 	sbc	a, #0x80
-   5A3A 30 1C         [12] 5060 	jr	NC,00201$
-                           5061 ;src/includes/game.h:222: ulx+=1;
-   5A3C DD 34 F5      [23] 5062 	inc	-11 (ix)
-   5A3F 20 03         [12] 5063 	jr	NZ,00328$
-   5A41 DD 34 F6      [23] 5064 	inc	-10 (ix)
-   5A44                    5065 00328$:
-                           5066 ;src/includes/game.h:156: drawTile(ulx, uly, xCursor, yCursor);
-   5A44 DD 7E F5      [19] 5067 	ld	a,-11 (ix)
-   5A47 DD 77 FD      [19] 5068 	ld	-3 (ix),a
-                           5069 ;src/includes/game.h:223: drawWorld(ulx, uly);
-   5A4A DD 7E FE      [19] 5070 	ld	a,-2 (ix)
-   5A4D F5            [11] 5071 	push	af
-   5A4E 33            [ 6] 5072 	inc	sp
-   5A4F DD 7E FD      [19] 5073 	ld	a,-3 (ix)
-   5A52 F5            [11] 5074 	push	af
-   5A53 33            [ 6] 5075 	inc	sp
-   5A54 CD 83 52      [17] 5076 	call	_drawWorld
-   5A57 F1            [10] 5077 	pop	af
-                           5078 ;src/includes/game.h:228: for(i=0; i<14000; i++) {}
-   5A58                    5079 00201$:
-   5A58 11 B0 36      [10] 5080 	ld	de,#0x36B0
-   5A5B                    5081 00171$:
-   5A5B 1B            [ 6] 5082 	dec	de
-   5A5C 7A            [ 4] 5083 	ld	a,d
-   5A5D B3            [ 4] 5084 	or	a,e
-   5A5E 20 FB         [12] 5085 	jr	NZ,00171$
-   5A60                    5086 00128$:
-                           5087 ;src/includes/game.h:232: if ( cpct_isKeyPressed(Key_Space) )
-   5A60 21 05 80      [10] 5088 	ld	hl,#0x8005
-   5A63 CD 34 5D      [17] 5089 	call	_cpct_isKeyPressed
-   5A66 7D            [ 4] 5090 	ld	a,l
-   5A67 B7            [ 4] 5091 	or	a, a
-   5A68 28 5E         [12] 5092 	jr	Z,00138$
-                           5093 ;src/includes/game.h:234: switch(CURSOR_MODE)
-   5A6A 3A DF 6F      [13] 5094 	ld	a,(#_CURSOR_MODE + 0)
-   5A6D D6 01         [ 7] 5095 	sub	a, #0x01
-   5A6F 38 4F         [12] 5096 	jr	C,00206$
-   5A71 3E 06         [ 7] 5097 	ld	a,#0x06
-   5A73 FD 21 DF 6F   [14] 5098 	ld	iy,#_CURSOR_MODE
-   5A77 FD 96 00      [19] 5099 	sub	a, 0 (iy)
-   5A7A 38 44         [12] 5100 	jr	C,00206$
-   5A7C FD 21 DF 6F   [14] 5101 	ld	iy,#_CURSOR_MODE
-   5A80 FD 5E 00      [19] 5102 	ld	e,0 (iy)
-   5A83 1D            [ 4] 5103 	dec	e
-   5A84 16 00         [ 7] 5104 	ld	d,#0x00
-   5A86 21 8C 5A      [10] 5105 	ld	hl,#00329$
-   5A89 19            [11] 5106 	add	hl,de
-   5A8A 19            [11] 5107 	add	hl,de
-                           5108 ;src/includes/game.h:236: case T_SSNS:
-   5A8B E9            [ 4] 5109 	jp	(hl)
-   5A8C                    5110 00329$:
-   5A8C 18 0A         [12] 5111 	jr	00129$
-   5A8E 18 0F         [12] 5112 	jr	00130$
-   5A90 18 14         [12] 5113 	jr	00131$
-   5A92 18 19         [12] 5114 	jr	00132$
-   5A94 18 1E         [12] 5115 	jr	00133$
-   5A96 18 23         [12] 5116 	jr	00134$
-   5A98                    5117 00129$:
-                           5118 ;src/includes/game.h:237: CURSOR_MODE=T_SSEW;
-   5A98 21 DF 6F      [10] 5119 	ld	hl,#_CURSOR_MODE + 0
-   5A9B 36 02         [10] 5120 	ld	(hl), #0x02
-                           5121 ;src/includes/game.h:238: break;
-   5A9D 18 21         [12] 5122 	jr	00206$
-                           5123 ;src/includes/game.h:239: case T_SSEW:
-   5A9F                    5124 00130$:
-                           5125 ;src/includes/game.h:240: CURSOR_MODE=T_SSNS;
-   5A9F 21 DF 6F      [10] 5126 	ld	hl,#_CURSOR_MODE + 0
-   5AA2 36 01         [10] 5127 	ld	(hl), #0x01
-                           5128 ;src/includes/game.h:241: break;
-   5AA4 18 1A         [12] 5129 	jr	00206$
-                           5130 ;src/includes/game.h:242: case T_SMNS:
-   5AA6                    5131 00131$:
-                           5132 ;src/includes/game.h:243: CURSOR_MODE=T_SMEW;
-   5AA6 21 DF 6F      [10] 5133 	ld	hl,#_CURSOR_MODE + 0
-   5AA9 36 04         [10] 5134 	ld	(hl), #0x04
-                           5135 ;src/includes/game.h:244: break;
-   5AAB 18 13         [12] 5136 	jr	00206$
-                           5137 ;src/includes/game.h:245: case T_SMEW:
-   5AAD                    5138 00132$:
-                           5139 ;src/includes/game.h:246: CURSOR_MODE=T_SMNS;
-   5AAD 21 DF 6F      [10] 5140 	ld	hl,#_CURSOR_MODE + 0
-   5AB0 36 03         [10] 5141 	ld	(hl), #0x03
-                           5142 ;src/includes/game.h:247: break;
-   5AB2 18 0C         [12] 5143 	jr	00206$
-                           5144 ;src/includes/game.h:248: case T_SLNS:
-   5AB4                    5145 00133$:
-                           5146 ;src/includes/game.h:249: CURSOR_MODE=T_SLEW;
-   5AB4 21 DF 6F      [10] 5147 	ld	hl,#_CURSOR_MODE + 0
-   5AB7 36 06         [10] 5148 	ld	(hl), #0x06
-                           5149 ;src/includes/game.h:250: break;
-   5AB9 18 05         [12] 5150 	jr	00206$
-                           5151 ;src/includes/game.h:251: case T_SLEW:
-   5ABB                    5152 00134$:
-                           5153 ;src/includes/game.h:252: CURSOR_MODE=T_SLNS;
-   5ABB 21 DF 6F      [10] 5154 	ld	hl,#_CURSOR_MODE + 0
-   5ABE 36 05         [10] 5155 	ld	(hl), #0x05
-                           5156 ;src/includes/game.h:256: for(i=0; i<14000; i++) {}
-   5AC0                    5157 00206$:
-   5AC0 21 B0 36      [10] 5158 	ld	hl,#0x36B0
-   5AC3                    5159 00174$:
-   5AC3 2B            [ 6] 5160 	dec	hl
-   5AC4 7C            [ 4] 5161 	ld	a,h
-   5AC5 B5            [ 4] 5162 	or	a,l
-   5AC6 20 FB         [12] 5163 	jr	NZ,00174$
-   5AC8                    5164 00138$:
-                           5165 ;src/includes/game.h:259: if ( cpct_isKeyPressed(Key_Esc) )
-   5AC8 21 08 04      [10] 5166 	ld	hl,#0x0408
-   5ACB CD 34 5D      [17] 5167 	call	_cpct_isKeyPressed
-                           5168 ;src/includes/game.h:156: drawTile(ulx, uly, xCursor, yCursor);
-   5ACE DD 46 F9      [19] 5169 	ld	b,-7 (ix)
-                           5170 ;src/includes/game.h:259: if ( cpct_isKeyPressed(Key_Esc) )
-   5AD1 7D            [ 4] 5171 	ld	a,l
-   5AD2 B7            [ 4] 5172 	or	a, a
-   5AD3 28 46         [12] 5173 	jr	Z,00147$
-                           5174 ;src/includes/game.h:262: if(CURSOR_MODE==NONE)
-   5AD5 3A DF 6F      [13] 5175 	ld	a,(#_CURSOR_MODE + 0)
-   5AD8 B7            [ 4] 5176 	or	a, a
-   5AD9 20 06         [12] 5177 	jr	NZ,00143$
-                           5178 ;src/includes/game.h:263: exit=1;
-   5ADB DD 36 FB 01   [19] 5179 	ld	-5 (ix),#0x01
-   5ADF 18 32         [12] 5180 	jr	00212$
-   5AE1                    5181 00143$:
-                           5182 ;src/includes/game.h:264: else if(CURSOR_MODE>=T_SSNS && CURSOR_MODE<=T_SLEW)
-   5AE1 3A DF 6F      [13] 5183 	ld	a,(#_CURSOR_MODE + 0)
-   5AE4 D6 01         [ 7] 5184 	sub	a, #0x01
-   5AE6 38 2B         [12] 5185 	jr	C,00212$
-   5AE8 3E 06         [ 7] 5186 	ld	a,#0x06
-   5AEA FD 21 DF 6F   [14] 5187 	ld	iy,#_CURSOR_MODE
-   5AEE FD 96 00      [19] 5188 	sub	a, 0 (iy)
-   5AF1 38 20         [12] 5189 	jr	C,00212$
-                           5190 ;src/includes/game.h:266: CURSOR_MODE=NONE;
-   5AF3 FD 21 DF 6F   [14] 5191 	ld	iy,#_CURSOR_MODE
-   5AF7 FD 36 00 00   [19] 5192 	ld	0 (iy),#0x00
-                           5193 ;src/includes/game.h:267: drawTile(ulx, uly, xCursor, yCursor);
-   5AFB C5            [11] 5194 	push	bc
-   5AFC DD 7E FC      [19] 5195 	ld	a,-4 (ix)
-   5AFF F5            [11] 5196 	push	af
-   5B00 33            [ 6] 5197 	inc	sp
-   5B01 C5            [11] 5198 	push	bc
-   5B02 33            [ 6] 5199 	inc	sp
-   5B03 DD 7E FE      [19] 5200 	ld	a,-2 (ix)
-   5B06 F5            [11] 5201 	push	af
-   5B07 33            [ 6] 5202 	inc	sp
-   5B08 DD 7E FD      [19] 5203 	ld	a,-3 (ix)
-   5B0B F5            [11] 5204 	push	af
-   5B0C 33            [ 6] 5205 	inc	sp
-   5B0D CD 5B 50      [17] 5206 	call	_drawTile
-   5B10 F1            [10] 5207 	pop	af
-   5B11 F1            [10] 5208 	pop	af
-   5B12 C1            [10] 5209 	pop	bc
-                           5210 ;src/includes/game.h:271: for(i=0; i<14000; i++) {}
-   5B13                    5211 00212$:
-   5B13 21 B0 36      [10] 5212 	ld	hl,#0x36B0
-   5B16                    5213 00177$:
-   5B16 2B            [ 6] 5214 	dec	hl
-   5B17 7C            [ 4] 5215 	ld	a,h
-   5B18 B5            [ 4] 5216 	or	a,l
-   5B19 20 FB         [12] 5217 	jr	NZ,00177$
-   5B1B                    5218 00147$:
-                           5219 ;src/includes/game.h:274: if ( cpct_isKeyPressed(Key_Return) )
-   5B1B C5            [11] 5220 	push	bc
-   5B1C 21 02 04      [10] 5221 	ld	hl,#0x0402
-   5B1F CD 34 5D      [17] 5222 	call	_cpct_isKeyPressed
-   5B22 7D            [ 4] 5223 	ld	a,l
-   5B23 C1            [10] 5224 	pop	bc
-   5B24 B7            [ 4] 5225 	or	a, a
-   5B25 CA C7 5B      [10] 5226 	jp	Z,00156$
-                           5227 ;src/includes/game.h:277: if(CURSOR_MODE==NONE)
-   5B28 3A DF 6F      [13] 5228 	ld	a,(#_CURSOR_MODE + 0)
-   5B2B B7            [ 4] 5229 	or	a, a
-   5B2C 20 44         [12] 5230 	jr	NZ,00152$
-                           5231 ;src/includes/game.h:279: menuTile(ulx+xCursor, uly+yCursor);
-   5B2E DD 7E F7      [19] 5232 	ld	a, -9 (ix)
-   5B31 DD 66 F3      [19] 5233 	ld	h, -13 (ix)
-   5B34 84            [ 4] 5234 	add	a, h
-   5B35 67            [ 4] 5235 	ld	h,a
-   5B36 DD 6E F5      [19] 5236 	ld	l,-11 (ix)
-   5B39 DD 56 F9      [19] 5237 	ld	d,-7 (ix)
-   5B3C 7D            [ 4] 5238 	ld	a,l
-   5B3D 82            [ 4] 5239 	add	a, d
-   5B3E C5            [11] 5240 	push	bc
-   5B3F E5            [11] 5241 	push	hl
-   5B40 33            [ 6] 5242 	inc	sp
-   5B41 F5            [11] 5243 	push	af
-   5B42 33            [ 6] 5244 	inc	sp
-   5B43 CD 6D 56      [17] 5245 	call	_menuTile
-   5B46 F1            [10] 5246 	pop	af
-   5B47 21 00 00      [10] 5247 	ld	hl,#0x0000
-   5B4A E5            [11] 5248 	push	hl
-   5B4B 2E 00         [ 7] 5249 	ld	l, #0x00
-   5B4D E5            [11] 5250 	push	hl
-   5B4E CD 41 5F      [17] 5251 	call	_cpct_px2byteM1
-   5B51 F1            [10] 5252 	pop	af
-   5B52 F1            [10] 5253 	pop	af
-   5B53 65            [ 4] 5254 	ld	h,l
-   5B54 11 00 40      [10] 5255 	ld	de,#0x4000
-   5B57 D5            [11] 5256 	push	de
-   5B58 E5            [11] 5257 	push	hl
-   5B59 33            [ 6] 5258 	inc	sp
-   5B5A 21 00 C0      [10] 5259 	ld	hl,#0xC000
-   5B5D E5            [11] 5260 	push	hl
-   5B5E CD 33 5F      [17] 5261 	call	_cpct_memset
-   5B61 DD 7E FE      [19] 5262 	ld	a,-2 (ix)
-   5B64 F5            [11] 5263 	push	af
-   5B65 33            [ 6] 5264 	inc	sp
-   5B66 DD 7E FD      [19] 5265 	ld	a,-3 (ix)
-   5B69 F5            [11] 5266 	push	af
-   5B6A 33            [ 6] 5267 	inc	sp
-   5B6B CD 83 52      [17] 5268 	call	_drawWorld
-   5B6E F1            [10] 5269 	pop	af
-   5B6F C1            [10] 5270 	pop	bc
-   5B70 18 4D         [12] 5271 	jr	00218$
-   5B72                    5272 00152$:
-                           5273 ;src/includes/game.h:284: else if(CURSOR_MODE>=T_SSNS && CURSOR_MODE<=T_SLEW)
-   5B72 3A DF 6F      [13] 5274 	ld	a,(#_CURSOR_MODE + 0)
-   5B75 D6 01         [ 7] 5275 	sub	a, #0x01
-   5B77 38 46         [12] 5276 	jr	C,00218$
-   5B79 3E 06         [ 7] 5277 	ld	a,#0x06
-   5B7B FD 21 DF 6F   [14] 5278 	ld	iy,#_CURSOR_MODE
-   5B7F FD 96 00      [19] 5279 	sub	a, 0 (iy)
-   5B82 38 3B         [12] 5280 	jr	C,00218$
-                           5281 ;src/includes/game.h:286: p_world[ulx+xCursor+(uly+yCursor)*WIDTH]=CURSOR_MODE+9;
-   5B84 DD 7E F5      [19] 5282 	ld	a,-11 (ix)
-   5B87 DD 86 F9      [19] 5283 	add	a, -7 (ix)
-   5B8A 5F            [ 4] 5284 	ld	e,a
-   5B8B DD 7E F6      [19] 5285 	ld	a,-10 (ix)
-   5B8E DD 8E FA      [19] 5286 	adc	a, -6 (ix)
-   5B91 57            [ 4] 5287 	ld	d,a
-   5B92 DD 7E F7      [19] 5288 	ld	a,-9 (ix)
-   5B95 DD 86 F3      [19] 5289 	add	a, -13 (ix)
-   5B98 6F            [ 4] 5290 	ld	l,a
-   5B99 DD 7E F8      [19] 5291 	ld	a,-8 (ix)
-   5B9C DD 8E F4      [19] 5292 	adc	a, -12 (ix)
-   5B9F 67            [ 4] 5293 	ld	h,a
-   5BA0 D5            [11] 5294 	push	de
-   5BA1 5D            [ 4] 5295 	ld	e, l
-   5BA2 54            [ 4] 5296 	ld	d, h
-   5BA3 29            [11] 5297 	add	hl, hl
-   5BA4 29            [11] 5298 	add	hl, hl
-   5BA5 19            [11] 5299 	add	hl, de
-   5BA6 29            [11] 5300 	add	hl, hl
-   5BA7 29            [11] 5301 	add	hl, hl
-   5BA8 29            [11] 5302 	add	hl, hl
-   5BA9 29            [11] 5303 	add	hl, hl
-   5BAA D1            [10] 5304 	pop	de
-   5BAB 19            [11] 5305 	add	hl,de
-   5BAC 3E DF         [ 7] 5306 	ld	a,#<(_p_world)
-   5BAE 85            [ 4] 5307 	add	a, l
-   5BAF 5F            [ 4] 5308 	ld	e,a
-   5BB0 3E 60         [ 7] 5309 	ld	a,#>(_p_world)
-   5BB2 8C            [ 4] 5310 	adc	a, h
-   5BB3 57            [ 4] 5311 	ld	d,a
-   5BB4 3A DF 6F      [13] 5312 	ld	a,(#_CURSOR_MODE + 0)
-   5BB7 C6 09         [ 7] 5313 	add	a, #0x09
-   5BB9 12            [ 7] 5314 	ld	(de),a
-                           5315 ;src/includes/game.h:287: CURSOR_MODE=NONE;
-   5BBA 21 DF 6F      [10] 5316 	ld	hl,#_CURSOR_MODE + 0
-   5BBD 36 00         [10] 5317 	ld	(hl), #0x00
-                           5318 ;src/includes/game.h:291: for(i=0; i<14000; i++) {}
-   5BBF                    5319 00218$:
-   5BBF 21 B0 36      [10] 5320 	ld	hl,#0x36B0
-   5BC2                    5321 00180$:
-   5BC2 2B            [ 6] 5322 	dec	hl
-   5BC3 7C            [ 4] 5323 	ld	a,h
-   5BC4 B5            [ 4] 5324 	or	a,l
-   5BC5 20 FB         [12] 5325 	jr	NZ,00180$
-   5BC7                    5326 00156$:
-                           5327 ;src/includes/game.h:295: drawCursor(xCursor, yCursor, 0);
-   5BC7 AF            [ 4] 5328 	xor	a, a
-   5BC8 F5            [11] 5329 	push	af
-   5BC9 33            [ 6] 5330 	inc	sp
-   5BCA DD 7E FC      [19] 5331 	ld	a,-4 (ix)
-   5BCD F5            [11] 5332 	push	af
-   5BCE 33            [ 6] 5333 	inc	sp
-   5BCF C5            [11] 5334 	push	bc
-   5BD0 33            [ 6] 5335 	inc	sp
-   5BD1 CD 5E 4D      [17] 5336 	call	_drawCursor
-   5BD4 F1            [10] 5337 	pop	af
-   5BD5 33            [ 6] 5338 	inc	sp
-                           5339 ;src/includes/game.h:297: while(!exit);
-   5BD6 DD 7E FB      [19] 5340 	ld	a,-5 (ix)
-   5BD9 B7            [ 4] 5341 	or	a, a
-   5BDA CA 64 58      [10] 5342 	jp	Z,00157$
-   5BDD DD F9         [10] 5343 	ld	sp, ix
-   5BDF DD E1         [14] 5344 	pop	ix
-   5BE1 C9            [10] 5345 	ret
-                           5346 ;src/main.c:17: void drawTrain() 
-                           5347 ;	---------------------------------
-                           5348 ; Function drawTrain
-                           5349 ; ---------------------------------
-   5BE2                    5350 _drawTrain::
-                           5351 ;src/main.c:55: }
-   5BE2 C9            [10] 5352 	ret
-                           5353 ;src/main.c:58: void main(void)
-                           5354 ;	---------------------------------
-                           5355 ; Function main
-                           5356 ; ---------------------------------
-   5BE3                    5357 _main::
-   5BE3 DD E5         [15] 5358 	push	ix
-   5BE5 DD 21 00 00   [14] 5359 	ld	ix,#0
-   5BE9 DD 39         [15] 5360 	add	ix,sp
-   5BEB 21 ED FF      [10] 5361 	ld	hl,#-19
-   5BEE 39            [11] 5362 	add	hl,sp
-   5BEF F9            [ 6] 5363 	ld	sp,hl
-                           5364 ;src/main.c:63: const char *menuMain[] = { 
-   5BF0 21 09 00      [10] 5365 	ld	hl,#0x0009
-   5BF3 39            [11] 5366 	add	hl,sp
-   5BF4 5D            [ 4] 5367 	ld	e,l
-   5BF5 54            [ 4] 5368 	ld	d,h
-   5BF6 36 DD         [10] 5369 	ld	(hl),#<(___str_34)
-   5BF8 23            [ 6] 5370 	inc	hl
-   5BF9 36 5C         [10] 5371 	ld	(hl),#>(___str_34)
-   5BFB 6B            [ 4] 5372 	ld	l, e
-   5BFC 62            [ 4] 5373 	ld	h, d
-   5BFD 23            [ 6] 5374 	inc	hl
-   5BFE 23            [ 6] 5375 	inc	hl
-   5BFF 01 E6 5C      [10] 5376 	ld	bc,#___str_35+0
-   5C02 71            [ 7] 5377 	ld	(hl),c
-   5C03 23            [ 6] 5378 	inc	hl
-   5C04 70            [ 7] 5379 	ld	(hl),b
-   5C05 21 04 00      [10] 5380 	ld	hl,#0x0004
-   5C08 19            [11] 5381 	add	hl,de
-   5C09 01 EE 5C      [10] 5382 	ld	bc,#___str_36+0
-   5C0C 71            [ 7] 5383 	ld	(hl),c
-   5C0D 23            [ 6] 5384 	inc	hl
-   5C0E 70            [ 7] 5385 	ld	(hl),b
-                           5386 ;src/main.c:69: const char *windowCredit[] = { 
-   5C0F 21 00 00      [10] 5387 	ld	hl,#0x0000
-   5C12 39            [11] 5388 	add	hl,sp
-   5C13 DD 75 FC      [19] 5389 	ld	-4 (ix),l
-   5C16 DD 74 FD      [19] 5390 	ld	-3 (ix),h
-   5C19 DD 6E FC      [19] 5391 	ld	l,-4 (ix)
-   5C1C DD 66 FD      [19] 5392 	ld	h,-3 (ix)
-   5C1F 36 F3         [10] 5393 	ld	(hl),#<(___str_37)
-   5C21 23            [ 6] 5394 	inc	hl
-   5C22 36 5C         [10] 5395 	ld	(hl),#>(___str_37)
-   5C24 DD 6E FC      [19] 5396 	ld	l,-4 (ix)
-   5C27 DD 66 FD      [19] 5397 	ld	h,-3 (ix)
-   5C2A 23            [ 6] 5398 	inc	hl
-   5C2B 23            [ 6] 5399 	inc	hl
-   5C2C 01 FC 5C      [10] 5400 	ld	bc,#___str_38+0
-   5C2F 71            [ 7] 5401 	ld	(hl),c
-   5C30 23            [ 6] 5402 	inc	hl
-   5C31 70            [ 7] 5403 	ld	(hl),b
-   5C32 DD 7E FC      [19] 5404 	ld	a,-4 (ix)
-   5C35 C6 04         [ 7] 5405 	add	a, #0x04
-   5C37 6F            [ 4] 5406 	ld	l,a
-   5C38 DD 7E FD      [19] 5407 	ld	a,-3 (ix)
-   5C3B CE 00         [ 7] 5408 	adc	a, #0x00
-   5C3D 67            [ 4] 5409 	ld	h,a
-   5C3E 01 FD 5C      [10] 5410 	ld	bc,#___str_39+0
-   5C41 71            [ 7] 5411 	ld	(hl),c
-   5C42 23            [ 6] 5412 	inc	hl
-   5C43 70            [ 7] 5413 	ld	(hl),b
-                           5414 ;src/main.c:75: firmware = cpct_disableFirmware();
-   5C44 D5            [11] 5415 	push	de
-   5C45 CD 69 5F      [17] 5416 	call	_cpct_disableFirmware
-   5C48 D1            [10] 5417 	pop	de
-   5C49 DD 75 F4      [19] 5418 	ld	-12 (ix),l
-   5C4C DD 74 F5      [19] 5419 	ld	-11 (ix),h
-                           5420 ;src/main.c:77: cpct_fw2hw(paletteTrains, 16);
-   5C4F 21 13 40      [10] 5421 	ld	hl,#_paletteTrains
-   5C52 D5            [11] 5422 	push	de
-   5C53 01 10 00      [10] 5423 	ld	bc,#0x0010
-   5C56 C5            [11] 5424 	push	bc
-   5C57 E5            [11] 5425 	push	hl
-   5C58 CD 75 5E      [17] 5426 	call	_cpct_fw2hw
-   5C5B D1            [10] 5427 	pop	de
-                           5428 ;src/main.c:78: cpct_fw2hw(paletteMenusM2, 2);
-   5C5C 21 27 40      [10] 5429 	ld	hl,#_paletteMenusM2
-   5C5F D5            [11] 5430 	push	de
-   5C60 01 02 00      [10] 5431 	ld	bc,#0x0002
-   5C63 C5            [11] 5432 	push	bc
-   5C64 E5            [11] 5433 	push	hl
-   5C65 CD 75 5E      [17] 5434 	call	_cpct_fw2hw
-   5C68 D1            [10] 5435 	pop	de
-                           5436 ;src/main.c:79: cpct_fw2hw(paletteMenusM1, 4);
-   5C69 21 23 40      [10] 5437 	ld	hl,#_paletteMenusM1
-   5C6C D5            [11] 5438 	push	de
-   5C6D 01 04 00      [10] 5439 	ld	bc,#0x0004
-   5C70 C5            [11] 5440 	push	bc
-   5C71 E5            [11] 5441 	push	hl
-   5C72 CD 75 5E      [17] 5442 	call	_cpct_fw2hw
-   5C75 D1            [10] 5443 	pop	de
-                           5444 ;src/main.c:81: cpct_setBorder(paletteTrains[12]);
-   5C76 3A 1F 40      [13] 5445 	ld	a, (#_paletteTrains + 12)
-   5C79 D5            [11] 5446 	push	de
-   5C7A 57            [ 4] 5447 	ld	d,a
-   5C7B 1E 10         [ 7] 5448 	ld	e,#0x10
-   5C7D D5            [11] 5449 	push	de
-   5C7E CD 40 5D      [17] 5450 	call	_cpct_setPALColour
-   5C81 CD BD 46      [17] 5451 	call	_putM2
-   5C84 D1            [10] 5452 	pop	de
-                           5453 ;src/main.c:85: do{
-   5C85 DD 73 FE      [19] 5454 	ld	-2 (ix),e
-   5C88 DD 72 FF      [19] 5455 	ld	-1 (ix),d
-   5C8B                    5456 00105$:
-                           5457 ;src/main.c:86: menuChoice = drawMenu(menuMain,3);
-   5C8B DD 5E FE      [19] 5458 	ld	e,-2 (ix)
-   5C8E DD 56 FF      [19] 5459 	ld	d,-1 (ix)
-   5C91 3E 03         [ 7] 5460 	ld	a,#0x03
-   5C93 F5            [11] 5461 	push	af
-   5C94 33            [ 6] 5462 	inc	sp
-   5C95 D5            [11] 5463 	push	de
-   5C96 CD C3 4A      [17] 5464 	call	_drawMenu
-   5C99 F1            [10] 5465 	pop	af
-   5C9A 33            [ 6] 5466 	inc	sp
-                           5467 ;src/main.c:88: if(menuChoice==0)
-   5C9B DD 75 F3      [19] 5468 	ld	-13 (ix), l
-   5C9E 7D            [ 4] 5469 	ld	a, l
-   5C9F B7            [ 4] 5470 	or	a, a
-   5CA0 20 09         [12] 5471 	jr	NZ,00102$
-                           5472 ;src/main.c:90: putM1();
-   5CA2 CD A9 46      [17] 5473 	call	_putM1
-                           5474 ;src/main.c:92: game();
-   5CA5 CD 0E 58      [17] 5475 	call	_game
-                           5476 ;src/main.c:94: putM2();
-   5CA8 CD BD 46      [17] 5477 	call	_putM2
-   5CAB                    5478 00102$:
-                           5479 ;src/main.c:97: if(menuChoice==1)
-   5CAB DD 7E F3      [19] 5480 	ld	a,-13 (ix)
-   5CAE 3D            [ 4] 5481 	dec	a
-   5CAF 20 10         [12] 5482 	jr	NZ,00106$
-                           5483 ;src/main.c:98: drawWindow(windowCredit,3,0);
-   5CB1 DD 5E FC      [19] 5484 	ld	e,-4 (ix)
-   5CB4 DD 56 FD      [19] 5485 	ld	d,-3 (ix)
-   5CB7 21 03 00      [10] 5486 	ld	hl,#0x0003
-   5CBA E5            [11] 5487 	push	hl
-   5CBB D5            [11] 5488 	push	de
-   5CBC CD C1 4B      [17] 5489 	call	_drawWindow
-   5CBF F1            [10] 5490 	pop	af
-   5CC0 F1            [10] 5491 	pop	af
-   5CC1                    5492 00106$:
-                           5493 ;src/main.c:100: while(menuChoice!=2);
-   5CC1 DD 7E F3      [19] 5494 	ld	a,-13 (ix)
-   5CC4 D6 02         [ 7] 5495 	sub	a, #0x02
-   5CC6 20 C3         [12] 5496 	jr	NZ,00105$
-                           5497 ;src/main.c:102: cpct_setVideoMode(0);
-   5CC8 AF            [ 4] 5498 	xor	a, a
-   5CC9 F5            [11] 5499 	push	af
-   5CCA 33            [ 6] 5500 	inc	sp
-   5CCB CD 05 5F      [17] 5501 	call	_cpct_setVideoMode
-   5CCE 33            [ 6] 5502 	inc	sp
-                           5503 ;src/main.c:103: cpct_reenableFirmware(firmware);
-   5CCF DD 6E F4      [19] 5504 	ld	l,-12 (ix)
-   5CD2 DD 66 F5      [19] 5505 	ld	h,-11 (ix)
-   5CD5 CD D3 5E      [17] 5506 	call	_cpct_reenableFirmware
-   5CD8 DD F9         [10] 5507 	ld	sp, ix
-   5CDA DD E1         [14] 5508 	pop	ix
-   5CDC C9            [10] 5509 	ret
-   5CDD                    5510 ___str_34:
-   5CDD 4E 65 77 20 67 61  5511 	.ascii "New game"
+   58D6 00                 4877 	.db 0x00
+                           4878 ;src/includes/game.h:139: void game()
+                           4879 ;	---------------------------------
+                           4880 ; Function game
+                           4881 ; ---------------------------------
+   58D7                    4882 _game::
+   58D7 DD E5         [15] 4883 	push	ix
+   58D9 DD 21 00 00   [14] 4884 	ld	ix,#0
+   58DD DD 39         [15] 4885 	add	ix,sp
+   58DF 21 F1 FF      [10] 4886 	ld	hl,#-15
+   58E2 39            [11] 4887 	add	hl,sp
+   58E3 F9            [ 6] 4888 	ld	sp,hl
+                           4889 ;src/includes/game.h:142: int ulx = 0;
+   58E4 DD 36 F7 00   [19] 4890 	ld	-9 (ix),#0x00
+   58E8 DD 36 F8 00   [19] 4891 	ld	-8 (ix),#0x00
+                           4892 ;src/includes/game.h:143: int uly = 0;
+   58EC DD 36 F5 00   [19] 4893 	ld	-11 (ix),#0x00
+   58F0 DD 36 F6 00   [19] 4894 	ld	-10 (ix),#0x00
+                           4895 ;src/includes/game.h:144: int xCursor = 10;
+   58F4 DD 36 F3 0A   [19] 4896 	ld	-13 (ix),#0x0A
+   58F8 DD 36 F4 00   [19] 4897 	ld	-12 (ix),#0x00
+                           4898 ;src/includes/game.h:145: int yCursor = 6;
+   58FC 21 06 00      [10] 4899 	ld	hl,#0x0006
+   58FF E3            [19] 4900 	ex	(sp), hl
+                           4901 ;src/includes/game.h:147: u8 exit=0;
+   5900 DD 36 F9 00   [19] 4902 	ld	-7 (ix),#0x00
+                           4903 ;src/includes/game.h:149: cpct_clearScreen(cpct_px2byteM1(0,0,0,0));
+   5904 21 00 00      [10] 4904 	ld	hl,#0x0000
+   5907 E5            [11] 4905 	push	hl
+   5908 2E 00         [ 7] 4906 	ld	l, #0x00
+   590A E5            [11] 4907 	push	hl
+   590B CD 0A 60      [17] 4908 	call	_cpct_px2byteM1
+   590E F1            [10] 4909 	pop	af
+   590F F1            [10] 4910 	pop	af
+   5910 65            [ 4] 4911 	ld	h,l
+   5911 01 00 40      [10] 4912 	ld	bc,#0x4000
+   5914 C5            [11] 4913 	push	bc
+   5915 E5            [11] 4914 	push	hl
+   5916 33            [ 6] 4915 	inc	sp
+   5917 21 00 C0      [10] 4916 	ld	hl,#0xC000
+   591A E5            [11] 4917 	push	hl
+   591B CD FC 5F      [17] 4918 	call	_cpct_memset
+                           4919 ;src/includes/game.h:151: generateWorld();
+   591E CD 93 4F      [17] 4920 	call	_generateWorld
+                           4921 ;src/includes/game.h:153: drawWorld(ulx, uly);
+   5921 21 00 00      [10] 4922 	ld	hl,#0x0000
+   5924 E5            [11] 4923 	push	hl
+   5925 CD 3D 53      [17] 4924 	call	_drawWorld
+   5928 F1            [10] 4925 	pop	af
+                           4926 ;src/includes/game.h:155: do{
+   5929                    4927 00172$:
+                           4928 ;src/includes/game.h:156: cpct_scanKeyboard(); 
+   5929 CD 1B 61      [17] 4929 	call	_cpct_scanKeyboard
+                           4930 ;src/includes/game.h:158: if ( cpct_isKeyPressed(Key_CursorUp) )
+   592C 21 00 01      [10] 4931 	ld	hl,#0x0100
+   592F CD FD 5D      [17] 4932 	call	_cpct_isKeyPressed
+                           4933 ;src/includes/game.h:160: drawTile(ulx, uly, xCursor, yCursor);
+   5932 DD 7E F3      [19] 4934 	ld	a,-13 (ix)
+   5935 DD 77 FC      [19] 4935 	ld	-4 (ix),a
+   5938 DD 7E F5      [19] 4936 	ld	a,-11 (ix)
+   593B DD 77 FD      [19] 4937 	ld	-3 (ix),a
+   593E DD 7E F7      [19] 4938 	ld	a,-9 (ix)
+   5941 DD 77 FE      [19] 4939 	ld	-2 (ix),a
+                           4940 ;src/includes/game.h:158: if ( cpct_isKeyPressed(Key_CursorUp) )
+   5944 7D            [ 4] 4941 	ld	a,l
+   5945 B7            [ 4] 4942 	or	a, a
+   5946 28 5F         [12] 4943 	jr	Z,00107$
+                           4944 ;src/includes/game.h:160: drawTile(ulx, uly, xCursor, yCursor);
+   5948 DD 7E F1      [19] 4945 	ld	a,-15 (ix)
+   594B DD 77 FF      [19] 4946 	ld	-1 (ix), a
+   594E F5            [11] 4947 	push	af
+   594F 33            [ 6] 4948 	inc	sp
+   5950 DD 7E FC      [19] 4949 	ld	a,-4 (ix)
+   5953 F5            [11] 4950 	push	af
+   5954 33            [ 6] 4951 	inc	sp
+   5955 DD 7E FD      [19] 4952 	ld	a,-3 (ix)
+   5958 F5            [11] 4953 	push	af
+   5959 33            [ 6] 4954 	inc	sp
+   595A DD 7E FE      [19] 4955 	ld	a,-2 (ix)
+   595D F5            [11] 4956 	push	af
+   595E 33            [ 6] 4957 	inc	sp
+   595F CD 15 51      [17] 4958 	call	_drawTile
+   5962 F1            [10] 4959 	pop	af
+   5963 F1            [10] 4960 	pop	af
+                           4961 ;src/includes/game.h:162: yCursor-=1;
+   5964 E1            [10] 4962 	pop	hl
+   5965 E5            [11] 4963 	push	hl
+   5966 2B            [ 6] 4964 	dec	hl
+   5967 E3            [19] 4965 	ex	(sp), hl
+                           4966 ;src/includes/game.h:165: if(yCursor<0)
+   5968 DD CB F2 7E   [20] 4967 	bit	7, -14 (ix)
+   596C 28 31         [12] 4968 	jr	Z,00201$
+                           4969 ;src/includes/game.h:167: yCursor=0;
+   596E 21 00 00      [10] 4970 	ld	hl,#0x0000
+   5971 E3            [19] 4971 	ex	(sp), hl
+                           4972 ;src/includes/game.h:170: if(uly>0)
+   5972 AF            [ 4] 4973 	xor	a, a
+   5973 DD BE F5      [19] 4974 	cp	a, -11 (ix)
+   5976 DD 9E F6      [19] 4975 	sbc	a, -10 (ix)
+   5979 E2 7E 59      [10] 4976 	jp	PO, 00356$
+   597C EE 80         [ 7] 4977 	xor	a, #0x80
+   597E                    4978 00356$:
+   597E F2 9F 59      [10] 4979 	jp	P,00201$
+                           4980 ;src/includes/game.h:172: uly-=1;
+   5981 DD 6E F5      [19] 4981 	ld	l,-11 (ix)
+   5984 DD 66 F6      [19] 4982 	ld	h,-10 (ix)
+   5987 2B            [ 6] 4983 	dec	hl
+   5988 DD 75 F5      [19] 4984 	ld	-11 (ix),l
+   598B DD 74 F6      [19] 4985 	ld	-10 (ix),h
+                           4986 ;src/includes/game.h:160: drawTile(ulx, uly, xCursor, yCursor);
+   598E DD 7E F5      [19] 4987 	ld	a,-11 (ix)
+                           4988 ;src/includes/game.h:173: drawWorld(ulx, uly);
+   5991 DD 77 FD      [19] 4989 	ld	-3 (ix), a
+   5994 F5            [11] 4990 	push	af
+   5995 33            [ 6] 4991 	inc	sp
+   5996 DD 7E FE      [19] 4992 	ld	a,-2 (ix)
+   5999 F5            [11] 4993 	push	af
+   599A 33            [ 6] 4994 	inc	sp
+   599B CD 3D 53      [17] 4995 	call	_drawWorld
+   599E F1            [10] 4996 	pop	af
+                           4997 ;src/includes/game.h:178: for(i=0; i<14000; i++) {}
+   599F                    4998 00201$:
+   599F 11 B0 36      [10] 4999 	ld	de,#0x36B0
+   59A2                    5000 00177$:
+   59A2 1B            [ 6] 5001 	dec	de
+   59A3 7A            [ 4] 5002 	ld	a,d
+   59A4 B3            [ 4] 5003 	or	a,e
+   59A5 20 FB         [12] 5004 	jr	NZ,00177$
+   59A7                    5005 00107$:
+                           5006 ;src/includes/game.h:181: if ( cpct_isKeyPressed(Key_CursorDown) )
+   59A7 21 00 04      [10] 5007 	ld	hl,#0x0400
+   59AA CD FD 5D      [17] 5008 	call	_cpct_isKeyPressed
+   59AD 7D            [ 4] 5009 	ld	a,l
+   59AE B7            [ 4] 5010 	or	a, a
+   59AF CA 2C 5A      [10] 5011 	jp	Z,00114$
+                           5012 ;src/includes/game.h:183: drawTile(ulx, uly, xCursor, yCursor);
+   59B2 DD 66 F1      [19] 5013 	ld	h,-15 (ix)
+   59B5 E5            [11] 5014 	push	hl
+   59B6 33            [ 6] 5015 	inc	sp
+   59B7 DD 7E FC      [19] 5016 	ld	a,-4 (ix)
+   59BA F5            [11] 5017 	push	af
+   59BB 33            [ 6] 5018 	inc	sp
+   59BC DD 7E FD      [19] 5019 	ld	a,-3 (ix)
+   59BF F5            [11] 5020 	push	af
+   59C0 33            [ 6] 5021 	inc	sp
+   59C1 DD 7E FE      [19] 5022 	ld	a,-2 (ix)
+   59C4 F5            [11] 5023 	push	af
+   59C5 33            [ 6] 5024 	inc	sp
+   59C6 CD 15 51      [17] 5025 	call	_drawTile
+   59C9 F1            [10] 5026 	pop	af
+   59CA F1            [10] 5027 	pop	af
+                           5028 ;src/includes/game.h:184: yCursor+=1;
+   59CB DD 34 F1      [23] 5029 	inc	-15 (ix)
+   59CE 20 03         [12] 5030 	jr	NZ,00357$
+   59D0 DD 34 F2      [23] 5031 	inc	-14 (ix)
+   59D3                    5032 00357$:
+                           5033 ;src/includes/game.h:185: if(yCursor>NBTILE_H-1)
+   59D3 3E 0B         [ 7] 5034 	ld	a,#0x0B
+   59D5 DD BE F1      [19] 5035 	cp	a, -15 (ix)
+   59D8 3E 00         [ 7] 5036 	ld	a,#0x00
+   59DA DD 9E F2      [19] 5037 	sbc	a, -14 (ix)
+   59DD E2 E2 59      [10] 5038 	jp	PO, 00358$
+   59E0 EE 80         [ 7] 5039 	xor	a, #0x80
+   59E2                    5040 00358$:
+   59E2 F2 11 5A      [10] 5041 	jp	P,00206$
+                           5042 ;src/includes/game.h:187: yCursor=NBTILE_H-1;
+   59E5 21 0B 00      [10] 5043 	ld	hl,#0x000B
+   59E8 E3            [19] 5044 	ex	(sp), hl
+                           5045 ;src/includes/game.h:188: if(uly<HEIGHT-NBTILE_H)
+   59E9 DD 7E F5      [19] 5046 	ld	a,-11 (ix)
+   59EC D6 24         [ 7] 5047 	sub	a, #0x24
+   59EE DD 7E F6      [19] 5048 	ld	a,-10 (ix)
+   59F1 17            [ 4] 5049 	rla
+   59F2 3F            [ 4] 5050 	ccf
+   59F3 1F            [ 4] 5051 	rra
+   59F4 DE 80         [ 7] 5052 	sbc	a, #0x80
+   59F6 30 19         [12] 5053 	jr	NC,00206$
+                           5054 ;src/includes/game.h:190: uly+=1;
+   59F8 DD 34 F5      [23] 5055 	inc	-11 (ix)
+   59FB 20 03         [12] 5056 	jr	NZ,00359$
+   59FD DD 34 F6      [23] 5057 	inc	-10 (ix)
+   5A00                    5058 00359$:
+                           5059 ;src/includes/game.h:160: drawTile(ulx, uly, xCursor, yCursor);
+   5A00 DD 7E F5      [19] 5060 	ld	a,-11 (ix)
+                           5061 ;src/includes/game.h:191: drawWorld(ulx, uly);
+   5A03 DD 77 FD      [19] 5062 	ld	-3 (ix), a
+   5A06 F5            [11] 5063 	push	af
+   5A07 33            [ 6] 5064 	inc	sp
+   5A08 DD 7E FE      [19] 5065 	ld	a,-2 (ix)
+   5A0B F5            [11] 5066 	push	af
+   5A0C 33            [ 6] 5067 	inc	sp
+   5A0D CD 3D 53      [17] 5068 	call	_drawWorld
+   5A10 F1            [10] 5069 	pop	af
+                           5070 ;src/includes/game.h:196: for(i=0; i<14000; i++) {}
+   5A11                    5071 00206$:
+   5A11 DD 36 FA B0   [19] 5072 	ld	-6 (ix),#0xB0
+   5A15 DD 36 FB 36   [19] 5073 	ld	-5 (ix),#0x36
+   5A19                    5074 00180$:
+   5A19 DD 6E FA      [19] 5075 	ld	l,-6 (ix)
+   5A1C DD 66 FB      [19] 5076 	ld	h,-5 (ix)
+   5A1F 2B            [ 6] 5077 	dec	hl
+   5A20 DD 75 FA      [19] 5078 	ld	-6 (ix),l
+   5A23 DD 74 FB      [19] 5079 	ld	-5 (ix), h
+   5A26 7C            [ 4] 5080 	ld	a, h
+   5A27 DD B6 FA      [19] 5081 	or	a,-6 (ix)
+   5A2A 20 ED         [12] 5082 	jr	NZ,00180$
+   5A2C                    5083 00114$:
+                           5084 ;src/includes/game.h:199: if ( cpct_isKeyPressed(Key_CursorLeft) )
+   5A2C 21 01 01      [10] 5085 	ld	hl,#0x0101
+   5A2F CD FD 5D      [17] 5086 	call	_cpct_isKeyPressed
+                           5087 ;src/includes/game.h:160: drawTile(ulx, uly, xCursor, yCursor);
+   5A32 DD 7E F1      [19] 5088 	ld	a,-15 (ix)
+   5A35 DD 77 FF      [19] 5089 	ld	-1 (ix),a
+                           5090 ;src/includes/game.h:199: if ( cpct_isKeyPressed(Key_CursorLeft) )
+   5A38 7D            [ 4] 5091 	ld	a,l
+   5A39 B7            [ 4] 5092 	or	a, a
+   5A3A 28 6C         [12] 5093 	jr	Z,00121$
+                           5094 ;src/includes/game.h:201: drawTile(ulx, uly, xCursor, yCursor);
+   5A3C DD 7E FF      [19] 5095 	ld	a,-1 (ix)
+   5A3F F5            [11] 5096 	push	af
+   5A40 33            [ 6] 5097 	inc	sp
+   5A41 DD 7E FC      [19] 5098 	ld	a,-4 (ix)
+   5A44 F5            [11] 5099 	push	af
+   5A45 33            [ 6] 5100 	inc	sp
+   5A46 DD 7E FD      [19] 5101 	ld	a,-3 (ix)
+   5A49 F5            [11] 5102 	push	af
+   5A4A 33            [ 6] 5103 	inc	sp
+   5A4B DD 7E FE      [19] 5104 	ld	a,-2 (ix)
+   5A4E F5            [11] 5105 	push	af
+   5A4F 33            [ 6] 5106 	inc	sp
+   5A50 CD 15 51      [17] 5107 	call	_drawTile
+   5A53 F1            [10] 5108 	pop	af
+   5A54 F1            [10] 5109 	pop	af
+                           5110 ;src/includes/game.h:202: xCursor-=1;
+   5A55 DD 6E F3      [19] 5111 	ld	l,-13 (ix)
+   5A58 DD 66 F4      [19] 5112 	ld	h,-12 (ix)
+   5A5B 2B            [ 6] 5113 	dec	hl
+   5A5C DD 75 F3      [19] 5114 	ld	-13 (ix),l
+   5A5F DD 74 F4      [19] 5115 	ld	-12 (ix),h
+                           5116 ;src/includes/game.h:203: if(xCursor<0)
+   5A62 DD CB F4 7E   [20] 5117 	bit	7, -12 (ix)
+   5A66 28 38         [12] 5118 	jr	Z,00211$
+                           5119 ;src/includes/game.h:205: xCursor=0;
+   5A68 DD 36 F3 00   [19] 5120 	ld	-13 (ix),#0x00
+   5A6C DD 36 F4 00   [19] 5121 	ld	-12 (ix),#0x00
+                           5122 ;src/includes/game.h:206: if(ulx>0)
+   5A70 AF            [ 4] 5123 	xor	a, a
+   5A71 DD BE F7      [19] 5124 	cp	a, -9 (ix)
+   5A74 DD 9E F8      [19] 5125 	sbc	a, -8 (ix)
+   5A77 E2 7C 5A      [10] 5126 	jp	PO, 00360$
+   5A7A EE 80         [ 7] 5127 	xor	a, #0x80
+   5A7C                    5128 00360$:
+   5A7C F2 A0 5A      [10] 5129 	jp	P,00211$
+                           5130 ;src/includes/game.h:208: ulx-=1;
+   5A7F DD 6E F7      [19] 5131 	ld	l,-9 (ix)
+   5A82 DD 66 F8      [19] 5132 	ld	h,-8 (ix)
+   5A85 2B            [ 6] 5133 	dec	hl
+   5A86 DD 75 F7      [19] 5134 	ld	-9 (ix),l
+   5A89 DD 74 F8      [19] 5135 	ld	-8 (ix),h
+                           5136 ;src/includes/game.h:160: drawTile(ulx, uly, xCursor, yCursor);
+   5A8C DD 7E F7      [19] 5137 	ld	a,-9 (ix)
+   5A8F DD 77 FE      [19] 5138 	ld	-2 (ix),a
+                           5139 ;src/includes/game.h:209: drawWorld(ulx, uly);
+   5A92 DD 7E FD      [19] 5140 	ld	a,-3 (ix)
+   5A95 F5            [11] 5141 	push	af
+   5A96 33            [ 6] 5142 	inc	sp
+   5A97 DD 7E FE      [19] 5143 	ld	a,-2 (ix)
+   5A9A F5            [11] 5144 	push	af
+   5A9B 33            [ 6] 5145 	inc	sp
+   5A9C CD 3D 53      [17] 5146 	call	_drawWorld
+   5A9F F1            [10] 5147 	pop	af
+                           5148 ;src/includes/game.h:214: for(i=0; i<14000; i++) {}
+   5AA0                    5149 00211$:
+   5AA0 11 B0 36      [10] 5150 	ld	de,#0x36B0
+   5AA3                    5151 00183$:
+   5AA3 1B            [ 6] 5152 	dec	de
+   5AA4 7A            [ 4] 5153 	ld	a,d
+   5AA5 B3            [ 4] 5154 	or	a,e
+   5AA6 20 FB         [12] 5155 	jr	NZ,00183$
+   5AA8                    5156 00121$:
+                           5157 ;src/includes/game.h:217: if ( cpct_isKeyPressed(Key_CursorRight) )
+   5AA8 21 00 02      [10] 5158 	ld	hl,#0x0200
+   5AAB CD FD 5D      [17] 5159 	call	_cpct_isKeyPressed
+   5AAE 7D            [ 4] 5160 	ld	a,l
+   5AAF B7            [ 4] 5161 	or	a, a
+   5AB0 28 6E         [12] 5162 	jr	Z,00128$
+                           5163 ;src/includes/game.h:219: drawTile(ulx, uly, xCursor, yCursor);
+   5AB2 DD 56 F3      [19] 5164 	ld	d,-13 (ix)
+   5AB5 DD 7E FF      [19] 5165 	ld	a,-1 (ix)
+   5AB8 F5            [11] 5166 	push	af
+   5AB9 33            [ 6] 5167 	inc	sp
+   5ABA D5            [11] 5168 	push	de
+   5ABB 33            [ 6] 5169 	inc	sp
+   5ABC DD 7E FD      [19] 5170 	ld	a,-3 (ix)
+   5ABF F5            [11] 5171 	push	af
+   5AC0 33            [ 6] 5172 	inc	sp
+   5AC1 DD 7E FE      [19] 5173 	ld	a,-2 (ix)
+   5AC4 F5            [11] 5174 	push	af
+   5AC5 33            [ 6] 5175 	inc	sp
+   5AC6 CD 15 51      [17] 5176 	call	_drawTile
+   5AC9 F1            [10] 5177 	pop	af
+   5ACA F1            [10] 5178 	pop	af
+                           5179 ;src/includes/game.h:220: xCursor+=1;
+   5ACB DD 34 F3      [23] 5180 	inc	-13 (ix)
+   5ACE 20 03         [12] 5181 	jr	NZ,00361$
+   5AD0 DD 34 F4      [23] 5182 	inc	-12 (ix)
+   5AD3                    5183 00361$:
+                           5184 ;src/includes/game.h:221: if(xCursor>NBTILE_W-1)
+   5AD3 3E 13         [ 7] 5185 	ld	a,#0x13
+   5AD5 DD BE F3      [19] 5186 	cp	a, -13 (ix)
+   5AD8 3E 00         [ 7] 5187 	ld	a,#0x00
+   5ADA DD 9E F4      [19] 5188 	sbc	a, -12 (ix)
+   5ADD E2 E2 5A      [10] 5189 	jp	PO, 00362$
+   5AE0 EE 80         [ 7] 5190 	xor	a, #0x80
+   5AE2                    5191 00362$:
+   5AE2 F2 18 5B      [10] 5192 	jp	P,00216$
+                           5193 ;src/includes/game.h:223: xCursor=NBTILE_W-1;
+   5AE5 DD 36 F3 13   [19] 5194 	ld	-13 (ix),#0x13
+   5AE9 DD 36 F4 00   [19] 5195 	ld	-12 (ix),#0x00
+                           5196 ;src/includes/game.h:224: if(ulx<WIDTH-NBTILE_W)
+   5AED DD 7E F7      [19] 5197 	ld	a,-9 (ix)
+   5AF0 D6 3C         [ 7] 5198 	sub	a, #0x3C
+   5AF2 DD 7E F8      [19] 5199 	ld	a,-8 (ix)
+   5AF5 17            [ 4] 5200 	rla
+   5AF6 3F            [ 4] 5201 	ccf
+   5AF7 1F            [ 4] 5202 	rra
+   5AF8 DE 80         [ 7] 5203 	sbc	a, #0x80
+   5AFA 30 1C         [12] 5204 	jr	NC,00216$
+                           5205 ;src/includes/game.h:226: ulx+=1;
+   5AFC DD 34 F7      [23] 5206 	inc	-9 (ix)
+   5AFF 20 03         [12] 5207 	jr	NZ,00363$
+   5B01 DD 34 F8      [23] 5208 	inc	-8 (ix)
+   5B04                    5209 00363$:
+                           5210 ;src/includes/game.h:160: drawTile(ulx, uly, xCursor, yCursor);
+   5B04 DD 7E F7      [19] 5211 	ld	a,-9 (ix)
+   5B07 DD 77 FE      [19] 5212 	ld	-2 (ix),a
+                           5213 ;src/includes/game.h:227: drawWorld(ulx, uly);
+   5B0A DD 7E FD      [19] 5214 	ld	a,-3 (ix)
+   5B0D F5            [11] 5215 	push	af
+   5B0E 33            [ 6] 5216 	inc	sp
+   5B0F DD 7E FE      [19] 5217 	ld	a,-2 (ix)
+   5B12 F5            [11] 5218 	push	af
+   5B13 33            [ 6] 5219 	inc	sp
+   5B14 CD 3D 53      [17] 5220 	call	_drawWorld
+   5B17 F1            [10] 5221 	pop	af
+                           5222 ;src/includes/game.h:232: for(i=0; i<14000; i++) {}
+   5B18                    5223 00216$:
+   5B18 11 B0 36      [10] 5224 	ld	de,#0x36B0
+   5B1B                    5225 00186$:
+   5B1B 1B            [ 6] 5226 	dec	de
+   5B1C 7A            [ 4] 5227 	ld	a,d
+   5B1D B3            [ 4] 5228 	or	a,e
+   5B1E 20 FB         [12] 5229 	jr	NZ,00186$
+   5B20                    5230 00128$:
+                           5231 ;src/includes/game.h:236: if ( cpct_isKeyPressed(Key_Space) )
+   5B20 21 05 80      [10] 5232 	ld	hl,#0x8005
+   5B23 CD FD 5D      [17] 5233 	call	_cpct_isKeyPressed
+   5B26 7D            [ 4] 5234 	ld	a,l
+   5B27 B7            [ 4] 5235 	or	a, a
+   5B28 CA A3 5B      [10] 5236 	jp	Z,00155$
+                           5237 ;src/includes/game.h:238: if(CURSOR_MODE==T_SSNS)
+   5B2B 3A A8 70      [13] 5238 	ld	a,(#_CURSOR_MODE + 0)
+   5B2E 3D            [ 4] 5239 	dec	a
+   5B2F 20 07         [12] 5240 	jr	NZ,00151$
+                           5241 ;src/includes/game.h:239: CURSOR_MODE=T_SSEW;
+   5B31 21 A8 70      [10] 5242 	ld	hl,#_CURSOR_MODE + 0
+   5B34 36 02         [10] 5243 	ld	(hl), #0x02
+   5B36 18 63         [12] 5244 	jr	00228$
+   5B38                    5245 00151$:
+                           5246 ;src/includes/game.h:240: else if(CURSOR_MODE==T_SSEW)
+   5B38 3A A8 70      [13] 5247 	ld	a,(#_CURSOR_MODE + 0)
+   5B3B D6 02         [ 7] 5248 	sub	a, #0x02
+   5B3D 20 07         [12] 5249 	jr	NZ,00148$
+                           5250 ;src/includes/game.h:241: CURSOR_MODE=T_SSNS;
+   5B3F 21 A8 70      [10] 5251 	ld	hl,#_CURSOR_MODE + 0
+   5B42 36 01         [10] 5252 	ld	(hl), #0x01
+   5B44 18 55         [12] 5253 	jr	00228$
+   5B46                    5254 00148$:
+                           5255 ;src/includes/game.h:242: else if(CURSOR_MODE==T_SMNS)
+   5B46 3A A8 70      [13] 5256 	ld	a,(#_CURSOR_MODE + 0)
+   5B49 D6 03         [ 7] 5257 	sub	a, #0x03
+   5B4B 20 07         [12] 5258 	jr	NZ,00145$
+                           5259 ;src/includes/game.h:243: CURSOR_MODE=T_SMEW;
+   5B4D 21 A8 70      [10] 5260 	ld	hl,#_CURSOR_MODE + 0
+   5B50 36 04         [10] 5261 	ld	(hl), #0x04
+   5B52 18 47         [12] 5262 	jr	00228$
+   5B54                    5263 00145$:
+                           5264 ;src/includes/game.h:244: else if(CURSOR_MODE==T_SMEW)
+   5B54 3A A8 70      [13] 5265 	ld	a,(#_CURSOR_MODE + 0)
+   5B57 D6 04         [ 7] 5266 	sub	a, #0x04
+   5B59 20 07         [12] 5267 	jr	NZ,00142$
+                           5268 ;src/includes/game.h:245: CURSOR_MODE=T_SMNS;
+   5B5B 21 A8 70      [10] 5269 	ld	hl,#_CURSOR_MODE + 0
+   5B5E 36 03         [10] 5270 	ld	(hl), #0x03
+   5B60 18 39         [12] 5271 	jr	00228$
+   5B62                    5272 00142$:
+                           5273 ;src/includes/game.h:246: else if(CURSOR_MODE==T_SLNS)
+   5B62 3A A8 70      [13] 5274 	ld	a,(#_CURSOR_MODE + 0)
+   5B65 D6 05         [ 7] 5275 	sub	a, #0x05
+   5B67 20 07         [12] 5276 	jr	NZ,00139$
+                           5277 ;src/includes/game.h:247: CURSOR_MODE=T_SLEW;
+   5B69 21 A8 70      [10] 5278 	ld	hl,#_CURSOR_MODE + 0
+   5B6C 36 06         [10] 5279 	ld	(hl), #0x06
+   5B6E 18 2B         [12] 5280 	jr	00228$
+   5B70                    5281 00139$:
+                           5282 ;src/includes/game.h:248: else if(CURSOR_MODE==T_SLEW)
+   5B70 3A A8 70      [13] 5283 	ld	a,(#_CURSOR_MODE + 0)
+   5B73 D6 06         [ 7] 5284 	sub	a, #0x06
+   5B75 20 07         [12] 5285 	jr	NZ,00136$
+                           5286 ;src/includes/game.h:249: CURSOR_MODE=T_SLNS;
+   5B77 21 A8 70      [10] 5287 	ld	hl,#_CURSOR_MODE + 0
+   5B7A 36 05         [10] 5288 	ld	(hl), #0x05
+   5B7C 18 1D         [12] 5289 	jr	00228$
+   5B7E                    5290 00136$:
+                           5291 ;src/includes/game.h:250: else if(CURSOR_MODE>=T_REW && CURSOR_MODE<T_RNSW)
+   5B7E 3A A8 70      [13] 5292 	ld	a,(#_CURSOR_MODE + 0)
+   5B81 FE 07         [ 7] 5293 	cp	a,#0x07
+   5B83 38 0A         [12] 5294 	jr	C,00132$
+   5B85 D6 10         [ 7] 5295 	sub	a, #0x10
+   5B87 30 06         [12] 5296 	jr	NC,00132$
+                           5297 ;src/includes/game.h:251: CURSOR_MODE+=1;
+   5B89 21 A8 70      [10] 5298 	ld	hl, #_CURSOR_MODE+0
+   5B8C 34            [11] 5299 	inc	(hl)
+   5B8D 18 0C         [12] 5300 	jr	00228$
+   5B8F                    5301 00132$:
+                           5302 ;src/includes/game.h:252: else if(CURSOR_MODE==T_RNSW)
+   5B8F 3A A8 70      [13] 5303 	ld	a,(#_CURSOR_MODE + 0)
+   5B92 D6 10         [ 7] 5304 	sub	a, #0x10
+   5B94 20 05         [12] 5305 	jr	NZ,00228$
+                           5306 ;src/includes/game.h:253: CURSOR_MODE=T_REW;
+   5B96 21 A8 70      [10] 5307 	ld	hl,#_CURSOR_MODE + 0
+   5B99 36 07         [10] 5308 	ld	(hl), #0x07
+                           5309 ;src/includes/game.h:255: for(i=0; i<14000; i++) {}
+   5B9B                    5310 00228$:
+   5B9B 21 B0 36      [10] 5311 	ld	hl,#0x36B0
+   5B9E                    5312 00189$:
+   5B9E 2B            [ 6] 5313 	dec	hl
+   5B9F 7C            [ 4] 5314 	ld	a,h
+   5BA0 B5            [ 4] 5315 	or	a,l
+   5BA1 20 FB         [12] 5316 	jr	NZ,00189$
+   5BA3                    5317 00155$:
+                           5318 ;src/includes/game.h:258: if ( cpct_isKeyPressed(Key_Esc) )
+   5BA3 21 08 04      [10] 5319 	ld	hl,#0x0408
+   5BA6 CD FD 5D      [17] 5320 	call	_cpct_isKeyPressed
+                           5321 ;src/includes/game.h:160: drawTile(ulx, uly, xCursor, yCursor);
+   5BA9 DD 46 F3      [19] 5322 	ld	b,-13 (ix)
+                           5323 ;src/includes/game.h:258: if ( cpct_isKeyPressed(Key_Esc) )
+   5BAC 7D            [ 4] 5324 	ld	a,l
+   5BAD B7            [ 4] 5325 	or	a, a
+   5BAE 28 34         [12] 5326 	jr	Z,00161$
+                           5327 ;src/includes/game.h:261: if(CURSOR_MODE==NONE)
+   5BB0 3A A8 70      [13] 5328 	ld	a,(#_CURSOR_MODE + 0)
+   5BB3 B7            [ 4] 5329 	or	a, a
+   5BB4 20 06         [12] 5330 	jr	NZ,00157$
+                           5331 ;src/includes/game.h:262: exit=1;
+   5BB6 DD 36 F9 01   [19] 5332 	ld	-7 (ix),#0x01
+   5BBA 18 20         [12] 5333 	jr	00232$
+   5BBC                    5334 00157$:
+                           5335 ;src/includes/game.h:265: CURSOR_MODE=NONE;
+   5BBC FD 21 A8 70   [14] 5336 	ld	iy,#_CURSOR_MODE
+   5BC0 FD 36 00 00   [19] 5337 	ld	0 (iy),#0x00
+                           5338 ;src/includes/game.h:266: drawTile(ulx, uly, xCursor, yCursor);
+   5BC4 C5            [11] 5339 	push	bc
+   5BC5 DD 7E FF      [19] 5340 	ld	a,-1 (ix)
+   5BC8 F5            [11] 5341 	push	af
+   5BC9 33            [ 6] 5342 	inc	sp
+   5BCA C5            [11] 5343 	push	bc
+   5BCB 33            [ 6] 5344 	inc	sp
+   5BCC DD 7E FD      [19] 5345 	ld	a,-3 (ix)
+   5BCF F5            [11] 5346 	push	af
+   5BD0 33            [ 6] 5347 	inc	sp
+   5BD1 DD 7E FE      [19] 5348 	ld	a,-2 (ix)
+   5BD4 F5            [11] 5349 	push	af
+   5BD5 33            [ 6] 5350 	inc	sp
+   5BD6 CD 15 51      [17] 5351 	call	_drawTile
+   5BD9 F1            [10] 5352 	pop	af
+   5BDA F1            [10] 5353 	pop	af
+   5BDB C1            [10] 5354 	pop	bc
+                           5355 ;src/includes/game.h:270: for(i=0; i<14000; i++) {}
+   5BDC                    5356 00232$:
+   5BDC 21 B0 36      [10] 5357 	ld	hl,#0x36B0
+   5BDF                    5358 00192$:
+   5BDF 2B            [ 6] 5359 	dec	hl
+   5BE0 7C            [ 4] 5360 	ld	a,h
+   5BE1 B5            [ 4] 5361 	or	a,l
+   5BE2 20 FB         [12] 5362 	jr	NZ,00192$
+   5BE4                    5363 00161$:
+                           5364 ;src/includes/game.h:273: if ( cpct_isKeyPressed(Key_Return) )
+   5BE4 C5            [11] 5365 	push	bc
+   5BE5 21 02 04      [10] 5366 	ld	hl,#0x0402
+   5BE8 CD FD 5D      [17] 5367 	call	_cpct_isKeyPressed
+   5BEB 7D            [ 4] 5368 	ld	a,l
+   5BEC C1            [10] 5369 	pop	bc
+   5BED B7            [ 4] 5370 	or	a, a
+   5BEE CA 90 5C      [10] 5371 	jp	Z,00171$
+                           5372 ;src/includes/game.h:276: if(CURSOR_MODE==NONE)
+   5BF1 3A A8 70      [13] 5373 	ld	a,(#_CURSOR_MODE + 0)
+   5BF4 B7            [ 4] 5374 	or	a, a
+   5BF5 20 44         [12] 5375 	jr	NZ,00167$
+                           5376 ;src/includes/game.h:278: menuTile(ulx+xCursor, uly+yCursor);
+   5BF7 DD 7E F5      [19] 5377 	ld	a, -11 (ix)
+   5BFA DD 66 F1      [19] 5378 	ld	h, -15 (ix)
+   5BFD 84            [ 4] 5379 	add	a, h
+   5BFE 67            [ 4] 5380 	ld	h,a
+   5BFF DD 6E F7      [19] 5381 	ld	l,-9 (ix)
+   5C02 DD 56 F3      [19] 5382 	ld	d,-13 (ix)
+   5C05 7D            [ 4] 5383 	ld	a,l
+   5C06 82            [ 4] 5384 	add	a, d
+   5C07 C5            [11] 5385 	push	bc
+   5C08 E5            [11] 5386 	push	hl
+   5C09 33            [ 6] 5387 	inc	sp
+   5C0A F5            [11] 5388 	push	af
+   5C0B 33            [ 6] 5389 	inc	sp
+   5C0C CD 27 57      [17] 5390 	call	_menuTile
+   5C0F F1            [10] 5391 	pop	af
+   5C10 21 00 00      [10] 5392 	ld	hl,#0x0000
+   5C13 E5            [11] 5393 	push	hl
+   5C14 2E 00         [ 7] 5394 	ld	l, #0x00
+   5C16 E5            [11] 5395 	push	hl
+   5C17 CD 0A 60      [17] 5396 	call	_cpct_px2byteM1
+   5C1A F1            [10] 5397 	pop	af
+   5C1B F1            [10] 5398 	pop	af
+   5C1C 65            [ 4] 5399 	ld	h,l
+   5C1D 11 00 40      [10] 5400 	ld	de,#0x4000
+   5C20 D5            [11] 5401 	push	de
+   5C21 E5            [11] 5402 	push	hl
+   5C22 33            [ 6] 5403 	inc	sp
+   5C23 21 00 C0      [10] 5404 	ld	hl,#0xC000
+   5C26 E5            [11] 5405 	push	hl
+   5C27 CD FC 5F      [17] 5406 	call	_cpct_memset
+   5C2A DD 7E FD      [19] 5407 	ld	a,-3 (ix)
+   5C2D F5            [11] 5408 	push	af
+   5C2E 33            [ 6] 5409 	inc	sp
+   5C2F DD 7E FE      [19] 5410 	ld	a,-2 (ix)
+   5C32 F5            [11] 5411 	push	af
+   5C33 33            [ 6] 5412 	inc	sp
+   5C34 CD 3D 53      [17] 5413 	call	_drawWorld
+   5C37 F1            [10] 5414 	pop	af
+   5C38 C1            [10] 5415 	pop	bc
+   5C39 18 4D         [12] 5416 	jr	00238$
+   5C3B                    5417 00167$:
+                           5418 ;src/includes/game.h:283: else if(CURSOR_MODE>=T_SSNS)
+   5C3B 3A A8 70      [13] 5419 	ld	a,(#_CURSOR_MODE + 0)
+   5C3E D6 01         [ 7] 5420 	sub	a, #0x01
+   5C40 38 46         [12] 5421 	jr	C,00238$
+                           5422 ;src/includes/game.h:285: p_world[ulx+xCursor+(uly+yCursor)*WIDTH]=CURSOR_MODE+9;
+   5C42 DD 7E F7      [19] 5423 	ld	a,-9 (ix)
+   5C45 DD 86 F3      [19] 5424 	add	a, -13 (ix)
+   5C48 5F            [ 4] 5425 	ld	e,a
+   5C49 DD 7E F8      [19] 5426 	ld	a,-8 (ix)
+   5C4C DD 8E F4      [19] 5427 	adc	a, -12 (ix)
+   5C4F 57            [ 4] 5428 	ld	d,a
+   5C50 DD 7E F5      [19] 5429 	ld	a,-11 (ix)
+   5C53 DD 86 F1      [19] 5430 	add	a, -15 (ix)
+   5C56 6F            [ 4] 5431 	ld	l,a
+   5C57 DD 7E F6      [19] 5432 	ld	a,-10 (ix)
+   5C5A DD 8E F2      [19] 5433 	adc	a, -14 (ix)
+   5C5D 67            [ 4] 5434 	ld	h,a
+   5C5E D5            [11] 5435 	push	de
+   5C5F 5D            [ 4] 5436 	ld	e, l
+   5C60 54            [ 4] 5437 	ld	d, h
+   5C61 29            [11] 5438 	add	hl, hl
+   5C62 29            [11] 5439 	add	hl, hl
+   5C63 19            [11] 5440 	add	hl, de
+   5C64 29            [11] 5441 	add	hl, hl
+   5C65 29            [11] 5442 	add	hl, hl
+   5C66 29            [11] 5443 	add	hl, hl
+   5C67 29            [11] 5444 	add	hl, hl
+   5C68 D1            [10] 5445 	pop	de
+   5C69 19            [11] 5446 	add	hl,de
+   5C6A 3E A8         [ 7] 5447 	ld	a,#<(_p_world)
+   5C6C 85            [ 4] 5448 	add	a, l
+   5C6D 5F            [ 4] 5449 	ld	e,a
+   5C6E 3E 61         [ 7] 5450 	ld	a,#>(_p_world)
+   5C70 8C            [ 4] 5451 	adc	a, h
+   5C71 57            [ 4] 5452 	ld	d,a
+   5C72 3A A8 70      [13] 5453 	ld	a,(#_CURSOR_MODE + 0)
+   5C75 C6 09         [ 7] 5454 	add	a, #0x09
+   5C77 12            [ 7] 5455 	ld	(de),a
+                           5456 ;src/includes/game.h:288: if(CURSOR_MODE<=T_SLEW)
+   5C78 3E 06         [ 7] 5457 	ld	a,#0x06
+   5C7A FD 21 A8 70   [14] 5458 	ld	iy,#_CURSOR_MODE
+   5C7E FD 96 00      [19] 5459 	sub	a, 0 (iy)
+   5C81 38 05         [12] 5460 	jr	C,00238$
+                           5461 ;src/includes/game.h:289: CURSOR_MODE=NONE;
+   5C83 21 A8 70      [10] 5462 	ld	hl,#_CURSOR_MODE + 0
+   5C86 36 00         [10] 5463 	ld	(hl), #0x00
+                           5464 ;src/includes/game.h:293: for(i=0; i<14000; i++) {}
+   5C88                    5465 00238$:
+   5C88 21 B0 36      [10] 5466 	ld	hl,#0x36B0
+   5C8B                    5467 00195$:
+   5C8B 2B            [ 6] 5468 	dec	hl
+   5C8C 7C            [ 4] 5469 	ld	a,h
+   5C8D B5            [ 4] 5470 	or	a,l
+   5C8E 20 FB         [12] 5471 	jr	NZ,00195$
+   5C90                    5472 00171$:
+                           5473 ;src/includes/game.h:297: drawCursor(xCursor, yCursor, 0);
+   5C90 AF            [ 4] 5474 	xor	a, a
+   5C91 F5            [11] 5475 	push	af
+   5C92 33            [ 6] 5476 	inc	sp
+   5C93 DD 7E FF      [19] 5477 	ld	a,-1 (ix)
+   5C96 F5            [11] 5478 	push	af
+   5C97 33            [ 6] 5479 	inc	sp
+   5C98 C5            [11] 5480 	push	bc
+   5C99 33            [ 6] 5481 	inc	sp
+   5C9A CD 5E 4D      [17] 5482 	call	_drawCursor
+   5C9D F1            [10] 5483 	pop	af
+   5C9E 33            [ 6] 5484 	inc	sp
+                           5485 ;src/includes/game.h:299: while(!exit);
+   5C9F DD 7E F9      [19] 5486 	ld	a,-7 (ix)
+   5CA2 B7            [ 4] 5487 	or	a, a
+   5CA3 CA 29 59      [10] 5488 	jp	Z,00172$
+   5CA6 DD F9         [10] 5489 	ld	sp, ix
+   5CA8 DD E1         [14] 5490 	pop	ix
+   5CAA C9            [10] 5491 	ret
+                           5492 ;src/main.c:17: void drawTrain() 
+                           5493 ;	---------------------------------
+                           5494 ; Function drawTrain
+                           5495 ; ---------------------------------
+   5CAB                    5496 _drawTrain::
+                           5497 ;src/main.c:55: }
+   5CAB C9            [10] 5498 	ret
+                           5499 ;src/main.c:58: void main(void)
+                           5500 ;	---------------------------------
+                           5501 ; Function main
+                           5502 ; ---------------------------------
+   5CAC                    5503 _main::
+   5CAC DD E5         [15] 5504 	push	ix
+   5CAE DD 21 00 00   [14] 5505 	ld	ix,#0
+   5CB2 DD 39         [15] 5506 	add	ix,sp
+   5CB4 21 ED FF      [10] 5507 	ld	hl,#-19
+   5CB7 39            [11] 5508 	add	hl,sp
+   5CB8 F9            [ 6] 5509 	ld	sp,hl
+                           5510 ;src/main.c:63: const char *menuMain[] = { 
+   5CB9 21 07 00      [10] 5511 	ld	hl,#0x0007
+   5CBC 39            [11] 5512 	add	hl,sp
+   5CBD 5D            [ 4] 5513 	ld	e,l
+   5CBE 54            [ 4] 5514 	ld	d,h
+   5CBF 36 A6         [10] 5515 	ld	(hl),#<(___str_34)
+   5CC1 23            [ 6] 5516 	inc	hl
+   5CC2 36 5D         [10] 5517 	ld	(hl),#>(___str_34)
+   5CC4 6B            [ 4] 5518 	ld	l, e
+   5CC5 62            [ 4] 5519 	ld	h, d
+   5CC6 23            [ 6] 5520 	inc	hl
+   5CC7 23            [ 6] 5521 	inc	hl
+   5CC8 01 AF 5D      [10] 5522 	ld	bc,#___str_35+0
+   5CCB 71            [ 7] 5523 	ld	(hl),c
+   5CCC 23            [ 6] 5524 	inc	hl
+   5CCD 70            [ 7] 5525 	ld	(hl),b
+   5CCE 21 04 00      [10] 5526 	ld	hl,#0x0004
+   5CD1 19            [11] 5527 	add	hl,de
+   5CD2 01 B7 5D      [10] 5528 	ld	bc,#___str_36+0
+   5CD5 71            [ 7] 5529 	ld	(hl),c
+   5CD6 23            [ 6] 5530 	inc	hl
+   5CD7 70            [ 7] 5531 	ld	(hl),b
+                           5532 ;src/main.c:69: const char *windowCredit[] = { 
+   5CD8 21 00 00      [10] 5533 	ld	hl,#0x0000
+   5CDB 39            [11] 5534 	add	hl,sp
+   5CDC DD 75 FE      [19] 5535 	ld	-2 (ix),l
+   5CDF DD 74 FF      [19] 5536 	ld	-1 (ix),h
+   5CE2 DD 6E FE      [19] 5537 	ld	l,-2 (ix)
+   5CE5 DD 66 FF      [19] 5538 	ld	h,-1 (ix)
+   5CE8 36 BC         [10] 5539 	ld	(hl),#<(___str_37)
+   5CEA 23            [ 6] 5540 	inc	hl
+   5CEB 36 5D         [10] 5541 	ld	(hl),#>(___str_37)
+   5CED DD 6E FE      [19] 5542 	ld	l,-2 (ix)
+   5CF0 DD 66 FF      [19] 5543 	ld	h,-1 (ix)
+   5CF3 23            [ 6] 5544 	inc	hl
+   5CF4 23            [ 6] 5545 	inc	hl
+   5CF5 01 C5 5D      [10] 5546 	ld	bc,#___str_38+0
+   5CF8 71            [ 7] 5547 	ld	(hl),c
+   5CF9 23            [ 6] 5548 	inc	hl
+   5CFA 70            [ 7] 5549 	ld	(hl),b
+   5CFB DD 7E FE      [19] 5550 	ld	a,-2 (ix)
+   5CFE C6 04         [ 7] 5551 	add	a, #0x04
+   5D00 6F            [ 4] 5552 	ld	l,a
+   5D01 DD 7E FF      [19] 5553 	ld	a,-1 (ix)
+   5D04 CE 00         [ 7] 5554 	adc	a, #0x00
+   5D06 67            [ 4] 5555 	ld	h,a
+   5D07 01 C6 5D      [10] 5556 	ld	bc,#___str_39+0
+   5D0A 71            [ 7] 5557 	ld	(hl),c
+   5D0B 23            [ 6] 5558 	inc	hl
+   5D0C 70            [ 7] 5559 	ld	(hl),b
+                           5560 ;src/main.c:75: firmware = cpct_disableFirmware();
+   5D0D D5            [11] 5561 	push	de
+   5D0E CD 32 60      [17] 5562 	call	_cpct_disableFirmware
+   5D11 D1            [10] 5563 	pop	de
+   5D12 DD 75 FA      [19] 5564 	ld	-6 (ix),l
+   5D15 DD 74 FB      [19] 5565 	ld	-5 (ix),h
+                           5566 ;src/main.c:77: cpct_fw2hw(paletteTrains, 16);
+   5D18 21 13 40      [10] 5567 	ld	hl,#_paletteTrains
+   5D1B D5            [11] 5568 	push	de
+   5D1C 01 10 00      [10] 5569 	ld	bc,#0x0010
+   5D1F C5            [11] 5570 	push	bc
+   5D20 E5            [11] 5571 	push	hl
+   5D21 CD 3E 5F      [17] 5572 	call	_cpct_fw2hw
+   5D24 D1            [10] 5573 	pop	de
+                           5574 ;src/main.c:78: cpct_fw2hw(paletteMenusM2, 2);
+   5D25 21 27 40      [10] 5575 	ld	hl,#_paletteMenusM2
+   5D28 D5            [11] 5576 	push	de
+   5D29 01 02 00      [10] 5577 	ld	bc,#0x0002
+   5D2C C5            [11] 5578 	push	bc
+   5D2D E5            [11] 5579 	push	hl
+   5D2E CD 3E 5F      [17] 5580 	call	_cpct_fw2hw
+   5D31 D1            [10] 5581 	pop	de
+                           5582 ;src/main.c:79: cpct_fw2hw(paletteMenusM1, 4);
+   5D32 21 23 40      [10] 5583 	ld	hl,#_paletteMenusM1
+   5D35 D5            [11] 5584 	push	de
+   5D36 01 04 00      [10] 5585 	ld	bc,#0x0004
+   5D39 C5            [11] 5586 	push	bc
+   5D3A E5            [11] 5587 	push	hl
+   5D3B CD 3E 5F      [17] 5588 	call	_cpct_fw2hw
+   5D3E D1            [10] 5589 	pop	de
+                           5590 ;src/main.c:81: cpct_setBorder(paletteTrains[12]);
+   5D3F 3A 1F 40      [13] 5591 	ld	a, (#_paletteTrains + 12)
+   5D42 D5            [11] 5592 	push	de
+   5D43 57            [ 4] 5593 	ld	d,a
+   5D44 1E 10         [ 7] 5594 	ld	e,#0x10
+   5D46 D5            [11] 5595 	push	de
+   5D47 CD 09 5E      [17] 5596 	call	_cpct_setPALColour
+   5D4A CD BD 46      [17] 5597 	call	_putM2
+   5D4D D1            [10] 5598 	pop	de
+                           5599 ;src/main.c:85: do{
+   5D4E DD 73 FC      [19] 5600 	ld	-4 (ix),e
+   5D51 DD 72 FD      [19] 5601 	ld	-3 (ix),d
+   5D54                    5602 00105$:
+                           5603 ;src/main.c:86: menuChoice = drawMenu(menuMain,3);
+   5D54 DD 5E FC      [19] 5604 	ld	e,-4 (ix)
+   5D57 DD 56 FD      [19] 5605 	ld	d,-3 (ix)
+   5D5A 3E 03         [ 7] 5606 	ld	a,#0x03
+   5D5C F5            [11] 5607 	push	af
+   5D5D 33            [ 6] 5608 	inc	sp
+   5D5E D5            [11] 5609 	push	de
+   5D5F CD C3 4A      [17] 5610 	call	_drawMenu
+   5D62 F1            [10] 5611 	pop	af
+   5D63 33            [ 6] 5612 	inc	sp
+                           5613 ;src/main.c:88: if(menuChoice==0)
+   5D64 DD 75 F3      [19] 5614 	ld	-13 (ix), l
+   5D67 7D            [ 4] 5615 	ld	a, l
+   5D68 B7            [ 4] 5616 	or	a, a
+   5D69 20 09         [12] 5617 	jr	NZ,00102$
+                           5618 ;src/main.c:90: putM1();
+   5D6B CD A9 46      [17] 5619 	call	_putM1
+                           5620 ;src/main.c:92: game();
+   5D6E CD D7 58      [17] 5621 	call	_game
+                           5622 ;src/main.c:94: putM2();
+   5D71 CD BD 46      [17] 5623 	call	_putM2
+   5D74                    5624 00102$:
+                           5625 ;src/main.c:97: if(menuChoice==1)
+   5D74 DD 7E F3      [19] 5626 	ld	a,-13 (ix)
+   5D77 3D            [ 4] 5627 	dec	a
+   5D78 20 10         [12] 5628 	jr	NZ,00106$
+                           5629 ;src/main.c:98: drawWindow(windowCredit,3,0);
+   5D7A DD 5E FE      [19] 5630 	ld	e,-2 (ix)
+   5D7D DD 56 FF      [19] 5631 	ld	d,-1 (ix)
+   5D80 21 03 00      [10] 5632 	ld	hl,#0x0003
+   5D83 E5            [11] 5633 	push	hl
+   5D84 D5            [11] 5634 	push	de
+   5D85 CD C1 4B      [17] 5635 	call	_drawWindow
+   5D88 F1            [10] 5636 	pop	af
+   5D89 F1            [10] 5637 	pop	af
+   5D8A                    5638 00106$:
+                           5639 ;src/main.c:100: while(menuChoice!=2);
+   5D8A DD 7E F3      [19] 5640 	ld	a,-13 (ix)
+   5D8D D6 02         [ 7] 5641 	sub	a, #0x02
+   5D8F 20 C3         [12] 5642 	jr	NZ,00105$
+                           5643 ;src/main.c:102: cpct_setVideoMode(0);
+   5D91 AF            [ 4] 5644 	xor	a, a
+   5D92 F5            [11] 5645 	push	af
+   5D93 33            [ 6] 5646 	inc	sp
+   5D94 CD CE 5F      [17] 5647 	call	_cpct_setVideoMode
+   5D97 33            [ 6] 5648 	inc	sp
+                           5649 ;src/main.c:103: cpct_reenableFirmware(firmware);
+   5D98 DD 6E FA      [19] 5650 	ld	l,-6 (ix)
+   5D9B DD 66 FB      [19] 5651 	ld	h,-5 (ix)
+   5D9E CD 9C 5F      [17] 5652 	call	_cpct_reenableFirmware
+   5DA1 DD F9         [10] 5653 	ld	sp, ix
+   5DA3 DD E1         [14] 5654 	pop	ix
+   5DA5 C9            [10] 5655 	ret
+   5DA6                    5656 ___str_34:
+   5DA6 4E 65 77 20 67 61  5657 	.ascii "New game"
         6D 65
-   5CE5 00                 5512 	.db 0x00
-   5CE6                    5513 ___str_35:
-   5CE6 43 72 65 64 69 74  5514 	.ascii "Credits"
+   5DAE 00                 5658 	.db 0x00
+   5DAF                    5659 ___str_35:
+   5DAF 43 72 65 64 69 74  5660 	.ascii "Credits"
         73
-   5CED 00                 5515 	.db 0x00
-   5CEE                    5516 ___str_36:
-   5CEE 51 75 69 74        5517 	.ascii "Quit"
-   5CF2 00                 5518 	.db 0x00
-   5CF3                    5519 ___str_37:
-   5CF3 52 61 69 6C 77 61  5520 	.ascii "Railways"
+   5DB6 00                 5661 	.db 0x00
+   5DB7                    5662 ___str_36:
+   5DB7 51 75 69 74        5663 	.ascii "Quit"
+   5DBB 00                 5664 	.db 0x00
+   5DBC                    5665 ___str_37:
+   5DBC 52 61 69 6C 77 61  5666 	.ascii "Railways"
         79 73
-   5CFB 00                 5521 	.db 0x00
-   5CFC                    5522 ___str_38:
-   5CFC 00                 5523 	.db 0x00
-   5CFD                    5524 ___str_39:
-   5CFD 54 72 65 77 64 62  5525 	.ascii "Trewdbal  Productions 2016"
+   5DC4 00                 5667 	.db 0x00
+   5DC5                    5668 ___str_38:
+   5DC5 00                 5669 	.db 0x00
+   5DC6                    5670 ___str_39:
+   5DC6 54 72 65 77 64 62  5671 	.ascii "Trewdbal  Productions 2016"
         61 6C 20 20 50 72
         6F 64 75 63 74 69
         6F 6E 73 20 32 30
         31 36
-   5D17 00                 5526 	.db 0x00
-                           5527 	.area _CODE
-                           5528 	.area _INITIALIZER
-   6FE0                    5529 __xinit__CURSOR_MODE:
-   6FE0 00                 5530 	.db #0x00	; 0
-                           5531 	.area _CABS (ABS)
+   5DE0 00                 5672 	.db 0x00
+                           5673 	.area _CODE
+                           5674 	.area _INITIALIZER
+   70A9                    5675 __xinit__CURSOR_MODE:
+   70A9 00                 5676 	.db #0x00	; 0
+                           5677 	.area _CABS (ABS)

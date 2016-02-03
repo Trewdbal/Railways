@@ -83,7 +83,6 @@ void menuStations()
 	}
 }
 
-
 void menuTile(u8 x, u8 y)
 {
 	u8 menuChoice;
@@ -112,6 +111,11 @@ void menuTile(u8 x, u8 y)
 
 		if(menuChoice==0)
 			windowInfoTile(x, y);
+		else if(menuChoice==1)
+		{
+		CURSOR_MODE=T_REW;
+		menuChoice=6;
+		}
 		else if(menuChoice==2)
 		{
 			menuStations();
@@ -231,27 +235,22 @@ void game()
 
 		if ( cpct_isKeyPressed(Key_Space) )
 		{
-			switch(CURSOR_MODE)
-			{
-				case T_SSNS:
+			if(CURSOR_MODE==T_SSNS)
 					CURSOR_MODE=T_SSEW;
-					break;
-				case T_SSEW:
+			else if(CURSOR_MODE==T_SSEW)
 					CURSOR_MODE=T_SSNS;
-					break;
-				case T_SMNS:
+			else if(CURSOR_MODE==T_SMNS)
 					CURSOR_MODE=T_SMEW;
-					break;
-				case T_SMEW:
+			else if(CURSOR_MODE==T_SMEW)
 					CURSOR_MODE=T_SMNS;
-					break;
-				case T_SLNS:
+			else if(CURSOR_MODE==T_SLNS)
 					CURSOR_MODE=T_SLEW;
-					break;
-				case T_SLEW:
+			else if(CURSOR_MODE==T_SLEW)
 					CURSOR_MODE=T_SLNS;
-					break;
-			}
+			else if(CURSOR_MODE>=T_REW && CURSOR_MODE<T_RNSW)
+				CURSOR_MODE+=1;
+			else if(CURSOR_MODE==T_RNSW)
+					CURSOR_MODE=T_REW;
 			// Wait loop
 			for(i=0; i<14000; i++) {}
 		}
@@ -261,7 +260,7 @@ void game()
 			// if standard cursor, call menu Tile
 			if(CURSOR_MODE==NONE)
 				exit=1;
-			else if(CURSOR_MODE>=T_SSNS && CURSOR_MODE<=T_SLEW)
+			else
 			{
 				CURSOR_MODE=NONE;
 				drawTile(ulx, uly, xCursor, yCursor);
@@ -280,10 +279,13 @@ void game()
 				cpct_clearScreen(cpct_px2byteM1(0,0,0,0));	
 				drawWorld(ulx, uly);
 			}
-			// If station cursor, apply the station tile
-			else if(CURSOR_MODE>=T_SSNS && CURSOR_MODE<=T_SLEW)
+			// If station or rail cursor, apply the tile
+			else if(CURSOR_MODE>=T_SSNS)
 			{
 				p_world[ulx+xCursor+(uly+yCursor)*WIDTH]=CURSOR_MODE+9;
+				
+				// Back to standard cursor only for the stations, not for the rail mode
+				if(CURSOR_MODE<=T_SLEW)
 				CURSOR_MODE=NONE;
 			}
 

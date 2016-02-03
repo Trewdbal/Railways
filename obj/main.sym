@@ -11,44 +11,44 @@ Symbol Table
   0 _EraseMenuEntry                                                08D9 GR
   0 ___str_0                                                       0D4A R
   0 ___str_1                                                       0D4F R
-  0 ___str_10                                                      154B R
-  0 ___str_11                                                      155E R
-  0 ___str_12                                                      156E R
-  0 ___str_13                                                      1574 R
-  0 ___str_14                                                      1588 R
-  0 ___str_15                                                      158F R
-  0 ___str_16                                                      15A1 R
-  0 ___str_17                                                      15BD R
-  0 ___str_18                                                      15CC R
-  0 ___str_19                                                      15E0 R
-  0 ___str_2                                                       14D0 R
-  0 ___str_20                                                      15EE R
-  0 ___str_21                                                      165A R
-  0 ___str_22                                                      1660 R
-  0 ___str_23                                                      1667 R
-  0 ___str_24                                                      1786 R
-  0 ___str_25                                                      1796 R
-  0 ___str_26                                                      17A6 R
-  0 ___str_27                                                      17B6 R
-  0 ___str_28                                                      17BE R
-  0 ___str_29                                                      17CD R
-  0 ___str_3                                                       14DA R
-  0 ___str_30                                                      17D8 R
-  0 ___str_31                                                      17DF R
-  0 ___str_32                                                      1802 R
-  0 ___str_33                                                      1803 R
-  0 ___str_34                                                      1CDD R
-  0 ___str_35                                                      1CE6 R
-  0 ___str_36                                                      1CEE R
-  0 ___str_37                                                      1CF3 R
-  0 ___str_38                                                      1CFC R
-  0 ___str_39                                                      1CFD R
-  0 ___str_4                                                       14DB R
-  0 ___str_5                                                       14EF R
-  0 ___str_6                                                       14FF R
-  0 ___str_7                                                       1504 R
-  0 ___str_8                                                       1521 R
-  0 ___str_9                                                       1546 R
+  0 ___str_10                                                      1605 R
+  0 ___str_11                                                      1618 R
+  0 ___str_12                                                      1628 R
+  0 ___str_13                                                      162E R
+  0 ___str_14                                                      1642 R
+  0 ___str_15                                                      1649 R
+  0 ___str_16                                                      165B R
+  0 ___str_17                                                      1677 R
+  0 ___str_18                                                      1686 R
+  0 ___str_19                                                      169A R
+  0 ___str_2                                                       158A R
+  0 ___str_20                                                      16A8 R
+  0 ___str_21                                                      1714 R
+  0 ___str_22                                                      171A R
+  0 ___str_23                                                      1721 R
+  0 ___str_24                                                      184F R
+  0 ___str_25                                                      185F R
+  0 ___str_26                                                      186F R
+  0 ___str_27                                                      187F R
+  0 ___str_28                                                      1887 R
+  0 ___str_29                                                      1896 R
+  0 ___str_3                                                       1594 R
+  0 ___str_30                                                      18A1 R
+  0 ___str_31                                                      18A8 R
+  0 ___str_32                                                      18CB R
+  0 ___str_33                                                      18CC R
+  0 ___str_34                                                      1DA6 R
+  0 ___str_35                                                      1DAF R
+  0 ___str_36                                                      1DB7 R
+  0 ___str_37                                                      1DBC R
+  0 ___str_38                                                      1DC5 R
+  0 ___str_39                                                      1DC6 R
+  0 ___str_4                                                       1595 R
+  0 ___str_5                                                       15A9 R
+  0 ___str_6                                                       15B9 R
+  0 ___str_7                                                       15BE R
+  0 ___str_8                                                       15DB R
+  0 ___str_9                                                       1600 R
     __divsint                                                      **** GX
     __moduchar                                                     **** GX
   7 __xinit__CURSOR_MODE                                           0000 R
@@ -79,24 +79,24 @@ Symbol Table
   0 _drawCursor                                                    0D5E GR
   0 _drawMenu                                                      0AC3 GR
   0 _drawMenuEntry                                                 0993 GR
-  0 _drawTile                                                      105B GR
-  0 _drawTrain                                                     1BE2 GR
+  0 _drawTile                                                      1115 GR
+  0 _drawTrain                                                     1CAB GR
   0 _drawWindow                                                    0BC1 GR
-  0 _drawWorld                                                     1283 GR
+  0 _drawWorld                                                     133D GR
   0 _dwellings1                                                    00E9 GR
   0 _dwellings2                                                    0129 GR
   0 _dwellings3                                                    0169 GR
   0 _farm1                                                         01E9 GR
   0 _farm2                                                         0229 GR
   0 _forest                                                        00A9 GR
-  0 _game                                                          180E GR
-  0 _generateWorld                                                 0ED9 GR
+  0 _game                                                          18D7 GR
+  0 _generateWorld                                                 0F93 GR
   0 _grass1                                                        0029 GR
   0 _grass2                                                        0069 GR
   0 _livestock                                                     0269 GR
-  0 _main                                                          1BE3 GR
-  0 _menuStations                                                  15F8 GR
-  0 _menuTile                                                      166D GR
+  0 _main                                                          1CAC GR
+  0 _menuStations                                                  16B2 GR
+  0 _menuTile                                                      1727 GR
   1 _p_world                                                       0000 GR
   0 _paletteMenusM1                                                0023 GR
   0 _paletteMenusM2                                                0027 GR
@@ -127,7 +127,7 @@ Symbol Table
   0 _station_small_ns                                              02A9 GR
     _strlen                                                        **** GX
   0 _water                                                         01A9 GR
-  0 _windowInfoTile                                                133B GR
+  0 _windowInfoTile                                                13F5 GR
 
 
 ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 4.
@@ -135,7 +135,7 @@ Hexadecimal [16-Bits]
 
 Area Table
 
-   0 _CODE                                      size 1D18   flags    0
+   0 _CODE                                      size 1DE1   flags    0
    1 _DATA                                      size  F00   flags    0
    2 _INITIALIZED                               size    1   flags    0
    3 _DABS                                      size    0   flags    8
