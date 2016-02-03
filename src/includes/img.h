@@ -7,19 +7,35 @@
 #define WIDTH 80
 #define HEIGHT 48
 #define NBFARM 60
-#define NBURBAN 30
-#define FOREST_DENSITY 0.12
+#define NBURBAN 20
+#define NBFOREST 50
 #define NBLIVESTOCK 19
+
+// **************
+//  Enumerations
+// **************
 
 enum {GRASS1, GRASS2, DWELLINGS1, DWELLINGS2, DWELLINGS3, FARM1, FARM2, WATER, FOREST, LIVESTOCK, SSNS, SSEW, SMNS, SMEW, SLNS, SLEW, REW, RNS, REN, RES, RWN, RWS, REWN, REWS, RNSE, RNSW};
 enum {NONE, T_SSNS, T_SSEW, T_SMNS, T_SMEW, T_SLNS, T_SLEW, T_REW, T_RNS, T_REN, T_RES, T_RWN, T_RWS, T_REWN, T_REWS, T_RNSE, T_RNSW};
+
+// **********
+//  Palettes
+// **********
 
 const unsigned char paletteTrains[16] = {0,26,13,3,15,6,16,9,10,20,2,1,19,24,11,25};
 const unsigned char paletteMenusM1[4] = {0,15,9,22};
 const unsigned char paletteMenusM2[2] = {0,20};
 
+// ******************
+//  Global variables
+// ******************
+
 u8 p_world[WIDTH*HEIGHT];
 u8 CURSOR_MODE=NONE;
+
+// *******
+//  Tiles
+// *******
 
 const u8 grass1[] = {     0x0F, 0x0F, 0x0F, 0x8F, 0x0F, 0x0F, 0x0F, 0x0F
 	,      0x1F, 0x0F, 0x2F, 0x0F, 0x0F, 0x0F, 0x0F, 0x0F

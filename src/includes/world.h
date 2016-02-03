@@ -67,11 +67,34 @@ void drawCursor(u8 x, u8 y, u8 color)
 	}
 }
 
+void patternTile(u8 tileType, int index, u8 nBitsX, u8 nBitsY, u8 *pattern)
+{
+	u8 ix;
+	u8 iy;
+
+	for(iy=0; iy<nBitsY; iy++)
+	{
+		for(ix=0; ix<nBitsX; ix++)
+		{
+			if(cpct_getBit (pattern, iy*nBitsX+ix)!=0 && index+iy*WIDTH+ix < WIDTH*HEIGHT)
+			{
+				if(tileType == FOREST)
+					p_world[index+iy*WIDTH+ix] = tileType;
+				else if(tileType==DWELLINGS1)
+						p_world[index+iy*WIDTH+ix] = (u8)cpct_getRandomUniform_u8_f(cpct_count2VSYNC ()%256)%3+2;
+
+			}
+		}
+	}
+}
+
 void generateWorld()
 {
 	int ix;
 	int iy;
 	int shift;
+	u8 p_forest[8];
+	u8 p_cities[2];
 
 	//	Grass();
 
@@ -83,16 +106,63 @@ void generateWorld()
 	}
 
 	// Forests
+	for(ix=0; ix<NBFOREST; ix++)
+	{
+		iy = cpct_getRandomUniform_u8_f((cpct_count2VSYNC ()+ix)%256)*15;
 
+		switch(cpct_getRandomUniform_u8_f((cpct_count2VSYNC ()+ix)%256)%4)
+		{
+			case 0:
+				p_forest[0] = 0b10000100;
+				p_forest[1] = 0b11000111;
+				p_forest[2] = 0b11011110;
+				p_forest[3] = 0b01111110;
+				p_forest[4] = 0b11111110; 
+				p_forest[5] = 0b01111111;
+				p_forest[6] = 0b11101111;
+				p_forest[7] = 0b11001111;
+				break;
+			case 1:
+				p_forest[0] = 0b00001100;
+				p_forest[1] = 0b11111000;
+				p_forest[2] = 0b00111111;
+				p_forest[3] = 0b01111110;
+				p_forest[4] = 0b11111110; 
+				p_forest[5] = 0b01011111;
+				p_forest[6] = 0b11001111;
+				p_forest[7] = 0b10001100;
+				break;
+			case 2:
+				p_forest[0] = 0b00110000;
+				p_forest[1] = 0b11110100;
+				p_forest[2] = 0b11111111;
+				p_forest[3] = 0b11111111;
+				p_forest[4] = 0b01111100;
+				p_forest[5] = 0b01111110;
+				p_forest[6] = 0b00111110;
+				p_forest[7] = 0b00011000;
+				break;
+			case 3:
+				p_forest[0] = 0b11000000 , 
+				p_forest[1] = 0b11100111;
+				p_forest[2] = 0b01111110;
+				p_forest[3] = 0b01111110;
+				p_forest[4] = 0b11111110;
+				p_forest[5] = 0b11111100;
+				p_forest[6] = 0b01111000;
+				p_forest[7] = 0b00110000;
+				break;
+		}
+		patternTile(FOREST, iy, 8, 8, p_forest);
 
-
+	}
 
 	// Farms
 	cpct_setRandomSeedUniform_u8(1);
 
 	for(ix=0; ix<NBFARM; ix++)
 	{
-		iy = cpct_getRandomUniform_u8_f(1)*15; // (WIDTH*HEIGHT)/255;
+		iy = cpct_getRandomUniform_u8_f(cpct_count2VSYNC ()%256)*15; // (WIDTH*HEIGHT)/255;
 
 		shift = cpct_getRandomUniform_u8_f(cpct_count2VSYNC ()%256)%10;
 		shift=iy-shift+5;
@@ -107,18 +177,61 @@ void generateWorld()
 
 	for(ix=0; ix<NBURBAN; ix++)
 	{
-		iy = cpct_getRandomUniform_u8_f(cpct_count2VSYNC ()%256)*15; // (WIDTH*HEIGHT)/255;
+		iy = cpct_getRandomUniform_u8_f(0)*15; // (WIDTH*HEIGHT)/255;
 
-		shift = cpct_getRandomUniform_u8_f(cpct_count2VSYNC ()%256)%10;
+		shift = cpct_getRandomUniform_u8_f(0)%10;
 		shift=iy-shift+5;
 
 		if(shift>0 && shift<WIDTH*HEIGHT)
-			p_world[shift] = (u8)cpct_getRandomUniform_u8_f(cpct_count2VSYNC ()%256)%3+2;
+			p_world[shift] = (u8)cpct_getRandomUniform_u8_f(0)%3+2;
+	}
+
+	cpct_setRandomSeedUniform_u8(3);
+	for(ix=0; ix<NBURBAN; ix++)
+	{
+		iy = cpct_getRandomUniform_u8_f((cpct_count2VSYNC ()+ix)%256)*15; // (WIDTH*HEIGHT)/255;
+		shift = cpct_getRandomUniform_u8_f((cpct_count2VSYNC ()-shift)%256)%10;
+		iy-=shift+5;
+
+		switch(cpct_getRandomUniform_u8_f((cpct_count2VSYNC ()+ix)%256)%6)
+		{
+			case 0:
+			p_cities[0] = 0b01110010; // 01001110;
+			p_cities[1] = 0b01000110; // 01100010;
+			break;
+
+			case 1:
+			p_cities[0] = 0b01100000; // 00000110;
+			p_cities[1] = 0b00000110; // 01100000;
+			break;
+
+			case 2:
+			p_cities[0] = 0b00010000; // 00001000;
+			p_cities[1] = 0b00000110; // 01100000;
+			break;
+
+			case 3:
+			p_cities[0] = 0b11000000; // 00000011;
+			p_cities[1] = 0b00110001; // 10001100;
+			break;
+
+			case 4:
+			p_cities[0] = 0b11000100; // 00100011;
+			p_cities[1] = 0b00001110; // 01110000;
+			break;
+
+			case 5:
+			p_cities[0] = 0b01000000; // 00000010;
+			p_cities[1] = 0b01001110; // 01110010;
+			break;
+		}
+
+		patternTile(DWELLINGS1, iy, 4, 4, p_cities);
 	}
 
 	// Livestock
 
-	cpct_setRandomSeedUniform_u8(3);
+	cpct_setRandomSeedUniform_u8(4);
 
 	for(ix=0; ix<NBLIVESTOCK; ix++)
 	{
@@ -222,13 +335,26 @@ void drawTile(u8 x_, u8 y_, u8 ix, u8 iy)
 	}
 }
 
+void drawScrolls(u8 x_, u8 y_)
+{
+	u8 scrollx;
+	u8 scrolly;
+	u8 *p_video;	
+	
+	scrollx = x_* (WIDTH-TILESIZE_W)/(WIDTH-NBTILE_W);
+	scrolly = y_* (HEIGHT*TILESIZE_W-TILESIZE_H)/(HEIGHT-NBTILE_H);
+
+	p_video = cpct_getScreenPtr(SCR_VMEM, scrollx, 0);
+	cpct_drawSolidBox(p_video, cpct_px2byteM1(0,0,0,0), 4, TILESIZE_W);
+
+	p_video = cpct_getScreenPtr(SCR_VMEM, 0, scrolly);
+	cpct_drawSolidBox(p_video, cpct_px2byteM1(0,0,0,0), 1, TILESIZE_H);
+}
+
 void drawWorld(u8 x_, u8 y_)
 {
 	u8 ix;
 	u8 iy;
-	u8 scrollx;
-	u8 scrolly;
-	u8 *p_video;
 
 	for(iy=0; iy<NBTILE_H;iy++)
 	{
@@ -238,16 +364,7 @@ void drawWorld(u8 x_, u8 y_)
 		}
 	}
 
-	// Draw the scrolls
-
-	scrollx = x_* (WIDTH-TILESIZE_W)/(WIDTH-NBTILE_W);
-	scrolly = y_* (HEIGHT*TILESIZE_W-TILESIZE_H)/(HEIGHT-NBTILE_H);
-
-	p_video = cpct_getScreenPtr(SCR_VMEM, scrollx, 0);
-	cpct_drawSolidBox(p_video, cpct_px2byteM1(0,0,0,0), 4, TILESIZE_W);
-
-	p_video = cpct_getScreenPtr(SCR_VMEM, 0, scrolly);
-	cpct_drawSolidBox(p_video, cpct_px2byteM1(0,0,0,0), 1, TILESIZE_H);
+	drawScrolls(x_, y_);
 
 	//  sprintf(buff, "%d", p_world[2] );
 	//	cpct_drawStringM1 (buff, SCR_VMEM, 0, 1);

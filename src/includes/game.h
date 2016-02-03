@@ -180,7 +180,7 @@ void game()
 			}
 
 			// Wait loop
-			for(i=0; i<14000; i++) {}
+			for(i=0; i<5000; i++) {}
 		}
 
 		else if ( cpct_isKeyPressed(Key_CursorDown) )
@@ -198,7 +198,7 @@ void game()
 			}
 
 			// Wait loop
-			for(i=0; i<14000; i++) {}
+			for(i=0; i<5000; i++) {}
 		}
 
 		else if ( cpct_isKeyPressed(Key_CursorLeft) )
@@ -317,6 +317,7 @@ void game()
 		}
 
 		drawCursor(xCursor, yCursor, 0);
+		drawScrolls(ulx, uly);
 	} 
 	while(!exit);
 
