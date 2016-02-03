@@ -73,7 +73,7 @@ void generateWorld()
 	int iy;
 	int shift;
 
-	//	generateGradients();
+	//	Grass();
 
 	cpct_setRandomSeedUniform_u8(0);
 
@@ -81,29 +81,11 @@ void generateWorld()
 	{
 		p_world[iy] = cpct_getRandomUniform_u8_f(0)%2;
 	}
-	/*
+
 	// Forests
-	for(iy=0; iy<8; iy++)
-	{
 
-	for(ix=0; ix<10; ix++)
-	{
-	perlipn = perlin((float)ix/WIDTH, (float)iy/HEIGHT);
-	if(perlipn>FOREST_DENSITY)
-	{
-	for(shifty=0;shifty<6;shifty++)
-	for(shiftx=0;shiftx<8;shiftx++)
 
-	p_world[(iy*6+shifty)*WIDTH+((ix*8)+shiftx)] = FOREST;
-	}
 
-	}
-
-	sprintf(buff, "%f",perlipn );
-	cpct_drawStringM1 (buff, SCR_VMEM, 0, 1);
-
-	}
-	 */
 
 	// Farms
 	cpct_setRandomSeedUniform_u8(1);
@@ -112,11 +94,11 @@ void generateWorld()
 	{
 		iy = cpct_getRandomUniform_u8_f(1)*15; // (WIDTH*HEIGHT)/255;
 
-		shift = cpct_getRandomUniform_u8_f(1)%10;
+		shift = cpct_getRandomUniform_u8_f(cpct_count2VSYNC ()%256)%10;
 		shift=iy-shift+5;
 
 		if(shift>0 && shift<WIDTH*HEIGHT)
-			p_world[shift] = (u8)cpct_getRandomUniform_u8_f(1)%2+5;
+			p_world[shift] = (u8)cpct_getRandomUniform_u8_f(cpct_count2VSYNC ()%256)%2+5;
 	}
 
 	// Cities
@@ -125,13 +107,13 @@ void generateWorld()
 
 	for(ix=0; ix<NBURBAN; ix++)
 	{
-		iy = cpct_getRandomUniform_u8_f(2)*15; // (WIDTH*HEIGHT)/255;
+		iy = cpct_getRandomUniform_u8_f(cpct_count2VSYNC ()%256)*15; // (WIDTH*HEIGHT)/255;
 
-		shift = cpct_getRandomUniform_u8_f(2)%10;
+		shift = cpct_getRandomUniform_u8_f(cpct_count2VSYNC ()%256)%10;
 		shift=iy-shift+5;
 
 		if(shift>0 && shift<WIDTH*HEIGHT)
-			p_world[shift] = (u8)cpct_getRandomUniform_u8_f(2)%3+2;
+			p_world[shift] = (u8)cpct_getRandomUniform_u8_f(cpct_count2VSYNC ()%256)%3+2;
 	}
 
 	// Livestock
@@ -140,9 +122,9 @@ void generateWorld()
 
 	for(ix=0; ix<NBLIVESTOCK; ix++)
 	{
-		iy = cpct_getRandomUniform_u8_f(3)*15; // (WIDTH*HEIGHT)/255;
+		iy = cpct_getRandomUniform_u8_f(cpct_count2VSYNC ()%256)*15; // (WIDTH*HEIGHT)/255;
 
-		shift = cpct_getRandomUniform_u8_f(3)%10;
+		shift = cpct_getRandomUniform_u8_f(cpct_count2VSYNC ()%256)%10;
 		shift=iy-shift+5;
 
 		if(shift>0 && shift<WIDTH*HEIGHT)

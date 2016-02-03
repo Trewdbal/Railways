@@ -87,8 +87,6 @@ void main(void)
 
 		if(menuChoice==0)
 		{
-			putM1();
-			
 			game();
 
 			putM2();

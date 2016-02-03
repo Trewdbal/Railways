@@ -113,8 +113,8 @@ void menuTile(u8 x, u8 y)
 			windowInfoTile(x, y);
 		else if(menuChoice==1)
 		{
-		CURSOR_MODE=T_REW;
-		menuChoice=6;
+			CURSOR_MODE=T_REW;
+			menuChoice=6;
 		}
 		else if(menuChoice==2)
 		{
@@ -145,11 +145,16 @@ void game()
 	int yCursor = 6;
 	int i;
 	u8 exit=0;
+	u8 *p_video;
 
-	cpct_clearScreen(cpct_px2byteM1(0,0,0,0));
+	drawBoxM2(50, 50);
+	p_video = cpct_getScreenPtr(SCR_VMEM, 32, 95);
+	cpct_drawStringM2 ("Generating world...", p_video, 0);	
 
 	generateWorld();
 
+	putM1();
+	cpct_clearScreen(cpct_px2byteM1(0,0,0,0));
 	drawWorld(ulx, uly);
 
 	do{
@@ -178,7 +183,7 @@ void game()
 			for(i=0; i<14000; i++) {}
 		}
 
-		if ( cpct_isKeyPressed(Key_CursorDown) )
+		else if ( cpct_isKeyPressed(Key_CursorDown) )
 		{
 			drawTile(ulx, uly, xCursor, yCursor);
 			yCursor+=1;
@@ -196,7 +201,7 @@ void game()
 			for(i=0; i<14000; i++) {}
 		}
 
-		if ( cpct_isKeyPressed(Key_CursorLeft) )
+		else if ( cpct_isKeyPressed(Key_CursorLeft) )
 		{
 			drawTile(ulx, uly, xCursor, yCursor);
 			xCursor-=1;
@@ -214,7 +219,7 @@ void game()
 			for(i=0; i<14000; i++) {}
 		}
 
-		if ( cpct_isKeyPressed(Key_CursorRight) )
+		else if ( cpct_isKeyPressed(Key_CursorRight) )
 		{
 			drawTile(ulx, uly, xCursor, yCursor);
 			xCursor+=1;
@@ -233,33 +238,50 @@ void game()
 		}
 
 
-		if ( cpct_isKeyPressed(Key_Space) )
+		else if ( cpct_isKeyPressed(Key_Space) )
 		{
 			if(CURSOR_MODE==T_SSNS)
-					CURSOR_MODE=T_SSEW;
+				CURSOR_MODE=T_SSEW;
 			else if(CURSOR_MODE==T_SSEW)
-					CURSOR_MODE=T_SSNS;
+				CURSOR_MODE=T_SSNS;
 			else if(CURSOR_MODE==T_SMNS)
-					CURSOR_MODE=T_SMEW;
+				CURSOR_MODE=T_SMEW;
 			else if(CURSOR_MODE==T_SMEW)
-					CURSOR_MODE=T_SMNS;
+				CURSOR_MODE=T_SMNS;
 			else if(CURSOR_MODE==T_SLNS)
-					CURSOR_MODE=T_SLEW;
+				CURSOR_MODE=T_SLEW;
 			else if(CURSOR_MODE==T_SLEW)
-					CURSOR_MODE=T_SLNS;
+				CURSOR_MODE=T_SLNS;
 			else if(CURSOR_MODE>=T_REW && CURSOR_MODE<T_RNSW)
 				CURSOR_MODE+=1;
 			else if(CURSOR_MODE==T_RNSW)
-					CURSOR_MODE=T_REW;
+				CURSOR_MODE=T_REW;
 			// Wait loop
 			for(i=0; i<14000; i++) {}
 		}
 
-		if ( cpct_isKeyPressed(Key_Esc) )
+		else if ( cpct_isKeyPressed(Key_Esc) )
 		{
 			// if standard cursor, call menu Tile
 			if(CURSOR_MODE==NONE)
-				exit=1;
+			{
+
+				const char *txtWindowQuit[] = { 
+					"Really quit ?",
+					"",
+					"Press Return to quit or Esc to resume",
+				};
+
+				putM2();
+				if(	drawWindow(txtWindowQuit,3,1) == 1)
+					exit=1;
+				else
+				{
+					putM1();
+					cpct_clearScreen(cpct_px2byteM1(0,0,0,0));	
+					drawWorld(ulx, uly);
+				}
+			}
 			else
 			{
 				CURSOR_MODE=NONE;
@@ -270,7 +292,7 @@ void game()
 			for(i=0; i<14000; i++) {}
 		}
 
-		if ( cpct_isKeyPressed(Key_Return) )
+		else if ( cpct_isKeyPressed(Key_Return) )
 		{
 			// if standard cursor, call menu Tile
 			if(CURSOR_MODE==NONE)
@@ -283,10 +305,10 @@ void game()
 			else if(CURSOR_MODE>=T_SSNS)
 			{
 				p_world[ulx+xCursor+(uly+yCursor)*WIDTH]=CURSOR_MODE+9;
-				
+
 				// Back to standard cursor only for the stations, not for the rail mode
 				if(CURSOR_MODE<=T_SLEW)
-				CURSOR_MODE=NONE;
+					CURSOR_MODE=NONE;
 			}
 
 			// Wait loop

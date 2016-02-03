@@ -1,7 +1,7 @@
 ;--------------------------------------------------------
 ; File Created by SDCC : free open source ANSI-C Compiler
 ; Version 3.5.4 #9329 (Linux)
-; This file was generated Wed Feb  3 17:10:22 2016
+; This file was generated Wed Feb  3 17:46:50 2016
 ;--------------------------------------------------------
 	.module main
 	.optsdcc -mz80
@@ -35,6 +35,7 @@
 	.globl _cpct_setPALColour
 	.globl _cpct_setPalette
 	.globl _cpct_fw2hw
+	.globl _cpct_count2VSYNC
 	.globl _cpct_setVideoMode
 	.globl _cpct_drawStringM2
 	.globl _cpct_drawSolidBox
@@ -3428,14 +3429,14 @@ _generateWorld::
 	xor	a, #0x80
 	sub	a, #0x8F
 	jr	C,00114$
-;src/includes/world.h:109: cpct_setRandomSeedUniform_u8(1);
+;src/includes/world.h:91: cpct_setRandomSeedUniform_u8(1);
 	ld	l,#0x01
 	call	_cpct_setRandomSeedUniform_u8
-;src/includes/world.h:111: for(ix=0; ix<NBFARM; ix++)
+;src/includes/world.h:93: for(ix=0; ix<NBFARM; ix++)
 	ld	hl,#0x0000
 	ex	(sp), hl
 00116$:
-;src/includes/world.h:113: iy = cpct_getRandomUniform_u8_f(1)*15; // (WIDTH*HEIGHT)/255;
+;src/includes/world.h:95: iy = cpct_getRandomUniform_u8_f(1)*15; // (WIDTH*HEIGHT)/255;
 	ld	l,#0x01
 	call	_cpct_getRandomUniform_u8_f
 	ld	c,l
@@ -3448,9 +3449,11 @@ _generateWorld::
 	add	hl, bc
 	add	hl, hl
 	add	hl, bc
-;src/includes/world.h:115: shift = cpct_getRandomUniform_u8_f(1)%10;
-	push	hl
-	ld	l,#0x01
+	ld	e,l
+	ld	d,h
+;src/includes/world.h:97: shift = cpct_getRandomUniform_u8_f(cpct_count2VSYNC ()%256)%10;
+	push	de
+	call	_cpct_count2VSYNC
 	call	_cpct_getRandomUniform_u8_f
 	ld	b,l
 	ld	a,#0x0A
@@ -3462,7 +3465,7 @@ _generateWorld::
 	pop	af
 	pop	de
 	ld	h,#0x00
-;src/includes/world.h:116: shift=iy-shift+5;
+;src/includes/world.h:98: shift=iy-shift+5;
 	ld	a,e
 	sub	a, l
 	ld	l,a
@@ -3471,7 +3474,7 @@ _generateWorld::
 	ld	h,a
 	ld	bc,#0x0005
 	add	hl,bc
-;src/includes/world.h:118: if(shift>0 && shift<WIDTH*HEIGHT)
+;src/includes/world.h:100: if(shift>0 && shift<WIDTH*HEIGHT)
 	xor	a, a
 	cp	a, l
 	sbc	a, h
@@ -3483,11 +3486,11 @@ _generateWorld::
 	xor	a, #0x80
 	sub	a, #0x8F
 	jr	NC,00117$
-;src/includes/world.h:119: p_world[shift] = (u8)cpct_getRandomUniform_u8_f(1)%2+5;
+;src/includes/world.h:101: p_world[shift] = (u8)cpct_getRandomUniform_u8_f(cpct_count2VSYNC ()%256)%2+5;
 	ld	de,#_p_world
 	add	hl,de
 	push	hl
-	ld	l,#0x01
+	call	_cpct_count2VSYNC
 	call	_cpct_getRandomUniform_u8_f
 	ld	a,l
 	pop	hl
@@ -3495,7 +3498,7 @@ _generateWorld::
 	add	a, #0x05
 	ld	(hl),a
 00117$:
-;src/includes/world.h:111: for(ix=0; ix<NBFARM; ix++)
+;src/includes/world.h:93: for(ix=0; ix<NBFARM; ix++)
 	inc	-4 (ix)
 	jr	NZ,00181$
 	inc	-3 (ix)
@@ -3508,15 +3511,15 @@ _generateWorld::
 	rra
 	sbc	a, #0x80
 	jr	C,00116$
-;src/includes/world.h:124: cpct_setRandomSeedUniform_u8(2);
+;src/includes/world.h:106: cpct_setRandomSeedUniform_u8(2);
 	ld	l,#0x02
 	call	_cpct_setRandomSeedUniform_u8
-;src/includes/world.h:126: for(ix=0; ix<NBURBAN; ix++)
+;src/includes/world.h:108: for(ix=0; ix<NBURBAN; ix++)
 	ld	hl,#0x0000
 	ex	(sp), hl
 00118$:
-;src/includes/world.h:128: iy = cpct_getRandomUniform_u8_f(2)*15; // (WIDTH*HEIGHT)/255;
-	ld	l,#0x02
+;src/includes/world.h:110: iy = cpct_getRandomUniform_u8_f(cpct_count2VSYNC ()%256)*15; // (WIDTH*HEIGHT)/255;
+	call	_cpct_count2VSYNC
 	call	_cpct_getRandomUniform_u8_f
 	ld	c,l
 	ld	b,#0x00
@@ -3528,9 +3531,11 @@ _generateWorld::
 	add	hl, bc
 	add	hl, hl
 	add	hl, bc
-;src/includes/world.h:130: shift = cpct_getRandomUniform_u8_f(2)%10;
-	push	hl
-	ld	l,#0x02
+	ld	e,l
+	ld	d,h
+;src/includes/world.h:112: shift = cpct_getRandomUniform_u8_f(cpct_count2VSYNC ()%256)%10;
+	push	de
+	call	_cpct_count2VSYNC
 	call	_cpct_getRandomUniform_u8_f
 	ld	b,l
 	ld	a,#0x0A
@@ -3542,7 +3547,7 @@ _generateWorld::
 	pop	af
 	pop	de
 	ld	h,#0x00
-;src/includes/world.h:131: shift=iy-shift+5;
+;src/includes/world.h:113: shift=iy-shift+5;
 	ld	a,e
 	sub	a, l
 	ld	c,a
@@ -3554,7 +3559,7 @@ _generateWorld::
 	inc	bc
 	inc	bc
 	inc	bc
-;src/includes/world.h:133: if(shift>0 && shift<WIDTH*HEIGHT)
+;src/includes/world.h:115: if(shift>0 && shift<WIDTH*HEIGHT)
 	xor	a, a
 	cp	a, c
 	sbc	a, b
@@ -3566,11 +3571,13 @@ _generateWorld::
 	xor	a, #0x80
 	sub	a, #0x8F
 	jr	NC,00119$
-;src/includes/world.h:134: p_world[shift] = (u8)cpct_getRandomUniform_u8_f(2)%3+2;
+;src/includes/world.h:116: p_world[shift] = (u8)cpct_getRandomUniform_u8_f(cpct_count2VSYNC ()%256)%3+2;
 	ld	hl,#_p_world
 	add	hl,bc
-	push	hl
-	ld	l,#0x02
+	ld	e,l
+	ld	d,h
+	push	de
+	call	_cpct_count2VSYNC
 	call	_cpct_getRandomUniform_u8_f
 	ld	b,l
 	ld	a,#0x03
@@ -3585,7 +3592,7 @@ _generateWorld::
 	add	a, #0x02
 	ld	(de),a
 00119$:
-;src/includes/world.h:126: for(ix=0; ix<NBURBAN; ix++)
+;src/includes/world.h:108: for(ix=0; ix<NBURBAN; ix++)
 	inc	-4 (ix)
 	jr	NZ,00183$
 	inc	-3 (ix)
@@ -3598,15 +3605,15 @@ _generateWorld::
 	rra
 	sbc	a, #0x80
 	jr	C,00118$
-;src/includes/world.h:139: cpct_setRandomSeedUniform_u8(3);
+;src/includes/world.h:121: cpct_setRandomSeedUniform_u8(3);
 	ld	l,#0x03
 	call	_cpct_setRandomSeedUniform_u8
-;src/includes/world.h:141: for(ix=0; ix<NBLIVESTOCK; ix++)
+;src/includes/world.h:123: for(ix=0; ix<NBLIVESTOCK; ix++)
 	ld	de,#0x0000
 00120$:
-;src/includes/world.h:143: iy = cpct_getRandomUniform_u8_f(3)*15; // (WIDTH*HEIGHT)/255;
+;src/includes/world.h:125: iy = cpct_getRandomUniform_u8_f(cpct_count2VSYNC ()%256)*15; // (WIDTH*HEIGHT)/255;
 	push	de
-	ld	l,#0x03
+	call	_cpct_count2VSYNC
 	call	_cpct_getRandomUniform_u8_f
 	pop	de
 	ld	c,l
@@ -3621,9 +3628,9 @@ _generateWorld::
 	add	hl, bc
 	ld	-2 (ix),l
 	ld	-1 (ix),h
-;src/includes/world.h:145: shift = cpct_getRandomUniform_u8_f(3)%10;
+;src/includes/world.h:127: shift = cpct_getRandomUniform_u8_f(cpct_count2VSYNC ()%256)%10;
 	push	de
-	ld	l,#0x03
+	call	_cpct_count2VSYNC
 	call	_cpct_getRandomUniform_u8_f
 	ld	b,l
 	ld	a,#0x0A
@@ -3635,7 +3642,7 @@ _generateWorld::
 	pop	af
 	pop	de
 	ld	h,#0x00
-;src/includes/world.h:146: shift=iy-shift+5;
+;src/includes/world.h:128: shift=iy-shift+5;
 	ld	a,-2 (ix)
 	sub	a, l
 	ld	l,a
@@ -3644,7 +3651,7 @@ _generateWorld::
 	ld	h,a
 	ld	bc,#0x0005
 	add	hl,bc
-;src/includes/world.h:148: if(shift>0 && shift<WIDTH*HEIGHT)
+;src/includes/world.h:130: if(shift>0 && shift<WIDTH*HEIGHT)
 	xor	a, a
 	cp	a, l
 	sbc	a, h
@@ -3656,12 +3663,12 @@ _generateWorld::
 	xor	a, #0x80
 	sub	a, #0x8F
 	jr	NC,00121$
-;src/includes/world.h:149: p_world[shift] = LIVESTOCK;
+;src/includes/world.h:131: p_world[shift] = LIVESTOCK;
 	ld	bc,#_p_world
 	add	hl,bc
 	ld	(hl),#0x09
 00121$:
-;src/includes/world.h:141: for(ix=0; ix<NBLIVESTOCK; ix++)
+;src/includes/world.h:123: for(ix=0; ix<NBLIVESTOCK; ix++)
 	inc	de
 	ld	a,e
 	sub	a, #0x13
@@ -3674,7 +3681,7 @@ _generateWorld::
 	ld	sp, ix
 	pop	ix
 	ret
-;src/includes/world.h:153: void drawTile(u8 x_, u8 y_, u8 ix, u8 iy)
+;src/includes/world.h:135: void drawTile(u8 x_, u8 y_, u8 ix, u8 iy)
 ;	---------------------------------
 ; Function drawTile
 ; ---------------------------------
@@ -3682,7 +3689,7 @@ _drawTile::
 	push	ix
 	ld	ix,#0
 	add	ix,sp
-;src/includes/world.h:156: int adress = (y_+iy)*WIDTH+x_+ix;
+;src/includes/world.h:138: int adress = (y_+iy)*WIDTH+x_+ix;
 	ld	l,5 (ix)
 	ld	h,#0x00
 	ld	e,7 (ix)
@@ -3705,7 +3712,7 @@ _drawTile::
 	add	hl,de
 	ld	e, l
 	ld	d, h
-;src/includes/world.h:158: p_video = cpct_getScreenPtr(SCR_VMEM, ix*TILESIZE_W, iy*TILESIZE_H);
+;src/includes/world.h:140: p_video = cpct_getScreenPtr(SCR_VMEM, ix*TILESIZE_W, iy*TILESIZE_H);
 	ld	a,7 (ix)
 	rlca
 	rlca
@@ -3727,7 +3734,7 @@ _drawTile::
 	pop	de
 	ld	c, l
 	ld	b, h
-;src/includes/world.h:160: switch(p_world[adress])
+;src/includes/world.h:142: switch(p_world[adress])
 	ld	hl,#_p_world
 	add	hl,de
 	ld	e,(hl)
@@ -3767,10 +3774,76 @@ _drawTile::
 	jp	00124$
 	jp	00125$
 	jp	00126$
-;src/includes/world.h:162: case GRASS1:
+;src/includes/world.h:144: case GRASS1:
 00101$:
-;src/includes/world.h:163: cpct_drawSprite(grass1, p_video, TILESIZE_W, TILESIZE_H);
+;src/includes/world.h:145: cpct_drawSprite(grass1, p_video, TILESIZE_W, TILESIZE_H);
 	ld	de,#_grass1
+	ld	hl,#0x1004
+	push	hl
+	push	bc
+	push	de
+	call	_cpct_drawSprite
+;src/includes/world.h:146: break;
+	jp	00128$
+;src/includes/world.h:147: case GRASS2:
+00102$:
+;src/includes/world.h:148: cpct_drawSprite(grass2, p_video, TILESIZE_W, TILESIZE_H);
+	ld	de,#_grass2
+	ld	hl,#0x1004
+	push	hl
+	push	bc
+	push	de
+	call	_cpct_drawSprite
+;src/includes/world.h:149: break;
+	jp	00128$
+;src/includes/world.h:150: case DWELLINGS1:
+00103$:
+;src/includes/world.h:151: cpct_drawSprite(dwellings1, p_video, TILESIZE_W, TILESIZE_H);
+	ld	de,#_dwellings1
+	ld	hl,#0x1004
+	push	hl
+	push	bc
+	push	de
+	call	_cpct_drawSprite
+;src/includes/world.h:152: break;
+	jp	00128$
+;src/includes/world.h:153: case DWELLINGS2:
+00104$:
+;src/includes/world.h:154: cpct_drawSprite(dwellings2, p_video, TILESIZE_W, TILESIZE_H);
+	ld	de,#_dwellings2
+	ld	hl,#0x1004
+	push	hl
+	push	bc
+	push	de
+	call	_cpct_drawSprite
+;src/includes/world.h:155: break;
+	jp	00128$
+;src/includes/world.h:156: case DWELLINGS3:
+00105$:
+;src/includes/world.h:157: cpct_drawSprite(dwellings3, p_video, TILESIZE_W, TILESIZE_H);
+	ld	de,#_dwellings3
+	ld	hl,#0x1004
+	push	hl
+	push	bc
+	push	de
+	call	_cpct_drawSprite
+;src/includes/world.h:158: break;
+	jp	00128$
+;src/includes/world.h:159: case FARM1:
+00106$:
+;src/includes/world.h:160: cpct_drawSprite(farm1, p_video, TILESIZE_W, TILESIZE_H);
+	ld	de,#_farm1
+	ld	hl,#0x1004
+	push	hl
+	push	bc
+	push	de
+	call	_cpct_drawSprite
+;src/includes/world.h:161: break;
+	jp	00128$
+;src/includes/world.h:162: case FARM2:
+00107$:
+;src/includes/world.h:163: cpct_drawSprite(farm2, p_video, TILESIZE_W, TILESIZE_H);
+	ld	de,#_farm2
 	ld	hl,#0x1004
 	push	hl
 	push	bc
@@ -3778,10 +3851,10 @@ _drawTile::
 	call	_cpct_drawSprite
 ;src/includes/world.h:164: break;
 	jp	00128$
-;src/includes/world.h:165: case GRASS2:
-00102$:
-;src/includes/world.h:166: cpct_drawSprite(grass2, p_video, TILESIZE_W, TILESIZE_H);
-	ld	de,#_grass2
+;src/includes/world.h:165: case WATER:
+00108$:
+;src/includes/world.h:166: cpct_drawSprite(water, p_video, TILESIZE_W, TILESIZE_H);
+	ld	de,#_water
 	ld	hl,#0x1004
 	push	hl
 	push	bc
@@ -3789,10 +3862,10 @@ _drawTile::
 	call	_cpct_drawSprite
 ;src/includes/world.h:167: break;
 	jp	00128$
-;src/includes/world.h:168: case DWELLINGS1:
-00103$:
-;src/includes/world.h:169: cpct_drawSprite(dwellings1, p_video, TILESIZE_W, TILESIZE_H);
-	ld	de,#_dwellings1
+;src/includes/world.h:168: case FOREST:
+00109$:
+;src/includes/world.h:169: cpct_drawSprite(forest, p_video, TILESIZE_W, TILESIZE_H);
+	ld	de,#_forest
 	ld	hl,#0x1004
 	push	hl
 	push	bc
@@ -3800,10 +3873,10 @@ _drawTile::
 	call	_cpct_drawSprite
 ;src/includes/world.h:170: break;
 	jp	00128$
-;src/includes/world.h:171: case DWELLINGS2:
-00104$:
-;src/includes/world.h:172: cpct_drawSprite(dwellings2, p_video, TILESIZE_W, TILESIZE_H);
-	ld	de,#_dwellings2
+;src/includes/world.h:171: case LIVESTOCK:
+00110$:
+;src/includes/world.h:172: cpct_drawSprite(livestock, p_video, TILESIZE_W, TILESIZE_H);
+	ld	de,#_livestock
 	ld	hl,#0x1004
 	push	hl
 	push	bc
@@ -3811,10 +3884,10 @@ _drawTile::
 	call	_cpct_drawSprite
 ;src/includes/world.h:173: break;
 	jp	00128$
-;src/includes/world.h:174: case DWELLINGS3:
-00105$:
-;src/includes/world.h:175: cpct_drawSprite(dwellings3, p_video, TILESIZE_W, TILESIZE_H);
-	ld	de,#_dwellings3
+;src/includes/world.h:174: case SSNS:
+00111$:
+;src/includes/world.h:175: cpct_drawSprite(station_small_ns, p_video, TILESIZE_W, TILESIZE_H);
+	ld	de,#_station_small_ns
 	ld	hl,#0x1004
 	push	hl
 	push	bc
@@ -3822,10 +3895,10 @@ _drawTile::
 	call	_cpct_drawSprite
 ;src/includes/world.h:176: break;
 	jp	00128$
-;src/includes/world.h:177: case FARM1:
-00106$:
-;src/includes/world.h:178: cpct_drawSprite(farm1, p_video, TILESIZE_W, TILESIZE_H);
-	ld	de,#_farm1
+;src/includes/world.h:177: case SSEW:
+00112$:
+;src/includes/world.h:178: cpct_drawSprite(station_small_ew, p_video, TILESIZE_W, TILESIZE_H);
+	ld	de,#_station_small_ew
 	ld	hl,#0x1004
 	push	hl
 	push	bc
@@ -3833,10 +3906,10 @@ _drawTile::
 	call	_cpct_drawSprite
 ;src/includes/world.h:179: break;
 	jp	00128$
-;src/includes/world.h:180: case FARM2:
-00107$:
-;src/includes/world.h:181: cpct_drawSprite(farm2, p_video, TILESIZE_W, TILESIZE_H);
-	ld	de,#_farm2
+;src/includes/world.h:180: case SMNS:
+00113$:
+;src/includes/world.h:181: cpct_drawSprite(station_medium_ns, p_video, TILESIZE_W, TILESIZE_H);
+	ld	de,#_station_medium_ns
 	ld	hl,#0x1004
 	push	hl
 	push	bc
@@ -3844,10 +3917,10 @@ _drawTile::
 	call	_cpct_drawSprite
 ;src/includes/world.h:182: break;
 	jp	00128$
-;src/includes/world.h:183: case WATER:
-00108$:
-;src/includes/world.h:184: cpct_drawSprite(water, p_video, TILESIZE_W, TILESIZE_H);
-	ld	de,#_water
+;src/includes/world.h:183: case SMEW:
+00114$:
+;src/includes/world.h:184: cpct_drawSprite(station_medium_ew, p_video, TILESIZE_W, TILESIZE_H);
+	ld	de,#_station_medium_ew
 	ld	hl,#0x1004
 	push	hl
 	push	bc
@@ -3855,10 +3928,10 @@ _drawTile::
 	call	_cpct_drawSprite
 ;src/includes/world.h:185: break;
 	jp	00128$
-;src/includes/world.h:186: case FOREST:
-00109$:
-;src/includes/world.h:187: cpct_drawSprite(forest, p_video, TILESIZE_W, TILESIZE_H);
-	ld	de,#_forest
+;src/includes/world.h:186: case SLNS:
+00115$:
+;src/includes/world.h:187: cpct_drawSprite(station_large_ns, p_video, TILESIZE_W, TILESIZE_H);
+	ld	de,#_station_large_ns
 	ld	hl,#0x1004
 	push	hl
 	push	bc
@@ -3866,10 +3939,10 @@ _drawTile::
 	call	_cpct_drawSprite
 ;src/includes/world.h:188: break;
 	jp	00128$
-;src/includes/world.h:189: case LIVESTOCK:
-00110$:
-;src/includes/world.h:190: cpct_drawSprite(livestock, p_video, TILESIZE_W, TILESIZE_H);
-	ld	de,#_livestock
+;src/includes/world.h:189: case SLEW:
+00116$:
+;src/includes/world.h:190: cpct_drawSprite(station_large_ew, p_video, TILESIZE_W, TILESIZE_H);
+	ld	de,#_station_large_ew
 	ld	hl,#0x1004
 	push	hl
 	push	bc
@@ -3877,10 +3950,10 @@ _drawTile::
 	call	_cpct_drawSprite
 ;src/includes/world.h:191: break;
 	jp	00128$
-;src/includes/world.h:192: case SSNS:
-00111$:
-;src/includes/world.h:193: cpct_drawSprite(station_small_ns, p_video, TILESIZE_W, TILESIZE_H);
-	ld	de,#_station_small_ns
+;src/includes/world.h:192: case REW:
+00117$:
+;src/includes/world.h:193: cpct_drawSprite(rail_ew, p_video, TILESIZE_W, TILESIZE_H);	
+	ld	de,#_rail_ew
 	ld	hl,#0x1004
 	push	hl
 	push	bc
@@ -3888,76 +3961,76 @@ _drawTile::
 	call	_cpct_drawSprite
 ;src/includes/world.h:194: break;
 	jp	00128$
-;src/includes/world.h:195: case SSEW:
-00112$:
-;src/includes/world.h:196: cpct_drawSprite(station_small_ew, p_video, TILESIZE_W, TILESIZE_H);
-	ld	de,#_station_small_ew
+;src/includes/world.h:195: case RNS:
+00118$:
+;src/includes/world.h:196: cpct_drawSprite(rail_ns, p_video, TILESIZE_W, TILESIZE_H);	
+	ld	de,#_rail_ns
 	ld	hl,#0x1004
 	push	hl
 	push	bc
 	push	de
 	call	_cpct_drawSprite
 ;src/includes/world.h:197: break;
-	jp	00128$
-;src/includes/world.h:198: case SMNS:
-00113$:
-;src/includes/world.h:199: cpct_drawSprite(station_medium_ns, p_video, TILESIZE_W, TILESIZE_H);
-	ld	de,#_station_medium_ns
+	jr	00128$
+;src/includes/world.h:198: case REN:
+00119$:
+;src/includes/world.h:199: cpct_drawSprite(rail_en, p_video, TILESIZE_W, TILESIZE_H);	
+	ld	de,#_rail_en
 	ld	hl,#0x1004
 	push	hl
 	push	bc
 	push	de
 	call	_cpct_drawSprite
 ;src/includes/world.h:200: break;
-	jp	00128$
-;src/includes/world.h:201: case SMEW:
-00114$:
-;src/includes/world.h:202: cpct_drawSprite(station_medium_ew, p_video, TILESIZE_W, TILESIZE_H);
-	ld	de,#_station_medium_ew
+	jr	00128$
+;src/includes/world.h:201: case RES:
+00120$:
+;src/includes/world.h:202: cpct_drawSprite(rail_es, p_video, TILESIZE_W, TILESIZE_H);	
+	ld	de,#_rail_es
 	ld	hl,#0x1004
 	push	hl
 	push	bc
 	push	de
 	call	_cpct_drawSprite
 ;src/includes/world.h:203: break;
-	jp	00128$
-;src/includes/world.h:204: case SLNS:
-00115$:
-;src/includes/world.h:205: cpct_drawSprite(station_large_ns, p_video, TILESIZE_W, TILESIZE_H);
-	ld	de,#_station_large_ns
+	jr	00128$
+;src/includes/world.h:204: case RWN:
+00121$:
+;src/includes/world.h:205: cpct_drawSprite(rail_wn, p_video, TILESIZE_W, TILESIZE_H);	
+	ld	de,#_rail_wn
 	ld	hl,#0x1004
 	push	hl
 	push	bc
 	push	de
 	call	_cpct_drawSprite
 ;src/includes/world.h:206: break;
-	jp	00128$
-;src/includes/world.h:207: case SLEW:
-00116$:
-;src/includes/world.h:208: cpct_drawSprite(station_large_ew, p_video, TILESIZE_W, TILESIZE_H);
-	ld	de,#_station_large_ew
+	jr	00128$
+;src/includes/world.h:207: case RWS:
+00122$:
+;src/includes/world.h:208: cpct_drawSprite(rail_ws, p_video, TILESIZE_W, TILESIZE_H);	
+	ld	de,#_rail_ws
 	ld	hl,#0x1004
 	push	hl
 	push	bc
 	push	de
 	call	_cpct_drawSprite
 ;src/includes/world.h:209: break;
-	jp	00128$
-;src/includes/world.h:210: case REW:
-00117$:
-;src/includes/world.h:211: cpct_drawSprite(rail_ew, p_video, TILESIZE_W, TILESIZE_H);	
-	ld	de,#_rail_ew
+	jr	00128$
+;src/includes/world.h:210: case REWN:
+00123$:
+;src/includes/world.h:211: cpct_drawSprite(rail_ew_n, p_video, TILESIZE_W, TILESIZE_H);	
+	ld	de,#_rail_ew_n
 	ld	hl,#0x1004
 	push	hl
 	push	bc
 	push	de
 	call	_cpct_drawSprite
 ;src/includes/world.h:212: break;
-	jp	00128$
-;src/includes/world.h:213: case RNS:
-00118$:
-;src/includes/world.h:214: cpct_drawSprite(rail_ns, p_video, TILESIZE_W, TILESIZE_H);	
-	ld	de,#_rail_ns
+	jr	00128$
+;src/includes/world.h:213: case REWS:
+00124$:
+;src/includes/world.h:214: cpct_drawSprite(rail_ew_s, p_video, TILESIZE_W, TILESIZE_H);	
+	ld	de,#_rail_ew_s
 	ld	hl,#0x1004
 	push	hl
 	push	bc
@@ -3965,10 +4038,10 @@ _drawTile::
 	call	_cpct_drawSprite
 ;src/includes/world.h:215: break;
 	jr	00128$
-;src/includes/world.h:216: case REN:
-00119$:
-;src/includes/world.h:217: cpct_drawSprite(rail_en, p_video, TILESIZE_W, TILESIZE_H);	
-	ld	de,#_rail_en
+;src/includes/world.h:216: case RNSE:
+00125$:
+;src/includes/world.h:217: cpct_drawSprite(rail_ns_e, p_video, TILESIZE_W, TILESIZE_H);	
+	ld	de,#_rail_ns_e
 	ld	hl,#0x1004
 	push	hl
 	push	bc
@@ -3976,86 +4049,20 @@ _drawTile::
 	call	_cpct_drawSprite
 ;src/includes/world.h:218: break;
 	jr	00128$
-;src/includes/world.h:219: case RES:
-00120$:
-;src/includes/world.h:220: cpct_drawSprite(rail_es, p_video, TILESIZE_W, TILESIZE_H);	
-	ld	de,#_rail_es
-	ld	hl,#0x1004
-	push	hl
-	push	bc
-	push	de
-	call	_cpct_drawSprite
-;src/includes/world.h:221: break;
-	jr	00128$
-;src/includes/world.h:222: case RWN:
-00121$:
-;src/includes/world.h:223: cpct_drawSprite(rail_wn, p_video, TILESIZE_W, TILESIZE_H);	
-	ld	de,#_rail_wn
-	ld	hl,#0x1004
-	push	hl
-	push	bc
-	push	de
-	call	_cpct_drawSprite
-;src/includes/world.h:224: break;
-	jr	00128$
-;src/includes/world.h:225: case RWS:
-00122$:
-;src/includes/world.h:226: cpct_drawSprite(rail_ws, p_video, TILESIZE_W, TILESIZE_H);	
-	ld	de,#_rail_ws
-	ld	hl,#0x1004
-	push	hl
-	push	bc
-	push	de
-	call	_cpct_drawSprite
-;src/includes/world.h:227: break;
-	jr	00128$
-;src/includes/world.h:228: case REWN:
-00123$:
-;src/includes/world.h:229: cpct_drawSprite(rail_ew_n, p_video, TILESIZE_W, TILESIZE_H);	
-	ld	de,#_rail_ew_n
-	ld	hl,#0x1004
-	push	hl
-	push	bc
-	push	de
-	call	_cpct_drawSprite
-;src/includes/world.h:230: break;
-	jr	00128$
-;src/includes/world.h:231: case REWS:
-00124$:
-;src/includes/world.h:232: cpct_drawSprite(rail_ew_s, p_video, TILESIZE_W, TILESIZE_H);	
-	ld	de,#_rail_ew_s
-	ld	hl,#0x1004
-	push	hl
-	push	bc
-	push	de
-	call	_cpct_drawSprite
-;src/includes/world.h:233: break;
-	jr	00128$
-;src/includes/world.h:234: case RNSE:
-00125$:
-;src/includes/world.h:235: cpct_drawSprite(rail_ns_e, p_video, TILESIZE_W, TILESIZE_H);	
-	ld	de,#_rail_ns_e
-	ld	hl,#0x1004
-	push	hl
-	push	bc
-	push	de
-	call	_cpct_drawSprite
-;src/includes/world.h:236: break;
-	jr	00128$
-;src/includes/world.h:237: case RNSW:
+;src/includes/world.h:219: case RNSW:
 00126$:
-;src/includes/world.h:238: cpct_drawSprite(rail_ns_w, p_video, TILESIZE_W, TILESIZE_H);
+;src/includes/world.h:220: cpct_drawSprite(rail_ns_w, p_video, TILESIZE_W, TILESIZE_H);
 	ld	de,#_rail_ns_w
 	ld	hl,#0x1004
 	push	hl
 	push	bc
 	push	de
 	call	_cpct_drawSprite
-;src/includes/world.h:240: }
+;src/includes/world.h:222: }
 00128$:
 	pop	ix
 	ret
-;src/includes/world.h:243: void drawWorld(u8 x_, u8 y_)
+;src/includes/world.h:225: void drawWorld(u8 x_, u8 y_)
 ;	---------------------------------
 ; Function drawWorld
 ; ---------------------------------
@@ -4064,13 +4071,13 @@ _drawWorld::
 	ld	ix,#0
 	add	ix,sp
 	dec	sp
-;src/includes/world.h:251: for(iy=0; iy<NBTILE_H;iy++)
+;src/includes/world.h:233: for(iy=0; iy<NBTILE_H;iy++)
 	ld	d,#0x00
-;src/includes/world.h:253: for(ix=0; ix<NBTILE_W;ix++)
+;src/includes/world.h:235: for(ix=0; ix<NBTILE_W;ix++)
 00109$:
 	ld	e,#0x00
 00103$:
-;src/includes/world.h:255: drawTile(x_, y_, ix, iy);
+;src/includes/world.h:237: drawTile(x_, y_, ix, iy);
 	push	de
 	push	de
 	ld	h,5 (ix)
@@ -4080,17 +4087,17 @@ _drawWorld::
 	pop	af
 	pop	af
 	pop	de
-;src/includes/world.h:253: for(ix=0; ix<NBTILE_W;ix++)
+;src/includes/world.h:235: for(ix=0; ix<NBTILE_W;ix++)
 	inc	e
 	ld	a,e
 	sub	a, #0x14
 	jr	C,00103$
-;src/includes/world.h:251: for(iy=0; iy<NBTILE_H;iy++)
+;src/includes/world.h:233: for(iy=0; iy<NBTILE_H;iy++)
 	inc	d
 	ld	a,d
 	sub	a, #0x0C
 	jr	C,00109$
-;src/includes/world.h:261: scrollx = x_* (WIDTH-TILESIZE_W)/(WIDTH-NBTILE_W);
+;src/includes/world.h:243: scrollx = x_* (WIDTH-TILESIZE_W)/(WIDTH-NBTILE_W);
 	ld	c,4 (ix)
 	ld	b,#0x00
 	ld	l, c
@@ -4110,7 +4117,7 @@ _drawWorld::
 	pop	af
 	pop	af
 	ld	d,l
-;src/includes/world.h:262: scrolly = y_* (HEIGHT*TILESIZE_W-TILESIZE_H)/(HEIGHT-NBTILE_H);
+;src/includes/world.h:244: scrolly = y_* (HEIGHT*TILESIZE_W-TILESIZE_H)/(HEIGHT-NBTILE_H);
 	ld	c,5 (ix)
 	ld	b,#0x00
 	ld	l, c
@@ -4133,7 +4140,7 @@ _drawWorld::
 	pop	af
 	pop	de
 	ld	-1 (ix),l
-;src/includes/world.h:264: p_video = cpct_getScreenPtr(SCR_VMEM, scrollx, 0);
+;src/includes/world.h:246: p_video = cpct_getScreenPtr(SCR_VMEM, scrollx, 0);
 	xor	a, a
 	push	af
 	inc	sp
@@ -4142,7 +4149,7 @@ _drawWorld::
 	ld	hl,#0xC000
 	push	hl
 	call	_cpct_getScreenPtr
-;src/includes/world.h:265: cpct_drawSolidBox(p_video, cpct_px2byteM1(0,0,0,0), 4, TILESIZE_W);
+;src/includes/world.h:247: cpct_drawSolidBox(p_video, cpct_px2byteM1(0,0,0,0), 4, TILESIZE_W);
 	push	hl
 	ld	hl,#0x0000
 	push	hl
@@ -4162,7 +4169,7 @@ _drawWorld::
 	pop	af
 	pop	af
 	inc	sp
-;src/includes/world.h:267: p_video = cpct_getScreenPtr(SCR_VMEM, 0, scrolly);
+;src/includes/world.h:249: p_video = cpct_getScreenPtr(SCR_VMEM, 0, scrolly);
 	ld	a,-1 (ix)
 	push	af
 	inc	sp
@@ -4172,7 +4179,7 @@ _drawWorld::
 	ld	hl,#0xC000
 	push	hl
 	call	_cpct_getScreenPtr
-;src/includes/world.h:268: cpct_drawSolidBox(p_video, cpct_px2byteM1(0,0,0,0), 1, TILESIZE_H);
+;src/includes/world.h:250: cpct_drawSolidBox(p_video, cpct_px2byteM1(0,0,0,0), 1, TILESIZE_H);
 	push	hl
 	ld	hl,#0x0000
 	push	hl
@@ -4883,24 +4890,54 @@ _game::
 	push	ix
 	ld	ix,#0
 	add	ix,sp
-	ld	hl,#-15
+	ld	hl,#-22
 	add	hl,sp
 	ld	sp,hl
 ;src/includes/game.h:142: int ulx = 0;
-	ld	-9 (ix),#0x00
-	ld	-8 (ix),#0x00
-;src/includes/game.h:143: int uly = 0;
-	ld	-11 (ix),#0x00
-	ld	-10 (ix),#0x00
-;src/includes/game.h:144: int xCursor = 10;
-	ld	-13 (ix),#0x0A
-	ld	-12 (ix),#0x00
-;src/includes/game.h:145: int yCursor = 6;
-	ld	hl,#0x0006
-	ex	(sp), hl
-;src/includes/game.h:147: u8 exit=0;
 	ld	-7 (ix),#0x00
-;src/includes/game.h:149: cpct_clearScreen(cpct_px2byteM1(0,0,0,0));
+	ld	-6 (ix),#0x00
+;src/includes/game.h:143: int uly = 0;
+	ld	-16 (ix),#0x00
+	ld	-15 (ix),#0x00
+;src/includes/game.h:144: int xCursor = 10;
+	ld	-9 (ix),#0x0A
+	ld	-8 (ix),#0x00
+;src/includes/game.h:145: int yCursor = 6;
+	ld	-12 (ix),#0x06
+	ld	-11 (ix),#0x00
+;src/includes/game.h:147: u8 exit=0;
+	ld	-10 (ix),#0x00
+;src/includes/game.h:150: drawBoxM2(50, 50);
+	ld	hl,#0x0032
+	push	hl
+	ld	l, #0x32
+	push	hl
+	call	_drawBoxM2
+	pop	af
+;src/includes/game.h:151: p_video = cpct_getScreenPtr(SCR_VMEM, 32, 95);
+	ld	hl, #0x5F20
+	ex	(sp),hl
+	ld	hl,#0xC000
+	push	hl
+	call	_cpct_getScreenPtr
+;src/includes/game.h:152: cpct_drawStringM2 ("Generating world...", p_video, 0);	
+	ld	c, l
+	ld	b, h
+	ld	de,#___str_37
+	xor	a, a
+	push	af
+	inc	sp
+	push	bc
+	push	de
+	call	_cpct_drawStringM2
+	pop	af
+	pop	af
+	inc	sp
+;src/includes/game.h:154: generateWorld();
+	call	_generateWorld
+;src/includes/game.h:156: putM1();
+	call	_putM1
+;src/includes/game.h:157: cpct_clearScreen(cpct_px2byteM1(0,0,0,0));
 	ld	hl,#0x0000
 	push	hl
 	ld	l, #0x00
@@ -4916,479 +4953,452 @@ _game::
 	ld	hl,#0xC000
 	push	hl
 	call	_cpct_memset
-;src/includes/game.h:151: generateWorld();
-	call	_generateWorld
-;src/includes/game.h:153: drawWorld(ulx, uly);
+;src/includes/game.h:158: drawWorld(ulx, uly);
 	ld	hl,#0x0000
 	push	hl
 	call	_drawWorld
 	pop	af
-;src/includes/game.h:155: do{
-00172$:
-;src/includes/game.h:156: cpct_scanKeyboard(); 
+;src/includes/game.h:160: do{
+00181$:
+;src/includes/game.h:161: cpct_scanKeyboard(); 
 	call	_cpct_scanKeyboard
-;src/includes/game.h:158: if ( cpct_isKeyPressed(Key_CursorUp) )
+;src/includes/game.h:163: if ( cpct_isKeyPressed(Key_CursorUp) )
 	ld	hl,#0x0100
 	call	_cpct_isKeyPressed
-;src/includes/game.h:160: drawTile(ulx, uly, xCursor, yCursor);
-	ld	a,-13 (ix)
-	ld	-4 (ix),a
-	ld	a,-11 (ix)
-	ld	-3 (ix),a
+	ld	-2 (ix),l
+;src/includes/game.h:165: drawTile(ulx, uly, xCursor, yCursor);
+	ld	a,-12 (ix)
+	ld	-1 (ix),a
 	ld	a,-9 (ix)
-	ld	-2 (ix),a
-;src/includes/game.h:158: if ( cpct_isKeyPressed(Key_CursorUp) )
-	ld	a,l
+	ld	-3 (ix),a
+	ld	a,-16 (ix)
+	ld	-4 (ix),a
+	ld	a,-7 (ix)
+	ld	-5 (ix),a
+;src/includes/game.h:163: if ( cpct_isKeyPressed(Key_CursorUp) )
+	ld	a,-2 (ix)
 	or	a, a
-	jr	Z,00107$
-;src/includes/game.h:160: drawTile(ulx, uly, xCursor, yCursor);
-	ld	a,-15 (ix)
-	ld	-1 (ix), a
-	push	af
-	inc	sp
-	ld	a,-4 (ix)
+	jp	Z,00179$
+;src/includes/game.h:165: drawTile(ulx, uly, xCursor, yCursor);
+	ld	a,-1 (ix)
 	push	af
 	inc	sp
 	ld	a,-3 (ix)
 	push	af
 	inc	sp
-	ld	a,-2 (ix)
+	ld	a,-4 (ix)
+	push	af
+	inc	sp
+	ld	a,-5 (ix)
 	push	af
 	inc	sp
 	call	_drawTile
 	pop	af
 	pop	af
-;src/includes/game.h:162: yCursor-=1;
-	pop	hl
-	push	hl
+;src/includes/game.h:167: yCursor-=1;
+	ld	l,-12 (ix)
+	ld	h,-11 (ix)
 	dec	hl
-	ex	(sp), hl
-;src/includes/game.h:165: if(yCursor<0)
-	bit	7, -14 (ix)
-	jr	Z,00201$
-;src/includes/game.h:167: yCursor=0;
-	ld	hl,#0x0000
-	ex	(sp), hl
-;src/includes/game.h:170: if(uly>0)
+	ld	-12 (ix),l
+	ld	-11 (ix),h
+;src/includes/game.h:170: if(yCursor<0)
+	bit	7, -11 (ix)
+	jr	Z,00210$
+;src/includes/game.h:172: yCursor=0;
+	ld	-12 (ix),#0x00
+	ld	-11 (ix),#0x00
+;src/includes/game.h:175: if(uly>0)
 	xor	a, a
-	cp	a, -11 (ix)
-	sbc	a, -10 (ix)
-	jp	PO, 00356$
+	cp	a, -16 (ix)
+	sbc	a, -15 (ix)
+	jp	PO, 00387$
 	xor	a, #0x80
-00356$:
-	jp	P,00201$
-;src/includes/game.h:172: uly-=1;
-	ld	l,-11 (ix)
-	ld	h,-10 (ix)
+00387$:
+	jp	P,00210$
+;src/includes/game.h:177: uly-=1;
+	ld	l,-16 (ix)
+	ld	h,-15 (ix)
 	dec	hl
-	ld	-11 (ix),l
-	ld	-10 (ix),h
-;src/includes/game.h:160: drawTile(ulx, uly, xCursor, yCursor);
-	ld	a,-11 (ix)
-;src/includes/game.h:173: drawWorld(ulx, uly);
-	ld	-3 (ix), a
-	push	af
+	ld	-16 (ix),l
+	ld	-15 (ix),h
+;src/includes/game.h:178: drawWorld(ulx, uly);
+	ld	h,-16 (ix)
+	push	hl
 	inc	sp
-	ld	a,-2 (ix)
+	ld	a,-5 (ix)
 	push	af
 	inc	sp
 	call	_drawWorld
 	pop	af
-;src/includes/game.h:178: for(i=0; i<14000; i++) {}
-00201$:
-	ld	de,#0x36B0
-00177$:
-	dec	de
-	ld	a,d
-	or	a,e
-	jr	NZ,00177$
-00107$:
-;src/includes/game.h:181: if ( cpct_isKeyPressed(Key_CursorDown) )
+;src/includes/game.h:183: for(i=0; i<14000; i++) {}
+00210$:
+	ld	-14 (ix),#0xB0
+	ld	-13 (ix),#0x36
+00186$:
+	ld	l,-14 (ix)
+	ld	h,-13 (ix)
+	dec	hl
+	ld	-14 (ix),l
+	ld	-13 (ix), h
+	ld	a, h
+	or	a,-14 (ix)
+	jr	NZ,00186$
+	jp	00180$
+00179$:
+;src/includes/game.h:186: else if ( cpct_isKeyPressed(Key_CursorDown) )
 	ld	hl,#0x0400
 	call	_cpct_isKeyPressed
 	ld	a,l
 	or	a, a
-	jp	Z,00114$
-;src/includes/game.h:183: drawTile(ulx, uly, xCursor, yCursor);
-	ld	h,-15 (ix)
-	push	hl
-	inc	sp
-	ld	a,-4 (ix)
+	jp	Z,00176$
+;src/includes/game.h:188: drawTile(ulx, uly, xCursor, yCursor);
+	ld	a,-1 (ix)
 	push	af
 	inc	sp
 	ld	a,-3 (ix)
 	push	af
 	inc	sp
-	ld	a,-2 (ix)
+	ld	a,-4 (ix)
+	push	af
+	inc	sp
+	ld	a,-5 (ix)
 	push	af
 	inc	sp
 	call	_drawTile
 	pop	af
 	pop	af
-;src/includes/game.h:184: yCursor+=1;
-	inc	-15 (ix)
-	jr	NZ,00357$
-	inc	-14 (ix)
-00357$:
-;src/includes/game.h:185: if(yCursor>NBTILE_H-1)
+;src/includes/game.h:189: yCursor+=1;
+	inc	-12 (ix)
+	jr	NZ,00388$
+	inc	-11 (ix)
+00388$:
+;src/includes/game.h:190: if(yCursor>NBTILE_H-1)
 	ld	a,#0x0B
-	cp	a, -15 (ix)
+	cp	a, -12 (ix)
 	ld	a,#0x00
-	sbc	a, -14 (ix)
-	jp	PO, 00358$
+	sbc	a, -11 (ix)
+	jp	PO, 00389$
 	xor	a, #0x80
-00358$:
-	jp	P,00206$
-;src/includes/game.h:187: yCursor=NBTILE_H-1;
-	ld	hl,#0x000B
-	ex	(sp), hl
-;src/includes/game.h:188: if(uly<HEIGHT-NBTILE_H)
-	ld	a,-11 (ix)
+00389$:
+	jp	P,00215$
+;src/includes/game.h:192: yCursor=NBTILE_H-1;
+	ld	-12 (ix),#0x0B
+	ld	-11 (ix),#0x00
+;src/includes/game.h:193: if(uly<HEIGHT-NBTILE_H)
+	ld	a,-16 (ix)
 	sub	a, #0x24
-	ld	a,-10 (ix)
+	ld	a,-15 (ix)
 	rla
 	ccf
 	rra
 	sbc	a, #0x80
-	jr	NC,00206$
-;src/includes/game.h:190: uly+=1;
-	inc	-11 (ix)
-	jr	NZ,00359$
-	inc	-10 (ix)
-00359$:
-;src/includes/game.h:160: drawTile(ulx, uly, xCursor, yCursor);
-	ld	a,-11 (ix)
-;src/includes/game.h:191: drawWorld(ulx, uly);
-	ld	-3 (ix), a
-	push	af
+	jr	NC,00215$
+;src/includes/game.h:195: uly+=1;
+	inc	-16 (ix)
+	jr	NZ,00390$
+	inc	-15 (ix)
+00390$:
+;src/includes/game.h:196: drawWorld(ulx, uly);
+	ld	h,-16 (ix)
+	push	hl
 	inc	sp
-	ld	a,-2 (ix)
+	ld	a,-5 (ix)
 	push	af
 	inc	sp
 	call	_drawWorld
 	pop	af
-;src/includes/game.h:196: for(i=0; i<14000; i++) {}
-00206$:
-	ld	-6 (ix),#0xB0
-	ld	-5 (ix),#0x36
-00180$:
-	ld	l,-6 (ix)
-	ld	h,-5 (ix)
+;src/includes/game.h:201: for(i=0; i<14000; i++) {}
+00215$:
+	ld	-14 (ix),#0xB0
+	ld	-13 (ix),#0x36
+00189$:
+	ld	l,-14 (ix)
+	ld	h,-13 (ix)
 	dec	hl
-	ld	-6 (ix),l
-	ld	-5 (ix), h
+	ld	-14 (ix),l
+	ld	-13 (ix), h
 	ld	a, h
-	or	a,-6 (ix)
-	jr	NZ,00180$
-00114$:
-;src/includes/game.h:199: if ( cpct_isKeyPressed(Key_CursorLeft) )
+	or	a,-14 (ix)
+	jr	NZ,00189$
+	jp	00180$
+00176$:
+;src/includes/game.h:204: else if ( cpct_isKeyPressed(Key_CursorLeft) )
 	ld	hl,#0x0101
 	call	_cpct_isKeyPressed
-;src/includes/game.h:160: drawTile(ulx, uly, xCursor, yCursor);
-	ld	a,-15 (ix)
-	ld	-1 (ix),a
-;src/includes/game.h:199: if ( cpct_isKeyPressed(Key_CursorLeft) )
 	ld	a,l
 	or	a, a
-	jr	Z,00121$
-;src/includes/game.h:201: drawTile(ulx, uly, xCursor, yCursor);
+	jr	Z,00173$
+;src/includes/game.h:206: drawTile(ulx, uly, xCursor, yCursor);
 	ld	a,-1 (ix)
-	push	af
-	inc	sp
-	ld	a,-4 (ix)
 	push	af
 	inc	sp
 	ld	a,-3 (ix)
 	push	af
 	inc	sp
-	ld	a,-2 (ix)
+	ld	a,-4 (ix)
+	push	af
+	inc	sp
+	ld	a,-5 (ix)
 	push	af
 	inc	sp
 	call	_drawTile
 	pop	af
 	pop	af
-;src/includes/game.h:202: xCursor-=1;
-	ld	l,-13 (ix)
-	ld	h,-12 (ix)
-	dec	hl
-	ld	-13 (ix),l
-	ld	-12 (ix),h
-;src/includes/game.h:203: if(xCursor<0)
-	bit	7, -12 (ix)
-	jr	Z,00211$
-;src/includes/game.h:205: xCursor=0;
-	ld	-13 (ix),#0x00
-	ld	-12 (ix),#0x00
-;src/includes/game.h:206: if(ulx>0)
-	xor	a, a
-	cp	a, -9 (ix)
-	sbc	a, -8 (ix)
-	jp	PO, 00360$
-	xor	a, #0x80
-00360$:
-	jp	P,00211$
-;src/includes/game.h:208: ulx-=1;
+;src/includes/game.h:207: xCursor-=1;
 	ld	l,-9 (ix)
 	ld	h,-8 (ix)
 	dec	hl
 	ld	-9 (ix),l
 	ld	-8 (ix),h
-;src/includes/game.h:160: drawTile(ulx, uly, xCursor, yCursor);
-	ld	a,-9 (ix)
-	ld	-2 (ix),a
-;src/includes/game.h:209: drawWorld(ulx, uly);
-	ld	a,-3 (ix)
-	push	af
-	inc	sp
-	ld	a,-2 (ix)
-	push	af
-	inc	sp
-	call	_drawWorld
-	pop	af
-;src/includes/game.h:214: for(i=0; i<14000; i++) {}
-00211$:
-	ld	de,#0x36B0
-00183$:
-	dec	de
-	ld	a,d
-	or	a,e
-	jr	NZ,00183$
-00121$:
-;src/includes/game.h:217: if ( cpct_isKeyPressed(Key_CursorRight) )
-	ld	hl,#0x0200
-	call	_cpct_isKeyPressed
-	ld	a,l
-	or	a, a
-	jr	Z,00128$
-;src/includes/game.h:219: drawTile(ulx, uly, xCursor, yCursor);
-	ld	d,-13 (ix)
-	ld	a,-1 (ix)
+;src/includes/game.h:208: if(xCursor<0)
+	bit	7, -8 (ix)
+	jr	Z,00220$
+;src/includes/game.h:210: xCursor=0;
+	ld	-9 (ix),#0x00
+	ld	-8 (ix),#0x00
+;src/includes/game.h:211: if(ulx>0)
+	xor	a, a
+	cp	a, -7 (ix)
+	sbc	a, -6 (ix)
+	jp	PO, 00391$
+	xor	a, #0x80
+00391$:
+	jp	P,00220$
+;src/includes/game.h:213: ulx-=1;
+	ld	l,-7 (ix)
+	ld	h,-6 (ix)
+	dec	hl
+	ld	-7 (ix),l
+	ld	-6 (ix),h
+;src/includes/game.h:214: drawWorld(ulx, uly);
+	ld	d,-7 (ix)
+	ld	a,-4 (ix)
 	push	af
 	inc	sp
 	push	de
 	inc	sp
+	call	_drawWorld
+	pop	af
+;src/includes/game.h:219: for(i=0; i<14000; i++) {}
+00220$:
+	ld	bc,#0x36B0
+00192$:
+	dec	bc
+	ld	a,b
+	or	a,c
+	jr	NZ,00192$
+	jp	00180$
+00173$:
+;src/includes/game.h:222: else if ( cpct_isKeyPressed(Key_CursorRight) )
+	ld	hl,#0x0200
+	call	_cpct_isKeyPressed
+	ld	a,l
+	or	a, a
+	jr	Z,00170$
+;src/includes/game.h:224: drawTile(ulx, uly, xCursor, yCursor);
+	ld	a,-1 (ix)
+	push	af
+	inc	sp
 	ld	a,-3 (ix)
 	push	af
 	inc	sp
-	ld	a,-2 (ix)
+	ld	a,-4 (ix)
+	push	af
+	inc	sp
+	ld	a,-5 (ix)
 	push	af
 	inc	sp
 	call	_drawTile
 	pop	af
 	pop	af
-;src/includes/game.h:220: xCursor+=1;
-	inc	-13 (ix)
-	jr	NZ,00361$
-	inc	-12 (ix)
-00361$:
-;src/includes/game.h:221: if(xCursor>NBTILE_W-1)
+;src/includes/game.h:225: xCursor+=1;
+	inc	-9 (ix)
+	jr	NZ,00392$
+	inc	-8 (ix)
+00392$:
+;src/includes/game.h:226: if(xCursor>NBTILE_W-1)
 	ld	a,#0x13
-	cp	a, -13 (ix)
+	cp	a, -9 (ix)
 	ld	a,#0x00
-	sbc	a, -12 (ix)
-	jp	PO, 00362$
+	sbc	a, -8 (ix)
+	jp	PO, 00393$
 	xor	a, #0x80
-00362$:
-	jp	P,00216$
-;src/includes/game.h:223: xCursor=NBTILE_W-1;
-	ld	-13 (ix),#0x13
-	ld	-12 (ix),#0x00
-;src/includes/game.h:224: if(ulx<WIDTH-NBTILE_W)
-	ld	a,-9 (ix)
+00393$:
+	jp	P,00225$
+;src/includes/game.h:228: xCursor=NBTILE_W-1;
+	ld	-9 (ix),#0x13
+	ld	-8 (ix),#0x00
+;src/includes/game.h:229: if(ulx<WIDTH-NBTILE_W)
+	ld	a,-7 (ix)
 	sub	a, #0x3C
-	ld	a,-8 (ix)
+	ld	a,-6 (ix)
 	rla
 	ccf
 	rra
 	sbc	a, #0x80
-	jr	NC,00216$
-;src/includes/game.h:226: ulx+=1;
-	inc	-9 (ix)
-	jr	NZ,00363$
-	inc	-8 (ix)
-00363$:
-;src/includes/game.h:160: drawTile(ulx, uly, xCursor, yCursor);
-	ld	a,-9 (ix)
-	ld	-2 (ix),a
-;src/includes/game.h:227: drawWorld(ulx, uly);
-	ld	a,-3 (ix)
+	jr	NC,00225$
+;src/includes/game.h:231: ulx+=1;
+	inc	-7 (ix)
+	jr	NZ,00394$
+	inc	-6 (ix)
+00394$:
+;src/includes/game.h:232: drawWorld(ulx, uly);
+	ld	d,-7 (ix)
+	ld	a,-4 (ix)
 	push	af
 	inc	sp
-	ld	a,-2 (ix)
-	push	af
+	push	de
 	inc	sp
 	call	_drawWorld
 	pop	af
-;src/includes/game.h:232: for(i=0; i<14000; i++) {}
-00216$:
-	ld	de,#0x36B0
-00186$:
-	dec	de
-	ld	a,d
-	or	a,e
-	jr	NZ,00186$
-00128$:
-;src/includes/game.h:236: if ( cpct_isKeyPressed(Key_Space) )
+;src/includes/game.h:237: for(i=0; i<14000; i++) {}
+00225$:
+	ld	bc,#0x36B0
+00195$:
+	dec	bc
+	ld	a,b
+	or	a,c
+	jr	NZ,00195$
+	jp	00180$
+00170$:
+;src/includes/game.h:241: else if ( cpct_isKeyPressed(Key_Space) )
 	ld	hl,#0x8005
 	call	_cpct_isKeyPressed
 	ld	a,l
 	or	a, a
-	jp	Z,00155$
-;src/includes/game.h:238: if(CURSOR_MODE==T_SSNS)
+	jp	Z,00167$
+;src/includes/game.h:243: if(CURSOR_MODE==T_SSNS)
 	ld	a,(#_CURSOR_MODE + 0)
 	dec	a
-	jr	NZ,00151$
-;src/includes/game.h:239: CURSOR_MODE=T_SSEW;
-	ld	hl,#_CURSOR_MODE + 0
-	ld	(hl), #0x02
-	jr	00228$
-00151$:
-;src/includes/game.h:240: else if(CURSOR_MODE==T_SSEW)
+	jr	NZ,00143$
+;src/includes/game.h:244: CURSOR_MODE=T_SSEW;
+	ld	iy,#_CURSOR_MODE
+	ld	0 (iy),#0x02
+	jp	00237$
+00143$:
+;src/includes/game.h:245: else if(CURSOR_MODE==T_SSEW)
 	ld	a,(#_CURSOR_MODE + 0)
 	sub	a, #0x02
-	jr	NZ,00148$
-;src/includes/game.h:241: CURSOR_MODE=T_SSNS;
-	ld	hl,#_CURSOR_MODE + 0
-	ld	(hl), #0x01
-	jr	00228$
-00148$:
-;src/includes/game.h:242: else if(CURSOR_MODE==T_SMNS)
+	jr	NZ,00140$
+;src/includes/game.h:246: CURSOR_MODE=T_SSNS;
+	ld	iy,#_CURSOR_MODE
+	ld	0 (iy),#0x01
+	jr	00237$
+00140$:
+;src/includes/game.h:247: else if(CURSOR_MODE==T_SMNS)
 	ld	a,(#_CURSOR_MODE + 0)
 	sub	a, #0x03
-	jr	NZ,00145$
-;src/includes/game.h:243: CURSOR_MODE=T_SMEW;
-	ld	hl,#_CURSOR_MODE + 0
-	ld	(hl), #0x04
-	jr	00228$
-00145$:
-;src/includes/game.h:244: else if(CURSOR_MODE==T_SMEW)
+	jr	NZ,00137$
+;src/includes/game.h:248: CURSOR_MODE=T_SMEW;
+	ld	iy,#_CURSOR_MODE
+	ld	0 (iy),#0x04
+	jr	00237$
+00137$:
+;src/includes/game.h:249: else if(CURSOR_MODE==T_SMEW)
 	ld	a,(#_CURSOR_MODE + 0)
 	sub	a, #0x04
-	jr	NZ,00142$
-;src/includes/game.h:245: CURSOR_MODE=T_SMNS;
-	ld	hl,#_CURSOR_MODE + 0
-	ld	(hl), #0x03
-	jr	00228$
-00142$:
-;src/includes/game.h:246: else if(CURSOR_MODE==T_SLNS)
+	jr	NZ,00134$
+;src/includes/game.h:250: CURSOR_MODE=T_SMNS;
+	ld	iy,#_CURSOR_MODE
+	ld	0 (iy),#0x03
+	jr	00237$
+00134$:
+;src/includes/game.h:251: else if(CURSOR_MODE==T_SLNS)
 	ld	a,(#_CURSOR_MODE + 0)
 	sub	a, #0x05
-	jr	NZ,00139$
-;src/includes/game.h:247: CURSOR_MODE=T_SLEW;
-	ld	hl,#_CURSOR_MODE + 0
-	ld	(hl), #0x06
-	jr	00228$
-00139$:
-;src/includes/game.h:248: else if(CURSOR_MODE==T_SLEW)
+	jr	NZ,00131$
+;src/includes/game.h:252: CURSOR_MODE=T_SLEW;
+	ld	iy,#_CURSOR_MODE
+	ld	0 (iy),#0x06
+	jr	00237$
+00131$:
+;src/includes/game.h:253: else if(CURSOR_MODE==T_SLEW)
 	ld	a,(#_CURSOR_MODE + 0)
 	sub	a, #0x06
-	jr	NZ,00136$
-;src/includes/game.h:249: CURSOR_MODE=T_SLNS;
-	ld	hl,#_CURSOR_MODE + 0
-	ld	(hl), #0x05
-	jr	00228$
-00136$:
-;src/includes/game.h:250: else if(CURSOR_MODE>=T_REW && CURSOR_MODE<T_RNSW)
+	jr	NZ,00128$
+;src/includes/game.h:254: CURSOR_MODE=T_SLNS;
+	ld	iy,#_CURSOR_MODE
+	ld	0 (iy),#0x05
+	jr	00237$
+00128$:
+;src/includes/game.h:255: else if(CURSOR_MODE>=T_REW && CURSOR_MODE<T_RNSW)
 	ld	a,(#_CURSOR_MODE + 0)
 	cp	a,#0x07
-	jr	C,00132$
+	jr	C,00124$
 	sub	a, #0x10
-	jr	NC,00132$
-;src/includes/game.h:251: CURSOR_MODE+=1;
-	ld	hl, #_CURSOR_MODE+0
-	inc	(hl)
-	jr	00228$
-00132$:
-;src/includes/game.h:252: else if(CURSOR_MODE==T_RNSW)
+	jr	NC,00124$
+;src/includes/game.h:256: CURSOR_MODE+=1;
+	ld	iy,#_CURSOR_MODE
+	inc	0 (iy)
+	jr	00237$
+00124$:
+;src/includes/game.h:257: else if(CURSOR_MODE==T_RNSW)
 	ld	a,(#_CURSOR_MODE + 0)
 	sub	a, #0x10
-	jr	NZ,00228$
-;src/includes/game.h:253: CURSOR_MODE=T_REW;
-	ld	hl,#_CURSOR_MODE + 0
-	ld	(hl), #0x07
-;src/includes/game.h:255: for(i=0; i<14000; i++) {}
-00228$:
-	ld	hl,#0x36B0
-00189$:
-	dec	hl
-	ld	a,h
-	or	a,l
-	jr	NZ,00189$
-00155$:
-;src/includes/game.h:258: if ( cpct_isKeyPressed(Key_Esc) )
+	jr	NZ,00237$
+;src/includes/game.h:258: CURSOR_MODE=T_REW;
+	ld	iy,#_CURSOR_MODE
+	ld	0 (iy),#0x07
+;src/includes/game.h:260: for(i=0; i<14000; i++) {}
+00237$:
+	ld	bc,#0x36B0
+00198$:
+	dec	bc
+	ld	a,b
+	or	a,c
+	jr	NZ,00198$
+	jp	00180$
+00167$:
+;src/includes/game.h:263: else if ( cpct_isKeyPressed(Key_Esc) )
 	ld	hl,#0x0408
 	call	_cpct_isKeyPressed
-;src/includes/game.h:160: drawTile(ulx, uly, xCursor, yCursor);
-	ld	b,-13 (ix)
-;src/includes/game.h:258: if ( cpct_isKeyPressed(Key_Esc) )
 	ld	a,l
 	or	a, a
-	jr	Z,00161$
-;src/includes/game.h:261: if(CURSOR_MODE==NONE)
+	jp	Z,00164$
+;src/includes/game.h:266: if(CURSOR_MODE==NONE)
 	ld	a,(#_CURSOR_MODE + 0)
 	or	a, a
-	jr	NZ,00157$
-;src/includes/game.h:262: exit=1;
-	ld	-7 (ix),#0x01
-	jr	00232$
-00157$:
-;src/includes/game.h:265: CURSOR_MODE=NONE;
-	ld	iy,#_CURSOR_MODE
-	ld	0 (iy),#0x00
-;src/includes/game.h:266: drawTile(ulx, uly, xCursor, yCursor);
-	push	bc
-	ld	a,-1 (ix)
-	push	af
-	inc	sp
-	push	bc
-	inc	sp
-	ld	a,-3 (ix)
-	push	af
-	inc	sp
-	ld	a,-2 (ix)
-	push	af
-	inc	sp
-	call	_drawTile
-	pop	af
-	pop	af
-	pop	bc
-;src/includes/game.h:270: for(i=0; i<14000; i++) {}
-00232$:
-	ld	hl,#0x36B0
-00192$:
-	dec	hl
-	ld	a,h
-	or	a,l
-	jr	NZ,00192$
-00161$:
-;src/includes/game.h:273: if ( cpct_isKeyPressed(Key_Return) )
-	push	bc
-	ld	hl,#0x0402
-	call	_cpct_isKeyPressed
-	ld	a,l
-	pop	bc
-	or	a, a
-	jp	Z,00171$
-;src/includes/game.h:276: if(CURSOR_MODE==NONE)
-	ld	a,(#_CURSOR_MODE + 0)
-	or	a, a
-	jr	NZ,00167$
-;src/includes/game.h:278: menuTile(ulx+xCursor, uly+yCursor);
-	ld	a, -11 (ix)
-	ld	h, -15 (ix)
-	add	a, h
-	ld	h,a
-	ld	l,-9 (ix)
-	ld	d,-13 (ix)
-	ld	a,l
-	add	a, d
-	push	bc
+	jr	NZ,00150$
+;src/includes/game.h:269: const char *txtWindowQuit[] = { 
+	ld	hl,#0x0000
+	add	hl,sp
+	ld	e,l
+	ld	d,h
+	ld	(hl),#<(___str_34)
+	inc	hl
+	ld	(hl),#>(___str_34)
+	ld	l, e
+	ld	h, d
+	inc	hl
+	inc	hl
+	ld	(hl),#<(___str_35)
+	inc	hl
+	ld	(hl),#>(___str_35)
+	ld	hl,#0x0004
+	add	hl,de
+	ld	(hl),#<(___str_36)
+	inc	hl
+	ld	(hl),#>(___str_36)
+;src/includes/game.h:275: putM2();
+	push	de
+	call	_putM2
+	pop	de
+;src/includes/game.h:276: if(	drawWindow(txtWindowQuit,3,1) == 1)
+	ld	hl,#0x0103
 	push	hl
-	inc	sp
-	push	af
-	inc	sp
-	call	_menuTile
+	push	de
+	call	_drawWindow
 	pop	af
+	pop	af
+	dec	l
+	jr	NZ,00147$
+;src/includes/game.h:277: exit=1;
+	ld	-10 (ix),#0x01
+	jr	00242$
+00147$:
+;src/includes/game.h:280: putM1();
+	call	_putM1
+;src/includes/game.h:281: cpct_clearScreen(cpct_px2byteM1(0,0,0,0));	
 	ld	hl,#0x0000
 	push	hl
 	ld	l, #0x00
@@ -5397,52 +5407,131 @@ _game::
 	pop	af
 	pop	af
 	ld	h,l
-	ld	de,#0x4000
-	push	de
+	ld	bc,#0x4000
+	push	bc
 	push	hl
 	inc	sp
 	ld	hl,#0xC000
 	push	hl
 	call	_cpct_memset
-	ld	a,-3 (ix)
+;src/includes/game.h:282: drawWorld(ulx, uly);
+	ld	a,-4 (ix)
 	push	af
 	inc	sp
-	ld	a,-2 (ix)
+	ld	a,-5 (ix)
 	push	af
 	inc	sp
 	call	_drawWorld
 	pop	af
-	pop	bc
-	jr	00238$
-00167$:
-;src/includes/game.h:283: else if(CURSOR_MODE>=T_SSNS)
+	jr	00242$
+00150$:
+;src/includes/game.h:287: CURSOR_MODE=NONE;
+	ld	iy,#_CURSOR_MODE
+	ld	0 (iy),#0x00
+;src/includes/game.h:288: drawTile(ulx, uly, xCursor, yCursor);
+	ld	a,-1 (ix)
+	push	af
+	inc	sp
+	ld	a,-3 (ix)
+	push	af
+	inc	sp
+	ld	a,-4 (ix)
+	push	af
+	inc	sp
+	ld	a,-5 (ix)
+	push	af
+	inc	sp
+	call	_drawTile
+	pop	af
+	pop	af
+;src/includes/game.h:292: for(i=0; i<14000; i++) {}
+00242$:
+	ld	bc,#0x36B0
+00201$:
+	dec	bc
+	ld	a,b
+	or	a,c
+	jr	NZ,00201$
+	jp	00180$
+00164$:
+;src/includes/game.h:295: else if ( cpct_isKeyPressed(Key_Return) )
+	ld	hl,#0x0402
+	call	_cpct_isKeyPressed
+	ld	a,l
+	or	a, a
+	jp	Z,00180$
+;src/includes/game.h:298: if(CURSOR_MODE==NONE)
+	ld	a,(#_CURSOR_MODE + 0)
+	or	a, a
+	jr	NZ,00158$
+;src/includes/game.h:300: menuTile(ulx+xCursor, uly+yCursor);
+	ld	a, -16 (ix)
+	ld	l, -12 (ix)
+	add	a, l
+	ld	h,a
+	ld	l,-7 (ix)
+	ld	d,-9 (ix)
+	ld	a,l
+	add	a, d
+	push	hl
+	inc	sp
+	push	af
+	inc	sp
+	call	_menuTile
+	pop	af
+;src/includes/game.h:301: cpct_clearScreen(cpct_px2byteM1(0,0,0,0));	
+	ld	hl,#0x0000
+	push	hl
+	ld	l, #0x00
+	push	hl
+	call	_cpct_px2byteM1
+	pop	af
+	pop	af
+	ld	h,l
+	ld	bc,#0x4000
+	push	bc
+	push	hl
+	inc	sp
+	ld	hl,#0xC000
+	push	hl
+	call	_cpct_memset
+;src/includes/game.h:302: drawWorld(ulx, uly);
+	ld	a,-4 (ix)
+	push	af
+	inc	sp
+	ld	a,-5 (ix)
+	push	af
+	inc	sp
+	call	_drawWorld
+	pop	af
+	jr	00248$
+00158$:
+;src/includes/game.h:305: else if(CURSOR_MODE>=T_SSNS)
 	ld	a,(#_CURSOR_MODE + 0)
 	sub	a, #0x01
-	jr	C,00238$
-;src/includes/game.h:285: p_world[ulx+xCursor+(uly+yCursor)*WIDTH]=CURSOR_MODE+9;
-	ld	a,-9 (ix)
-	add	a, -13 (ix)
+	jr	C,00248$
+;src/includes/game.h:307: p_world[ulx+xCursor+(uly+yCursor)*WIDTH]=CURSOR_MODE+9;
+	ld	a,-7 (ix)
+	add	a, -9 (ix)
 	ld	e,a
-	ld	a,-8 (ix)
-	adc	a, -12 (ix)
+	ld	a,-6 (ix)
+	adc	a, -8 (ix)
 	ld	d,a
-	ld	a,-11 (ix)
-	add	a, -15 (ix)
+	ld	a,-16 (ix)
+	add	a, -12 (ix)
 	ld	l,a
-	ld	a,-10 (ix)
-	adc	a, -14 (ix)
+	ld	a,-15 (ix)
+	adc	a, -11 (ix)
 	ld	h,a
-	push	de
-	ld	e, l
-	ld	d, h
+	ld	c, l
+	ld	b, h
 	add	hl, hl
 	add	hl, hl
-	add	hl, de
+	add	hl, bc
 	add	hl, hl
 	add	hl, hl
 	add	hl, hl
 	add	hl, hl
-	pop	de
 	add	hl,de
 	ld	a,#<(_p_world)
 	add	a, l
@@ -5453,42 +5542,59 @@ _game::
 	ld	a,(#_CURSOR_MODE + 0)
 	add	a, #0x09
 	ld	(de),a
-;src/includes/game.h:288: if(CURSOR_MODE<=T_SLEW)
+;src/includes/game.h:310: if(CURSOR_MODE<=T_SLEW)
 	ld	a,#0x06
 	ld	iy,#_CURSOR_MODE
 	sub	a, 0 (iy)
-	jr	C,00238$
-;src/includes/game.h:289: CURSOR_MODE=NONE;
+	jr	C,00248$
+;src/includes/game.h:311: CURSOR_MODE=NONE;
 	ld	hl,#_CURSOR_MODE + 0
 	ld	(hl), #0x00
-;src/includes/game.h:293: for(i=0; i<14000; i++) {}
-00238$:
-	ld	hl,#0x36B0
-00195$:
+;src/includes/game.h:315: for(i=0; i<14000; i++) {}
+00248$:
+	ld	-14 (ix),#0xB0
+	ld	-13 (ix),#0x36
+00204$:
+	ld	l,-14 (ix)
+	ld	h,-13 (ix)
 	dec	hl
-	ld	a,h
-	or	a,l
-	jr	NZ,00195$
-00171$:
-;src/includes/game.h:297: drawCursor(xCursor, yCursor, 0);
+	ld	-14 (ix),l
+	ld	-13 (ix), h
+	ld	a, h
+	or	a,-14 (ix)
+	jr	NZ,00204$
+00180$:
+;src/includes/game.h:319: drawCursor(xCursor, yCursor, 0);
+	ld	d,-12 (ix)
+	ld	b,-9 (ix)
 	xor	a, a
 	push	af
 	inc	sp
-	ld	a,-1 (ix)
-	push	af
+	push	de
 	inc	sp
 	push	bc
 	inc	sp
 	call	_drawCursor
 	pop	af
 	inc	sp
-;src/includes/game.h:299: while(!exit);
-	ld	a,-7 (ix)
+;src/includes/game.h:321: while(!exit);
+	ld	a,-10 (ix)
 	or	a, a
-	jp	Z,00172$
+	jp	Z,00181$
 	ld	sp, ix
 	pop	ix
 	ret
+___str_34:
+	.ascii "Really quit ?"
+	.db 0x00
+___str_35:
+	.db 0x00
+___str_36:
+	.ascii "Press Return to quit or Esc to resume"
+	.db 0x00
+___str_37:
+	.ascii "Generating world..."
+	.db 0x00
 ;src/main.c:17: void drawTrain() 
 ;	---------------------------------
 ; Function drawTrain
@@ -5504,56 +5610,56 @@ _main::
 	push	ix
 	ld	ix,#0
 	add	ix,sp
-	ld	hl,#-19
+	ld	hl,#-18
 	add	hl,sp
 	ld	sp,hl
 ;src/main.c:63: const char *menuMain[] = { 
-	ld	hl,#0x0007
+	ld	hl,#0x0008
 	add	hl,sp
 	ld	e,l
 	ld	d,h
-	ld	(hl),#<(___str_34)
+	ld	(hl),#<(___str_38)
 	inc	hl
-	ld	(hl),#>(___str_34)
+	ld	(hl),#>(___str_38)
 	ld	l, e
 	ld	h, d
 	inc	hl
 	inc	hl
-	ld	bc,#___str_35+0
+	ld	bc,#___str_39+0
 	ld	(hl),c
 	inc	hl
 	ld	(hl),b
 	ld	hl,#0x0004
 	add	hl,de
-	ld	bc,#___str_36+0
+	ld	bc,#___str_40+0
 	ld	(hl),c
 	inc	hl
 	ld	(hl),b
 ;src/main.c:69: const char *windowCredit[] = { 
 	ld	hl,#0x0000
 	add	hl,sp
-	ld	-2 (ix),l
-	ld	-1 (ix),h
-	ld	l,-2 (ix)
-	ld	h,-1 (ix)
-	ld	(hl),#<(___str_37)
+	ld	-4 (ix),l
+	ld	-3 (ix),h
+	ld	l,-4 (ix)
+	ld	h,-3 (ix)
+	ld	(hl),#<(___str_41)
 	inc	hl
-	ld	(hl),#>(___str_37)
-	ld	l,-2 (ix)
-	ld	h,-1 (ix)
+	ld	(hl),#>(___str_41)
+	ld	l,-4 (ix)
+	ld	h,-3 (ix)
 	inc	hl
 	inc	hl
-	ld	bc,#___str_38+0
+	ld	bc,#___str_42+0
 	ld	(hl),c
 	inc	hl
 	ld	(hl),b
-	ld	a,-2 (ix)
+	ld	a,-4 (ix)
 	add	a, #0x04
 	ld	l,a
-	ld	a,-1 (ix)
+	ld	a,-3 (ix)
 	adc	a, #0x00
 	ld	h,a
-	ld	bc,#___str_39+0
+	ld	bc,#___str_43+0
 	ld	(hl),c
 	inc	hl
 	ld	(hl),b
@@ -5561,8 +5667,8 @@ _main::
 	push	de
 	call	_cpct_disableFirmware
 	pop	de
-	ld	-6 (ix),l
-	ld	-5 (ix),h
+	ld	-12 (ix),l
+	ld	-11 (ix),h
 ;src/main.c:77: cpct_fw2hw(paletteTrains, 16);
 	ld	hl,#_paletteTrains
 	push	de
@@ -5597,12 +5703,12 @@ _main::
 	call	_putM2
 	pop	de
 ;src/main.c:85: do{
-	ld	-4 (ix),e
-	ld	-3 (ix),d
+	ld	-2 (ix),e
+	ld	-1 (ix),d
 00105$:
 ;src/main.c:86: menuChoice = drawMenu(menuMain,3);
-	ld	e,-4 (ix)
-	ld	d,-3 (ix)
+	ld	e,-2 (ix)
+	ld	d,-1 (ix)
 	ld	a,#0x03
 	push	af
 	inc	sp
@@ -5610,64 +5716,65 @@ _main::
 	call	_drawMenu
 	pop	af
 	inc	sp
+	ld	d,l
 ;src/main.c:88: if(menuChoice==0)
-	ld	-13 (ix), l
-	ld	a, l
+	ld	a,d
 	or	a, a
 	jr	NZ,00102$
-;src/main.c:90: putM1();
-	call	_putM1
-;src/main.c:92: game();
+;src/main.c:90: game();
+	push	de
 	call	_game
-;src/main.c:94: putM2();
 	call	_putM2
+	pop	de
 00102$:
-;src/main.c:97: if(menuChoice==1)
-	ld	a,-13 (ix)
+;src/main.c:95: if(menuChoice==1)
+	ld	a,d
 	dec	a
 	jr	NZ,00106$
-;src/main.c:98: drawWindow(windowCredit,3,0);
-	ld	e,-2 (ix)
-	ld	d,-1 (ix)
+;src/main.c:96: drawWindow(windowCredit,3,0);
+	ld	c,-4 (ix)
+	ld	b,-3 (ix)
+	push	de
 	ld	hl,#0x0003
 	push	hl
-	push	de
+	push	bc
 	call	_drawWindow
 	pop	af
 	pop	af
+	pop	de
 00106$:
-;src/main.c:100: while(menuChoice!=2);
-	ld	a,-13 (ix)
+;src/main.c:98: while(menuChoice!=2);
+	ld	a,d
 	sub	a, #0x02
 	jr	NZ,00105$
-;src/main.c:102: cpct_setVideoMode(0);
+;src/main.c:100: cpct_setVideoMode(0);
 	xor	a, a
 	push	af
 	inc	sp
 	call	_cpct_setVideoMode
 	inc	sp
-;src/main.c:103: cpct_reenableFirmware(firmware);
-	ld	l,-6 (ix)
-	ld	h,-5 (ix)
+;src/main.c:101: cpct_reenableFirmware(firmware);
+	ld	l,-12 (ix)
+	ld	h,-11 (ix)
 	call	_cpct_reenableFirmware
 	ld	sp, ix
 	pop	ix
 	ret
-___str_34:
+___str_38:
 	.ascii "New game"
 	.db 0x00
-___str_35:
+___str_39:
 	.ascii "Credits"
 	.db 0x00
-___str_36:
+___str_40:
 	.ascii "Quit"
 	.db 0x00
-___str_37:
+___str_41:
 	.ascii "Railways"
 	.db 0x00
-___str_38:
+___str_42:
 	.db 0x00
-___str_39:
+___str_43:
 	.ascii "Trewdbal  Productions 2016"
 	.db 0x00
 	.area _CODE
