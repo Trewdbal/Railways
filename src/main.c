@@ -8,47 +8,6 @@ extern const u8 paletteMenusM1[];
 extern const u8 paletteMenusM2[];
 extern const u8 paletteTrains[];
 
-void drawTrain() 
-{
-	/*
-	// Video memory pointers
-	u8 *pvideo_s1;
-
-	//    cpct_clearScreen_f64(0);
-
-	pvideo_s1 = cpct_getScreenPtr(SCR_VMEM, 20, 80);
-
-	cpct_drawSprite(BB15000, pvideo_s1, BANNER_W, BANNER_H);
-
-	cpct_scanKeyboard_f();
-
-	do { cpct_scanKeyboard(); } while ( ! cpct_isAnyKeyPressed_f() );
-
-	cpct_drawSprite(BB27000, pvideo_s1, BANNER_W, BANNER_H);
-
-	do { cpct_scanKeyboard(); } while ( ! cpct_isAnyKeyPressed_f() );
-
-	cpct_drawSprite(BB63000, pvideo_s1, BANNER_W, BANNER_H);
-
-	do { cpct_scanKeyboard(); } while ( ! cpct_isAnyKeyPressed_f() );
-
-	cpct_drawSprite(BB67000, pvideo_s1, BANNER_W, BANNER_H);
-
-	do { cpct_scanKeyboard(); } while ( ! cpct_isAnyKeyPressed_f() );
-
-	cpct_drawSprite(RE44II, pvideo_s1, BANNER_W, BANNER_H);
-
-	do { cpct_scanKeyboard(); } while ( ! cpct_isAnyKeyPressed_f() );
-
-	cpct_drawStringM0 ("BB15000", SCR_VMEM, 0, 1);
-	while(1)
-	{
-	}
-
-*/
-}
-
-
 void main(void)
 {
 	u16 firmware;
@@ -73,6 +32,9 @@ void main(void)
 	cpct_fw2hw(paletteMenusM1, 4);
 
 	cpct_setBorder(paletteTrains[12]);
+
+	putM0();
+	drawTrain();
 
 	putM2();
 

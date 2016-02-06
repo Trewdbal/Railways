@@ -10,20 +10,22 @@ Symbol Table
     _CURSOR_MODE                                                   **** GX
     __divsint                                                      **** GX
     __moduchar                                                     **** GX
+    __moduint                                                      **** GX
     _cpct_count2VSYNC                                              **** GX
     _cpct_drawSolidBox                                             **** GX
     _cpct_drawSprite                                               **** GX
     _cpct_getBit                                                   **** GX
     _cpct_getRandomUniform_u8_f                                    **** GX
+    _cpct_getRandom_mxor_u16                                       **** GX
     _cpct_getRandom_mxor_u8                                        **** GX
     _cpct_getScreenPtr                                             **** GX
     _cpct_memset                                                   **** GX
     _cpct_px2byteM1                                                **** GX
     _cpct_setSeed_mxor                                             **** GX
   0 _drawCursor                                                    0000 GR
-  0 _drawScrolls                                                   0996 GR
-  0 _drawTile                                                      076E GR
-  0 _drawWorld                                                     0A2F GR
+  0 _drawScrolls                                                   08AF GR
+  0 _drawTile                                                      0687 GR
+  0 _drawWorld                                                     0948 GR
     _dwellings1                                                    **** GX
     _dwellings2                                                    **** GX
     _dwellings3                                                    **** GX
@@ -60,7 +62,7 @@ Hexadecimal [16-Bits]
 
 Area Table
 
-   0 _CODE                                      size  A68   flags    0
+   0 _CODE                                      size  981   flags    0
    1 _DATA                                      size    0   flags    0
    2 _INITIALIZED                               size    0   flags    0
    3 _DABS                                      size    0   flags    8

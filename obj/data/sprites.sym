@@ -7,6 +7,7 @@ Symbol Table
     .__.ABS.                                                    =  0000 G
     .__.CPU.                                                    =  0000 L
     .__.H$L.                                                    =  0000 L
+  0 _BB63000                                                       09A0 GR
   0 _dwellings1                                                    00C0 GR
   0 _dwellings2                                                    0100 GR
   0 _dwellings3                                                    0140 GR
@@ -15,7 +16,9 @@ Symbol Table
   0 _forest                                                        0080 GR
   0 _grass1                                                        0000 GR
   0 _grass2                                                        0040 GR
+  0 _l141P                                                         0810 GR
   0 _livestock                                                     0240 GR
+  0 _lock                                                          0680 GR
   0 _rail_en                                                       0480 GR
   0 _rail_es                                                       04C0 GR
   0 _rail_ew                                                       0400 GR
@@ -39,7 +42,7 @@ Hexadecimal [16-Bits]
 
 Area Table
 
-   0 _CODE                                      size  680   flags    0
+   0 _CODE                                      size  B30   flags    0
    1 _DATA                                      size    0   flags    0
    2 _INITIALIZED                               size    0   flags    0
    3 _DABS                                      size    0   flags    8

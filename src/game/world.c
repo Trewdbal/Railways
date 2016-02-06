@@ -94,7 +94,6 @@ void generateWorld()
 {
 	int ix;
 	int iy;
-	int shift;
 	u8 p_forest[8];
 	u8 p_cities[2];
 
@@ -111,7 +110,7 @@ void generateWorld()
 	// Forests
 	for(ix=0; ix<NBFOREST; ix++)
 	{
-		iy = cpct_rand()*15;
+		iy = cpct_rand16()%(WIDTH*HEIGHT);
 
 		switch(cpct_rand()%4)
 		{
@@ -164,33 +163,21 @@ void generateWorld()
 
 	for(ix=0; ix<NBFARM; ix++)
 	{
-		iy = cpct_rand()*15; // (WIDTH*HEIGHT)/255;
-
-		shift = cpct_rand()%10;
-		shift=iy-shift+5;
-
-		if(shift>0 && shift<WIDTH*HEIGHT)
-			p_world[shift] = cpct_rand()%2+5;
+		iy = cpct_rand16()%(WIDTH*HEIGHT);
+		p_world[iy] = cpct_rand()%2+5;
 	}
 
 	// Cities
 
 	for(ix=0; ix<NBURBAN; ix++)
 	{
-		iy = cpct_rand()*15; // (WIDTH*HEIGHT)/255;
-
-		shift = cpct_rand()%10;
-		shift=iy-shift+5;
-
-		if(shift>0 && shift<WIDTH*HEIGHT)
-			p_world[shift] = cpct_rand()%3+2;
+		iy = cpct_rand16()%(WIDTH*HEIGHT);
+		p_world[iy] = cpct_rand()%3+2;
 	}
 
 	for(ix=0; ix<NBURBAN; ix++)
 	{
-		iy = cpct_rand()*15; // (WIDTH*HEIGHT)/255;
-		shift = cpct_rand()%10;
-		iy-=shift+5;
+		iy = cpct_rand16()%(WIDTH*HEIGHT);
 
 		switch(cpct_rand()%6)
 		{
@@ -232,13 +219,8 @@ void generateWorld()
 
 	for(ix=0; ix<NBLIVESTOCK; ix++)
 	{
-		iy = cpct_rand()*15; // (WIDTH*HEIGHT)/255;
-
-		shift = cpct_rand()%10;
-		shift=iy-shift+5;
-
-		if(shift>0 && shift<WIDTH*HEIGHT)
-			p_world[shift] = LIVESTOCK;
+		iy = cpct_rand16()%(WIDTH*HEIGHT);
+		p_world[iy] = LIVESTOCK;
 	}
 }
 
@@ -365,7 +347,5 @@ void drawWorld(u8 x_, u8 y_)
 
 	//  sprintf(buff, "%d", p_world[2] );
 	//	cpct_drawStringM1 (buff, SCR_VMEM, 0, 1);
-
-
 }
 
