@@ -1,18 +1,12 @@
-#define SCR_VMEM  (u8*)0xC000
-
-#define BANNER_W 40
-#define BANNER_H 40
 
 #include <cpctelera.h>
-#include <string.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <math.h>
+#include "data/defs.h"
+#include "gui/gui.h"
+#include "game/game.h"
 
-#include "includes/img.h"
-#include "includes/gui.h"
-#include "includes/world.h"
-#include "includes/game.h"
+extern const u8 paletteMenusM1[];
+extern const u8 paletteMenusM2[];
+extern const u8 paletteTrains[];
 
 void drawTrain() 
 {

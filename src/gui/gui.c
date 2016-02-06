@@ -1,3 +1,5 @@
+#include "gui.h"
+
 void putM0(void)
 {
 	cpct_setVideoMode(0);
@@ -194,4 +196,3 @@ u8 drawWindow(char **text, u8 nbLine, u8 button)
 
 	return valueReturn;
 }
-

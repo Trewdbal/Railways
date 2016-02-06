@@ -1,3 +1,5 @@
+#include "game.h"
+
 void windowInfoTile(u8 x, u8 y)
 {
 	const char *txtWindowInfoTile[4];

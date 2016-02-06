@@ -1,0 +1,51 @@
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 1.
+Hexadecimal [16-Bits]
+
+Symbol Table
+
+    .__.$$$.                                                    =  2710 L
+    .__.ABS.                                                    =  0000 G
+    .__.CPU.                                                    =  0000 L
+    .__.H$L.                                                    =  0000 L
+  0 _dwellings1                                                    00C0 GR
+  0 _dwellings2                                                    0100 GR
+  0 _dwellings3                                                    0140 GR
+  0 _farm1                                                         01C0 GR
+  0 _farm2                                                         0200 GR
+  0 _forest                                                        0080 GR
+  0 _grass1                                                        0000 GR
+  0 _grass2                                                        0040 GR
+  0 _livestock                                                     0240 GR
+  0 _rail_en                                                       0480 GR
+  0 _rail_es                                                       04C0 GR
+  0 _rail_ew                                                       0400 GR
+  0 _rail_ew_n                                                     0580 GR
+  0 _rail_ew_s                                                     05C0 GR
+  0 _rail_ns                                                       0440 GR
+  0 _rail_ns_e                                                     0640 GR
+  0 _rail_ns_w                                                     0600 GR
+  0 _rail_wn                                                       0500 GR
+  0 _rail_ws                                                       0540 GR
+  0 _station_large_ew                                              03C0 GR
+  0 _station_large_ns                                              0380 GR
+  0 _station_medium_ew                                             0340 GR
+  0 _station_medium_ns                                             0300 GR
+  0 _station_small_ew                                              02C0 GR
+  0 _station_small_ns                                              0280 GR
+  0 _water                                                         0180 GR
+
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 2.
+Hexadecimal [16-Bits]
+
+Area Table
+
+   0 _CODE                                      size  680   flags    0
+   1 _DATA                                      size    0   flags    0
+   2 _INITIALIZED                               size    0   flags    0
+   3 _DABS                                      size    0   flags    8
+   4 _HOME                                      size    0   flags    0
+   5 _GSINIT                                    size    0   flags    0
+   6 _GSFINAL                                   size    0   flags    0
+   7 _INITIALIZER                               size    0   flags    0
+   8 _CABS                                      size    0   flags    8
+

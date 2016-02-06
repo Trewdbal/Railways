@@ -1,0 +1,72 @@
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 1.
+Hexadecimal [16-Bits]
+
+Symbol Table
+
+    .__.$$$.                                                    =  2710 L
+    .__.ABS.                                                    =  0000 G
+    .__.CPU.                                                    =  0000 L
+    .__.H$L.                                                    =  0000 L
+    _CURSOR_MODE                                                   **** GX
+    __divsint                                                      **** GX
+    __moduchar                                                     **** GX
+    _cpct_count2VSYNC                                              **** GX
+    _cpct_drawSolidBox                                             **** GX
+    _cpct_drawSprite                                               **** GX
+    _cpct_getBit                                                   **** GX
+    _cpct_getRandomUniform_u8_f                                    **** GX
+    _cpct_getRandom_mxor_u8                                        **** GX
+    _cpct_getScreenPtr                                             **** GX
+    _cpct_memset                                                   **** GX
+    _cpct_px2byteM1                                                **** GX
+    _cpct_setSeed_mxor                                             **** GX
+  0 _drawCursor                                                    0000 GR
+  0 _drawScrolls                                                   0996 GR
+  0 _drawTile                                                      076E GR
+  0 _drawWorld                                                     0A2F GR
+    _dwellings1                                                    **** GX
+    _dwellings2                                                    **** GX
+    _dwellings3                                                    **** GX
+    _farm1                                                         **** GX
+    _farm2                                                         **** GX
+    _forest                                                        **** GX
+  0 _generateWorld                                                 0332 GR
+    _grass1                                                        **** GX
+    _grass2                                                        **** GX
+    _livestock                                                     **** GX
+    _p_world                                                       **** GX
+  0 _patternTile                                                   0235 GR
+    _rail_en                                                       **** GX
+    _rail_es                                                       **** GX
+    _rail_ew                                                       **** GX
+    _rail_ew_n                                                     **** GX
+    _rail_ew_s                                                     **** GX
+    _rail_ns                                                       **** GX
+    _rail_ns_e                                                     **** GX
+    _rail_ns_w                                                     **** GX
+    _rail_wn                                                       **** GX
+    _rail_ws                                                       **** GX
+    _station_large_ew                                              **** GX
+    _station_large_ns                                              **** GX
+    _station_medium_ew                                             **** GX
+    _station_medium_ns                                             **** GX
+    _station_small_ew                                              **** GX
+    _station_small_ns                                              **** GX
+    _water                                                         **** GX
+
+
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 2.
+Hexadecimal [16-Bits]
+
+Area Table
+
+   0 _CODE                                      size  A68   flags    0
+   1 _DATA                                      size    0   flags    0
+   2 _INITIALIZED                               size    0   flags    0
+   3 _DABS                                      size    0   flags    8
+   4 _HOME                                      size    0   flags    0
+   5 _GSINIT                                    size    0   flags    0
+   6 _GSFINAL                                   size    0   flags    0
+   7 _INITIALIZER                               size    0   flags    0
+   8 _CABS                                      size    0   flags    8
+

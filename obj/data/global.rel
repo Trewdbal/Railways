@@ -1,0 +1,45 @@
+XL2
+H 9 areas 6 global symbols
+M global
+O -mz80
+S .__.ABS. Def0000
+A _CODE size 16 flags 0 addr 0
+S _paletteMenusM1 Def0010
+S _paletteMenusM2 Def0014
+S _paletteTrains Def0000
+A _DATA size F00 flags 0 addr 0
+S _p_world Def0000
+A _INITIALIZED size 1 flags 0 addr 0
+S _CURSOR_MODE Def0000
+A _DABS size 0 flags 8 addr 0
+A _HOME size 0 flags 0 addr 0
+A _GSINIT size 0 flags 0 addr 0
+A _GSFINAL size 0 flags 0 addr 0
+A _INITIALIZER size 1 flags 0 addr 0
+A _CABS size 0 flags 8 addr 0
+T 00 00
+R 00 00 01 00
+T 00 00
+R 00 00 01 00
+T 00 00
+R 00 00 02 00
+T 00 00
+R 00 00 02 00
+T 00 00
+R 00 00 00 00
+T 00 00 00 1A 0D 03 0F 06 10 09 0A 14 02 01 13 18
+R 00 00 00 00
+T 0E 00 0B 19
+R 00 00 00 00
+T 10 00
+R 00 00 00 00
+T 10 00 00 0F 09 16
+R 00 00 00 00
+T 14 00
+R 00 00 00 00
+T 14 00 00 14
+R 00 00 00 00
+T 00 00
+R 00 00 07 00
+T 00 00 00
+R 00 00 07 00

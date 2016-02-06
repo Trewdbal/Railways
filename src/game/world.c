@@ -1,3 +1,5 @@
+#include "world.h"
+
 void drawCursor(u8 x, u8 y, u8 color)
 {
 	u8 *p_video;
@@ -366,3 +368,4 @@ void drawWorld(u8 x_, u8 y_)
 
 
 }
+

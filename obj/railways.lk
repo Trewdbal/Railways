@@ -1,5 +1,5 @@
 -mjwx
--i obj/railways2.ihx
+-i obj/railways.ihx
 -b _CODE = 0x4000
 -b _DATA = 0x0000
 -u
@@ -8,5 +8,10 @@
 -l /home/arnaud/Téléchargements/cpctelera-master/cpctelera/cpctelera.lib
 -l z80
 obj/main.rel
+obj/game/game.rel
+obj/game/world.rel
+obj/gui/gui.rel
+obj/data/global.rel
+obj/data/sprites.rel
 
 -e
