@@ -96,21 +96,22 @@ void generateWorld()
 	u8 p_forest[8];
 	u8 p_cities[2];
 
-	//	Grass();
+	// Initialize random number generator;
+	cpct_srand((u32)cpct_count2VSYNC());
 
-	cpct_setRandomSeedUniform_u8(0);
+	//	Grass();
 
 	for(iy=0; iy<HEIGHT*WIDTH;iy++)
 	{
-		p_world[iy] = cpct_getRandomUniform_u8_f(0)%2;
+		p_world[iy] = cpct_rand()%2;
 	}
 
 	// Forests
 	for(ix=0; ix<NBFOREST; ix++)
 	{
-		iy = cpct_getRandomUniform_u8_f((cpct_count2VSYNC ()+ix)%256)*15;
+		iy = cpct_rand()*15;
 
-		switch(cpct_getRandomUniform_u8_f((cpct_count2VSYNC ()+ix)%256)%4)
+		switch(cpct_rand()%4)
 		{
 			case 0:
 				p_forest[0] = 0b10000100;
@@ -158,42 +159,38 @@ void generateWorld()
 	}
 
 	// Farms
-	cpct_setRandomSeedUniform_u8(1);
 
 	for(ix=0; ix<NBFARM; ix++)
 	{
-		iy = cpct_getRandomUniform_u8_f(cpct_count2VSYNC ()%256)*15; // (WIDTH*HEIGHT)/255;
+		iy = cpct_rand()*15; // (WIDTH*HEIGHT)/255;
 
-		shift = cpct_getRandomUniform_u8_f(cpct_count2VSYNC ()%256)%10;
+		shift = cpct_rand()%10;
 		shift=iy-shift+5;
 
 		if(shift>0 && shift<WIDTH*HEIGHT)
-			p_world[shift] = (u8)cpct_getRandomUniform_u8_f(cpct_count2VSYNC ()%256)%2+5;
+			p_world[shift] = cpct_rand()%2+5;
 	}
 
 	// Cities
 
-	cpct_setRandomSeedUniform_u8(2);
-
 	for(ix=0; ix<NBURBAN; ix++)
 	{
-		iy = cpct_getRandomUniform_u8_f(0)*15; // (WIDTH*HEIGHT)/255;
+		iy = cpct_rand()*15; // (WIDTH*HEIGHT)/255;
 
-		shift = cpct_getRandomUniform_u8_f(0)%10;
+		shift = cpct_rand()%10;
 		shift=iy-shift+5;
 
 		if(shift>0 && shift<WIDTH*HEIGHT)
-			p_world[shift] = (u8)cpct_getRandomUniform_u8_f(0)%3+2;
+			p_world[shift] = cpct_rand()%3+2;
 	}
 
-	cpct_setRandomSeedUniform_u8(3);
 	for(ix=0; ix<NBURBAN; ix++)
 	{
-		iy = cpct_getRandomUniform_u8_f((cpct_count2VSYNC ()+ix)%256)*15; // (WIDTH*HEIGHT)/255;
-		shift = cpct_getRandomUniform_u8_f((cpct_count2VSYNC ()-shift)%256)%10;
+		iy = cpct_rand()*15; // (WIDTH*HEIGHT)/255;
+		shift = cpct_rand()%10;
 		iy-=shift+5;
 
-		switch(cpct_getRandomUniform_u8_f((cpct_count2VSYNC ()+ix)%256)%6)
+		switch(cpct_rand()%6)
 		{
 			case 0:
 			p_cities[0] = 0b01110010; // 01001110;
@@ -231,13 +228,11 @@ void generateWorld()
 
 	// Livestock
 
-	cpct_setRandomSeedUniform_u8(4);
-
 	for(ix=0; ix<NBLIVESTOCK; ix++)
 	{
-		iy = cpct_getRandomUniform_u8_f(cpct_count2VSYNC ()%256)*15; // (WIDTH*HEIGHT)/255;
+		iy = cpct_rand()*15; // (WIDTH*HEIGHT)/255;
 
-		shift = cpct_getRandomUniform_u8_f(cpct_count2VSYNC ()%256)%10;
+		shift = cpct_rand()%10;
 		shift=iy-shift+5;
 
 		if(shift>0 && shift<WIDTH*HEIGHT)
