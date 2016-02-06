@@ -33,9 +33,6 @@ void main(void)
 
 	cpct_setBorder(paletteTrains[12]);
 
-	putM0();
-	drawTrain();
-
 	putM2();
 
 	do{

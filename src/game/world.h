@@ -7,6 +7,7 @@
 
 extern u8 pworld[];
 extern u8 CURSOR_MODE;
+extern u8 locDelocked;
 
 extern const u8 paletteMenusM1[];
 extern const u8 paletteMenusM2[];

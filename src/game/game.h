@@ -5,6 +5,7 @@
 #include "../data/defs.h"
 #include "../gui/gui.h"
 #include "world.h"
+#include "depot.h"
 
 extern u8 p_world[];
 extern u8 CURSOR_MODE;

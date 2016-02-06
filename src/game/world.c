@@ -97,6 +97,9 @@ void generateWorld()
 	u8 p_forest[8];
 	u8 p_cities[2];
 
+	locDelocked = 1;
+	CURSOR_MODE = NONE;
+
 	// Initialize random number generator;
 	cpct_srand((u32)cpct_count2VSYNC());
 
@@ -145,7 +148,7 @@ void generateWorld()
 				p_forest[7] = 0b00011000;
 				break;
 			case 3:
-				p_forest[0] = 0b11000000 , 
+				p_forest[0] = 0b11000000; 
 				p_forest[1] = 0b11100111;
 				p_forest[2] = 0b01111110;
 				p_forest[3] = 0b01111110;

@@ -8,6 +8,7 @@
 -l /home/arnaud/Téléchargements/cpctelera-master/cpctelera/cpctelera.lib
 -l z80
 obj/main.rel
+obj/game/depot.rel
 obj/game/game.rel
 obj/game/world.rel
 obj/gui/gui.rel

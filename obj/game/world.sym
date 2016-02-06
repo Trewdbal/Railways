@@ -23,9 +23,9 @@ Symbol Table
     _cpct_px2byteM1                                                **** GX
     _cpct_setSeed_mxor                                             **** GX
   0 _drawCursor                                                    0000 GR
-  0 _drawScrolls                                                   08AF GR
-  0 _drawTile                                                      0687 GR
-  0 _drawWorld                                                     0948 GR
+  0 _drawScrolls                                                   08C3 GR
+  0 _drawTile                                                      069B GR
+  0 _drawWorld                                                     095C GR
     _dwellings1                                                    **** GX
     _dwellings2                                                    **** GX
     _dwellings3                                                    **** GX
@@ -36,6 +36,7 @@ Symbol Table
     _grass1                                                        **** GX
     _grass2                                                        **** GX
     _livestock                                                     **** GX
+    _locDelocked                                                   **** GX
     _p_world                                                       **** GX
   0 _patternTile                                                   0235 GR
     _rail_en                                                       **** GX
@@ -62,7 +63,7 @@ Hexadecimal [16-Bits]
 
 Area Table
 
-   0 _CODE                                      size  981   flags    0
+   0 _CODE                                      size  995   flags    0
    1 _DATA                                      size    0   flags    0
    2 _INITIALIZED                               size    0   flags    0
    3 _DABS                                      size    0   flags    8

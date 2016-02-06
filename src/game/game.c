@@ -10,8 +10,8 @@ void windowInfoTile(u8 x, u8 y)
 		case GRASS2:
 			txtWindowInfoTile[0] = "Grassland";
 			txtWindowInfoTile[1] = "";
-			txtWindowInfoTile[2] = "Production: nothing";
-			txtWindowInfoTile[3] = "Demand: nothing";
+			txtWindowInfoTile[2] = "Production: Nothing";
+			txtWindowInfoTile[3] = "Demand: Nothing";
 			break;
 		case DWELLINGS1:
 		case DWELLINGS2:
@@ -130,11 +130,17 @@ void menuTile(u8 x, u8 y)
 
 			menuChoice=6;
 		}
+		else if(menuChoice==4)
+		{
+			railroadDepot();
+			menuChoice=6;
+		}
 
 	}
-	while(menuChoice!=6);
 
-	putM1();
+while(menuChoice!=6);
+
+putM1();
 
 }
 
