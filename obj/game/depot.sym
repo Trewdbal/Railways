@@ -7,10 +7,13 @@ Symbol Table
     .__.ABS.                                                    =  0000 G
     .__.CPU.                                                    =  0000 L
     .__.H$L.                                                    =  0000 L
+    ___fs2uchar                                                    **** GX
+    ___fsadd                                                       **** GX
+    ___fsmul                                                       **** GX
   0 ___str_0                                                       006A R
   0 ___str_1                                                       007B R
-    __moduchar                                                     **** GX
-  0 _buyLocomotive                                                 0089 GR
+    ___uchar2fs                                                    **** GX
+  0 _buyLocomotive                                                 01D9 GR
     _cpct_drawSolidBox                                             **** GX
     _cpct_drawSprite                                               **** GX
     _cpct_getScreenPtr                                             **** GX
@@ -18,7 +21,9 @@ Symbol Table
     _cpct_memset                                                   **** GX
     _cpct_px2byteM0                                                **** GX
     _cpct_scanKeyboard                                             **** GX
+  0 _drawLocomotive                                                0089 GR
     _drawMenu                                                      **** GX
+    _floorf                                                        **** GX
     _l141P                                                         **** GX
     _locDelocked                                                   **** GX
     _lock                                                          **** GX
@@ -26,13 +31,12 @@ Symbol Table
     _putM2                                                         **** GX
   0 _railroadDepot                                                 0000 GR
 
-
 ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 2.
 Hexadecimal [16-Bits]
 
 Area Table
 
-   0 _CODE                                      size  176   flags    0
+   0 _CODE                                      size  2A6   flags    0
    1 _DATA                                      size    0   flags    0
    2 _INITIALIZED                               size    0   flags    0
    3 _DABS                                      size    0   flags    8

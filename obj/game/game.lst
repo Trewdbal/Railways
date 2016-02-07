@@ -1,7 +1,7 @@
                               1 ;--------------------------------------------------------
                               2 ; File Created by SDCC : free open source ANSI-C Compiler
                               3 ; Version 3.5.4 #9329 (Linux)
-                              4 ; This file was generated Sat Feb  6 21:51:25 2016
+                              4 ; This file was generated Sun Feb  7 16:09:14 2016
                               5 ;--------------------------------------------------------
                               6 	.module game
                               7 	.optsdcc -mz80
@@ -556,7 +556,7 @@
    0319 39            [11]  525 	add	hl,sp
    031A F9            [ 6]  526 	ld	sp,hl
                             527 ;src/game/game.c:92: const char *txtMenuTile[] = { 
-   031B 21 06 00      [10]  528 	ld	hl,#0x0006
+   031B 21 00 00      [10]  528 	ld	hl,#0x0000
    031E 39            [11]  529 	add	hl,sp
    031F 5D            [ 4]  530 	ld	e,l
    0320 54            [ 4]  531 	ld	d,h
@@ -602,7 +602,7 @@
    0360 23            [ 6]  571 	inc	hl
    0361 70            [ 7]  572 	ld	(hl),b
                             573 ;src/game/game.c:102: const char *txtWindowDestroy[] = { 
-   0362 21 00 00      [10]  574 	ld	hl,#0x0000
+   0362 21 0E 00      [10]  574 	ld	hl,#0x000E
    0365 39            [11]  575 	add	hl,sp
    0366 4D            [ 4]  576 	ld	c,l
    0367 44            [ 4]  577 	ld	b,h
@@ -611,19 +611,19 @@
    036B 36s04         [10]  580 	ld	(hl),#>(___str_27)
    036D 21 02 00      [10]  581 	ld	hl,#0x0002
    0370 09            [11]  582 	add	hl,bc
-   0371 DD 75 FE      [19]  583 	ld	-2 (ix),l
-   0374 DD 74 FF      [19]  584 	ld	-1 (ix),h
-   0377 DD 6E FE      [19]  585 	ld	l,-2 (ix)
-   037A DD 66 FF      [19]  586 	ld	h,-1 (ix)
+   0371 DD 75 FA      [19]  583 	ld	-6 (ix),l
+   0374 DD 74 FB      [19]  584 	ld	-5 (ix),h
+   0377 DD 6E FA      [19]  585 	ld	l,-6 (ix)
+   037A DD 66 FB      [19]  586 	ld	h,-5 (ix)
    037D 36rBE         [10]  587 	ld	(hl),#<(___str_28)
    037F 23            [ 6]  588 	inc	hl
    0380 36s04         [10]  589 	ld	(hl),#>(___str_28)
    0382 21 04 00      [10]  590 	ld	hl,#0x0004
    0385 09            [11]  591 	add	hl,bc
-   0386 DD 75 FE      [19]  592 	ld	-2 (ix),l
-   0389 DD 74 FF      [19]  593 	ld	-1 (ix),h
-   038C DD 6E FE      [19]  594 	ld	l,-2 (ix)
-   038F DD 66 FF      [19]  595 	ld	h,-1 (ix)
+   0386 DD 75 FA      [19]  592 	ld	-6 (ix),l
+   0389 DD 74 FB      [19]  593 	ld	-5 (ix),h
+   038C DD 6E FA      [19]  594 	ld	l,-6 (ix)
+   038F DD 66 FB      [19]  595 	ld	h,-5 (ix)
    0392 36rBF         [10]  596 	ld	(hl),#<(___str_29)
    0394 23            [ 6]  597 	inc	hl
    0395 36s04         [10]  598 	ld	(hl),#>(___str_29)
@@ -647,16 +647,16 @@
    03AB 29            [11]  616 	add	hl, hl
    03AC 29            [11]  617 	add	hl, hl
    03AD D1            [10]  618 	pop	de
-   03AE DD 75 FE      [19]  619 	ld	-2 (ix),l
-   03B1 DD 74 FF      [19]  620 	ld	-1 (ix),h
-   03B4 DD 71 FC      [19]  621 	ld	-4 (ix),c
-   03B7 DD 70 FD      [19]  622 	ld	-3 (ix),b
-   03BA DD 73 FA      [19]  623 	ld	-6 (ix),e
-   03BD DD 72 FB      [19]  624 	ld	-5 (ix),d
+   03AE DD 75 FA      [19]  619 	ld	-6 (ix),l
+   03B1 DD 74 FB      [19]  620 	ld	-5 (ix),h
+   03B4 DD 71 FE      [19]  621 	ld	-2 (ix),c
+   03B7 DD 70 FF      [19]  622 	ld	-1 (ix),b
+   03BA DD 73 FC      [19]  623 	ld	-4 (ix),e
+   03BD DD 72 FD      [19]  624 	ld	-3 (ix),d
    03C0                     625 00117$:
                             626 ;src/game/game.c:112: menuChoice = drawMenu(txtMenuTile,7);
-   03C0 DD 5E FA      [19]  627 	ld	e,-6 (ix)
-   03C3 DD 56 FB      [19]  628 	ld	d,-5 (ix)
+   03C0 DD 5E FC      [19]  627 	ld	e,-4 (ix)
+   03C3 DD 56 FD      [19]  628 	ld	d,-3 (ix)
    03C6 3E 07         [ 7]  629 	ld	a,#0x07
    03C8 F5            [11]  630 	push	af
    03C9 33            [ 6]  631 	inc	sp
@@ -705,8 +705,8 @@
    03FE D6 03         [ 7]  674 	sub	a, #0x03
    0400 20 29         [12]  675 	jr	NZ,00106$
                             676 ;src/game/game.c:128: if(	drawWindow(txtWindowDestroy,3,1) == 1)
-   0402 DD 5E FC      [19]  677 	ld	e,-4 (ix)
-   0405 DD 56 FD      [19]  678 	ld	d,-3 (ix)
+   0402 DD 5E FE      [19]  677 	ld	e,-2 (ix)
+   0405 DD 56 FF      [19]  678 	ld	d,-1 (ix)
    0408 21 03 01      [10]  679 	ld	hl,#0x0103
    040B E5            [11]  680 	push	hl
    040C D5            [11]  681 	push	de
@@ -718,8 +718,8 @@
                             687 ;src/game/game.c:129: p_world[x+y*WIDTH] = GRASS1;
    0415 DD 6E 04      [19]  688 	ld	l,4 (ix)
    0418 26 00         [ 7]  689 	ld	h,#0x00
-   041A DD 5E FE      [19]  690 	ld	e,-2 (ix)
-   041D DD 56 FF      [19]  691 	ld	d,-1 (ix)
+   041A DD 5E FA      [19]  690 	ld	e,-6 (ix)
+   041D DD 56 FB      [19]  691 	ld	d,-5 (ix)
    0420 19            [11]  692 	add	hl,de
    0421 11r00r00      [10]  693 	ld	de,#_p_world
    0424 19            [11]  694 	add	hl,de
@@ -804,19 +804,19 @@
    04D5 39            [11]  757 	add	hl,sp
    04D6 F9            [ 6]  758 	ld	sp,hl
                             759 ;src/game/game.c:150: int ulx = 0;
-   04D7 DD 36 F2 00   [19]  760 	ld	-14 (ix),#0x00
-   04DB DD 36 F3 00   [19]  761 	ld	-13 (ix),#0x00
+   04D7 DD 36 F4 00   [19]  760 	ld	-12 (ix),#0x00
+   04DB DD 36 F5 00   [19]  761 	ld	-11 (ix),#0x00
                             762 ;src/game/game.c:151: int uly = 0;
-   04DF DD 36 F6 00   [19]  763 	ld	-10 (ix),#0x00
-   04E3 DD 36 F7 00   [19]  764 	ld	-9 (ix),#0x00
+   04DF DD 36 F7 00   [19]  763 	ld	-9 (ix),#0x00
+   04E3 DD 36 F8 00   [19]  764 	ld	-8 (ix),#0x00
                             765 ;src/game/game.c:152: int xCursor = 10;
-   04E7 DD 36 F0 0A   [19]  766 	ld	-16 (ix),#0x0A
-   04EB DD 36 F1 00   [19]  767 	ld	-15 (ix),#0x00
+   04E7 DD 36 F9 0A   [19]  766 	ld	-7 (ix),#0x0A
+   04EB DD 36 FA 00   [19]  767 	ld	-6 (ix),#0x00
                             768 ;src/game/game.c:153: int yCursor = 6;
-   04EF DD 36 F4 06   [19]  769 	ld	-12 (ix),#0x06
-   04F3 DD 36 F5 00   [19]  770 	ld	-11 (ix),#0x00
+   04EF DD 36 F2 06   [19]  769 	ld	-14 (ix),#0x06
+   04F3 DD 36 F3 00   [19]  770 	ld	-13 (ix),#0x00
                             771 ;src/game/game.c:155: u8 exit=0;
-   04F7 DD 36 F8 00   [19]  772 	ld	-8 (ix),#0x00
+   04F7 DD 36 F6 00   [19]  772 	ld	-10 (ix),#0x00
                             773 ;src/game/game.c:158: drawBoxM2(50, 50);
    04FB 21 32 00      [10]  774 	ld	hl,#0x0032
    04FE E5            [11]  775 	push	hl
@@ -877,13 +877,13 @@
    054F CDr00r00      [17]  830 	call	_cpct_isKeyPressed
    0552 DD 75 FE      [19]  831 	ld	-2 (ix),l
                             832 ;src/game/game.c:173: drawTile(ulx, uly, xCursor, yCursor);
-   0555 DD 7E F4      [19]  833 	ld	a,-12 (ix)
+   0555 DD 7E F2      [19]  833 	ld	a,-14 (ix)
    0558 DD 77 FF      [19]  834 	ld	-1 (ix),a
-   055B DD 7E F0      [19]  835 	ld	a,-16 (ix)
+   055B DD 7E F9      [19]  835 	ld	a,-7 (ix)
    055E DD 77 FD      [19]  836 	ld	-3 (ix),a
-   0561 DD 7E F6      [19]  837 	ld	a,-10 (ix)
+   0561 DD 7E F7      [19]  837 	ld	a,-9 (ix)
    0564 DD 77 FC      [19]  838 	ld	-4 (ix),a
-   0567 DD 7E F2      [19]  839 	ld	a,-14 (ix)
+   0567 DD 7E F4      [19]  839 	ld	a,-12 (ix)
    056A DD 77 FB      [19]  840 	ld	-5 (ix),a
                             841 ;src/game/game.c:171: if ( cpct_isKeyPressed(Key_CursorUp) )
    056D DD 7E FE      [19]  842 	ld	a,-2 (ix)
@@ -906,33 +906,33 @@
    058B F1            [10]  859 	pop	af
    058C F1            [10]  860 	pop	af
                             861 ;src/game/game.c:175: yCursor-=1;
-   058D DD 6E F4      [19]  862 	ld	l,-12 (ix)
-   0590 DD 66 F5      [19]  863 	ld	h,-11 (ix)
+   058D DD 6E F2      [19]  862 	ld	l,-14 (ix)
+   0590 DD 66 F3      [19]  863 	ld	h,-13 (ix)
    0593 2B            [ 6]  864 	dec	hl
-   0594 DD 75 F4      [19]  865 	ld	-12 (ix),l
-   0597 DD 74 F5      [19]  866 	ld	-11 (ix),h
+   0594 DD 75 F2      [19]  865 	ld	-14 (ix),l
+   0597 DD 74 F3      [19]  866 	ld	-13 (ix),h
                             867 ;src/game/game.c:178: if(yCursor<0)
-   059A DD CB F5 7E   [20]  868 	bit	7, -11 (ix)
+   059A DD CB F3 7E   [20]  868 	bit	7, -13 (ix)
    059E 28 35         [12]  869 	jr	Z,00210$
                             870 ;src/game/game.c:180: yCursor=0;
-   05A0 DD 36 F4 00   [19]  871 	ld	-12 (ix),#0x00
-   05A4 DD 36 F5 00   [19]  872 	ld	-11 (ix),#0x00
+   05A0 DD 36 F2 00   [19]  871 	ld	-14 (ix),#0x00
+   05A4 DD 36 F3 00   [19]  872 	ld	-13 (ix),#0x00
                             873 ;src/game/game.c:183: if(uly>0)
    05A8 AF            [ 4]  874 	xor	a, a
-   05A9 DD BE F6      [19]  875 	cp	a, -10 (ix)
-   05AC DD 9E F7      [19]  876 	sbc	a, -9 (ix)
+   05A9 DD BE F7      [19]  875 	cp	a, -9 (ix)
+   05AC DD 9E F8      [19]  876 	sbc	a, -8 (ix)
    05AF E2rB4r05      [10]  877 	jp	PO, 00387$
    05B2 EE 80         [ 7]  878 	xor	a, #0x80
    05B4                     879 00387$:
    05B4 F2rD5r05      [10]  880 	jp	P,00210$
                             881 ;src/game/game.c:185: uly-=1;
-   05B7 DD 6E F6      [19]  882 	ld	l,-10 (ix)
-   05BA DD 66 F7      [19]  883 	ld	h,-9 (ix)
+   05B7 DD 6E F7      [19]  882 	ld	l,-9 (ix)
+   05BA DD 66 F8      [19]  883 	ld	h,-8 (ix)
    05BD 2B            [ 6]  884 	dec	hl
-   05BE DD 75 F6      [19]  885 	ld	-10 (ix),l
-   05C1 DD 74 F7      [19]  886 	ld	-9 (ix),h
+   05BE DD 75 F7      [19]  885 	ld	-9 (ix),l
+   05C1 DD 74 F8      [19]  886 	ld	-8 (ix),h
                             887 ;src/game/game.c:173: drawTile(ulx, uly, xCursor, yCursor);
-   05C4 DD 7E F6      [19]  888 	ld	a,-10 (ix)
+   05C4 DD 7E F7      [19]  888 	ld	a,-9 (ix)
                             889 ;src/game/game.c:186: drawWorld(ulx, uly);
    05C7 DD 77 FC      [19]  890 	ld	-4 (ix), a
    05CA F5            [11]  891 	push	af
@@ -944,16 +944,16 @@
    05D4 F1            [10]  897 	pop	af
                             898 ;src/game/game.c:191: for(i=0; i<5000; i++) {}
    05D5                     899 00210$:
-   05D5 DD 36 F9 88   [19]  900 	ld	-7 (ix),#0x88
-   05D9 DD 36 FA 13   [19]  901 	ld	-6 (ix),#0x13
+   05D5 DD 36 F0 88   [19]  900 	ld	-16 (ix),#0x88
+   05D9 DD 36 F1 13   [19]  901 	ld	-15 (ix),#0x13
    05DD                     902 00186$:
-   05DD DD 6E F9      [19]  903 	ld	l,-7 (ix)
-   05E0 DD 66 FA      [19]  904 	ld	h,-6 (ix)
+   05DD DD 6E F0      [19]  903 	ld	l,-16 (ix)
+   05E0 DD 66 F1      [19]  904 	ld	h,-15 (ix)
    05E3 2B            [ 6]  905 	dec	hl
-   05E4 DD 75 F9      [19]  906 	ld	-7 (ix),l
-   05E7 DD 74 FA      [19]  907 	ld	-6 (ix), h
+   05E4 DD 75 F0      [19]  906 	ld	-16 (ix),l
+   05E7 DD 74 F1      [19]  907 	ld	-15 (ix), h
    05EA 7C            [ 4]  908 	ld	a, h
-   05EB DD B6 F9      [19]  909 	or	a,-7 (ix)
+   05EB DD B6 F0      [19]  909 	or	a,-16 (ix)
    05EE 20 ED         [12]  910 	jr	NZ,00186$
    05F0 C3r51r09      [10]  911 	jp	00180$
    05F3                     912 00179$:
@@ -980,38 +980,38 @@
    0615 F1            [10]  933 	pop	af
    0616 F1            [10]  934 	pop	af
                             935 ;src/game/game.c:197: yCursor+=1;
-   0617 DD 34 F4      [23]  936 	inc	-12 (ix)
+   0617 DD 34 F2      [23]  936 	inc	-14 (ix)
    061A 20 03         [12]  937 	jr	NZ,00388$
-   061C DD 34 F5      [23]  938 	inc	-11 (ix)
+   061C DD 34 F3      [23]  938 	inc	-13 (ix)
    061F                     939 00388$:
                             940 ;src/game/game.c:198: if(yCursor>NBTILE_H-1)
    061F 3E 0B         [ 7]  941 	ld	a,#0x0B
-   0621 DD BE F4      [19]  942 	cp	a, -12 (ix)
+   0621 DD BE F2      [19]  942 	cp	a, -14 (ix)
    0624 3E 00         [ 7]  943 	ld	a,#0x00
-   0626 DD 9E F5      [19]  944 	sbc	a, -11 (ix)
+   0626 DD 9E F3      [19]  944 	sbc	a, -13 (ix)
    0629 E2r2Er06      [10]  945 	jp	PO, 00389$
    062C EE 80         [ 7]  946 	xor	a, #0x80
    062E                     947 00389$:
    062E F2r61r06      [10]  948 	jp	P,00215$
                             949 ;src/game/game.c:200: yCursor=NBTILE_H-1;
-   0631 DD 36 F4 0B   [19]  950 	ld	-12 (ix),#0x0B
-   0635 DD 36 F5 00   [19]  951 	ld	-11 (ix),#0x00
+   0631 DD 36 F2 0B   [19]  950 	ld	-14 (ix),#0x0B
+   0635 DD 36 F3 00   [19]  951 	ld	-13 (ix),#0x00
                             952 ;src/game/game.c:201: if(uly<HEIGHT-NBTILE_H)
-   0639 DD 7E F6      [19]  953 	ld	a,-10 (ix)
+   0639 DD 7E F7      [19]  953 	ld	a,-9 (ix)
    063C D6 24         [ 7]  954 	sub	a, #0x24
-   063E DD 7E F7      [19]  955 	ld	a,-9 (ix)
+   063E DD 7E F8      [19]  955 	ld	a,-8 (ix)
    0641 17            [ 4]  956 	rla
    0642 3F            [ 4]  957 	ccf
    0643 1F            [ 4]  958 	rra
    0644 DE 80         [ 7]  959 	sbc	a, #0x80
    0646 30 19         [12]  960 	jr	NC,00215$
                             961 ;src/game/game.c:203: uly+=1;
-   0648 DD 34 F6      [23]  962 	inc	-10 (ix)
+   0648 DD 34 F7      [23]  962 	inc	-9 (ix)
    064B 20 03         [12]  963 	jr	NZ,00390$
-   064D DD 34 F7      [23]  964 	inc	-9 (ix)
+   064D DD 34 F8      [23]  964 	inc	-8 (ix)
    0650                     965 00390$:
                             966 ;src/game/game.c:173: drawTile(ulx, uly, xCursor, yCursor);
-   0650 DD 7E F6      [19]  967 	ld	a,-10 (ix)
+   0650 DD 7E F7      [19]  967 	ld	a,-9 (ix)
                             968 ;src/game/game.c:204: drawWorld(ulx, uly);
    0653 DD 77 FC      [19]  969 	ld	-4 (ix), a
    0656 F5            [11]  970 	push	af
@@ -1023,16 +1023,16 @@
    0660 F1            [10]  976 	pop	af
                             977 ;src/game/game.c:209: for(i=0; i<5000; i++) {}
    0661                     978 00215$:
-   0661 DD 36 F9 88   [19]  979 	ld	-7 (ix),#0x88
-   0665 DD 36 FA 13   [19]  980 	ld	-6 (ix),#0x13
+   0661 DD 36 F0 88   [19]  979 	ld	-16 (ix),#0x88
+   0665 DD 36 F1 13   [19]  980 	ld	-15 (ix),#0x13
    0669                     981 00189$:
-   0669 DD 6E F9      [19]  982 	ld	l,-7 (ix)
-   066C DD 66 FA      [19]  983 	ld	h,-6 (ix)
+   0669 DD 6E F0      [19]  982 	ld	l,-16 (ix)
+   066C DD 66 F1      [19]  983 	ld	h,-15 (ix)
    066F 2B            [ 6]  984 	dec	hl
-   0670 DD 75 F9      [19]  985 	ld	-7 (ix),l
-   0673 DD 74 FA      [19]  986 	ld	-6 (ix), h
+   0670 DD 75 F0      [19]  985 	ld	-16 (ix),l
+   0673 DD 74 F1      [19]  986 	ld	-15 (ix), h
    0676 7C            [ 4]  987 	ld	a, h
-   0677 DD B6 F9      [19]  988 	or	a,-7 (ix)
+   0677 DD B6 F0      [19]  988 	or	a,-16 (ix)
    067A 20 ED         [12]  989 	jr	NZ,00189$
    067C C3r51r09      [10]  990 	jp	00180$
    067F                     991 00176$:
@@ -1059,33 +1059,33 @@
    06A0 F1            [10] 1012 	pop	af
    06A1 F1            [10] 1013 	pop	af
                            1014 ;src/game/game.c:215: xCursor-=1;
-   06A2 DD 6E F0      [19] 1015 	ld	l,-16 (ix)
-   06A5 DD 66 F1      [19] 1016 	ld	h,-15 (ix)
+   06A2 DD 6E F9      [19] 1015 	ld	l,-7 (ix)
+   06A5 DD 66 FA      [19] 1016 	ld	h,-6 (ix)
    06A8 2B            [ 6] 1017 	dec	hl
-   06A9 DD 75 F0      [19] 1018 	ld	-16 (ix),l
-   06AC DD 74 F1      [19] 1019 	ld	-15 (ix),h
+   06A9 DD 75 F9      [19] 1018 	ld	-7 (ix),l
+   06AC DD 74 FA      [19] 1019 	ld	-6 (ix),h
                            1020 ;src/game/game.c:216: if(xCursor<0)
-   06AF DD CB F1 7E   [20] 1021 	bit	7, -15 (ix)
+   06AF DD CB FA 7E   [20] 1021 	bit	7, -6 (ix)
    06B3 28 38         [12] 1022 	jr	Z,00220$
                            1023 ;src/game/game.c:218: xCursor=0;
-   06B5 DD 36 F0 00   [19] 1024 	ld	-16 (ix),#0x00
-   06B9 DD 36 F1 00   [19] 1025 	ld	-15 (ix),#0x00
+   06B5 DD 36 F9 00   [19] 1024 	ld	-7 (ix),#0x00
+   06B9 DD 36 FA 00   [19] 1025 	ld	-6 (ix),#0x00
                            1026 ;src/game/game.c:219: if(ulx>0)
    06BD AF            [ 4] 1027 	xor	a, a
-   06BE DD BE F2      [19] 1028 	cp	a, -14 (ix)
-   06C1 DD 9E F3      [19] 1029 	sbc	a, -13 (ix)
+   06BE DD BE F4      [19] 1028 	cp	a, -12 (ix)
+   06C1 DD 9E F5      [19] 1029 	sbc	a, -11 (ix)
    06C4 E2rC9r06      [10] 1030 	jp	PO, 00391$
    06C7 EE 80         [ 7] 1031 	xor	a, #0x80
    06C9                    1032 00391$:
    06C9 F2rEDr06      [10] 1033 	jp	P,00220$
                            1034 ;src/game/game.c:221: ulx-=1;
-   06CC DD 6E F2      [19] 1035 	ld	l,-14 (ix)
-   06CF DD 66 F3      [19] 1036 	ld	h,-13 (ix)
+   06CC DD 6E F4      [19] 1035 	ld	l,-12 (ix)
+   06CF DD 66 F5      [19] 1036 	ld	h,-11 (ix)
    06D2 2B            [ 6] 1037 	dec	hl
-   06D3 DD 75 F2      [19] 1038 	ld	-14 (ix),l
-   06D6 DD 74 F3      [19] 1039 	ld	-13 (ix),h
+   06D3 DD 75 F4      [19] 1038 	ld	-12 (ix),l
+   06D6 DD 74 F5      [19] 1039 	ld	-11 (ix),h
                            1040 ;src/game/game.c:173: drawTile(ulx, uly, xCursor, yCursor);
-   06D9 DD 7E F2      [19] 1041 	ld	a,-14 (ix)
+   06D9 DD 7E F4      [19] 1041 	ld	a,-12 (ix)
    06DC DD 77 FB      [19] 1042 	ld	-5 (ix),a
                            1043 ;src/game/game.c:222: drawWorld(ulx, uly);
    06DF DD 7E FC      [19] 1044 	ld	a,-4 (ix)
@@ -1129,38 +1129,38 @@
    0719 F1            [10] 1082 	pop	af
    071A F1            [10] 1083 	pop	af
                            1084 ;src/game/game.c:233: xCursor+=1;
-   071B DD 34 F0      [23] 1085 	inc	-16 (ix)
+   071B DD 34 F9      [23] 1085 	inc	-7 (ix)
    071E 20 03         [12] 1086 	jr	NZ,00392$
-   0720 DD 34 F1      [23] 1087 	inc	-15 (ix)
+   0720 DD 34 FA      [23] 1087 	inc	-6 (ix)
    0723                    1088 00392$:
                            1089 ;src/game/game.c:234: if(xCursor>NBTILE_W-1)
    0723 3E 13         [ 7] 1090 	ld	a,#0x13
-   0725 DD BE F0      [19] 1091 	cp	a, -16 (ix)
+   0725 DD BE F9      [19] 1091 	cp	a, -7 (ix)
    0728 3E 00         [ 7] 1092 	ld	a,#0x00
-   072A DD 9E F1      [19] 1093 	sbc	a, -15 (ix)
+   072A DD 9E FA      [19] 1093 	sbc	a, -6 (ix)
    072D E2r32r07      [10] 1094 	jp	PO, 00393$
    0730 EE 80         [ 7] 1095 	xor	a, #0x80
    0732                    1096 00393$:
    0732 F2r68r07      [10] 1097 	jp	P,00225$
                            1098 ;src/game/game.c:236: xCursor=NBTILE_W-1;
-   0735 DD 36 F0 13   [19] 1099 	ld	-16 (ix),#0x13
-   0739 DD 36 F1 00   [19] 1100 	ld	-15 (ix),#0x00
+   0735 DD 36 F9 13   [19] 1099 	ld	-7 (ix),#0x13
+   0739 DD 36 FA 00   [19] 1100 	ld	-6 (ix),#0x00
                            1101 ;src/game/game.c:237: if(ulx<WIDTH-NBTILE_W)
-   073D DD 7E F2      [19] 1102 	ld	a,-14 (ix)
+   073D DD 7E F4      [19] 1102 	ld	a,-12 (ix)
    0740 D6 3C         [ 7] 1103 	sub	a, #0x3C
-   0742 DD 7E F3      [19] 1104 	ld	a,-13 (ix)
+   0742 DD 7E F5      [19] 1104 	ld	a,-11 (ix)
    0745 17            [ 4] 1105 	rla
    0746 3F            [ 4] 1106 	ccf
    0747 1F            [ 4] 1107 	rra
    0748 DE 80         [ 7] 1108 	sbc	a, #0x80
    074A 30 1C         [12] 1109 	jr	NC,00225$
                            1110 ;src/game/game.c:239: ulx+=1;
-   074C DD 34 F2      [23] 1111 	inc	-14 (ix)
+   074C DD 34 F4      [23] 1111 	inc	-12 (ix)
    074F 20 03         [12] 1112 	jr	NZ,00394$
-   0751 DD 34 F3      [23] 1113 	inc	-13 (ix)
+   0751 DD 34 F5      [23] 1113 	inc	-11 (ix)
    0754                    1114 00394$:
                            1115 ;src/game/game.c:173: drawTile(ulx, uly, xCursor, yCursor);
-   0754 DD 7E F2      [19] 1116 	ld	a,-14 (ix)
+   0754 DD 7E F4      [19] 1116 	ld	a,-12 (ix)
    0757 DD 77 FB      [19] 1117 	ld	-5 (ix),a
                            1118 ;src/game/game.c:240: drawWorld(ulx, uly);
    075A DD 7E FC      [19] 1119 	ld	a,-4 (ix)
@@ -1313,7 +1313,7 @@
    0836 2D            [ 4] 1266 	dec	l
    0837 20 06         [12] 1267 	jr	NZ,00147$
                            1268 ;src/game/game.c:285: exit=1;
-   0839 DD 36 F8 01   [19] 1269 	ld	-8 (ix),#0x01
+   0839 DD 36 F6 01   [19] 1269 	ld	-10 (ix),#0x01
    083D 18 4E         [12] 1270 	jr	00242$
    083F                    1271 00147$:
                            1272 ;src/game/game.c:288: putM1();
@@ -1385,12 +1385,12 @@
    08A6 B7            [ 4] 1338 	or	a, a
    08A7 20 42         [12] 1339 	jr	NZ,00158$
                            1340 ;src/game/game.c:308: menuTile(ulx+xCursor, uly+yCursor);
-   08A9 DD 7E F6      [19] 1341 	ld	a, -10 (ix)
-   08AC DD 6E F4      [19] 1342 	ld	l, -12 (ix)
+   08A9 DD 7E F7      [19] 1341 	ld	a, -9 (ix)
+   08AC DD 6E F2      [19] 1342 	ld	l, -14 (ix)
    08AF 85            [ 4] 1343 	add	a, l
    08B0 67            [ 4] 1344 	ld	h,a
-   08B1 DD 6E F2      [19] 1345 	ld	l,-14 (ix)
-   08B4 DD 56 F0      [19] 1346 	ld	d,-16 (ix)
+   08B1 DD 6E F4      [19] 1345 	ld	l,-12 (ix)
+   08B4 DD 56 F9      [19] 1346 	ld	d,-7 (ix)
    08B7 7D            [ 4] 1347 	ld	a,l
    08B8 82            [ 4] 1348 	add	a, d
    08B9 E5            [11] 1349 	push	hl
@@ -1431,17 +1431,17 @@
    08EE D6 01         [ 7] 1384 	sub	a, #0x01
    08F0 38 44         [12] 1385 	jr	C,00248$
                            1386 ;src/game/game.c:315: p_world[ulx+xCursor+(uly+yCursor)*WIDTH]=CURSOR_MODE+9;
-   08F2 DD 7E F2      [19] 1387 	ld	a,-14 (ix)
-   08F5 DD 86 F0      [19] 1388 	add	a, -16 (ix)
+   08F2 DD 7E F4      [19] 1387 	ld	a,-12 (ix)
+   08F5 DD 86 F9      [19] 1388 	add	a, -7 (ix)
    08F8 5F            [ 4] 1389 	ld	e,a
-   08F9 DD 7E F3      [19] 1390 	ld	a,-13 (ix)
-   08FC DD 8E F1      [19] 1391 	adc	a, -15 (ix)
+   08F9 DD 7E F5      [19] 1390 	ld	a,-11 (ix)
+   08FC DD 8E FA      [19] 1391 	adc	a, -6 (ix)
    08FF 57            [ 4] 1392 	ld	d,a
-   0900 DD 7E F6      [19] 1393 	ld	a,-10 (ix)
-   0903 DD 86 F4      [19] 1394 	add	a, -12 (ix)
+   0900 DD 7E F7      [19] 1393 	ld	a,-9 (ix)
+   0903 DD 86 F2      [19] 1394 	add	a, -14 (ix)
    0906 6F            [ 4] 1395 	ld	l,a
-   0907 DD 7E F7      [19] 1396 	ld	a,-9 (ix)
-   090A DD 8E F5      [19] 1397 	adc	a, -11 (ix)
+   0907 DD 7E F8      [19] 1396 	ld	a,-8 (ix)
+   090A DD 8E F3      [19] 1397 	adc	a, -13 (ix)
    090D 67            [ 4] 1398 	ld	h,a
    090E 4D            [ 4] 1399 	ld	c, l
    090F 44            [ 4] 1400 	ld	b, h
@@ -1472,21 +1472,21 @@
    0934 36 00         [10] 1425 	ld	(hl), #0x00
                            1426 ;src/game/game.c:323: for(i=0; i<14000; i++) {}
    0936                    1427 00248$:
-   0936 DD 36 F9 B0   [19] 1428 	ld	-7 (ix),#0xB0
-   093A DD 36 FA 36   [19] 1429 	ld	-6 (ix),#0x36
+   0936 DD 36 F0 B0   [19] 1428 	ld	-16 (ix),#0xB0
+   093A DD 36 F1 36   [19] 1429 	ld	-15 (ix),#0x36
    093E                    1430 00204$:
-   093E DD 6E F9      [19] 1431 	ld	l,-7 (ix)
-   0941 DD 66 FA      [19] 1432 	ld	h,-6 (ix)
+   093E DD 6E F0      [19] 1431 	ld	l,-16 (ix)
+   0941 DD 66 F1      [19] 1432 	ld	h,-15 (ix)
    0944 2B            [ 6] 1433 	dec	hl
-   0945 DD 75 F9      [19] 1434 	ld	-7 (ix),l
-   0948 DD 74 FA      [19] 1435 	ld	-6 (ix), h
+   0945 DD 75 F0      [19] 1434 	ld	-16 (ix),l
+   0948 DD 74 F1      [19] 1435 	ld	-15 (ix), h
    094B 7C            [ 4] 1436 	ld	a, h
-   094C DD B6 F9      [19] 1437 	or	a,-7 (ix)
+   094C DD B6 F0      [19] 1437 	or	a,-16 (ix)
    094F 20 ED         [12] 1438 	jr	NZ,00204$
    0951                    1439 00180$:
                            1440 ;src/game/game.c:327: drawCursor(xCursor, yCursor, 0);
-   0951 DD 56 F4      [19] 1441 	ld	d,-12 (ix)
-   0954 DD 46 F0      [19] 1442 	ld	b,-16 (ix)
+   0951 DD 56 F2      [19] 1441 	ld	d,-14 (ix)
+   0954 DD 46 F9      [19] 1442 	ld	b,-7 (ix)
    0957 AF            [ 4] 1443 	xor	a, a
    0958 F5            [11] 1444 	push	af
    0959 33            [ 6] 1445 	inc	sp
@@ -1507,7 +1507,7 @@
    096D CDr00r00      [17] 1460 	call	_drawScrolls
    0970 F1            [10] 1461 	pop	af
                            1462 ;src/game/game.c:330: while(!exit);
-   0971 DD 7E F8      [19] 1463 	ld	a,-8 (ix)
+   0971 DD 7E F6      [19] 1463 	ld	a,-10 (ix)
    0974 B7            [ 4] 1464 	or	a, a
    0975 CAr49r05      [10] 1465 	jp	Z,00181$
    0978 DD F9         [10] 1466 	ld	sp, ix

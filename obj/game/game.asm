@@ -1,7 +1,7 @@
 ;--------------------------------------------------------
 ; File Created by SDCC : free open source ANSI-C Compiler
 ; Version 3.5.4 #9329 (Linux)
-; This file was generated Sat Feb  6 21:51:25 2016
+; This file was generated Sun Feb  7 16:09:14 2016
 ;--------------------------------------------------------
 	.module game
 	.optsdcc -mz80
@@ -525,7 +525,7 @@ _menuTile::
 	add	hl,sp
 	ld	sp,hl
 ;src/game/game.c:92: const char *txtMenuTile[] = { 
-	ld	hl,#0x0006
+	ld	hl,#0x0000
 	add	hl,sp
 	ld	e,l
 	ld	d,h
@@ -571,7 +571,7 @@ _menuTile::
 	inc	hl
 	ld	(hl),b
 ;src/game/game.c:102: const char *txtWindowDestroy[] = { 
-	ld	hl,#0x0000
+	ld	hl,#0x000E
 	add	hl,sp
 	ld	c,l
 	ld	b,h
@@ -580,19 +580,19 @@ _menuTile::
 	ld	(hl),#>(___str_27)
 	ld	hl,#0x0002
 	add	hl,bc
-	ld	-2 (ix),l
-	ld	-1 (ix),h
-	ld	l,-2 (ix)
-	ld	h,-1 (ix)
+	ld	-6 (ix),l
+	ld	-5 (ix),h
+	ld	l,-6 (ix)
+	ld	h,-5 (ix)
 	ld	(hl),#<(___str_28)
 	inc	hl
 	ld	(hl),#>(___str_28)
 	ld	hl,#0x0004
 	add	hl,bc
-	ld	-2 (ix),l
-	ld	-1 (ix),h
-	ld	l,-2 (ix)
-	ld	h,-1 (ix)
+	ld	-6 (ix),l
+	ld	-5 (ix),h
+	ld	l,-6 (ix)
+	ld	h,-5 (ix)
 	ld	(hl),#<(___str_29)
 	inc	hl
 	ld	(hl),#>(___str_29)
@@ -616,16 +616,16 @@ _menuTile::
 	add	hl, hl
 	add	hl, hl
 	pop	de
-	ld	-2 (ix),l
-	ld	-1 (ix),h
-	ld	-4 (ix),c
-	ld	-3 (ix),b
-	ld	-6 (ix),e
-	ld	-5 (ix),d
+	ld	-6 (ix),l
+	ld	-5 (ix),h
+	ld	-2 (ix),c
+	ld	-1 (ix),b
+	ld	-4 (ix),e
+	ld	-3 (ix),d
 00117$:
 ;src/game/game.c:112: menuChoice = drawMenu(txtMenuTile,7);
-	ld	e,-6 (ix)
-	ld	d,-5 (ix)
+	ld	e,-4 (ix)
+	ld	d,-3 (ix)
 	ld	a,#0x07
 	push	af
 	inc	sp
@@ -674,8 +674,8 @@ _menuTile::
 	sub	a, #0x03
 	jr	NZ,00106$
 ;src/game/game.c:128: if(	drawWindow(txtWindowDestroy,3,1) == 1)
-	ld	e,-4 (ix)
-	ld	d,-3 (ix)
+	ld	e,-2 (ix)
+	ld	d,-1 (ix)
 	ld	hl,#0x0103
 	push	hl
 	push	de
@@ -687,8 +687,8 @@ _menuTile::
 ;src/game/game.c:129: p_world[x+y*WIDTH] = GRASS1;
 	ld	l,4 (ix)
 	ld	h,#0x00
-	ld	e,-2 (ix)
-	ld	d,-1 (ix)
+	ld	e,-6 (ix)
+	ld	d,-5 (ix)
 	add	hl,de
 	ld	de,#_p_world
 	add	hl,de
@@ -757,19 +757,19 @@ _game::
 	add	hl,sp
 	ld	sp,hl
 ;src/game/game.c:150: int ulx = 0;
-	ld	-14 (ix),#0x00
-	ld	-13 (ix),#0x00
-;src/game/game.c:151: int uly = 0;
-	ld	-10 (ix),#0x00
-	ld	-9 (ix),#0x00
-;src/game/game.c:152: int xCursor = 10;
-	ld	-16 (ix),#0x0A
-	ld	-15 (ix),#0x00
-;src/game/game.c:153: int yCursor = 6;
-	ld	-12 (ix),#0x06
+	ld	-12 (ix),#0x00
 	ld	-11 (ix),#0x00
-;src/game/game.c:155: u8 exit=0;
+;src/game/game.c:151: int uly = 0;
+	ld	-9 (ix),#0x00
 	ld	-8 (ix),#0x00
+;src/game/game.c:152: int xCursor = 10;
+	ld	-7 (ix),#0x0A
+	ld	-6 (ix),#0x00
+;src/game/game.c:153: int yCursor = 6;
+	ld	-14 (ix),#0x06
+	ld	-13 (ix),#0x00
+;src/game/game.c:155: u8 exit=0;
+	ld	-10 (ix),#0x00
 ;src/game/game.c:158: drawBoxM2(50, 50);
 	ld	hl,#0x0032
 	push	hl
@@ -830,13 +830,13 @@ _game::
 	call	_cpct_isKeyPressed
 	ld	-2 (ix),l
 ;src/game/game.c:173: drawTile(ulx, uly, xCursor, yCursor);
-	ld	a,-12 (ix)
-	ld	-1 (ix),a
-	ld	a,-16 (ix)
-	ld	-3 (ix),a
-	ld	a,-10 (ix)
-	ld	-4 (ix),a
 	ld	a,-14 (ix)
+	ld	-1 (ix),a
+	ld	a,-7 (ix)
+	ld	-3 (ix),a
+	ld	a,-9 (ix)
+	ld	-4 (ix),a
+	ld	a,-12 (ix)
 	ld	-5 (ix),a
 ;src/game/game.c:171: if ( cpct_isKeyPressed(Key_CursorUp) )
 	ld	a,-2 (ix)
@@ -859,33 +859,33 @@ _game::
 	pop	af
 	pop	af
 ;src/game/game.c:175: yCursor-=1;
-	ld	l,-12 (ix)
-	ld	h,-11 (ix)
+	ld	l,-14 (ix)
+	ld	h,-13 (ix)
 	dec	hl
-	ld	-12 (ix),l
-	ld	-11 (ix),h
+	ld	-14 (ix),l
+	ld	-13 (ix),h
 ;src/game/game.c:178: if(yCursor<0)
-	bit	7, -11 (ix)
+	bit	7, -13 (ix)
 	jr	Z,00210$
 ;src/game/game.c:180: yCursor=0;
-	ld	-12 (ix),#0x00
-	ld	-11 (ix),#0x00
+	ld	-14 (ix),#0x00
+	ld	-13 (ix),#0x00
 ;src/game/game.c:183: if(uly>0)
 	xor	a, a
-	cp	a, -10 (ix)
-	sbc	a, -9 (ix)
+	cp	a, -9 (ix)
+	sbc	a, -8 (ix)
 	jp	PO, 00387$
 	xor	a, #0x80
 00387$:
 	jp	P,00210$
 ;src/game/game.c:185: uly-=1;
-	ld	l,-10 (ix)
-	ld	h,-9 (ix)
+	ld	l,-9 (ix)
+	ld	h,-8 (ix)
 	dec	hl
-	ld	-10 (ix),l
-	ld	-9 (ix),h
+	ld	-9 (ix),l
+	ld	-8 (ix),h
 ;src/game/game.c:173: drawTile(ulx, uly, xCursor, yCursor);
-	ld	a,-10 (ix)
+	ld	a,-9 (ix)
 ;src/game/game.c:186: drawWorld(ulx, uly);
 	ld	-4 (ix), a
 	push	af
@@ -897,16 +897,16 @@ _game::
 	pop	af
 ;src/game/game.c:191: for(i=0; i<5000; i++) {}
 00210$:
-	ld	-7 (ix),#0x88
-	ld	-6 (ix),#0x13
+	ld	-16 (ix),#0x88
+	ld	-15 (ix),#0x13
 00186$:
-	ld	l,-7 (ix)
-	ld	h,-6 (ix)
+	ld	l,-16 (ix)
+	ld	h,-15 (ix)
 	dec	hl
-	ld	-7 (ix),l
-	ld	-6 (ix), h
+	ld	-16 (ix),l
+	ld	-15 (ix), h
 	ld	a, h
-	or	a,-7 (ix)
+	or	a,-16 (ix)
 	jr	NZ,00186$
 	jp	00180$
 00179$:
@@ -933,38 +933,38 @@ _game::
 	pop	af
 	pop	af
 ;src/game/game.c:197: yCursor+=1;
-	inc	-12 (ix)
+	inc	-14 (ix)
 	jr	NZ,00388$
-	inc	-11 (ix)
+	inc	-13 (ix)
 00388$:
 ;src/game/game.c:198: if(yCursor>NBTILE_H-1)
 	ld	a,#0x0B
-	cp	a, -12 (ix)
+	cp	a, -14 (ix)
 	ld	a,#0x00
-	sbc	a, -11 (ix)
+	sbc	a, -13 (ix)
 	jp	PO, 00389$
 	xor	a, #0x80
 00389$:
 	jp	P,00215$
 ;src/game/game.c:200: yCursor=NBTILE_H-1;
-	ld	-12 (ix),#0x0B
-	ld	-11 (ix),#0x00
+	ld	-14 (ix),#0x0B
+	ld	-13 (ix),#0x00
 ;src/game/game.c:201: if(uly<HEIGHT-NBTILE_H)
-	ld	a,-10 (ix)
-	sub	a, #0x24
 	ld	a,-9 (ix)
+	sub	a, #0x24
+	ld	a,-8 (ix)
 	rla
 	ccf
 	rra
 	sbc	a, #0x80
 	jr	NC,00215$
 ;src/game/game.c:203: uly+=1;
-	inc	-10 (ix)
-	jr	NZ,00390$
 	inc	-9 (ix)
+	jr	NZ,00390$
+	inc	-8 (ix)
 00390$:
 ;src/game/game.c:173: drawTile(ulx, uly, xCursor, yCursor);
-	ld	a,-10 (ix)
+	ld	a,-9 (ix)
 ;src/game/game.c:204: drawWorld(ulx, uly);
 	ld	-4 (ix), a
 	push	af
@@ -976,16 +976,16 @@ _game::
 	pop	af
 ;src/game/game.c:209: for(i=0; i<5000; i++) {}
 00215$:
-	ld	-7 (ix),#0x88
-	ld	-6 (ix),#0x13
+	ld	-16 (ix),#0x88
+	ld	-15 (ix),#0x13
 00189$:
-	ld	l,-7 (ix)
-	ld	h,-6 (ix)
+	ld	l,-16 (ix)
+	ld	h,-15 (ix)
 	dec	hl
-	ld	-7 (ix),l
-	ld	-6 (ix), h
+	ld	-16 (ix),l
+	ld	-15 (ix), h
 	ld	a, h
-	or	a,-7 (ix)
+	or	a,-16 (ix)
 	jr	NZ,00189$
 	jp	00180$
 00176$:
@@ -1012,33 +1012,33 @@ _game::
 	pop	af
 	pop	af
 ;src/game/game.c:215: xCursor-=1;
-	ld	l,-16 (ix)
-	ld	h,-15 (ix)
+	ld	l,-7 (ix)
+	ld	h,-6 (ix)
 	dec	hl
-	ld	-16 (ix),l
-	ld	-15 (ix),h
+	ld	-7 (ix),l
+	ld	-6 (ix),h
 ;src/game/game.c:216: if(xCursor<0)
-	bit	7, -15 (ix)
+	bit	7, -6 (ix)
 	jr	Z,00220$
 ;src/game/game.c:218: xCursor=0;
-	ld	-16 (ix),#0x00
-	ld	-15 (ix),#0x00
+	ld	-7 (ix),#0x00
+	ld	-6 (ix),#0x00
 ;src/game/game.c:219: if(ulx>0)
 	xor	a, a
-	cp	a, -14 (ix)
-	sbc	a, -13 (ix)
+	cp	a, -12 (ix)
+	sbc	a, -11 (ix)
 	jp	PO, 00391$
 	xor	a, #0x80
 00391$:
 	jp	P,00220$
 ;src/game/game.c:221: ulx-=1;
-	ld	l,-14 (ix)
-	ld	h,-13 (ix)
+	ld	l,-12 (ix)
+	ld	h,-11 (ix)
 	dec	hl
-	ld	-14 (ix),l
-	ld	-13 (ix),h
+	ld	-12 (ix),l
+	ld	-11 (ix),h
 ;src/game/game.c:173: drawTile(ulx, uly, xCursor, yCursor);
-	ld	a,-14 (ix)
+	ld	a,-12 (ix)
 	ld	-5 (ix),a
 ;src/game/game.c:222: drawWorld(ulx, uly);
 	ld	a,-4 (ix)
@@ -1082,38 +1082,38 @@ _game::
 	pop	af
 	pop	af
 ;src/game/game.c:233: xCursor+=1;
-	inc	-16 (ix)
+	inc	-7 (ix)
 	jr	NZ,00392$
-	inc	-15 (ix)
+	inc	-6 (ix)
 00392$:
 ;src/game/game.c:234: if(xCursor>NBTILE_W-1)
 	ld	a,#0x13
-	cp	a, -16 (ix)
+	cp	a, -7 (ix)
 	ld	a,#0x00
-	sbc	a, -15 (ix)
+	sbc	a, -6 (ix)
 	jp	PO, 00393$
 	xor	a, #0x80
 00393$:
 	jp	P,00225$
 ;src/game/game.c:236: xCursor=NBTILE_W-1;
-	ld	-16 (ix),#0x13
-	ld	-15 (ix),#0x00
+	ld	-7 (ix),#0x13
+	ld	-6 (ix),#0x00
 ;src/game/game.c:237: if(ulx<WIDTH-NBTILE_W)
-	ld	a,-14 (ix)
+	ld	a,-12 (ix)
 	sub	a, #0x3C
-	ld	a,-13 (ix)
+	ld	a,-11 (ix)
 	rla
 	ccf
 	rra
 	sbc	a, #0x80
 	jr	NC,00225$
 ;src/game/game.c:239: ulx+=1;
-	inc	-14 (ix)
+	inc	-12 (ix)
 	jr	NZ,00394$
-	inc	-13 (ix)
+	inc	-11 (ix)
 00394$:
 ;src/game/game.c:173: drawTile(ulx, uly, xCursor, yCursor);
-	ld	a,-14 (ix)
+	ld	a,-12 (ix)
 	ld	-5 (ix),a
 ;src/game/game.c:240: drawWorld(ulx, uly);
 	ld	a,-4 (ix)
@@ -1266,7 +1266,7 @@ _game::
 	dec	l
 	jr	NZ,00147$
 ;src/game/game.c:285: exit=1;
-	ld	-8 (ix),#0x01
+	ld	-10 (ix),#0x01
 	jr	00242$
 00147$:
 ;src/game/game.c:288: putM1();
@@ -1338,12 +1338,12 @@ _game::
 	or	a, a
 	jr	NZ,00158$
 ;src/game/game.c:308: menuTile(ulx+xCursor, uly+yCursor);
-	ld	a, -10 (ix)
-	ld	l, -12 (ix)
+	ld	a, -9 (ix)
+	ld	l, -14 (ix)
 	add	a, l
 	ld	h,a
-	ld	l,-14 (ix)
-	ld	d,-16 (ix)
+	ld	l,-12 (ix)
+	ld	d,-7 (ix)
 	ld	a,l
 	add	a, d
 	push	hl
@@ -1384,17 +1384,17 @@ _game::
 	sub	a, #0x01
 	jr	C,00248$
 ;src/game/game.c:315: p_world[ulx+xCursor+(uly+yCursor)*WIDTH]=CURSOR_MODE+9;
-	ld	a,-14 (ix)
-	add	a, -16 (ix)
+	ld	a,-12 (ix)
+	add	a, -7 (ix)
 	ld	e,a
-	ld	a,-13 (ix)
-	adc	a, -15 (ix)
+	ld	a,-11 (ix)
+	adc	a, -6 (ix)
 	ld	d,a
-	ld	a,-10 (ix)
-	add	a, -12 (ix)
-	ld	l,a
 	ld	a,-9 (ix)
-	adc	a, -11 (ix)
+	add	a, -14 (ix)
+	ld	l,a
+	ld	a,-8 (ix)
+	adc	a, -13 (ix)
 	ld	h,a
 	ld	c, l
 	ld	b, h
@@ -1425,21 +1425,21 @@ _game::
 	ld	(hl), #0x00
 ;src/game/game.c:323: for(i=0; i<14000; i++) {}
 00248$:
-	ld	-7 (ix),#0xB0
-	ld	-6 (ix),#0x36
+	ld	-16 (ix),#0xB0
+	ld	-15 (ix),#0x36
 00204$:
-	ld	l,-7 (ix)
-	ld	h,-6 (ix)
+	ld	l,-16 (ix)
+	ld	h,-15 (ix)
 	dec	hl
-	ld	-7 (ix),l
-	ld	-6 (ix), h
+	ld	-16 (ix),l
+	ld	-15 (ix), h
 	ld	a, h
-	or	a,-7 (ix)
+	or	a,-16 (ix)
 	jr	NZ,00204$
 00180$:
 ;src/game/game.c:327: drawCursor(xCursor, yCursor, 0);
-	ld	d,-12 (ix)
-	ld	b,-16 (ix)
+	ld	d,-14 (ix)
+	ld	b,-7 (ix)
 	xor	a, a
 	push	af
 	inc	sp
@@ -1460,7 +1460,7 @@ _game::
 	call	_drawScrolls
 	pop	af
 ;src/game/game.c:330: while(!exit);
-	ld	a,-8 (ix)
+	ld	a,-10 (ix)
 	or	a, a
 	jp	Z,00181$
 	ld	sp, ix

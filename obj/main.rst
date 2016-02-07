@@ -1,7 +1,7 @@
                               1 ;--------------------------------------------------------
                               2 ; File Created by SDCC : free open source ANSI-C Compiler
                               3 ; Version 3.5.4 #9329 (Linux)
-                              4 ; This file was generated Sat Feb  6 21:45:24 2016
+                              4 ; This file was generated Sun Feb  7 16:09:11 2016
                               5 ;--------------------------------------------------------
                               6 	.module main
                               7 	.optsdcc -mz80
@@ -86,25 +86,25 @@
                              86 ;src/main.c:22: const char *windowCredit[] = { 
    402C 21 00 00      [10]   87 	ld	hl,#0x0000
    402F 39            [11]   88 	add	hl,sp
-   4030 DD 75 FC      [19]   89 	ld	-4 (ix),l
-   4033 DD 74 FD      [19]   90 	ld	-3 (ix),h
-   4036 DD 6E FC      [19]   91 	ld	l,-4 (ix)
-   4039 DD 66 FD      [19]   92 	ld	h,-3 (ix)
+   4030 DD 75 FE      [19]   89 	ld	-2 (ix),l
+   4033 DD 74 FF      [19]   90 	ld	-1 (ix),h
+   4036 DD 6E FE      [19]   91 	ld	l,-2 (ix)
+   4039 DD 66 FF      [19]   92 	ld	h,-1 (ix)
    403C 36 0B         [10]   93 	ld	(hl),#<(___str_3)
    403E 23            [ 6]   94 	inc	hl
    403F 36 41         [10]   95 	ld	(hl),#>(___str_3)
-   4041 DD 6E FC      [19]   96 	ld	l,-4 (ix)
-   4044 DD 66 FD      [19]   97 	ld	h,-3 (ix)
+   4041 DD 6E FE      [19]   96 	ld	l,-2 (ix)
+   4044 DD 66 FF      [19]   97 	ld	h,-1 (ix)
    4047 23            [ 6]   98 	inc	hl
    4048 23            [ 6]   99 	inc	hl
    4049 01 14 41      [10]  100 	ld	bc,#___str_4+0
    404C 71            [ 7]  101 	ld	(hl),c
    404D 23            [ 6]  102 	inc	hl
    404E 70            [ 7]  103 	ld	(hl),b
-   404F DD 7E FC      [19]  104 	ld	a,-4 (ix)
+   404F DD 7E FE      [19]  104 	ld	a,-2 (ix)
    4052 C6 04         [ 7]  105 	add	a, #0x04
    4054 6F            [ 4]  106 	ld	l,a
-   4055 DD 7E FD      [19]  107 	ld	a,-3 (ix)
+   4055 DD 7E FF      [19]  107 	ld	a,-1 (ix)
    4058 CE 00         [ 7]  108 	adc	a, #0x00
    405A 67            [ 4]  109 	ld	h,a
    405B 01 15 41      [10]  110 	ld	bc,#___str_5+0
@@ -113,55 +113,55 @@
    4060 70            [ 7]  113 	ld	(hl),b
                             114 ;src/main.c:28: firmware = cpct_disableFirmware();
    4061 D5            [11]  115 	push	de
-   4062 CD AA 6A      [17]  116 	call	_cpct_disableFirmware
+   4062 CD AB 6C      [17]  116 	call	_cpct_disableFirmware
    4065 D1            [10]  117 	pop	de
    4066 DD 75 FA      [19]  118 	ld	-6 (ix),l
    4069 DD 74 FB      [19]  119 	ld	-5 (ix),h
                             120 ;src/main.c:30: cpct_fw2hw(paletteTrains, 16);
-   406C 21 C7 5C      [10]  121 	ld	hl,#_paletteTrains
+   406C 21 F7 5D      [10]  121 	ld	hl,#_paletteTrains
    406F D5            [11]  122 	push	de
    4070 01 10 00      [10]  123 	ld	bc,#0x0010
    4073 C5            [11]  124 	push	bc
    4074 E5            [11]  125 	push	hl
-   4075 CD 90 69      [17]  126 	call	_cpct_fw2hw
+   4075 CD C0 6A      [17]  126 	call	_cpct_fw2hw
    4078 D1            [10]  127 	pop	de
                             128 ;src/main.c:31: cpct_fw2hw(paletteMenusM2, 2);
-   4079 21 DB 5C      [10]  129 	ld	hl,#_paletteMenusM2
+   4079 21 0B 5E      [10]  129 	ld	hl,#_paletteMenusM2
    407C D5            [11]  130 	push	de
    407D 01 02 00      [10]  131 	ld	bc,#0x0002
    4080 C5            [11]  132 	push	bc
    4081 E5            [11]  133 	push	hl
-   4082 CD 90 69      [17]  134 	call	_cpct_fw2hw
+   4082 CD C0 6A      [17]  134 	call	_cpct_fw2hw
    4085 D1            [10]  135 	pop	de
                             136 ;src/main.c:32: cpct_fw2hw(paletteMenusM1, 4);
-   4086 21 D7 5C      [10]  137 	ld	hl,#_paletteMenusM1
+   4086 21 07 5E      [10]  137 	ld	hl,#_paletteMenusM1
    4089 D5            [11]  138 	push	de
    408A 01 04 00      [10]  139 	ld	bc,#0x0004
    408D C5            [11]  140 	push	bc
    408E E5            [11]  141 	push	hl
-   408F CD 90 69      [17]  142 	call	_cpct_fw2hw
+   408F CD C0 6A      [17]  142 	call	_cpct_fw2hw
    4092 D1            [10]  143 	pop	de
                             144 ;src/main.c:34: cpct_setBorder(paletteTrains[12]);
-   4093 3A D3 5C      [13]  145 	ld	a, (#_paletteTrains + 12)
+   4093 3A 03 5E      [13]  145 	ld	a, (#_paletteTrains + 12)
    4096 D5            [11]  146 	push	de
    4097 57            [ 4]  147 	ld	d,a
    4098 1E 10         [ 7]  148 	ld	e,#0x10
    409A D5            [11]  149 	push	de
-   409B CD 30 68      [17]  150 	call	_cpct_setPALColour
-   409E CD 28 56      [17]  151 	call	_putM2
+   409B CD 60 69      [17]  150 	call	_cpct_setPALColour
+   409E CD 58 57      [17]  151 	call	_putM2
    40A1 D1            [10]  152 	pop	de
                             153 ;src/main.c:38: do{
-   40A2 DD 73 FE      [19]  154 	ld	-2 (ix),e
-   40A5 DD 72 FF      [19]  155 	ld	-1 (ix),d
+   40A2 DD 73 FC      [19]  154 	ld	-4 (ix),e
+   40A5 DD 72 FD      [19]  155 	ld	-3 (ix),d
    40A8                     156 00105$:
                             157 ;src/main.c:39: menuChoice = drawMenu(menuMain,3);
-   40A8 DD 5E FE      [19]  158 	ld	e,-2 (ix)
-   40AB DD 56 FF      [19]  159 	ld	d,-1 (ix)
+   40A8 DD 5E FC      [19]  158 	ld	e,-4 (ix)
+   40AB DD 56 FD      [19]  159 	ld	d,-3 (ix)
    40AE 3E 03         [ 7]  160 	ld	a,#0x03
    40B0 F5            [11]  161 	push	af
    40B1 33            [ 6]  162 	inc	sp
    40B2 D5            [11]  163 	push	de
-   40B3 CD 2E 5A      [17]  164 	call	_drawMenu
+   40B3 CD 5E 5B      [17]  164 	call	_drawMenu
    40B6 F1            [10]  165 	pop	af
    40B7 33            [ 6]  166 	inc	sp
    40B8 55            [ 4]  167 	ld	d,l
@@ -171,8 +171,8 @@
    40BB 20 08         [12]  171 	jr	NZ,00102$
                             172 ;src/main.c:43: game();
    40BD D5            [11]  173 	push	de
-   40BE CD 70 47      [17]  174 	call	_game
-   40C1 CD 28 56      [17]  175 	call	_putM2
+   40BE CD A0 48      [17]  174 	call	_game
+   40C1 CD 58 57      [17]  175 	call	_putM2
    40C4 D1            [10]  176 	pop	de
    40C5                     177 00102$:
                             178 ;src/main.c:48: if(menuChoice==1)
@@ -180,13 +180,13 @@
    40C6 3D            [ 4]  180 	dec	a
    40C7 20 12         [12]  181 	jr	NZ,00106$
                             182 ;src/main.c:49: drawWindow(windowCredit,3,0);
-   40C9 DD 4E FC      [19]  183 	ld	c,-4 (ix)
-   40CC DD 46 FD      [19]  184 	ld	b,-3 (ix)
+   40C9 DD 4E FE      [19]  183 	ld	c,-2 (ix)
+   40CC DD 46 FF      [19]  184 	ld	b,-1 (ix)
    40CF D5            [11]  185 	push	de
    40D0 21 03 00      [10]  186 	ld	hl,#0x0003
    40D3 E5            [11]  187 	push	hl
    40D4 C5            [11]  188 	push	bc
-   40D5 CD 2C 5B      [17]  189 	call	_drawWindow
+   40D5 CD 5C 5C      [17]  189 	call	_drawWindow
    40D8 F1            [10]  190 	pop	af
    40D9 F1            [10]  191 	pop	af
    40DA D1            [10]  192 	pop	de
@@ -199,12 +199,12 @@
    40E0 AF            [ 4]  199 	xor	a, a
    40E1 F5            [11]  200 	push	af
    40E2 33            [ 6]  201 	inc	sp
-   40E3 CD 46 6A      [17]  202 	call	_cpct_setVideoMode
+   40E3 CD 47 6C      [17]  202 	call	_cpct_setVideoMode
    40E6 33            [ 6]  203 	inc	sp
                             204 ;src/main.c:54: cpct_reenableFirmware(firmware);
    40E7 DD 6E FA      [19]  205 	ld	l,-6 (ix)
    40EA DD 66 FB      [19]  206 	ld	h,-5 (ix)
-   40ED CD FE 69      [17]  207 	call	_cpct_reenableFirmware
+   40ED CD 2E 6B      [17]  207 	call	_cpct_reenableFirmware
    40F0 DD F9         [10]  208 	ld	sp, ix
    40F2 DD E1         [14]  209 	pop	ix
    40F4 C9            [10]  210 	ret

@@ -1,7 +1,7 @@
                               1 ;--------------------------------------------------------
                               2 ; File Created by SDCC : free open source ANSI-C Compiler
                               3 ; Version 3.5.4 #9329 (Linux)
-                              4 ; This file was generated Sat Feb  6 22:30:35 2016
+                              4 ; This file was generated Sun Feb  7 16:09:17 2016
                               5 ;--------------------------------------------------------
                               6 	.module world
                               7 	.optsdcc -mz80
@@ -461,7 +461,7 @@
    024D                     461 00153$:
    024D AF            [ 4]  462 	xor	a,a
    024E                     463 00154$:
-   024E DD 77 F9      [19]  464 	ld	-7 (ix),a
+   024E DD 77 FA      [19]  464 	ld	-6 (ix),a
    0251 DD 7E 04      [19]  465 	ld	a,4 (ix)
    0254 D6 02         [ 7]  466 	sub	a, #0x02
    0256 20 04         [12]  467 	jr	NZ,00155$
@@ -470,7 +470,7 @@
    025C                     470 00155$:
    025C AF            [ 4]  471 	xor	a,a
    025D                     472 00156$:
-   025D DD 77 FD      [19]  473 	ld	-3 (ix),a
+   025D DD 77 F9      [19]  473 	ld	-7 (ix),a
    0260 DD 36 F5 00   [19]  474 	ld	-11 (ix),#0x00
    0264 11 00 00      [10]  475 	ld	de,#0x0000
    0267                     476 00115$:
@@ -506,13 +506,13 @@
    02A1 D2r22r03      [10]  506 	jp	NC,00116$
                             507 ;src/game/world.c:81: if(cpct_getBit (pattern, iy*nBitsX+ix)!=0 && index+iy*WIDTH+ix < WIDTH*HEIGHT)
    02A4 DD 7E F6      [19]  508 	ld	a,-10 (ix)
-   02A7 DD 77 FA      [19]  509 	ld	-6 (ix),a
-   02AA DD 36 FB 00   [19]  510 	ld	-5 (ix),#0x00
+   02A7 DD 77 FC      [19]  509 	ld	-4 (ix),a
+   02AA DD 36 FD 00   [19]  510 	ld	-3 (ix),#0x00
    02AE DD 7E FE      [19]  511 	ld	a,-2 (ix)
-   02B1 DD 86 FA      [19]  512 	add	a, -6 (ix)
+   02B1 DD 86 FC      [19]  512 	add	a, -4 (ix)
    02B4 6F            [ 4]  513 	ld	l,a
    02B5 DD 7E FF      [19]  514 	ld	a,-1 (ix)
-   02B8 DD 8E FB      [19]  515 	adc	a, -5 (ix)
+   02B8 DD 8E FD      [19]  515 	adc	a, -3 (ix)
    02BB 67            [ 4]  516 	ld	h,a
    02BC DD 4E 09      [19]  517 	ld	c,9 (ix)
    02BF DD 46 0A      [19]  518 	ld	b,10 (ix)
@@ -520,16 +520,16 @@
    02C3 E5            [11]  520 	push	hl
    02C4 C5            [11]  521 	push	bc
    02C5 CDr00r00      [17]  522 	call	_cpct_getBit
-   02C8 DD 75 FC      [19]  523 	ld	-4 (ix),l
+   02C8 DD 75 FB      [19]  523 	ld	-5 (ix),l
    02CB D1            [10]  524 	pop	de
-   02CC DD 7E FC      [19]  525 	ld	a,-4 (ix)
+   02CC DD 7E FB      [19]  525 	ld	a,-5 (ix)
    02CF B7            [ 4]  526 	or	a, a
    02D0 28 4A         [12]  527 	jr	Z,00113$
    02D2 DD 7E F7      [19]  528 	ld	a,-9 (ix)
-   02D5 DD 86 FA      [19]  529 	add	a, -6 (ix)
+   02D5 DD 86 FC      [19]  529 	add	a, -4 (ix)
    02D8 4F            [ 4]  530 	ld	c,a
    02D9 DD 7E F8      [19]  531 	ld	a,-8 (ix)
-   02DC DD 8E FB      [19]  532 	adc	a, -5 (ix)
+   02DC DD 8E FD      [19]  532 	adc	a, -3 (ix)
    02DF 47            [ 4]  533 	ld	b,a
    02E0 EE 80         [ 7]  534 	xor	a, #0x80
    02E2 D6 8F         [ 7]  535 	sub	a, #0x8F
@@ -540,7 +540,7 @@
    02EA 4D            [ 4]  540 	ld	c,l
    02EB 44            [ 4]  541 	ld	b,h
                             542 ;src/game/world.c:83: if(tileType == FOREST)
-   02EC DD 7E F9      [19]  543 	ld	a,-7 (ix)
+   02EC DD 7E FA      [19]  543 	ld	a,-6 (ix)
    02EF B7            [ 4]  544 	or	a, a
    02F0 28 06         [12]  545 	jr	Z,00104$
                             546 ;src/game/world.c:84: p_world[index+iy*WIDTH+ix] = tileType;
@@ -549,7 +549,7 @@
    02F6 18 24         [12]  549 	jr	00113$
    02F8                     550 00104$:
                             551 ;src/game/world.c:85: else if(tileType==DWELLINGS1)
-   02F8 DD 7E FD      [19]  552 	ld	a,-3 (ix)
+   02F8 DD 7E F9      [19]  552 	ld	a,-7 (ix)
    02FB B7            [ 4]  553 	or	a, a
    02FC 28 1E         [12]  554 	jr	Z,00113$
                             555 ;src/game/world.c:86: p_world[index+iy*WIDTH+ix] = (u8)cpct_getRandomUniform_u8_f(cpct_count2VSYNC ()%256)%3+2;
@@ -557,11 +557,11 @@
    02FF D5            [11]  557 	push	de
    0300 CDr00r00      [17]  558 	call	_cpct_count2VSYNC
    0303 CDr00r00      [17]  559 	call	_cpct_getRandomUniform_u8_f
-   0306 DD 75 FC      [19]  560 	ld	-4 (ix),l
+   0306 DD 75 FB      [19]  560 	ld	-5 (ix),l
    0309 3E 03         [ 7]  561 	ld	a,#0x03
    030B F5            [11]  562 	push	af
    030C 33            [ 6]  563 	inc	sp
-   030D DD 7E FC      [19]  564 	ld	a,-4 (ix)
+   030D DD 7E FB      [19]  564 	ld	a,-5 (ix)
    0310 F5            [11]  565 	push	af
    0311 33            [ 6]  566 	inc	sp
    0312 CDr00r00      [17]  567 	call	__moduchar
@@ -630,8 +630,8 @@
                             630 ;src/game/world.c:114: for(ix=0; ix<NBFOREST; ix++)
    0372 21 00 00      [10]  631 	ld	hl,#0x0000
    0375 39            [11]  632 	add	hl,sp
-   0376 DD 75 FA      [19]  633 	ld	-6 (ix),l
-   0379 DD 74 FB      [19]  634 	ld	-5 (ix),h
+   0376 DD 75 F1      [19]  633 	ld	-15 (ix),l
+   0379 DD 74 F2      [19]  634 	ld	-14 (ix),h
    037C 01 00 00      [10]  635 	ld	bc,#0x0000
    037F                     636 00121$:
                             637 ;src/game/world.c:116: iy = cpct_rand16()%(WIDTH*HEIGHT);
@@ -644,69 +644,69 @@
    038B F1            [10]  644 	pop	af
    038C F1            [10]  645 	pop	af
    038D C1            [10]  646 	pop	bc
-   038E DD 75 FC      [19]  647 	ld	-4 (ix),l
-   0391 DD 74 FD      [19]  648 	ld	-3 (ix),h
+   038E DD 75 F8      [19]  647 	ld	-8 (ix),l
+   0391 DD 74 F9      [19]  648 	ld	-7 (ix),h
                             649 ;src/game/world.c:118: switch(cpct_rand()%4)
    0394 C5            [11]  650 	push	bc
    0395 CDr00r00      [17]  651 	call	_cpct_getRandom_mxor_u8
    0398 7D            [ 4]  652 	ld	a,l
    0399 C1            [10]  653 	pop	bc
    039A E6 03         [ 7]  654 	and	a, #0x03
-   039C DD 77 F3      [19]  655 	ld	-13 (ix),a
+   039C DD 77 F7      [19]  655 	ld	-9 (ix),a
    039F 3E 03         [ 7]  656 	ld	a,#0x03
-   03A1 DD 96 F3      [19]  657 	sub	a, -13 (ix)
+   03A1 DD 96 F7      [19]  657 	sub	a, -9 (ix)
    03A4 DAr08r05      [10]  658 	jp	C,00106$
                             659 ;src/game/world.c:122: p_forest[1] = 0b11000111;
    03A7 E5            [11]  660 	push	hl
-   03A8 DD 6E FA      [19]  661 	ld	l,-6 (ix)
-   03AB DD 66 FB      [19]  662 	ld	h,-5 (ix)
+   03A8 DD 6E F1      [19]  661 	ld	l,-15 (ix)
+   03AB DD 66 F2      [19]  662 	ld	h,-14 (ix)
    03AE 23            [ 6]  663 	inc	hl
    03AF E5            [11]  664 	push	hl
    03B0 FD E1         [14]  665 	pop	iy
    03B2 E1            [10]  666 	pop	hl
                             667 ;src/game/world.c:123: p_forest[2] = 0b11011110;
-   03B3 DD 5E FA      [19]  668 	ld	e,-6 (ix)
-   03B6 DD 56 FB      [19]  669 	ld	d,-5 (ix)
+   03B3 DD 5E F1      [19]  668 	ld	e,-15 (ix)
+   03B6 DD 56 F2      [19]  669 	ld	d,-14 (ix)
    03B9 13            [ 6]  670 	inc	de
    03BA 13            [ 6]  671 	inc	de
                             672 ;src/game/world.c:124: p_forest[3] = 0b01111110;
-   03BB DD 7E FA      [19]  673 	ld	a,-6 (ix)
+   03BB DD 7E F1      [19]  673 	ld	a,-15 (ix)
    03BE C6 03         [ 7]  674 	add	a, #0x03
-   03C0 DD 77 FE      [19]  675 	ld	-2 (ix),a
-   03C3 DD 7E FB      [19]  676 	ld	a,-5 (ix)
+   03C0 DD 77 F5      [19]  675 	ld	-11 (ix),a
+   03C3 DD 7E F2      [19]  676 	ld	a,-14 (ix)
    03C6 CE 00         [ 7]  677 	adc	a, #0x00
-   03C8 DD 77 FF      [19]  678 	ld	-1 (ix),a
+   03C8 DD 77 F6      [19]  678 	ld	-10 (ix),a
                             679 ;src/game/world.c:125: p_forest[4] = 0b11111110; 
-   03CB DD 7E FA      [19]  680 	ld	a,-6 (ix)
+   03CB DD 7E F1      [19]  680 	ld	a,-15 (ix)
    03CE C6 04         [ 7]  681 	add	a, #0x04
-   03D0 DD 77 F6      [19]  682 	ld	-10 (ix),a
-   03D3 DD 7E FB      [19]  683 	ld	a,-5 (ix)
+   03D0 DD 77 F3      [19]  682 	ld	-13 (ix),a
+   03D3 DD 7E F2      [19]  683 	ld	a,-14 (ix)
    03D6 CE 00         [ 7]  684 	adc	a, #0x00
-   03D8 DD 77 F7      [19]  685 	ld	-9 (ix),a
+   03D8 DD 77 F4      [19]  685 	ld	-12 (ix),a
                             686 ;src/game/world.c:126: p_forest[5] = 0b01111111;
-   03DB DD 7E FA      [19]  687 	ld	a,-6 (ix)
+   03DB DD 7E F1      [19]  687 	ld	a,-15 (ix)
    03DE C6 05         [ 7]  688 	add	a, #0x05
-   03E0 DD 77 F4      [19]  689 	ld	-12 (ix),a
-   03E3 DD 7E FB      [19]  690 	ld	a,-5 (ix)
+   03E0 DD 77 FE      [19]  689 	ld	-2 (ix),a
+   03E3 DD 7E F2      [19]  690 	ld	a,-14 (ix)
    03E6 CE 00         [ 7]  691 	adc	a, #0x00
-   03E8 DD 77 F5      [19]  692 	ld	-11 (ix),a
+   03E8 DD 77 FF      [19]  692 	ld	-1 (ix),a
                             693 ;src/game/world.c:127: p_forest[6] = 0b11101111;
-   03EB DD 7E FA      [19]  694 	ld	a,-6 (ix)
+   03EB DD 7E F1      [19]  694 	ld	a,-15 (ix)
    03EE C6 06         [ 7]  695 	add	a, #0x06
-   03F0 DD 77 F8      [19]  696 	ld	-8 (ix),a
-   03F3 DD 7E FB      [19]  697 	ld	a,-5 (ix)
+   03F0 DD 77 FC      [19]  696 	ld	-4 (ix),a
+   03F3 DD 7E F2      [19]  697 	ld	a,-14 (ix)
    03F6 CE 00         [ 7]  698 	adc	a, #0x00
-   03F8 DD 77 F9      [19]  699 	ld	-7 (ix),a
+   03F8 DD 77 FD      [19]  699 	ld	-3 (ix),a
                             700 ;src/game/world.c:128: p_forest[7] = 0b11001111;
-   03FB DD 7E FA      [19]  701 	ld	a,-6 (ix)
+   03FB DD 7E F1      [19]  701 	ld	a,-15 (ix)
    03FE C6 07         [ 7]  702 	add	a, #0x07
-   0400 DD 77 F1      [19]  703 	ld	-15 (ix),a
-   0403 DD 7E FB      [19]  704 	ld	a,-5 (ix)
+   0400 DD 77 FA      [19]  703 	ld	-6 (ix),a
+   0403 DD 7E F2      [19]  704 	ld	a,-14 (ix)
    0406 CE 00         [ 7]  705 	adc	a, #0x00
-   0408 DD 77 F2      [19]  706 	ld	-14 (ix),a
+   0408 DD 77 FB      [19]  706 	ld	-5 (ix),a
                             707 ;src/game/world.c:118: switch(cpct_rand()%4)
    040B D5            [11]  708 	push	de
-   040C DD 5E F3      [19]  709 	ld	e,-13 (ix)
+   040C DD 5E F7      [19]  709 	ld	e,-9 (ix)
    040F 16 00         [ 7]  710 	ld	d,#0x00
    0411 21r19r04      [10]  711 	ld	hl,#00195$
    0414 19            [11]  712 	add	hl,de
@@ -722,8 +722,8 @@
                             722 ;src/game/world.c:120: case 0:
    0425                     723 00102$:
                             724 ;src/game/world.c:121: p_forest[0] = 0b10000100;
-   0425 DD 6E FA      [19]  725 	ld	l,-6 (ix)
-   0428 DD 66 FB      [19]  726 	ld	h,-5 (ix)
+   0425 DD 6E F1      [19]  725 	ld	l,-15 (ix)
+   0428 DD 66 F2      [19]  726 	ld	h,-14 (ix)
    042B 36 84         [10]  727 	ld	(hl),#0x84
                             728 ;src/game/world.c:122: p_forest[1] = 0b11000111;
    042D FD 36 00 C7   [19]  729 	ld	0 (iy), #0xC7
@@ -731,32 +731,32 @@
    0431 3E DE         [ 7]  731 	ld	a,#0xDE
    0433 12            [ 7]  732 	ld	(de),a
                             733 ;src/game/world.c:124: p_forest[3] = 0b01111110;
-   0434 DD 6E FE      [19]  734 	ld	l,-2 (ix)
-   0437 DD 66 FF      [19]  735 	ld	h,-1 (ix)
+   0434 DD 6E F5      [19]  734 	ld	l,-11 (ix)
+   0437 DD 66 F6      [19]  735 	ld	h,-10 (ix)
    043A 36 7E         [10]  736 	ld	(hl),#0x7E
                             737 ;src/game/world.c:125: p_forest[4] = 0b11111110; 
-   043C DD 6E F6      [19]  738 	ld	l,-10 (ix)
-   043F DD 66 F7      [19]  739 	ld	h,-9 (ix)
+   043C DD 6E F3      [19]  738 	ld	l,-13 (ix)
+   043F DD 66 F4      [19]  739 	ld	h,-12 (ix)
    0442 36 FE         [10]  740 	ld	(hl),#0xFE
                             741 ;src/game/world.c:126: p_forest[5] = 0b01111111;
-   0444 DD 6E F4      [19]  742 	ld	l,-12 (ix)
-   0447 DD 66 F5      [19]  743 	ld	h,-11 (ix)
+   0444 DD 6E FE      [19]  742 	ld	l,-2 (ix)
+   0447 DD 66 FF      [19]  743 	ld	h,-1 (ix)
    044A 36 7F         [10]  744 	ld	(hl),#0x7F
                             745 ;src/game/world.c:127: p_forest[6] = 0b11101111;
-   044C DD 6E F8      [19]  746 	ld	l,-8 (ix)
-   044F DD 66 F9      [19]  747 	ld	h,-7 (ix)
+   044C DD 6E FC      [19]  746 	ld	l,-4 (ix)
+   044F DD 66 FD      [19]  747 	ld	h,-3 (ix)
    0452 36 EF         [10]  748 	ld	(hl),#0xEF
                             749 ;src/game/world.c:128: p_forest[7] = 0b11001111;
-   0454 DD 6E F1      [19]  750 	ld	l,-15 (ix)
-   0457 DD 66 F2      [19]  751 	ld	h,-14 (ix)
+   0454 DD 6E FA      [19]  750 	ld	l,-6 (ix)
+   0457 DD 66 FB      [19]  751 	ld	h,-5 (ix)
    045A 36 CF         [10]  752 	ld	(hl),#0xCF
                             753 ;src/game/world.c:129: break;
    045C C3r08r05      [10]  754 	jp	00106$
                             755 ;src/game/world.c:130: case 1:
    045F                     756 00103$:
                             757 ;src/game/world.c:131: p_forest[0] = 0b00001100;
-   045F DD 6E FA      [19]  758 	ld	l,-6 (ix)
-   0462 DD 66 FB      [19]  759 	ld	h,-5 (ix)
+   045F DD 6E F1      [19]  758 	ld	l,-15 (ix)
+   0462 DD 66 F2      [19]  759 	ld	h,-14 (ix)
    0465 36 0C         [10]  760 	ld	(hl),#0x0C
                             761 ;src/game/world.c:132: p_forest[1] = 0b11111000;
    0467 FD 36 00 F8   [19]  762 	ld	0 (iy), #0xF8
@@ -764,32 +764,32 @@
    046B 3E 3F         [ 7]  764 	ld	a,#0x3F
    046D 12            [ 7]  765 	ld	(de),a
                             766 ;src/game/world.c:134: p_forest[3] = 0b01111110;
-   046E DD 6E FE      [19]  767 	ld	l,-2 (ix)
-   0471 DD 66 FF      [19]  768 	ld	h,-1 (ix)
+   046E DD 6E F5      [19]  767 	ld	l,-11 (ix)
+   0471 DD 66 F6      [19]  768 	ld	h,-10 (ix)
    0474 36 7E         [10]  769 	ld	(hl),#0x7E
                             770 ;src/game/world.c:135: p_forest[4] = 0b11111110; 
-   0476 DD 6E F6      [19]  771 	ld	l,-10 (ix)
-   0479 DD 66 F7      [19]  772 	ld	h,-9 (ix)
+   0476 DD 6E F3      [19]  771 	ld	l,-13 (ix)
+   0479 DD 66 F4      [19]  772 	ld	h,-12 (ix)
    047C 36 FE         [10]  773 	ld	(hl),#0xFE
                             774 ;src/game/world.c:136: p_forest[5] = 0b01011111;
-   047E DD 6E F4      [19]  775 	ld	l,-12 (ix)
-   0481 DD 66 F5      [19]  776 	ld	h,-11 (ix)
+   047E DD 6E FE      [19]  775 	ld	l,-2 (ix)
+   0481 DD 66 FF      [19]  776 	ld	h,-1 (ix)
    0484 36 5F         [10]  777 	ld	(hl),#0x5F
                             778 ;src/game/world.c:137: p_forest[6] = 0b11001111;
-   0486 DD 6E F8      [19]  779 	ld	l,-8 (ix)
-   0489 DD 66 F9      [19]  780 	ld	h,-7 (ix)
+   0486 DD 6E FC      [19]  779 	ld	l,-4 (ix)
+   0489 DD 66 FD      [19]  780 	ld	h,-3 (ix)
    048C 36 CF         [10]  781 	ld	(hl),#0xCF
                             782 ;src/game/world.c:138: p_forest[7] = 0b10001100;
-   048E DD 6E F1      [19]  783 	ld	l,-15 (ix)
-   0491 DD 66 F2      [19]  784 	ld	h,-14 (ix)
+   048E DD 6E FA      [19]  783 	ld	l,-6 (ix)
+   0491 DD 66 FB      [19]  784 	ld	h,-5 (ix)
    0494 36 8C         [10]  785 	ld	(hl),#0x8C
                             786 ;src/game/world.c:139: break;
    0496 18 70         [12]  787 	jr	00106$
                             788 ;src/game/world.c:140: case 2:
    0498                     789 00104$:
                             790 ;src/game/world.c:141: p_forest[0] = 0b00110000;
-   0498 DD 6E FA      [19]  791 	ld	l,-6 (ix)
-   049B DD 66 FB      [19]  792 	ld	h,-5 (ix)
+   0498 DD 6E F1      [19]  791 	ld	l,-15 (ix)
+   049B DD 66 F2      [19]  792 	ld	h,-14 (ix)
    049E 36 30         [10]  793 	ld	(hl),#0x30
                             794 ;src/game/world.c:142: p_forest[1] = 0b11110100;
    04A0 FD 36 00 F4   [19]  795 	ld	0 (iy), #0xF4
@@ -797,32 +797,32 @@
    04A4 3E FF         [ 7]  797 	ld	a,#0xFF
    04A6 12            [ 7]  798 	ld	(de),a
                             799 ;src/game/world.c:144: p_forest[3] = 0b11111111;
-   04A7 DD 6E FE      [19]  800 	ld	l,-2 (ix)
-   04AA DD 66 FF      [19]  801 	ld	h,-1 (ix)
+   04A7 DD 6E F5      [19]  800 	ld	l,-11 (ix)
+   04AA DD 66 F6      [19]  801 	ld	h,-10 (ix)
    04AD 36 FF         [10]  802 	ld	(hl),#0xFF
                             803 ;src/game/world.c:145: p_forest[4] = 0b01111100;
-   04AF DD 6E F6      [19]  804 	ld	l,-10 (ix)
-   04B2 DD 66 F7      [19]  805 	ld	h,-9 (ix)
+   04AF DD 6E F3      [19]  804 	ld	l,-13 (ix)
+   04B2 DD 66 F4      [19]  805 	ld	h,-12 (ix)
    04B5 36 7C         [10]  806 	ld	(hl),#0x7C
                             807 ;src/game/world.c:146: p_forest[5] = 0b01111110;
-   04B7 DD 6E F4      [19]  808 	ld	l,-12 (ix)
-   04BA DD 66 F5      [19]  809 	ld	h,-11 (ix)
+   04B7 DD 6E FE      [19]  808 	ld	l,-2 (ix)
+   04BA DD 66 FF      [19]  809 	ld	h,-1 (ix)
    04BD 36 7E         [10]  810 	ld	(hl),#0x7E
                             811 ;src/game/world.c:147: p_forest[6] = 0b00111110;
-   04BF DD 6E F8      [19]  812 	ld	l,-8 (ix)
-   04C2 DD 66 F9      [19]  813 	ld	h,-7 (ix)
+   04BF DD 6E FC      [19]  812 	ld	l,-4 (ix)
+   04C2 DD 66 FD      [19]  813 	ld	h,-3 (ix)
    04C5 36 3E         [10]  814 	ld	(hl),#0x3E
                             815 ;src/game/world.c:148: p_forest[7] = 0b00011000;
-   04C7 DD 6E F1      [19]  816 	ld	l,-15 (ix)
-   04CA DD 66 F2      [19]  817 	ld	h,-14 (ix)
+   04C7 DD 6E FA      [19]  816 	ld	l,-6 (ix)
+   04CA DD 66 FB      [19]  817 	ld	h,-5 (ix)
    04CD 36 18         [10]  818 	ld	(hl),#0x18
                             819 ;src/game/world.c:149: break;
    04CF 18 37         [12]  820 	jr	00106$
                             821 ;src/game/world.c:150: case 3:
    04D1                     822 00105$:
                             823 ;src/game/world.c:151: p_forest[0] = 0b11000000; 
-   04D1 DD 6E FA      [19]  824 	ld	l,-6 (ix)
-   04D4 DD 66 FB      [19]  825 	ld	h,-5 (ix)
+   04D1 DD 6E F1      [19]  824 	ld	l,-15 (ix)
+   04D4 DD 66 F2      [19]  825 	ld	h,-14 (ix)
    04D7 36 C0         [10]  826 	ld	(hl),#0xC0
                             827 ;src/game/world.c:152: p_forest[1] = 0b11100111;
    04D9 FD 36 00 E7   [19]  828 	ld	0 (iy), #0xE7
@@ -830,36 +830,36 @@
    04DD 3E 7E         [ 7]  830 	ld	a,#0x7E
    04DF 12            [ 7]  831 	ld	(de),a
                             832 ;src/game/world.c:154: p_forest[3] = 0b01111110;
-   04E0 DD 6E FE      [19]  833 	ld	l,-2 (ix)
-   04E3 DD 66 FF      [19]  834 	ld	h,-1 (ix)
+   04E0 DD 6E F5      [19]  833 	ld	l,-11 (ix)
+   04E3 DD 66 F6      [19]  834 	ld	h,-10 (ix)
    04E6 36 7E         [10]  835 	ld	(hl),#0x7E
                             836 ;src/game/world.c:155: p_forest[4] = 0b11111110;
-   04E8 DD 6E F6      [19]  837 	ld	l,-10 (ix)
-   04EB DD 66 F7      [19]  838 	ld	h,-9 (ix)
+   04E8 DD 6E F3      [19]  837 	ld	l,-13 (ix)
+   04EB DD 66 F4      [19]  838 	ld	h,-12 (ix)
    04EE 36 FE         [10]  839 	ld	(hl),#0xFE
                             840 ;src/game/world.c:156: p_forest[5] = 0b11111100;
-   04F0 DD 6E F4      [19]  841 	ld	l,-12 (ix)
-   04F3 DD 66 F5      [19]  842 	ld	h,-11 (ix)
+   04F0 DD 6E FE      [19]  841 	ld	l,-2 (ix)
+   04F3 DD 66 FF      [19]  842 	ld	h,-1 (ix)
    04F6 36 FC         [10]  843 	ld	(hl),#0xFC
                             844 ;src/game/world.c:157: p_forest[6] = 0b01111000;
-   04F8 DD 6E F8      [19]  845 	ld	l,-8 (ix)
-   04FB DD 66 F9      [19]  846 	ld	h,-7 (ix)
+   04F8 DD 6E FC      [19]  845 	ld	l,-4 (ix)
+   04FB DD 66 FD      [19]  846 	ld	h,-3 (ix)
    04FE 36 78         [10]  847 	ld	(hl),#0x78
                             848 ;src/game/world.c:158: p_forest[7] = 0b00110000;
-   0500 DD 6E F1      [19]  849 	ld	l,-15 (ix)
-   0503 DD 66 F2      [19]  850 	ld	h,-14 (ix)
+   0500 DD 6E FA      [19]  849 	ld	l,-6 (ix)
+   0503 DD 66 FB      [19]  850 	ld	h,-5 (ix)
    0506 36 30         [10]  851 	ld	(hl),#0x30
                             852 ;src/game/world.c:160: }
    0508                     853 00106$:
                             854 ;src/game/world.c:161: patternTile(FOREST, iy, 8, 8, p_forest);
-   0508 DD 6E FA      [19]  855 	ld	l,-6 (ix)
-   050B DD 66 FB      [19]  856 	ld	h,-5 (ix)
+   0508 DD 6E F1      [19]  855 	ld	l,-15 (ix)
+   050B DD 66 F2      [19]  856 	ld	h,-14 (ix)
    050E C5            [11]  857 	push	bc
    050F E5            [11]  858 	push	hl
    0510 21 08 08      [10]  859 	ld	hl,#0x0808
    0513 E5            [11]  860 	push	hl
-   0514 DD 6E FC      [19]  861 	ld	l,-4 (ix)
-   0517 DD 66 FD      [19]  862 	ld	h,-3 (ix)
+   0514 DD 6E F8      [19]  861 	ld	l,-8 (ix)
+   0517 DD 66 F9      [19]  862 	ld	h,-7 (ix)
    051A E5            [11]  863 	push	hl
    051B 3E 08         [ 7]  864 	ld	a,#0x08
    051D F5            [11]  865 	push	af
@@ -929,10 +929,10 @@
                             929 ;src/game/world.c:178: p_world[iy] = cpct_rand()%3+2;
    0573 3Er00         [ 7]  930 	ld	a,#<(_p_world)
    0575 85            [ 4]  931 	add	a, l
-   0576 DD 77 F1      [19]  932 	ld	-15 (ix),a
+   0576 DD 77 FA      [19]  932 	ld	-6 (ix),a
    0579 3Es00         [ 7]  933 	ld	a,#>(_p_world)
    057B 8C            [ 4]  934 	adc	a, h
-   057C DD 77 F2      [19]  935 	ld	-14 (ix),a
+   057C DD 77 FB      [19]  935 	ld	-5 (ix),a
    057F D5            [11]  936 	push	de
    0580 CDr00r00      [17]  937 	call	_cpct_getRandom_mxor_u8
    0583 45            [ 4]  938 	ld	b,l
@@ -948,8 +948,8 @@
    0590 7D            [ 4]  948 	ld	a,l
    0591 D1            [10]  949 	pop	de
    0592 C6 02         [ 7]  950 	add	a, #0x02
-   0594 DD 6E F1      [19]  951 	ld	l,-15 (ix)
-   0597 DD 66 F2      [19]  952 	ld	h,-14 (ix)
+   0594 DD 6E FA      [19]  951 	ld	l,-6 (ix)
+   0597 DD 66 FB      [19]  952 	ld	h,-5 (ix)
    059A 77            [ 7]  953 	ld	(hl),a
    059B 1B            [ 6]  954 	dec	de
                             955 ;src/game/world.c:175: for(ix=0; ix<NBURBAN; ix++)
@@ -957,12 +957,12 @@
    059D B3            [ 4]  957 	or	a,e
    059E 20 C2         [12]  958 	jr	NZ,00128$
                             959 ;src/game/world.c:181: for(ix=0; ix<NBURBAN; ix++)
-   05A0 21 08 00      [10]  960 	ld	hl,#0x0008
+   05A0 21 0A 00      [10]  960 	ld	hl,#0x000A
    05A3 39            [11]  961 	add	hl,sp
    05A4 4D            [ 4]  962 	ld	c,l
    05A5 44            [ 4]  963 	ld	b,h
-   05A6 DD 36 EF 00   [19]  964 	ld	-17 (ix),#0x00
-   05AA DD 36 F0 00   [19]  965 	ld	-16 (ix),#0x00
+   05A6 DD 36 ED 00   [19]  964 	ld	-19 (ix),#0x00
+   05AA DD 36 EE 00   [19]  965 	ld	-18 (ix),#0x00
    05AE                     966 00129$:
                             967 ;src/game/world.c:183: iy = cpct_rand16()%(WIDTH*HEIGHT);
    05AE C5            [11]  968 	push	bc
@@ -974,8 +974,8 @@
    05BA F1            [10]  974 	pop	af
    05BB F1            [10]  975 	pop	af
    05BC C1            [10]  976 	pop	bc
-   05BD DD 75 F1      [19]  977 	ld	-15 (ix),l
-   05C0 DD 74 F2      [19]  978 	ld	-14 (ix),h
+   05BD DD 75 FA      [19]  977 	ld	-6 (ix),l
+   05C0 DD 74 FB      [19]  978 	ld	-5 (ix),h
                             979 ;src/game/world.c:185: switch(cpct_rand()%6)
    05C3 C5            [11]  980 	push	bc
    05C4 CDr00r00      [17]  981 	call	_cpct_getRandom_mxor_u8
@@ -995,8 +995,8 @@
                             995 ;src/game/world.c:189: p_cities[1] = 0b01000110; // 01100010;
    05D9 21 01 00      [10]  996 	ld	hl,#0x0001
    05DC 09            [11]  997 	add	hl,bc
-   05DD DD 75 F8      [19]  998 	ld	-8 (ix),l
-   05E0 DD 74 F9      [19]  999 	ld	-7 (ix),h
+   05DD DD 75 FC      [19]  998 	ld	-4 (ix),l
+   05E0 DD 74 FD      [19]  999 	ld	-3 (ix),h
                            1000 ;src/game/world.c:185: switch(cpct_rand()%6)
    05E3 16 00         [ 7] 1001 	ld	d,#0x00
    05E5 21rEBr05      [10] 1002 	ld	hl,#00196$
@@ -1016,8 +1016,8 @@
    05F7 3E 72         [ 7] 1016 	ld	a,#0x72
    05F9 02            [ 7] 1017 	ld	(bc),a
                            1018 ;src/game/world.c:189: p_cities[1] = 0b01000110; // 01100010;
-   05FA DD 6E F8      [19] 1019 	ld	l,-8 (ix)
-   05FD DD 66 F9      [19] 1020 	ld	h,-7 (ix)
+   05FA DD 6E FC      [19] 1019 	ld	l,-4 (ix)
+   05FD DD 66 FD      [19] 1020 	ld	h,-3 (ix)
    0600 36 46         [10] 1021 	ld	(hl),#0x46
                            1022 ;src/game/world.c:190: break;
    0602 18 3F         [12] 1023 	jr	00116$
@@ -1027,8 +1027,8 @@
    0604 3E 60         [ 7] 1027 	ld	a,#0x60
    0606 02            [ 7] 1028 	ld	(bc),a
                            1029 ;src/game/world.c:194: p_cities[1] = 0b00000110; // 01100000;
-   0607 DD 6E F8      [19] 1030 	ld	l,-8 (ix)
-   060A DD 66 F9      [19] 1031 	ld	h,-7 (ix)
+   0607 DD 6E FC      [19] 1030 	ld	l,-4 (ix)
+   060A DD 66 FD      [19] 1031 	ld	h,-3 (ix)
    060D 36 06         [10] 1032 	ld	(hl),#0x06
                            1033 ;src/game/world.c:195: break;
    060F 18 32         [12] 1034 	jr	00116$
@@ -1038,8 +1038,8 @@
    0611 3E 10         [ 7] 1038 	ld	a,#0x10
    0613 02            [ 7] 1039 	ld	(bc),a
                            1040 ;src/game/world.c:199: p_cities[1] = 0b00000110; // 01100000;
-   0614 DD 6E F8      [19] 1041 	ld	l,-8 (ix)
-   0617 DD 66 F9      [19] 1042 	ld	h,-7 (ix)
+   0614 DD 6E FC      [19] 1041 	ld	l,-4 (ix)
+   0617 DD 66 FD      [19] 1042 	ld	h,-3 (ix)
    061A 36 06         [10] 1043 	ld	(hl),#0x06
                            1044 ;src/game/world.c:200: break;
    061C 18 25         [12] 1045 	jr	00116$
@@ -1049,8 +1049,8 @@
    061E 3E C0         [ 7] 1049 	ld	a,#0xC0
    0620 02            [ 7] 1050 	ld	(bc),a
                            1051 ;src/game/world.c:204: p_cities[1] = 0b00110001; // 10001100;
-   0621 DD 6E F8      [19] 1052 	ld	l,-8 (ix)
-   0624 DD 66 F9      [19] 1053 	ld	h,-7 (ix)
+   0621 DD 6E FC      [19] 1052 	ld	l,-4 (ix)
+   0624 DD 66 FD      [19] 1053 	ld	h,-3 (ix)
    0627 36 31         [10] 1054 	ld	(hl),#0x31
                            1055 ;src/game/world.c:205: break;
    0629 18 18         [12] 1056 	jr	00116$
@@ -1060,8 +1060,8 @@
    062B 3E C4         [ 7] 1060 	ld	a,#0xC4
    062D 02            [ 7] 1061 	ld	(bc),a
                            1062 ;src/game/world.c:209: p_cities[1] = 0b00001110; // 01110000;
-   062E DD 6E F8      [19] 1063 	ld	l,-8 (ix)
-   0631 DD 66 F9      [19] 1064 	ld	h,-7 (ix)
+   062E DD 6E FC      [19] 1063 	ld	l,-4 (ix)
+   0631 DD 66 FD      [19] 1064 	ld	h,-3 (ix)
    0634 36 0E         [10] 1065 	ld	(hl),#0x0E
                            1066 ;src/game/world.c:210: break;
    0636 18 0B         [12] 1067 	jr	00116$
@@ -1071,8 +1071,8 @@
    0638 3E 40         [ 7] 1071 	ld	a,#0x40
    063A 02            [ 7] 1072 	ld	(bc),a
                            1073 ;src/game/world.c:214: p_cities[1] = 0b01001110; // 01110010;
-   063B DD 6E F8      [19] 1074 	ld	l,-8 (ix)
-   063E DD 66 F9      [19] 1075 	ld	h,-7 (ix)
+   063B DD 6E FC      [19] 1074 	ld	l,-4 (ix)
+   063E DD 66 FD      [19] 1075 	ld	h,-3 (ix)
    0641 36 4E         [10] 1076 	ld	(hl),#0x4E
                            1077 ;src/game/world.c:216: }
    0643                    1078 00116$:
@@ -1083,8 +1083,8 @@
    0646 E5            [11] 1083 	push	hl
    0647 21 04 04      [10] 1084 	ld	hl,#0x0404
    064A E5            [11] 1085 	push	hl
-   064B DD 6E F1      [19] 1086 	ld	l,-15 (ix)
-   064E DD 66 F2      [19] 1087 	ld	h,-14 (ix)
+   064B DD 6E FA      [19] 1086 	ld	l,-6 (ix)
+   064E DD 66 FB      [19] 1087 	ld	h,-5 (ix)
    0651 E5            [11] 1088 	push	hl
    0652 3E 02         [ 7] 1089 	ld	a,#0x02
    0654 F5            [11] 1090 	push	af
@@ -1095,13 +1095,13 @@
    065D F9            [ 6] 1095 	ld	sp,hl
    065E C1            [10] 1096 	pop	bc
                            1097 ;src/game/world.c:181: for(ix=0; ix<NBURBAN; ix++)
-   065F DD 34 EF      [23] 1098 	inc	-17 (ix)
+   065F DD 34 ED      [23] 1098 	inc	-19 (ix)
    0662 20 03         [12] 1099 	jr	NZ,00197$
-   0664 DD 34 F0      [23] 1100 	inc	-16 (ix)
+   0664 DD 34 EE      [23] 1100 	inc	-18 (ix)
    0667                    1101 00197$:
-   0667 DD 7E EF      [19] 1102 	ld	a,-17 (ix)
+   0667 DD 7E ED      [19] 1102 	ld	a,-19 (ix)
    066A D6 14         [ 7] 1103 	sub	a, #0x14
-   066C DD 7E F0      [19] 1104 	ld	a,-16 (ix)
+   066C DD 7E EE      [19] 1104 	ld	a,-18 (ix)
    066F 17            [ 4] 1105 	rla
    0670 3F            [ 4] 1106 	ccf
    0671 1F            [ 4] 1107 	rra
