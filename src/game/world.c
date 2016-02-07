@@ -97,7 +97,6 @@ void generateWorld()
 	u8 p_forest[8];
 	u8 p_cities[2];
 
-	locDelocked = 1;
 	CURSOR_MODE = NONE;
 
 	// Initialize random number generator;

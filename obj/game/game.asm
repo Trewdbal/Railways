@@ -1,7 +1,7 @@
 ;--------------------------------------------------------
 ; File Created by SDCC : free open source ANSI-C Compiler
 ; Version 3.5.4 #9329 (Linux)
-; This file was generated Sun Feb  7 16:09:14 2016
+; This file was generated Sun Feb  7 17:44:04 2016
 ;--------------------------------------------------------
 	.module game
 	.optsdcc -mz80
@@ -757,33 +757,36 @@ _game::
 	add	hl,sp
 	ld	sp,hl
 ;src/game/game.c:150: int ulx = 0;
-	ld	-12 (ix),#0x00
-	ld	-11 (ix),#0x00
-;src/game/game.c:151: int uly = 0;
 	ld	-9 (ix),#0x00
 	ld	-8 (ix),#0x00
-;src/game/game.c:152: int xCursor = 10;
-	ld	-7 (ix),#0x0A
-	ld	-6 (ix),#0x00
-;src/game/game.c:153: int yCursor = 6;
-	ld	-14 (ix),#0x06
-	ld	-13 (ix),#0x00
-;src/game/game.c:155: u8 exit=0;
+;src/game/game.c:151: int uly = 0;
+	ld	-11 (ix),#0x00
 	ld	-10 (ix),#0x00
-;src/game/game.c:158: drawBoxM2(50, 50);
+;src/game/game.c:152: int xCursor = 10;
+	ld	-16 (ix),#0x0A
+	ld	-15 (ix),#0x00
+;src/game/game.c:153: int yCursor = 6;
+	ld	-7 (ix),#0x06
+	ld	-6 (ix),#0x00
+;src/game/game.c:155: u8 exit=0;
+	ld	-14 (ix),#0x00
+;src/game/game.c:157: locDelocked = 4;
+	ld	hl,#_locDelocked + 0
+	ld	(hl), #0x04
+;src/game/game.c:159: drawBoxM2(50, 50);
 	ld	hl,#0x0032
 	push	hl
 	ld	l, #0x32
 	push	hl
 	call	_drawBoxM2
 	pop	af
-;src/game/game.c:159: p_video = cpct_getScreenPtr(SCR_VMEM, 32, 95);
+;src/game/game.c:160: p_video = cpct_getScreenPtr(SCR_VMEM, 32, 95);
 	ld	hl, #0x5F20
 	ex	(sp),hl
 	ld	hl,#0xC000
 	push	hl
 	call	_cpct_getScreenPtr
-;src/game/game.c:160: cpct_drawStringM2 ("Generating world...", p_video, 0);	
+;src/game/game.c:161: cpct_drawStringM2 ("Generating world...", p_video, 0);	
 	ld	c, l
 	ld	b, h
 	ld	de,#___str_33
@@ -796,11 +799,11 @@ _game::
 	pop	af
 	pop	af
 	inc	sp
-;src/game/game.c:162: generateWorld();
+;src/game/game.c:163: generateWorld();
 	call	_generateWorld
-;src/game/game.c:164: putM1();
+;src/game/game.c:165: putM1();
 	call	_putM1
-;src/game/game.c:165: cpct_clearScreen(cpct_px2byteM1(0,0,0,0));
+;src/game/game.c:166: cpct_clearScreen(cpct_px2byteM1(0,0,0,0));
 	ld	hl,#0x0000
 	push	hl
 	ld	l, #0x00
@@ -816,37 +819,34 @@ _game::
 	ld	hl,#0xC000
 	push	hl
 	call	_cpct_memset
-;src/game/game.c:166: drawWorld(ulx, uly);
+;src/game/game.c:167: drawWorld(ulx, uly);
 	ld	hl,#0x0000
 	push	hl
 	call	_drawWorld
 	pop	af
-;src/game/game.c:168: do{
+;src/game/game.c:169: do{
 00181$:
-;src/game/game.c:169: cpct_scanKeyboard(); 
+;src/game/game.c:170: cpct_scanKeyboard(); 
 	call	_cpct_scanKeyboard
-;src/game/game.c:171: if ( cpct_isKeyPressed(Key_CursorUp) )
+;src/game/game.c:172: if ( cpct_isKeyPressed(Key_CursorUp) )
 	ld	hl,#0x0100
 	call	_cpct_isKeyPressed
-	ld	-2 (ix),l
-;src/game/game.c:173: drawTile(ulx, uly, xCursor, yCursor);
-	ld	a,-14 (ix)
-	ld	-1 (ix),a
+	ld	-3 (ix),l
+;src/game/game.c:174: drawTile(ulx, uly, xCursor, yCursor);
 	ld	a,-7 (ix)
-	ld	-3 (ix),a
-	ld	a,-9 (ix)
+	ld	-2 (ix),a
+	ld	a,-16 (ix)
 	ld	-4 (ix),a
-	ld	a,-12 (ix)
+	ld	a,-11 (ix)
 	ld	-5 (ix),a
-;src/game/game.c:171: if ( cpct_isKeyPressed(Key_CursorUp) )
-	ld	a,-2 (ix)
+	ld	a,-9 (ix)
+	ld	-1 (ix),a
+;src/game/game.c:172: if ( cpct_isKeyPressed(Key_CursorUp) )
+	ld	a,-3 (ix)
 	or	a, a
 	jp	Z,00179$
-;src/game/game.c:173: drawTile(ulx, uly, xCursor, yCursor);
-	ld	a,-1 (ix)
-	push	af
-	inc	sp
-	ld	a,-3 (ix)
+;src/game/game.c:174: drawTile(ulx, uly, xCursor, yCursor);
+	ld	a,-2 (ix)
 	push	af
 	inc	sp
 	ld	a,-4 (ix)
@@ -855,201 +855,204 @@ _game::
 	ld	a,-5 (ix)
 	push	af
 	inc	sp
-	call	_drawTile
-	pop	af
-	pop	af
-;src/game/game.c:175: yCursor-=1;
-	ld	l,-14 (ix)
-	ld	h,-13 (ix)
-	dec	hl
-	ld	-14 (ix),l
-	ld	-13 (ix),h
-;src/game/game.c:178: if(yCursor<0)
-	bit	7, -13 (ix)
-	jr	Z,00210$
-;src/game/game.c:180: yCursor=0;
-	ld	-14 (ix),#0x00
-	ld	-13 (ix),#0x00
-;src/game/game.c:183: if(uly>0)
-	xor	a, a
-	cp	a, -9 (ix)
-	sbc	a, -8 (ix)
-	jp	PO, 00387$
-	xor	a, #0x80
-00387$:
-	jp	P,00210$
-;src/game/game.c:185: uly-=1;
-	ld	l,-9 (ix)
-	ld	h,-8 (ix)
-	dec	hl
-	ld	-9 (ix),l
-	ld	-8 (ix),h
-;src/game/game.c:173: drawTile(ulx, uly, xCursor, yCursor);
-	ld	a,-9 (ix)
-;src/game/game.c:186: drawWorld(ulx, uly);
-	ld	-4 (ix), a
-	push	af
-	inc	sp
-	ld	a,-5 (ix)
-	push	af
-	inc	sp
-	call	_drawWorld
-	pop	af
-;src/game/game.c:191: for(i=0; i<5000; i++) {}
-00210$:
-	ld	-16 (ix),#0x88
-	ld	-15 (ix),#0x13
-00186$:
-	ld	l,-16 (ix)
-	ld	h,-15 (ix)
-	dec	hl
-	ld	-16 (ix),l
-	ld	-15 (ix), h
-	ld	a, h
-	or	a,-16 (ix)
-	jr	NZ,00186$
-	jp	00180$
-00179$:
-;src/game/game.c:194: else if ( cpct_isKeyPressed(Key_CursorDown) )
-	ld	hl,#0x0400
-	call	_cpct_isKeyPressed
-	ld	a,l
-	or	a, a
-	jp	Z,00176$
-;src/game/game.c:196: drawTile(ulx, uly, xCursor, yCursor);
 	ld	a,-1 (ix)
 	push	af
 	inc	sp
-	ld	a,-3 (ix)
-	push	af
-	inc	sp
-	ld	a,-4 (ix)
-	push	af
-	inc	sp
-	ld	a,-5 (ix)
-	push	af
-	inc	sp
 	call	_drawTile
 	pop	af
 	pop	af
-;src/game/game.c:197: yCursor+=1;
-	inc	-14 (ix)
-	jr	NZ,00388$
-	inc	-13 (ix)
-00388$:
-;src/game/game.c:198: if(yCursor>NBTILE_H-1)
-	ld	a,#0x0B
-	cp	a, -14 (ix)
-	ld	a,#0x00
-	sbc	a, -13 (ix)
-	jp	PO, 00389$
-	xor	a, #0x80
-00389$:
-	jp	P,00215$
-;src/game/game.c:200: yCursor=NBTILE_H-1;
-	ld	-14 (ix),#0x0B
-	ld	-13 (ix),#0x00
-;src/game/game.c:201: if(uly<HEIGHT-NBTILE_H)
-	ld	a,-9 (ix)
-	sub	a, #0x24
-	ld	a,-8 (ix)
-	rla
-	ccf
-	rra
-	sbc	a, #0x80
-	jr	NC,00215$
-;src/game/game.c:203: uly+=1;
-	inc	-9 (ix)
-	jr	NZ,00390$
-	inc	-8 (ix)
-00390$:
-;src/game/game.c:173: drawTile(ulx, uly, xCursor, yCursor);
-	ld	a,-9 (ix)
-;src/game/game.c:204: drawWorld(ulx, uly);
-	ld	-4 (ix), a
-	push	af
-	inc	sp
-	ld	a,-5 (ix)
-	push	af
-	inc	sp
-	call	_drawWorld
-	pop	af
-;src/game/game.c:209: for(i=0; i<5000; i++) {}
-00215$:
-	ld	-16 (ix),#0x88
-	ld	-15 (ix),#0x13
-00189$:
-	ld	l,-16 (ix)
-	ld	h,-15 (ix)
-	dec	hl
-	ld	-16 (ix),l
-	ld	-15 (ix), h
-	ld	a, h
-	or	a,-16 (ix)
-	jr	NZ,00189$
-	jp	00180$
-00176$:
-;src/game/game.c:212: else if ( cpct_isKeyPressed(Key_CursorLeft) )
-	ld	hl,#0x0101
-	call	_cpct_isKeyPressed
-	ld	a,l
-	or	a, a
-	jr	Z,00173$
-;src/game/game.c:214: drawTile(ulx, uly, xCursor, yCursor);
-	ld	a,-1 (ix)
-	push	af
-	inc	sp
-	ld	a,-3 (ix)
-	push	af
-	inc	sp
-	ld	a,-4 (ix)
-	push	af
-	inc	sp
-	ld	a,-5 (ix)
-	push	af
-	inc	sp
-	call	_drawTile
-	pop	af
-	pop	af
-;src/game/game.c:215: xCursor-=1;
+;src/game/game.c:176: yCursor-=1;
 	ld	l,-7 (ix)
 	ld	h,-6 (ix)
 	dec	hl
 	ld	-7 (ix),l
 	ld	-6 (ix),h
-;src/game/game.c:216: if(xCursor<0)
+;src/game/game.c:179: if(yCursor<0)
 	bit	7, -6 (ix)
-	jr	Z,00220$
-;src/game/game.c:218: xCursor=0;
+	jr	Z,00210$
+;src/game/game.c:181: yCursor=0;
 	ld	-7 (ix),#0x00
 	ld	-6 (ix),#0x00
-;src/game/game.c:219: if(ulx>0)
+;src/game/game.c:184: if(uly>0)
 	xor	a, a
-	cp	a, -12 (ix)
-	sbc	a, -11 (ix)
-	jp	PO, 00391$
+	cp	a, -11 (ix)
+	sbc	a, -10 (ix)
+	jp	PO, 00387$
 	xor	a, #0x80
-00391$:
-	jp	P,00220$
-;src/game/game.c:221: ulx-=1;
-	ld	l,-12 (ix)
-	ld	h,-11 (ix)
+00387$:
+	jp	P,00210$
+;src/game/game.c:186: uly-=1;
+	ld	l,-11 (ix)
+	ld	h,-10 (ix)
 	dec	hl
-	ld	-12 (ix),l
-	ld	-11 (ix),h
-;src/game/game.c:173: drawTile(ulx, uly, xCursor, yCursor);
-	ld	a,-12 (ix)
-	ld	-5 (ix),a
-;src/game/game.c:222: drawWorld(ulx, uly);
+	ld	-11 (ix),l
+	ld	-10 (ix),h
+;src/game/game.c:174: drawTile(ulx, uly, xCursor, yCursor);
+	ld	a,-11 (ix)
+;src/game/game.c:187: drawWorld(ulx, uly);
+	ld	-5 (ix), a
+	push	af
+	inc	sp
+	ld	a,-1 (ix)
+	push	af
+	inc	sp
+	call	_drawWorld
+	pop	af
+;src/game/game.c:192: for(i=0; i<5000; i++) {}
+00210$:
+	ld	-13 (ix),#0x88
+	ld	-12 (ix),#0x13
+00186$:
+	ld	l,-13 (ix)
+	ld	h,-12 (ix)
+	dec	hl
+	ld	-13 (ix),l
+	ld	-12 (ix), h
+	ld	a, h
+	or	a,-13 (ix)
+	jr	NZ,00186$
+	jp	00180$
+00179$:
+;src/game/game.c:195: else if ( cpct_isKeyPressed(Key_CursorDown) )
+	ld	hl,#0x0400
+	call	_cpct_isKeyPressed
+	ld	a,l
+	or	a, a
+	jp	Z,00176$
+;src/game/game.c:197: drawTile(ulx, uly, xCursor, yCursor);
+	ld	a,-2 (ix)
+	push	af
+	inc	sp
 	ld	a,-4 (ix)
 	push	af
 	inc	sp
 	ld	a,-5 (ix)
 	push	af
 	inc	sp
+	ld	a,-1 (ix)
+	push	af
+	inc	sp
+	call	_drawTile
+	pop	af
+	pop	af
+;src/game/game.c:198: yCursor+=1;
+	inc	-7 (ix)
+	jr	NZ,00388$
+	inc	-6 (ix)
+00388$:
+;src/game/game.c:199: if(yCursor>NBTILE_H-1)
+	ld	a,#0x0B
+	cp	a, -7 (ix)
+	ld	a,#0x00
+	sbc	a, -6 (ix)
+	jp	PO, 00389$
+	xor	a, #0x80
+00389$:
+	jp	P,00215$
+;src/game/game.c:201: yCursor=NBTILE_H-1;
+	ld	-7 (ix),#0x0B
+	ld	-6 (ix),#0x00
+;src/game/game.c:202: if(uly<HEIGHT-NBTILE_H)
+	ld	a,-11 (ix)
+	sub	a, #0x24
+	ld	a,-10 (ix)
+	rla
+	ccf
+	rra
+	sbc	a, #0x80
+	jr	NC,00215$
+;src/game/game.c:204: uly+=1;
+	inc	-11 (ix)
+	jr	NZ,00390$
+	inc	-10 (ix)
+00390$:
+;src/game/game.c:174: drawTile(ulx, uly, xCursor, yCursor);
+	ld	a,-11 (ix)
+;src/game/game.c:205: drawWorld(ulx, uly);
+	ld	-5 (ix), a
+	push	af
+	inc	sp
+	ld	a,-1 (ix)
+	push	af
+	inc	sp
 	call	_drawWorld
 	pop	af
-;src/game/game.c:227: for(i=0; i<14000; i++) {}
+;src/game/game.c:210: for(i=0; i<5000; i++) {}
+00215$:
+	ld	-13 (ix),#0x88
+	ld	-12 (ix),#0x13
+00189$:
+	ld	l,-13 (ix)
+	ld	h,-12 (ix)
+	dec	hl
+	ld	-13 (ix),l
+	ld	-12 (ix), h
+	ld	a, h
+	or	a,-13 (ix)
+	jr	NZ,00189$
+	jp	00180$
+00176$:
+;src/game/game.c:213: else if ( cpct_isKeyPressed(Key_CursorLeft) )
+	ld	hl,#0x0101
+	call	_cpct_isKeyPressed
+	ld	a,l
+	or	a, a
+	jr	Z,00173$
+;src/game/game.c:215: drawTile(ulx, uly, xCursor, yCursor);
+	ld	a,-2 (ix)
+	push	af
+	inc	sp
+	ld	a,-4 (ix)
+	push	af
+	inc	sp
+	ld	a,-5 (ix)
+	push	af
+	inc	sp
+	ld	a,-1 (ix)
+	push	af
+	inc	sp
+	call	_drawTile
+	pop	af
+	pop	af
+;src/game/game.c:216: xCursor-=1;
+	ld	l,-16 (ix)
+	ld	h,-15 (ix)
+	dec	hl
+	ld	-16 (ix),l
+	ld	-15 (ix),h
+;src/game/game.c:217: if(xCursor<0)
+	bit	7, -15 (ix)
+	jr	Z,00220$
+;src/game/game.c:219: xCursor=0;
+	ld	-16 (ix),#0x00
+	ld	-15 (ix),#0x00
+;src/game/game.c:220: if(ulx>0)
+	xor	a, a
+	cp	a, -9 (ix)
+	sbc	a, -8 (ix)
+	jp	PO, 00391$
+	xor	a, #0x80
+00391$:
+	jp	P,00220$
+;src/game/game.c:222: ulx-=1;
+	ld	l,-9 (ix)
+	ld	h,-8 (ix)
+	dec	hl
+	ld	-9 (ix),l
+	ld	-8 (ix),h
+;src/game/game.c:174: drawTile(ulx, uly, xCursor, yCursor);
+	ld	a,-9 (ix)
+	ld	-1 (ix),a
+;src/game/game.c:223: drawWorld(ulx, uly);
+	ld	a,-5 (ix)
+	push	af
+	inc	sp
+	ld	a,-1 (ix)
+	push	af
+	inc	sp
+	call	_drawWorld
+	pop	af
+;src/game/game.c:228: for(i=0; i<14000; i++) {}
 00220$:
 	ld	hl,#0x36B0
 00192$:
@@ -1059,72 +1062,72 @@ _game::
 	jr	NZ,00192$
 	jp	00180$
 00173$:
-;src/game/game.c:230: else if ( cpct_isKeyPressed(Key_CursorRight) )
+;src/game/game.c:231: else if ( cpct_isKeyPressed(Key_CursorRight) )
 	ld	hl,#0x0200
 	call	_cpct_isKeyPressed
 	ld	a,l
 	or	a, a
 	jr	Z,00170$
-;src/game/game.c:232: drawTile(ulx, uly, xCursor, yCursor);
-	ld	a,-1 (ix)
-	push	af
-	inc	sp
-	ld	a,-3 (ix)
+;src/game/game.c:233: drawTile(ulx, uly, xCursor, yCursor);
+	ld	a,-2 (ix)
 	push	af
 	inc	sp
 	ld	a,-4 (ix)
 	push	af
 	inc	sp
 	ld	a,-5 (ix)
+	push	af
+	inc	sp
+	ld	a,-1 (ix)
 	push	af
 	inc	sp
 	call	_drawTile
 	pop	af
 	pop	af
-;src/game/game.c:233: xCursor+=1;
-	inc	-7 (ix)
+;src/game/game.c:234: xCursor+=1;
+	inc	-16 (ix)
 	jr	NZ,00392$
-	inc	-6 (ix)
+	inc	-15 (ix)
 00392$:
-;src/game/game.c:234: if(xCursor>NBTILE_W-1)
+;src/game/game.c:235: if(xCursor>NBTILE_W-1)
 	ld	a,#0x13
-	cp	a, -7 (ix)
+	cp	a, -16 (ix)
 	ld	a,#0x00
-	sbc	a, -6 (ix)
+	sbc	a, -15 (ix)
 	jp	PO, 00393$
 	xor	a, #0x80
 00393$:
 	jp	P,00225$
-;src/game/game.c:236: xCursor=NBTILE_W-1;
-	ld	-7 (ix),#0x13
-	ld	-6 (ix),#0x00
-;src/game/game.c:237: if(ulx<WIDTH-NBTILE_W)
-	ld	a,-12 (ix)
+;src/game/game.c:237: xCursor=NBTILE_W-1;
+	ld	-16 (ix),#0x13
+	ld	-15 (ix),#0x00
+;src/game/game.c:238: if(ulx<WIDTH-NBTILE_W)
+	ld	a,-9 (ix)
 	sub	a, #0x3C
-	ld	a,-11 (ix)
+	ld	a,-8 (ix)
 	rla
 	ccf
 	rra
 	sbc	a, #0x80
 	jr	NC,00225$
-;src/game/game.c:239: ulx+=1;
-	inc	-12 (ix)
+;src/game/game.c:240: ulx+=1;
+	inc	-9 (ix)
 	jr	NZ,00394$
-	inc	-11 (ix)
+	inc	-8 (ix)
 00394$:
-;src/game/game.c:173: drawTile(ulx, uly, xCursor, yCursor);
-	ld	a,-12 (ix)
-	ld	-5 (ix),a
-;src/game/game.c:240: drawWorld(ulx, uly);
-	ld	a,-4 (ix)
+;src/game/game.c:174: drawTile(ulx, uly, xCursor, yCursor);
+	ld	a,-9 (ix)
+	ld	-1 (ix),a
+;src/game/game.c:241: drawWorld(ulx, uly);
+	ld	a,-5 (ix)
 	push	af
 	inc	sp
-	ld	a,-5 (ix)
+	ld	a,-1 (ix)
 	push	af
 	inc	sp
 	call	_drawWorld
 	pop	af
-;src/game/game.c:245: for(i=0; i<14000; i++) {}
+;src/game/game.c:246: for(i=0; i<14000; i++) {}
 00225$:
 	ld	hl,#0x36B0
 00195$:
@@ -1134,85 +1137,85 @@ _game::
 	jr	NZ,00195$
 	jp	00180$
 00170$:
-;src/game/game.c:249: else if ( cpct_isKeyPressed(Key_Space) )
+;src/game/game.c:250: else if ( cpct_isKeyPressed(Key_Space) )
 	ld	hl,#0x8005
 	call	_cpct_isKeyPressed
 	ld	a,l
 	or	a, a
 	jp	Z,00167$
-;src/game/game.c:251: if(CURSOR_MODE==T_SSNS)
+;src/game/game.c:252: if(CURSOR_MODE==T_SSNS)
 	ld	a,(#_CURSOR_MODE + 0)
 	dec	a
 	jr	NZ,00143$
-;src/game/game.c:252: CURSOR_MODE=T_SSEW;
+;src/game/game.c:253: CURSOR_MODE=T_SSEW;
 	ld	hl,#_CURSOR_MODE + 0
 	ld	(hl), #0x02
 	jr	00237$
 00143$:
-;src/game/game.c:253: else if(CURSOR_MODE==T_SSEW)
+;src/game/game.c:254: else if(CURSOR_MODE==T_SSEW)
 	ld	a,(#_CURSOR_MODE + 0)
 	sub	a, #0x02
 	jr	NZ,00140$
-;src/game/game.c:254: CURSOR_MODE=T_SSNS;
+;src/game/game.c:255: CURSOR_MODE=T_SSNS;
 	ld	hl,#_CURSOR_MODE + 0
 	ld	(hl), #0x01
 	jr	00237$
 00140$:
-;src/game/game.c:255: else if(CURSOR_MODE==T_SMNS)
+;src/game/game.c:256: else if(CURSOR_MODE==T_SMNS)
 	ld	a,(#_CURSOR_MODE + 0)
 	sub	a, #0x03
 	jr	NZ,00137$
-;src/game/game.c:256: CURSOR_MODE=T_SMEW;
+;src/game/game.c:257: CURSOR_MODE=T_SMEW;
 	ld	hl,#_CURSOR_MODE + 0
 	ld	(hl), #0x04
 	jr	00237$
 00137$:
-;src/game/game.c:257: else if(CURSOR_MODE==T_SMEW)
+;src/game/game.c:258: else if(CURSOR_MODE==T_SMEW)
 	ld	a,(#_CURSOR_MODE + 0)
 	sub	a, #0x04
 	jr	NZ,00134$
-;src/game/game.c:258: CURSOR_MODE=T_SMNS;
+;src/game/game.c:259: CURSOR_MODE=T_SMNS;
 	ld	hl,#_CURSOR_MODE + 0
 	ld	(hl), #0x03
 	jr	00237$
 00134$:
-;src/game/game.c:259: else if(CURSOR_MODE==T_SLNS)
+;src/game/game.c:260: else if(CURSOR_MODE==T_SLNS)
 	ld	a,(#_CURSOR_MODE + 0)
 	sub	a, #0x05
 	jr	NZ,00131$
-;src/game/game.c:260: CURSOR_MODE=T_SLEW;
+;src/game/game.c:261: CURSOR_MODE=T_SLEW;
 	ld	hl,#_CURSOR_MODE + 0
 	ld	(hl), #0x06
 	jr	00237$
 00131$:
-;src/game/game.c:261: else if(CURSOR_MODE==T_SLEW)
+;src/game/game.c:262: else if(CURSOR_MODE==T_SLEW)
 	ld	a,(#_CURSOR_MODE + 0)
 	sub	a, #0x06
 	jr	NZ,00128$
-;src/game/game.c:262: CURSOR_MODE=T_SLNS;
+;src/game/game.c:263: CURSOR_MODE=T_SLNS;
 	ld	hl,#_CURSOR_MODE + 0
 	ld	(hl), #0x05
 	jr	00237$
 00128$:
-;src/game/game.c:263: else if(CURSOR_MODE>=T_REW && CURSOR_MODE<T_RNSW)
+;src/game/game.c:264: else if(CURSOR_MODE>=T_REW && CURSOR_MODE<T_RNSW)
 	ld	a,(#_CURSOR_MODE + 0)
 	cp	a,#0x07
 	jr	C,00124$
 	sub	a, #0x10
 	jr	NC,00124$
-;src/game/game.c:264: CURSOR_MODE+=1;
+;src/game/game.c:265: CURSOR_MODE+=1;
 	ld	hl, #_CURSOR_MODE+0
 	inc	(hl)
 	jr	00237$
 00124$:
-;src/game/game.c:265: else if(CURSOR_MODE==T_RNSW)
+;src/game/game.c:266: else if(CURSOR_MODE==T_RNSW)
 	ld	a,(#_CURSOR_MODE + 0)
 	sub	a, #0x10
 	jr	NZ,00237$
-;src/game/game.c:266: CURSOR_MODE=T_REW;
+;src/game/game.c:267: CURSOR_MODE=T_REW;
 	ld	hl,#_CURSOR_MODE + 0
 	ld	(hl), #0x07
-;src/game/game.c:268: for(i=0; i<14000; i++) {}
+;src/game/game.c:269: for(i=0; i<14000; i++) {}
 00237$:
 	ld	hl,#0x36B0
 00198$:
@@ -1222,17 +1225,17 @@ _game::
 	jr	NZ,00198$
 	jp	00180$
 00167$:
-;src/game/game.c:271: else if ( cpct_isKeyPressed(Key_Esc) )
+;src/game/game.c:272: else if ( cpct_isKeyPressed(Key_Esc) )
 	ld	hl,#0x0408
 	call	_cpct_isKeyPressed
 	ld	a,l
 	or	a, a
 	jp	Z,00164$
-;src/game/game.c:274: if(CURSOR_MODE==NONE)
+;src/game/game.c:275: if(CURSOR_MODE==NONE)
 	ld	a,(#_CURSOR_MODE + 0)
 	or	a, a
 	jr	NZ,00150$
-;src/game/game.c:277: const char *txtWindowQuit[] = { 
+;src/game/game.c:278: const char *txtWindowQuit[] = { 
 	ld	hl,#0x0000
 	add	hl,sp
 	ld	e,l
@@ -1252,11 +1255,11 @@ _game::
 	ld	(hl),#<(___str_32)
 	inc	hl
 	ld	(hl),#>(___str_32)
-;src/game/game.c:283: putM2();
+;src/game/game.c:284: putM2();
 	push	de
 	call	_putM2
 	pop	de
-;src/game/game.c:284: if(	drawWindow(txtWindowQuit,3,1) == 1)
+;src/game/game.c:285: if(	drawWindow(txtWindowQuit,3,1) == 1)
 	ld	hl,#0x0103
 	push	hl
 	push	de
@@ -1265,13 +1268,13 @@ _game::
 	pop	af
 	dec	l
 	jr	NZ,00147$
-;src/game/game.c:285: exit=1;
-	ld	-10 (ix),#0x01
+;src/game/game.c:286: exit=1;
+	ld	-14 (ix),#0x01
 	jr	00242$
 00147$:
-;src/game/game.c:288: putM1();
+;src/game/game.c:289: putM1();
 	call	_putM1
-;src/game/game.c:289: cpct_clearScreen(cpct_px2byteM1(0,0,0,0));	
+;src/game/game.c:290: cpct_clearScreen(cpct_px2byteM1(0,0,0,0));	
 	ld	hl,#0x0000
 	push	hl
 	ld	l, #0x00
@@ -1287,25 +1290,22 @@ _game::
 	ld	hl,#0xC000
 	push	hl
 	call	_cpct_memset
-;src/game/game.c:290: drawWorld(ulx, uly);
-	ld	a,-4 (ix)
+;src/game/game.c:291: drawWorld(ulx, uly);
+	ld	a,-5 (ix)
 	push	af
 	inc	sp
-	ld	a,-5 (ix)
+	ld	a,-1 (ix)
 	push	af
 	inc	sp
 	call	_drawWorld
 	pop	af
 	jr	00242$
 00150$:
-;src/game/game.c:295: CURSOR_MODE=NONE;
+;src/game/game.c:296: CURSOR_MODE=NONE;
 	ld	iy,#_CURSOR_MODE
 	ld	0 (iy),#0x00
-;src/game/game.c:296: drawTile(ulx, uly, xCursor, yCursor);
-	ld	a,-1 (ix)
-	push	af
-	inc	sp
-	ld	a,-3 (ix)
+;src/game/game.c:297: drawTile(ulx, uly, xCursor, yCursor);
+	ld	a,-2 (ix)
 	push	af
 	inc	sp
 	ld	a,-4 (ix)
@@ -1314,10 +1314,13 @@ _game::
 	ld	a,-5 (ix)
 	push	af
 	inc	sp
+	ld	a,-1 (ix)
+	push	af
+	inc	sp
 	call	_drawTile
 	pop	af
 	pop	af
-;src/game/game.c:300: for(i=0; i<14000; i++) {}
+;src/game/game.c:301: for(i=0; i<14000; i++) {}
 00242$:
 	ld	bc,#0x36B0
 00201$:
@@ -1327,23 +1330,23 @@ _game::
 	jr	NZ,00201$
 	jp	00180$
 00164$:
-;src/game/game.c:303: else if ( cpct_isKeyPressed(Key_Return) )
+;src/game/game.c:304: else if ( cpct_isKeyPressed(Key_Return) )
 	ld	hl,#0x0402
 	call	_cpct_isKeyPressed
 	ld	a,l
 	or	a, a
 	jp	Z,00180$
-;src/game/game.c:306: if(CURSOR_MODE==NONE)
+;src/game/game.c:307: if(CURSOR_MODE==NONE)
 	ld	a,(#_CURSOR_MODE + 0)
 	or	a, a
 	jr	NZ,00158$
-;src/game/game.c:308: menuTile(ulx+xCursor, uly+yCursor);
-	ld	a, -9 (ix)
-	ld	l, -14 (ix)
+;src/game/game.c:309: menuTile(ulx+xCursor, uly+yCursor);
+	ld	a, -11 (ix)
+	ld	l, -7 (ix)
 	add	a, l
 	ld	h,a
-	ld	l,-12 (ix)
-	ld	d,-7 (ix)
+	ld	l,-9 (ix)
+	ld	d,-16 (ix)
 	ld	a,l
 	add	a, d
 	push	hl
@@ -1352,7 +1355,7 @@ _game::
 	inc	sp
 	call	_menuTile
 	pop	af
-;src/game/game.c:309: cpct_clearScreen(cpct_px2byteM1(0,0,0,0));	
+;src/game/game.c:310: cpct_clearScreen(cpct_px2byteM1(0,0,0,0));	
 	ld	hl,#0x0000
 	push	hl
 	ld	l, #0x00
@@ -1368,33 +1371,33 @@ _game::
 	ld	hl,#0xC000
 	push	hl
 	call	_cpct_memset
-;src/game/game.c:310: drawWorld(ulx, uly);
-	ld	a,-4 (ix)
+;src/game/game.c:311: drawWorld(ulx, uly);
+	ld	a,-5 (ix)
 	push	af
 	inc	sp
-	ld	a,-5 (ix)
+	ld	a,-1 (ix)
 	push	af
 	inc	sp
 	call	_drawWorld
 	pop	af
 	jr	00248$
 00158$:
-;src/game/game.c:313: else if(CURSOR_MODE>=T_SSNS)
+;src/game/game.c:314: else if(CURSOR_MODE>=T_SSNS)
 	ld	a,(#_CURSOR_MODE + 0)
 	sub	a, #0x01
 	jr	C,00248$
-;src/game/game.c:315: p_world[ulx+xCursor+(uly+yCursor)*WIDTH]=CURSOR_MODE+9;
-	ld	a,-12 (ix)
-	add	a, -7 (ix)
-	ld	e,a
-	ld	a,-11 (ix)
-	adc	a, -6 (ix)
-	ld	d,a
+;src/game/game.c:316: p_world[ulx+xCursor+(uly+yCursor)*WIDTH]=CURSOR_MODE+9;
 	ld	a,-9 (ix)
-	add	a, -14 (ix)
-	ld	l,a
+	add	a, -16 (ix)
+	ld	e,a
 	ld	a,-8 (ix)
-	adc	a, -13 (ix)
+	adc	a, -15 (ix)
+	ld	d,a
+	ld	a,-11 (ix)
+	add	a, -7 (ix)
+	ld	l,a
+	ld	a,-10 (ix)
+	adc	a, -6 (ix)
 	ld	h,a
 	ld	c, l
 	ld	b, h
@@ -1415,31 +1418,31 @@ _game::
 	ld	a,(#_CURSOR_MODE + 0)
 	add	a, #0x09
 	ld	(de),a
-;src/game/game.c:318: if(CURSOR_MODE<=T_SLEW)
+;src/game/game.c:319: if(CURSOR_MODE<=T_SLEW)
 	ld	a,#0x06
 	ld	iy,#_CURSOR_MODE
 	sub	a, 0 (iy)
 	jr	C,00248$
-;src/game/game.c:319: CURSOR_MODE=NONE;
+;src/game/game.c:320: CURSOR_MODE=NONE;
 	ld	hl,#_CURSOR_MODE + 0
 	ld	(hl), #0x00
-;src/game/game.c:323: for(i=0; i<14000; i++) {}
+;src/game/game.c:324: for(i=0; i<14000; i++) {}
 00248$:
-	ld	-16 (ix),#0xB0
-	ld	-15 (ix),#0x36
+	ld	-13 (ix),#0xB0
+	ld	-12 (ix),#0x36
 00204$:
-	ld	l,-16 (ix)
-	ld	h,-15 (ix)
+	ld	l,-13 (ix)
+	ld	h,-12 (ix)
 	dec	hl
-	ld	-16 (ix),l
-	ld	-15 (ix), h
+	ld	-13 (ix),l
+	ld	-12 (ix), h
 	ld	a, h
-	or	a,-16 (ix)
+	or	a,-13 (ix)
 	jr	NZ,00204$
 00180$:
-;src/game/game.c:327: drawCursor(xCursor, yCursor, 0);
-	ld	d,-14 (ix)
-	ld	b,-7 (ix)
+;src/game/game.c:328: drawCursor(xCursor, yCursor, 0);
+	ld	d,-7 (ix)
+	ld	b,-16 (ix)
 	xor	a, a
 	push	af
 	inc	sp
@@ -1450,17 +1453,17 @@ _game::
 	call	_drawCursor
 	pop	af
 	inc	sp
-;src/game/game.c:328: drawScrolls(ulx, uly);
-	ld	a,-4 (ix)
+;src/game/game.c:329: drawScrolls(ulx, uly);
+	ld	a,-5 (ix)
 	push	af
 	inc	sp
-	ld	a,-5 (ix)
+	ld	a,-1 (ix)
 	push	af
 	inc	sp
 	call	_drawScrolls
 	pop	af
-;src/game/game.c:330: while(!exit);
-	ld	a,-10 (ix)
+;src/game/game.c:331: while(!exit);
+	ld	a,-14 (ix)
 	or	a, a
 	jp	Z,00181$
 	ld	sp, ix

@@ -32,10 +32,10 @@ Symbol Table
   0 ___str_28                                                      04BE R
   0 ___str_29                                                      04BF R
   0 ___str_3                                                       01B4 R
-  0 ___str_30                                                      097D R
-  0 ___str_31                                                      098B R
-  0 ___str_32                                                      098C R
-  0 ___str_33                                                      09B2 R
+  0 ___str_30                                                      0982 R
+  0 ___str_31                                                      0990 R
+  0 ___str_32                                                      0991 R
+  0 ___str_33                                                      09B7 R
   0 ___str_4                                                       01C4 R
   0 ___str_5                                                       01C9 R
   0 ___str_6                                                       01E6 R
@@ -57,12 +57,13 @@ Symbol Table
     _drawWorld                                                     **** GX
   0 _game                                                          04CA GR
     _generateWorld                                                 **** GX
-  0 _menuStations                                                  0299 GR
+    _locDelocked                                                   **** GX
 ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 2.
 Hexadecimal [16-Bits]
 
 Symbol Table
 
+  0 _menuStations                                                  0299 GR
   0 _menuTile                                                      030E GR
     _p_world                                                       **** GX
     _putM1                                                         **** GX
@@ -76,7 +77,7 @@ Hexadecimal [16-Bits]
 
 Area Table
 
-   0 _CODE                                      size  9C6   flags    0
+   0 _CODE                                      size  9CB   flags    0
    1 _DATA                                      size    0   flags    0
    2 _INITIALIZED                               size    0   flags    0
    3 _DABS                                      size    0   flags    8

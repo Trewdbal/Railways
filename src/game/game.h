@@ -9,6 +9,7 @@
 
 extern u8 p_world[];
 extern u8 CURSOR_MODE;
+extern u8 locDelocked;
 
 void windowInfoTile(u8, u8);
 void menuStations();

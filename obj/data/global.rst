@@ -22,16 +22,16 @@
                              22 ; ram data
                              23 ;--------------------------------------------------------
                              24 	.area _DATA
-   6E99                      25 _p_world::
-   6E99                      26 	.ds 3840
+   75FA                      25 _p_world::
+   75FA                      26 	.ds 3840
                              27 ;--------------------------------------------------------
                              28 ; ram data
                              29 ;--------------------------------------------------------
                              30 	.area _INITIALIZED
-   7D99                      31 _CURSOR_MODE::
-   7D99                      32 	.ds 1
-   7D9A                      33 _locDelocked::
-   7D9A                      34 	.ds 1
+   84FA                      31 _CURSOR_MODE::
+   84FA                      32 	.ds 1
+   84FB                      33 _locDelocked::
+   84FB                      34 	.ds 1
                              35 ;--------------------------------------------------------
                              36 ; absolute external ram data
                              37 ;--------------------------------------------------------
@@ -53,34 +53,34 @@
                              53 ;--------------------------------------------------------
                              54 	.area _CODE
                              55 	.area _CODE
-   5DF7                      56 _paletteTrains:
-   5DF7 00                   57 	.db #0x00	; 0
-   5DF8 1A                   58 	.db #0x1A	; 26
-   5DF9 0D                   59 	.db #0x0D	; 13
-   5DFA 03                   60 	.db #0x03	; 3
-   5DFB 0F                   61 	.db #0x0F	; 15
-   5DFC 06                   62 	.db #0x06	; 6
-   5DFD 10                   63 	.db #0x10	; 16
-   5DFE 09                   64 	.db #0x09	; 9
-   5DFF 0A                   65 	.db #0x0A	; 10
-   5E00 14                   66 	.db #0x14	; 20
-   5E01 02                   67 	.db #0x02	; 2
-   5E02 01                   68 	.db #0x01	; 1
-   5E03 13                   69 	.db #0x13	; 19
-   5E04 18                   70 	.db #0x18	; 24
-   5E05 0B                   71 	.db #0x0B	; 11
-   5E06 19                   72 	.db #0x19	; 25
-   5E07                      73 _paletteMenusM1:
-   5E07 00                   74 	.db #0x00	; 0
-   5E08 0F                   75 	.db #0x0F	; 15
-   5E09 09                   76 	.db #0x09	; 9
-   5E0A 16                   77 	.db #0x16	; 22
-   5E0B                      78 _paletteMenusM2:
-   5E0B 00                   79 	.db #0x00	; 0
-   5E0C 14                   80 	.db #0x14	; 20
+   60A8                      56 _paletteTrains:
+   60A8 00                   57 	.db #0x00	; 0
+   60A9 1A                   58 	.db #0x1A	; 26
+   60AA 0D                   59 	.db #0x0D	; 13
+   60AB 03                   60 	.db #0x03	; 3
+   60AC 0F                   61 	.db #0x0F	; 15
+   60AD 06                   62 	.db #0x06	; 6
+   60AE 10                   63 	.db #0x10	; 16
+   60AF 09                   64 	.db #0x09	; 9
+   60B0 0A                   65 	.db #0x0A	; 10
+   60B1 14                   66 	.db #0x14	; 20
+   60B2 02                   67 	.db #0x02	; 2
+   60B3 01                   68 	.db #0x01	; 1
+   60B4 13                   69 	.db #0x13	; 19
+   60B5 18                   70 	.db #0x18	; 24
+   60B6 0B                   71 	.db #0x0B	; 11
+   60B7 19                   72 	.db #0x19	; 25
+   60B8                      73 _paletteMenusM1:
+   60B8 00                   74 	.db #0x00	; 0
+   60B9 0F                   75 	.db #0x0F	; 15
+   60BA 09                   76 	.db #0x09	; 9
+   60BB 16                   77 	.db #0x16	; 22
+   60BC                      78 _paletteMenusM2:
+   60BC 00                   79 	.db #0x00	; 0
+   60BD 14                   80 	.db #0x14	; 20
                              81 	.area _INITIALIZER
-   8C0A                      82 __xinit__CURSOR_MODE:
-   8C0A 00                   83 	.db #0x00	; 0
-   8C0B                      84 __xinit__locDelocked:
-   8C0B 01                   85 	.db #0x01	; 1
+   936B                      82 __xinit__CURSOR_MODE:
+   936B 00                   83 	.db #0x00	; 0
+   936C                      84 __xinit__locDelocked:
+   936C 01                   85 	.db #0x01	; 1
                              86 	.area _CABS (ABS)

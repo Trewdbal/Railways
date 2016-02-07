@@ -12,8 +12,27 @@ Symbol Table
     ___fsmul                                                       **** GX
   0 ___str_0                                                       006A R
   0 ___str_1                                                       007B R
+  0 ___str_10                                                      03FE R
+  0 ___str_11                                                      0415 R
+  0 ___str_12                                                      0421 R
+  0 ___str_13                                                      0428 R
+  0 ___str_14                                                      043F R
+  0 ___str_15                                                      0456 R
+  0 ___str_16                                                      0463 R
+  0 ___str_17                                                      0469 R
+  0 ___str_18                                                      0480 R
+  0 ___str_19                                                      0498 R
+  0 ___str_2                                                       038C R
+  0 ___str_3                                                       0392 R
+  0 ___str_4                                                       0393 R
+  0 ___str_5                                                       03A5 R
+  0 ___str_6                                                       03BC R
+  0 ___str_7                                                       03D3 R
+  0 ___str_8                                                       03E0 R
+  0 ___str_9                                                       03E7 R
     ___uchar2fs                                                    **** GX
-  0 _buyLocomotive                                                 01D9 GR
+  0 _buyLocomotive                                                 04A5 GR
+  0 _confirmBuyLocomotive                                          024E GR
     _cpct_drawSolidBox                                             **** GX
     _cpct_drawSprite                                               **** GX
     _cpct_getScreenPtr                                             **** GX
@@ -21,10 +40,15 @@ Symbol Table
     _cpct_memset                                                   **** GX
     _cpct_px2byteM0                                                **** GX
     _cpct_scanKeyboard                                             **** GX
+  0 _drawAllLocomotives                                            021E GR
   0 _drawLocomotive                                                0089 GR
     _drawMenu                                                      **** GX
+    _drawWindow                                                    **** GX
     _floorf                                                        **** GX
+    _l130B                                                         **** GX
     _l141P                                                         **** GX
+    _l141TA                                                        **** GX
+    _l142AT                                                        **** GX
     _locDelocked                                                   **** GX
     _lock                                                          **** GX
     _putM0                                                         **** GX
@@ -36,7 +60,7 @@ Hexadecimal [16-Bits]
 
 Area Table
 
-   0 _CODE                                      size  2A6   flags    0
+   0 _CODE                                      size  55E   flags    0
    1 _DATA                                      size    0   flags    0
    2 _INITIALIZED                               size    0   flags    0
    3 _DABS                                      size    0   flags    8

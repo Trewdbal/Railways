@@ -154,7 +154,8 @@ void game()
 	int i;
 	u8 exit=0;
 	u8 *p_video;
-
+	locDelocked = 4;
+	
 	drawBoxM2(50, 50);
 	p_video = cpct_getScreenPtr(SCR_VMEM, 32, 95);
 	cpct_drawStringM2 ("Generating world...", p_video, 0);	
