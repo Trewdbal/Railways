@@ -1,7 +1,7 @@
 ;--------------------------------------------------------
 ; File Created by SDCC : free open source ANSI-C Compiler
 ; Version 3.5.4 #9329 (Linux)
-; This file was generated Sun Feb  7 17:44:04 2016
+; This file was generated Mon Feb  8 17:23:03 2016
 ;--------------------------------------------------------
 	.module game
 	.optsdcc -mz80
@@ -760,16 +760,16 @@ _game::
 	ld	-9 (ix),#0x00
 	ld	-8 (ix),#0x00
 ;src/game/game.c:151: int uly = 0;
-	ld	-11 (ix),#0x00
-	ld	-10 (ix),#0x00
+	ld	-7 (ix),#0x00
+	ld	-6 (ix),#0x00
 ;src/game/game.c:152: int xCursor = 10;
 	ld	-16 (ix),#0x0A
 	ld	-15 (ix),#0x00
 ;src/game/game.c:153: int yCursor = 6;
-	ld	-7 (ix),#0x06
-	ld	-6 (ix),#0x00
+	ld	-12 (ix),#0x06
+	ld	-11 (ix),#0x00
 ;src/game/game.c:155: u8 exit=0;
-	ld	-14 (ix),#0x00
+	ld	-10 (ix),#0x00
 ;src/game/game.c:157: locDelocked = 4;
 	ld	hl,#_locDelocked + 0
 	ld	(hl), #0x04
@@ -833,11 +833,11 @@ _game::
 	call	_cpct_isKeyPressed
 	ld	-3 (ix),l
 ;src/game/game.c:174: drawTile(ulx, uly, xCursor, yCursor);
-	ld	a,-7 (ix)
+	ld	a,-12 (ix)
 	ld	-2 (ix),a
 	ld	a,-16 (ix)
 	ld	-4 (ix),a
-	ld	a,-11 (ix)
+	ld	a,-7 (ix)
 	ld	-5 (ix),a
 	ld	a,-9 (ix)
 	ld	-1 (ix),a
@@ -862,33 +862,33 @@ _game::
 	pop	af
 	pop	af
 ;src/game/game.c:176: yCursor-=1;
-	ld	l,-7 (ix)
-	ld	h,-6 (ix)
+	ld	l,-12 (ix)
+	ld	h,-11 (ix)
 	dec	hl
-	ld	-7 (ix),l
-	ld	-6 (ix),h
+	ld	-12 (ix),l
+	ld	-11 (ix),h
 ;src/game/game.c:179: if(yCursor<0)
-	bit	7, -6 (ix)
+	bit	7, -11 (ix)
 	jr	Z,00210$
 ;src/game/game.c:181: yCursor=0;
-	ld	-7 (ix),#0x00
-	ld	-6 (ix),#0x00
+	ld	-12 (ix),#0x00
+	ld	-11 (ix),#0x00
 ;src/game/game.c:184: if(uly>0)
 	xor	a, a
-	cp	a, -11 (ix)
-	sbc	a, -10 (ix)
+	cp	a, -7 (ix)
+	sbc	a, -6 (ix)
 	jp	PO, 00387$
 	xor	a, #0x80
 00387$:
 	jp	P,00210$
 ;src/game/game.c:186: uly-=1;
-	ld	l,-11 (ix)
-	ld	h,-10 (ix)
+	ld	l,-7 (ix)
+	ld	h,-6 (ix)
 	dec	hl
-	ld	-11 (ix),l
-	ld	-10 (ix),h
+	ld	-7 (ix),l
+	ld	-6 (ix),h
 ;src/game/game.c:174: drawTile(ulx, uly, xCursor, yCursor);
-	ld	a,-11 (ix)
+	ld	a,-7 (ix)
 ;src/game/game.c:187: drawWorld(ulx, uly);
 	ld	-5 (ix), a
 	push	af
@@ -900,16 +900,16 @@ _game::
 	pop	af
 ;src/game/game.c:192: for(i=0; i<5000; i++) {}
 00210$:
-	ld	-13 (ix),#0x88
-	ld	-12 (ix),#0x13
+	ld	-14 (ix),#0x88
+	ld	-13 (ix),#0x13
 00186$:
-	ld	l,-13 (ix)
-	ld	h,-12 (ix)
+	ld	l,-14 (ix)
+	ld	h,-13 (ix)
 	dec	hl
-	ld	-13 (ix),l
-	ld	-12 (ix), h
+	ld	-14 (ix),l
+	ld	-13 (ix), h
 	ld	a, h
-	or	a,-13 (ix)
+	or	a,-14 (ix)
 	jr	NZ,00186$
 	jp	00180$
 00179$:
@@ -936,38 +936,38 @@ _game::
 	pop	af
 	pop	af
 ;src/game/game.c:198: yCursor+=1;
-	inc	-7 (ix)
+	inc	-12 (ix)
 	jr	NZ,00388$
-	inc	-6 (ix)
+	inc	-11 (ix)
 00388$:
 ;src/game/game.c:199: if(yCursor>NBTILE_H-1)
 	ld	a,#0x0B
-	cp	a, -7 (ix)
+	cp	a, -12 (ix)
 	ld	a,#0x00
-	sbc	a, -6 (ix)
+	sbc	a, -11 (ix)
 	jp	PO, 00389$
 	xor	a, #0x80
 00389$:
 	jp	P,00215$
 ;src/game/game.c:201: yCursor=NBTILE_H-1;
-	ld	-7 (ix),#0x0B
-	ld	-6 (ix),#0x00
+	ld	-12 (ix),#0x0B
+	ld	-11 (ix),#0x00
 ;src/game/game.c:202: if(uly<HEIGHT-NBTILE_H)
-	ld	a,-11 (ix)
+	ld	a,-7 (ix)
 	sub	a, #0x24
-	ld	a,-10 (ix)
+	ld	a,-6 (ix)
 	rla
 	ccf
 	rra
 	sbc	a, #0x80
 	jr	NC,00215$
 ;src/game/game.c:204: uly+=1;
-	inc	-11 (ix)
+	inc	-7 (ix)
 	jr	NZ,00390$
-	inc	-10 (ix)
+	inc	-6 (ix)
 00390$:
 ;src/game/game.c:174: drawTile(ulx, uly, xCursor, yCursor);
-	ld	a,-11 (ix)
+	ld	a,-7 (ix)
 ;src/game/game.c:205: drawWorld(ulx, uly);
 	ld	-5 (ix), a
 	push	af
@@ -979,16 +979,16 @@ _game::
 	pop	af
 ;src/game/game.c:210: for(i=0; i<5000; i++) {}
 00215$:
-	ld	-13 (ix),#0x88
-	ld	-12 (ix),#0x13
+	ld	-14 (ix),#0x88
+	ld	-13 (ix),#0x13
 00189$:
-	ld	l,-13 (ix)
-	ld	h,-12 (ix)
+	ld	l,-14 (ix)
+	ld	h,-13 (ix)
 	dec	hl
-	ld	-13 (ix),l
-	ld	-12 (ix), h
+	ld	-14 (ix),l
+	ld	-13 (ix), h
 	ld	a, h
-	or	a,-13 (ix)
+	or	a,-14 (ix)
 	jr	NZ,00189$
 	jp	00180$
 00176$:
@@ -1269,7 +1269,7 @@ _game::
 	dec	l
 	jr	NZ,00147$
 ;src/game/game.c:286: exit=1;
-	ld	-14 (ix),#0x01
+	ld	-10 (ix),#0x01
 	jr	00242$
 00147$:
 ;src/game/game.c:289: putM1();
@@ -1341,8 +1341,8 @@ _game::
 	or	a, a
 	jr	NZ,00158$
 ;src/game/game.c:309: menuTile(ulx+xCursor, uly+yCursor);
-	ld	a, -11 (ix)
-	ld	l, -7 (ix)
+	ld	a, -7 (ix)
+	ld	l, -12 (ix)
 	add	a, l
 	ld	h,a
 	ld	l,-9 (ix)
@@ -1393,11 +1393,11 @@ _game::
 	ld	a,-8 (ix)
 	adc	a, -15 (ix)
 	ld	d,a
-	ld	a,-11 (ix)
-	add	a, -7 (ix)
+	ld	a,-7 (ix)
+	add	a, -12 (ix)
 	ld	l,a
-	ld	a,-10 (ix)
-	adc	a, -6 (ix)
+	ld	a,-6 (ix)
+	adc	a, -11 (ix)
 	ld	h,a
 	ld	c, l
 	ld	b, h
@@ -1428,20 +1428,20 @@ _game::
 	ld	(hl), #0x00
 ;src/game/game.c:324: for(i=0; i<14000; i++) {}
 00248$:
-	ld	-13 (ix),#0xB0
-	ld	-12 (ix),#0x36
+	ld	-14 (ix),#0xB0
+	ld	-13 (ix),#0x36
 00204$:
-	ld	l,-13 (ix)
-	ld	h,-12 (ix)
+	ld	l,-14 (ix)
+	ld	h,-13 (ix)
 	dec	hl
-	ld	-13 (ix),l
-	ld	-12 (ix), h
+	ld	-14 (ix),l
+	ld	-13 (ix), h
 	ld	a, h
-	or	a,-13 (ix)
+	or	a,-14 (ix)
 	jr	NZ,00204$
 00180$:
 ;src/game/game.c:328: drawCursor(xCursor, yCursor, 0);
-	ld	d,-7 (ix)
+	ld	d,-12 (ix)
 	ld	b,-16 (ix)
 	xor	a, a
 	push	af
@@ -1463,7 +1463,7 @@ _game::
 	call	_drawScrolls
 	pop	af
 ;src/game/game.c:331: while(!exit);
-	ld	a,-14 (ix)
+	ld	a,-10 (ix)
 	or	a, a
 	jp	Z,00181$
 	ld	sp, ix

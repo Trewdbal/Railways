@@ -13,6 +13,8 @@ extern const u8 l141P[];
 extern const u8 BB63000[];
 
 extern u8 locDelocked;
+extern Train* trainList;
+extern u8 nbTrainList;
 
 void railroadDepot();
 void buyLocomotive();

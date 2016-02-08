@@ -1,7 +1,7 @@
 ;--------------------------------------------------------
 ; File Created by SDCC : free open source ANSI-C Compiler
 ; Version 3.5.4 #9329 (Linux)
-; This file was generated Sun Feb  7 16:09:18 2016
+; This file was generated Mon Feb  8 17:36:37 2016
 ;--------------------------------------------------------
 	.module global
 	.optsdcc -mz80
@@ -12,8 +12,10 @@
 	.globl _paletteMenusM2
 	.globl _paletteMenusM1
 	.globl _paletteTrains
+	.globl _nbTrainList
 	.globl _locDelocked
 	.globl _CURSOR_MODE
+	.globl _trainList
 	.globl _p_world
 ;--------------------------------------------------------
 ; special function registers
@@ -24,6 +26,8 @@
 	.area _DATA
 _p_world::
 	.ds 3840
+_trainList::
+	.ds 2
 ;--------------------------------------------------------
 ; ram data
 ;--------------------------------------------------------
@@ -31,6 +35,8 @@ _p_world::
 _CURSOR_MODE::
 	.ds 1
 _locDelocked::
+	.ds 1
+_nbTrainList::
 	.ds 1
 ;--------------------------------------------------------
 ; absolute external ram data
@@ -83,4 +89,6 @@ __xinit__CURSOR_MODE:
 	.db #0x00	; 0
 __xinit__locDelocked:
 	.db #0x01	; 1
+__xinit__nbTrainList:
+	.db #0x00	; 0
 	.area _CABS (ABS)

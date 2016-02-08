@@ -23,9 +23,9 @@ Symbol Table
     _cpct_px2byteM1                                                **** GX
     _cpct_setSeed_mxor                                             **** GX
   0 _drawCursor                                                    0000 GR
-  0 _drawScrolls                                                   08B7 GR
-  0 _drawTile                                                      068F GR
-  0 _drawWorld                                                     0950 GR
+  0 _drawScrolls                                                   08BB GR
+  0 _drawTile                                                      0693 GR
+  0 _drawWorld                                                     0954 GR
     _dwellings1                                                    **** GX
     _dwellings2                                                    **** GX
     _dwellings3                                                    **** GX
@@ -62,7 +62,7 @@ Hexadecimal [16-Bits]
 
 Area Table
 
-   0 _CODE                                      size  989   flags    0
+   0 _CODE                                      size  98D   flags    0
    1 _DATA                                      size    0   flags    0
    2 _INITIALIZED                               size    0   flags    0
    3 _DABS                                      size    0   flags    8

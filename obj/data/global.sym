@@ -10,11 +10,14 @@ Symbol Table
   2 _CURSOR_MODE                                                   0000 GR
   7 __xinit__CURSOR_MODE                                           0000 R
   7 __xinit__locDelocked                                           0001 R
+  7 __xinit__nbTrainList                                           0002 R
   2 _locDelocked                                                   0001 GR
+  2 _nbTrainList                                                   0002 GR
   1 _p_world                                                       0000 GR
   0 _paletteMenusM1                                                0010 GR
   0 _paletteMenusM2                                                0014 GR
   0 _paletteTrains                                                 0000 GR
+  1 _trainList                                                     0F00 GR
 
 ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 2.
 Hexadecimal [16-Bits]
@@ -22,12 +25,12 @@ Hexadecimal [16-Bits]
 Area Table
 
    0 _CODE                                      size   16   flags    0
-   1 _DATA                                      size  F00   flags    0
-   2 _INITIALIZED                               size    2   flags    0
+   1 _DATA                                      size  F02   flags    0
+   2 _INITIALIZED                               size    3   flags    0
    3 _DABS                                      size    0   flags    8
    4 _HOME                                      size    0   flags    0
    5 _GSINIT                                    size    0   flags    0
    6 _GSFINAL                                   size    0   flags    0
-   7 _INITIALIZER                               size    2   flags    0
+   7 _INITIALIZER                               size    3   flags    0
    8 _CABS                                      size    0   flags    8
 

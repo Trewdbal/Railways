@@ -80,7 +80,10 @@ void drawAllLocomotives(u8 iSelect)
 
 u8 confirmBuyLocomotive(u8 iSelect)
 {
+	u8 returnChoice=0;
 	const char *txtWindowLocomotive[6];
+
+	// Prepare the display of informations about the selected locomotive
 
 	putM2();
 
@@ -121,7 +124,35 @@ u8 confirmBuyLocomotive(u8 iSelect)
 			break;
 	}
 
-	return drawWindow(txtWindowLocomotive, 6, 1);
+	// Display window with informations about locomotive and ask for confirmation of purchase
+	returnChoice = drawWindow(txtWindowLocomotive, 6, 1);
+	
+	// If confirm buy locomotive, add the locomotive to the train list
+	if (returnChoice==1)
+	{
+		if(nbTrainList==0)
+			trainList = (Train*)malloc(sizeof(Train));
+		else
+			realloc(trainList, (nbTrainList+1)*sizeof(Train));
+
+		// Define locomotive
+		trainList[nbTrainList].loco = iSelect;
+		
+		// Define wagons
+		trainList[nbTrainList].wagon[0] = 0;
+		trainList[nbTrainList].wagon[1] = 0;
+		trainList[nbTrainList].wagon[2] = 0;
+		trainList[nbTrainList].wagon[3] = 0;
+		trainList[nbTrainList].wagon[4] = 0;
+		trainList[nbTrainList].wagon[5] = 0;
+		trainList[nbTrainList].wagon[6] = 0;
+		trainList[nbTrainList].wagon[7] = 0;
+	
+		// Increment nb of trains in the list
+		nbTrainList++;
+	}
+
+	return returnChoice;
 }
 
 void buyLocomotive()

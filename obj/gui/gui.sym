@@ -8,8 +8,8 @@ Symbol Table
     .__.CPU.                                                    =  0000 L
     .__.H$L.                                                    =  0000 L
   0 _EraseMenuEntry                                                0243 GR
-  0 ___str_0                                                       06B2 R
-  0 ___str_1                                                       06B7 R
+  0 ___str_0                                                       06B4 R
+  0 ___str_1                                                       06B9 R
     _cpct_drawSolidBox                                             **** GX
     _cpct_drawStringM2                                             **** GX
     _cpct_getScreenPtr                                             **** GX
@@ -38,7 +38,7 @@ Hexadecimal [16-Bits]
 
 Area Table
 
-   0 _CODE                                      size  6C6   flags    0
+   0 _CODE                                      size  6C8   flags    0
    1 _DATA                                      size    0   flags    0
    2 _INITIALIZED                               size    0   flags    0
    3 _DABS                                      size    0   flags    8

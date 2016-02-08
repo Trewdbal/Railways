@@ -1,7 +1,7 @@
                               1 ;--------------------------------------------------------
                               2 ; File Created by SDCC : free open source ANSI-C Compiler
                               3 ; Version 3.5.4 #9329 (Linux)
-                              4 ; This file was generated Sun Feb  7 16:09:11 2016
+                              4 ; This file was generated Mon Feb  8 17:23:00 2016
                               5 ;--------------------------------------------------------
                               6 	.module main
                               7 	.optsdcc -mz80
@@ -86,25 +86,25 @@
                              86 ;src/main.c:22: const char *windowCredit[] = { 
    002C 21 00 00      [10]   87 	ld	hl,#0x0000
    002F 39            [11]   88 	add	hl,sp
-   0030 DD 75 FE      [19]   89 	ld	-2 (ix),l
-   0033 DD 74 FF      [19]   90 	ld	-1 (ix),h
-   0036 DD 6E FE      [19]   91 	ld	l,-2 (ix)
-   0039 DD 66 FF      [19]   92 	ld	h,-1 (ix)
+   0030 DD 75 FC      [19]   89 	ld	-4 (ix),l
+   0033 DD 74 FD      [19]   90 	ld	-3 (ix),h
+   0036 DD 6E FC      [19]   91 	ld	l,-4 (ix)
+   0039 DD 66 FD      [19]   92 	ld	h,-3 (ix)
    003C 36r0B         [10]   93 	ld	(hl),#<(___str_3)
    003E 23            [ 6]   94 	inc	hl
    003F 36s01         [10]   95 	ld	(hl),#>(___str_3)
-   0041 DD 6E FE      [19]   96 	ld	l,-2 (ix)
-   0044 DD 66 FF      [19]   97 	ld	h,-1 (ix)
+   0041 DD 6E FC      [19]   96 	ld	l,-4 (ix)
+   0044 DD 66 FD      [19]   97 	ld	h,-3 (ix)
    0047 23            [ 6]   98 	inc	hl
    0048 23            [ 6]   99 	inc	hl
    0049 01r14r01      [10]  100 	ld	bc,#___str_4+0
    004C 71            [ 7]  101 	ld	(hl),c
    004D 23            [ 6]  102 	inc	hl
    004E 70            [ 7]  103 	ld	(hl),b
-   004F DD 7E FE      [19]  104 	ld	a,-2 (ix)
+   004F DD 7E FC      [19]  104 	ld	a,-4 (ix)
    0052 C6 04         [ 7]  105 	add	a, #0x04
    0054 6F            [ 4]  106 	ld	l,a
-   0055 DD 7E FF      [19]  107 	ld	a,-1 (ix)
+   0055 DD 7E FD      [19]  107 	ld	a,-3 (ix)
    0058 CE 00         [ 7]  108 	adc	a, #0x00
    005A 67            [ 4]  109 	ld	h,a
    005B 01r15r01      [10]  110 	ld	bc,#___str_5+0
@@ -151,12 +151,12 @@
    009E CDr00r00      [17]  151 	call	_putM2
    00A1 D1            [10]  152 	pop	de
                             153 ;src/main.c:38: do{
-   00A2 DD 73 FC      [19]  154 	ld	-4 (ix),e
-   00A5 DD 72 FD      [19]  155 	ld	-3 (ix),d
+   00A2 DD 73 FE      [19]  154 	ld	-2 (ix),e
+   00A5 DD 72 FF      [19]  155 	ld	-1 (ix),d
    00A8                     156 00105$:
                             157 ;src/main.c:39: menuChoice = drawMenu(menuMain,3);
-   00A8 DD 5E FC      [19]  158 	ld	e,-4 (ix)
-   00AB DD 56 FD      [19]  159 	ld	d,-3 (ix)
+   00A8 DD 5E FE      [19]  158 	ld	e,-2 (ix)
+   00AB DD 56 FF      [19]  159 	ld	d,-1 (ix)
    00AE 3E 03         [ 7]  160 	ld	a,#0x03
    00B0 F5            [11]  161 	push	af
    00B1 33            [ 6]  162 	inc	sp
@@ -180,8 +180,8 @@
    00C6 3D            [ 4]  180 	dec	a
    00C7 20 12         [12]  181 	jr	NZ,00106$
                             182 ;src/main.c:49: drawWindow(windowCredit,3,0);
-   00C9 DD 4E FE      [19]  183 	ld	c,-2 (ix)
-   00CC DD 46 FF      [19]  184 	ld	b,-1 (ix)
+   00C9 DD 4E FC      [19]  183 	ld	c,-4 (ix)
+   00CC DD 46 FD      [19]  184 	ld	b,-3 (ix)
    00CF D5            [11]  185 	push	de
    00D0 21 03 00      [10]  186 	ld	hl,#0x0003
    00D3 E5            [11]  187 	push	hl

@@ -1,7 +1,7 @@
                               1 ;--------------------------------------------------------
                               2 ; File Created by SDCC : free open source ANSI-C Compiler
                               3 ; Version 3.5.4 #9329 (Linux)
-                              4 ; This file was generated Sun Feb  7 16:09:18 2016
+                              4 ; This file was generated Mon Feb  8 17:23:07 2016
                               5 ;--------------------------------------------------------
                               6 	.module gui
                               7 	.optsdcc -mz80
@@ -185,7 +185,7 @@
    00A6 CDr00r00      [17]  185 	call	_cpct_memset
    00A9 D1            [10]  186 	pop	de
                             187 ;src/gui/gui.c:36: pvid = cpct_getScreenPtr(SCR_VMEM, left+1, top+4);
-   00AA DD 73 FF      [19]  188 	ld	-1 (ix), e
+   00AA DD 73 FE      [19]  188 	ld	-2 (ix), e
    00AD 63            [ 4]  189 	ld	h, e
    00AE 24            [ 4]  190 	inc	h
    00AF 24            [ 4]  191 	inc	h
@@ -193,11 +193,11 @@
    00B1 24            [ 4]  193 	inc	h
    00B2 DD 7E F9      [19]  194 	ld	a,-7 (ix)
    00B5 3C            [ 4]  195 	inc	a
-   00B6 DD 77 FC      [19]  196 	ld	-4 (ix),a
+   00B6 DD 77 FF      [19]  196 	ld	-1 (ix),a
    00B9 D5            [11]  197 	push	de
    00BA E5            [11]  198 	push	hl
    00BB 33            [ 6]  199 	inc	sp
-   00BC DD 7E FC      [19]  200 	ld	a,-4 (ix)
+   00BC DD 7E FF      [19]  200 	ld	a,-1 (ix)
    00BF F5            [11]  201 	push	af
    00C0 33            [ 6]  202 	inc	sp
    00C1 21 00 C0      [10]  203 	ld	hl,#0xC000
@@ -216,14 +216,14 @@
    00D9 21 02 02      [10]  216 	ld	hl,#0x0202
    00DC E5            [11]  217 	push	hl
    00DD CDr00r00      [17]  218 	call	_cpct_px2byteM0
-   00E0 DD 75 FE      [19]  219 	ld	-2 (ix),l
+   00E0 DD 75 FC      [19]  219 	ld	-4 (ix),l
    00E3 D1            [10]  220 	pop	de
    00E4 C1            [10]  221 	pop	bc
    00E5 D5            [11]  222 	push	de
    00E6 DD 66 FB      [19]  223 	ld	h,-5 (ix)
    00E9 DD 6E FD      [19]  224 	ld	l,-3 (ix)
    00EC E5            [11]  225 	push	hl
-   00ED DD 7E FE      [19]  226 	ld	a,-2 (ix)
+   00ED DD 7E FC      [19]  226 	ld	a,-4 (ix)
    00F0 F5            [11]  227 	push	af
    00F1 33            [ 6]  228 	inc	sp
    00F2 C5            [11]  229 	push	bc
@@ -260,12 +260,12 @@
    0121 F1            [10]  260 	pop	af
    0122 33            [ 6]  261 	inc	sp
                             262 ;src/gui/gui.c:44: pvid = cpct_getScreenPtr(SCR_VMEM, left+1, top+2);
-   0123 DD 66 FF      [19]  263 	ld	h,-1 (ix)
+   0123 DD 66 FE      [19]  263 	ld	h,-2 (ix)
    0126 24            [ 4]  264 	inc	h
    0127 24            [ 4]  265 	inc	h
    0128 E5            [11]  266 	push	hl
    0129 33            [ 6]  267 	inc	sp
-   012A DD 7E FC      [19]  268 	ld	a,-4 (ix)
+   012A DD 7E FF      [19]  268 	ld	a,-1 (ix)
    012D F5            [11]  269 	push	af
    012E 33            [ 6]  270 	inc	sp
    012F 21 00 C0      [10]  271 	ld	hl,#0xC000
@@ -284,7 +284,7 @@
    0144 21 00 00      [10]  284 	ld	hl,#0x0000
    0147 E5            [11]  285 	push	hl
    0148 CDr00r00      [17]  286 	call	_cpct_px2byteM0
-   014B DD 75 FE      [19]  287 	ld	-2 (ix),l
+   014B DD 75 FC      [19]  287 	ld	-4 (ix),l
    014E D1            [10]  288 	pop	de
    014F C1            [10]  289 	pop	bc
    0150 79            [ 4]  290 	ld	a,c
@@ -292,7 +292,7 @@
    0152 33            [ 6]  292 	inc	sp
    0153 C5            [11]  293 	push	bc
    0154 33            [ 6]  294 	inc	sp
-   0155 DD 7E FE      [19]  295 	ld	a,-2 (ix)
+   0155 DD 7E FC      [19]  295 	ld	a,-4 (ix)
    0158 F5            [11]  296 	push	af
    0159 33            [ 6]  297 	inc	sp
    015A D5            [11]  298 	push	de
@@ -350,10 +350,10 @@
    01A9 DD CB FA 1E   [23]  350 	rr	-6 (ix)
                             351 ;src/gui/gui.c:58: pvid = cpct_getScreenPtr(SCR_VMEM, left+2, top+5);
    01AD DD 7E FA      [19]  352 	ld	a,-6 (ix)
-   01B0 DD 77 FF      [19]  353 	ld	-1 (ix), a
+   01B0 DD 77 FC      [19]  353 	ld	-4 (ix), a
    01B3 C6 05         [ 7]  354 	add	a, #0x05
    01B5 4F            [ 4]  355 	ld	c,a
-   01B6 DD 73 FC      [19]  356 	ld	-4 (ix), e
+   01B6 DD 73 FD      [19]  356 	ld	-3 (ix), e
    01B9 63            [ 4]  357 	ld	h, e
    01BA 24            [ 4]  358 	inc	h
    01BB 24            [ 4]  359 	inc	h
@@ -372,8 +372,8 @@
    01CD DD 4E 04      [19]  372 	ld	c,4 (ix)
    01D0 79            [ 4]  373 	ld	a,c
    01D1 C6 FF         [ 7]  374 	add	a,#0xFF
-   01D3 DD 75 FD      [19]  375 	ld	-3 (ix),l
-   01D6 DD 74 FE      [19]  376 	ld	-2 (ix),h
+   01D3 DD 75 FE      [19]  375 	ld	-2 (ix),l
+   01D6 DD 74 FF      [19]  376 	ld	-1 (ix),h
    01D9 C5            [11]  377 	push	bc
    01DA D5            [11]  378 	push	de
    01DB C5            [11]  379 	push	bc
@@ -383,8 +383,8 @@
    01DF AF            [ 4]  383 	xor	a, a
    01E0 F5            [11]  384 	push	af
    01E1 33            [ 6]  385 	inc	sp
-   01E2 DD 6E FD      [19]  386 	ld	l,-3 (ix)
-   01E5 DD 66 FE      [19]  387 	ld	h,-2 (ix)
+   01E2 DD 6E FE      [19]  386 	ld	l,-2 (ix)
+   01E5 DD 66 FF      [19]  387 	ld	h,-1 (ix)
    01E8 E5            [11]  388 	push	hl
    01E9 CDr00r00      [17]  389 	call	_cpct_drawSolidBox
    01EC F1            [10]  390 	pop	af
@@ -420,9 +420,9 @@
    0213 33            [ 6]  420 	inc	sp
    0214 C1            [10]  421 	pop	bc
                             422 ;src/gui/gui.c:66: pvid = cpct_getScreenPtr(SCR_VMEM, left+1, top+1);
-   0215 DD 66 FF      [19]  423 	ld	h,-1 (ix)
+   0215 DD 66 FC      [19]  423 	ld	h,-4 (ix)
    0218 24            [ 4]  424 	inc	h
-   0219 DD 56 FC      [19]  425 	ld	d,-4 (ix)
+   0219 DD 56 FD      [19]  425 	ld	d,-3 (ix)
    021C 14            [ 4]  426 	inc	d
    021D C5            [11]  427 	push	bc
    021E E5            [11]  428 	push	hl
@@ -668,10 +668,10 @@
                             668 ;src/gui/gui.c:97: for(i=0; i<nbEntry; i++)
    035C 3E CA         [ 7]  669 	ld	a,#0xCA
    035E 91            [ 4]  670 	sub	a, c
-   035F DD 77 FD      [19]  671 	ld	-3 (ix),a
+   035F DD 77 FE      [19]  671 	ld	-2 (ix),a
    0362 3E 00         [ 7]  672 	ld	a,#0x00
    0364 98            [ 4]  673 	sbc	a, b
-   0365 DD 77 FE      [19]  674 	ld	-2 (ix), a
+   0365 DD 77 FF      [19]  674 	ld	-1 (ix), a
    0368 07            [ 4]  675 	rlca
    0369 E6 01         [ 7]  676 	and	a,#0x01
    036B 5F            [ 4]  677 	ld	e,a
@@ -705,13 +705,13 @@
    039A 0E 00         [ 7]  705 	ld	c,#0x00
    039C                     706 00104$:
                             707 ;src/gui/gui.c:104: p_video = cpct_getScreenPtr(SCR_VMEM, (82-strlen(menu[i]))/2, (202-nbEntry*10)/2+i*10);
-   039C DD 6E FD      [19]  708 	ld	l,-3 (ix)
-   039F DD 66 FE      [19]  709 	ld	h,-2 (ix)
+   039C DD 6E FE      [19]  708 	ld	l,-2 (ix)
+   039F DD 66 FF      [19]  709 	ld	h,-1 (ix)
    03A2 7B            [ 4]  710 	ld	a,e
    03A3 B7            [ 4]  711 	or	a, a
    03A4 28 07         [12]  712 	jr	Z,00115$
-   03A6 DD 6E FD      [19]  713 	ld	l,-3 (ix)
-   03A9 DD 66 FE      [19]  714 	ld	h,-2 (ix)
+   03A6 DD 6E FE      [19]  713 	ld	l,-2 (ix)
+   03A9 DD 66 FF      [19]  714 	ld	h,-1 (ix)
    03AC 23            [ 6]  715 	inc	hl
    03AD                     716 00115$:
    03AD CB 2C         [ 8]  717 	sra	h
@@ -727,7 +727,7 @@
    03BB D1            [10]  727 	pop	de
    03BC 78            [ 4]  728 	ld	a,b
    03BD 85            [ 4]  729 	add	a, l
-   03BE DD 77 FF      [19]  730 	ld	-1 (ix),a
+   03BE DD 77 FD      [19]  730 	ld	-3 (ix),a
    03C1 DD 56 FA      [19]  731 	ld	d,-6 (ix)
    03C4 DD 46 FB      [19]  732 	ld	b,-5 (ix)
    03C7 CB 22         [ 8]  733 	sla	d
@@ -762,7 +762,7 @@
    03F0 DD 75 FC      [19]  762 	ld	-4 (ix),l
    03F3 C5            [11]  763 	push	bc
    03F4 D5            [11]  764 	push	de
-   03F5 DD 66 FF      [19]  765 	ld	h,-1 (ix)
+   03F5 DD 66 FD      [19]  765 	ld	h,-3 (ix)
    03F8 DD 6E FC      [19]  766 	ld	l,-4 (ix)
    03FB E5            [11]  767 	push	hl
    03FC 21 00 C0      [10]  768 	ld	hl,#0xC000
@@ -1001,11 +1001,11 @@
    053F B7            [ 4] 1001 	or	a, a
    0540 20 05         [12] 1002 	jr	NZ,00102$
                            1003 ;src/gui/gui.c:170: buttonTxt = "<OK>";
-   0542 11rB2r06      [10] 1004 	ld	de,#___str_0
+   0542 11rB4r06      [10] 1004 	ld	de,#___str_0
    0545 18 03         [12] 1005 	jr	00103$
    0547                    1006 00102$:
                            1007 ;src/gui/gui.c:172: buttonTxt = "<OK>  <Cancel>";
-   0547 11rB7r06      [10] 1008 	ld	de,#___str_1+0
+   0547 11rB9r06      [10] 1008 	ld	de,#___str_1+0
    054A                    1009 00103$:
                            1010 ;src/gui/gui.c:174: drawBoxM2(50,(nbLine+2)*12);
    054A DD 4E 06      [19] 1011 	ld	c,6 (ix)
@@ -1043,209 +1043,207 @@
    0574 DD 77 FE      [19] 1043 	ld	-2 (ix), a
    0577 07            [ 4] 1044 	rlca
    0578 E6 01         [ 7] 1045 	and	a,#0x01
-   057A DD 77 FA      [19] 1046 	ld	-6 (ix),a
+   057A DD 77 FF      [19] 1046 	ld	-1 (ix),a
    057D DD 36 F6 00   [19] 1047 	ld	-10 (ix),#0x00
-   0581 DD 36 F9 00   [19] 1048 	ld	-7 (ix),#0x00
+   0581 DD 36 FC 00   [19] 1048 	ld	-4 (ix),#0x00
    0585                    1049 00114$:
                            1050 ;src/gui/gui.c:178: p_video = cpct_getScreenPtr(SCR_VMEM, (82-strlen(text[i]))/2, (202-(nbLine+2)*10)/2+i*10);
    0585 DD 7E FD      [19] 1051 	ld	a,-3 (ix)
    0588 C6 01         [ 7] 1052 	add	a, #0x01
-   058A DD 77 F7      [19] 1053 	ld	-9 (ix),a
+   058A DD 77 FA      [19] 1053 	ld	-6 (ix),a
    058D DD 7E FE      [19] 1054 	ld	a,-2 (ix)
    0590 CE 00         [ 7] 1055 	adc	a, #0x00
-   0592 DD 77 F8      [19] 1056 	ld	-8 (ix),a
+   0592 DD 77 FB      [19] 1056 	ld	-5 (ix),a
                            1057 ;src/gui/gui.c:176: for(i=0; i<nbLine; i++)
    0595 DD 7E F6      [19] 1058 	ld	a,-10 (ix)
    0598 DD 96 06      [19] 1059 	sub	a, 6 (ix)
-   059B D2r25r06      [10] 1060 	jp	NC,00104$
+   059B D2r27r06      [10] 1060 	jp	NC,00104$
                            1061 ;src/gui/gui.c:178: p_video = cpct_getScreenPtr(SCR_VMEM, (82-strlen(text[i]))/2, (202-(nbLine+2)*10)/2+i*10);
    059E DD 6E FD      [19] 1062 	ld	l,-3 (ix)
    05A1 DD 66 FE      [19] 1063 	ld	h,-2 (ix)
-   05A4 DD 7E FA      [19] 1064 	ld	a,-6 (ix)
+   05A4 DD 7E FF      [19] 1064 	ld	a,-1 (ix)
    05A7 B7            [ 4] 1065 	or	a, a
-   05A8 28 04         [12] 1066 	jr	Z,00118$
-   05AA C1            [10] 1067 	pop	bc
-   05AB E1            [10] 1068 	pop	hl
-   05AC E5            [11] 1069 	push	hl
-   05AD C5            [11] 1070 	push	bc
-   05AE                    1071 00118$:
-   05AE CB 2C         [ 8] 1072 	sra	h
-   05B0 CB 1D         [ 8] 1073 	rr	l
-   05B2 DD 66 F9      [19] 1074 	ld	h,-7 (ix)
-   05B5 7D            [ 4] 1075 	ld	a,l
-   05B6 84            [ 4] 1076 	add	a, h
-   05B7 DD 77 FF      [19] 1077 	ld	-1 (ix),a
-   05BA DD 6E F6      [19] 1078 	ld	l,-10 (ix)
-   05BD 26 00         [ 7] 1079 	ld	h,#0x00
-   05BF 29            [11] 1080 	add	hl, hl
-   05C0 45            [ 4] 1081 	ld	b,l
-   05C1 4C            [ 4] 1082 	ld	c,h
-   05C2 DD 7E 04      [19] 1083 	ld	a,4 (ix)
-   05C5 80            [ 4] 1084 	add	a, b
-   05C6 DD 77 FB      [19] 1085 	ld	-5 (ix),a
-   05C9 DD 7E 05      [19] 1086 	ld	a,5 (ix)
-   05CC 89            [ 4] 1087 	adc	a, c
-   05CD DD 77 FC      [19] 1088 	ld	-4 (ix),a
-   05D0 DD 6E FB      [19] 1089 	ld	l,-5 (ix)
-   05D3 DD 66 FC      [19] 1090 	ld	h,-4 (ix)
-   05D6 4E            [ 7] 1091 	ld	c,(hl)
-   05D7 23            [ 6] 1092 	inc	hl
-   05D8 46            [ 7] 1093 	ld	b,(hl)
-   05D9 D5            [11] 1094 	push	de
-   05DA C5            [11] 1095 	push	bc
-   05DB CDr00r00      [17] 1096 	call	_strlen
-   05DE F1            [10] 1097 	pop	af
-   05DF D1            [10] 1098 	pop	de
-   05E0 3E 52         [ 7] 1099 	ld	a,#0x52
-   05E2 95            [ 4] 1100 	sub	a, l
-   05E3 6F            [ 4] 1101 	ld	l,a
-   05E4 3E 00         [ 7] 1102 	ld	a,#0x00
-   05E6 9C            [ 4] 1103 	sbc	a, h
-   05E7 67            [ 4] 1104 	ld	h,a
-   05E8 CB 3C         [ 8] 1105 	srl	h
-   05EA CB 1D         [ 8] 1106 	rr	l
-   05EC 45            [ 4] 1107 	ld	b,l
-   05ED D5            [11] 1108 	push	de
-   05EE DD 7E FF      [19] 1109 	ld	a,-1 (ix)
-   05F1 F5            [11] 1110 	push	af
-   05F2 33            [ 6] 1111 	inc	sp
-   05F3 C5            [11] 1112 	push	bc
-   05F4 33            [ 6] 1113 	inc	sp
-   05F5 21 00 C0      [10] 1114 	ld	hl,#0xC000
-   05F8 E5            [11] 1115 	push	hl
-   05F9 CDr00r00      [17] 1116 	call	_cpct_getScreenPtr
-   05FC D1            [10] 1117 	pop	de
-   05FD E5            [11] 1118 	push	hl
-   05FE FD E1         [14] 1119 	pop	iy
-                           1120 ;src/gui/gui.c:179: cpct_drawStringM2 (text[i], p_video, 0);
-   0600 DD 6E FB      [19] 1121 	ld	l,-5 (ix)
-   0603 DD 66 FC      [19] 1122 	ld	h,-4 (ix)
-   0606 4E            [ 7] 1123 	ld	c,(hl)
-   0607 23            [ 6] 1124 	inc	hl
-   0608 46            [ 7] 1125 	ld	b,(hl)
-   0609 D5            [11] 1126 	push	de
-   060A AF            [ 4] 1127 	xor	a, a
-   060B F5            [11] 1128 	push	af
-   060C 33            [ 6] 1129 	inc	sp
-   060D FD E5         [15] 1130 	push	iy
-   060F C5            [11] 1131 	push	bc
-   0610 CDr00r00      [17] 1132 	call	_cpct_drawStringM2
-   0613 F1            [10] 1133 	pop	af
-   0614 F1            [10] 1134 	pop	af
-   0615 33            [ 6] 1135 	inc	sp
-   0616 D1            [10] 1136 	pop	de
-                           1137 ;src/gui/gui.c:176: for(i=0; i<nbLine; i++)
-   0617 DD 7E F9      [19] 1138 	ld	a,-7 (ix)
-   061A C6 0A         [ 7] 1139 	add	a, #0x0A
-   061C DD 77 F9      [19] 1140 	ld	-7 (ix),a
-   061F DD 34 F6      [23] 1141 	inc	-10 (ix)
-   0622 C3r85r05      [10] 1142 	jp	00114$
-   0625                    1143 00104$:
-                           1144 ;src/gui/gui.c:182: p_video = cpct_getScreenPtr(SCR_VMEM, (82-strlen(buttonTxt))/2, (202-(nbLine+2)*10)/2+(nbLine+1)*10);
-   0625 DD 46 FD      [19] 1145 	ld	b,-3 (ix)
-   0628 DD 66 FE      [19] 1146 	ld	h,-2 (ix)
-   062B DD 7E FA      [19] 1147 	ld	a,-6 (ix)
-   062E B7            [ 4] 1148 	or	a, a
-   062F 28 06         [12] 1149 	jr	Z,00119$
-   0631 DD 46 F7      [19] 1150 	ld	b,-9 (ix)
-   0634 DD 66 F8      [19] 1151 	ld	h,-8 (ix)
-   0637                    1152 00119$:
-   0637 CB 2C         [ 8] 1153 	sra	h
-   0639 CB 18         [ 8] 1154 	rr	b
-   063B DD 4E 06      [19] 1155 	ld	c,6 (ix)
-   063E 0C            [ 4] 1156 	inc	c
-   063F 79            [ 4] 1157 	ld	a,c
-   0640 87            [ 4] 1158 	add	a, a
-   0641 87            [ 4] 1159 	add	a, a
-   0642 81            [ 4] 1160 	add	a, c
-   0643 87            [ 4] 1161 	add	a, a
-   0644 67            [ 4] 1162 	ld	h, a
-   0645 80            [ 4] 1163 	add	a,b
-   0646 47            [ 4] 1164 	ld	b,a
-   0647 C5            [11] 1165 	push	bc
-   0648 D5            [11] 1166 	push	de
-   0649 D5            [11] 1167 	push	de
-   064A CDr00r00      [17] 1168 	call	_strlen
-   064D F1            [10] 1169 	pop	af
-   064E D1            [10] 1170 	pop	de
-   064F C1            [10] 1171 	pop	bc
-   0650 3E 52         [ 7] 1172 	ld	a,#0x52
-   0652 95            [ 4] 1173 	sub	a, l
-   0653 6F            [ 4] 1174 	ld	l,a
-   0654 3E 00         [ 7] 1175 	ld	a,#0x00
-   0656 9C            [ 4] 1176 	sbc	a, h
-   0657 67            [ 4] 1177 	ld	h,a
-   0658 CB 3C         [ 8] 1178 	srl	h
-   065A CB 1D         [ 8] 1179 	rr	l
-   065C 7D            [ 4] 1180 	ld	a,l
-   065D D5            [11] 1181 	push	de
-   065E C5            [11] 1182 	push	bc
-   065F 33            [ 6] 1183 	inc	sp
-   0660 F5            [11] 1184 	push	af
-   0661 33            [ 6] 1185 	inc	sp
-   0662 21 00 C0      [10] 1186 	ld	hl,#0xC000
-   0665 E5            [11] 1187 	push	hl
-   0666 CDr00r00      [17] 1188 	call	_cpct_getScreenPtr
-   0669 D1            [10] 1189 	pop	de
-                           1190 ;src/gui/gui.c:183: cpct_drawStringM2 (buttonTxt, p_video, 0);
-   066A 4D            [ 4] 1191 	ld	c, l
-   066B 44            [ 4] 1192 	ld	b, h
-   066C AF            [ 4] 1193 	xor	a, a
-   066D F5            [11] 1194 	push	af
-   066E 33            [ 6] 1195 	inc	sp
-   066F C5            [11] 1196 	push	bc
-   0670 D5            [11] 1197 	push	de
-   0671 CDr00r00      [17] 1198 	call	_cpct_drawStringM2
-   0674 F1            [10] 1199 	pop	af
-   0675 F1            [10] 1200 	pop	af
-   0676 33            [ 6] 1201 	inc	sp
-                           1202 ;src/gui/gui.c:186: do{
-   0677                    1203 00110$:
-                           1204 ;src/gui/gui.c:187: cpct_scanKeyboard(); 
-   0677 CDr00r00      [17] 1205 	call	_cpct_scanKeyboard
-                           1206 ;src/gui/gui.c:189: if ( cpct_isKeyPressed(Key_Return) )
-   067A 21 02 04      [10] 1207 	ld	hl,#0x0402
-   067D CDr00r00      [17] 1208 	call	_cpct_isKeyPressed
-   0680 7D            [ 4] 1209 	ld	a,l
-   0681 B7            [ 4] 1210 	or	a, a
-   0682 28 04         [12] 1211 	jr	Z,00106$
-                           1212 ;src/gui/gui.c:190: valueReturn=1;
-   0684 DD 36 F5 01   [19] 1213 	ld	-11 (ix),#0x01
-   0688                    1214 00106$:
-                           1215 ;src/gui/gui.c:192: if ( cpct_isKeyPressed(Key_Esc) )
-   0688 21 08 04      [10] 1216 	ld	hl,#0x0408
-   068B CDr00r00      [17] 1217 	call	_cpct_isKeyPressed
-   068E 7D            [ 4] 1218 	ld	a,l
-   068F B7            [ 4] 1219 	or	a, a
-   0690 28 04         [12] 1220 	jr	Z,00111$
-                           1221 ;src/gui/gui.c:193: valueReturn=0;
-   0692 DD 36 F5 00   [19] 1222 	ld	-11 (ix),#0x00
-   0696                    1223 00111$:
-                           1224 ;src/gui/gui.c:195: while(!cpct_isKeyPressed(Key_Return) && !cpct_isKeyPressed(Key_Esc));
-   0696 21 02 04      [10] 1225 	ld	hl,#0x0402
-   0699 CDr00r00      [17] 1226 	call	_cpct_isKeyPressed
-   069C 7D            [ 4] 1227 	ld	a,l
-   069D B7            [ 4] 1228 	or	a, a
-   069E 20 0A         [12] 1229 	jr	NZ,00112$
-   06A0 21 08 04      [10] 1230 	ld	hl,#0x0408
-   06A3 CDr00r00      [17] 1231 	call	_cpct_isKeyPressed
-   06A6 7D            [ 4] 1232 	ld	a,l
-   06A7 B7            [ 4] 1233 	or	a, a
-   06A8 28 CD         [12] 1234 	jr	Z,00110$
-   06AA                    1235 00112$:
-                           1236 ;src/gui/gui.c:197: return valueReturn;
-   06AA DD 6E F5      [19] 1237 	ld	l,-11 (ix)
-   06AD DD F9         [10] 1238 	ld	sp, ix
-   06AF DD E1         [14] 1239 	pop	ix
-   06B1 C9            [10] 1240 	ret
-   06B2                    1241 ___str_0:
-   06B2 3C 4F 4B 3E        1242 	.ascii "<OK>"
-   06B6 00                 1243 	.db 0x00
-   06B7                    1244 ___str_1:
-   06B7 3C 4F 4B 3E 20 20  1245 	.ascii "<OK>  <Cancel>"
+   05A8 28 06         [12] 1066 	jr	Z,00118$
+   05AA DD 6E FA      [19] 1067 	ld	l,-6 (ix)
+   05AD DD 66 FB      [19] 1068 	ld	h,-5 (ix)
+   05B0                    1069 00118$:
+   05B0 CB 2C         [ 8] 1070 	sra	h
+   05B2 CB 1D         [ 8] 1071 	rr	l
+   05B4 DD 66 FC      [19] 1072 	ld	h,-4 (ix)
+   05B7 7D            [ 4] 1073 	ld	a,l
+   05B8 84            [ 4] 1074 	add	a, h
+   05B9 DD 77 F9      [19] 1075 	ld	-7 (ix),a
+   05BC DD 6E F6      [19] 1076 	ld	l,-10 (ix)
+   05BF 26 00         [ 7] 1077 	ld	h,#0x00
+   05C1 29            [11] 1078 	add	hl, hl
+   05C2 45            [ 4] 1079 	ld	b,l
+   05C3 4C            [ 4] 1080 	ld	c,h
+   05C4 DD 7E 04      [19] 1081 	ld	a,4 (ix)
+   05C7 80            [ 4] 1082 	add	a, b
+   05C8 DD 77 F7      [19] 1083 	ld	-9 (ix),a
+   05CB DD 7E 05      [19] 1084 	ld	a,5 (ix)
+   05CE 89            [ 4] 1085 	adc	a, c
+   05CF DD 77 F8      [19] 1086 	ld	-8 (ix),a
+   05D2 DD 6E F7      [19] 1087 	ld	l,-9 (ix)
+   05D5 DD 66 F8      [19] 1088 	ld	h,-8 (ix)
+   05D8 4E            [ 7] 1089 	ld	c,(hl)
+   05D9 23            [ 6] 1090 	inc	hl
+   05DA 46            [ 7] 1091 	ld	b,(hl)
+   05DB D5            [11] 1092 	push	de
+   05DC C5            [11] 1093 	push	bc
+   05DD CDr00r00      [17] 1094 	call	_strlen
+   05E0 F1            [10] 1095 	pop	af
+   05E1 D1            [10] 1096 	pop	de
+   05E2 3E 52         [ 7] 1097 	ld	a,#0x52
+   05E4 95            [ 4] 1098 	sub	a, l
+   05E5 6F            [ 4] 1099 	ld	l,a
+   05E6 3E 00         [ 7] 1100 	ld	a,#0x00
+   05E8 9C            [ 4] 1101 	sbc	a, h
+   05E9 67            [ 4] 1102 	ld	h,a
+   05EA CB 3C         [ 8] 1103 	srl	h
+   05EC CB 1D         [ 8] 1104 	rr	l
+   05EE 45            [ 4] 1105 	ld	b,l
+   05EF D5            [11] 1106 	push	de
+   05F0 DD 7E F9      [19] 1107 	ld	a,-7 (ix)
+   05F3 F5            [11] 1108 	push	af
+   05F4 33            [ 6] 1109 	inc	sp
+   05F5 C5            [11] 1110 	push	bc
+   05F6 33            [ 6] 1111 	inc	sp
+   05F7 21 00 C0      [10] 1112 	ld	hl,#0xC000
+   05FA E5            [11] 1113 	push	hl
+   05FB CDr00r00      [17] 1114 	call	_cpct_getScreenPtr
+   05FE D1            [10] 1115 	pop	de
+   05FF E5            [11] 1116 	push	hl
+   0600 FD E1         [14] 1117 	pop	iy
+                           1118 ;src/gui/gui.c:179: cpct_drawStringM2 (text[i], p_video, 0);
+   0602 DD 6E F7      [19] 1119 	ld	l,-9 (ix)
+   0605 DD 66 F8      [19] 1120 	ld	h,-8 (ix)
+   0608 4E            [ 7] 1121 	ld	c,(hl)
+   0609 23            [ 6] 1122 	inc	hl
+   060A 46            [ 7] 1123 	ld	b,(hl)
+   060B D5            [11] 1124 	push	de
+   060C AF            [ 4] 1125 	xor	a, a
+   060D F5            [11] 1126 	push	af
+   060E 33            [ 6] 1127 	inc	sp
+   060F FD E5         [15] 1128 	push	iy
+   0611 C5            [11] 1129 	push	bc
+   0612 CDr00r00      [17] 1130 	call	_cpct_drawStringM2
+   0615 F1            [10] 1131 	pop	af
+   0616 F1            [10] 1132 	pop	af
+   0617 33            [ 6] 1133 	inc	sp
+   0618 D1            [10] 1134 	pop	de
+                           1135 ;src/gui/gui.c:176: for(i=0; i<nbLine; i++)
+   0619 DD 7E FC      [19] 1136 	ld	a,-4 (ix)
+   061C C6 0A         [ 7] 1137 	add	a, #0x0A
+   061E DD 77 FC      [19] 1138 	ld	-4 (ix),a
+   0621 DD 34 F6      [23] 1139 	inc	-10 (ix)
+   0624 C3r85r05      [10] 1140 	jp	00114$
+   0627                    1141 00104$:
+                           1142 ;src/gui/gui.c:182: p_video = cpct_getScreenPtr(SCR_VMEM, (82-strlen(buttonTxt))/2, (202-(nbLine+2)*10)/2+(nbLine+1)*10);
+   0627 DD 46 FD      [19] 1143 	ld	b,-3 (ix)
+   062A DD 66 FE      [19] 1144 	ld	h,-2 (ix)
+   062D DD 7E FF      [19] 1145 	ld	a,-1 (ix)
+   0630 B7            [ 4] 1146 	or	a, a
+   0631 28 06         [12] 1147 	jr	Z,00119$
+   0633 DD 46 FA      [19] 1148 	ld	b,-6 (ix)
+   0636 DD 66 FB      [19] 1149 	ld	h,-5 (ix)
+   0639                    1150 00119$:
+   0639 CB 2C         [ 8] 1151 	sra	h
+   063B CB 18         [ 8] 1152 	rr	b
+   063D DD 4E 06      [19] 1153 	ld	c,6 (ix)
+   0640 0C            [ 4] 1154 	inc	c
+   0641 79            [ 4] 1155 	ld	a,c
+   0642 87            [ 4] 1156 	add	a, a
+   0643 87            [ 4] 1157 	add	a, a
+   0644 81            [ 4] 1158 	add	a, c
+   0645 87            [ 4] 1159 	add	a, a
+   0646 67            [ 4] 1160 	ld	h, a
+   0647 80            [ 4] 1161 	add	a,b
+   0648 47            [ 4] 1162 	ld	b,a
+   0649 C5            [11] 1163 	push	bc
+   064A D5            [11] 1164 	push	de
+   064B D5            [11] 1165 	push	de
+   064C CDr00r00      [17] 1166 	call	_strlen
+   064F F1            [10] 1167 	pop	af
+   0650 D1            [10] 1168 	pop	de
+   0651 C1            [10] 1169 	pop	bc
+   0652 3E 52         [ 7] 1170 	ld	a,#0x52
+   0654 95            [ 4] 1171 	sub	a, l
+   0655 6F            [ 4] 1172 	ld	l,a
+   0656 3E 00         [ 7] 1173 	ld	a,#0x00
+   0658 9C            [ 4] 1174 	sbc	a, h
+   0659 67            [ 4] 1175 	ld	h,a
+   065A CB 3C         [ 8] 1176 	srl	h
+   065C CB 1D         [ 8] 1177 	rr	l
+   065E 7D            [ 4] 1178 	ld	a,l
+   065F D5            [11] 1179 	push	de
+   0660 C5            [11] 1180 	push	bc
+   0661 33            [ 6] 1181 	inc	sp
+   0662 F5            [11] 1182 	push	af
+   0663 33            [ 6] 1183 	inc	sp
+   0664 21 00 C0      [10] 1184 	ld	hl,#0xC000
+   0667 E5            [11] 1185 	push	hl
+   0668 CDr00r00      [17] 1186 	call	_cpct_getScreenPtr
+   066B D1            [10] 1187 	pop	de
+                           1188 ;src/gui/gui.c:183: cpct_drawStringM2 (buttonTxt, p_video, 0);
+   066C 4D            [ 4] 1189 	ld	c, l
+   066D 44            [ 4] 1190 	ld	b, h
+   066E AF            [ 4] 1191 	xor	a, a
+   066F F5            [11] 1192 	push	af
+   0670 33            [ 6] 1193 	inc	sp
+   0671 C5            [11] 1194 	push	bc
+   0672 D5            [11] 1195 	push	de
+   0673 CDr00r00      [17] 1196 	call	_cpct_drawStringM2
+   0676 F1            [10] 1197 	pop	af
+   0677 F1            [10] 1198 	pop	af
+   0678 33            [ 6] 1199 	inc	sp
+                           1200 ;src/gui/gui.c:186: do{
+   0679                    1201 00110$:
+                           1202 ;src/gui/gui.c:187: cpct_scanKeyboard(); 
+   0679 CDr00r00      [17] 1203 	call	_cpct_scanKeyboard
+                           1204 ;src/gui/gui.c:189: if ( cpct_isKeyPressed(Key_Return) )
+   067C 21 02 04      [10] 1205 	ld	hl,#0x0402
+   067F CDr00r00      [17] 1206 	call	_cpct_isKeyPressed
+   0682 7D            [ 4] 1207 	ld	a,l
+   0683 B7            [ 4] 1208 	or	a, a
+   0684 28 04         [12] 1209 	jr	Z,00106$
+                           1210 ;src/gui/gui.c:190: valueReturn=1;
+   0686 DD 36 F5 01   [19] 1211 	ld	-11 (ix),#0x01
+   068A                    1212 00106$:
+                           1213 ;src/gui/gui.c:192: if ( cpct_isKeyPressed(Key_Esc) )
+   068A 21 08 04      [10] 1214 	ld	hl,#0x0408
+   068D CDr00r00      [17] 1215 	call	_cpct_isKeyPressed
+   0690 7D            [ 4] 1216 	ld	a,l
+   0691 B7            [ 4] 1217 	or	a, a
+   0692 28 04         [12] 1218 	jr	Z,00111$
+                           1219 ;src/gui/gui.c:193: valueReturn=0;
+   0694 DD 36 F5 00   [19] 1220 	ld	-11 (ix),#0x00
+   0698                    1221 00111$:
+                           1222 ;src/gui/gui.c:195: while(!cpct_isKeyPressed(Key_Return) && !cpct_isKeyPressed(Key_Esc));
+   0698 21 02 04      [10] 1223 	ld	hl,#0x0402
+   069B CDr00r00      [17] 1224 	call	_cpct_isKeyPressed
+   069E 7D            [ 4] 1225 	ld	a,l
+   069F B7            [ 4] 1226 	or	a, a
+   06A0 20 0A         [12] 1227 	jr	NZ,00112$
+   06A2 21 08 04      [10] 1228 	ld	hl,#0x0408
+   06A5 CDr00r00      [17] 1229 	call	_cpct_isKeyPressed
+   06A8 7D            [ 4] 1230 	ld	a,l
+   06A9 B7            [ 4] 1231 	or	a, a
+   06AA 28 CD         [12] 1232 	jr	Z,00110$
+   06AC                    1233 00112$:
+                           1234 ;src/gui/gui.c:197: return valueReturn;
+   06AC DD 6E F5      [19] 1235 	ld	l,-11 (ix)
+   06AF DD F9         [10] 1236 	ld	sp, ix
+   06B1 DD E1         [14] 1237 	pop	ix
+   06B3 C9            [10] 1238 	ret
+   06B4                    1239 ___str_0:
+   06B4 3C 4F 4B 3E        1240 	.ascii "<OK>"
+   06B8 00                 1241 	.db 0x00
+   06B9                    1242 ___str_1:
+   06B9 3C 4F 4B 3E 20 20  1243 	.ascii "<OK>  <Cancel>"
         3C 43 61 6E 63 65
         6C 3E
-   06C5 00                 1246 	.db 0x00
-                           1247 	.area _CODE
-                           1248 	.area _INITIALIZER
-                           1249 	.area _CABS (ABS)
+   06C7 00                 1244 	.db 0x00
+                           1245 	.area _CODE
+                           1246 	.area _INITIALIZER
+                           1247 	.area _CABS (ABS)

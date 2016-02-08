@@ -1,7 +1,7 @@
 ;--------------------------------------------------------
 ; File Created by SDCC : free open source ANSI-C Compiler
 ; Version 3.5.4 #9329 (Linux)
-; This file was generated Sun Feb  7 16:09:18 2016
+; This file was generated Mon Feb  8 17:23:07 2016
 ;--------------------------------------------------------
 	.module gui
 	.optsdcc -mz80
@@ -185,7 +185,7 @@ _drawBoxM0::
 	call	_cpct_memset
 	pop	de
 ;src/gui/gui.c:36: pvid = cpct_getScreenPtr(SCR_VMEM, left+1, top+4);
-	ld	-1 (ix), e
+	ld	-2 (ix), e
 	ld	h, e
 	inc	h
 	inc	h
@@ -193,11 +193,11 @@ _drawBoxM0::
 	inc	h
 	ld	a,-7 (ix)
 	inc	a
-	ld	-4 (ix),a
+	ld	-1 (ix),a
 	push	de
 	push	hl
 	inc	sp
-	ld	a,-4 (ix)
+	ld	a,-1 (ix)
 	push	af
 	inc	sp
 	ld	hl,#0xC000
@@ -216,14 +216,14 @@ _drawBoxM0::
 	ld	hl,#0x0202
 	push	hl
 	call	_cpct_px2byteM0
-	ld	-2 (ix),l
+	ld	-4 (ix),l
 	pop	de
 	pop	bc
 	push	de
 	ld	h,-5 (ix)
 	ld	l,-3 (ix)
 	push	hl
-	ld	a,-2 (ix)
+	ld	a,-4 (ix)
 	push	af
 	inc	sp
 	push	bc
@@ -260,12 +260,12 @@ _drawBoxM0::
 	pop	af
 	inc	sp
 ;src/gui/gui.c:44: pvid = cpct_getScreenPtr(SCR_VMEM, left+1, top+2);
-	ld	h,-1 (ix)
+	ld	h,-2 (ix)
 	inc	h
 	inc	h
 	push	hl
 	inc	sp
-	ld	a,-4 (ix)
+	ld	a,-1 (ix)
 	push	af
 	inc	sp
 	ld	hl,#0xC000
@@ -284,7 +284,7 @@ _drawBoxM0::
 	ld	hl,#0x0000
 	push	hl
 	call	_cpct_px2byteM0
-	ld	-2 (ix),l
+	ld	-4 (ix),l
 	pop	de
 	pop	bc
 	ld	a,c
@@ -292,7 +292,7 @@ _drawBoxM0::
 	inc	sp
 	push	bc
 	inc	sp
-	ld	a,-2 (ix)
+	ld	a,-4 (ix)
 	push	af
 	inc	sp
 	push	de
@@ -350,10 +350,10 @@ _drawBoxM2::
 	rr	-6 (ix)
 ;src/gui/gui.c:58: pvid = cpct_getScreenPtr(SCR_VMEM, left+2, top+5);
 	ld	a,-6 (ix)
-	ld	-1 (ix), a
+	ld	-4 (ix), a
 	add	a, #0x05
 	ld	c,a
-	ld	-4 (ix), e
+	ld	-3 (ix), e
 	ld	h, e
 	inc	h
 	inc	h
@@ -372,8 +372,8 @@ _drawBoxM2::
 	ld	c,4 (ix)
 	ld	a,c
 	add	a,#0xFF
-	ld	-3 (ix),l
-	ld	-2 (ix),h
+	ld	-2 (ix),l
+	ld	-1 (ix),h
 	push	bc
 	push	de
 	push	bc
@@ -383,8 +383,8 @@ _drawBoxM2::
 	xor	a, a
 	push	af
 	inc	sp
-	ld	l,-3 (ix)
-	ld	h,-2 (ix)
+	ld	l,-2 (ix)
+	ld	h,-1 (ix)
 	push	hl
 	call	_cpct_drawSolidBox
 	pop	af
@@ -420,9 +420,9 @@ _drawBoxM2::
 	inc	sp
 	pop	bc
 ;src/gui/gui.c:66: pvid = cpct_getScreenPtr(SCR_VMEM, left+1, top+1);
-	ld	h,-1 (ix)
+	ld	h,-4 (ix)
 	inc	h
-	ld	d,-4 (ix)
+	ld	d,-3 (ix)
 	inc	d
 	push	bc
 	push	hl
@@ -668,10 +668,10 @@ _drawMenuEntry::
 ;src/gui/gui.c:97: for(i=0; i<nbEntry; i++)
 	ld	a,#0xCA
 	sub	a, c
-	ld	-3 (ix),a
+	ld	-2 (ix),a
 	ld	a,#0x00
 	sbc	a, b
-	ld	-2 (ix), a
+	ld	-1 (ix), a
 	rlca
 	and	a,#0x01
 	ld	e,a
@@ -705,13 +705,13 @@ _drawMenuEntry::
 	ld	c,#0x00
 00104$:
 ;src/gui/gui.c:104: p_video = cpct_getScreenPtr(SCR_VMEM, (82-strlen(menu[i]))/2, (202-nbEntry*10)/2+i*10);
-	ld	l,-3 (ix)
-	ld	h,-2 (ix)
+	ld	l,-2 (ix)
+	ld	h,-1 (ix)
 	ld	a,e
 	or	a, a
 	jr	Z,00115$
-	ld	l,-3 (ix)
-	ld	h,-2 (ix)
+	ld	l,-2 (ix)
+	ld	h,-1 (ix)
 	inc	hl
 00115$:
 	sra	h
@@ -727,7 +727,7 @@ _drawMenuEntry::
 	pop	de
 	ld	a,b
 	add	a, l
-	ld	-1 (ix),a
+	ld	-3 (ix),a
 	ld	d,-6 (ix)
 	ld	b,-5 (ix)
 	sla	d
@@ -762,7 +762,7 @@ _drawMenuEntry::
 	ld	-4 (ix),l
 	push	bc
 	push	de
-	ld	h,-1 (ix)
+	ld	h,-3 (ix)
 	ld	l,-4 (ix)
 	push	hl
 	ld	hl,#0xC000
@@ -1043,17 +1043,17 @@ _drawWindow::
 	ld	-2 (ix), a
 	rlca
 	and	a,#0x01
-	ld	-6 (ix),a
+	ld	-1 (ix),a
 	ld	-10 (ix),#0x00
-	ld	-7 (ix),#0x00
+	ld	-4 (ix),#0x00
 00114$:
 ;src/gui/gui.c:178: p_video = cpct_getScreenPtr(SCR_VMEM, (82-strlen(text[i]))/2, (202-(nbLine+2)*10)/2+i*10);
 	ld	a,-3 (ix)
 	add	a, #0x01
-	ld	-9 (ix),a
+	ld	-6 (ix),a
 	ld	a,-2 (ix)
 	adc	a, #0x00
-	ld	-8 (ix),a
+	ld	-5 (ix),a
 ;src/gui/gui.c:176: for(i=0; i<nbLine; i++)
 	ld	a,-10 (ix)
 	sub	a, 6 (ix)
@@ -1061,20 +1061,18 @@ _drawWindow::
 ;src/gui/gui.c:178: p_video = cpct_getScreenPtr(SCR_VMEM, (82-strlen(text[i]))/2, (202-(nbLine+2)*10)/2+i*10);
 	ld	l,-3 (ix)
 	ld	h,-2 (ix)
-	ld	a,-6 (ix)
+	ld	a,-1 (ix)
 	or	a, a
 	jr	Z,00118$
-	pop	bc
-	pop	hl
-	push	hl
-	push	bc
+	ld	l,-6 (ix)
+	ld	h,-5 (ix)
 00118$:
 	sra	h
 	rr	l
-	ld	h,-7 (ix)
+	ld	h,-4 (ix)
 	ld	a,l
 	add	a, h
-	ld	-1 (ix),a
+	ld	-7 (ix),a
 	ld	l,-10 (ix)
 	ld	h,#0x00
 	add	hl, hl
@@ -1082,12 +1080,12 @@ _drawWindow::
 	ld	c,h
 	ld	a,4 (ix)
 	add	a, b
-	ld	-5 (ix),a
+	ld	-9 (ix),a
 	ld	a,5 (ix)
 	adc	a, c
-	ld	-4 (ix),a
-	ld	l,-5 (ix)
-	ld	h,-4 (ix)
+	ld	-8 (ix),a
+	ld	l,-9 (ix)
+	ld	h,-8 (ix)
 	ld	c,(hl)
 	inc	hl
 	ld	b,(hl)
@@ -1106,7 +1104,7 @@ _drawWindow::
 	rr	l
 	ld	b,l
 	push	de
-	ld	a,-1 (ix)
+	ld	a,-7 (ix)
 	push	af
 	inc	sp
 	push	bc
@@ -1118,8 +1116,8 @@ _drawWindow::
 	push	hl
 	pop	iy
 ;src/gui/gui.c:179: cpct_drawStringM2 (text[i], p_video, 0);
-	ld	l,-5 (ix)
-	ld	h,-4 (ix)
+	ld	l,-9 (ix)
+	ld	h,-8 (ix)
 	ld	c,(hl)
 	inc	hl
 	ld	b,(hl)
@@ -1135,20 +1133,20 @@ _drawWindow::
 	inc	sp
 	pop	de
 ;src/gui/gui.c:176: for(i=0; i<nbLine; i++)
-	ld	a,-7 (ix)
+	ld	a,-4 (ix)
 	add	a, #0x0A
-	ld	-7 (ix),a
+	ld	-4 (ix),a
 	inc	-10 (ix)
 	jp	00114$
 00104$:
 ;src/gui/gui.c:182: p_video = cpct_getScreenPtr(SCR_VMEM, (82-strlen(buttonTxt))/2, (202-(nbLine+2)*10)/2+(nbLine+1)*10);
 	ld	b,-3 (ix)
 	ld	h,-2 (ix)
-	ld	a,-6 (ix)
+	ld	a,-1 (ix)
 	or	a, a
 	jr	Z,00119$
-	ld	b,-9 (ix)
-	ld	h,-8 (ix)
+	ld	b,-6 (ix)
+	ld	h,-5 (ix)
 00119$:
 	sra	h
 	rr	b

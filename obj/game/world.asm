@@ -1,7 +1,7 @@
 ;--------------------------------------------------------
 ; File Created by SDCC : free open source ANSI-C Compiler
 ; Version 3.5.4 #9329 (Linux)
-; This file was generated Sun Feb  7 17:44:07 2016
+; This file was generated Mon Feb  8 17:23:06 2016
 ;--------------------------------------------------------
 	.module world
 	.optsdcc -mz80
@@ -461,7 +461,7 @@ _patternTile::
 00153$:
 	xor	a,a
 00154$:
-	ld	-9 (ix),a
+	ld	-1 (ix),a
 	ld	a,4 (ix)
 	sub	a, #0x02
 	jr	NZ,00155$
@@ -470,7 +470,7 @@ _patternTile::
 00155$:
 	xor	a,a
 00156$:
-	ld	-1 (ix),a
+	ld	-4 (ix),a
 	ld	-11 (ix),#0x00
 	ld	de,#0x0000
 00115$:
@@ -497,8 +497,8 @@ _patternTile::
 00158$:
 	djnz	00157$
 	pop	de
-	ld	-5 (ix),l
-	ld	-4 (ix),h
+	ld	-6 (ix),l
+	ld	-5 (ix),h
 	ld	-10 (ix),#0x00
 00112$:
 	ld	a,-10 (ix)
@@ -506,13 +506,13 @@ _patternTile::
 	jp	NC,00116$
 ;src/game/world.c:81: if(cpct_getBit (pattern, iy*nBitsX+ix)!=0 && index+iy*WIDTH+ix < WIDTH*HEIGHT)
 	ld	a,-10 (ix)
-	ld	-7 (ix),a
-	ld	-6 (ix),#0x00
-	ld	a,-5 (ix)
-	add	a, -7 (ix)
+	ld	-9 (ix),a
+	ld	-8 (ix),#0x00
+	ld	a,-6 (ix)
+	add	a, -9 (ix)
 	ld	l,a
-	ld	a,-4 (ix)
-	adc	a, -6 (ix)
+	ld	a,-5 (ix)
+	adc	a, -8 (ix)
 	ld	h,a
 	ld	c,9 (ix)
 	ld	b,10 (ix)
@@ -520,16 +520,16 @@ _patternTile::
 	push	hl
 	push	bc
 	call	_cpct_getBit
-	ld	-8 (ix),l
+	ld	-7 (ix),l
 	pop	de
-	ld	a,-8 (ix)
+	ld	a,-7 (ix)
 	or	a, a
 	jr	Z,00113$
 	ld	a,-3 (ix)
-	add	a, -7 (ix)
+	add	a, -9 (ix)
 	ld	c,a
 	ld	a,-2 (ix)
-	adc	a, -6 (ix)
+	adc	a, -8 (ix)
 	ld	b,a
 	xor	a, #0x80
 	sub	a, #0x8F
@@ -540,7 +540,7 @@ _patternTile::
 	ld	c,l
 	ld	b,h
 ;src/game/world.c:83: if(tileType == FOREST)
-	ld	a,-9 (ix)
+	ld	a,-1 (ix)
 	or	a, a
 	jr	Z,00104$
 ;src/game/world.c:84: p_world[index+iy*WIDTH+ix] = tileType;
@@ -549,7 +549,7 @@ _patternTile::
 	jr	00113$
 00104$:
 ;src/game/world.c:85: else if(tileType==DWELLINGS1)
-	ld	a,-1 (ix)
+	ld	a,-4 (ix)
 	or	a, a
 	jr	Z,00113$
 ;src/game/world.c:86: p_world[index+iy*WIDTH+ix] = (u8)cpct_getRandomUniform_u8_f(cpct_count2VSYNC ()%256)%3+2;
@@ -557,11 +557,11 @@ _patternTile::
 	push	de
 	call	_cpct_count2VSYNC
 	call	_cpct_getRandomUniform_u8_f
-	ld	-8 (ix),l
+	ld	-7 (ix),l
 	ld	a,#0x03
 	push	af
 	inc	sp
-	ld	a,-8 (ix)
+	ld	a,-7 (ix)
 	push	af
 	inc	sp
 	call	__moduchar
@@ -625,10 +625,10 @@ _generateWorld::
 	sub	a, #0x8F
 	jr	C,00119$
 ;src/game/world.c:113: for(ix=0; ix<NBFOREST; ix++)
-	ld	hl,#0x0004
+	ld	hl,#0x0000
 	add	hl,sp
-	ld	-15 (ix),l
-	ld	-14 (ix),h
+	ld	-11 (ix),l
+	ld	-10 (ix),h
 	ld	bc,#0x0000
 00121$:
 ;src/game/world.c:115: iy = cpct_rand16()%(WIDTH*HEIGHT);
@@ -641,69 +641,69 @@ _generateWorld::
 	pop	af
 	pop	af
 	pop	bc
-	ld	-2 (ix),l
-	ld	-1 (ix),h
+	ld	-5 (ix),l
+	ld	-4 (ix),h
 ;src/game/world.c:117: switch(cpct_rand()%4)
 	push	bc
 	call	_cpct_getRandom_mxor_u8
 	ld	a,l
 	pop	bc
 	and	a, #0x03
-	ld	-9 (ix),a
+	ld	-3 (ix),a
 	ld	a,#0x03
-	sub	a, -9 (ix)
+	sub	a, -3 (ix)
 	jp	C,00106$
 ;src/game/world.c:121: p_forest[1] = 0b11000111;
 	push	hl
-	ld	l,-15 (ix)
-	ld	h,-14 (ix)
+	ld	l,-11 (ix)
+	ld	h,-10 (ix)
 	inc	hl
 	push	hl
 	pop	iy
 	pop	hl
 ;src/game/world.c:122: p_forest[2] = 0b11011110;
-	ld	e,-15 (ix)
-	ld	d,-14 (ix)
+	ld	e,-11 (ix)
+	ld	d,-10 (ix)
 	inc	de
 	inc	de
 ;src/game/world.c:123: p_forest[3] = 0b01111110;
-	ld	a,-15 (ix)
+	ld	a,-11 (ix)
 	add	a, #0x03
-	ld	-8 (ix),a
-	ld	a,-14 (ix)
-	adc	a, #0x00
-	ld	-7 (ix),a
-;src/game/world.c:124: p_forest[4] = 0b11111110; 
-	ld	a,-15 (ix)
-	add	a, #0x04
-	ld	-4 (ix),a
-	ld	a,-14 (ix)
-	adc	a, #0x00
-	ld	-3 (ix),a
-;src/game/world.c:125: p_forest[5] = 0b01111111;
-	ld	a,-15 (ix)
-	add	a, #0x05
 	ld	-13 (ix),a
-	ld	a,-14 (ix)
+	ld	a,-10 (ix)
 	adc	a, #0x00
 	ld	-12 (ix),a
-;src/game/world.c:126: p_forest[6] = 0b11101111;
-	ld	a,-15 (ix)
-	add	a, #0x06
+;src/game/world.c:124: p_forest[4] = 0b11111110; 
+	ld	a,-11 (ix)
+	add	a, #0x04
+	ld	-7 (ix),a
+	ld	a,-10 (ix)
+	adc	a, #0x00
 	ld	-6 (ix),a
-	ld	a,-14 (ix)
+;src/game/world.c:125: p_forest[5] = 0b01111111;
+	ld	a,-11 (ix)
+	add	a, #0x05
+	ld	-9 (ix),a
+	ld	a,-10 (ix)
 	adc	a, #0x00
-	ld	-5 (ix),a
+	ld	-8 (ix),a
+;src/game/world.c:126: p_forest[6] = 0b11101111;
+	ld	a,-11 (ix)
+	add	a, #0x06
+	ld	-15 (ix),a
+	ld	a,-10 (ix)
+	adc	a, #0x00
+	ld	-14 (ix),a
 ;src/game/world.c:127: p_forest[7] = 0b11001111;
-	ld	a,-15 (ix)
+	ld	a,-11 (ix)
 	add	a, #0x07
-	ld	-11 (ix),a
-	ld	a,-14 (ix)
+	ld	-2 (ix),a
+	ld	a,-10 (ix)
 	adc	a, #0x00
-	ld	-10 (ix),a
+	ld	-1 (ix),a
 ;src/game/world.c:117: switch(cpct_rand()%4)
 	push	de
-	ld	e,-9 (ix)
+	ld	e,-3 (ix)
 	ld	d,#0x00
 	ld	hl,#00195$
 	add	hl,de
@@ -719,8 +719,8 @@ _generateWorld::
 ;src/game/world.c:119: case 0:
 00102$:
 ;src/game/world.c:120: p_forest[0] = 0b10000100;
-	ld	l,-15 (ix)
-	ld	h,-14 (ix)
+	ld	l,-11 (ix)
+	ld	h,-10 (ix)
 	ld	(hl),#0x84
 ;src/game/world.c:121: p_forest[1] = 0b11000111;
 	ld	0 (iy), #0xC7
@@ -728,32 +728,32 @@ _generateWorld::
 	ld	a,#0xDE
 	ld	(de),a
 ;src/game/world.c:123: p_forest[3] = 0b01111110;
-	ld	l,-8 (ix)
-	ld	h,-7 (ix)
-	ld	(hl),#0x7E
-;src/game/world.c:124: p_forest[4] = 0b11111110; 
-	ld	l,-4 (ix)
-	ld	h,-3 (ix)
-	ld	(hl),#0xFE
-;src/game/world.c:125: p_forest[5] = 0b01111111;
 	ld	l,-13 (ix)
 	ld	h,-12 (ix)
+	ld	(hl),#0x7E
+;src/game/world.c:124: p_forest[4] = 0b11111110; 
+	ld	l,-7 (ix)
+	ld	h,-6 (ix)
+	ld	(hl),#0xFE
+;src/game/world.c:125: p_forest[5] = 0b01111111;
+	ld	l,-9 (ix)
+	ld	h,-8 (ix)
 	ld	(hl),#0x7F
 ;src/game/world.c:126: p_forest[6] = 0b11101111;
-	ld	l,-6 (ix)
-	ld	h,-5 (ix)
+	ld	l,-15 (ix)
+	ld	h,-14 (ix)
 	ld	(hl),#0xEF
 ;src/game/world.c:127: p_forest[7] = 0b11001111;
-	ld	l,-11 (ix)
-	ld	h,-10 (ix)
+	ld	l,-2 (ix)
+	ld	h,-1 (ix)
 	ld	(hl),#0xCF
 ;src/game/world.c:128: break;
 	jp	00106$
 ;src/game/world.c:129: case 1:
 00103$:
 ;src/game/world.c:130: p_forest[0] = 0b00001100;
-	ld	l,-15 (ix)
-	ld	h,-14 (ix)
+	ld	l,-11 (ix)
+	ld	h,-10 (ix)
 	ld	(hl),#0x0C
 ;src/game/world.c:131: p_forest[1] = 0b11111000;
 	ld	0 (iy), #0xF8
@@ -761,32 +761,32 @@ _generateWorld::
 	ld	a,#0x3F
 	ld	(de),a
 ;src/game/world.c:133: p_forest[3] = 0b01111110;
-	ld	l,-8 (ix)
-	ld	h,-7 (ix)
-	ld	(hl),#0x7E
-;src/game/world.c:134: p_forest[4] = 0b11111110; 
-	ld	l,-4 (ix)
-	ld	h,-3 (ix)
-	ld	(hl),#0xFE
-;src/game/world.c:135: p_forest[5] = 0b01011111;
 	ld	l,-13 (ix)
 	ld	h,-12 (ix)
+	ld	(hl),#0x7E
+;src/game/world.c:134: p_forest[4] = 0b11111110; 
+	ld	l,-7 (ix)
+	ld	h,-6 (ix)
+	ld	(hl),#0xFE
+;src/game/world.c:135: p_forest[5] = 0b01011111;
+	ld	l,-9 (ix)
+	ld	h,-8 (ix)
 	ld	(hl),#0x5F
 ;src/game/world.c:136: p_forest[6] = 0b11001111;
-	ld	l,-6 (ix)
-	ld	h,-5 (ix)
+	ld	l,-15 (ix)
+	ld	h,-14 (ix)
 	ld	(hl),#0xCF
 ;src/game/world.c:137: p_forest[7] = 0b10001100;
-	ld	l,-11 (ix)
-	ld	h,-10 (ix)
+	ld	l,-2 (ix)
+	ld	h,-1 (ix)
 	ld	(hl),#0x8C
 ;src/game/world.c:138: break;
 	jr	00106$
 ;src/game/world.c:139: case 2:
 00104$:
 ;src/game/world.c:140: p_forest[0] = 0b00110000;
-	ld	l,-15 (ix)
-	ld	h,-14 (ix)
+	ld	l,-11 (ix)
+	ld	h,-10 (ix)
 	ld	(hl),#0x30
 ;src/game/world.c:141: p_forest[1] = 0b11110100;
 	ld	0 (iy), #0xF4
@@ -794,32 +794,32 @@ _generateWorld::
 	ld	a,#0xFF
 	ld	(de),a
 ;src/game/world.c:143: p_forest[3] = 0b11111111;
-	ld	l,-8 (ix)
-	ld	h,-7 (ix)
-	ld	(hl),#0xFF
-;src/game/world.c:144: p_forest[4] = 0b01111100;
-	ld	l,-4 (ix)
-	ld	h,-3 (ix)
-	ld	(hl),#0x7C
-;src/game/world.c:145: p_forest[5] = 0b01111110;
 	ld	l,-13 (ix)
 	ld	h,-12 (ix)
+	ld	(hl),#0xFF
+;src/game/world.c:144: p_forest[4] = 0b01111100;
+	ld	l,-7 (ix)
+	ld	h,-6 (ix)
+	ld	(hl),#0x7C
+;src/game/world.c:145: p_forest[5] = 0b01111110;
+	ld	l,-9 (ix)
+	ld	h,-8 (ix)
 	ld	(hl),#0x7E
 ;src/game/world.c:146: p_forest[6] = 0b00111110;
-	ld	l,-6 (ix)
-	ld	h,-5 (ix)
+	ld	l,-15 (ix)
+	ld	h,-14 (ix)
 	ld	(hl),#0x3E
 ;src/game/world.c:147: p_forest[7] = 0b00011000;
-	ld	l,-11 (ix)
-	ld	h,-10 (ix)
+	ld	l,-2 (ix)
+	ld	h,-1 (ix)
 	ld	(hl),#0x18
 ;src/game/world.c:148: break;
 	jr	00106$
 ;src/game/world.c:149: case 3:
 00105$:
 ;src/game/world.c:150: p_forest[0] = 0b11000000; 
-	ld	l,-15 (ix)
-	ld	h,-14 (ix)
+	ld	l,-11 (ix)
+	ld	h,-10 (ix)
 	ld	(hl),#0xC0
 ;src/game/world.c:151: p_forest[1] = 0b11100111;
 	ld	0 (iy), #0xE7
@@ -827,36 +827,36 @@ _generateWorld::
 	ld	a,#0x7E
 	ld	(de),a
 ;src/game/world.c:153: p_forest[3] = 0b01111110;
-	ld	l,-8 (ix)
-	ld	h,-7 (ix)
-	ld	(hl),#0x7E
-;src/game/world.c:154: p_forest[4] = 0b11111110;
-	ld	l,-4 (ix)
-	ld	h,-3 (ix)
-	ld	(hl),#0xFE
-;src/game/world.c:155: p_forest[5] = 0b11111100;
 	ld	l,-13 (ix)
 	ld	h,-12 (ix)
+	ld	(hl),#0x7E
+;src/game/world.c:154: p_forest[4] = 0b11111110;
+	ld	l,-7 (ix)
+	ld	h,-6 (ix)
+	ld	(hl),#0xFE
+;src/game/world.c:155: p_forest[5] = 0b11111100;
+	ld	l,-9 (ix)
+	ld	h,-8 (ix)
 	ld	(hl),#0xFC
 ;src/game/world.c:156: p_forest[6] = 0b01111000;
-	ld	l,-6 (ix)
-	ld	h,-5 (ix)
+	ld	l,-15 (ix)
+	ld	h,-14 (ix)
 	ld	(hl),#0x78
 ;src/game/world.c:157: p_forest[7] = 0b00110000;
-	ld	l,-11 (ix)
-	ld	h,-10 (ix)
+	ld	l,-2 (ix)
+	ld	h,-1 (ix)
 	ld	(hl),#0x30
 ;src/game/world.c:159: }
 00106$:
 ;src/game/world.c:160: patternTile(FOREST, iy, 8, 8, p_forest);
-	ld	l,-15 (ix)
-	ld	h,-14 (ix)
+	ld	l,-11 (ix)
+	ld	h,-10 (ix)
 	push	bc
 	push	hl
 	ld	hl,#0x0808
 	push	hl
-	ld	l,-2 (ix)
-	ld	h,-1 (ix)
+	ld	l,-5 (ix)
+	ld	h,-4 (ix)
 	push	hl
 	ld	a,#0x08
 	push	af
@@ -926,10 +926,10 @@ _generateWorld::
 ;src/game/world.c:177: p_world[iy] = cpct_rand()%3+2;
 	ld	a,#<(_p_world)
 	add	a, l
-	ld	-11 (ix),a
+	ld	-2 (ix),a
 	ld	a,#>(_p_world)
 	adc	a, h
-	ld	-10 (ix),a
+	ld	-1 (ix),a
 	push	de
 	call	_cpct_getRandom_mxor_u8
 	ld	b,l
@@ -945,8 +945,8 @@ _generateWorld::
 	ld	a,l
 	pop	de
 	add	a, #0x02
-	ld	l,-11 (ix)
-	ld	h,-10 (ix)
+	ld	l,-2 (ix)
+	ld	h,-1 (ix)
 	ld	(hl),a
 	dec	de
 ;src/game/world.c:174: for(ix=0; ix<NBURBAN; ix++)
@@ -954,12 +954,12 @@ _generateWorld::
 	or	a,e
 	jr	NZ,00128$
 ;src/game/world.c:180: for(ix=0; ix<NBURBAN; ix++)
-	ld	hl,#0x0002
+	ld	hl,#0x000A
 	add	hl,sp
 	ld	c,l
 	ld	b,h
-	ld	hl,#0x0000
-	ex	(sp), hl
+	ld	-19 (ix),#0x00
+	ld	-18 (ix),#0x00
 00129$:
 ;src/game/world.c:182: iy = cpct_rand16()%(WIDTH*HEIGHT);
 	push	bc
@@ -971,8 +971,8 @@ _generateWorld::
 	pop	af
 	pop	af
 	pop	bc
-	ld	-11 (ix),l
-	ld	-10 (ix),h
+	ld	-2 (ix),l
+	ld	-1 (ix),h
 ;src/game/world.c:184: switch(cpct_rand()%6)
 	push	bc
 	call	_cpct_getRandom_mxor_u8
@@ -992,8 +992,8 @@ _generateWorld::
 ;src/game/world.c:188: p_cities[1] = 0b01000110; // 01100010;
 	ld	hl,#0x0001
 	add	hl,bc
-	ld	-6 (ix),l
-	ld	-5 (ix),h
+	ld	-15 (ix),l
+	ld	-14 (ix),h
 ;src/game/world.c:184: switch(cpct_rand()%6)
 	ld	d,#0x00
 	ld	hl,#00196$
@@ -1013,8 +1013,8 @@ _generateWorld::
 	ld	a,#0x72
 	ld	(bc),a
 ;src/game/world.c:188: p_cities[1] = 0b01000110; // 01100010;
-	ld	l,-6 (ix)
-	ld	h,-5 (ix)
+	ld	l,-15 (ix)
+	ld	h,-14 (ix)
 	ld	(hl),#0x46
 ;src/game/world.c:189: break;
 	jr	00116$
@@ -1024,8 +1024,8 @@ _generateWorld::
 	ld	a,#0x60
 	ld	(bc),a
 ;src/game/world.c:193: p_cities[1] = 0b00000110; // 01100000;
-	ld	l,-6 (ix)
-	ld	h,-5 (ix)
+	ld	l,-15 (ix)
+	ld	h,-14 (ix)
 	ld	(hl),#0x06
 ;src/game/world.c:194: break;
 	jr	00116$
@@ -1035,8 +1035,8 @@ _generateWorld::
 	ld	a,#0x10
 	ld	(bc),a
 ;src/game/world.c:198: p_cities[1] = 0b00000110; // 01100000;
-	ld	l,-6 (ix)
-	ld	h,-5 (ix)
+	ld	l,-15 (ix)
+	ld	h,-14 (ix)
 	ld	(hl),#0x06
 ;src/game/world.c:199: break;
 	jr	00116$
@@ -1046,8 +1046,8 @@ _generateWorld::
 	ld	a,#0xC0
 	ld	(bc),a
 ;src/game/world.c:203: p_cities[1] = 0b00110001; // 10001100;
-	ld	l,-6 (ix)
-	ld	h,-5 (ix)
+	ld	l,-15 (ix)
+	ld	h,-14 (ix)
 	ld	(hl),#0x31
 ;src/game/world.c:204: break;
 	jr	00116$
@@ -1057,8 +1057,8 @@ _generateWorld::
 	ld	a,#0xC4
 	ld	(bc),a
 ;src/game/world.c:208: p_cities[1] = 0b00001110; // 01110000;
-	ld	l,-6 (ix)
-	ld	h,-5 (ix)
+	ld	l,-15 (ix)
+	ld	h,-14 (ix)
 	ld	(hl),#0x0E
 ;src/game/world.c:209: break;
 	jr	00116$
@@ -1068,8 +1068,8 @@ _generateWorld::
 	ld	a,#0x40
 	ld	(bc),a
 ;src/game/world.c:213: p_cities[1] = 0b01001110; // 01110010;
-	ld	l,-6 (ix)
-	ld	h,-5 (ix)
+	ld	l,-15 (ix)
+	ld	h,-14 (ix)
 	ld	(hl),#0x4E
 ;src/game/world.c:215: }
 00116$:
@@ -1080,8 +1080,8 @@ _generateWorld::
 	push	hl
 	ld	hl,#0x0404
 	push	hl
-	ld	l,-11 (ix)
-	ld	h,-10 (ix)
+	ld	l,-2 (ix)
+	ld	h,-1 (ix)
 	push	hl
 	ld	a,#0x02
 	push	af
@@ -1092,13 +1092,13 @@ _generateWorld::
 	ld	sp,hl
 	pop	bc
 ;src/game/world.c:180: for(ix=0; ix<NBURBAN; ix++)
-	inc	-27 (ix)
+	inc	-19 (ix)
 	jr	NZ,00197$
-	inc	-26 (ix)
+	inc	-18 (ix)
 00197$:
-	ld	a,-27 (ix)
+	ld	a,-19 (ix)
 	sub	a, #0x14
-	ld	a,-26 (ix)
+	ld	a,-18 (ix)
 	rla
 	ccf
 	rra

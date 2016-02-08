@@ -1,7 +1,7 @@
 ;--------------------------------------------------------
 ; File Created by SDCC : free open source ANSI-C Compiler
 ; Version 3.5.4 #9329 (Linux)
-; This file was generated Sun Feb  7 16:09:11 2016
+; This file was generated Mon Feb  8 17:23:00 2016
 ;--------------------------------------------------------
 	.module main
 	.optsdcc -mz80
@@ -86,25 +86,25 @@ _main::
 ;src/main.c:22: const char *windowCredit[] = { 
 	ld	hl,#0x0000
 	add	hl,sp
-	ld	-2 (ix),l
-	ld	-1 (ix),h
-	ld	l,-2 (ix)
-	ld	h,-1 (ix)
+	ld	-4 (ix),l
+	ld	-3 (ix),h
+	ld	l,-4 (ix)
+	ld	h,-3 (ix)
 	ld	(hl),#<(___str_3)
 	inc	hl
 	ld	(hl),#>(___str_3)
-	ld	l,-2 (ix)
-	ld	h,-1 (ix)
+	ld	l,-4 (ix)
+	ld	h,-3 (ix)
 	inc	hl
 	inc	hl
 	ld	bc,#___str_4+0
 	ld	(hl),c
 	inc	hl
 	ld	(hl),b
-	ld	a,-2 (ix)
+	ld	a,-4 (ix)
 	add	a, #0x04
 	ld	l,a
-	ld	a,-1 (ix)
+	ld	a,-3 (ix)
 	adc	a, #0x00
 	ld	h,a
 	ld	bc,#___str_5+0
@@ -151,12 +151,12 @@ _main::
 	call	_putM2
 	pop	de
 ;src/main.c:38: do{
-	ld	-4 (ix),e
-	ld	-3 (ix),d
+	ld	-2 (ix),e
+	ld	-1 (ix),d
 00105$:
 ;src/main.c:39: menuChoice = drawMenu(menuMain,3);
-	ld	e,-4 (ix)
-	ld	d,-3 (ix)
+	ld	e,-2 (ix)
+	ld	d,-1 (ix)
 	ld	a,#0x03
 	push	af
 	inc	sp
@@ -180,8 +180,8 @@ _main::
 	dec	a
 	jr	NZ,00106$
 ;src/main.c:49: drawWindow(windowCredit,3,0);
-	ld	c,-2 (ix)
-	ld	b,-1 (ix)
+	ld	c,-4 (ix)
+	ld	b,-3 (ix)
 	push	de
 	ld	hl,#0x0003
 	push	hl
