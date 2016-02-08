@@ -1,7 +1,7 @@
 ;--------------------------------------------------------
 ; File Created by SDCC : free open source ANSI-C Compiler
 ; Version 3.5.4 #9329 (Linux)
-; This file was generated Mon Feb  8 17:23:07 2016
+; This file was generated Mon Feb  8 21:04:40 2016
 ;--------------------------------------------------------
 	.module sprites
 	.optsdcc -mz80
@@ -14,6 +14,8 @@
 	.globl _l142AT
 	.globl _l141TA
 	.globl _l130B
+	.globl _l130B_M2
+	.globl _wagon_M2
 	.globl _lock
 	.globl _rail_ns_e
 	.globl _rail_ns_w
@@ -2164,6 +2166,158 @@ _lock:
 	.db #0x00	; 0
 	.db #0x00	; 0
 	.db #0x00	; 0
+_wagon_M2:
+	.db #0xFF	; 255
+	.db #0xFF	; 255
+	.db #0xFF	; 255
+	.db #0xFF	; 255
+	.db #0xFF	; 255
+	.db #0xFF	; 255
+	.db #0xFF	; 255
+	.db #0xFF	; 255
+	.db #0xFF	; 255
+	.db #0xFF	; 255
+	.db #0xFF	; 255
+	.db #0xFF	; 255
+	.db #0xFF	; 255
+	.db #0xFF	; 255
+	.db #0xFF	; 255
+	.db #0xFF	; 255
+	.db #0xFF	; 255
+	.db #0xFF	; 255
+	.db #0xFF	; 255
+	.db #0xFF	; 255
+	.db #0xFF	; 255
+	.db #0xFF	; 255
+	.db #0xFF	; 255
+	.db #0xFF	; 255
+	.db #0xFF	; 255
+	.db #0x80	; 128
+	.db #0x00	; 0
+	.db #0x00	; 0
+	.db #0x00	; 0
+	.db #0x01	; 1
+	.db #0x80	; 128
+	.db #0x00	; 0
+	.db #0x00	; 0
+	.db #0x00	; 0
+	.db #0x01	; 1
+	.db #0x00	; 0
+	.db #0x00	; 0
+	.db #0x00	; 0
+	.db #0x00	; 0
+	.db #0x00	; 0
+	.db #0xC0	; 192
+	.db #0x00	; 0
+	.db #0x00	; 0
+	.db #0x00	; 0
+	.db #0x03	; 3
+	.db #0xE3	; 227
+	.db #0x1F	; 31
+	.db #0xFF	; 255
+	.db #0xF8	; 248
+	.db #0xC7	; 199
+_l130B_M2:
+	.db #0xFF	; 255
+	.db #0xFF	; 255
+	.db #0xFF	; 255
+	.db #0xFF	; 255
+	.db #0xFF	; 255
+	.db #0xFF	; 255
+	.db #0xFF	; 255
+	.db #0xFF	; 255
+	.db #0xFF	; 255
+	.db #0xFF	; 255
+	.db #0xFF	; 255
+	.db #0xFF	; 255
+	.db #0xFF	; 255
+	.db #0xFE	; 254
+	.db #0x7F	; 127
+	.db #0xE3	; 227
+	.db #0xE1	; 225
+	.db #0xE3	; 227
+	.db #0xFF	; 255
+	.db #0xFF	; 255
+	.db #0xFF	; 255
+	.db #0xFF	; 255
+	.db #0xFC	; 252
+	.db #0x02	; 2
+	.db #0x7F	; 127
+	.db #0xC1	; 193
+	.db #0xE0	; 224
+	.db #0x37	; 55	'7'
+	.db #0xFF	; 255
+	.db #0xFF	; 255
+	.db #0xFF	; 255
+	.db #0xFF	; 255
+	.db #0xFE	; 254
+	.db #0xC0	; 192
+	.db #0x00	; 0
+	.db #0x00	; 0
+	.db #0x00	; 0
+	.db #0x00	; 0
+	.db #0xFF	; 255
+	.db #0xFF	; 255
+	.db #0xE0	; 224
+	.db #0x00	; 0
+	.db #0x06	; 6
+	.db #0xC0	; 192
+	.db #0x00	; 0
+	.db #0x00	; 0
+	.db #0x00	; 0
+	.db #0x00	; 0
+	.db #0x7F	; 127
+	.db #0xFF	; 255
+	.db #0xE0	; 224
+	.db #0x00	; 0
+	.db #0x06	; 6
+	.db #0x00	; 0
+	.db #0x00	; 0
+	.db #0x00	; 0
+	.db #0x00	; 0
+	.db #0x00	; 0
+	.db #0xFF	; 255
+	.db #0xFF	; 255
+	.db #0x80	; 128
+	.db #0x00	; 0
+	.db #0x06	; 6
+	.db #0x00	; 0
+	.db #0x00	; 0
+	.db #0x00	; 0
+	.db #0x00	; 0
+	.db #0x01	; 1
+	.db #0xFF	; 255
+	.db #0xFF	; 255
+	.db #0x00	; 0
+	.db #0x00	; 0
+	.db #0x00	; 0
+	.db #0x00	; 0
+	.db #0x00	; 0
+	.db #0x00	; 0
+	.db #0x00	; 0
+	.db #0x07	; 7
+	.db #0xFF	; 255
+	.db #0xFF	; 255
+	.db #0x80	; 128
+	.db #0x00	; 0
+	.db #0x0E	; 14
+	.db #0xE0	; 224
+	.db #0x00	; 0
+	.db #0x00	; 0
+	.db #0x00	; 0
+	.db #0x00	; 0
+	.db #0x7F	; 127
+	.db #0xFF	; 255
+	.db #0xE3	; 227
+	.db #0xFE	; 254
+	.db #0x3F	; 63
+	.db #0xF8	; 248
+	.db #0x78	; 120	'x'
+	.db #0x3C	; 60
+	.db #0x3F	; 63
+	.db #0x8F	; 143
+	.db #0xFF	; 255
+	.db #0xFF	; 255
 _l130B:
 	.db #0x00	; 0
 	.db #0x00	; 0

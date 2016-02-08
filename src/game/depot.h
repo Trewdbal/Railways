@@ -12,6 +12,9 @@ extern const u8 l142AT[];
 extern const u8 l141P[];
 extern const u8 BB63000[];
 
+extern const u8 l130B_M2[];
+extern const u8 wagon_M2[];
+
 extern u8 locDelocked;
 extern Train* trainList;
 extern u8 nbTrainList;

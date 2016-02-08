@@ -113,42 +113,42 @@
    4060 70            [ 7]  113 	ld	(hl),b
                             114 ;src/main.c:28: firmware = cpct_disableFirmware();
    4061 D5            [11]  115 	push	de
-   4062 CD EC 78      [17]  116 	call	_cpct_disableFirmware
+   4062 CD B8 79      [17]  116 	call	_cpct_disableFirmware
    4065 D1            [10]  117 	pop	de
    4066 DD 75 FA      [19]  118 	ld	-6 (ix),l
    4069 DD 74 FB      [19]  119 	ld	-5 (ix),h
                             120 ;src/main.c:30: cpct_fw2hw(paletteTrains, 16);
-   406C 21 E3 61      [10]  121 	ld	hl,#_paletteTrains
+   406C 21 19 62      [10]  121 	ld	hl,#_paletteTrains
    406F D5            [11]  122 	push	de
    4070 01 10 00      [10]  123 	ld	bc,#0x0010
    4073 C5            [11]  124 	push	bc
    4074 E5            [11]  125 	push	hl
-   4075 CD EF 74      [17]  126 	call	_cpct_fw2hw
+   4075 CD BB 75      [17]  126 	call	_cpct_fw2hw
    4078 D1            [10]  127 	pop	de
                             128 ;src/main.c:31: cpct_fw2hw(paletteMenusM2, 2);
-   4079 21 F7 61      [10]  129 	ld	hl,#_paletteMenusM2
+   4079 21 2D 62      [10]  129 	ld	hl,#_paletteMenusM2
    407C D5            [11]  130 	push	de
    407D 01 02 00      [10]  131 	ld	bc,#0x0002
    4080 C5            [11]  132 	push	bc
    4081 E5            [11]  133 	push	hl
-   4082 CD EF 74      [17]  134 	call	_cpct_fw2hw
+   4082 CD BB 75      [17]  134 	call	_cpct_fw2hw
    4085 D1            [10]  135 	pop	de
                             136 ;src/main.c:32: cpct_fw2hw(paletteMenusM1, 4);
-   4086 21 F3 61      [10]  137 	ld	hl,#_paletteMenusM1
+   4086 21 29 62      [10]  137 	ld	hl,#_paletteMenusM1
    4089 D5            [11]  138 	push	de
    408A 01 04 00      [10]  139 	ld	bc,#0x0004
    408D C5            [11]  140 	push	bc
    408E E5            [11]  141 	push	hl
-   408F CD EF 74      [17]  142 	call	_cpct_fw2hw
+   408F CD BB 75      [17]  142 	call	_cpct_fw2hw
    4092 D1            [10]  143 	pop	de
                             144 ;src/main.c:34: cpct_setBorder(paletteTrains[12]);
-   4093 3A EF 61      [13]  145 	ld	a, (#_paletteTrains + 12)
+   4093 3A 25 62      [13]  145 	ld	a, (#_paletteTrains + 12)
    4096 D5            [11]  146 	push	de
    4097 57            [ 4]  147 	ld	d,a
    4098 1E 10         [ 7]  148 	ld	e,#0x10
    409A D5            [11]  149 	push	de
-   409B CD 70 73      [17]  150 	call	_cpct_setPALColour
-   409E CD 42 5B      [17]  151 	call	_putM2
+   409B CD 3C 74      [17]  150 	call	_cpct_setPALColour
+   409E CD 78 5B      [17]  151 	call	_putM2
    40A1 D1            [10]  152 	pop	de
                             153 ;src/main.c:38: do{
    40A2 DD 73 FE      [19]  154 	ld	-2 (ix),e
@@ -161,7 +161,7 @@
    40B0 F5            [11]  161 	push	af
    40B1 33            [ 6]  162 	inc	sp
    40B2 D5            [11]  163 	push	de
-   40B3 CD 48 5F      [17]  164 	call	_drawMenu
+   40B3 CD 7E 5F      [17]  164 	call	_drawMenu
    40B6 F1            [10]  165 	pop	af
    40B7 33            [ 6]  166 	inc	sp
    40B8 55            [ 4]  167 	ld	d,l
@@ -171,8 +171,8 @@
    40BB 20 08         [12]  171 	jr	NZ,00102$
                             172 ;src/main.c:43: game();
    40BD D5            [11]  173 	push	de
-   40BE CD 8D 4C      [17]  174 	call	_game
-   40C1 CD 42 5B      [17]  175 	call	_putM2
+   40BE CD C3 4C      [17]  174 	call	_game
+   40C1 CD 78 5B      [17]  175 	call	_putM2
    40C4 D1            [10]  176 	pop	de
    40C5                     177 00102$:
                             178 ;src/main.c:48: if(menuChoice==1)
@@ -186,7 +186,7 @@
    40D0 21 03 00      [10]  186 	ld	hl,#0x0003
    40D3 E5            [11]  187 	push	hl
    40D4 C5            [11]  188 	push	bc
-   40D5 CD 46 60      [17]  189 	call	_drawWindow
+   40D5 CD 7C 60      [17]  189 	call	_drawWindow
    40D8 F1            [10]  190 	pop	af
    40D9 F1            [10]  191 	pop	af
    40DA D1            [10]  192 	pop	de
@@ -199,12 +199,12 @@
    40E0 AF            [ 4]  199 	xor	a, a
    40E1 F5            [11]  200 	push	af
    40E2 33            [ 6]  201 	inc	sp
-   40E3 CD 88 78      [17]  202 	call	_cpct_setVideoMode
+   40E3 CD 54 79      [17]  202 	call	_cpct_setVideoMode
    40E6 33            [ 6]  203 	inc	sp
                             204 ;src/main.c:54: cpct_reenableFirmware(firmware);
    40E7 DD 6E FA      [19]  205 	ld	l,-6 (ix)
    40EA DD 66 FB      [19]  206 	ld	h,-5 (ix)
-   40ED CD 20 77      [17]  207 	call	_cpct_reenableFirmware
+   40ED CD EC 77      [17]  207 	call	_cpct_reenableFirmware
    40F0 DD F9         [10]  208 	ld	sp, ix
    40F2 DD E1         [14]  209 	pop	ix
    40F4 C9            [10]  210 	ret

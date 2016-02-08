@@ -1,7 +1,7 @@
                               1 ;--------------------------------------------------------
                               2 ; File Created by SDCC : free open source ANSI-C Compiler
                               3 ; Version 3.5.4 #9329 (Linux)
-                              4 ; This file was generated Mon Feb  8 17:38:58 2016
+                              4 ; This file was generated Mon Feb  8 21:04:40 2016
                               5 ;--------------------------------------------------------
                               6 	.module depot
                               7 	.optsdcc -mz80
@@ -9,1107 +9,1153 @@
                               9 ;--------------------------------------------------------
                              10 ; Public variables in this module
                              11 ;--------------------------------------------------------
-                             12 	.globl _drawWindow
-                             13 	.globl _drawMenu
-                             14 	.globl _putM2
-                             15 	.globl _putM0
-                             16 	.globl _realloc
-                             17 	.globl _malloc
-                             18 	.globl _floorf
-                             19 	.globl _cpct_getScreenPtr
-                             20 	.globl _cpct_drawSolidBox
-                             21 	.globl _cpct_drawSprite
-                             22 	.globl _cpct_px2byteM0
-                             23 	.globl _cpct_isKeyPressed
-                             24 	.globl _cpct_scanKeyboard
-                             25 	.globl _cpct_memset
-                             26 	.globl _railroadDepot
-                             27 	.globl _drawLocomotive
-                             28 	.globl _drawAllLocomotives
-                             29 	.globl _confirmBuyLocomotive
-                             30 	.globl _buyLocomotive
-                             31 ;--------------------------------------------------------
-                             32 ; special function registers
-                             33 ;--------------------------------------------------------
+                             12 	.globl _drawDepot
+                             13 	.globl _drawWindow
+                             14 	.globl _drawMenu
+                             15 	.globl _putM2
+                             16 	.globl _putM0
+                             17 	.globl _realloc
+                             18 	.globl _malloc
+                             19 	.globl _floorf
+                             20 	.globl _cpct_getScreenPtr
+                             21 	.globl _cpct_drawSolidBox
+                             22 	.globl _cpct_drawSprite
+                             23 	.globl _cpct_px2byteM0
+                             24 	.globl _cpct_isKeyPressed
+                             25 	.globl _cpct_scanKeyboard
+                             26 	.globl _cpct_memset
+                             27 	.globl _railroadDepot
+                             28 	.globl _drawLocomotive
+                             29 	.globl _drawAllLocomotives
+                             30 	.globl _confirmBuyLocomotive
+                             31 	.globl _buyLocomotive
+                             32 ;--------------------------------------------------------
+                             33 ; special function registers
                              34 ;--------------------------------------------------------
-                             35 ; ram data
-                             36 ;--------------------------------------------------------
-                             37 	.area _DATA
-                             38 ;--------------------------------------------------------
-                             39 ; ram data
-                             40 ;--------------------------------------------------------
-                             41 	.area _INITIALIZED
-                             42 ;--------------------------------------------------------
-                             43 ; absolute external ram data
-                             44 ;--------------------------------------------------------
-                             45 	.area _DABS (ABS)
-                             46 ;--------------------------------------------------------
-                             47 ; global & static initialisations
-                             48 ;--------------------------------------------------------
-                             49 	.area _HOME
-                             50 	.area _GSINIT
-                             51 	.area _GSFINAL
-                             52 	.area _GSINIT
-                             53 ;--------------------------------------------------------
-                             54 ; Home
-                             55 ;--------------------------------------------------------
-                             56 	.area _HOME
+                             35 ;--------------------------------------------------------
+                             36 ; ram data
+                             37 ;--------------------------------------------------------
+                             38 	.area _DATA
+                             39 ;--------------------------------------------------------
+                             40 ; ram data
+                             41 ;--------------------------------------------------------
+                             42 	.area _INITIALIZED
+                             43 ;--------------------------------------------------------
+                             44 ; absolute external ram data
+                             45 ;--------------------------------------------------------
+                             46 	.area _DABS (ABS)
+                             47 ;--------------------------------------------------------
+                             48 ; global & static initialisations
+                             49 ;--------------------------------------------------------
+                             50 	.area _HOME
+                             51 	.area _GSINIT
+                             52 	.area _GSFINAL
+                             53 	.area _GSINIT
+                             54 ;--------------------------------------------------------
+                             55 ; Home
+                             56 ;--------------------------------------------------------
                              57 	.area _HOME
-                             58 ;--------------------------------------------------------
-                             59 ; code
-                             60 ;--------------------------------------------------------
-                             61 	.area _CODE
-                             62 ;src/game/depot.c:3: void railroadDepot()
-                             63 ;	---------------------------------
-                             64 ; Function railroadDepot
-                             65 ; ---------------------------------
-   0000                      66 _railroadDepot::
-   0000 DD E5         [15]   67 	push	ix
-   0002 DD 21 00 00   [14]   68 	ld	ix,#0
-   0006 DD 39         [15]   69 	add	ix,sp
-   0008 F5            [11]   70 	push	af
-   0009 F5            [11]   71 	push	af
-   000A 3B            [ 6]   72 	dec	sp
-                             73 ;src/game/depot.c:5: u8 exit=0;
-   000B DD 36 FF 00   [19]   74 	ld	-1 (ix),#0x00
-                             75 ;src/game/depot.c:7: cpct_clearScreen(0b11111111);
-   000F 21 00 40      [10]   76 	ld	hl,#0x4000
-   0012 E5            [11]   77 	push	hl
-   0013 3E FF         [ 7]   78 	ld	a,#0xFF
-   0015 F5            [11]   79 	push	af
-   0016 33            [ 6]   80 	inc	sp
-   0017 26 C0         [ 7]   81 	ld	h, #0xC0
-   0019 E5            [11]   82 	push	hl
-   001A CDr00r00      [17]   83 	call	_cpct_memset
-                             84 ;src/game/depot.c:9: do
-   001D                      85 00108$:
-                             86 ;src/game/depot.c:11: cpct_scanKeyboard(); 
-   001D CDr00r00      [17]   87 	call	_cpct_scanKeyboard
-                             88 ;src/game/depot.c:13: if ( cpct_isKeyPressed(Key_Esc) )
-   0020 21 08 04      [10]   89 	ld	hl,#0x0408
-   0023 CDr00r00      [17]   90 	call	_cpct_isKeyPressed
-   0026 7D            [ 4]   91 	ld	a,l
-   0027 B7            [ 4]   92 	or	a, a
-   0028 28 06         [12]   93 	jr	Z,00106$
-                             94 ;src/game/depot.c:14: exit=1;
-   002A DD 36 FF 01   [19]   95 	ld	-1 (ix),#0x01
-   002E 18 2F         [12]   96 	jr	00109$
-   0030                      97 00106$:
-                             98 ;src/game/depot.c:15: else if(cpct_isKeyPressed(Key_Return) )
-   0030 21 02 04      [10]   99 	ld	hl,#0x0402
-   0033 CDr00r00      [17]  100 	call	_cpct_isKeyPressed
-   0036 7D            [ 4]  101 	ld	a,l
-   0037 B7            [ 4]  102 	or	a, a
-   0038 28 25         [12]  103 	jr	Z,00109$
-                            104 ;src/game/depot.c:17: const char *txtMenuChoice[] = { 
-   003A 21 00 00      [10]  105 	ld	hl,#0x0000
-   003D 39            [11]  106 	add	hl,sp
-   003E 5D            [ 4]  107 	ld	e,l
-   003F 54            [ 4]  108 	ld	d,h
-   0040 36r6A         [10]  109 	ld	(hl),#<(___str_0)
-   0042 23            [ 6]  110 	inc	hl
-   0043 36s00         [10]  111 	ld	(hl),#>(___str_0)
-   0045 6B            [ 4]  112 	ld	l, e
-   0046 62            [ 4]  113 	ld	h, d
-   0047 23            [ 6]  114 	inc	hl
-   0048 23            [ 6]  115 	inc	hl
-   0049 36r7B         [10]  116 	ld	(hl),#<(___str_1)
-   004B 23            [ 6]  117 	inc	hl
-   004C 36s00         [10]  118 	ld	(hl),#>(___str_1)
-                            119 ;src/game/depot.c:21: u8 menuChoice = drawMenu(txtMenuChoice,2);
-   004E 3E 02         [ 7]  120 	ld	a,#0x02
-   0050 F5            [11]  121 	push	af
-   0051 33            [ 6]  122 	inc	sp
-   0052 D5            [11]  123 	push	de
-   0053 CDr00r00      [17]  124 	call	_drawMenu
-   0056 F1            [10]  125 	pop	af
-   0057 33            [ 6]  126 	inc	sp
-   0058 7D            [ 4]  127 	ld	a,l
-                            128 ;src/game/depot.c:23: if(menuChoice == 0)
-   0059 B7            [ 4]  129 	or	a, a
-   005A 20 03         [12]  130 	jr	NZ,00109$
-                            131 ;src/game/depot.c:24: buyLocomotive();
-   005C CDrDAr05      [17]  132 	call	_buyLocomotive
-   005F                     133 00109$:
-                            134 ;src/game/depot.c:28: while(!exit);
-   005F DD 7E FF      [19]  135 	ld	a,-1 (ix)
-   0062 B7            [ 4]  136 	or	a, a
-   0063 28 B8         [12]  137 	jr	Z,00108$
-   0065 DD F9         [10]  138 	ld	sp, ix
-   0067 DD E1         [14]  139 	pop	ix
-   0069 C9            [10]  140 	ret
-   006A                     141 ___str_0:
-   006A 42 75 79 20 61 20   142 	.ascii "Buy a locomotive"
+                             58 	.area _HOME
+                             59 ;--------------------------------------------------------
+                             60 ; code
+                             61 ;--------------------------------------------------------
+                             62 	.area _CODE
+                             63 ;src/game/depot.c:3: void drawDepot()
+                             64 ;	---------------------------------
+                             65 ; Function drawDepot
+                             66 ; ---------------------------------
+   0000                      67 _drawDepot::
+                             68 ;src/game/depot.c:8: cpct_clearScreen(0b11111111);
+   0000 21 00 40      [10]   69 	ld	hl,#0x4000
+   0003 E5            [11]   70 	push	hl
+   0004 3E FF         [ 7]   71 	ld	a,#0xFF
+   0006 F5            [11]   72 	push	af
+   0007 33            [ 6]   73 	inc	sp
+   0008 26 C0         [ 7]   74 	ld	h, #0xC0
+   000A E5            [11]   75 	push	hl
+   000B CDr00r00      [17]   76 	call	_cpct_memset
+                             77 ;src/game/depot.c:10: for(i=0; i<nbTrainList; i++)
+   000E 11 00 00      [10]   78 	ld	de,#0x0000
+   0011                      79 00103$:
+   0011 21r00r00      [10]   80 	ld	hl,#_nbTrainList
+   0014 7A            [ 4]   81 	ld	a,d
+   0015 96            [ 7]   82 	sub	a, (hl)
+   0016 D0            [11]   83 	ret	NC
+                             84 ;src/game/depot.c:12: p_video = cpct_getScreenPtr(SCR_VMEM, 50, 30+i*20);
+   0017 7B            [ 4]   85 	ld	a,e
+   0018 C6 1E         [ 7]   86 	add	a, #0x1E
+   001A D5            [11]   87 	push	de
+   001B 57            [ 4]   88 	ld	d,a
+   001C 1E 32         [ 7]   89 	ld	e,#0x32
+   001E D5            [11]   90 	push	de
+   001F 21 00 C0      [10]   91 	ld	hl,#0xC000
+   0022 E5            [11]   92 	push	hl
+   0023 CDr00r00      [17]   93 	call	_cpct_getScreenPtr
+   0026 D1            [10]   94 	pop	de
+                             95 ;src/game/depot.c:13: cpct_drawSprite(l130B_M2, p_video, 10, 10);
+   0027 4D            [ 4]   96 	ld	c, l
+   0028 44            [ 4]   97 	ld	b, h
+   0029 D5            [11]   98 	push	de
+   002A 21 0A 0A      [10]   99 	ld	hl,#0x0A0A
+   002D E5            [11]  100 	push	hl
+   002E C5            [11]  101 	push	bc
+   002F 21r00r00      [10]  102 	ld	hl,#_l130B_M2
+   0032 E5            [11]  103 	push	hl
+   0033 CDr00r00      [17]  104 	call	_cpct_drawSprite
+   0036 D1            [10]  105 	pop	de
+                            106 ;src/game/depot.c:10: for(i=0; i<nbTrainList; i++)
+   0037 7B            [ 4]  107 	ld	a,e
+   0038 C6 14         [ 7]  108 	add	a, #0x14
+   003A 5F            [ 4]  109 	ld	e,a
+   003B 14            [ 4]  110 	inc	d
+   003C 18 D3         [12]  111 	jr	00103$
+                            112 ;src/game/depot.c:17: void railroadDepot()
+                            113 ;	---------------------------------
+                            114 ; Function railroadDepot
+                            115 ; ---------------------------------
+   003E                     116 _railroadDepot::
+   003E DD E5         [15]  117 	push	ix
+   0040 DD 21 00 00   [14]  118 	ld	ix,#0
+   0044 DD 39         [15]  119 	add	ix,sp
+   0046 F5            [11]  120 	push	af
+   0047 F5            [11]  121 	push	af
+   0048 3B            [ 6]  122 	dec	sp
+                            123 ;src/game/depot.c:19: u8 exit=0;
+   0049 DD 36 FF 00   [19]  124 	ld	-1 (ix),#0x00
+                            125 ;src/game/depot.c:21: drawDepot();
+   004D CDr00r00      [17]  126 	call	_drawDepot
+                            127 ;src/game/depot.c:23: do
+   0050                     128 00108$:
+                            129 ;src/game/depot.c:25: cpct_scanKeyboard(); 
+   0050 CDr00r00      [17]  130 	call	_cpct_scanKeyboard
+                            131 ;src/game/depot.c:27: if ( cpct_isKeyPressed(Key_Esc) )
+   0053 21 08 04      [10]  132 	ld	hl,#0x0408
+   0056 CDr00r00      [17]  133 	call	_cpct_isKeyPressed
+   0059 7D            [ 4]  134 	ld	a,l
+   005A B7            [ 4]  135 	or	a, a
+   005B 28 06         [12]  136 	jr	Z,00106$
+                            137 ;src/game/depot.c:28: exit=1;
+   005D DD 36 FF 01   [19]  138 	ld	-1 (ix),#0x01
+   0061 18 32         [12]  139 	jr	00109$
+   0063                     140 00106$:
+                            141 ;src/game/depot.c:29: else if(cpct_isKeyPressed(Key_Return) )
+   0063 21 02 04      [10]  142 	ld	hl,#0x0402
+   0066 CDr00r00      [17]  143 	call	_cpct_isKeyPressed
+   0069 7D            [ 4]  144 	ld	a,l
+   006A B7            [ 4]  145 	or	a, a
+   006B 28 28         [12]  146 	jr	Z,00109$
+                            147 ;src/game/depot.c:31: const char *txtMenuChoice[] = { 
+   006D 21 00 00      [10]  148 	ld	hl,#0x0000
+   0070 39            [11]  149 	add	hl,sp
+   0071 5D            [ 4]  150 	ld	e,l
+   0072 54            [ 4]  151 	ld	d,h
+   0073 36rA0         [10]  152 	ld	(hl),#<(___str_0)
+   0075 23            [ 6]  153 	inc	hl
+   0076 36s00         [10]  154 	ld	(hl),#>(___str_0)
+   0078 6B            [ 4]  155 	ld	l, e
+   0079 62            [ 4]  156 	ld	h, d
+   007A 23            [ 6]  157 	inc	hl
+   007B 23            [ 6]  158 	inc	hl
+   007C 36rB1         [10]  159 	ld	(hl),#<(___str_1)
+   007E 23            [ 6]  160 	inc	hl
+   007F 36s00         [10]  161 	ld	(hl),#>(___str_1)
+                            162 ;src/game/depot.c:35: u8 menuChoice = drawMenu(txtMenuChoice,2);
+   0081 3E 02         [ 7]  163 	ld	a,#0x02
+   0083 F5            [11]  164 	push	af
+   0084 33            [ 6]  165 	inc	sp
+   0085 D5            [11]  166 	push	de
+   0086 CDr00r00      [17]  167 	call	_drawMenu
+   0089 F1            [10]  168 	pop	af
+   008A 33            [ 6]  169 	inc	sp
+   008B 7D            [ 4]  170 	ld	a,l
+                            171 ;src/game/depot.c:37: if(menuChoice == 0)
+   008C B7            [ 4]  172 	or	a, a
+   008D 20 03         [12]  173 	jr	NZ,00102$
+                            174 ;src/game/depot.c:38: buyLocomotive();
+   008F CDr10r06      [17]  175 	call	_buyLocomotive
+   0092                     176 00102$:
+                            177 ;src/game/depot.c:40: drawDepot();
+   0092 CDr00r00      [17]  178 	call	_drawDepot
+   0095                     179 00109$:
+                            180 ;src/game/depot.c:44: while(!exit);
+   0095 DD 7E FF      [19]  181 	ld	a,-1 (ix)
+   0098 B7            [ 4]  182 	or	a, a
+   0099 28 B5         [12]  183 	jr	Z,00108$
+   009B DD F9         [10]  184 	ld	sp, ix
+   009D DD E1         [14]  185 	pop	ix
+   009F C9            [10]  186 	ret
+   00A0                     187 ___str_0:
+   00A0 42 75 79 20 61 20   188 	.ascii "Buy a locomotive"
         6C 6F 63 6F 6D 6F
         74 69 76 65
-   007A 00                  143 	.db 0x00
-   007B                     144 ___str_1:
-   007B 42 61 63 6B 20 74   145 	.ascii "Back to depot"
+   00B0 00                  189 	.db 0x00
+   00B1                     190 ___str_1:
+   00B1 42 61 63 6B 20 74   191 	.ascii "Back to depot"
         6F 20 64 65 70 6F
         74
-   0088 00                  146 	.db 0x00
-                            147 ;src/game/depot.c:31: void drawLocomotive(u8 i, u8 iSelect)
-                            148 ;	---------------------------------
-                            149 ; Function drawLocomotive
-                            150 ; ---------------------------------
-   0089                     151 _drawLocomotive::
-   0089 DD E5         [15]  152 	push	ix
-   008B DD 21 00 00   [14]  153 	ld	ix,#0
-   008F DD 39         [15]  154 	add	ix,sp
-   0091 21 F7 FF      [10]  155 	ld	hl,#-9
-   0094 39            [11]  156 	add	hl,sp
-   0095 F9            [ 6]  157 	ld	sp,hl
-                            158 ;src/game/depot.c:34: p_video = cpct_getScreenPtr(SCR_VMEM, 5+25*floorf(i/4), 30+40*(i%4));
-   0096 DD 7E 04      [19]  159 	ld	a,4 (ix)
-   0099 E6 03         [ 7]  160 	and	a, #0x03
-   009B 4F            [ 4]  161 	ld	c,a
-   009C 87            [ 4]  162 	add	a, a
-   009D 87            [ 4]  163 	add	a, a
-   009E 81            [ 4]  164 	add	a, c
-   009F 87            [ 4]  165 	add	a, a
-   00A0 87            [ 4]  166 	add	a, a
-   00A1 87            [ 4]  167 	add	a, a
-   00A2 DD 77 F7      [19]  168 	ld	-9 (ix), a
-   00A5 C6 1E         [ 7]  169 	add	a, #0x1E
-   00A7 DD 77 FC      [19]  170 	ld	-4 (ix),a
-   00AA DD 7E 04      [19]  171 	ld	a,4 (ix)
-   00AD 0F            [ 4]  172 	rrca
-   00AE 0F            [ 4]  173 	rrca
-   00AF E6 3F         [ 7]  174 	and	a,#0x3F
-   00B1 DD 77 FF      [19]  175 	ld	-1 (ix), a
-   00B4 F5            [11]  176 	push	af
-   00B5 33            [ 6]  177 	inc	sp
-   00B6 CDr00r00      [17]  178 	call	___uchar2fs
-   00B9 33            [ 6]  179 	inc	sp
-   00BA DD 72 FB      [19]  180 	ld	-5 (ix),d
-   00BD DD 73 FA      [19]  181 	ld	-6 (ix),e
-   00C0 DD 74 F9      [19]  182 	ld	-7 (ix),h
-   00C3 DD 75 F8      [19]  183 	ld	-8 (ix),l
-   00C6 DD 6E FA      [19]  184 	ld	l,-6 (ix)
-   00C9 DD 66 FB      [19]  185 	ld	h,-5 (ix)
-   00CC E5            [11]  186 	push	hl
-   00CD DD 6E F8      [19]  187 	ld	l,-8 (ix)
-   00D0 DD 66 F9      [19]  188 	ld	h,-7 (ix)
-   00D3 E5            [11]  189 	push	hl
-   00D4 CDr00r00      [17]  190 	call	_floorf
-   00D7 F1            [10]  191 	pop	af
-   00D8 F1            [10]  192 	pop	af
-   00D9 EB            [ 4]  193 	ex	de, hl
-   00DA E5            [11]  194 	push	hl
-   00DB D5            [11]  195 	push	de
-   00DC 21 C8 41      [10]  196 	ld	hl,#0x41C8
-   00DF E5            [11]  197 	push	hl
-   00E0 21 00 00      [10]  198 	ld	hl,#0x0000
-   00E3 E5            [11]  199 	push	hl
-   00E4 CDr00r00      [17]  200 	call	___fsmul
-   00E7 F1            [10]  201 	pop	af
-   00E8 F1            [10]  202 	pop	af
-   00E9 F1            [10]  203 	pop	af
-   00EA F1            [10]  204 	pop	af
-   00EB 4D            [ 4]  205 	ld	c,l
-   00EC 44            [ 4]  206 	ld	b,h
-   00ED 21 A0 40      [10]  207 	ld	hl,#0x40A0
-   00F0 E5            [11]  208 	push	hl
-   00F1 21 00 00      [10]  209 	ld	hl,#0x0000
-   00F4 E5            [11]  210 	push	hl
-   00F5 D5            [11]  211 	push	de
-   00F6 C5            [11]  212 	push	bc
-   00F7 CDr00r00      [17]  213 	call	___fsadd
-   00FA F1            [10]  214 	pop	af
-   00FB F1            [10]  215 	pop	af
-   00FC F1            [10]  216 	pop	af
-   00FD F1            [10]  217 	pop	af
-   00FE D5            [11]  218 	push	de
-   00FF E5            [11]  219 	push	hl
-   0100 CDr00r00      [17]  220 	call	___fs2uchar
-   0103 F1            [10]  221 	pop	af
-   0104 F1            [10]  222 	pop	af
-   0105 55            [ 4]  223 	ld	d,l
-   0106 DD 7E FC      [19]  224 	ld	a,-4 (ix)
-   0109 F5            [11]  225 	push	af
-   010A 33            [ 6]  226 	inc	sp
-   010B D5            [11]  227 	push	de
-   010C 33            [ 6]  228 	inc	sp
-   010D 21 00 C0      [10]  229 	ld	hl,#0xC000
-   0110 E5            [11]  230 	push	hl
-   0111 CDr00r00      [17]  231 	call	_cpct_getScreenPtr
-                            232 ;src/game/depot.c:38: cpct_drawSolidBox(p_video, cpct_px2byteM0(5,5), 22, 22);
-   0114 DD 75 FD      [19]  233 	ld	-3 (ix),l
-   0117 DD 74 FE      [19]  234 	ld	-2 (ix),h
-                            235 ;src/game/depot.c:37: if(i==iSelect)
-   011A DD 7E 04      [19]  236 	ld	a,4 (ix)
-   011D DD 96 05      [19]  237 	sub	a, 5 (ix)
-   0120 20 1D         [12]  238 	jr	NZ,00102$
-                            239 ;src/game/depot.c:38: cpct_drawSolidBox(p_video, cpct_px2byteM0(5,5), 22, 22);
-   0122 21 05 05      [10]  240 	ld	hl,#0x0505
-   0125 E5            [11]  241 	push	hl
-   0126 CDr00r00      [17]  242 	call	_cpct_px2byteM0
-   0129 55            [ 4]  243 	ld	d,l
-   012A 21 16 16      [10]  244 	ld	hl,#0x1616
-   012D E5            [11]  245 	push	hl
-   012E D5            [11]  246 	push	de
-   012F 33            [ 6]  247 	inc	sp
-   0130 DD 6E FD      [19]  248 	ld	l,-3 (ix)
-   0133 DD 66 FE      [19]  249 	ld	h,-2 (ix)
-   0136 E5            [11]  250 	push	hl
-   0137 CDr00r00      [17]  251 	call	_cpct_drawSolidBox
-   013A F1            [10]  252 	pop	af
-   013B F1            [10]  253 	pop	af
-   013C 33            [ 6]  254 	inc	sp
-   013D 18 1B         [12]  255 	jr	00103$
-   013F                     256 00102$:
-                            257 ;src/game/depot.c:40: cpct_drawSolidBox(p_video, cpct_px2byteM0(11,11), 22, 22);
-   013F 21 0B 0B      [10]  258 	ld	hl,#0x0B0B
-   0142 E5            [11]  259 	push	hl
-   0143 CDr00r00      [17]  260 	call	_cpct_px2byteM0
-   0146 55            [ 4]  261 	ld	d,l
-   0147 21 16 16      [10]  262 	ld	hl,#0x1616
-   014A E5            [11]  263 	push	hl
-   014B D5            [11]  264 	push	de
-   014C 33            [ 6]  265 	inc	sp
-   014D DD 6E FD      [19]  266 	ld	l,-3 (ix)
-   0150 DD 66 FE      [19]  267 	ld	h,-2 (ix)
-   0153 E5            [11]  268 	push	hl
-   0154 CDr00r00      [17]  269 	call	_cpct_drawSolidBox
-   0157 F1            [10]  270 	pop	af
-   0158 F1            [10]  271 	pop	af
-   0159 33            [ 6]  272 	inc	sp
-   015A                     273 00103$:
-                            274 ;src/game/depot.c:42: p_video = cpct_getScreenPtr(SCR_VMEM, 5+25*floorf(i/4)+1, 30+40*(i%4)+1);
-   015A DD 7E F7      [19]  275 	ld	a,-9 (ix)
-   015D C6 1F         [ 7]  276 	add	a, #0x1F
-   015F DD 77 FD      [19]  277 	ld	-3 (ix),a
-   0162 DD 6E FA      [19]  278 	ld	l,-6 (ix)
-   0165 DD 66 FB      [19]  279 	ld	h,-5 (ix)
-   0168 E5            [11]  280 	push	hl
-   0169 DD 6E F8      [19]  281 	ld	l,-8 (ix)
-   016C DD 66 F9      [19]  282 	ld	h,-7 (ix)
-   016F E5            [11]  283 	push	hl
-   0170 CDr00r00      [17]  284 	call	_floorf
-   0173 F1            [10]  285 	pop	af
-   0174 F1            [10]  286 	pop	af
-   0175 EB            [ 4]  287 	ex	de, hl
-   0176 E5            [11]  288 	push	hl
-   0177 D5            [11]  289 	push	de
-   0178 21 C8 41      [10]  290 	ld	hl,#0x41C8
-   017B E5            [11]  291 	push	hl
-   017C 21 00 00      [10]  292 	ld	hl,#0x0000
-   017F E5            [11]  293 	push	hl
-   0180 CDr00r00      [17]  294 	call	___fsmul
-   0183 F1            [10]  295 	pop	af
-   0184 F1            [10]  296 	pop	af
-   0185 F1            [10]  297 	pop	af
-   0186 F1            [10]  298 	pop	af
-   0187 4D            [ 4]  299 	ld	c,l
-   0188 44            [ 4]  300 	ld	b,h
-   0189 21 C0 40      [10]  301 	ld	hl,#0x40C0
-   018C E5            [11]  302 	push	hl
-   018D 21 00 00      [10]  303 	ld	hl,#0x0000
-   0190 E5            [11]  304 	push	hl
-   0191 D5            [11]  305 	push	de
-   0192 C5            [11]  306 	push	bc
-   0193 CDr00r00      [17]  307 	call	___fsadd
-   0196 F1            [10]  308 	pop	af
-   0197 F1            [10]  309 	pop	af
-   0198 F1            [10]  310 	pop	af
-   0199 F1            [10]  311 	pop	af
-   019A D5            [11]  312 	push	de
-   019B E5            [11]  313 	push	hl
-   019C CDr00r00      [17]  314 	call	___fs2uchar
-   019F F1            [10]  315 	pop	af
-   01A0 F1            [10]  316 	pop	af
-   01A1 55            [ 4]  317 	ld	d,l
-   01A2 DD 7E FD      [19]  318 	ld	a,-3 (ix)
-   01A5 F5            [11]  319 	push	af
-   01A6 33            [ 6]  320 	inc	sp
-   01A7 D5            [11]  321 	push	de
-   01A8 33            [ 6]  322 	inc	sp
-   01A9 21 00 C0      [10]  323 	ld	hl,#0xC000
-   01AC E5            [11]  324 	push	hl
-   01AD CDr00r00      [17]  325 	call	_cpct_getScreenPtr
-                            326 ;src/game/depot.c:38: cpct_drawSolidBox(p_video, cpct_px2byteM0(5,5), 22, 22);
-   01B0 4D            [ 4]  327 	ld	c, l
-   01B1 44            [ 4]  328 	ld	b, h
-                            329 ;src/game/depot.c:44: if(i<locDelocked)
-   01B2 21r00r00      [10]  330 	ld	hl,#_locDelocked
-   01B5 DD 7E 04      [19]  331 	ld	a,4 (ix)
-   01B8 96            [ 7]  332 	sub	a, (hl)
-   01B9 30 52         [12]  333 	jr	NC,00110$
-                            334 ;src/game/depot.c:46: switch(i)
-   01BB 3E 03         [ 7]  335 	ld	a,#0x03
-   01BD DD 96 04      [19]  336 	sub	a, 4 (ix)
-   01C0 38 57         [12]  337 	jr	C,00112$
-   01C2 DD 5E 04      [19]  338 	ld	e,4 (ix)
-   01C5 16 00         [ 7]  339 	ld	d,#0x00
-   01C7 21rCDr01      [10]  340 	ld	hl,#00128$
-   01CA 19            [11]  341 	add	hl,de
-   01CB 19            [11]  342 	add	hl,de
-                            343 ;src/game/depot.c:48: case 0:
-   01CC E9            [ 4]  344 	jp	(hl)
-   01CD                     345 00128$:
-   01CD 18 06         [12]  346 	jr	00104$
-   01CF 18 12         [12]  347 	jr	00105$
-   01D1 18 1E         [12]  348 	jr	00106$
-   01D3 18 2A         [12]  349 	jr	00107$
-   01D5                     350 00104$:
-                            351 ;src/game/depot.c:49: cpct_drawSprite(l130B, p_video, 20, 20);
-   01D5 11r00r00      [10]  352 	ld	de,#_l130B+0
-   01D8 21 14 14      [10]  353 	ld	hl,#0x1414
-   01DB E5            [11]  354 	push	hl
-   01DC C5            [11]  355 	push	bc
-   01DD D5            [11]  356 	push	de
-   01DE CDr00r00      [17]  357 	call	_cpct_drawSprite
-                            358 ;src/game/depot.c:50: break;
-   01E1 18 36         [12]  359 	jr	00112$
-                            360 ;src/game/depot.c:51: case 1:
-   01E3                     361 00105$:
-                            362 ;src/game/depot.c:52: cpct_drawSprite(l141TA, p_video, 20, 20);
-   01E3 11r00r00      [10]  363 	ld	de,#_l141TA+0
-   01E6 21 14 14      [10]  364 	ld	hl,#0x1414
-   01E9 E5            [11]  365 	push	hl
-   01EA C5            [11]  366 	push	bc
-   01EB D5            [11]  367 	push	de
-   01EC CDr00r00      [17]  368 	call	_cpct_drawSprite
-                            369 ;src/game/depot.c:53: break;
-   01EF 18 28         [12]  370 	jr	00112$
-                            371 ;src/game/depot.c:54: case 2:
-   01F1                     372 00106$:
-                            373 ;src/game/depot.c:55: cpct_drawSprite(l142AT, p_video, 20, 20);
-   01F1 11r00r00      [10]  374 	ld	de,#_l142AT+0
-   01F4 21 14 14      [10]  375 	ld	hl,#0x1414
-   01F7 E5            [11]  376 	push	hl
-   01F8 C5            [11]  377 	push	bc
-   01F9 D5            [11]  378 	push	de
-   01FA CDr00r00      [17]  379 	call	_cpct_drawSprite
-                            380 ;src/game/depot.c:56: break;
-   01FD 18 1A         [12]  381 	jr	00112$
-                            382 ;src/game/depot.c:57: case 3:
-   01FF                     383 00107$:
-                            384 ;src/game/depot.c:58: cpct_drawSprite(l141P, p_video, 20, 20);
-   01FF 11r00r00      [10]  385 	ld	de,#_l141P+0
-   0202 21 14 14      [10]  386 	ld	hl,#0x1414
-   0205 E5            [11]  387 	push	hl
-   0206 C5            [11]  388 	push	bc
-   0207 D5            [11]  389 	push	de
-   0208 CDr00r00      [17]  390 	call	_cpct_drawSprite
-                            391 ;src/game/depot.c:60: }
-   020B 18 0C         [12]  392 	jr	00112$
-   020D                     393 00110$:
-                            394 ;src/game/depot.c:66: cpct_drawSprite(lock, p_video, 20, 20);
-   020D 11r00r00      [10]  395 	ld	de,#_lock
-   0210 21 14 14      [10]  396 	ld	hl,#0x1414
-   0213 E5            [11]  397 	push	hl
-   0214 C5            [11]  398 	push	bc
-   0215 D5            [11]  399 	push	de
-   0216 CDr00r00      [17]  400 	call	_cpct_drawSprite
-   0219                     401 00112$:
-   0219 DD F9         [10]  402 	ld	sp, ix
-   021B DD E1         [14]  403 	pop	ix
-   021D C9            [10]  404 	ret
-                            405 ;src/game/depot.c:70: void drawAllLocomotives(u8 iSelect)
-                            406 ;	---------------------------------
-                            407 ; Function drawAllLocomotives
-                            408 ; ---------------------------------
-   021E                     409 _drawAllLocomotives::
-                            410 ;src/game/depot.c:74: putM0();
-   021E CDr00r00      [17]  411 	call	_putM0
-                            412 ;src/game/depot.c:76: cpct_clearScreen(cpct_px2byteM0(9,9));
-   0221 21 09 09      [10]  413 	ld	hl,#0x0909
-   0224 E5            [11]  414 	push	hl
-   0225 CDr00r00      [17]  415 	call	_cpct_px2byteM0
-   0228 65            [ 4]  416 	ld	h,l
-   0229 01 00 40      [10]  417 	ld	bc,#0x4000
-   022C C5            [11]  418 	push	bc
-   022D E5            [11]  419 	push	hl
-   022E 33            [ 6]  420 	inc	sp
-   022F 21 00 C0      [10]  421 	ld	hl,#0xC000
-   0232 E5            [11]  422 	push	hl
-   0233 CDr00r00      [17]  423 	call	_cpct_memset
-                            424 ;src/game/depot.c:77: for(i=0; i<12; i++)
-   0236 16 00         [ 7]  425 	ld	d,#0x00
-   0238                     426 00102$:
-                            427 ;src/game/depot.c:78: drawLocomotive(i, iSelect);
-   0238 D5            [11]  428 	push	de
-   0239 21 04 00      [10]  429 	ld	hl, #4+0
-   023C 39            [11]  430 	add	hl, sp
-   023D 7E            [ 7]  431 	ld	a, (hl)
-   023E F5            [11]  432 	push	af
-   023F 33            [ 6]  433 	inc	sp
-   0240 D5            [11]  434 	push	de
-   0241 33            [ 6]  435 	inc	sp
-   0242 CDr89r00      [17]  436 	call	_drawLocomotive
-   0245 F1            [10]  437 	pop	af
-   0246 D1            [10]  438 	pop	de
-                            439 ;src/game/depot.c:77: for(i=0; i<12; i++)
-   0247 14            [ 4]  440 	inc	d
-   0248 7A            [ 4]  441 	ld	a,d
-   0249 D6 0C         [ 7]  442 	sub	a, #0x0C
-   024B 38 EB         [12]  443 	jr	C,00102$
-   024D C9            [10]  444 	ret
-                            445 ;src/game/depot.c:81: u8 confirmBuyLocomotive(u8 iSelect)
-                            446 ;	---------------------------------
-                            447 ; Function confirmBuyLocomotive
-                            448 ; ---------------------------------
-   024E                     449 _confirmBuyLocomotive::
-   024E DD E5         [15]  450 	push	ix
-   0250 DD 21 00 00   [14]  451 	ld	ix,#0
-   0254 DD 39         [15]  452 	add	ix,sp
-   0256 21 F4 FF      [10]  453 	ld	hl,#-12
-   0259 39            [11]  454 	add	hl,sp
-   025A F9            [ 6]  455 	ld	sp,hl
-                            456 ;src/game/depot.c:88: putM2();
-   025B CDr00r00      [17]  457 	call	_putM2
-                            458 ;src/game/depot.c:90: switch(iSelect)
-   025E 3E 03         [ 7]  459 	ld	a,#0x03
-   0260 DD 96 04      [19]  460 	sub	a, 4 (ix)
-   0263 DAr7Ar03      [10]  461 	jp	C,00105$
-   0266 DD 5E 04      [19]  462 	ld	e,4 (ix)
-   0269 16 00         [ 7]  463 	ld	d,#0x00
-   026B 21r72r02      [10]  464 	ld	hl,#00125$
-   026E 19            [11]  465 	add	hl,de
-   026F 19            [11]  466 	add	hl,de
-   0270 19            [11]  467 	add	hl,de
-   0271 E9            [ 4]  468 	jp	(hl)
-   0272                     469 00125$:
-   0272 C3r7Er02      [10]  470 	jp	00101$
-   0275 C3rBEr02      [10]  471 	jp	00102$
-   0278 C3rFEr02      [10]  472 	jp	00103$
-   027B C3r3Dr03      [10]  473 	jp	00104$
-                            474 ;src/game/depot.c:92: case 0:
-   027E                     475 00101$:
-                            476 ;src/game/depot.c:93: txtWindowLocomotive[0] = "130 B";
-   027E 21 00 00      [10]  477 	ld	hl,#0x0000
-   0281 39            [11]  478 	add	hl,sp
-   0282 5D            [ 4]  479 	ld	e,l
-   0283 54            [ 4]  480 	ld	d,h
-   0284 36rC1         [10]  481 	ld	(hl),#<(___str_2)
-   0286 23            [ 6]  482 	inc	hl
-   0287 36s04         [10]  483 	ld	(hl),#>(___str_2)
-                            484 ;src/game/depot.c:94: txtWindowLocomotive[1] = "";
-   0289 6B            [ 4]  485 	ld	l, e
-   028A 62            [ 4]  486 	ld	h, d
-   028B 23            [ 6]  487 	inc	hl
-   028C 23            [ 6]  488 	inc	hl
-   028D 01rC7r04      [10]  489 	ld	bc,#___str_3+0
-   0290 71            [ 7]  490 	ld	(hl),c
-   0291 23            [ 6]  491 	inc	hl
-   0292 70            [ 7]  492 	ld	(hl),b
-                            493 ;src/game/depot.c:95: txtWindowLocomotive[2] = "Propulsion: steam";
-   0293 21 04 00      [10]  494 	ld	hl,#0x0004
-   0296 19            [11]  495 	add	hl,de
-   0297 01rC8r04      [10]  496 	ld	bc,#___str_4+0
-   029A 71            [ 7]  497 	ld	(hl),c
-   029B 23            [ 6]  498 	inc	hl
-   029C 70            [ 7]  499 	ld	(hl),b
-                            500 ;src/game/depot.c:96: txtWindowLocomotive[3] = "Entry of service: 1909";
-   029D 21 06 00      [10]  501 	ld	hl,#0x0006
-   02A0 19            [11]  502 	add	hl,de
-   02A1 01rDAr04      [10]  503 	ld	bc,#___str_5+0
-   02A4 71            [ 7]  504 	ld	(hl),c
-   02A5 23            [ 6]  505 	inc	hl
-   02A6 70            [ 7]  506 	ld	(hl),b
-                            507 ;src/game/depot.c:97: txtWindowLocomotive[4] = "Maximum speed: 80 km/h";
-   02A7 21 08 00      [10]  508 	ld	hl,#0x0008
-   02AA 19            [11]  509 	add	hl,de
-   02AB 01rF1r04      [10]  510 	ld	bc,#___str_6+0
-   02AE 71            [ 7]  511 	ld	(hl),c
-   02AF 23            [ 6]  512 	inc	hl
-   02B0 70            [ 7]  513 	ld	(hl),b
-                            514 ;src/game/depot.c:98: txtWindowLocomotive[5] = "Price: 1000$";
-   02B1 21 0A 00      [10]  515 	ld	hl,#0x000A
-   02B4 19            [11]  516 	add	hl,de
-   02B5 11r08r05      [10]  517 	ld	de,#___str_7+0
-   02B8 73            [ 7]  518 	ld	(hl),e
-   02B9 23            [ 6]  519 	inc	hl
-   02BA 72            [ 7]  520 	ld	(hl),d
-                            521 ;src/game/depot.c:99: break;
-   02BB C3r7Ar03      [10]  522 	jp	00105$
-                            523 ;src/game/depot.c:100: case 1:
-   02BE                     524 00102$:
-                            525 ;src/game/depot.c:101: txtWindowLocomotive[0] = "141 TA";
-   02BE 21 00 00      [10]  526 	ld	hl,#0x0000
-   02C1 39            [11]  527 	add	hl,sp
-   02C2 5D            [ 4]  528 	ld	e,l
-   02C3 54            [ 4]  529 	ld	d,h
-   02C4 36r15         [10]  530 	ld	(hl),#<(___str_8)
-   02C6 23            [ 6]  531 	inc	hl
-   02C7 36s05         [10]  532 	ld	(hl),#>(___str_8)
-                            533 ;src/game/depot.c:102: txtWindowLocomotive[1] = "";
-   02C9 6B            [ 4]  534 	ld	l, e
-   02CA 62            [ 4]  535 	ld	h, d
-   02CB 23            [ 6]  536 	inc	hl
-   02CC 23            [ 6]  537 	inc	hl
-   02CD 01rC7r04      [10]  538 	ld	bc,#___str_3+0
-   02D0 71            [ 7]  539 	ld	(hl),c
-   02D1 23            [ 6]  540 	inc	hl
-   02D2 70            [ 7]  541 	ld	(hl),b
-                            542 ;src/game/depot.c:103: txtWindowLocomotive[2] = "Propulsion: steam";
-   02D3 21 04 00      [10]  543 	ld	hl,#0x0004
-   02D6 19            [11]  544 	add	hl,de
-   02D7 01rC8r04      [10]  545 	ld	bc,#___str_4+0
-   02DA 71            [ 7]  546 	ld	(hl),c
-   02DB 23            [ 6]  547 	inc	hl
-   02DC 70            [ 7]  548 	ld	(hl),b
-                            549 ;src/game/depot.c:104: txtWindowLocomotive[3] = "Entry of service: 1911";
-   02DD 21 06 00      [10]  550 	ld	hl,#0x0006
-   02E0 19            [11]  551 	add	hl,de
-   02E1 01r1Cr05      [10]  552 	ld	bc,#___str_9+0
-   02E4 71            [ 7]  553 	ld	(hl),c
-   02E5 23            [ 6]  554 	inc	hl
-   02E6 70            [ 7]  555 	ld	(hl),b
-                            556 ;src/game/depot.c:105: txtWindowLocomotive[4] = "Maximum speed: 70 km/h";
-   02E7 21 08 00      [10]  557 	ld	hl,#0x0008
-   02EA 19            [11]  558 	add	hl,de
-   02EB 01r33r05      [10]  559 	ld	bc,#___str_10+0
-   02EE 71            [ 7]  560 	ld	(hl),c
-   02EF 23            [ 6]  561 	inc	hl
-   02F0 70            [ 7]  562 	ld	(hl),b
-                            563 ;src/game/depot.c:106: txtWindowLocomotive[5] = "Price: 900$";
-   02F1 21 0A 00      [10]  564 	ld	hl,#0x000A
-   02F4 19            [11]  565 	add	hl,de
-   02F5 11r4Ar05      [10]  566 	ld	de,#___str_11+0
-   02F8 73            [ 7]  567 	ld	(hl),e
-   02F9 23            [ 6]  568 	inc	hl
-   02FA 72            [ 7]  569 	ld	(hl),d
-                            570 ;src/game/depot.c:107: break;
-   02FB C3r7Ar03      [10]  571 	jp	00105$
-                            572 ;src/game/depot.c:108: case 2:
-   02FE                     573 00103$:
-                            574 ;src/game/depot.c:109: txtWindowLocomotive[0] = "142 AT";
-   02FE 21 00 00      [10]  575 	ld	hl,#0x0000
-   0301 39            [11]  576 	add	hl,sp
-   0302 5D            [ 4]  577 	ld	e,l
-   0303 54            [ 4]  578 	ld	d,h
-   0304 36r56         [10]  579 	ld	(hl),#<(___str_12)
-   0306 23            [ 6]  580 	inc	hl
-   0307 36s05         [10]  581 	ld	(hl),#>(___str_12)
-                            582 ;src/game/depot.c:110: txtWindowLocomotive[1] = "";
-   0309 6B            [ 4]  583 	ld	l, e
-   030A 62            [ 4]  584 	ld	h, d
-   030B 23            [ 6]  585 	inc	hl
-   030C 23            [ 6]  586 	inc	hl
-   030D 01rC7r04      [10]  587 	ld	bc,#___str_3+0
-   0310 71            [ 7]  588 	ld	(hl),c
-   0311 23            [ 6]  589 	inc	hl
-   0312 70            [ 7]  590 	ld	(hl),b
-                            591 ;src/game/depot.c:111: txtWindowLocomotive[2] = "Propulsion: steam";
-   0313 21 04 00      [10]  592 	ld	hl,#0x0004
-   0316 19            [11]  593 	add	hl,de
-   0317 01rC8r04      [10]  594 	ld	bc,#___str_4+0
-   031A 71            [ 7]  595 	ld	(hl),c
-   031B 23            [ 6]  596 	inc	hl
-   031C 70            [ 7]  597 	ld	(hl),b
-                            598 ;src/game/depot.c:112: txtWindowLocomotive[3] = "Entry of service: 1926";
-   031D 21 06 00      [10]  599 	ld	hl,#0x0006
-   0320 19            [11]  600 	add	hl,de
-   0321 01r5Dr05      [10]  601 	ld	bc,#___str_13+0
-   0324 71            [ 7]  602 	ld	(hl),c
-   0325 23            [ 6]  603 	inc	hl
-   0326 70            [ 7]  604 	ld	(hl),b
-                            605 ;src/game/depot.c:113: txtWindowLocomotive[4] = "Maximum speed: 95 km/h";
-   0327 21 08 00      [10]  606 	ld	hl,#0x0008
-   032A 19            [11]  607 	add	hl,de
-   032B 01r74r05      [10]  608 	ld	bc,#___str_14+0
-   032E 71            [ 7]  609 	ld	(hl),c
-   032F 23            [ 6]  610 	inc	hl
-   0330 70            [ 7]  611 	ld	(hl),b
-                            612 ;src/game/depot.c:114: txtWindowLocomotive[5] = "Price: 1500$";
-   0331 21 0A 00      [10]  613 	ld	hl,#0x000A
-   0334 19            [11]  614 	add	hl,de
-   0335 11r8Br05      [10]  615 	ld	de,#___str_15+0
-   0338 73            [ 7]  616 	ld	(hl),e
-   0339 23            [ 6]  617 	inc	hl
-   033A 72            [ 7]  618 	ld	(hl),d
-                            619 ;src/game/depot.c:115: break;
-   033B 18 3D         [12]  620 	jr	00105$
-                            621 ;src/game/depot.c:117: case 3:
-   033D                     622 00104$:
-                            623 ;src/game/depot.c:118: txtWindowLocomotive[0] = "141 P";
-   033D 21 00 00      [10]  624 	ld	hl,#0x0000
-   0340 39            [11]  625 	add	hl,sp
-   0341 5D            [ 4]  626 	ld	e,l
-   0342 54            [ 4]  627 	ld	d,h
-   0343 36r98         [10]  628 	ld	(hl),#<(___str_16)
-   0345 23            [ 6]  629 	inc	hl
-   0346 36s05         [10]  630 	ld	(hl),#>(___str_16)
-                            631 ;src/game/depot.c:119: txtWindowLocomotive[1] = "";
-   0348 6B            [ 4]  632 	ld	l, e
-   0349 62            [ 4]  633 	ld	h, d
-   034A 23            [ 6]  634 	inc	hl
-   034B 23            [ 6]  635 	inc	hl
-   034C 01rC7r04      [10]  636 	ld	bc,#___str_3+0
-   034F 71            [ 7]  637 	ld	(hl),c
-   0350 23            [ 6]  638 	inc	hl
-   0351 70            [ 7]  639 	ld	(hl),b
-                            640 ;src/game/depot.c:120: txtWindowLocomotive[2] = "Propulsion: steam";
-   0352 21 04 00      [10]  641 	ld	hl,#0x0004
-   0355 19            [11]  642 	add	hl,de
-   0356 01rC8r04      [10]  643 	ld	bc,#___str_4+0
-   0359 71            [ 7]  644 	ld	(hl),c
-   035A 23            [ 6]  645 	inc	hl
-   035B 70            [ 7]  646 	ld	(hl),b
-                            647 ;src/game/depot.c:121: txtWindowLocomotive[3] = "Entry of service: 1942";
-   035C 21 06 00      [10]  648 	ld	hl,#0x0006
-   035F 19            [11]  649 	add	hl,de
-   0360 01r9Er05      [10]  650 	ld	bc,#___str_17+0
-   0363 71            [ 7]  651 	ld	(hl),c
-   0364 23            [ 6]  652 	inc	hl
-   0365 70            [ 7]  653 	ld	(hl),b
-                            654 ;src/game/depot.c:122: txtWindowLocomotive[4] = "Maximum speed: 105 km/h";
-   0366 21 08 00      [10]  655 	ld	hl,#0x0008
-   0369 19            [11]  656 	add	hl,de
-   036A 01rB5r05      [10]  657 	ld	bc,#___str_18+0
-   036D 71            [ 7]  658 	ld	(hl),c
-   036E 23            [ 6]  659 	inc	hl
-   036F 70            [ 7]  660 	ld	(hl),b
-                            661 ;src/game/depot.c:123: txtWindowLocomotive[5] = "Price: 2000$";
-   0370 21 0A 00      [10]  662 	ld	hl,#0x000A
-   0373 19            [11]  663 	add	hl,de
-   0374 11rCDr05      [10]  664 	ld	de,#___str_19+0
-   0377 73            [ 7]  665 	ld	(hl),e
-   0378 23            [ 6]  666 	inc	hl
-   0379 72            [ 7]  667 	ld	(hl),d
-                            668 ;src/game/depot.c:125: }
-   037A                     669 00105$:
-                            670 ;src/game/depot.c:128: returnChoice = drawWindow(txtWindowLocomotive, 6, 1);
-   037A 21 00 00      [10]  671 	ld	hl,#0x0000
-   037D 39            [11]  672 	add	hl,sp
-   037E EB            [ 4]  673 	ex	de,hl
-   037F 21 06 01      [10]  674 	ld	hl,#0x0106
-   0382 E5            [11]  675 	push	hl
-   0383 D5            [11]  676 	push	de
-   0384 CDr00r00      [17]  677 	call	_drawWindow
-   0387 F1            [10]  678 	pop	af
-   0388 F1            [10]  679 	pop	af
-   0389 4D            [ 4]  680 	ld	c,l
-                            681 ;src/game/depot.c:131: if (returnChoice==1)
-   038A 79            [ 4]  682 	ld	a,c
-   038B 3D            [ 4]  683 	dec	a
-   038C C2rBBr04      [10]  684 	jp	NZ,00110$
-                            685 ;src/game/depot.c:133: if(nbTrainList==0)
-   038F 3Ar00r00      [13]  686 	ld	a,(#_nbTrainList + 0)
-   0392 B7            [ 4]  687 	or	a, a
-   0393 20 0F         [12]  688 	jr	NZ,00107$
-                            689 ;src/game/depot.c:134: trainList = (Train*)malloc(sizeof(Train));
-   0395 C5            [11]  690 	push	bc
-   0396 21 09 00      [10]  691 	ld	hl,#0x0009
-   0399 E5            [11]  692 	push	hl
-   039A CDr00r00      [17]  693 	call	_malloc
-   039D F1            [10]  694 	pop	af
-   039E C1            [10]  695 	pop	bc
-   039F 22r00r00      [16]  696 	ld	(_trainList),hl
-   03A2 18 1D         [12]  697 	jr	00108$
-   03A4                     698 00107$:
-                            699 ;src/game/depot.c:136: realloc(trainList, (nbTrainList+1)*sizeof(Train));
-   03A4 FD 21r00r00   [14]  700 	ld	iy,#_nbTrainList
-   03A8 FD 6E 00      [19]  701 	ld	l,0 (iy)
-   03AB 26 00         [ 7]  702 	ld	h,#0x00
-   03AD 23            [ 6]  703 	inc	hl
-   03AE 5D            [ 4]  704 	ld	e, l
-   03AF 54            [ 4]  705 	ld	d, h
-   03B0 29            [11]  706 	add	hl, hl
-   03B1 29            [11]  707 	add	hl, hl
-   03B2 29            [11]  708 	add	hl, hl
-   03B3 19            [11]  709 	add	hl, de
-   03B4 EB            [ 4]  710 	ex	de,hl
-   03B5 2Ar00r00      [16]  711 	ld	hl,(_trainList)
-   03B8 C5            [11]  712 	push	bc
-   03B9 D5            [11]  713 	push	de
-   03BA E5            [11]  714 	push	hl
-   03BB CDr00r00      [17]  715 	call	_realloc
-   03BE F1            [10]  716 	pop	af
-   03BF F1            [10]  717 	pop	af
-   03C0 C1            [10]  718 	pop	bc
-   03C1                     719 00108$:
-                            720 ;src/game/depot.c:139: trainList[nbTrainList].loco = iSelect;
-   03C1 ED 5Br00r00   [20]  721 	ld	de,(_nbTrainList)
-   03C5 16 00         [ 7]  722 	ld	d,#0x00
-   03C7 6B            [ 4]  723 	ld	l, e
-   03C8 62            [ 4]  724 	ld	h, d
-   03C9 29            [11]  725 	add	hl, hl
-   03CA 29            [11]  726 	add	hl, hl
-   03CB 29            [11]  727 	add	hl, hl
-   03CC 19            [11]  728 	add	hl, de
-   03CD EB            [ 4]  729 	ex	de,hl
-   03CE FD 2Ar00r00   [20]  730 	ld	iy,(_trainList)
-   03D2 FD 19         [15]  731 	add	iy, de
-   03D4 DD 7E 04      [19]  732 	ld	a,4 (ix)
-   03D7 FD 77 00      [19]  733 	ld	0 (iy), a
-                            734 ;src/game/depot.c:142: trainList[nbTrainList].wagon[0] = 0;
-   03DA ED 5Br00r00   [20]  735 	ld	de,(_nbTrainList)
-   03DE 16 00         [ 7]  736 	ld	d,#0x00
-   03E0 6B            [ 4]  737 	ld	l, e
-   03E1 62            [ 4]  738 	ld	h, d
-   03E2 29            [11]  739 	add	hl, hl
-   03E3 29            [11]  740 	add	hl, hl
-   03E4 29            [11]  741 	add	hl, hl
-   03E5 19            [11]  742 	add	hl, de
-   03E6 EB            [ 4]  743 	ex	de,hl
-   03E7 FD 2Ar00r00   [20]  744 	ld	iy,(_trainList)
-   03EB FD 19         [15]  745 	add	iy, de
-   03ED FD 23         [10]  746 	inc	iy
-   03EF FD 36 00 00   [19]  747 	ld	0 (iy), #0x00
-                            748 ;src/game/depot.c:143: trainList[nbTrainList].wagon[1] = 0;
-   03F3 ED 5Br00r00   [20]  749 	ld	de,(_nbTrainList)
-   03F7 16 00         [ 7]  750 	ld	d,#0x00
-   03F9 6B            [ 4]  751 	ld	l, e
-   03FA 62            [ 4]  752 	ld	h, d
-   03FB 29            [11]  753 	add	hl, hl
-   03FC 29            [11]  754 	add	hl, hl
-   03FD 29            [11]  755 	add	hl, hl
-   03FE 19            [11]  756 	add	hl, de
-   03FF EB            [ 4]  757 	ex	de,hl
-   0400 FD 2Ar00r00   [20]  758 	ld	iy,(_trainList)
-   0404 FD 19         [15]  759 	add	iy, de
-   0406 FD 23         [10]  760 	inc	iy
-   0408 FD 23         [10]  761 	inc	iy
-   040A FD 36 00 00   [19]  762 	ld	0 (iy), #0x00
-                            763 ;src/game/depot.c:144: trainList[nbTrainList].wagon[2] = 0;
-   040E ED 5Br00r00   [20]  764 	ld	de,(_nbTrainList)
-   0412 16 00         [ 7]  765 	ld	d,#0x00
-   0414 6B            [ 4]  766 	ld	l, e
-   0415 62            [ 4]  767 	ld	h, d
-   0416 29            [11]  768 	add	hl, hl
-   0417 29            [11]  769 	add	hl, hl
-   0418 29            [11]  770 	add	hl, hl
-   0419 19            [11]  771 	add	hl, de
-   041A EB            [ 4]  772 	ex	de,hl
-   041B FD 2Ar00r00   [20]  773 	ld	iy,(_trainList)
-   041F FD 19         [15]  774 	add	iy, de
-   0421 FD 23         [10]  775 	inc	iy
-   0423 FD 23         [10]  776 	inc	iy
-   0425 FD 23         [10]  777 	inc	iy
-   0427 FD 36 00 00   [19]  778 	ld	0 (iy), #0x00
-                            779 ;src/game/depot.c:145: trainList[nbTrainList].wagon[3] = 0;
-   042B ED 5Br00r00   [20]  780 	ld	de,(_nbTrainList)
-   042F 16 00         [ 7]  781 	ld	d,#0x00
-   0431 6B            [ 4]  782 	ld	l, e
-   0432 62            [ 4]  783 	ld	h, d
-   0433 29            [11]  784 	add	hl, hl
-   0434 29            [11]  785 	add	hl, hl
-   0435 29            [11]  786 	add	hl, hl
-   0436 19            [11]  787 	add	hl, de
-   0437 EB            [ 4]  788 	ex	de,hl
-   0438 FD 2Ar00r00   [20]  789 	ld	iy,(_trainList)
-   043C FD 19         [15]  790 	add	iy, de
-   043E 11 04 00      [10]  791 	ld	de,#0x0004
-   0441 FD 19         [15]  792 	add	iy, de
-   0443 FD 36 00 00   [19]  793 	ld	0 (iy), #0x00
-                            794 ;src/game/depot.c:146: trainList[nbTrainList].wagon[4] = 0;
-   0447 ED 5Br00r00   [20]  795 	ld	de,(_nbTrainList)
-   044B 16 00         [ 7]  796 	ld	d,#0x00
-   044D 6B            [ 4]  797 	ld	l, e
-   044E 62            [ 4]  798 	ld	h, d
-   044F 29            [11]  799 	add	hl, hl
-   0450 29            [11]  800 	add	hl, hl
-   0451 29            [11]  801 	add	hl, hl
-   0452 19            [11]  802 	add	hl, de
-   0453 EB            [ 4]  803 	ex	de,hl
-   0454 FD 2Ar00r00   [20]  804 	ld	iy,(_trainList)
-   0458 FD 19         [15]  805 	add	iy, de
-   045A 11 05 00      [10]  806 	ld	de,#0x0005
-   045D FD 19         [15]  807 	add	iy, de
-   045F FD 36 00 00   [19]  808 	ld	0 (iy), #0x00
-                            809 ;src/game/depot.c:147: trainList[nbTrainList].wagon[5] = 0;
-   0463 ED 5Br00r00   [20]  810 	ld	de,(_nbTrainList)
-   0467 16 00         [ 7]  811 	ld	d,#0x00
-   0469 6B            [ 4]  812 	ld	l, e
-   046A 62            [ 4]  813 	ld	h, d
-   046B 29            [11]  814 	add	hl, hl
-   046C 29            [11]  815 	add	hl, hl
-   046D 29            [11]  816 	add	hl, hl
-   046E 19            [11]  817 	add	hl, de
-   046F EB            [ 4]  818 	ex	de,hl
-   0470 FD 2Ar00r00   [20]  819 	ld	iy,(_trainList)
-   0474 FD 19         [15]  820 	add	iy, de
-   0476 11 06 00      [10]  821 	ld	de,#0x0006
-   0479 FD 19         [15]  822 	add	iy, de
-   047B FD 36 00 00   [19]  823 	ld	0 (iy), #0x00
-                            824 ;src/game/depot.c:148: trainList[nbTrainList].wagon[6] = 0;
-   047F ED 5Br00r00   [20]  825 	ld	de,(_nbTrainList)
-   0483 16 00         [ 7]  826 	ld	d,#0x00
-   0485 6B            [ 4]  827 	ld	l, e
-   0486 62            [ 4]  828 	ld	h, d
-   0487 29            [11]  829 	add	hl, hl
-   0488 29            [11]  830 	add	hl, hl
-   0489 29            [11]  831 	add	hl, hl
-   048A 19            [11]  832 	add	hl, de
-   048B EB            [ 4]  833 	ex	de,hl
-   048C FD 2Ar00r00   [20]  834 	ld	iy,(_trainList)
-   0490 FD 19         [15]  835 	add	iy, de
-   0492 11 07 00      [10]  836 	ld	de,#0x0007
-   0495 FD 19         [15]  837 	add	iy, de
-   0497 FD 36 00 00   [19]  838 	ld	0 (iy), #0x00
-                            839 ;src/game/depot.c:149: trainList[nbTrainList].wagon[7] = 0;
-   049B ED 5Br00r00   [20]  840 	ld	de,(_nbTrainList)
-   049F 16 00         [ 7]  841 	ld	d,#0x00
-   04A1 6B            [ 4]  842 	ld	l, e
-   04A2 62            [ 4]  843 	ld	h, d
-   04A3 29            [11]  844 	add	hl, hl
-   04A4 29            [11]  845 	add	hl, hl
-   04A5 29            [11]  846 	add	hl, hl
-   04A6 19            [11]  847 	add	hl, de
-   04A7 EB            [ 4]  848 	ex	de,hl
-   04A8 FD 2Ar00r00   [20]  849 	ld	iy,(_trainList)
-   04AC FD 19         [15]  850 	add	iy, de
-   04AE 11 08 00      [10]  851 	ld	de,#0x0008
-   04B1 FD 19         [15]  852 	add	iy, de
-   04B3 FD 36 00 00   [19]  853 	ld	0 (iy), #0x00
-                            854 ;src/game/depot.c:152: nbTrainList++;
-   04B7 21r00r00      [10]  855 	ld	hl, #_nbTrainList+0
-   04BA 34            [11]  856 	inc	(hl)
-   04BB                     857 00110$:
-                            858 ;src/game/depot.c:155: return returnChoice;
-   04BB 69            [ 4]  859 	ld	l,c
-   04BC DD F9         [10]  860 	ld	sp, ix
-   04BE DD E1         [14]  861 	pop	ix
-   04C0 C9            [10]  862 	ret
-   04C1                     863 ___str_2:
-   04C1 31 33 30 20 42      864 	.ascii "130 B"
-   04C6 00                  865 	.db 0x00
-   04C7                     866 ___str_3:
-   04C7 00                  867 	.db 0x00
-   04C8                     868 ___str_4:
-   04C8 50 72 6F 70 75 6C   869 	.ascii "Propulsion: steam"
+   00BE 00                  192 	.db 0x00
+                            193 ;src/game/depot.c:47: void drawLocomotive(u8 i, u8 iSelect)
+                            194 ;	---------------------------------
+                            195 ; Function drawLocomotive
+                            196 ; ---------------------------------
+   00BF                     197 _drawLocomotive::
+   00BF DD E5         [15]  198 	push	ix
+   00C1 DD 21 00 00   [14]  199 	ld	ix,#0
+   00C5 DD 39         [15]  200 	add	ix,sp
+   00C7 21 F7 FF      [10]  201 	ld	hl,#-9
+   00CA 39            [11]  202 	add	hl,sp
+   00CB F9            [ 6]  203 	ld	sp,hl
+                            204 ;src/game/depot.c:50: p_video = cpct_getScreenPtr(SCR_VMEM, 5+25*floorf(i/4), 30+40*(i%4));
+   00CC DD 7E 04      [19]  205 	ld	a,4 (ix)
+   00CF E6 03         [ 7]  206 	and	a, #0x03
+   00D1 4F            [ 4]  207 	ld	c,a
+   00D2 87            [ 4]  208 	add	a, a
+   00D3 87            [ 4]  209 	add	a, a
+   00D4 81            [ 4]  210 	add	a, c
+   00D5 87            [ 4]  211 	add	a, a
+   00D6 87            [ 4]  212 	add	a, a
+   00D7 87            [ 4]  213 	add	a, a
+   00D8 DD 77 FB      [19]  214 	ld	-5 (ix), a
+   00DB C6 1E         [ 7]  215 	add	a, #0x1E
+   00DD DD 77 F7      [19]  216 	ld	-9 (ix),a
+   00E0 DD 7E 04      [19]  217 	ld	a,4 (ix)
+   00E3 0F            [ 4]  218 	rrca
+   00E4 0F            [ 4]  219 	rrca
+   00E5 E6 3F         [ 7]  220 	and	a,#0x3F
+   00E7 DD 77 FA      [19]  221 	ld	-6 (ix), a
+   00EA F5            [11]  222 	push	af
+   00EB 33            [ 6]  223 	inc	sp
+   00EC CDr00r00      [17]  224 	call	___uchar2fs
+   00EF 33            [ 6]  225 	inc	sp
+   00F0 DD 72 FF      [19]  226 	ld	-1 (ix),d
+   00F3 DD 73 FE      [19]  227 	ld	-2 (ix),e
+   00F6 DD 74 FD      [19]  228 	ld	-3 (ix),h
+   00F9 DD 75 FC      [19]  229 	ld	-4 (ix),l
+   00FC DD 6E FE      [19]  230 	ld	l,-2 (ix)
+   00FF DD 66 FF      [19]  231 	ld	h,-1 (ix)
+   0102 E5            [11]  232 	push	hl
+   0103 DD 6E FC      [19]  233 	ld	l,-4 (ix)
+   0106 DD 66 FD      [19]  234 	ld	h,-3 (ix)
+   0109 E5            [11]  235 	push	hl
+   010A CDr00r00      [17]  236 	call	_floorf
+   010D F1            [10]  237 	pop	af
+   010E F1            [10]  238 	pop	af
+   010F EB            [ 4]  239 	ex	de, hl
+   0110 E5            [11]  240 	push	hl
+   0111 D5            [11]  241 	push	de
+   0112 21 C8 41      [10]  242 	ld	hl,#0x41C8
+   0115 E5            [11]  243 	push	hl
+   0116 21 00 00      [10]  244 	ld	hl,#0x0000
+   0119 E5            [11]  245 	push	hl
+   011A CDr00r00      [17]  246 	call	___fsmul
+   011D F1            [10]  247 	pop	af
+   011E F1            [10]  248 	pop	af
+   011F F1            [10]  249 	pop	af
+   0120 F1            [10]  250 	pop	af
+   0121 4D            [ 4]  251 	ld	c,l
+   0122 44            [ 4]  252 	ld	b,h
+   0123 21 A0 40      [10]  253 	ld	hl,#0x40A0
+   0126 E5            [11]  254 	push	hl
+   0127 21 00 00      [10]  255 	ld	hl,#0x0000
+   012A E5            [11]  256 	push	hl
+   012B D5            [11]  257 	push	de
+   012C C5            [11]  258 	push	bc
+   012D CDr00r00      [17]  259 	call	___fsadd
+   0130 F1            [10]  260 	pop	af
+   0131 F1            [10]  261 	pop	af
+   0132 F1            [10]  262 	pop	af
+   0133 F1            [10]  263 	pop	af
+   0134 D5            [11]  264 	push	de
+   0135 E5            [11]  265 	push	hl
+   0136 CDr00r00      [17]  266 	call	___fs2uchar
+   0139 F1            [10]  267 	pop	af
+   013A F1            [10]  268 	pop	af
+   013B 55            [ 4]  269 	ld	d,l
+   013C DD 7E F7      [19]  270 	ld	a,-9 (ix)
+   013F F5            [11]  271 	push	af
+   0140 33            [ 6]  272 	inc	sp
+   0141 D5            [11]  273 	push	de
+   0142 33            [ 6]  274 	inc	sp
+   0143 21 00 C0      [10]  275 	ld	hl,#0xC000
+   0146 E5            [11]  276 	push	hl
+   0147 CDr00r00      [17]  277 	call	_cpct_getScreenPtr
+                            278 ;src/game/depot.c:54: cpct_drawSolidBox(p_video, cpct_px2byteM0(5,5), 22, 22);
+   014A DD 75 F8      [19]  279 	ld	-8 (ix),l
+   014D DD 74 F9      [19]  280 	ld	-7 (ix),h
+                            281 ;src/game/depot.c:53: if(i==iSelect)
+   0150 DD 7E 04      [19]  282 	ld	a,4 (ix)
+   0153 DD 96 05      [19]  283 	sub	a, 5 (ix)
+   0156 20 1D         [12]  284 	jr	NZ,00102$
+                            285 ;src/game/depot.c:54: cpct_drawSolidBox(p_video, cpct_px2byteM0(5,5), 22, 22);
+   0158 21 05 05      [10]  286 	ld	hl,#0x0505
+   015B E5            [11]  287 	push	hl
+   015C CDr00r00      [17]  288 	call	_cpct_px2byteM0
+   015F 55            [ 4]  289 	ld	d,l
+   0160 21 16 16      [10]  290 	ld	hl,#0x1616
+   0163 E5            [11]  291 	push	hl
+   0164 D5            [11]  292 	push	de
+   0165 33            [ 6]  293 	inc	sp
+   0166 DD 6E F8      [19]  294 	ld	l,-8 (ix)
+   0169 DD 66 F9      [19]  295 	ld	h,-7 (ix)
+   016C E5            [11]  296 	push	hl
+   016D CDr00r00      [17]  297 	call	_cpct_drawSolidBox
+   0170 F1            [10]  298 	pop	af
+   0171 F1            [10]  299 	pop	af
+   0172 33            [ 6]  300 	inc	sp
+   0173 18 1B         [12]  301 	jr	00103$
+   0175                     302 00102$:
+                            303 ;src/game/depot.c:56: cpct_drawSolidBox(p_video, cpct_px2byteM0(11,11), 22, 22);
+   0175 21 0B 0B      [10]  304 	ld	hl,#0x0B0B
+   0178 E5            [11]  305 	push	hl
+   0179 CDr00r00      [17]  306 	call	_cpct_px2byteM0
+   017C 55            [ 4]  307 	ld	d,l
+   017D 21 16 16      [10]  308 	ld	hl,#0x1616
+   0180 E5            [11]  309 	push	hl
+   0181 D5            [11]  310 	push	de
+   0182 33            [ 6]  311 	inc	sp
+   0183 DD 6E F8      [19]  312 	ld	l,-8 (ix)
+   0186 DD 66 F9      [19]  313 	ld	h,-7 (ix)
+   0189 E5            [11]  314 	push	hl
+   018A CDr00r00      [17]  315 	call	_cpct_drawSolidBox
+   018D F1            [10]  316 	pop	af
+   018E F1            [10]  317 	pop	af
+   018F 33            [ 6]  318 	inc	sp
+   0190                     319 00103$:
+                            320 ;src/game/depot.c:58: p_video = cpct_getScreenPtr(SCR_VMEM, 5+25*floorf(i/4)+1, 30+40*(i%4)+1);
+   0190 DD 7E FB      [19]  321 	ld	a,-5 (ix)
+   0193 C6 1F         [ 7]  322 	add	a, #0x1F
+   0195 DD 77 F8      [19]  323 	ld	-8 (ix),a
+   0198 DD 6E FE      [19]  324 	ld	l,-2 (ix)
+   019B DD 66 FF      [19]  325 	ld	h,-1 (ix)
+   019E E5            [11]  326 	push	hl
+   019F DD 6E FC      [19]  327 	ld	l,-4 (ix)
+   01A2 DD 66 FD      [19]  328 	ld	h,-3 (ix)
+   01A5 E5            [11]  329 	push	hl
+   01A6 CDr00r00      [17]  330 	call	_floorf
+   01A9 F1            [10]  331 	pop	af
+   01AA F1            [10]  332 	pop	af
+   01AB EB            [ 4]  333 	ex	de, hl
+   01AC E5            [11]  334 	push	hl
+   01AD D5            [11]  335 	push	de
+   01AE 21 C8 41      [10]  336 	ld	hl,#0x41C8
+   01B1 E5            [11]  337 	push	hl
+   01B2 21 00 00      [10]  338 	ld	hl,#0x0000
+   01B5 E5            [11]  339 	push	hl
+   01B6 CDr00r00      [17]  340 	call	___fsmul
+   01B9 F1            [10]  341 	pop	af
+   01BA F1            [10]  342 	pop	af
+   01BB F1            [10]  343 	pop	af
+   01BC F1            [10]  344 	pop	af
+   01BD 4D            [ 4]  345 	ld	c,l
+   01BE 44            [ 4]  346 	ld	b,h
+   01BF 21 C0 40      [10]  347 	ld	hl,#0x40C0
+   01C2 E5            [11]  348 	push	hl
+   01C3 21 00 00      [10]  349 	ld	hl,#0x0000
+   01C6 E5            [11]  350 	push	hl
+   01C7 D5            [11]  351 	push	de
+   01C8 C5            [11]  352 	push	bc
+   01C9 CDr00r00      [17]  353 	call	___fsadd
+   01CC F1            [10]  354 	pop	af
+   01CD F1            [10]  355 	pop	af
+   01CE F1            [10]  356 	pop	af
+   01CF F1            [10]  357 	pop	af
+   01D0 D5            [11]  358 	push	de
+   01D1 E5            [11]  359 	push	hl
+   01D2 CDr00r00      [17]  360 	call	___fs2uchar
+   01D5 F1            [10]  361 	pop	af
+   01D6 F1            [10]  362 	pop	af
+   01D7 55            [ 4]  363 	ld	d,l
+   01D8 DD 7E F8      [19]  364 	ld	a,-8 (ix)
+   01DB F5            [11]  365 	push	af
+   01DC 33            [ 6]  366 	inc	sp
+   01DD D5            [11]  367 	push	de
+   01DE 33            [ 6]  368 	inc	sp
+   01DF 21 00 C0      [10]  369 	ld	hl,#0xC000
+   01E2 E5            [11]  370 	push	hl
+   01E3 CDr00r00      [17]  371 	call	_cpct_getScreenPtr
+                            372 ;src/game/depot.c:54: cpct_drawSolidBox(p_video, cpct_px2byteM0(5,5), 22, 22);
+   01E6 4D            [ 4]  373 	ld	c, l
+   01E7 44            [ 4]  374 	ld	b, h
+                            375 ;src/game/depot.c:60: if(i<locDelocked)
+   01E8 21r00r00      [10]  376 	ld	hl,#_locDelocked
+   01EB DD 7E 04      [19]  377 	ld	a,4 (ix)
+   01EE 96            [ 7]  378 	sub	a, (hl)
+   01EF 30 52         [12]  379 	jr	NC,00110$
+                            380 ;src/game/depot.c:62: switch(i)
+   01F1 3E 03         [ 7]  381 	ld	a,#0x03
+   01F3 DD 96 04      [19]  382 	sub	a, 4 (ix)
+   01F6 38 57         [12]  383 	jr	C,00112$
+   01F8 DD 5E 04      [19]  384 	ld	e,4 (ix)
+   01FB 16 00         [ 7]  385 	ld	d,#0x00
+   01FD 21r03r02      [10]  386 	ld	hl,#00128$
+   0200 19            [11]  387 	add	hl,de
+   0201 19            [11]  388 	add	hl,de
+                            389 ;src/game/depot.c:64: case 0:
+   0202 E9            [ 4]  390 	jp	(hl)
+   0203                     391 00128$:
+   0203 18 06         [12]  392 	jr	00104$
+   0205 18 12         [12]  393 	jr	00105$
+   0207 18 1E         [12]  394 	jr	00106$
+   0209 18 2A         [12]  395 	jr	00107$
+   020B                     396 00104$:
+                            397 ;src/game/depot.c:65: cpct_drawSprite(l130B, p_video, 20, 20);
+   020B 11r00r00      [10]  398 	ld	de,#_l130B+0
+   020E 21 14 14      [10]  399 	ld	hl,#0x1414
+   0211 E5            [11]  400 	push	hl
+   0212 C5            [11]  401 	push	bc
+   0213 D5            [11]  402 	push	de
+   0214 CDr00r00      [17]  403 	call	_cpct_drawSprite
+                            404 ;src/game/depot.c:66: break;
+   0217 18 36         [12]  405 	jr	00112$
+                            406 ;src/game/depot.c:67: case 1:
+   0219                     407 00105$:
+                            408 ;src/game/depot.c:68: cpct_drawSprite(l141TA, p_video, 20, 20);
+   0219 11r00r00      [10]  409 	ld	de,#_l141TA+0
+   021C 21 14 14      [10]  410 	ld	hl,#0x1414
+   021F E5            [11]  411 	push	hl
+   0220 C5            [11]  412 	push	bc
+   0221 D5            [11]  413 	push	de
+   0222 CDr00r00      [17]  414 	call	_cpct_drawSprite
+                            415 ;src/game/depot.c:69: break;
+   0225 18 28         [12]  416 	jr	00112$
+                            417 ;src/game/depot.c:70: case 2:
+   0227                     418 00106$:
+                            419 ;src/game/depot.c:71: cpct_drawSprite(l142AT, p_video, 20, 20);
+   0227 11r00r00      [10]  420 	ld	de,#_l142AT+0
+   022A 21 14 14      [10]  421 	ld	hl,#0x1414
+   022D E5            [11]  422 	push	hl
+   022E C5            [11]  423 	push	bc
+   022F D5            [11]  424 	push	de
+   0230 CDr00r00      [17]  425 	call	_cpct_drawSprite
+                            426 ;src/game/depot.c:72: break;
+   0233 18 1A         [12]  427 	jr	00112$
+                            428 ;src/game/depot.c:73: case 3:
+   0235                     429 00107$:
+                            430 ;src/game/depot.c:74: cpct_drawSprite(l141P, p_video, 20, 20);
+   0235 11r00r00      [10]  431 	ld	de,#_l141P+0
+   0238 21 14 14      [10]  432 	ld	hl,#0x1414
+   023B E5            [11]  433 	push	hl
+   023C C5            [11]  434 	push	bc
+   023D D5            [11]  435 	push	de
+   023E CDr00r00      [17]  436 	call	_cpct_drawSprite
+                            437 ;src/game/depot.c:76: }
+   0241 18 0C         [12]  438 	jr	00112$
+   0243                     439 00110$:
+                            440 ;src/game/depot.c:82: cpct_drawSprite(lock, p_video, 20, 20);
+   0243 11r00r00      [10]  441 	ld	de,#_lock
+   0246 21 14 14      [10]  442 	ld	hl,#0x1414
+   0249 E5            [11]  443 	push	hl
+   024A C5            [11]  444 	push	bc
+   024B D5            [11]  445 	push	de
+   024C CDr00r00      [17]  446 	call	_cpct_drawSprite
+   024F                     447 00112$:
+   024F DD F9         [10]  448 	ld	sp, ix
+   0251 DD E1         [14]  449 	pop	ix
+   0253 C9            [10]  450 	ret
+                            451 ;src/game/depot.c:86: void drawAllLocomotives(u8 iSelect)
+                            452 ;	---------------------------------
+                            453 ; Function drawAllLocomotives
+                            454 ; ---------------------------------
+   0254                     455 _drawAllLocomotives::
+                            456 ;src/game/depot.c:90: putM0();
+   0254 CDr00r00      [17]  457 	call	_putM0
+                            458 ;src/game/depot.c:92: cpct_clearScreen(cpct_px2byteM0(9,9));
+   0257 21 09 09      [10]  459 	ld	hl,#0x0909
+   025A E5            [11]  460 	push	hl
+   025B CDr00r00      [17]  461 	call	_cpct_px2byteM0
+   025E 65            [ 4]  462 	ld	h,l
+   025F 01 00 40      [10]  463 	ld	bc,#0x4000
+   0262 C5            [11]  464 	push	bc
+   0263 E5            [11]  465 	push	hl
+   0264 33            [ 6]  466 	inc	sp
+   0265 21 00 C0      [10]  467 	ld	hl,#0xC000
+   0268 E5            [11]  468 	push	hl
+   0269 CDr00r00      [17]  469 	call	_cpct_memset
+                            470 ;src/game/depot.c:93: for(i=0; i<12; i++)
+   026C 16 00         [ 7]  471 	ld	d,#0x00
+   026E                     472 00102$:
+                            473 ;src/game/depot.c:94: drawLocomotive(i, iSelect);
+   026E D5            [11]  474 	push	de
+   026F 21 04 00      [10]  475 	ld	hl, #4+0
+   0272 39            [11]  476 	add	hl, sp
+   0273 7E            [ 7]  477 	ld	a, (hl)
+   0274 F5            [11]  478 	push	af
+   0275 33            [ 6]  479 	inc	sp
+   0276 D5            [11]  480 	push	de
+   0277 33            [ 6]  481 	inc	sp
+   0278 CDrBFr00      [17]  482 	call	_drawLocomotive
+   027B F1            [10]  483 	pop	af
+   027C D1            [10]  484 	pop	de
+                            485 ;src/game/depot.c:93: for(i=0; i<12; i++)
+   027D 14            [ 4]  486 	inc	d
+   027E 7A            [ 4]  487 	ld	a,d
+   027F D6 0C         [ 7]  488 	sub	a, #0x0C
+   0281 38 EB         [12]  489 	jr	C,00102$
+   0283 C9            [10]  490 	ret
+                            491 ;src/game/depot.c:97: u8 confirmBuyLocomotive(u8 iSelect)
+                            492 ;	---------------------------------
+                            493 ; Function confirmBuyLocomotive
+                            494 ; ---------------------------------
+   0284                     495 _confirmBuyLocomotive::
+   0284 DD E5         [15]  496 	push	ix
+   0286 DD 21 00 00   [14]  497 	ld	ix,#0
+   028A DD 39         [15]  498 	add	ix,sp
+   028C 21 F4 FF      [10]  499 	ld	hl,#-12
+   028F 39            [11]  500 	add	hl,sp
+   0290 F9            [ 6]  501 	ld	sp,hl
+                            502 ;src/game/depot.c:104: putM2();
+   0291 CDr00r00      [17]  503 	call	_putM2
+                            504 ;src/game/depot.c:106: switch(iSelect)
+   0294 3E 03         [ 7]  505 	ld	a,#0x03
+   0296 DD 96 04      [19]  506 	sub	a, 4 (ix)
+   0299 DArB0r03      [10]  507 	jp	C,00105$
+   029C DD 5E 04      [19]  508 	ld	e,4 (ix)
+   029F 16 00         [ 7]  509 	ld	d,#0x00
+   02A1 21rA8r02      [10]  510 	ld	hl,#00125$
+   02A4 19            [11]  511 	add	hl,de
+   02A5 19            [11]  512 	add	hl,de
+   02A6 19            [11]  513 	add	hl,de
+   02A7 E9            [ 4]  514 	jp	(hl)
+   02A8                     515 00125$:
+   02A8 C3rB4r02      [10]  516 	jp	00101$
+   02AB C3rF4r02      [10]  517 	jp	00102$
+   02AE C3r34r03      [10]  518 	jp	00103$
+   02B1 C3r73r03      [10]  519 	jp	00104$
+                            520 ;src/game/depot.c:108: case 0:
+   02B4                     521 00101$:
+                            522 ;src/game/depot.c:109: txtWindowLocomotive[0] = "130 B";
+   02B4 21 00 00      [10]  523 	ld	hl,#0x0000
+   02B7 39            [11]  524 	add	hl,sp
+   02B8 5D            [ 4]  525 	ld	e,l
+   02B9 54            [ 4]  526 	ld	d,h
+   02BA 36rF7         [10]  527 	ld	(hl),#<(___str_2)
+   02BC 23            [ 6]  528 	inc	hl
+   02BD 36s04         [10]  529 	ld	(hl),#>(___str_2)
+                            530 ;src/game/depot.c:110: txtWindowLocomotive[1] = "";
+   02BF 6B            [ 4]  531 	ld	l, e
+   02C0 62            [ 4]  532 	ld	h, d
+   02C1 23            [ 6]  533 	inc	hl
+   02C2 23            [ 6]  534 	inc	hl
+   02C3 01rFDr04      [10]  535 	ld	bc,#___str_3+0
+   02C6 71            [ 7]  536 	ld	(hl),c
+   02C7 23            [ 6]  537 	inc	hl
+   02C8 70            [ 7]  538 	ld	(hl),b
+                            539 ;src/game/depot.c:111: txtWindowLocomotive[2] = "Propulsion: steam";
+   02C9 21 04 00      [10]  540 	ld	hl,#0x0004
+   02CC 19            [11]  541 	add	hl,de
+   02CD 01rFEr04      [10]  542 	ld	bc,#___str_4+0
+   02D0 71            [ 7]  543 	ld	(hl),c
+   02D1 23            [ 6]  544 	inc	hl
+   02D2 70            [ 7]  545 	ld	(hl),b
+                            546 ;src/game/depot.c:112: txtWindowLocomotive[3] = "Entry of service: 1909";
+   02D3 21 06 00      [10]  547 	ld	hl,#0x0006
+   02D6 19            [11]  548 	add	hl,de
+   02D7 01r10r05      [10]  549 	ld	bc,#___str_5+0
+   02DA 71            [ 7]  550 	ld	(hl),c
+   02DB 23            [ 6]  551 	inc	hl
+   02DC 70            [ 7]  552 	ld	(hl),b
+                            553 ;src/game/depot.c:113: txtWindowLocomotive[4] = "Maximum speed: 80 km/h";
+   02DD 21 08 00      [10]  554 	ld	hl,#0x0008
+   02E0 19            [11]  555 	add	hl,de
+   02E1 01r27r05      [10]  556 	ld	bc,#___str_6+0
+   02E4 71            [ 7]  557 	ld	(hl),c
+   02E5 23            [ 6]  558 	inc	hl
+   02E6 70            [ 7]  559 	ld	(hl),b
+                            560 ;src/game/depot.c:114: txtWindowLocomotive[5] = "Price: 1000$";
+   02E7 21 0A 00      [10]  561 	ld	hl,#0x000A
+   02EA 19            [11]  562 	add	hl,de
+   02EB 11r3Er05      [10]  563 	ld	de,#___str_7+0
+   02EE 73            [ 7]  564 	ld	(hl),e
+   02EF 23            [ 6]  565 	inc	hl
+   02F0 72            [ 7]  566 	ld	(hl),d
+                            567 ;src/game/depot.c:115: break;
+   02F1 C3rB0r03      [10]  568 	jp	00105$
+                            569 ;src/game/depot.c:116: case 1:
+   02F4                     570 00102$:
+                            571 ;src/game/depot.c:117: txtWindowLocomotive[0] = "141 TA";
+   02F4 21 00 00      [10]  572 	ld	hl,#0x0000
+   02F7 39            [11]  573 	add	hl,sp
+   02F8 5D            [ 4]  574 	ld	e,l
+   02F9 54            [ 4]  575 	ld	d,h
+   02FA 36r4B         [10]  576 	ld	(hl),#<(___str_8)
+   02FC 23            [ 6]  577 	inc	hl
+   02FD 36s05         [10]  578 	ld	(hl),#>(___str_8)
+                            579 ;src/game/depot.c:118: txtWindowLocomotive[1] = "";
+   02FF 6B            [ 4]  580 	ld	l, e
+   0300 62            [ 4]  581 	ld	h, d
+   0301 23            [ 6]  582 	inc	hl
+   0302 23            [ 6]  583 	inc	hl
+   0303 01rFDr04      [10]  584 	ld	bc,#___str_3+0
+   0306 71            [ 7]  585 	ld	(hl),c
+   0307 23            [ 6]  586 	inc	hl
+   0308 70            [ 7]  587 	ld	(hl),b
+                            588 ;src/game/depot.c:119: txtWindowLocomotive[2] = "Propulsion: steam";
+   0309 21 04 00      [10]  589 	ld	hl,#0x0004
+   030C 19            [11]  590 	add	hl,de
+   030D 01rFEr04      [10]  591 	ld	bc,#___str_4+0
+   0310 71            [ 7]  592 	ld	(hl),c
+   0311 23            [ 6]  593 	inc	hl
+   0312 70            [ 7]  594 	ld	(hl),b
+                            595 ;src/game/depot.c:120: txtWindowLocomotive[3] = "Entry of service: 1911";
+   0313 21 06 00      [10]  596 	ld	hl,#0x0006
+   0316 19            [11]  597 	add	hl,de
+   0317 01r52r05      [10]  598 	ld	bc,#___str_9+0
+   031A 71            [ 7]  599 	ld	(hl),c
+   031B 23            [ 6]  600 	inc	hl
+   031C 70            [ 7]  601 	ld	(hl),b
+                            602 ;src/game/depot.c:121: txtWindowLocomotive[4] = "Maximum speed: 70 km/h";
+   031D 21 08 00      [10]  603 	ld	hl,#0x0008
+   0320 19            [11]  604 	add	hl,de
+   0321 01r69r05      [10]  605 	ld	bc,#___str_10+0
+   0324 71            [ 7]  606 	ld	(hl),c
+   0325 23            [ 6]  607 	inc	hl
+   0326 70            [ 7]  608 	ld	(hl),b
+                            609 ;src/game/depot.c:122: txtWindowLocomotive[5] = "Price: 900$";
+   0327 21 0A 00      [10]  610 	ld	hl,#0x000A
+   032A 19            [11]  611 	add	hl,de
+   032B 11r80r05      [10]  612 	ld	de,#___str_11+0
+   032E 73            [ 7]  613 	ld	(hl),e
+   032F 23            [ 6]  614 	inc	hl
+   0330 72            [ 7]  615 	ld	(hl),d
+                            616 ;src/game/depot.c:123: break;
+   0331 C3rB0r03      [10]  617 	jp	00105$
+                            618 ;src/game/depot.c:124: case 2:
+   0334                     619 00103$:
+                            620 ;src/game/depot.c:125: txtWindowLocomotive[0] = "142 AT";
+   0334 21 00 00      [10]  621 	ld	hl,#0x0000
+   0337 39            [11]  622 	add	hl,sp
+   0338 5D            [ 4]  623 	ld	e,l
+   0339 54            [ 4]  624 	ld	d,h
+   033A 36r8C         [10]  625 	ld	(hl),#<(___str_12)
+   033C 23            [ 6]  626 	inc	hl
+   033D 36s05         [10]  627 	ld	(hl),#>(___str_12)
+                            628 ;src/game/depot.c:126: txtWindowLocomotive[1] = "";
+   033F 6B            [ 4]  629 	ld	l, e
+   0340 62            [ 4]  630 	ld	h, d
+   0341 23            [ 6]  631 	inc	hl
+   0342 23            [ 6]  632 	inc	hl
+   0343 01rFDr04      [10]  633 	ld	bc,#___str_3+0
+   0346 71            [ 7]  634 	ld	(hl),c
+   0347 23            [ 6]  635 	inc	hl
+   0348 70            [ 7]  636 	ld	(hl),b
+                            637 ;src/game/depot.c:127: txtWindowLocomotive[2] = "Propulsion: steam";
+   0349 21 04 00      [10]  638 	ld	hl,#0x0004
+   034C 19            [11]  639 	add	hl,de
+   034D 01rFEr04      [10]  640 	ld	bc,#___str_4+0
+   0350 71            [ 7]  641 	ld	(hl),c
+   0351 23            [ 6]  642 	inc	hl
+   0352 70            [ 7]  643 	ld	(hl),b
+                            644 ;src/game/depot.c:128: txtWindowLocomotive[3] = "Entry of service: 1926";
+   0353 21 06 00      [10]  645 	ld	hl,#0x0006
+   0356 19            [11]  646 	add	hl,de
+   0357 01r93r05      [10]  647 	ld	bc,#___str_13+0
+   035A 71            [ 7]  648 	ld	(hl),c
+   035B 23            [ 6]  649 	inc	hl
+   035C 70            [ 7]  650 	ld	(hl),b
+                            651 ;src/game/depot.c:129: txtWindowLocomotive[4] = "Maximum speed: 95 km/h";
+   035D 21 08 00      [10]  652 	ld	hl,#0x0008
+   0360 19            [11]  653 	add	hl,de
+   0361 01rAAr05      [10]  654 	ld	bc,#___str_14+0
+   0364 71            [ 7]  655 	ld	(hl),c
+   0365 23            [ 6]  656 	inc	hl
+   0366 70            [ 7]  657 	ld	(hl),b
+                            658 ;src/game/depot.c:130: txtWindowLocomotive[5] = "Price: 1500$";
+   0367 21 0A 00      [10]  659 	ld	hl,#0x000A
+   036A 19            [11]  660 	add	hl,de
+   036B 11rC1r05      [10]  661 	ld	de,#___str_15+0
+   036E 73            [ 7]  662 	ld	(hl),e
+   036F 23            [ 6]  663 	inc	hl
+   0370 72            [ 7]  664 	ld	(hl),d
+                            665 ;src/game/depot.c:131: break;
+   0371 18 3D         [12]  666 	jr	00105$
+                            667 ;src/game/depot.c:133: case 3:
+   0373                     668 00104$:
+                            669 ;src/game/depot.c:134: txtWindowLocomotive[0] = "141 P";
+   0373 21 00 00      [10]  670 	ld	hl,#0x0000
+   0376 39            [11]  671 	add	hl,sp
+   0377 5D            [ 4]  672 	ld	e,l
+   0378 54            [ 4]  673 	ld	d,h
+   0379 36rCE         [10]  674 	ld	(hl),#<(___str_16)
+   037B 23            [ 6]  675 	inc	hl
+   037C 36s05         [10]  676 	ld	(hl),#>(___str_16)
+                            677 ;src/game/depot.c:135: txtWindowLocomotive[1] = "";
+   037E 6B            [ 4]  678 	ld	l, e
+   037F 62            [ 4]  679 	ld	h, d
+   0380 23            [ 6]  680 	inc	hl
+   0381 23            [ 6]  681 	inc	hl
+   0382 01rFDr04      [10]  682 	ld	bc,#___str_3+0
+   0385 71            [ 7]  683 	ld	(hl),c
+   0386 23            [ 6]  684 	inc	hl
+   0387 70            [ 7]  685 	ld	(hl),b
+                            686 ;src/game/depot.c:136: txtWindowLocomotive[2] = "Propulsion: steam";
+   0388 21 04 00      [10]  687 	ld	hl,#0x0004
+   038B 19            [11]  688 	add	hl,de
+   038C 01rFEr04      [10]  689 	ld	bc,#___str_4+0
+   038F 71            [ 7]  690 	ld	(hl),c
+   0390 23            [ 6]  691 	inc	hl
+   0391 70            [ 7]  692 	ld	(hl),b
+                            693 ;src/game/depot.c:137: txtWindowLocomotive[3] = "Entry of service: 1942";
+   0392 21 06 00      [10]  694 	ld	hl,#0x0006
+   0395 19            [11]  695 	add	hl,de
+   0396 01rD4r05      [10]  696 	ld	bc,#___str_17+0
+   0399 71            [ 7]  697 	ld	(hl),c
+   039A 23            [ 6]  698 	inc	hl
+   039B 70            [ 7]  699 	ld	(hl),b
+                            700 ;src/game/depot.c:138: txtWindowLocomotive[4] = "Maximum speed: 105 km/h";
+   039C 21 08 00      [10]  701 	ld	hl,#0x0008
+   039F 19            [11]  702 	add	hl,de
+   03A0 01rEBr05      [10]  703 	ld	bc,#___str_18+0
+   03A3 71            [ 7]  704 	ld	(hl),c
+   03A4 23            [ 6]  705 	inc	hl
+   03A5 70            [ 7]  706 	ld	(hl),b
+                            707 ;src/game/depot.c:139: txtWindowLocomotive[5] = "Price: 2000$";
+   03A6 21 0A 00      [10]  708 	ld	hl,#0x000A
+   03A9 19            [11]  709 	add	hl,de
+   03AA 11r03r06      [10]  710 	ld	de,#___str_19+0
+   03AD 73            [ 7]  711 	ld	(hl),e
+   03AE 23            [ 6]  712 	inc	hl
+   03AF 72            [ 7]  713 	ld	(hl),d
+                            714 ;src/game/depot.c:141: }
+   03B0                     715 00105$:
+                            716 ;src/game/depot.c:144: returnChoice = drawWindow(txtWindowLocomotive, 6, 1);
+   03B0 21 00 00      [10]  717 	ld	hl,#0x0000
+   03B3 39            [11]  718 	add	hl,sp
+   03B4 EB            [ 4]  719 	ex	de,hl
+   03B5 21 06 01      [10]  720 	ld	hl,#0x0106
+   03B8 E5            [11]  721 	push	hl
+   03B9 D5            [11]  722 	push	de
+   03BA CDr00r00      [17]  723 	call	_drawWindow
+   03BD F1            [10]  724 	pop	af
+   03BE F1            [10]  725 	pop	af
+   03BF 4D            [ 4]  726 	ld	c,l
+                            727 ;src/game/depot.c:147: if (returnChoice==1)
+   03C0 79            [ 4]  728 	ld	a,c
+   03C1 3D            [ 4]  729 	dec	a
+   03C2 C2rF1r04      [10]  730 	jp	NZ,00110$
+                            731 ;src/game/depot.c:149: if(nbTrainList==0)
+   03C5 3Ar00r00      [13]  732 	ld	a,(#_nbTrainList + 0)
+   03C8 B7            [ 4]  733 	or	a, a
+   03C9 20 0F         [12]  734 	jr	NZ,00107$
+                            735 ;src/game/depot.c:150: trainList = (Train*)malloc(sizeof(Train));
+   03CB C5            [11]  736 	push	bc
+   03CC 21 09 00      [10]  737 	ld	hl,#0x0009
+   03CF E5            [11]  738 	push	hl
+   03D0 CDr00r00      [17]  739 	call	_malloc
+   03D3 F1            [10]  740 	pop	af
+   03D4 C1            [10]  741 	pop	bc
+   03D5 22r00r00      [16]  742 	ld	(_trainList),hl
+   03D8 18 1D         [12]  743 	jr	00108$
+   03DA                     744 00107$:
+                            745 ;src/game/depot.c:152: realloc(trainList, (nbTrainList+1)*sizeof(Train));
+   03DA FD 21r00r00   [14]  746 	ld	iy,#_nbTrainList
+   03DE FD 6E 00      [19]  747 	ld	l,0 (iy)
+   03E1 26 00         [ 7]  748 	ld	h,#0x00
+   03E3 23            [ 6]  749 	inc	hl
+   03E4 5D            [ 4]  750 	ld	e, l
+   03E5 54            [ 4]  751 	ld	d, h
+   03E6 29            [11]  752 	add	hl, hl
+   03E7 29            [11]  753 	add	hl, hl
+   03E8 29            [11]  754 	add	hl, hl
+   03E9 19            [11]  755 	add	hl, de
+   03EA EB            [ 4]  756 	ex	de,hl
+   03EB 2Ar00r00      [16]  757 	ld	hl,(_trainList)
+   03EE C5            [11]  758 	push	bc
+   03EF D5            [11]  759 	push	de
+   03F0 E5            [11]  760 	push	hl
+   03F1 CDr00r00      [17]  761 	call	_realloc
+   03F4 F1            [10]  762 	pop	af
+   03F5 F1            [10]  763 	pop	af
+   03F6 C1            [10]  764 	pop	bc
+   03F7                     765 00108$:
+                            766 ;src/game/depot.c:155: trainList[nbTrainList].loco = iSelect;
+   03F7 ED 5Br00r00   [20]  767 	ld	de,(_nbTrainList)
+   03FB 16 00         [ 7]  768 	ld	d,#0x00
+   03FD 6B            [ 4]  769 	ld	l, e
+   03FE 62            [ 4]  770 	ld	h, d
+   03FF 29            [11]  771 	add	hl, hl
+   0400 29            [11]  772 	add	hl, hl
+   0401 29            [11]  773 	add	hl, hl
+   0402 19            [11]  774 	add	hl, de
+   0403 EB            [ 4]  775 	ex	de,hl
+   0404 FD 2Ar00r00   [20]  776 	ld	iy,(_trainList)
+   0408 FD 19         [15]  777 	add	iy, de
+   040A DD 7E 04      [19]  778 	ld	a,4 (ix)
+   040D FD 77 00      [19]  779 	ld	0 (iy), a
+                            780 ;src/game/depot.c:158: trainList[nbTrainList].wagon[0] = 0;
+   0410 ED 5Br00r00   [20]  781 	ld	de,(_nbTrainList)
+   0414 16 00         [ 7]  782 	ld	d,#0x00
+   0416 6B            [ 4]  783 	ld	l, e
+   0417 62            [ 4]  784 	ld	h, d
+   0418 29            [11]  785 	add	hl, hl
+   0419 29            [11]  786 	add	hl, hl
+   041A 29            [11]  787 	add	hl, hl
+   041B 19            [11]  788 	add	hl, de
+   041C EB            [ 4]  789 	ex	de,hl
+   041D FD 2Ar00r00   [20]  790 	ld	iy,(_trainList)
+   0421 FD 19         [15]  791 	add	iy, de
+   0423 FD 23         [10]  792 	inc	iy
+   0425 FD 36 00 00   [19]  793 	ld	0 (iy), #0x00
+                            794 ;src/game/depot.c:159: trainList[nbTrainList].wagon[1] = 0;
+   0429 ED 5Br00r00   [20]  795 	ld	de,(_nbTrainList)
+   042D 16 00         [ 7]  796 	ld	d,#0x00
+   042F 6B            [ 4]  797 	ld	l, e
+   0430 62            [ 4]  798 	ld	h, d
+   0431 29            [11]  799 	add	hl, hl
+   0432 29            [11]  800 	add	hl, hl
+   0433 29            [11]  801 	add	hl, hl
+   0434 19            [11]  802 	add	hl, de
+   0435 EB            [ 4]  803 	ex	de,hl
+   0436 FD 2Ar00r00   [20]  804 	ld	iy,(_trainList)
+   043A FD 19         [15]  805 	add	iy, de
+   043C FD 23         [10]  806 	inc	iy
+   043E FD 23         [10]  807 	inc	iy
+   0440 FD 36 00 00   [19]  808 	ld	0 (iy), #0x00
+                            809 ;src/game/depot.c:160: trainList[nbTrainList].wagon[2] = 0;
+   0444 ED 5Br00r00   [20]  810 	ld	de,(_nbTrainList)
+   0448 16 00         [ 7]  811 	ld	d,#0x00
+   044A 6B            [ 4]  812 	ld	l, e
+   044B 62            [ 4]  813 	ld	h, d
+   044C 29            [11]  814 	add	hl, hl
+   044D 29            [11]  815 	add	hl, hl
+   044E 29            [11]  816 	add	hl, hl
+   044F 19            [11]  817 	add	hl, de
+   0450 EB            [ 4]  818 	ex	de,hl
+   0451 FD 2Ar00r00   [20]  819 	ld	iy,(_trainList)
+   0455 FD 19         [15]  820 	add	iy, de
+   0457 FD 23         [10]  821 	inc	iy
+   0459 FD 23         [10]  822 	inc	iy
+   045B FD 23         [10]  823 	inc	iy
+   045D FD 36 00 00   [19]  824 	ld	0 (iy), #0x00
+                            825 ;src/game/depot.c:161: trainList[nbTrainList].wagon[3] = 0;
+   0461 ED 5Br00r00   [20]  826 	ld	de,(_nbTrainList)
+   0465 16 00         [ 7]  827 	ld	d,#0x00
+   0467 6B            [ 4]  828 	ld	l, e
+   0468 62            [ 4]  829 	ld	h, d
+   0469 29            [11]  830 	add	hl, hl
+   046A 29            [11]  831 	add	hl, hl
+   046B 29            [11]  832 	add	hl, hl
+   046C 19            [11]  833 	add	hl, de
+   046D EB            [ 4]  834 	ex	de,hl
+   046E FD 2Ar00r00   [20]  835 	ld	iy,(_trainList)
+   0472 FD 19         [15]  836 	add	iy, de
+   0474 11 04 00      [10]  837 	ld	de,#0x0004
+   0477 FD 19         [15]  838 	add	iy, de
+   0479 FD 36 00 00   [19]  839 	ld	0 (iy), #0x00
+                            840 ;src/game/depot.c:162: trainList[nbTrainList].wagon[4] = 0;
+   047D ED 5Br00r00   [20]  841 	ld	de,(_nbTrainList)
+   0481 16 00         [ 7]  842 	ld	d,#0x00
+   0483 6B            [ 4]  843 	ld	l, e
+   0484 62            [ 4]  844 	ld	h, d
+   0485 29            [11]  845 	add	hl, hl
+   0486 29            [11]  846 	add	hl, hl
+   0487 29            [11]  847 	add	hl, hl
+   0488 19            [11]  848 	add	hl, de
+   0489 EB            [ 4]  849 	ex	de,hl
+   048A FD 2Ar00r00   [20]  850 	ld	iy,(_trainList)
+   048E FD 19         [15]  851 	add	iy, de
+   0490 11 05 00      [10]  852 	ld	de,#0x0005
+   0493 FD 19         [15]  853 	add	iy, de
+   0495 FD 36 00 00   [19]  854 	ld	0 (iy), #0x00
+                            855 ;src/game/depot.c:163: trainList[nbTrainList].wagon[5] = 0;
+   0499 ED 5Br00r00   [20]  856 	ld	de,(_nbTrainList)
+   049D 16 00         [ 7]  857 	ld	d,#0x00
+   049F 6B            [ 4]  858 	ld	l, e
+   04A0 62            [ 4]  859 	ld	h, d
+   04A1 29            [11]  860 	add	hl, hl
+   04A2 29            [11]  861 	add	hl, hl
+   04A3 29            [11]  862 	add	hl, hl
+   04A4 19            [11]  863 	add	hl, de
+   04A5 EB            [ 4]  864 	ex	de,hl
+   04A6 FD 2Ar00r00   [20]  865 	ld	iy,(_trainList)
+   04AA FD 19         [15]  866 	add	iy, de
+   04AC 11 06 00      [10]  867 	ld	de,#0x0006
+   04AF FD 19         [15]  868 	add	iy, de
+   04B1 FD 36 00 00   [19]  869 	ld	0 (iy), #0x00
+                            870 ;src/game/depot.c:164: trainList[nbTrainList].wagon[6] = 0;
+   04B5 ED 5Br00r00   [20]  871 	ld	de,(_nbTrainList)
+   04B9 16 00         [ 7]  872 	ld	d,#0x00
+   04BB 6B            [ 4]  873 	ld	l, e
+   04BC 62            [ 4]  874 	ld	h, d
+   04BD 29            [11]  875 	add	hl, hl
+   04BE 29            [11]  876 	add	hl, hl
+   04BF 29            [11]  877 	add	hl, hl
+   04C0 19            [11]  878 	add	hl, de
+   04C1 EB            [ 4]  879 	ex	de,hl
+   04C2 FD 2Ar00r00   [20]  880 	ld	iy,(_trainList)
+   04C6 FD 19         [15]  881 	add	iy, de
+   04C8 11 07 00      [10]  882 	ld	de,#0x0007
+   04CB FD 19         [15]  883 	add	iy, de
+   04CD FD 36 00 00   [19]  884 	ld	0 (iy), #0x00
+                            885 ;src/game/depot.c:165: trainList[nbTrainList].wagon[7] = 0;
+   04D1 ED 5Br00r00   [20]  886 	ld	de,(_nbTrainList)
+   04D5 16 00         [ 7]  887 	ld	d,#0x00
+   04D7 6B            [ 4]  888 	ld	l, e
+   04D8 62            [ 4]  889 	ld	h, d
+   04D9 29            [11]  890 	add	hl, hl
+   04DA 29            [11]  891 	add	hl, hl
+   04DB 29            [11]  892 	add	hl, hl
+   04DC 19            [11]  893 	add	hl, de
+   04DD EB            [ 4]  894 	ex	de,hl
+   04DE FD 2Ar00r00   [20]  895 	ld	iy,(_trainList)
+   04E2 FD 19         [15]  896 	add	iy, de
+   04E4 11 08 00      [10]  897 	ld	de,#0x0008
+   04E7 FD 19         [15]  898 	add	iy, de
+   04E9 FD 36 00 00   [19]  899 	ld	0 (iy), #0x00
+                            900 ;src/game/depot.c:168: nbTrainList++;
+   04ED 21r00r00      [10]  901 	ld	hl, #_nbTrainList+0
+   04F0 34            [11]  902 	inc	(hl)
+   04F1                     903 00110$:
+                            904 ;src/game/depot.c:171: return returnChoice;
+   04F1 69            [ 4]  905 	ld	l,c
+   04F2 DD F9         [10]  906 	ld	sp, ix
+   04F4 DD E1         [14]  907 	pop	ix
+   04F6 C9            [10]  908 	ret
+   04F7                     909 ___str_2:
+   04F7 31 33 30 20 42      910 	.ascii "130 B"
+   04FC 00                  911 	.db 0x00
+   04FD                     912 ___str_3:
+   04FD 00                  913 	.db 0x00
+   04FE                     914 ___str_4:
+   04FE 50 72 6F 70 75 6C   915 	.ascii "Propulsion: steam"
         73 69 6F 6E 3A 20
         73 74 65 61 6D
-   04D9 00                  870 	.db 0x00
-   04DA                     871 ___str_5:
-   04DA 45 6E 74 72 79 20   872 	.ascii "Entry of service: 1909"
+   050F 00                  916 	.db 0x00
+   0510                     917 ___str_5:
+   0510 45 6E 74 72 79 20   918 	.ascii "Entry of service: 1909"
         6F 66 20 73 65 72
         76 69 63 65 3A 20
         31 39 30 39
-   04F0 00                  873 	.db 0x00
-   04F1                     874 ___str_6:
-   04F1 4D 61 78 69 6D 75   875 	.ascii "Maximum speed: 80 km/h"
+   0526 00                  919 	.db 0x00
+   0527                     920 ___str_6:
+   0527 4D 61 78 69 6D 75   921 	.ascii "Maximum speed: 80 km/h"
         6D 20 73 70 65 65
         64 3A 20 38 30 20
         6B 6D 2F 68
-   0507 00                  876 	.db 0x00
-   0508                     877 ___str_7:
-   0508 50 72 69 63 65 3A   878 	.ascii "Price: 1000$"
+   053D 00                  922 	.db 0x00
+   053E                     923 ___str_7:
+   053E 50 72 69 63 65 3A   924 	.ascii "Price: 1000$"
         20 31 30 30 30 24
-   0514 00                  879 	.db 0x00
-   0515                     880 ___str_8:
-   0515 31 34 31 20 54 41   881 	.ascii "141 TA"
-   051B 00                  882 	.db 0x00
-   051C                     883 ___str_9:
-   051C 45 6E 74 72 79 20   884 	.ascii "Entry of service: 1911"
+   054A 00                  925 	.db 0x00
+   054B                     926 ___str_8:
+   054B 31 34 31 20 54 41   927 	.ascii "141 TA"
+   0551 00                  928 	.db 0x00
+   0552                     929 ___str_9:
+   0552 45 6E 74 72 79 20   930 	.ascii "Entry of service: 1911"
         6F 66 20 73 65 72
         76 69 63 65 3A 20
         31 39 31 31
-   0532 00                  885 	.db 0x00
-   0533                     886 ___str_10:
-   0533 4D 61 78 69 6D 75   887 	.ascii "Maximum speed: 70 km/h"
+   0568 00                  931 	.db 0x00
+   0569                     932 ___str_10:
+   0569 4D 61 78 69 6D 75   933 	.ascii "Maximum speed: 70 km/h"
         6D 20 73 70 65 65
         64 3A 20 37 30 20
         6B 6D 2F 68
-   0549 00                  888 	.db 0x00
-   054A                     889 ___str_11:
-   054A 50 72 69 63 65 3A   890 	.ascii "Price: 900$"
+   057F 00                  934 	.db 0x00
+   0580                     935 ___str_11:
+   0580 50 72 69 63 65 3A   936 	.ascii "Price: 900$"
         20 39 30 30 24
-   0555 00                  891 	.db 0x00
-   0556                     892 ___str_12:
-   0556 31 34 32 20 41 54   893 	.ascii "142 AT"
-   055C 00                  894 	.db 0x00
-   055D                     895 ___str_13:
-   055D 45 6E 74 72 79 20   896 	.ascii "Entry of service: 1926"
+   058B 00                  937 	.db 0x00
+   058C                     938 ___str_12:
+   058C 31 34 32 20 41 54   939 	.ascii "142 AT"
+   0592 00                  940 	.db 0x00
+   0593                     941 ___str_13:
+   0593 45 6E 74 72 79 20   942 	.ascii "Entry of service: 1926"
         6F 66 20 73 65 72
         76 69 63 65 3A 20
         31 39 32 36
-   0573 00                  897 	.db 0x00
-   0574                     898 ___str_14:
-   0574 4D 61 78 69 6D 75   899 	.ascii "Maximum speed: 95 km/h"
+   05A9 00                  943 	.db 0x00
+   05AA                     944 ___str_14:
+   05AA 4D 61 78 69 6D 75   945 	.ascii "Maximum speed: 95 km/h"
         6D 20 73 70 65 65
         64 3A 20 39 35 20
         6B 6D 2F 68
-   058A 00                  900 	.db 0x00
-   058B                     901 ___str_15:
-   058B 50 72 69 63 65 3A   902 	.ascii "Price: 1500$"
+   05C0 00                  946 	.db 0x00
+   05C1                     947 ___str_15:
+   05C1 50 72 69 63 65 3A   948 	.ascii "Price: 1500$"
         20 31 35 30 30 24
-   0597 00                  903 	.db 0x00
-   0598                     904 ___str_16:
-   0598 31 34 31 20 50      905 	.ascii "141 P"
-   059D 00                  906 	.db 0x00
-   059E                     907 ___str_17:
-   059E 45 6E 74 72 79 20   908 	.ascii "Entry of service: 1942"
+   05CD 00                  949 	.db 0x00
+   05CE                     950 ___str_16:
+   05CE 31 34 31 20 50      951 	.ascii "141 P"
+   05D3 00                  952 	.db 0x00
+   05D4                     953 ___str_17:
+   05D4 45 6E 74 72 79 20   954 	.ascii "Entry of service: 1942"
         6F 66 20 73 65 72
         76 69 63 65 3A 20
         31 39 34 32
-   05B4 00                  909 	.db 0x00
-   05B5                     910 ___str_18:
-   05B5 4D 61 78 69 6D 75   911 	.ascii "Maximum speed: 105 km/h"
+   05EA 00                  955 	.db 0x00
+   05EB                     956 ___str_18:
+   05EB 4D 61 78 69 6D 75   957 	.ascii "Maximum speed: 105 km/h"
         6D 20 73 70 65 65
         64 3A 20 31 30 35
         20 6B 6D 2F 68
-   05CC 00                  912 	.db 0x00
-   05CD                     913 ___str_19:
-   05CD 50 72 69 63 65 3A   914 	.ascii "Price: 2000$"
+   0602 00                  958 	.db 0x00
+   0603                     959 ___str_19:
+   0603 50 72 69 63 65 3A   960 	.ascii "Price: 2000$"
         20 32 30 30 30 24
-   05D9 00                  915 	.db 0x00
-                            916 ;src/game/depot.c:158: void buyLocomotive()
-                            917 ;	---------------------------------
-                            918 ; Function buyLocomotive
-                            919 ; ---------------------------------
-   05DA                     920 _buyLocomotive::
-                            921 ;src/game/depot.c:160: u8 exit=0;
-                            922 ;src/game/depot.c:162: u8 iSelect=0;
-   05DA 01 00 00      [10]  923 	ld	bc,#0x0000
-                            924 ;src/game/depot.c:164: drawAllLocomotives(iSelect);
-   05DD C5            [11]  925 	push	bc
-   05DE AF            [ 4]  926 	xor	a, a
-   05DF F5            [11]  927 	push	af
-   05E0 33            [ 6]  928 	inc	sp
-   05E1 CDr1Er02      [17]  929 	call	_drawAllLocomotives
-   05E4 33            [ 6]  930 	inc	sp
-   05E5 C1            [10]  931 	pop	bc
-                            932 ;src/game/depot.c:166: do
-   05E6                     933 00124$:
-                            934 ;src/game/depot.c:168: cpct_scanKeyboard(); 
-   05E6 C5            [11]  935 	push	bc
-   05E7 CDr00r00      [17]  936 	call	_cpct_scanKeyboard
-   05EA 21 00 01      [10]  937 	ld	hl,#0x0100
-   05ED CDr00r00      [17]  938 	call	_cpct_isKeyPressed
-   05F0 7D            [ 4]  939 	ld	a,l
-   05F1 C1            [10]  940 	pop	bc
-   05F2 B7            [ 4]  941 	or	a, a
-   05F3 28 24         [12]  942 	jr	Z,00122$
-                            943 ;src/game/depot.c:172: if (iSelect>0)
-   05F5 78            [ 4]  944 	ld	a,b
-   05F6 B7            [ 4]  945 	or	a, a
-   05F7 28 15         [12]  946 	jr	Z,00140$
-                            947 ;src/game/depot.c:174: iSelect--;
-   05F9 05            [ 4]  948 	dec	b
-                            949 ;src/game/depot.c:175: drawLocomotive(iSelect, iSelect);
-   05FA C5            [11]  950 	push	bc
-   05FB C5            [11]  951 	push	bc
-   05FC 33            [ 6]  952 	inc	sp
-   05FD C5            [11]  953 	push	bc
-   05FE 33            [ 6]  954 	inc	sp
-   05FF CDr89r00      [17]  955 	call	_drawLocomotive
-   0602 F1            [10]  956 	pop	af
-   0603 C1            [10]  957 	pop	bc
-                            958 ;src/game/depot.c:176: drawLocomotive(iSelect+1, iSelect);
-   0604 50            [ 4]  959 	ld	d,b
-   0605 14            [ 4]  960 	inc	d
-   0606 C5            [11]  961 	push	bc
-   0607 4A            [ 4]  962 	ld	c, d
-   0608 C5            [11]  963 	push	bc
-   0609 CDr89r00      [17]  964 	call	_drawLocomotive
-   060C F1            [10]  965 	pop	af
-   060D C1            [10]  966 	pop	bc
-                            967 ;src/game/depot.c:178: for(i=0; i<14000; i++) {} // wait loop
-   060E                     968 00140$:
-   060E 11 B0 36      [10]  969 	ld	de,#0x36B0
-   0611                     970 00129$:
-   0611 1B            [ 6]  971 	dec	de
-   0612 7A            [ 4]  972 	ld	a,d
-   0613 B3            [ 4]  973 	or	a,e
-   0614 20 FB         [12]  974 	jr	NZ,00129$
-   0616 C3r8Br06      [10]  975 	jp	00125$
-   0619                     976 00122$:
-                            977 ;src/game/depot.c:180: else if ( cpct_isKeyPressed(Key_CursorDown) )
-   0619 C5            [11]  978 	push	bc
-   061A 21 00 04      [10]  979 	ld	hl,#0x0400
-   061D CDr00r00      [17]  980 	call	_cpct_isKeyPressed
-   0620 7D            [ 4]  981 	ld	a,l
-   0621 C1            [10]  982 	pop	bc
-   0622 B7            [ 4]  983 	or	a, a
-   0623 28 24         [12]  984 	jr	Z,00119$
-                            985 ;src/game/depot.c:182: if (iSelect<11)
-   0625 78            [ 4]  986 	ld	a,b
-   0626 D6 0B         [ 7]  987 	sub	a, #0x0B
-   0628 30 15         [12]  988 	jr	NC,00144$
-                            989 ;src/game/depot.c:184: iSelect++;
-   062A 04            [ 4]  990 	inc	b
-                            991 ;src/game/depot.c:185: drawLocomotive(iSelect, iSelect);
-   062B C5            [11]  992 	push	bc
-   062C C5            [11]  993 	push	bc
-   062D 33            [ 6]  994 	inc	sp
-   062E C5            [11]  995 	push	bc
-   062F 33            [ 6]  996 	inc	sp
-   0630 CDr89r00      [17]  997 	call	_drawLocomotive
-   0633 F1            [10]  998 	pop	af
-   0634 C1            [10]  999 	pop	bc
-                           1000 ;src/game/depot.c:186: drawLocomotive(iSelect-1, iSelect);
-   0635 50            [ 4] 1001 	ld	d,b
-   0636 15            [ 4] 1002 	dec	d
-   0637 C5            [11] 1003 	push	bc
-   0638 4A            [ 4] 1004 	ld	c, d
-   0639 C5            [11] 1005 	push	bc
-   063A CDr89r00      [17] 1006 	call	_drawLocomotive
-   063D F1            [10] 1007 	pop	af
-   063E C1            [10] 1008 	pop	bc
-                           1009 ;src/game/depot.c:188: for(i=0; i<14000; i++) {} // wait loop
-   063F                    1010 00144$:
-   063F 11 B0 36      [10] 1011 	ld	de,#0x36B0
-   0642                    1012 00132$:
-   0642 1B            [ 6] 1013 	dec	de
-   0643 7A            [ 4] 1014 	ld	a,d
-   0644 B3            [ 4] 1015 	or	a,e
-   0645 20 FB         [12] 1016 	jr	NZ,00132$
-   0647 18 42         [12] 1017 	jr	00125$
-   0649                    1018 00119$:
-                           1019 ;src/game/depot.c:190: else if ( cpct_isKeyPressed(Key_Return) )
-   0649 C5            [11] 1020 	push	bc
-   064A 21 02 04      [10] 1021 	ld	hl,#0x0402
-   064D CDr00r00      [17] 1022 	call	_cpct_isKeyPressed
-   0650 7D            [ 4] 1023 	ld	a,l
-   0651 C1            [10] 1024 	pop	bc
-   0652 B7            [ 4] 1025 	or	a, a
-   0653 28 28         [12] 1026 	jr	Z,00116$
-                           1027 ;src/game/depot.c:192: if(iSelect<locDelocked)
-   0655 21r00r00      [10] 1028 	ld	hl,#_locDelocked
-   0658 78            [ 4] 1029 	ld	a,b
-   0659 96            [ 7] 1030 	sub	a, (hl)
-   065A 30 17         [12] 1031 	jr	NC,00149$
-                           1032 ;src/game/depot.c:194: if(confirmBuyLocomotive(iSelect) == 1)
-   065C C5            [11] 1033 	push	bc
-   065D C5            [11] 1034 	push	bc
-   065E 33            [ 6] 1035 	inc	sp
-   065F CDr4Er02      [17] 1036 	call	_confirmBuyLocomotive
-   0662 33            [ 6] 1037 	inc	sp
-   0663 C1            [10] 1038 	pop	bc
-   0664 2D            [ 4] 1039 	dec	l
-   0665 20 04         [12] 1040 	jr	NZ,00108$
-                           1041 ;src/game/depot.c:195: exit=1;
-   0667 0E 01         [ 7] 1042 	ld	c,#0x01
-   0669 18 08         [12] 1043 	jr	00149$
-   066B                    1044 00108$:
-                           1045 ;src/game/depot.c:197: drawAllLocomotives(iSelect);
-   066B C5            [11] 1046 	push	bc
-   066C C5            [11] 1047 	push	bc
-   066D 33            [ 6] 1048 	inc	sp
-   066E CDr1Er02      [17] 1049 	call	_drawAllLocomotives
-   0671 33            [ 6] 1050 	inc	sp
-   0672 C1            [10] 1051 	pop	bc
-                           1052 ;src/game/depot.c:200: for(i=0; i<14000; i++) {} // wait loop
-   0673                    1053 00149$:
-   0673 11 B0 36      [10] 1054 	ld	de,#0x36B0
-   0676                    1055 00135$:
-   0676 1B            [ 6] 1056 	dec	de
-   0677 7A            [ 4] 1057 	ld	a,d
-   0678 B3            [ 4] 1058 	or	a,e
-   0679 20 FB         [12] 1059 	jr	NZ,00135$
-   067B 18 0E         [12] 1060 	jr	00125$
-   067D                    1061 00116$:
-                           1062 ;src/game/depot.c:202: else if ( cpct_isKeyPressed(Key_Esc) )
-   067D C5            [11] 1063 	push	bc
-   067E 21 08 04      [10] 1064 	ld	hl,#0x0408
-   0681 CDr00r00      [17] 1065 	call	_cpct_isKeyPressed
-   0684 7D            [ 4] 1066 	ld	a,l
-   0685 C1            [10] 1067 	pop	bc
-   0686 B7            [ 4] 1068 	or	a, a
-   0687 28 02         [12] 1069 	jr	Z,00125$
-                           1070 ;src/game/depot.c:203: exit=1;
-   0689 0E 01         [ 7] 1071 	ld	c,#0x01
-   068B                    1072 00125$:
-                           1073 ;src/game/depot.c:205: while(!exit);
-   068B 79            [ 4] 1074 	ld	a,c
-   068C B7            [ 4] 1075 	or	a, a
-   068D CArE6r05      [10] 1076 	jp	Z,00124$
-                           1077 ;src/game/depot.c:207: putM2();
-   0690 C3r00r00      [10] 1078 	jp  _putM2
-                           1079 	.area _CODE
-                           1080 	.area _INITIALIZER
-                           1081 	.area _CABS (ABS)
+   060F 00                  961 	.db 0x00
+                            962 ;src/game/depot.c:174: void buyLocomotive()
+                            963 ;	---------------------------------
+                            964 ; Function buyLocomotive
+                            965 ; ---------------------------------
+   0610                     966 _buyLocomotive::
+                            967 ;src/game/depot.c:176: u8 exit=0;
+                            968 ;src/game/depot.c:178: u8 iSelect=0;
+   0610 01 00 00      [10]  969 	ld	bc,#0x0000
+                            970 ;src/game/depot.c:180: drawAllLocomotives(iSelect);
+   0613 C5            [11]  971 	push	bc
+   0614 AF            [ 4]  972 	xor	a, a
+   0615 F5            [11]  973 	push	af
+   0616 33            [ 6]  974 	inc	sp
+   0617 CDr54r02      [17]  975 	call	_drawAllLocomotives
+   061A 33            [ 6]  976 	inc	sp
+   061B C1            [10]  977 	pop	bc
+                            978 ;src/game/depot.c:182: do
+   061C                     979 00124$:
+                            980 ;src/game/depot.c:184: cpct_scanKeyboard(); 
+   061C C5            [11]  981 	push	bc
+   061D CDr00r00      [17]  982 	call	_cpct_scanKeyboard
+   0620 21 00 01      [10]  983 	ld	hl,#0x0100
+   0623 CDr00r00      [17]  984 	call	_cpct_isKeyPressed
+   0626 7D            [ 4]  985 	ld	a,l
+   0627 C1            [10]  986 	pop	bc
+   0628 B7            [ 4]  987 	or	a, a
+   0629 28 24         [12]  988 	jr	Z,00122$
+                            989 ;src/game/depot.c:188: if (iSelect>0)
+   062B 78            [ 4]  990 	ld	a,b
+   062C B7            [ 4]  991 	or	a, a
+   062D 28 15         [12]  992 	jr	Z,00140$
+                            993 ;src/game/depot.c:190: iSelect--;
+   062F 05            [ 4]  994 	dec	b
+                            995 ;src/game/depot.c:191: drawLocomotive(iSelect, iSelect);
+   0630 C5            [11]  996 	push	bc
+   0631 C5            [11]  997 	push	bc
+   0632 33            [ 6]  998 	inc	sp
+   0633 C5            [11]  999 	push	bc
+   0634 33            [ 6] 1000 	inc	sp
+   0635 CDrBFr00      [17] 1001 	call	_drawLocomotive
+   0638 F1            [10] 1002 	pop	af
+   0639 C1            [10] 1003 	pop	bc
+                           1004 ;src/game/depot.c:192: drawLocomotive(iSelect+1, iSelect);
+   063A 50            [ 4] 1005 	ld	d,b
+   063B 14            [ 4] 1006 	inc	d
+   063C C5            [11] 1007 	push	bc
+   063D 4A            [ 4] 1008 	ld	c, d
+   063E C5            [11] 1009 	push	bc
+   063F CDrBFr00      [17] 1010 	call	_drawLocomotive
+   0642 F1            [10] 1011 	pop	af
+   0643 C1            [10] 1012 	pop	bc
+                           1013 ;src/game/depot.c:194: for(i=0; i<14000; i++) {} // wait loop
+   0644                    1014 00140$:
+   0644 11 B0 36      [10] 1015 	ld	de,#0x36B0
+   0647                    1016 00129$:
+   0647 1B            [ 6] 1017 	dec	de
+   0648 7A            [ 4] 1018 	ld	a,d
+   0649 B3            [ 4] 1019 	or	a,e
+   064A 20 FB         [12] 1020 	jr	NZ,00129$
+   064C C3rC1r06      [10] 1021 	jp	00125$
+   064F                    1022 00122$:
+                           1023 ;src/game/depot.c:196: else if ( cpct_isKeyPressed(Key_CursorDown) )
+   064F C5            [11] 1024 	push	bc
+   0650 21 00 04      [10] 1025 	ld	hl,#0x0400
+   0653 CDr00r00      [17] 1026 	call	_cpct_isKeyPressed
+   0656 7D            [ 4] 1027 	ld	a,l
+   0657 C1            [10] 1028 	pop	bc
+   0658 B7            [ 4] 1029 	or	a, a
+   0659 28 24         [12] 1030 	jr	Z,00119$
+                           1031 ;src/game/depot.c:198: if (iSelect<11)
+   065B 78            [ 4] 1032 	ld	a,b
+   065C D6 0B         [ 7] 1033 	sub	a, #0x0B
+   065E 30 15         [12] 1034 	jr	NC,00144$
+                           1035 ;src/game/depot.c:200: iSelect++;
+   0660 04            [ 4] 1036 	inc	b
+                           1037 ;src/game/depot.c:201: drawLocomotive(iSelect, iSelect);
+   0661 C5            [11] 1038 	push	bc
+   0662 C5            [11] 1039 	push	bc
+   0663 33            [ 6] 1040 	inc	sp
+   0664 C5            [11] 1041 	push	bc
+   0665 33            [ 6] 1042 	inc	sp
+   0666 CDrBFr00      [17] 1043 	call	_drawLocomotive
+   0669 F1            [10] 1044 	pop	af
+   066A C1            [10] 1045 	pop	bc
+                           1046 ;src/game/depot.c:202: drawLocomotive(iSelect-1, iSelect);
+   066B 50            [ 4] 1047 	ld	d,b
+   066C 15            [ 4] 1048 	dec	d
+   066D C5            [11] 1049 	push	bc
+   066E 4A            [ 4] 1050 	ld	c, d
+   066F C5            [11] 1051 	push	bc
+   0670 CDrBFr00      [17] 1052 	call	_drawLocomotive
+   0673 F1            [10] 1053 	pop	af
+   0674 C1            [10] 1054 	pop	bc
+                           1055 ;src/game/depot.c:204: for(i=0; i<14000; i++) {} // wait loop
+   0675                    1056 00144$:
+   0675 11 B0 36      [10] 1057 	ld	de,#0x36B0
+   0678                    1058 00132$:
+   0678 1B            [ 6] 1059 	dec	de
+   0679 7A            [ 4] 1060 	ld	a,d
+   067A B3            [ 4] 1061 	or	a,e
+   067B 20 FB         [12] 1062 	jr	NZ,00132$
+   067D 18 42         [12] 1063 	jr	00125$
+   067F                    1064 00119$:
+                           1065 ;src/game/depot.c:206: else if ( cpct_isKeyPressed(Key_Return) )
+   067F C5            [11] 1066 	push	bc
+   0680 21 02 04      [10] 1067 	ld	hl,#0x0402
+   0683 CDr00r00      [17] 1068 	call	_cpct_isKeyPressed
+   0686 7D            [ 4] 1069 	ld	a,l
+   0687 C1            [10] 1070 	pop	bc
+   0688 B7            [ 4] 1071 	or	a, a
+   0689 28 28         [12] 1072 	jr	Z,00116$
+                           1073 ;src/game/depot.c:208: if(iSelect<locDelocked)
+   068B 21r00r00      [10] 1074 	ld	hl,#_locDelocked
+   068E 78            [ 4] 1075 	ld	a,b
+   068F 96            [ 7] 1076 	sub	a, (hl)
+   0690 30 17         [12] 1077 	jr	NC,00149$
+                           1078 ;src/game/depot.c:210: if(confirmBuyLocomotive(iSelect) == 1)
+   0692 C5            [11] 1079 	push	bc
+   0693 C5            [11] 1080 	push	bc
+   0694 33            [ 6] 1081 	inc	sp
+   0695 CDr84r02      [17] 1082 	call	_confirmBuyLocomotive
+   0698 33            [ 6] 1083 	inc	sp
+   0699 C1            [10] 1084 	pop	bc
+   069A 2D            [ 4] 1085 	dec	l
+   069B 20 04         [12] 1086 	jr	NZ,00108$
+                           1087 ;src/game/depot.c:211: exit=1;
+   069D 0E 01         [ 7] 1088 	ld	c,#0x01
+   069F 18 08         [12] 1089 	jr	00149$
+   06A1                    1090 00108$:
+                           1091 ;src/game/depot.c:213: drawAllLocomotives(iSelect);
+   06A1 C5            [11] 1092 	push	bc
+   06A2 C5            [11] 1093 	push	bc
+   06A3 33            [ 6] 1094 	inc	sp
+   06A4 CDr54r02      [17] 1095 	call	_drawAllLocomotives
+   06A7 33            [ 6] 1096 	inc	sp
+   06A8 C1            [10] 1097 	pop	bc
+                           1098 ;src/game/depot.c:216: for(i=0; i<14000; i++) {} // wait loop
+   06A9                    1099 00149$:
+   06A9 11 B0 36      [10] 1100 	ld	de,#0x36B0
+   06AC                    1101 00135$:
+   06AC 1B            [ 6] 1102 	dec	de
+   06AD 7A            [ 4] 1103 	ld	a,d
+   06AE B3            [ 4] 1104 	or	a,e
+   06AF 20 FB         [12] 1105 	jr	NZ,00135$
+   06B1 18 0E         [12] 1106 	jr	00125$
+   06B3                    1107 00116$:
+                           1108 ;src/game/depot.c:218: else if ( cpct_isKeyPressed(Key_Esc) )
+   06B3 C5            [11] 1109 	push	bc
+   06B4 21 08 04      [10] 1110 	ld	hl,#0x0408
+   06B7 CDr00r00      [17] 1111 	call	_cpct_isKeyPressed
+   06BA 7D            [ 4] 1112 	ld	a,l
+   06BB C1            [10] 1113 	pop	bc
+   06BC B7            [ 4] 1114 	or	a, a
+   06BD 28 02         [12] 1115 	jr	Z,00125$
+                           1116 ;src/game/depot.c:219: exit=1;
+   06BF 0E 01         [ 7] 1117 	ld	c,#0x01
+   06C1                    1118 00125$:
+                           1119 ;src/game/depot.c:221: while(!exit);
+   06C1 79            [ 4] 1120 	ld	a,c
+   06C2 B7            [ 4] 1121 	or	a, a
+   06C3 CAr1Cr06      [10] 1122 	jp	Z,00124$
+                           1123 ;src/game/depot.c:223: putM2();
+   06C6 C3r00r00      [10] 1124 	jp  _putM2
+                           1125 	.area _CODE
+                           1126 	.area _INITIALIZER
+                           1127 	.area _CABS (ABS)

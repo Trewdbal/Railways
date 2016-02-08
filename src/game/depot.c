@@ -1,10 +1,24 @@
 #include "depot.h"
 
+void drawDepot()
+{
+	u8 i;
+	u8 *p_video;
+
+	cpct_clearScreen(0b11111111);
+
+	for(i=0; i<nbTrainList; i++)
+	{
+			p_video = cpct_getScreenPtr(SCR_VMEM, 50, 10+i*20);
+			cpct_drawSprite(l130B_M2, p_video, 10, 10);
+	}
+}
+
 void railroadDepot()
 {
 	u8 exit=0;
 
-	cpct_clearScreen(0b11111111);
+	drawDepot();
 
 	do
 	{
@@ -22,6 +36,8 @@ void railroadDepot()
 
 			if(menuChoice == 0)
 				buyLocomotive();
+
+			drawDepot();
 		}
 
 	}
