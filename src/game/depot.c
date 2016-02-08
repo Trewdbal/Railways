@@ -103,11 +103,12 @@ u8 confirmBuyLocomotive(u8 iSelect)
 
 	putM2();
 
+	txtWindowLocomotive[1] = "";	
+
 	switch(iSelect)
 	{
 		case 0:
 			txtWindowLocomotive[0] = "130 B";
-			txtWindowLocomotive[1] = "";
 			txtWindowLocomotive[2] = "Propulsion: steam";
 			txtWindowLocomotive[3] = "Entry of service: 1909";
 			txtWindowLocomotive[4] = "Maximum speed: 80 km/h";
@@ -115,7 +116,6 @@ u8 confirmBuyLocomotive(u8 iSelect)
 			break;
 		case 1:
 			txtWindowLocomotive[0] = "141 TA";
-			txtWindowLocomotive[1] = "";
 			txtWindowLocomotive[2] = "Propulsion: steam";
 			txtWindowLocomotive[3] = "Entry of service: 1911";
 			txtWindowLocomotive[4] = "Maximum speed: 70 km/h";
@@ -123,7 +123,6 @@ u8 confirmBuyLocomotive(u8 iSelect)
 			break;
 		case 2:
 			txtWindowLocomotive[0] = "142 AT";
-			txtWindowLocomotive[1] = "";
 			txtWindowLocomotive[2] = "Propulsion: steam";
 			txtWindowLocomotive[3] = "Entry of service: 1926";
 			txtWindowLocomotive[4] = "Maximum speed: 95 km/h";
@@ -132,7 +131,6 @@ u8 confirmBuyLocomotive(u8 iSelect)
 
 		case 3:
 			txtWindowLocomotive[0] = "141 P";
-			txtWindowLocomotive[1] = "";
 			txtWindowLocomotive[2] = "Propulsion: steam";
 			txtWindowLocomotive[3] = "Entry of service: 1942";
 			txtWindowLocomotive[4] = "Maximum speed: 105 km/h";

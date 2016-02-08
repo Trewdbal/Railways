@@ -4,54 +4,41 @@ void windowInfoTile(u8 x, u8 y)
 {
 	const char *txtWindowInfoTile[4];
 
+    txtWindowInfoTile[1] = "";
+    txtWindowInfoTile[2] = "Production: Nothing";
+    txtWindowInfoTile[3] = "Demand: Nothing";
+
 	switch(p_world[y*WIDTH+x])
 	{
 		case GRASS1:
 		case GRASS2:
 			txtWindowInfoTile[0] = "Grassland";
-			txtWindowInfoTile[1] = "";
-			txtWindowInfoTile[2] = "Production: Nothing";
-			txtWindowInfoTile[3] = "Demand: Nothing";
 			break;
 		case DWELLINGS1:
 		case DWELLINGS2:
 		case DWELLINGS3:
 			txtWindowInfoTile[0] = "City";
-			txtWindowInfoTile[1] = "";
 			txtWindowInfoTile[2] = "Production: Passengers, mail";
 			txtWindowInfoTile[3] = "Demand: Passenger, mail, food, goods";
 			break;
 		case FARM1:
 		case FARM2:
 			txtWindowInfoTile[0] = "Farm";
-			txtWindowInfoTile[1] = "";
 			txtWindowInfoTile[2] = "Production: Cereal";
-			txtWindowInfoTile[3] = "Demand: Nothing";
 			break;
 		case WATER:
 			txtWindowInfoTile[0] = "Water";
-			txtWindowInfoTile[1] = "";
-			txtWindowInfoTile[2] = "Production: Nothing";
-			txtWindowInfoTile[3] = "Demand: Nothing";
 			break;
 		case FOREST:
 			txtWindowInfoTile[0] = "Forest";
-			txtWindowInfoTile[1] = "";
-			txtWindowInfoTile[2] = "Production: Nothing";
-			txtWindowInfoTile[3] = "Demand: Nothing";
 			break;
 		case LIVESTOCK:
 			txtWindowInfoTile[0] = "Livestock farming";
-			txtWindowInfoTile[1] = "";
 			txtWindowInfoTile[2] = "Production: Livestock, wool";
 			txtWindowInfoTile[3] = "Demand: Cereal";
 			break;
 		default:
 			txtWindowInfoTile[0] = "Not yet implemented";
-			txtWindowInfoTile[1] = "";
-			txtWindowInfoTile[2] = "Production: ?";
-			txtWindowInfoTile[3] = "Demand: ?";
-
 	}
 
 	drawWindow(txtWindowInfoTile, 4, 0);

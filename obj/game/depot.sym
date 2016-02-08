@@ -12,26 +12,26 @@ Symbol Table
     ___fsmul                                                       **** GX
   0 ___str_0                                                       00A0 R
   0 ___str_1                                                       00B1 R
-  0 ___str_10                                                      0569 R
-  0 ___str_11                                                      0580 R
-  0 ___str_12                                                      058C R
-  0 ___str_13                                                      0593 R
-  0 ___str_14                                                      05AA R
-  0 ___str_15                                                      05C1 R
-  0 ___str_16                                                      05CE R
-  0 ___str_17                                                      05D4 R
-  0 ___str_18                                                      05EB R
-  0 ___str_19                                                      0603 R
-  0 ___str_2                                                       04F7 R
-  0 ___str_3                                                       04FD R
-  0 ___str_4                                                       04FE R
-  0 ___str_5                                                       0510 R
-  0 ___str_6                                                       0527 R
-  0 ___str_7                                                       053E R
-  0 ___str_8                                                       054B R
-  0 ___str_9                                                       0552 R
+  0 ___str_10                                                      055F R
+  0 ___str_11                                                      0576 R
+  0 ___str_12                                                      0582 R
+  0 ___str_13                                                      0589 R
+  0 ___str_14                                                      05A0 R
+  0 ___str_15                                                      05B7 R
+  0 ___str_16                                                      05C4 R
+  0 ___str_17                                                      05CA R
+  0 ___str_18                                                      05E1 R
+  0 ___str_19                                                      05F9 R
+  0 ___str_2                                                       04ED R
+  0 ___str_3                                                       04EE R
+  0 ___str_4                                                       04F4 R
+  0 ___str_5                                                       0506 R
+  0 ___str_6                                                       051D R
+  0 ___str_7                                                       0534 R
+  0 ___str_8                                                       0541 R
+  0 ___str_9                                                       0548 R
     ___uchar2fs                                                    **** GX
-  0 _buyLocomotive                                                 0610 GR
+  0 _buyLocomotive                                                 0606 GR
   0 _confirmBuyLocomotive                                          0284 GR
     _cpct_drawSolidBox                                             **** GX
     _cpct_drawSprite                                               **** GX
@@ -71,7 +71,7 @@ Hexadecimal [16-Bits]
 
 Area Table
 
-   0 _CODE                                      size  6C9   flags    0
+   0 _CODE                                      size  6BF   flags    0
    1 _DATA                                      size    0   flags    0
    2 _INITIALIZED                               size    0   flags    0
    3 _DABS                                      size    0   flags    8

@@ -8,40 +8,38 @@ Symbol Table
     .__.CPU.                                                    =  0000 L
     .__.H$L.                                                    =  0000 L
     _CURSOR_MODE                                                   **** GX
-  0 ___str_0                                                       0195 R
-  0 ___str_1                                                       019F R
-  0 ___str_10                                                      0229 R
-  0 ___str_11                                                      0230 R
-  0 ___str_12                                                      0242 R
-  0 ___str_13                                                      025E R
-  0 ___str_14                                                      026D R
-  0 ___str_15                                                      0281 R
-  0 ___str_16                                                      028F R
-  0 ___str_17                                                      02FB R
-  0 ___str_18                                                      0301 R
-  0 ___str_19                                                      0308 R
-  0 ___str_2                                                       01A0 R
-  0 ___str_20                                                      0442 R
-  0 ___str_21                                                      0452 R
-  0 ___str_22                                                      0462 R
-  0 ___str_23                                                      0472 R
-  0 ___str_24                                                      047A R
-  0 ___str_25                                                      0489 R
-  0 ___str_26                                                      0494 R
-  0 ___str_27                                                      049B R
-  0 ___str_28                                                      04BE R
-  0 ___str_29                                                      04BF R
-  0 ___str_3                                                       01B4 R
-  0 ___str_30                                                      0982 R
-  0 ___str_31                                                      0990 R
-  0 ___str_32                                                      0991 R
-  0 ___str_33                                                      09B7 R
-  0 ___str_4                                                       01C4 R
-  0 ___str_5                                                       01C9 R
-  0 ___str_6                                                       01E6 R
-  0 ___str_7                                                       020B R
-  0 ___str_8                                                       0210 R
-  0 ___str_9                                                       0223 R
+  0 ___str_0                                                       010C R
+  0 ___str_1                                                       010D R
+  0 ___str_10                                                      01A0 R
+  0 ___str_11                                                      01A7 R
+  0 ___str_12                                                      01B9 R
+  0 ___str_13                                                      01D5 R
+  0 ___str_14                                                      01E4 R
+  0 ___str_15                                                      025A R
+  0 ___str_16                                                      0260 R
+  0 ___str_17                                                      0267 R
+  0 ___str_18                                                      03A1 R
+  0 ___str_19                                                      03B1 R
+  0 ___str_2                                                       0121 R
+  0 ___str_20                                                      03C1 R
+  0 ___str_21                                                      03D1 R
+  0 ___str_22                                                      03D9 R
+  0 ___str_23                                                      03E8 R
+  0 ___str_24                                                      03F3 R
+  0 ___str_25                                                      03FA R
+  0 ___str_26                                                      041D R
+  0 ___str_27                                                      041E R
+  0 ___str_28                                                      08E1 R
+  0 ___str_29                                                      08EF R
+  0 ___str_3                                                       0131 R
+  0 ___str_30                                                      08F0 R
+  0 ___str_31                                                      0916 R
+  0 ___str_4                                                       013B R
+  0 ___str_5                                                       0140 R
+  0 ___str_6                                                       015D R
+  0 ___str_7                                                       0182 R
+  0 ___str_8                                                       0187 R
+  0 ___str_9                                                       019A R
     _cpct_drawStringM2                                             **** GX
     _cpct_getScreenPtr                                             **** GX
     _cpct_isKeyPressed                                             **** GX
@@ -55,29 +53,28 @@ Symbol Table
     _drawTile                                                      **** GX
     _drawWindow                                                    **** GX
     _drawWorld                                                     **** GX
-  0 _game                                                          04CA GR
+  0 _game                                                          0429 GR
     _generateWorld                                                 **** GX
     _locDelocked                                                   **** GX
+  0 _menuStations                                                  01F8 GR
+  0 _menuTile                                                      026D GR
 ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 2.
 Hexadecimal [16-Bits]
 
 Symbol Table
 
-  0 _menuStations                                                  0299 GR
-  0 _menuTile                                                      030E GR
     _p_world                                                       **** GX
     _putM1                                                         **** GX
     _putM2                                                         **** GX
     _railroadDepot                                                 **** GX
   0 _windowInfoTile                                                0000 GR
 
-
 ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 3.
 Hexadecimal [16-Bits]
 
 Area Table
 
-   0 _CODE                                      size  9CB   flags    0
+   0 _CODE                                      size  92A   flags    0
    1 _DATA                                      size    0   flags    0
    2 _INITIALIZED                               size    0   flags    0
    3 _DABS                                      size    0   flags    8

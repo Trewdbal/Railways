@@ -1,7 +1,7 @@
 ;--------------------------------------------------------
 ; File Created by SDCC : free open source ANSI-C Compiler
 ; Version 3.5.4 #9329 (Linux)
-; This file was generated Mon Feb  8 21:04:40 2016
+; This file was generated Mon Feb  8 21:24:02 2016
 ;--------------------------------------------------------
 	.module depot
 	.optsdcc -mz80
@@ -81,9 +81,9 @@ _drawDepot::
 	ld	a,d
 	sub	a, (hl)
 	ret	NC
-;src/game/depot.c:12: p_video = cpct_getScreenPtr(SCR_VMEM, 50, 30+i*20);
+;src/game/depot.c:12: p_video = cpct_getScreenPtr(SCR_VMEM, 50, 10+i*20);
 	ld	a,e
-	add	a, #0x1E
+	add	a, #0x0A
 	push	de
 	ld	d,a
 	ld	e,#0x32
@@ -496,227 +496,198 @@ _confirmBuyLocomotive::
 	push	ix
 	ld	ix,#0
 	add	ix,sp
-	ld	hl,#-12
+	ld	hl,#-18
 	add	hl,sp
 	ld	sp,hl
 ;src/game/depot.c:104: putM2();
 	call	_putM2
-;src/game/depot.c:106: switch(iSelect)
+;src/game/depot.c:106: txtWindowLocomotive[1] = "";	
+	ld	hl,#0x0000
+	add	hl,sp
+	ld	e,l
+	ld	d,h
+	inc	hl
+	inc	hl
+	ld	bc,#___str_2+0
+	ld	(hl),c
+	inc	hl
+	ld	(hl),b
+;src/game/depot.c:108: switch(iSelect)
 	ld	a,#0x03
 	sub	a, 4 (ix)
 	jp	C,00105$
+;src/game/depot.c:112: txtWindowLocomotive[2] = "Propulsion: steam";
+	ld	hl,#0x0004
+	add	hl,de
+	ld	-4 (ix),l
+	ld	-3 (ix),h
+;src/game/depot.c:113: txtWindowLocomotive[3] = "Entry of service: 1909";
+	ld	hl,#0x0006
+	add	hl,de
+	ld	-2 (ix),l
+	ld	-1 (ix),h
+;src/game/depot.c:114: txtWindowLocomotive[4] = "Maximum speed: 80 km/h";
+	ld	hl,#0x0008
+	add	hl,de
+	ld	-6 (ix),l
+	ld	-5 (ix),h
+;src/game/depot.c:115: txtWindowLocomotive[5] = "Price: 1000$";
+	ld	hl,#0x000A
+	add	hl,de
+	ld	c,l
+	ld	b,h
+;src/game/depot.c:108: switch(iSelect)
+	push	de
 	ld	e,4 (ix)
 	ld	d,#0x00
 	ld	hl,#00125$
 	add	hl,de
 	add	hl,de
 	add	hl,de
+	pop	de
 	jp	(hl)
 00125$:
 	jp	00101$
 	jp	00102$
 	jp	00103$
 	jp	00104$
-;src/game/depot.c:108: case 0:
+;src/game/depot.c:110: case 0:
 00101$:
-;src/game/depot.c:109: txtWindowLocomotive[0] = "130 B";
-	ld	hl,#0x0000
-	add	hl,sp
-	ld	e,l
-	ld	d,h
-	ld	(hl),#<(___str_2)
-	inc	hl
-	ld	(hl),#>(___str_2)
-;src/game/depot.c:110: txtWindowLocomotive[1] = "";
+;src/game/depot.c:111: txtWindowLocomotive[0] = "130 B";
 	ld	l, e
 	ld	h, d
+	ld	(hl),#<(___str_3)
 	inc	hl
+	ld	(hl),#>(___str_3)
+;src/game/depot.c:112: txtWindowLocomotive[2] = "Propulsion: steam";
+	ld	l,-4 (ix)
+	ld	h,-3 (ix)
+	ld	(hl),#<(___str_4)
 	inc	hl
-	ld	bc,#___str_3+0
-	ld	(hl),c
+	ld	(hl),#>(___str_4)
+;src/game/depot.c:113: txtWindowLocomotive[3] = "Entry of service: 1909";
+	ld	l,-2 (ix)
+	ld	h,-1 (ix)
+	ld	(hl),#<(___str_5)
 	inc	hl
-	ld	(hl),b
-;src/game/depot.c:111: txtWindowLocomotive[2] = "Propulsion: steam";
-	ld	hl,#0x0004
-	add	hl,de
-	ld	bc,#___str_4+0
-	ld	(hl),c
+	ld	(hl),#>(___str_5)
+;src/game/depot.c:114: txtWindowLocomotive[4] = "Maximum speed: 80 km/h";
+	ld	l,-6 (ix)
+	ld	h,-5 (ix)
+	ld	(hl),#<(___str_6)
 	inc	hl
-	ld	(hl),b
-;src/game/depot.c:112: txtWindowLocomotive[3] = "Entry of service: 1909";
-	ld	hl,#0x0006
-	add	hl,de
-	ld	bc,#___str_5+0
-	ld	(hl),c
-	inc	hl
-	ld	(hl),b
-;src/game/depot.c:113: txtWindowLocomotive[4] = "Maximum speed: 80 km/h";
-	ld	hl,#0x0008
-	add	hl,de
-	ld	bc,#___str_6+0
-	ld	(hl),c
-	inc	hl
-	ld	(hl),b
-;src/game/depot.c:114: txtWindowLocomotive[5] = "Price: 1000$";
-	ld	hl,#0x000A
-	add	hl,de
-	ld	de,#___str_7+0
-	ld	(hl),e
-	inc	hl
-	ld	(hl),d
-;src/game/depot.c:115: break;
+	ld	(hl),#>(___str_6)
+;src/game/depot.c:115: txtWindowLocomotive[5] = "Price: 1000$";
+	ld	a,#<(___str_7)
+	ld	(bc),a
+	inc	bc
+	ld	a,#>(___str_7)
+	ld	(bc),a
+;src/game/depot.c:116: break;
 	jp	00105$
-;src/game/depot.c:116: case 1:
+;src/game/depot.c:117: case 1:
 00102$:
-;src/game/depot.c:117: txtWindowLocomotive[0] = "141 TA";
-	ld	hl,#0x0000
-	add	hl,sp
-	ld	e,l
-	ld	d,h
+;src/game/depot.c:118: txtWindowLocomotive[0] = "141 TA";
+	ld	l, e
+	ld	h, d
 	ld	(hl),#<(___str_8)
 	inc	hl
 	ld	(hl),#>(___str_8)
-;src/game/depot.c:118: txtWindowLocomotive[1] = "";
-	ld	l, e
-	ld	h, d
-	inc	hl
-	inc	hl
-	ld	bc,#___str_3+0
-	ld	(hl),c
-	inc	hl
-	ld	(hl),b
 ;src/game/depot.c:119: txtWindowLocomotive[2] = "Propulsion: steam";
-	ld	hl,#0x0004
-	add	hl,de
-	ld	bc,#___str_4+0
-	ld	(hl),c
+	ld	l,-4 (ix)
+	ld	h,-3 (ix)
+	ld	(hl),#<(___str_4)
 	inc	hl
-	ld	(hl),b
+	ld	(hl),#>(___str_4)
 ;src/game/depot.c:120: txtWindowLocomotive[3] = "Entry of service: 1911";
-	ld	hl,#0x0006
-	add	hl,de
-	ld	bc,#___str_9+0
-	ld	(hl),c
+	ld	l,-2 (ix)
+	ld	h,-1 (ix)
+	ld	(hl),#<(___str_9)
 	inc	hl
-	ld	(hl),b
+	ld	(hl),#>(___str_9)
 ;src/game/depot.c:121: txtWindowLocomotive[4] = "Maximum speed: 70 km/h";
-	ld	hl,#0x0008
-	add	hl,de
-	ld	bc,#___str_10+0
-	ld	(hl),c
+	ld	l,-6 (ix)
+	ld	h,-5 (ix)
+	ld	(hl),#<(___str_10)
 	inc	hl
-	ld	(hl),b
+	ld	(hl),#>(___str_10)
 ;src/game/depot.c:122: txtWindowLocomotive[5] = "Price: 900$";
-	ld	hl,#0x000A
-	add	hl,de
-	ld	de,#___str_11+0
-	ld	(hl),e
-	inc	hl
-	ld	(hl),d
+	ld	a,#<(___str_11)
+	ld	(bc),a
+	inc	bc
+	ld	a,#>(___str_11)
+	ld	(bc),a
 ;src/game/depot.c:123: break;
-	jp	00105$
+	jr	00105$
 ;src/game/depot.c:124: case 2:
 00103$:
 ;src/game/depot.c:125: txtWindowLocomotive[0] = "142 AT";
-	ld	hl,#0x0000
-	add	hl,sp
-	ld	e,l
-	ld	d,h
+	ld	l, e
+	ld	h, d
 	ld	(hl),#<(___str_12)
 	inc	hl
 	ld	(hl),#>(___str_12)
-;src/game/depot.c:126: txtWindowLocomotive[1] = "";
+;src/game/depot.c:126: txtWindowLocomotive[2] = "Propulsion: steam";
+	ld	l,-4 (ix)
+	ld	h,-3 (ix)
+	ld	(hl),#<(___str_4)
+	inc	hl
+	ld	(hl),#>(___str_4)
+;src/game/depot.c:127: txtWindowLocomotive[3] = "Entry of service: 1926";
+	ld	l,-2 (ix)
+	ld	h,-1 (ix)
+	ld	(hl),#<(___str_13)
+	inc	hl
+	ld	(hl),#>(___str_13)
+;src/game/depot.c:128: txtWindowLocomotive[4] = "Maximum speed: 95 km/h";
+	ld	l,-6 (ix)
+	ld	h,-5 (ix)
+	ld	(hl),#<(___str_14)
+	inc	hl
+	ld	(hl),#>(___str_14)
+;src/game/depot.c:129: txtWindowLocomotive[5] = "Price: 1500$";
+	ld	a,#<(___str_15)
+	ld	(bc),a
+	inc	bc
+	ld	a,#>(___str_15)
+	ld	(bc),a
+;src/game/depot.c:130: break;
+	jr	00105$
+;src/game/depot.c:132: case 3:
+00104$:
+;src/game/depot.c:133: txtWindowLocomotive[0] = "141 P";
 	ld	l, e
 	ld	h, d
-	inc	hl
-	inc	hl
-	ld	bc,#___str_3+0
-	ld	(hl),c
-	inc	hl
-	ld	(hl),b
-;src/game/depot.c:127: txtWindowLocomotive[2] = "Propulsion: steam";
-	ld	hl,#0x0004
-	add	hl,de
-	ld	bc,#___str_4+0
-	ld	(hl),c
-	inc	hl
-	ld	(hl),b
-;src/game/depot.c:128: txtWindowLocomotive[3] = "Entry of service: 1926";
-	ld	hl,#0x0006
-	add	hl,de
-	ld	bc,#___str_13+0
-	ld	(hl),c
-	inc	hl
-	ld	(hl),b
-;src/game/depot.c:129: txtWindowLocomotive[4] = "Maximum speed: 95 km/h";
-	ld	hl,#0x0008
-	add	hl,de
-	ld	bc,#___str_14+0
-	ld	(hl),c
-	inc	hl
-	ld	(hl),b
-;src/game/depot.c:130: txtWindowLocomotive[5] = "Price: 1500$";
-	ld	hl,#0x000A
-	add	hl,de
-	ld	de,#___str_15+0
-	ld	(hl),e
-	inc	hl
-	ld	(hl),d
-;src/game/depot.c:131: break;
-	jr	00105$
-;src/game/depot.c:133: case 3:
-00104$:
-;src/game/depot.c:134: txtWindowLocomotive[0] = "141 P";
-	ld	hl,#0x0000
-	add	hl,sp
-	ld	e,l
-	ld	d,h
 	ld	(hl),#<(___str_16)
 	inc	hl
 	ld	(hl),#>(___str_16)
-;src/game/depot.c:135: txtWindowLocomotive[1] = "";
-	ld	l, e
-	ld	h, d
+;src/game/depot.c:134: txtWindowLocomotive[2] = "Propulsion: steam";
+	ld	l,-4 (ix)
+	ld	h,-3 (ix)
+	ld	(hl),#<(___str_4)
 	inc	hl
+	ld	(hl),#>(___str_4)
+;src/game/depot.c:135: txtWindowLocomotive[3] = "Entry of service: 1942";
+	ld	l,-2 (ix)
+	ld	h,-1 (ix)
+	ld	(hl),#<(___str_17)
 	inc	hl
-	ld	bc,#___str_3+0
-	ld	(hl),c
+	ld	(hl),#>(___str_17)
+;src/game/depot.c:136: txtWindowLocomotive[4] = "Maximum speed: 105 km/h";
+	ld	l,-6 (ix)
+	ld	h,-5 (ix)
+	ld	(hl),#<(___str_18)
 	inc	hl
-	ld	(hl),b
-;src/game/depot.c:136: txtWindowLocomotive[2] = "Propulsion: steam";
-	ld	hl,#0x0004
-	add	hl,de
-	ld	bc,#___str_4+0
-	ld	(hl),c
-	inc	hl
-	ld	(hl),b
-;src/game/depot.c:137: txtWindowLocomotive[3] = "Entry of service: 1942";
-	ld	hl,#0x0006
-	add	hl,de
-	ld	bc,#___str_17+0
-	ld	(hl),c
-	inc	hl
-	ld	(hl),b
-;src/game/depot.c:138: txtWindowLocomotive[4] = "Maximum speed: 105 km/h";
-	ld	hl,#0x0008
-	add	hl,de
-	ld	bc,#___str_18+0
-	ld	(hl),c
-	inc	hl
-	ld	(hl),b
-;src/game/depot.c:139: txtWindowLocomotive[5] = "Price: 2000$";
-	ld	hl,#0x000A
-	add	hl,de
-	ld	de,#___str_19+0
-	ld	(hl),e
-	inc	hl
-	ld	(hl),d
-;src/game/depot.c:141: }
+	ld	(hl),#>(___str_18)
+;src/game/depot.c:137: txtWindowLocomotive[5] = "Price: 2000$";
+	ld	a,#<(___str_19)
+	ld	(bc),a
+	inc	bc
+	ld	a,#>(___str_19)
+	ld	(bc),a
+;src/game/depot.c:139: }
 00105$:
-;src/game/depot.c:144: returnChoice = drawWindow(txtWindowLocomotive, 6, 1);
-	ld	hl,#0x0000
-	add	hl,sp
-	ex	de,hl
+;src/game/depot.c:142: returnChoice = drawWindow(txtWindowLocomotive, 6, 1);
 	ld	hl,#0x0106
 	push	hl
 	push	de
@@ -724,15 +695,15 @@ _confirmBuyLocomotive::
 	pop	af
 	pop	af
 	ld	c,l
-;src/game/depot.c:147: if (returnChoice==1)
+;src/game/depot.c:145: if (returnChoice==1)
 	ld	a,c
 	dec	a
 	jp	NZ,00110$
-;src/game/depot.c:149: if(nbTrainList==0)
+;src/game/depot.c:147: if(nbTrainList==0)
 	ld	a,(#_nbTrainList + 0)
 	or	a, a
 	jr	NZ,00107$
-;src/game/depot.c:150: trainList = (Train*)malloc(sizeof(Train));
+;src/game/depot.c:148: trainList = (Train*)malloc(sizeof(Train));
 	push	bc
 	ld	hl,#0x0009
 	push	hl
@@ -742,7 +713,7 @@ _confirmBuyLocomotive::
 	ld	(_trainList),hl
 	jr	00108$
 00107$:
-;src/game/depot.c:152: realloc(trainList, (nbTrainList+1)*sizeof(Train));
+;src/game/depot.c:150: realloc(trainList, (nbTrainList+1)*sizeof(Train));
 	ld	iy,#_nbTrainList
 	ld	l,0 (iy)
 	ld	h,#0x00
@@ -763,7 +734,7 @@ _confirmBuyLocomotive::
 	pop	af
 	pop	bc
 00108$:
-;src/game/depot.c:155: trainList[nbTrainList].loco = iSelect;
+;src/game/depot.c:153: trainList[nbTrainList].loco = iSelect;
 	ld	de,(_nbTrainList)
 	ld	d,#0x00
 	ld	l, e
@@ -777,7 +748,7 @@ _confirmBuyLocomotive::
 	add	iy, de
 	ld	a,4 (ix)
 	ld	0 (iy), a
-;src/game/depot.c:158: trainList[nbTrainList].wagon[0] = 0;
+;src/game/depot.c:156: trainList[nbTrainList].wagon[0] = 0;
 	ld	de,(_nbTrainList)
 	ld	d,#0x00
 	ld	l, e
@@ -791,7 +762,7 @@ _confirmBuyLocomotive::
 	add	iy, de
 	inc	iy
 	ld	0 (iy), #0x00
-;src/game/depot.c:159: trainList[nbTrainList].wagon[1] = 0;
+;src/game/depot.c:157: trainList[nbTrainList].wagon[1] = 0;
 	ld	de,(_nbTrainList)
 	ld	d,#0x00
 	ld	l, e
@@ -806,7 +777,7 @@ _confirmBuyLocomotive::
 	inc	iy
 	inc	iy
 	ld	0 (iy), #0x00
-;src/game/depot.c:160: trainList[nbTrainList].wagon[2] = 0;
+;src/game/depot.c:158: trainList[nbTrainList].wagon[2] = 0;
 	ld	de,(_nbTrainList)
 	ld	d,#0x00
 	ld	l, e
@@ -822,7 +793,7 @@ _confirmBuyLocomotive::
 	inc	iy
 	inc	iy
 	ld	0 (iy), #0x00
-;src/game/depot.c:161: trainList[nbTrainList].wagon[3] = 0;
+;src/game/depot.c:159: trainList[nbTrainList].wagon[3] = 0;
 	ld	de,(_nbTrainList)
 	ld	d,#0x00
 	ld	l, e
@@ -837,7 +808,7 @@ _confirmBuyLocomotive::
 	ld	de,#0x0004
 	add	iy, de
 	ld	0 (iy), #0x00
-;src/game/depot.c:162: trainList[nbTrainList].wagon[4] = 0;
+;src/game/depot.c:160: trainList[nbTrainList].wagon[4] = 0;
 	ld	de,(_nbTrainList)
 	ld	d,#0x00
 	ld	l, e
@@ -852,7 +823,7 @@ _confirmBuyLocomotive::
 	ld	de,#0x0005
 	add	iy, de
 	ld	0 (iy), #0x00
-;src/game/depot.c:163: trainList[nbTrainList].wagon[5] = 0;
+;src/game/depot.c:161: trainList[nbTrainList].wagon[5] = 0;
 	ld	de,(_nbTrainList)
 	ld	d,#0x00
 	ld	l, e
@@ -867,7 +838,7 @@ _confirmBuyLocomotive::
 	ld	de,#0x0006
 	add	iy, de
 	ld	0 (iy), #0x00
-;src/game/depot.c:164: trainList[nbTrainList].wagon[6] = 0;
+;src/game/depot.c:162: trainList[nbTrainList].wagon[6] = 0;
 	ld	de,(_nbTrainList)
 	ld	d,#0x00
 	ld	l, e
@@ -882,7 +853,7 @@ _confirmBuyLocomotive::
 	ld	de,#0x0007
 	add	iy, de
 	ld	0 (iy), #0x00
-;src/game/depot.c:165: trainList[nbTrainList].wagon[7] = 0;
+;src/game/depot.c:163: trainList[nbTrainList].wagon[7] = 0;
 	ld	de,(_nbTrainList)
 	ld	d,#0x00
 	ld	l, e
@@ -897,19 +868,19 @@ _confirmBuyLocomotive::
 	ld	de,#0x0008
 	add	iy, de
 	ld	0 (iy), #0x00
-;src/game/depot.c:168: nbTrainList++;
+;src/game/depot.c:166: nbTrainList++;
 	ld	hl, #_nbTrainList+0
 	inc	(hl)
 00110$:
-;src/game/depot.c:171: return returnChoice;
+;src/game/depot.c:169: return returnChoice;
 	ld	l,c
 	ld	sp, ix
 	pop	ix
 	ret
 ___str_2:
-	.ascii "130 B"
 	.db 0x00
 ___str_3:
+	.ascii "130 B"
 	.db 0x00
 ___str_4:
 	.ascii "Propulsion: steam"
@@ -959,15 +930,15 @@ ___str_18:
 ___str_19:
 	.ascii "Price: 2000$"
 	.db 0x00
-;src/game/depot.c:174: void buyLocomotive()
+;src/game/depot.c:172: void buyLocomotive()
 ;	---------------------------------
 ; Function buyLocomotive
 ; ---------------------------------
 _buyLocomotive::
-;src/game/depot.c:176: u8 exit=0;
-;src/game/depot.c:178: u8 iSelect=0;
+;src/game/depot.c:174: u8 exit=0;
+;src/game/depot.c:176: u8 iSelect=0;
 	ld	bc,#0x0000
-;src/game/depot.c:180: drawAllLocomotives(iSelect);
+;src/game/depot.c:178: drawAllLocomotives(iSelect);
 	push	bc
 	xor	a, a
 	push	af
@@ -975,9 +946,9 @@ _buyLocomotive::
 	call	_drawAllLocomotives
 	inc	sp
 	pop	bc
-;src/game/depot.c:182: do
+;src/game/depot.c:180: do
 00124$:
-;src/game/depot.c:184: cpct_scanKeyboard(); 
+;src/game/depot.c:182: cpct_scanKeyboard(); 
 	push	bc
 	call	_cpct_scanKeyboard
 	ld	hl,#0x0100
@@ -986,13 +957,13 @@ _buyLocomotive::
 	pop	bc
 	or	a, a
 	jr	Z,00122$
-;src/game/depot.c:188: if (iSelect>0)
+;src/game/depot.c:186: if (iSelect>0)
 	ld	a,b
 	or	a, a
 	jr	Z,00140$
-;src/game/depot.c:190: iSelect--;
+;src/game/depot.c:188: iSelect--;
 	dec	b
-;src/game/depot.c:191: drawLocomotive(iSelect, iSelect);
+;src/game/depot.c:189: drawLocomotive(iSelect, iSelect);
 	push	bc
 	push	bc
 	inc	sp
@@ -1001,7 +972,7 @@ _buyLocomotive::
 	call	_drawLocomotive
 	pop	af
 	pop	bc
-;src/game/depot.c:192: drawLocomotive(iSelect+1, iSelect);
+;src/game/depot.c:190: drawLocomotive(iSelect+1, iSelect);
 	ld	d,b
 	inc	d
 	push	bc
@@ -1010,7 +981,7 @@ _buyLocomotive::
 	call	_drawLocomotive
 	pop	af
 	pop	bc
-;src/game/depot.c:194: for(i=0; i<14000; i++) {} // wait loop
+;src/game/depot.c:192: for(i=0; i<14000; i++) {} // wait loop
 00140$:
 	ld	de,#0x36B0
 00129$:
@@ -1020,7 +991,7 @@ _buyLocomotive::
 	jr	NZ,00129$
 	jp	00125$
 00122$:
-;src/game/depot.c:196: else if ( cpct_isKeyPressed(Key_CursorDown) )
+;src/game/depot.c:194: else if ( cpct_isKeyPressed(Key_CursorDown) )
 	push	bc
 	ld	hl,#0x0400
 	call	_cpct_isKeyPressed
@@ -1028,13 +999,13 @@ _buyLocomotive::
 	pop	bc
 	or	a, a
 	jr	Z,00119$
-;src/game/depot.c:198: if (iSelect<11)
+;src/game/depot.c:196: if (iSelect<11)
 	ld	a,b
 	sub	a, #0x0B
 	jr	NC,00144$
-;src/game/depot.c:200: iSelect++;
+;src/game/depot.c:198: iSelect++;
 	inc	b
-;src/game/depot.c:201: drawLocomotive(iSelect, iSelect);
+;src/game/depot.c:199: drawLocomotive(iSelect, iSelect);
 	push	bc
 	push	bc
 	inc	sp
@@ -1043,7 +1014,7 @@ _buyLocomotive::
 	call	_drawLocomotive
 	pop	af
 	pop	bc
-;src/game/depot.c:202: drawLocomotive(iSelect-1, iSelect);
+;src/game/depot.c:200: drawLocomotive(iSelect-1, iSelect);
 	ld	d,b
 	dec	d
 	push	bc
@@ -1052,7 +1023,7 @@ _buyLocomotive::
 	call	_drawLocomotive
 	pop	af
 	pop	bc
-;src/game/depot.c:204: for(i=0; i<14000; i++) {} // wait loop
+;src/game/depot.c:202: for(i=0; i<14000; i++) {} // wait loop
 00144$:
 	ld	de,#0x36B0
 00132$:
@@ -1062,7 +1033,7 @@ _buyLocomotive::
 	jr	NZ,00132$
 	jr	00125$
 00119$:
-;src/game/depot.c:206: else if ( cpct_isKeyPressed(Key_Return) )
+;src/game/depot.c:204: else if ( cpct_isKeyPressed(Key_Return) )
 	push	bc
 	ld	hl,#0x0402
 	call	_cpct_isKeyPressed
@@ -1070,12 +1041,12 @@ _buyLocomotive::
 	pop	bc
 	or	a, a
 	jr	Z,00116$
-;src/game/depot.c:208: if(iSelect<locDelocked)
+;src/game/depot.c:206: if(iSelect<locDelocked)
 	ld	hl,#_locDelocked
 	ld	a,b
 	sub	a, (hl)
 	jr	NC,00149$
-;src/game/depot.c:210: if(confirmBuyLocomotive(iSelect) == 1)
+;src/game/depot.c:208: if(confirmBuyLocomotive(iSelect) == 1)
 	push	bc
 	push	bc
 	inc	sp
@@ -1084,18 +1055,18 @@ _buyLocomotive::
 	pop	bc
 	dec	l
 	jr	NZ,00108$
-;src/game/depot.c:211: exit=1;
+;src/game/depot.c:209: exit=1;
 	ld	c,#0x01
 	jr	00149$
 00108$:
-;src/game/depot.c:213: drawAllLocomotives(iSelect);
+;src/game/depot.c:211: drawAllLocomotives(iSelect);
 	push	bc
 	push	bc
 	inc	sp
 	call	_drawAllLocomotives
 	inc	sp
 	pop	bc
-;src/game/depot.c:216: for(i=0; i<14000; i++) {} // wait loop
+;src/game/depot.c:214: for(i=0; i<14000; i++) {} // wait loop
 00149$:
 	ld	de,#0x36B0
 00135$:
@@ -1105,7 +1076,7 @@ _buyLocomotive::
 	jr	NZ,00135$
 	jr	00125$
 00116$:
-;src/game/depot.c:218: else if ( cpct_isKeyPressed(Key_Esc) )
+;src/game/depot.c:216: else if ( cpct_isKeyPressed(Key_Esc) )
 	push	bc
 	ld	hl,#0x0408
 	call	_cpct_isKeyPressed
@@ -1113,14 +1084,14 @@ _buyLocomotive::
 	pop	bc
 	or	a, a
 	jr	Z,00125$
-;src/game/depot.c:219: exit=1;
+;src/game/depot.c:217: exit=1;
 	ld	c,#0x01
 00125$:
-;src/game/depot.c:221: while(!exit);
+;src/game/depot.c:219: while(!exit);
 	ld	a,c
 	or	a, a
 	jp	Z,00124$
-;src/game/depot.c:223: putM2();
+;src/game/depot.c:221: putM2();
 	jp  _putM2
 	.area _CODE
 	.area _INITIALIZER
