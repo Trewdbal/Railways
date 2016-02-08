@@ -10,29 +10,29 @@ Symbol Table
     ___fs2uchar                                                    **** GX
     ___fsadd                                                       **** GX
     ___fsmul                                                       **** GX
-  0 ___str_0                                                       00A0 R
-  0 ___str_1                                                       00B1 R
-  0 ___str_10                                                      055F R
-  0 ___str_11                                                      0576 R
-  0 ___str_12                                                      0582 R
-  0 ___str_13                                                      0589 R
-  0 ___str_14                                                      05A0 R
-  0 ___str_15                                                      05B7 R
-  0 ___str_16                                                      05C4 R
-  0 ___str_17                                                      05CA R
-  0 ___str_18                                                      05E1 R
-  0 ___str_19                                                      05F9 R
-  0 ___str_2                                                       04ED R
-  0 ___str_3                                                       04EE R
-  0 ___str_4                                                       04F4 R
-  0 ___str_5                                                       0506 R
-  0 ___str_6                                                       051D R
-  0 ___str_7                                                       0534 R
-  0 ___str_8                                                       0541 R
-  0 ___str_9                                                       0548 R
+  0 ___str_0                                                       0160 R
+  0 ___str_1                                                       0171 R
+  0 ___str_10                                                      061F R
+  0 ___str_11                                                      0636 R
+  0 ___str_12                                                      0642 R
+  0 ___str_13                                                      0649 R
+  0 ___str_14                                                      0660 R
+  0 ___str_15                                                      0677 R
+  0 ___str_16                                                      0684 R
+  0 ___str_17                                                      068A R
+  0 ___str_18                                                      06A1 R
+  0 ___str_19                                                      06B9 R
+  0 ___str_2                                                       05AD R
+  0 ___str_3                                                       05AE R
+  0 ___str_4                                                       05B4 R
+  0 ___str_5                                                       05C6 R
+  0 ___str_6                                                       05DD R
+  0 ___str_7                                                       05F4 R
+  0 ___str_8                                                       0601 R
+  0 ___str_9                                                       0608 R
     ___uchar2fs                                                    **** GX
-  0 _buyLocomotive                                                 0606 GR
-  0 _confirmBuyLocomotive                                          0284 GR
+  0 _buyLocomotive                                                 06C6 GR
+  0 _confirmBuyLocomotive                                          0344 GR
     _cpct_drawSolidBox                                             **** GX
     _cpct_drawSprite                                               **** GX
     _cpct_getScreenPtr                                             **** GX
@@ -40,9 +40,9 @@ Symbol Table
     _cpct_memset                                                   **** GX
     _cpct_px2byteM0                                                **** GX
     _cpct_scanKeyboard                                             **** GX
-  0 _drawAllLocomotives                                            0254 GR
+  0 _drawAllLocomotives                                            0314 GR
   0 _drawDepot                                                     0000 GR
-  0 _drawLocomotive                                                00BF GR
+  0 _drawLocomotive                                                017F GR
     _drawMenu                                                      **** GX
     _drawWindow                                                    **** GX
     _floorf                                                        **** GX
@@ -57,7 +57,7 @@ Symbol Table
     _nbTrainList                                                   **** GX
     _putM0                                                         **** GX
     _putM2                                                         **** GX
-  0 _railroadDepot                                                 003E GR
+  0 _railroadDepot                                                 00FE GR
 ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 2.
 Hexadecimal [16-Bits]
 
@@ -65,13 +65,15 @@ Symbol Table
 
     _realloc                                                       **** GX
     _trainList                                                     **** GX
+    _wagon_M2                                                      **** GX
+
 
 ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 3.
 Hexadecimal [16-Bits]
 
 Area Table
 
-   0 _CODE                                      size  6BF   flags    0
+   0 _CODE                                      size  77F   flags    0
    1 _DATA                                      size    0   flags    0
    2 _INITIALIZED                               size    0   flags    0
    3 _DABS                                      size    0   flags    8

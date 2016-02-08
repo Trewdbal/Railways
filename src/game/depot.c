@@ -2,15 +2,38 @@
 
 void drawDepot()
 {
-	u8 i;
+	u8 iTrain;
+	u8 iWagon;
 	u8 *p_video;
 
 	cpct_clearScreen(0b11111111);
 
-	for(i=0; i<nbTrainList; i++)
+	// Draw the "rails"
+	for(iTrain=0; iTrain<12; iTrain++)
 	{
-			p_video = cpct_getScreenPtr(SCR_VMEM, 50, 10+i*20);
-			cpct_drawSprite(l130B_M2, p_video, 10, 10);
+		p_video = cpct_getScreenPtr(SCR_VMEM, 0, 20+iTrain*15);
+		cpct_drawSolidBox(p_video, 0b00000000, 60, 1);
+		p_video = cpct_getScreenPtr(SCR_VMEM, 0, 21+iTrain*15);
+		cpct_drawSolidBox(p_video, 0b00110011, 60, 1);
+	}
+
+	// Vertical bar
+	p_video = cpct_getScreenPtr(SCR_VMEM, 60, 0);
+	cpct_drawSolidBox(p_video, 0b00111111, 1, 200);
+
+	// Draw little trains on the depot screen
+	for(iTrain=0; iTrain<nbTrainList; iTrain++)
+	{
+		// For each train, draw the wagons
+		for(iWagon=0; iWagon<8; iWagon++)
+		{
+			p_video = cpct_getScreenPtr(SCR_VMEM, 5+iWagon*5, 10+iTrain*15);
+			cpct_drawSprite(wagon_M2, p_video, 5, 10);
+		}
+
+		// Draw the locomotive
+		p_video = cpct_getScreenPtr(SCR_VMEM, 5+iWagon*5, 10+iTrain*15);
+		cpct_drawSprite(l130B_M2, p_video, 10, 10);
 	}
 }
 
