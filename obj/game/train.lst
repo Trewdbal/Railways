@@ -1,0 +1,644 @@
+                              1 ;--------------------------------------------------------
+                              2 ; File Created by SDCC : free open source ANSI-C Compiler
+                              3 ; Version 3.6.8 #9946 (Linux)
+                              4 ;--------------------------------------------------------
+                              5 	.module train
+                              6 	.optsdcc -mz80
+                              7 	
+                              8 ;--------------------------------------------------------
+                              9 ; Public variables in this module
+                             10 ;--------------------------------------------------------
+                             11 	.globl _drawWindow
+                             12 	.globl _drawMenu
+                             13 	.globl _putM2
+                             14 	.globl _putM1
+                             15 	.globl _realloc
+                             16 	.globl _malloc
+                             17 	.globl _trainManagement
+                             18 	.globl _confirmBuyLocomotive
+                             19 	.globl _buyLocomotive
+                             20 ;--------------------------------------------------------
+                             21 ; special function registers
+                             22 ;--------------------------------------------------------
+                             23 ;--------------------------------------------------------
+                             24 ; ram data
+                             25 ;--------------------------------------------------------
+                             26 	.area _DATA
+                             27 ;--------------------------------------------------------
+                             28 ; ram data
+                             29 ;--------------------------------------------------------
+                             30 	.area _INITIALIZED
+                             31 ;--------------------------------------------------------
+                             32 ; absolute external ram data
+                             33 ;--------------------------------------------------------
+                             34 	.area _DABS (ABS)
+                             35 ;--------------------------------------------------------
+                             36 ; global & static initialisations
+                             37 ;--------------------------------------------------------
+                             38 	.area _HOME
+                             39 	.area _GSINIT
+                             40 	.area _GSFINAL
+                             41 	.area _GSINIT
+                             42 ;--------------------------------------------------------
+                             43 ; Home
+                             44 ;--------------------------------------------------------
+                             45 	.area _HOME
+                             46 	.area _HOME
+                             47 ;--------------------------------------------------------
+                             48 ; code
+                             49 ;--------------------------------------------------------
+                             50 	.area _CODE
+                             51 ;src/game/train.c:3: void trainManagement()
+                             52 ;	---------------------------------
+                             53 ; Function trainManagement
+                             54 ; ---------------------------------
+   0000                      55 _trainManagement::
+   0000 DD E5         [15]   56 	push	ix
+   0002 DD 21 00 00   [14]   57 	ld	ix,#0
+   0006 DD 39         [15]   58 	add	ix,sp
+   0008 F5            [11]   59 	push	af
+   0009 F5            [11]   60 	push	af
+                             61 ;src/game/train.c:5: const char *txtMenuChoice[] = { 
+   000A 21 00 00      [10]   62 	ld	hl, #0x0000
+   000D 39            [11]   63 	add	hl, sp
+   000E 4D            [ 4]   64 	ld	c,l
+   000F 44            [ 4]   65 	ld	b,h
+   0010 36r38         [10]   66 	ld	(hl), #<(___str_0)
+   0012 23            [ 6]   67 	inc	hl
+   0013 36s00         [10]   68 	ld	(hl), #>(___str_0)
+   0015 69            [ 4]   69 	ld	l, c
+   0016 60            [ 4]   70 	ld	h, b
+   0017 23            [ 6]   71 	inc	hl
+   0018 23            [ 6]   72 	inc	hl
+   0019 11r49r00      [10]   73 	ld	de, #___str_1+0
+   001C 73            [ 7]   74 	ld	(hl), e
+   001D 23            [ 6]   75 	inc	hl
+   001E 72            [ 7]   76 	ld	(hl), d
+                             77 ;src/game/train.c:9: u8 menuChoice = drawMenu(txtMenuChoice,2);
+   001F 3E 02         [ 7]   78 	ld	a, #0x02
+   0021 F5            [11]   79 	push	af
+   0022 33            [ 6]   80 	inc	sp
+   0023 C5            [11]   81 	push	bc
+   0024 CDr00r00      [17]   82 	call	_drawMenu
+   0027 F1            [10]   83 	pop	af
+   0028 33            [ 6]   84 	inc	sp
+                             85 ;src/game/train.c:11: if(menuChoice == 0)
+   0029 7D            [ 4]   86 	ld	a, l
+   002A B7            [ 4]   87 	or	a, a
+   002B 20 03         [12]   88 	jr	NZ,00102$
+                             89 ;src/game/train.c:12: buyLocomotive();
+   002D CDr34r03      [17]   90 	call	_buyLocomotive
+   0030                      91 00102$:
+                             92 ;src/game/train.c:14: putM1();
+   0030 CDr00r00      [17]   93 	call	_putM1
+   0033 DD F9         [10]   94 	ld	sp, ix
+   0035 DD E1         [14]   95 	pop	ix
+   0037 C9            [10]   96 	ret
+   0038                      97 ___str_0:
+   0038 42 75 79 20 61 20    98 	.ascii "Buy a locomotive"
+        6C 6F 63 6F 6D 6F
+        74 69 76 65
+   0048 00                   99 	.db 0x00
+   0049                     100 ___str_1:
+   0049 42 61 63 6B 20 74   101 	.ascii "Back to depot"
+        6F 20 64 65 70 6F
+        74
+   0056 00                  102 	.db 0x00
+                            103 ;src/game/train.c:18: u8 confirmBuyLocomotive(u8 iSelect)
+                            104 ;	---------------------------------
+                            105 ; Function confirmBuyLocomotive
+                            106 ; ---------------------------------
+   0057                     107 _confirmBuyLocomotive::
+   0057 DD E5         [15]  108 	push	ix
+   0059 DD 21 00 00   [14]  109 	ld	ix,#0
+   005D DD 39         [15]  110 	add	ix,sp
+   005F 21 ED FF      [10]  111 	ld	hl, #-19
+   0062 39            [11]  112 	add	hl, sp
+   0063 F9            [ 6]  113 	ld	sp, hl
+                            114 ;src/game/train.c:25: putM2();
+   0064 CDr00r00      [17]  115 	call	_putM2
+                            116 ;src/game/train.c:27: txtWindowLocomotive[1] = "";	
+   0067 21 01 00      [10]  117 	ld	hl, #0x0001
+   006A 39            [11]  118 	add	hl, sp
+   006B 4D            [ 4]  119 	ld	c,l
+   006C 44            [ 4]  120 	ld	b,h
+   006D 23            [ 6]  121 	inc	hl
+   006E 23            [ 6]  122 	inc	hl
+   006F 11r1Br02      [10]  123 	ld	de, #___str_2+0
+   0072 73            [ 7]  124 	ld	(hl), e
+   0073 23            [ 6]  125 	inc	hl
+   0074 72            [ 7]  126 	ld	(hl), d
+                            127 ;src/game/train.c:33: txtWindowLocomotive[2] = "Propulsion: steam";
+   0075 21 04 00      [10]  128 	ld	hl, #0x0004
+   0078 09            [11]  129 	add	hl,bc
+   0079 EB            [ 4]  130 	ex	de,hl
+                            131 ;src/game/train.c:34: txtWindowLocomotive[3] = "Entry of service: 1909";
+   007A 21 06 00      [10]  132 	ld	hl, #0x0006
+   007D 09            [11]  133 	add	hl,bc
+   007E DD 75 FC      [19]  134 	ld	-4 (ix), l
+   0081 DD 74 FD      [19]  135 	ld	-3 (ix), h
+                            136 ;src/game/train.c:35: txtWindowLocomotive[4] = "Maximum speed: 80 km/h";
+   0084 21 08 00      [10]  137 	ld	hl, #0x0008
+   0087 09            [11]  138 	add	hl,bc
+   0088 DD 75 FE      [19]  139 	ld	-2 (ix), l
+   008B DD 74 FF      [19]  140 	ld	-1 (ix), h
+                            141 ;src/game/train.c:36: txtWindowLocomotive[5] = "Price: 1000$";
+   008E 21 0A 00      [10]  142 	ld	hl, #0x000a
+   0091 09            [11]  143 	add	hl,bc
+   0092 DD 75 FA      [19]  144 	ld	-6 (ix), l
+   0095 DD 74 FB      [19]  145 	ld	-5 (ix), h
+                            146 ;src/game/train.c:29: switch(iSelect)
+   0098 DD 7E 04      [19]  147 	ld	a, 4 (ix)
+   009B B7            [ 4]  148 	or	a, a
+   009C 28 18         [12]  149 	jr	Z,00101$
+   009E DD 7E 04      [19]  150 	ld	a, 4 (ix)
+   00A1 3D            [ 4]  151 	dec	a
+   00A2 28 44         [12]  152 	jr	Z,00102$
+   00A4 DD 7E 04      [19]  153 	ld	a, 4 (ix)
+   00A7 D6 02         [ 7]  154 	sub	a, #0x02
+   00A9 28 6E         [12]  155 	jr	Z,00103$
+   00AB DD 7E 04      [19]  156 	ld	a, 4 (ix)
+   00AE D6 03         [ 7]  157 	sub	a, #0x03
+   00B0 CAr4Ar01      [10]  158 	jp	Z,00104$
+   00B3 C3r79r01      [10]  159 	jp	00105$
+                            160 ;src/game/train.c:31: case 0:
+   00B6                     161 00101$:
+                            162 ;src/game/train.c:32: txtWindowLocomotive[0] = "130 B";
+   00B6 69            [ 4]  163 	ld	l, c
+   00B7 60            [ 4]  164 	ld	h, b
+   00B8 36r1C         [10]  165 	ld	(hl), #<(___str_3)
+   00BA 23            [ 6]  166 	inc	hl
+   00BB 36s02         [10]  167 	ld	(hl), #>(___str_3)
+                            168 ;src/game/train.c:33: txtWindowLocomotive[2] = "Propulsion: steam";
+   00BD 3Er22         [ 7]  169 	ld	a, #<(___str_4)
+   00BF 12            [ 7]  170 	ld	(de), a
+   00C0 13            [ 6]  171 	inc	de
+   00C1 3Es02         [ 7]  172 	ld	a, #>(___str_4)
+   00C3 12            [ 7]  173 	ld	(de), a
+                            174 ;src/game/train.c:34: txtWindowLocomotive[3] = "Entry of service: 1909";
+   00C4 DD 6E FC      [19]  175 	ld	l,-4 (ix)
+   00C7 DD 66 FD      [19]  176 	ld	h,-3 (ix)
+   00CA 36r34         [10]  177 	ld	(hl), #<(___str_5)
+   00CC 23            [ 6]  178 	inc	hl
+   00CD 36s02         [10]  179 	ld	(hl), #>(___str_5)
+                            180 ;src/game/train.c:35: txtWindowLocomotive[4] = "Maximum speed: 80 km/h";
+   00CF DD 6E FE      [19]  181 	ld	l,-2 (ix)
+   00D2 DD 66 FF      [19]  182 	ld	h,-1 (ix)
+   00D5 36r4B         [10]  183 	ld	(hl), #<(___str_6)
+   00D7 23            [ 6]  184 	inc	hl
+   00D8 36s02         [10]  185 	ld	(hl), #>(___str_6)
+                            186 ;src/game/train.c:36: txtWindowLocomotive[5] = "Price: 1000$";
+   00DA DD 6E FA      [19]  187 	ld	l,-6 (ix)
+   00DD DD 66 FB      [19]  188 	ld	h,-5 (ix)
+   00E0 36r62         [10]  189 	ld	(hl), #<(___str_7)
+   00E2 23            [ 6]  190 	inc	hl
+   00E3 36s02         [10]  191 	ld	(hl), #>(___str_7)
+                            192 ;src/game/train.c:37: break;
+   00E5 C3r79r01      [10]  193 	jp	00105$
+                            194 ;src/game/train.c:38: case 1:
+   00E8                     195 00102$:
+                            196 ;src/game/train.c:39: txtWindowLocomotive[0] = "141 TA";
+   00E8 69            [ 4]  197 	ld	l, c
+   00E9 60            [ 4]  198 	ld	h, b
+   00EA 36r6F         [10]  199 	ld	(hl), #<(___str_8)
+   00EC 23            [ 6]  200 	inc	hl
+   00ED 36s02         [10]  201 	ld	(hl), #>(___str_8)
+                            202 ;src/game/train.c:40: txtWindowLocomotive[2] = "Propulsion: steam";
+   00EF 3Er22         [ 7]  203 	ld	a, #<(___str_4)
+   00F1 12            [ 7]  204 	ld	(de), a
+   00F2 13            [ 6]  205 	inc	de
+   00F3 3Es02         [ 7]  206 	ld	a, #>(___str_4)
+   00F5 12            [ 7]  207 	ld	(de), a
+                            208 ;src/game/train.c:41: txtWindowLocomotive[3] = "Entry of service: 1911";
+   00F6 DD 6E FC      [19]  209 	ld	l,-4 (ix)
+   00F9 DD 66 FD      [19]  210 	ld	h,-3 (ix)
+   00FC 36r76         [10]  211 	ld	(hl), #<(___str_9)
+   00FE 23            [ 6]  212 	inc	hl
+   00FF 36s02         [10]  213 	ld	(hl), #>(___str_9)
+                            214 ;src/game/train.c:42: txtWindowLocomotive[4] = "Maximum speed: 70 km/h";
+   0101 DD 6E FE      [19]  215 	ld	l,-2 (ix)
+   0104 DD 66 FF      [19]  216 	ld	h,-1 (ix)
+   0107 36r8D         [10]  217 	ld	(hl), #<(___str_10)
+   0109 23            [ 6]  218 	inc	hl
+   010A 36s02         [10]  219 	ld	(hl), #>(___str_10)
+                            220 ;src/game/train.c:43: txtWindowLocomotive[5] = "Price: 900$";
+   010C DD 6E FA      [19]  221 	ld	l,-6 (ix)
+   010F DD 66 FB      [19]  222 	ld	h,-5 (ix)
+   0112 36rA4         [10]  223 	ld	(hl), #<(___str_11)
+   0114 23            [ 6]  224 	inc	hl
+   0115 36s02         [10]  225 	ld	(hl), #>(___str_11)
+                            226 ;src/game/train.c:44: break;
+   0117 18 60         [12]  227 	jr	00105$
+                            228 ;src/game/train.c:45: case 2:
+   0119                     229 00103$:
+                            230 ;src/game/train.c:46: txtWindowLocomotive[0] = "242 CT";
+   0119 69            [ 4]  231 	ld	l, c
+   011A 60            [ 4]  232 	ld	h, b
+   011B 36rB0         [10]  233 	ld	(hl), #<(___str_12)
+   011D 23            [ 6]  234 	inc	hl
+   011E 36s02         [10]  235 	ld	(hl), #>(___str_12)
+                            236 ;src/game/train.c:47: txtWindowLocomotive[2] = "Propulsion: steam";
+   0120 3Er22         [ 7]  237 	ld	a, #<(___str_4)
+   0122 12            [ 7]  238 	ld	(de), a
+   0123 13            [ 6]  239 	inc	de
+   0124 3Es02         [ 7]  240 	ld	a, #>(___str_4)
+   0126 12            [ 7]  241 	ld	(de), a
+                            242 ;src/game/train.c:48: txtWindowLocomotive[3] = "Entry of service: 1930";
+   0127 DD 6E FC      [19]  243 	ld	l,-4 (ix)
+   012A DD 66 FD      [19]  244 	ld	h,-3 (ix)
+   012D 36rB7         [10]  245 	ld	(hl), #<(___str_13)
+   012F 23            [ 6]  246 	inc	hl
+   0130 36s02         [10]  247 	ld	(hl), #>(___str_13)
+                            248 ;src/game/train.c:49: txtWindowLocomotive[4] = "Maximum speed: 85 km/h";
+   0132 DD 6E FE      [19]  249 	ld	l,-2 (ix)
+   0135 DD 66 FF      [19]  250 	ld	h,-1 (ix)
+   0138 36rCE         [10]  251 	ld	(hl), #<(___str_14)
+   013A 23            [ 6]  252 	inc	hl
+   013B 36s02         [10]  253 	ld	(hl), #>(___str_14)
+                            254 ;src/game/train.c:50: txtWindowLocomotive[5] = "Price: 1500$";
+   013D DD 6E FA      [19]  255 	ld	l,-6 (ix)
+   0140 DD 66 FB      [19]  256 	ld	h,-5 (ix)
+   0143 36rE5         [10]  257 	ld	(hl), #<(___str_15)
+   0145 23            [ 6]  258 	inc	hl
+   0146 36s02         [10]  259 	ld	(hl), #>(___str_15)
+                            260 ;src/game/train.c:51: break;
+   0148 18 2F         [12]  261 	jr	00105$
+                            262 ;src/game/train.c:53: case 3:
+   014A                     263 00104$:
+                            264 ;src/game/train.c:54: txtWindowLocomotive[0] = "141 P";
+   014A 69            [ 4]  265 	ld	l, c
+   014B 60            [ 4]  266 	ld	h, b
+   014C 36rF2         [10]  267 	ld	(hl), #<(___str_16)
+   014E 23            [ 6]  268 	inc	hl
+   014F 36s02         [10]  269 	ld	(hl), #>(___str_16)
+                            270 ;src/game/train.c:55: txtWindowLocomotive[2] = "Propulsion: steam";
+   0151 3Er22         [ 7]  271 	ld	a, #<(___str_4)
+   0153 12            [ 7]  272 	ld	(de), a
+   0154 13            [ 6]  273 	inc	de
+   0155 3Es02         [ 7]  274 	ld	a, #>(___str_4)
+   0157 12            [ 7]  275 	ld	(de), a
+                            276 ;src/game/train.c:56: txtWindowLocomotive[3] = "Entry of service: 1942";
+   0158 DD 6E FC      [19]  277 	ld	l,-4 (ix)
+   015B DD 66 FD      [19]  278 	ld	h,-3 (ix)
+   015E 36rF8         [10]  279 	ld	(hl), #<(___str_17)
+   0160 23            [ 6]  280 	inc	hl
+   0161 36s02         [10]  281 	ld	(hl), #>(___str_17)
+                            282 ;src/game/train.c:57: txtWindowLocomotive[4] = "Maximum speed: 105 km/h";
+   0163 DD 6E FE      [19]  283 	ld	l,-2 (ix)
+   0166 DD 66 FF      [19]  284 	ld	h,-1 (ix)
+   0169 36r0F         [10]  285 	ld	(hl), #<(___str_18)
+   016B 23            [ 6]  286 	inc	hl
+   016C 36s03         [10]  287 	ld	(hl), #>(___str_18)
+                            288 ;src/game/train.c:58: txtWindowLocomotive[5] = "Price: 2000$";
+   016E DD 6E FA      [19]  289 	ld	l,-6 (ix)
+   0171 DD 66 FB      [19]  290 	ld	h,-5 (ix)
+   0174 36r27         [10]  291 	ld	(hl), #<(___str_19)
+   0176 23            [ 6]  292 	inc	hl
+   0177 36s03         [10]  293 	ld	(hl), #>(___str_19)
+                            294 ;src/game/train.c:60: }
+   0179                     295 00105$:
+                            296 ;src/game/train.c:63: returnChoice = drawWindow(txtWindowLocomotive, 6, 1);
+   0179 21 06 01      [10]  297 	ld	hl, #0x0106
+   017C E5            [11]  298 	push	hl
+   017D C5            [11]  299 	push	bc
+   017E CDr00r00      [17]  300 	call	_drawWindow
+   0181 F1            [10]  301 	pop	af
+   0182 F1            [10]  302 	pop	af
+                            303 ;src/game/train.c:66: if (returnChoice==1)
+   0183 DD 75 ED      [19]  304 	ld	-19 (ix), l
+   0186 7D            [ 4]  305 	ld	a, l
+   0187 3D            [ 4]  306 	dec	a
+   0188 C2r13r02      [10]  307 	jp	NZ,00110$
+                            308 ;src/game/train.c:68: if(nbTrainList==0)
+   018B 3Ar00r00      [13]  309 	ld	a,(#_nbTrainList + 0)
+   018E B7            [ 4]  310 	or	a, a
+   018F 20 0D         [12]  311 	jr	NZ,00107$
+                            312 ;src/game/train.c:69: trainList = (Train*)malloc(sizeof(Train));
+   0191 21 06 00      [10]  313 	ld	hl, #0x0006
+   0194 E5            [11]  314 	push	hl
+   0195 CDr00r00      [17]  315 	call	_malloc
+   0198 F1            [10]  316 	pop	af
+   0199 22r00r00      [16]  317 	ld	(_trainList), hl
+   019C 18 18         [12]  318 	jr	00108$
+   019E                     319 00107$:
+                            320 ;src/game/train.c:71: realloc(trainList, (nbTrainList+1)*sizeof(Train));
+   019E 21r00r00      [10]  321 	ld	hl,#_nbTrainList + 0
+   01A1 4E            [ 7]  322 	ld	c, (hl)
+   01A2 06 00         [ 7]  323 	ld	b, #0x00
+   01A4 03            [ 6]  324 	inc	bc
+   01A5 69            [ 4]  325 	ld	l, c
+   01A6 60            [ 4]  326 	ld	h, b
+   01A7 29            [11]  327 	add	hl, hl
+   01A8 09            [11]  328 	add	hl, bc
+   01A9 29            [11]  329 	add	hl, hl
+   01AA 4D            [ 4]  330 	ld	c, l
+   01AB 44            [ 4]  331 	ld	b, h
+   01AC 2Ar00r00      [16]  332 	ld	hl, (_trainList)
+   01AF C5            [11]  333 	push	bc
+   01B0 E5            [11]  334 	push	hl
+   01B1 CDr00r00      [17]  335 	call	_realloc
+   01B4 F1            [10]  336 	pop	af
+   01B5 F1            [10]  337 	pop	af
+   01B6                     338 00108$:
+                            339 ;src/game/train.c:74: trainList[nbTrainList].loco = iSelect;
+   01B6 ED 4Br00r00   [20]  340 	ld	bc, (_nbTrainList)
+   01BA 06 00         [ 7]  341 	ld	b, #0x00
+   01BC 69            [ 4]  342 	ld	l, c
+   01BD 60            [ 4]  343 	ld	h, b
+   01BE 29            [11]  344 	add	hl, hl
+   01BF 09            [11]  345 	add	hl, bc
+   01C0 29            [11]  346 	add	hl, hl
+   01C1 4D            [ 4]  347 	ld	c, l
+   01C2 44            [ 4]  348 	ld	b, h
+   01C3 2Ar00r00      [16]  349 	ld	hl, (_trainList)
+   01C6 09            [11]  350 	add	hl, bc
+   01C7 DD 7E 04      [19]  351 	ld	a, 4 (ix)
+   01CA 77            [ 7]  352 	ld	(hl), a
+                            353 ;src/game/train.c:77: trainList[nbTrainList].wagon[0] = 0;
+   01CB ED 4Br00r00   [20]  354 	ld	bc, (_nbTrainList)
+   01CF 06 00         [ 7]  355 	ld	b, #0x00
+   01D1 69            [ 4]  356 	ld	l, c
+   01D2 60            [ 4]  357 	ld	h, b
+   01D3 29            [11]  358 	add	hl, hl
+   01D4 09            [11]  359 	add	hl, bc
+   01D5 29            [11]  360 	add	hl, hl
+   01D6 4D            [ 4]  361 	ld	c, l
+   01D7 44            [ 4]  362 	ld	b, h
+   01D8 2Ar00r00      [16]  363 	ld	hl, (_trainList)
+   01DB 09            [11]  364 	add	hl, bc
+   01DC 23            [ 6]  365 	inc	hl
+   01DD 36 00         [10]  366 	ld	(hl), #0x00
+                            367 ;src/game/train.c:78: trainList[nbTrainList].wagon[1] = 0;
+   01DF ED 4Br00r00   [20]  368 	ld	bc, (_nbTrainList)
+   01E3 06 00         [ 7]  369 	ld	b, #0x00
+   01E5 69            [ 4]  370 	ld	l, c
+   01E6 60            [ 4]  371 	ld	h, b
+   01E7 29            [11]  372 	add	hl, hl
+   01E8 09            [11]  373 	add	hl, bc
+   01E9 29            [11]  374 	add	hl, hl
+   01EA 4D            [ 4]  375 	ld	c, l
+   01EB 44            [ 4]  376 	ld	b, h
+   01EC 2Ar00r00      [16]  377 	ld	hl, (_trainList)
+   01EF 09            [11]  378 	add	hl, bc
+   01F0 23            [ 6]  379 	inc	hl
+   01F1 23            [ 6]  380 	inc	hl
+   01F2 36 00         [10]  381 	ld	(hl), #0x00
+                            382 ;src/game/train.c:79: trainList[nbTrainList].wagon[2] = 0;
+   01F4 ED 4Br00r00   [20]  383 	ld	bc, (_nbTrainList)
+   01F8 06 00         [ 7]  384 	ld	b, #0x00
+   01FA 69            [ 4]  385 	ld	l, c
+   01FB 60            [ 4]  386 	ld	h, b
+   01FC 29            [11]  387 	add	hl, hl
+   01FD 09            [11]  388 	add	hl, bc
+   01FE 29            [11]  389 	add	hl, hl
+   01FF 4D            [ 4]  390 	ld	c, l
+   0200 44            [ 4]  391 	ld	b, h
+   0201 2Ar00r00      [16]  392 	ld	hl, (_trainList)
+   0204 09            [11]  393 	add	hl, bc
+   0205 23            [ 6]  394 	inc	hl
+   0206 23            [ 6]  395 	inc	hl
+   0207 23            [ 6]  396 	inc	hl
+   0208 36 00         [10]  397 	ld	(hl), #0x00
+                            398 ;src/game/train.c:82: nbTrainList++;
+   020A 21r00r00      [10]  399 	ld	hl, #_nbTrainList+0
+   020D 34            [11]  400 	inc	(hl)
+                            401 ;src/game/train.c:83: CURSOR_MODE = PUTTRAIN;
+   020E 21r00r00      [10]  402 	ld	hl,#_CURSOR_MODE + 0
+   0211 36 01         [10]  403 	ld	(hl), #0x01
+   0213                     404 00110$:
+                            405 ;src/game/train.c:86: return returnChoice;
+   0213 DD 6E ED      [19]  406 	ld	l, -19 (ix)
+   0216 DD F9         [10]  407 	ld	sp, ix
+   0218 DD E1         [14]  408 	pop	ix
+   021A C9            [10]  409 	ret
+   021B                     410 ___str_2:
+   021B 00                  411 	.db 0x00
+   021C                     412 ___str_3:
+   021C 31 33 30 20 42      413 	.ascii "130 B"
+   0221 00                  414 	.db 0x00
+   0222                     415 ___str_4:
+   0222 50 72 6F 70 75 6C   416 	.ascii "Propulsion: steam"
+        73 69 6F 6E 3A 20
+        73 74 65 61 6D
+   0233 00                  417 	.db 0x00
+   0234                     418 ___str_5:
+   0234 45 6E 74 72 79 20   419 	.ascii "Entry of service: 1909"
+        6F 66 20 73 65 72
+        76 69 63 65 3A 20
+        31 39 30 39
+   024A 00                  420 	.db 0x00
+   024B                     421 ___str_6:
+   024B 4D 61 78 69 6D 75   422 	.ascii "Maximum speed: 80 km/h"
+        6D 20 73 70 65 65
+        64 3A 20 38 30 20
+        6B 6D 2F 68
+   0261 00                  423 	.db 0x00
+   0262                     424 ___str_7:
+   0262 50 72 69 63 65 3A   425 	.ascii "Price: 1000$"
+        20 31 30 30 30 24
+   026E 00                  426 	.db 0x00
+   026F                     427 ___str_8:
+   026F 31 34 31 20 54 41   428 	.ascii "141 TA"
+   0275 00                  429 	.db 0x00
+   0276                     430 ___str_9:
+   0276 45 6E 74 72 79 20   431 	.ascii "Entry of service: 1911"
+        6F 66 20 73 65 72
+        76 69 63 65 3A 20
+        31 39 31 31
+   028C 00                  432 	.db 0x00
+   028D                     433 ___str_10:
+   028D 4D 61 78 69 6D 75   434 	.ascii "Maximum speed: 70 km/h"
+        6D 20 73 70 65 65
+        64 3A 20 37 30 20
+        6B 6D 2F 68
+   02A3 00                  435 	.db 0x00
+   02A4                     436 ___str_11:
+   02A4 50 72 69 63 65 3A   437 	.ascii "Price: 900$"
+        20 39 30 30 24
+   02AF 00                  438 	.db 0x00
+   02B0                     439 ___str_12:
+   02B0 32 34 32 20 43 54   440 	.ascii "242 CT"
+   02B6 00                  441 	.db 0x00
+   02B7                     442 ___str_13:
+   02B7 45 6E 74 72 79 20   443 	.ascii "Entry of service: 1930"
+        6F 66 20 73 65 72
+        76 69 63 65 3A 20
+        31 39 33 30
+   02CD 00                  444 	.db 0x00
+   02CE                     445 ___str_14:
+   02CE 4D 61 78 69 6D 75   446 	.ascii "Maximum speed: 85 km/h"
+        6D 20 73 70 65 65
+        64 3A 20 38 35 20
+        6B 6D 2F 68
+   02E4 00                  447 	.db 0x00
+   02E5                     448 ___str_15:
+   02E5 50 72 69 63 65 3A   449 	.ascii "Price: 1500$"
+        20 31 35 30 30 24
+   02F1 00                  450 	.db 0x00
+   02F2                     451 ___str_16:
+   02F2 31 34 31 20 50      452 	.ascii "141 P"
+   02F7 00                  453 	.db 0x00
+   02F8                     454 ___str_17:
+   02F8 45 6E 74 72 79 20   455 	.ascii "Entry of service: 1942"
+        6F 66 20 73 65 72
+        76 69 63 65 3A 20
+        31 39 34 32
+   030E 00                  456 	.db 0x00
+   030F                     457 ___str_18:
+   030F 4D 61 78 69 6D 75   458 	.ascii "Maximum speed: 105 km/h"
+        6D 20 73 70 65 65
+        64 3A 20 31 30 35
+        20 6B 6D 2F 68
+   0326 00                  459 	.db 0x00
+   0327                     460 ___str_19:
+   0327 50 72 69 63 65 3A   461 	.ascii "Price: 2000$"
+        20 32 30 30 30 24
+   0333 00                  462 	.db 0x00
+                            463 ;src/game/train.c:89: void buyLocomotive()
+                            464 ;	---------------------------------
+                            465 ; Function buyLocomotive
+                            466 ; ---------------------------------
+   0334                     467 _buyLocomotive::
+   0334 DD E5         [15]  468 	push	ix
+   0336 DD 21 00 00   [14]  469 	ld	ix,#0
+   033A DD 39         [15]  470 	add	ix,sp
+   033C 21 E8 FF      [10]  471 	ld	hl, #-24
+   033F 39            [11]  472 	add	hl, sp
+   0340 F9            [ 6]  473 	ld	sp, hl
+                            474 ;src/game/train.c:91: const char *txtMenuLoco[] = { 
+   0341 21 00 00      [10]  475 	ld	hl, #0x0000
+   0344 39            [11]  476 	add	hl, sp
+   0345 4D            [ 4]  477 	ld	c,l
+   0346 44            [ 4]  478 	ld	b,h
+   0347 36rCF         [10]  479 	ld	(hl), #<(___str_20)
+   0349 23            [ 6]  480 	inc	hl
+   034A 36s03         [10]  481 	ld	(hl), #>(___str_20)
+   034C 69            [ 4]  482 	ld	l, c
+   034D 60            [ 4]  483 	ld	h, b
+   034E 23            [ 6]  484 	inc	hl
+   034F 23            [ 6]  485 	inc	hl
+   0350 11rD5r03      [10]  486 	ld	de, #___str_21+0
+   0353 73            [ 7]  487 	ld	(hl), e
+   0354 23            [ 6]  488 	inc	hl
+   0355 72            [ 7]  489 	ld	(hl), d
+   0356 21 04 00      [10]  490 	ld	hl, #0x0004
+   0359 09            [11]  491 	add	hl, bc
+   035A 11rDCr03      [10]  492 	ld	de, #___str_22+0
+   035D 73            [ 7]  493 	ld	(hl), e
+   035E 23            [ 6]  494 	inc	hl
+   035F 72            [ 7]  495 	ld	(hl), d
+   0360 21 06 00      [10]  496 	ld	hl, #0x0006
+   0363 09            [11]  497 	add	hl, bc
+   0364 11rE3r03      [10]  498 	ld	de, #___str_23+0
+   0367 73            [ 7]  499 	ld	(hl), e
+   0368 23            [ 6]  500 	inc	hl
+   0369 72            [ 7]  501 	ld	(hl), d
+   036A 21 08 00      [10]  502 	ld	hl, #0x0008
+   036D 09            [11]  503 	add	hl, bc
+   036E 11rE9r03      [10]  504 	ld	de, #___str_24+0
+   0371 73            [ 7]  505 	ld	(hl), e
+   0372 23            [ 6]  506 	inc	hl
+   0373 72            [ 7]  507 	ld	(hl), d
+   0374 21 0A 00      [10]  508 	ld	hl, #0x000a
+   0377 09            [11]  509 	add	hl, bc
+   0378 11rF2r03      [10]  510 	ld	de, #___str_25+0
+   037B 73            [ 7]  511 	ld	(hl), e
+   037C 23            [ 6]  512 	inc	hl
+   037D 72            [ 7]  513 	ld	(hl), d
+   037E 21 0C 00      [10]  514 	ld	hl, #0x000c
+   0381 09            [11]  515 	add	hl, bc
+   0382 11rFCr03      [10]  516 	ld	de, #___str_26+0
+   0385 73            [ 7]  517 	ld	(hl), e
+   0386 23            [ 6]  518 	inc	hl
+   0387 72            [ 7]  519 	ld	(hl), d
+   0388 21 0E 00      [10]  520 	ld	hl, #0x000e
+   038B 09            [11]  521 	add	hl, bc
+   038C 11r05r04      [10]  522 	ld	de, #___str_27+0
+   038F 73            [ 7]  523 	ld	(hl), e
+   0390 23            [ 6]  524 	inc	hl
+   0391 72            [ 7]  525 	ld	(hl), d
+   0392 21 10 00      [10]  526 	ld	hl, #0x0010
+   0395 09            [11]  527 	add	hl, bc
+   0396 11r0Er04      [10]  528 	ld	de, #___str_28+0
+   0399 73            [ 7]  529 	ld	(hl), e
+   039A 23            [ 6]  530 	inc	hl
+   039B 72            [ 7]  531 	ld	(hl), d
+   039C 21 12 00      [10]  532 	ld	hl, #0x0012
+   039F 09            [11]  533 	add	hl, bc
+   03A0 11r15r04      [10]  534 	ld	de, #___str_29+0
+   03A3 73            [ 7]  535 	ld	(hl), e
+   03A4 23            [ 6]  536 	inc	hl
+   03A5 72            [ 7]  537 	ld	(hl), d
+   03A6 21 14 00      [10]  538 	ld	hl, #0x0014
+   03A9 09            [11]  539 	add	hl, bc
+   03AA 11r22r04      [10]  540 	ld	de, #___str_30+0
+   03AD 73            [ 7]  541 	ld	(hl), e
+   03AE 23            [ 6]  542 	inc	hl
+   03AF 72            [ 7]  543 	ld	(hl), d
+   03B0 21 16 00      [10]  544 	ld	hl, #0x0016
+   03B3 09            [11]  545 	add	hl, bc
+   03B4 11r2Br04      [10]  546 	ld	de, #___str_31+0
+   03B7 73            [ 7]  547 	ld	(hl), e
+   03B8 23            [ 6]  548 	inc	hl
+   03B9 72            [ 7]  549 	ld	(hl), d
+                            550 ;src/game/train.c:106: confirmBuyLocomotive( drawMenu(txtMenuLoco,12) );
+   03BA 3E 0C         [ 7]  551 	ld	a, #0x0c
+   03BC F5            [11]  552 	push	af
+   03BD 33            [ 6]  553 	inc	sp
+   03BE C5            [11]  554 	push	bc
+   03BF CDr00r00      [17]  555 	call	_drawMenu
+   03C2 F1            [10]  556 	pop	af
+   03C3 33            [ 6]  557 	inc	sp
+   03C4 45            [ 4]  558 	ld	b, l
+   03C5 C5            [11]  559 	push	bc
+   03C6 33            [ 6]  560 	inc	sp
+   03C7 CDr57r00      [17]  561 	call	_confirmBuyLocomotive
+   03CA DD F9         [10]  562 	ld	sp,ix
+   03CC DD E1         [14]  563 	pop	ix
+   03CE C9            [10]  564 	ret
+   03CF                     565 ___str_20:
+   03CF 31 33 30 20 42      566 	.ascii "130 B"
+   03D4 00                  567 	.db 0x00
+   03D5                     568 ___str_21:
+   03D5 31 34 31 20 54 41   569 	.ascii "141 TA"
+   03DB 00                  570 	.db 0x00
+   03DC                     571 ___str_22:
+   03DC 32 34 32 20 43 54   572 	.ascii "242 CT"
+   03E2 00                  573 	.db 0x00
+   03E3                     574 ___str_23:
+   03E3 31 34 31 20 50      575 	.ascii "141 P"
+   03E8 00                  576 	.db 0x00
+   03E9                     577 ___str_24:
+   03E9 42 42 20 36 33 30   578 	.ascii "BB 63000"
+        30 30
+   03F1 00                  579 	.db 0x00
+   03F2                     580 ___str_25:
+   03F2 52 65 20 34 2F 34   581 	.ascii "Re 4/4 II"
+        20 49 49
+   03FB 00                  582 	.db 0x00
+   03FC                     583 ___str_26:
+   03FC 42 42 20 36 37 30   584 	.ascii "BB 67000"
+        30 30
+   0404 00                  585 	.db 0x00
+   0405                     586 ___str_27:
+   0405 42 42 20 31 35 30   587 	.ascii "BB 15000"
+        30 30
+   040D 00                  588 	.db 0x00
+   040E                     589 ___str_28:
+   040E 52 65 20 34 36 30   590 	.ascii "Re 460"
+   0414 00                  591 	.db 0x00
+   0415                     592 ___str_29:
+   0415 44 42 20 43 6C 61   593 	.ascii "DB Class 101"
+        73 73 20 31 30 31
+   0421 00                  594 	.db 0x00
+   0422                     595 ___str_30:
+   0422 42 42 20 32 37 30   596 	.ascii "BB 27000"
+        30 30
+   042A 00                  597 	.db 0x00
+   042B                     598 ___str_31:
+   042B 45 53 20 36 34 46   599 	.ascii "ES 64F4"
+        34
+   0432 00                  600 	.db 0x00
+                            601 	.area _CODE
+                            602 	.area _INITIALIZER
+                            603 	.area _CABS (ABS)
