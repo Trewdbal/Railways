@@ -4,9 +4,9 @@ void windowInfoTile(u8 x, u8 y)
 {
 	const char *txtWindowInfoTile[4];
 
-    txtWindowInfoTile[1] = "";
-    txtWindowInfoTile[2] = "Production: Nothing";
-    txtWindowInfoTile[3] = "Demand: Nothing";
+	txtWindowInfoTile[1] = "";
+	txtWindowInfoTile[2] = "Production: Nothing";
+	txtWindowInfoTile[3] = "Demand: Nothing";
 
 	switch(p_world[y*WIDTH+x])
 	{
@@ -81,7 +81,7 @@ void menuTile(u8 x, u8 y)
 		"Build a railway",
 		"Build a station",
 		"Destroy",
-		"Railroad depot",
+		"Train management",
 		"Accounting",
 		"Resume",
 	};
@@ -119,15 +119,15 @@ void menuTile(u8 x, u8 y)
 		}
 		else if(menuChoice==4)
 		{
-			railroadDepot();
+			trainManagement();
 			menuChoice=6;
 		}
 
 	}
 
-while(menuChoice!=6);
+	while(menuChoice!=6);
 
-putM1();
+	putM1();
 
 }
 
@@ -141,8 +141,8 @@ void game()
 	int i;
 	u8 exit=0;
 	u8 *p_video;
-	locDelocked = 4;
-	
+	nbTrainList=0;
+
 	drawBoxM2(50, 50);
 	p_video = cpct_getScreenPtr(SCR_VMEM, 32, 95);
 	cpct_drawStringM2 ("Generating world...", p_video, 0);	
@@ -152,6 +152,7 @@ void game()
 	putM1();
 	cpct_clearScreen(cpct_px2byteM1(0,0,0,0));
 	drawWorld(ulx, uly);
+
 
 	do{
 		cpct_scanKeyboard(); 
@@ -297,10 +298,44 @@ void game()
 				cpct_clearScreen(cpct_px2byteM1(0,0,0,0));	
 				drawWorld(ulx, uly);
 			}
+			else if(CURSOR_MODE==PUTTRAIN)
+			{
+				// If the cursor is over a station
+				if(p_world[(uly+yCursor)*WIDTH+(ulx+xCursor)] >= SSNS && p_world[(uly+yCursor)*WIDTH+(ulx+xCursor)] <= SLEW )
+				{
+					// Update position
+					trainList[nbTrainList].posX = ulx+xCursor;
+					trainList[nbTrainList].posY = uly+yCursor;
+
+					// Update heading
+					// Vertical tracks
+					if( p_world[trainList[nbTrainList].posY*WIDTH+trainList[nbTrainList].posX] == SSNS ||
+							p_world[trainList[nbTrainList].posY*WIDTH+trainList[nbTrainList].posX] == SMNS ||
+							p_world[trainList[nbTrainList].posY*WIDTH+trainList[nbTrainList].posX] == SLNS )
+					{
+						trainList[nbTrainList].heading = 2;
+
+					}
+					// Horizontal tracks
+					else
+					{
+						trainList[nbTrainList].heading = 0;
+
+					}
+
+
+					// Increment nb of trains in the list. Effect: will be considered for animation in DrawTrain
+					nbTrainList++;
+
+					CURSOR_MODE=NONE;
+					drawTile(ulx, uly, xCursor, yCursor);
+
+				}
+			}
 			// If station or rail cursor, apply the tile
 			else if(CURSOR_MODE>=T_SSNS)
 			{
-				p_world[ulx+xCursor+(uly+yCursor)*WIDTH]=CURSOR_MODE+9;
+				p_world[ulx+xCursor+(uly+yCursor)*WIDTH]=CURSOR_MODE+8;
 
 				// Back to standard cursor only for the stations, not for the rail mode
 				if(CURSOR_MODE<=T_SLEW)
@@ -312,8 +347,10 @@ void game()
 
 		}
 
+		drawTrains(ulx, uly);
 		drawCursor(xCursor, yCursor, 0);
 		drawScrolls(ulx, uly);
+
 	} 
 	while(!exit);
 

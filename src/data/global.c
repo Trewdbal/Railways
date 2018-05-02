@@ -15,6 +15,5 @@ const u8 paletteMenusM2[2] = {0,20};
 
 u8 p_world[WIDTH*HEIGHT];
 u8 CURSOR_MODE=NONE;
-u8 locDelocked = 1;
 Train* trainList;
 u8 nbTrainList=0;

@@ -1,5 +1,5 @@
 XL2
-H 9 areas 9 global symbols
+H 9 areas 8 global symbols
 M global
 O -mz80
 S .__.ABS. Def0000
@@ -10,15 +10,14 @@ S _paletteTrains Def0000
 A _DATA size F02 flags 0 addr 0
 S _p_world Def0000
 S _trainList Def0F00
-A _INITIALIZED size 3 flags 0 addr 0
+A _INITIALIZED size 2 flags 0 addr 0
 S _CURSOR_MODE Def0000
-S _nbTrainList Def0002
-S _locDelocked Def0001
+S _nbTrainList Def0001
 A _DABS size 0 flags 8 addr 0
 A _HOME size 0 flags 0 addr 0
 A _GSINIT size 0 flags 0 addr 0
 A _GSFINAL size 0 flags 0 addr 0
-A _INITIALIZER size 3 flags 0 addr 0
+A _INITIALIZER size 2 flags 0 addr 0
 A _CABS size 0 flags 8 addr 0
 T 00 00
 R 00 00 01 00
@@ -35,10 +34,6 @@ R 00 00 02 00
 T 01 00
 R 00 00 02 00
 T 01 00
-R 00 00 02 00
-T 02 00
-R 00 00 02 00
-T 02 00
 R 00 00 02 00
 T 00 00
 R 00 00 00 00
@@ -60,9 +55,5 @@ T 00 00 00
 R 00 00 07 00
 T 01 00
 R 00 00 07 00
-T 01 00 01
-R 00 00 07 00
-T 02 00
-R 00 00 07 00
-T 02 00 00
+T 01 00 00
 R 00 00 07 00

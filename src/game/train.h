@@ -10,7 +10,7 @@ extern u8 nbTrainList;
 extern u8 CURSOR_MODE;
 
 void trainManagement();
-void buyLocomotive();
-u8 confirmBuyLocomotive(u8);
+void buyTrain();
+u8 confirmBuyTrain(u8);
 
 #endif

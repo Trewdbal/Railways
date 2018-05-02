@@ -7,9 +7,9 @@ Symbol Table
     .__.ABS.                                                    =  0000 G
     .__.CPU.                                                    =  0000 L
     .__.H$L.                                                    =  0000 L
-  0 _EraseMenuEntry                                                0243 GR
-  0 ___str_0                                                       06B4 R
-  0 ___str_1                                                       06B9 R
+  0 _EraseMenuEntry                                                022B GR
+  0 ___str_0                                                       0688 R
+  0 ___str_1                                                       068D R
     _cpct_drawSolidBox                                             **** GX
     _cpct_drawStringM2                                             **** GX
     _cpct_getScreenPtr                                             **** GX
@@ -19,17 +19,17 @@ Symbol Table
     _cpct_scanKeyboard                                             **** GX
     _cpct_setPalette                                               **** GX
     _cpct_setVideoMode                                             **** GX
-  0 _drawBoxM0                                                     0049 GR
-  0 _drawBoxM2                                                     0163 GR
-  0 _drawMenu                                                      042D GR
-  0 _drawMenuEntry                                                 02FD GR
-  0 _drawWindow                                                    052B GR
+  0 _drawBoxM0                                                     0041 GR
+  0 _drawBoxM2                                                     0150 GR
+  0 _drawMenu                                                      040D GR
+  0 _drawMenuEntry                                                 02E1 GR
+  0 _drawWindow                                                    050B GR
     _paletteMenusM1                                                **** GX
     _paletteMenusM2                                                **** GX
     _paletteTrains                                                 **** GX
   0 _putM0                                                         0000 GR
-  0 _putM1                                                         0013 GR
-  0 _putM2                                                         0027 GR
+  0 _putM1                                                         0011 GR
+  0 _putM2                                                         0022 GR
     _strlen                                                        **** GX
 
 
@@ -38,7 +38,7 @@ Hexadecimal [16-Bits]
 
 Area Table
 
-   0 _CODE                                      size  6C8   flags    0
+   0 _CODE                                      size  69C   flags    0
    1 _DATA                                      size    0   flags    0
    2 _INITIALIZED                               size    0   flags    0
    3 _DABS                                      size    0   flags    8

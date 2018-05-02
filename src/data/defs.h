@@ -21,7 +21,7 @@
 // *************
 
 enum {GRASS1, GRASS2, DWELLINGS1, DWELLINGS2, DWELLINGS3, FARM1, FARM2, WATER, FOREST, LIVESTOCK, SSNS, SSEW, SMNS, SMEW, SLNS, SLEW, REW, RNS, REN, RES, RWN, RWS, REWN, REWS, RNSE, RNSW};
-enum {NONE, T_SSNS, T_SSEW, T_SMNS, T_SMEW, T_SLNS, T_SLEW, T_REW, T_RNS, T_REN, T_RES, T_RWN, T_RWS, T_REWN, T_REWS, T_RNSE, T_RNSW};
+enum {NONE, PUTTRAIN, T_SSNS, T_SSEW, T_SMNS, T_SMEW, T_SLNS, T_SLEW, T_REW, T_RNS, T_REN, T_RES, T_RWN, T_RWS, T_REWN, T_REWS, T_RNSE, T_RNSW};
 
 // **********
 // Structures
@@ -31,7 +31,10 @@ typedef struct Train Train;
 struct Train
 {
 	u8 loco;
-	u8 wagon[8];
+	u8 wagon[3];
+	u8 posX;
+	u8 posY;
+	u8 heading;
 }; 
 
 #endif

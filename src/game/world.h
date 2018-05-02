@@ -37,6 +37,8 @@ extern const u8 rail_ew_n[];
 extern const u8 rail_ew_s[];
 extern const u8 rail_ns_w[];
 extern const u8 rail_ns_e[];
+extern const u8 train_h[];
+extern const u8 train_v[];
 
 void drawCursor(u8, u8, u8);
 void patternTile(u8, int, u8, u8, u8*);
@@ -44,5 +46,7 @@ void generateWorld();
 void drawTile(u8, u8, u8, u8);
 void drawScrolls(u8, u8);
 void drawWorld(u8, u8);
+void setTrainHeading(u8);
+void drawTrains(u8, u8);
 
 #endif

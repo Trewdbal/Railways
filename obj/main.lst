@@ -1,237 +1,224 @@
                               1 ;--------------------------------------------------------
                               2 ; File Created by SDCC : free open source ANSI-C Compiler
-                              3 ; Version 3.5.4 #9329 (Linux)
-                              4 ; This file was generated Mon Feb  8 17:23:00 2016
-                              5 ;--------------------------------------------------------
-                              6 	.module main
-                              7 	.optsdcc -mz80
-                              8 	
-                              9 ;--------------------------------------------------------
-                             10 ; Public variables in this module
-                             11 ;--------------------------------------------------------
-                             12 	.globl _main
-                             13 	.globl _game
-                             14 	.globl _drawWindow
-                             15 	.globl _drawMenu
-                             16 	.globl _putM2
-                             17 	.globl _cpct_setPALColour
-                             18 	.globl _cpct_fw2hw
-                             19 	.globl _cpct_setVideoMode
-                             20 	.globl _cpct_disableFirmware
-                             21 	.globl _cpct_reenableFirmware
-                             22 ;--------------------------------------------------------
-                             23 ; special function registers
+                              3 ; Version 3.6.8 #9946 (Linux)
+                              4 ;--------------------------------------------------------
+                              5 	.module main
+                              6 	.optsdcc -mz80
+                              7 	
+                              8 ;--------------------------------------------------------
+                              9 ; Public variables in this module
+                             10 ;--------------------------------------------------------
+                             11 	.globl _main
+                             12 	.globl _game
+                             13 	.globl _drawWindow
+                             14 	.globl _drawMenu
+                             15 	.globl _putM2
+                             16 	.globl _cpct_setPALColour
+                             17 	.globl _cpct_fw2hw
+                             18 	.globl _cpct_setVideoMode
+                             19 	.globl _cpct_disableFirmware
+                             20 	.globl _cpct_reenableFirmware
+                             21 ;--------------------------------------------------------
+                             22 ; special function registers
+                             23 ;--------------------------------------------------------
                              24 ;--------------------------------------------------------
-                             25 ;--------------------------------------------------------
-                             26 ; ram data
-                             27 ;--------------------------------------------------------
-                             28 	.area _DATA
-                             29 ;--------------------------------------------------------
-                             30 ; ram data
-                             31 ;--------------------------------------------------------
-                             32 	.area _INITIALIZED
-                             33 ;--------------------------------------------------------
-                             34 ; absolute external ram data
-                             35 ;--------------------------------------------------------
-                             36 	.area _DABS (ABS)
-                             37 ;--------------------------------------------------------
-                             38 ; global & static initialisations
-                             39 ;--------------------------------------------------------
-                             40 	.area _HOME
-                             41 	.area _GSINIT
-                             42 	.area _GSFINAL
-                             43 	.area _GSINIT
-                             44 ;--------------------------------------------------------
-                             45 ; Home
-                             46 ;--------------------------------------------------------
+                             25 ; ram data
+                             26 ;--------------------------------------------------------
+                             27 	.area _DATA
+                             28 ;--------------------------------------------------------
+                             29 ; ram data
+                             30 ;--------------------------------------------------------
+                             31 	.area _INITIALIZED
+                             32 ;--------------------------------------------------------
+                             33 ; absolute external ram data
+                             34 ;--------------------------------------------------------
+                             35 	.area _DABS (ABS)
+                             36 ;--------------------------------------------------------
+                             37 ; global & static initialisations
+                             38 ;--------------------------------------------------------
+                             39 	.area _HOME
+                             40 	.area _GSINIT
+                             41 	.area _GSFINAL
+                             42 	.area _GSINIT
+                             43 ;--------------------------------------------------------
+                             44 ; Home
+                             45 ;--------------------------------------------------------
+                             46 	.area _HOME
                              47 	.area _HOME
-                             48 	.area _HOME
-                             49 ;--------------------------------------------------------
-                             50 ; code
-                             51 ;--------------------------------------------------------
-                             52 	.area _CODE
-                             53 ;src/main.c:11: void main(void)
-                             54 ;	---------------------------------
-                             55 ; Function main
-                             56 ; ---------------------------------
-   0000                      57 _main::
-   0000 DD E5         [15]   58 	push	ix
-   0002 DD 21 00 00   [14]   59 	ld	ix,#0
-   0006 DD 39         [15]   60 	add	ix,sp
-   0008 21 EE FF      [10]   61 	ld	hl,#-18
-   000B 39            [11]   62 	add	hl,sp
-   000C F9            [ 6]   63 	ld	sp,hl
-                             64 ;src/main.c:16: const char *menuMain[] = { 
-   000D 21 06 00      [10]   65 	ld	hl,#0x0006
-   0010 39            [11]   66 	add	hl,sp
-   0011 5D            [ 4]   67 	ld	e,l
-   0012 54            [ 4]   68 	ld	d,h
-   0013 36rF5         [10]   69 	ld	(hl),#<(___str_0)
-   0015 23            [ 6]   70 	inc	hl
-   0016 36s00         [10]   71 	ld	(hl),#>(___str_0)
-   0018 6B            [ 4]   72 	ld	l, e
-   0019 62            [ 4]   73 	ld	h, d
-   001A 23            [ 6]   74 	inc	hl
-   001B 23            [ 6]   75 	inc	hl
-   001C 01rFEr00      [10]   76 	ld	bc,#___str_1+0
-   001F 71            [ 7]   77 	ld	(hl),c
-   0020 23            [ 6]   78 	inc	hl
-   0021 70            [ 7]   79 	ld	(hl),b
-   0022 21 04 00      [10]   80 	ld	hl,#0x0004
-   0025 19            [11]   81 	add	hl,de
-   0026 01r06r01      [10]   82 	ld	bc,#___str_2+0
-   0029 71            [ 7]   83 	ld	(hl),c
-   002A 23            [ 6]   84 	inc	hl
-   002B 70            [ 7]   85 	ld	(hl),b
-                             86 ;src/main.c:22: const char *windowCredit[] = { 
-   002C 21 00 00      [10]   87 	ld	hl,#0x0000
-   002F 39            [11]   88 	add	hl,sp
-   0030 DD 75 FC      [19]   89 	ld	-4 (ix),l
-   0033 DD 74 FD      [19]   90 	ld	-3 (ix),h
-   0036 DD 6E FC      [19]   91 	ld	l,-4 (ix)
-   0039 DD 66 FD      [19]   92 	ld	h,-3 (ix)
-   003C 36r0B         [10]   93 	ld	(hl),#<(___str_3)
-   003E 23            [ 6]   94 	inc	hl
-   003F 36s01         [10]   95 	ld	(hl),#>(___str_3)
-   0041 DD 6E FC      [19]   96 	ld	l,-4 (ix)
-   0044 DD 66 FD      [19]   97 	ld	h,-3 (ix)
-   0047 23            [ 6]   98 	inc	hl
-   0048 23            [ 6]   99 	inc	hl
-   0049 01r14r01      [10]  100 	ld	bc,#___str_4+0
-   004C 71            [ 7]  101 	ld	(hl),c
-   004D 23            [ 6]  102 	inc	hl
-   004E 70            [ 7]  103 	ld	(hl),b
-   004F DD 7E FC      [19]  104 	ld	a,-4 (ix)
-   0052 C6 04         [ 7]  105 	add	a, #0x04
-   0054 6F            [ 4]  106 	ld	l,a
-   0055 DD 7E FD      [19]  107 	ld	a,-3 (ix)
-   0058 CE 00         [ 7]  108 	adc	a, #0x00
-   005A 67            [ 4]  109 	ld	h,a
-   005B 01r15r01      [10]  110 	ld	bc,#___str_5+0
-   005E 71            [ 7]  111 	ld	(hl),c
-   005F 23            [ 6]  112 	inc	hl
-   0060 70            [ 7]  113 	ld	(hl),b
-                            114 ;src/main.c:28: firmware = cpct_disableFirmware();
-   0061 D5            [11]  115 	push	de
-   0062 CDr00r00      [17]  116 	call	_cpct_disableFirmware
-   0065 D1            [10]  117 	pop	de
-   0066 DD 75 FA      [19]  118 	ld	-6 (ix),l
-   0069 DD 74 FB      [19]  119 	ld	-5 (ix),h
-                            120 ;src/main.c:30: cpct_fw2hw(paletteTrains, 16);
-   006C 21r00r00      [10]  121 	ld	hl,#_paletteTrains
-   006F D5            [11]  122 	push	de
-   0070 01 10 00      [10]  123 	ld	bc,#0x0010
-   0073 C5            [11]  124 	push	bc
-   0074 E5            [11]  125 	push	hl
-   0075 CDr00r00      [17]  126 	call	_cpct_fw2hw
-   0078 D1            [10]  127 	pop	de
-                            128 ;src/main.c:31: cpct_fw2hw(paletteMenusM2, 2);
-   0079 21r00r00      [10]  129 	ld	hl,#_paletteMenusM2
-   007C D5            [11]  130 	push	de
-   007D 01 02 00      [10]  131 	ld	bc,#0x0002
-   0080 C5            [11]  132 	push	bc
-   0081 E5            [11]  133 	push	hl
-   0082 CDr00r00      [17]  134 	call	_cpct_fw2hw
-   0085 D1            [10]  135 	pop	de
-                            136 ;src/main.c:32: cpct_fw2hw(paletteMenusM1, 4);
-   0086 21r00r00      [10]  137 	ld	hl,#_paletteMenusM1
-   0089 D5            [11]  138 	push	de
-   008A 01 04 00      [10]  139 	ld	bc,#0x0004
-   008D C5            [11]  140 	push	bc
-   008E E5            [11]  141 	push	hl
-   008F CDr00r00      [17]  142 	call	_cpct_fw2hw
-   0092 D1            [10]  143 	pop	de
-                            144 ;src/main.c:34: cpct_setBorder(paletteTrains[12]);
-   0093 3Ar0Cr00      [13]  145 	ld	a, (#_paletteTrains + 12)
-   0096 D5            [11]  146 	push	de
-   0097 57            [ 4]  147 	ld	d,a
-   0098 1E 10         [ 7]  148 	ld	e,#0x10
-   009A D5            [11]  149 	push	de
-   009B CDr00r00      [17]  150 	call	_cpct_setPALColour
-   009E CDr00r00      [17]  151 	call	_putM2
-   00A1 D1            [10]  152 	pop	de
-                            153 ;src/main.c:38: do{
-   00A2 DD 73 FE      [19]  154 	ld	-2 (ix),e
-   00A5 DD 72 FF      [19]  155 	ld	-1 (ix),d
-   00A8                     156 00105$:
-                            157 ;src/main.c:39: menuChoice = drawMenu(menuMain,3);
-   00A8 DD 5E FE      [19]  158 	ld	e,-2 (ix)
-   00AB DD 56 FF      [19]  159 	ld	d,-1 (ix)
-   00AE 3E 03         [ 7]  160 	ld	a,#0x03
-   00B0 F5            [11]  161 	push	af
-   00B1 33            [ 6]  162 	inc	sp
-   00B2 D5            [11]  163 	push	de
-   00B3 CDr00r00      [17]  164 	call	_drawMenu
-   00B6 F1            [10]  165 	pop	af
-   00B7 33            [ 6]  166 	inc	sp
-   00B8 55            [ 4]  167 	ld	d,l
-                            168 ;src/main.c:41: if(menuChoice==0)
-   00B9 7A            [ 4]  169 	ld	a,d
-   00BA B7            [ 4]  170 	or	a, a
-   00BB 20 08         [12]  171 	jr	NZ,00102$
-                            172 ;src/main.c:43: game();
-   00BD D5            [11]  173 	push	de
-   00BE CDr00r00      [17]  174 	call	_game
-   00C1 CDr00r00      [17]  175 	call	_putM2
-   00C4 D1            [10]  176 	pop	de
-   00C5                     177 00102$:
-                            178 ;src/main.c:48: if(menuChoice==1)
-   00C5 7A            [ 4]  179 	ld	a,d
-   00C6 3D            [ 4]  180 	dec	a
-   00C7 20 12         [12]  181 	jr	NZ,00106$
-                            182 ;src/main.c:49: drawWindow(windowCredit,3,0);
-   00C9 DD 4E FC      [19]  183 	ld	c,-4 (ix)
-   00CC DD 46 FD      [19]  184 	ld	b,-3 (ix)
-   00CF D5            [11]  185 	push	de
-   00D0 21 03 00      [10]  186 	ld	hl,#0x0003
-   00D3 E5            [11]  187 	push	hl
-   00D4 C5            [11]  188 	push	bc
-   00D5 CDr00r00      [17]  189 	call	_drawWindow
-   00D8 F1            [10]  190 	pop	af
-   00D9 F1            [10]  191 	pop	af
-   00DA D1            [10]  192 	pop	de
-   00DB                     193 00106$:
-                            194 ;src/main.c:51: while(menuChoice!=2);
-   00DB 7A            [ 4]  195 	ld	a,d
-   00DC D6 02         [ 7]  196 	sub	a, #0x02
-   00DE 20 C8         [12]  197 	jr	NZ,00105$
-                            198 ;src/main.c:53: cpct_setVideoMode(0);
-   00E0 AF            [ 4]  199 	xor	a, a
-   00E1 F5            [11]  200 	push	af
-   00E2 33            [ 6]  201 	inc	sp
-   00E3 CDr00r00      [17]  202 	call	_cpct_setVideoMode
-   00E6 33            [ 6]  203 	inc	sp
-                            204 ;src/main.c:54: cpct_reenableFirmware(firmware);
-   00E7 DD 6E FA      [19]  205 	ld	l,-6 (ix)
-   00EA DD 66 FB      [19]  206 	ld	h,-5 (ix)
-   00ED CDr00r00      [17]  207 	call	_cpct_reenableFirmware
-   00F0 DD F9         [10]  208 	ld	sp, ix
-   00F2 DD E1         [14]  209 	pop	ix
-   00F4 C9            [10]  210 	ret
-   00F5                     211 ___str_0:
-   00F5 4E 65 77 20 67 61   212 	.ascii "New game"
+                             48 ;--------------------------------------------------------
+                             49 ; code
+                             50 ;--------------------------------------------------------
+                             51 	.area _CODE
+                             52 ;src/main.c:11: void main(void)
+                             53 ;	---------------------------------
+                             54 ; Function main
+                             55 ; ---------------------------------
+   0000                      56 _main::
+   0000 DD E5         [15]   57 	push	ix
+   0002 DD 21 00 00   [14]   58 	ld	ix,#0
+   0006 DD 39         [15]   59 	add	ix,sp
+   0008 21 EE FF      [10]   60 	ld	hl, #-18
+   000B 39            [11]   61 	add	hl, sp
+   000C F9            [ 6]   62 	ld	sp, hl
+                             63 ;src/main.c:16: const char *menuMain[] = { 
+   000D 21 06 00      [10]   64 	ld	hl, #0x0006
+   0010 39            [11]   65 	add	hl, sp
+   0011 DD 75 FC      [19]   66 	ld	-4 (ix), l
+   0014 DD 74 FD      [19]   67 	ld	-3 (ix), h
+   0017 36rE7         [10]   68 	ld	(hl), #<(___str_0)
+   0019 23            [ 6]   69 	inc	hl
+   001A 36s00         [10]   70 	ld	(hl), #>(___str_0)
+   001C DD 6E FC      [19]   71 	ld	l,-4 (ix)
+   001F DD 66 FD      [19]   72 	ld	h,-3 (ix)
+   0022 23            [ 6]   73 	inc	hl
+   0023 23            [ 6]   74 	inc	hl
+   0024 01rF0r00      [10]   75 	ld	bc, #___str_1+0
+   0027 71            [ 7]   76 	ld	(hl), c
+   0028 23            [ 6]   77 	inc	hl
+   0029 70            [ 7]   78 	ld	(hl), b
+   002A DD 7E FC      [19]   79 	ld	a, -4 (ix)
+   002D C6 04         [ 7]   80 	add	a, #0x04
+   002F 6F            [ 4]   81 	ld	l, a
+   0030 DD 7E FD      [19]   82 	ld	a, -3 (ix)
+   0033 CE 00         [ 7]   83 	adc	a, #0x00
+   0035 67            [ 4]   84 	ld	h, a
+   0036 01rF8r00      [10]   85 	ld	bc, #___str_2+0
+   0039 71            [ 7]   86 	ld	(hl), c
+   003A 23            [ 6]   87 	inc	hl
+   003B 70            [ 7]   88 	ld	(hl), b
+                             89 ;src/main.c:22: const char *windowCredit[] = { 
+   003C 21 00 00      [10]   90 	ld	hl, #0x0000
+   003F 39            [11]   91 	add	hl, sp
+   0040 4D            [ 4]   92 	ld	c,l
+   0041 44            [ 4]   93 	ld	b,h
+   0042 36rFD         [10]   94 	ld	(hl), #<(___str_3)
+   0044 23            [ 6]   95 	inc	hl
+   0045 36s00         [10]   96 	ld	(hl), #>(___str_3)
+   0047 69            [ 4]   97 	ld	l, c
+   0048 60            [ 4]   98 	ld	h, b
+   0049 23            [ 6]   99 	inc	hl
+   004A 23            [ 6]  100 	inc	hl
+   004B 11r06r01      [10]  101 	ld	de, #___str_4+0
+   004E 73            [ 7]  102 	ld	(hl), e
+   004F 23            [ 6]  103 	inc	hl
+   0050 72            [ 7]  104 	ld	(hl), d
+   0051 21 04 00      [10]  105 	ld	hl, #0x0004
+   0054 09            [11]  106 	add	hl, bc
+   0055 11r07r01      [10]  107 	ld	de, #___str_5+0
+   0058 73            [ 7]  108 	ld	(hl), e
+   0059 23            [ 6]  109 	inc	hl
+   005A 72            [ 7]  110 	ld	(hl), d
+                            111 ;src/main.c:28: firmware = cpct_disableFirmware();
+   005B C5            [11]  112 	push	bc
+   005C CDr00r00      [17]  113 	call	_cpct_disableFirmware
+   005F C1            [10]  114 	pop	bc
+   0060 DD 75 FA      [19]  115 	ld	-6 (ix), l
+   0063 DD 74 FB      [19]  116 	ld	-5 (ix), h
+                            117 ;src/main.c:30: cpct_fw2hw(paletteTrains, 16);
+   0066 C5            [11]  118 	push	bc
+   0067 21 10 00      [10]  119 	ld	hl, #0x0010
+   006A E5            [11]  120 	push	hl
+   006B 21r00r00      [10]  121 	ld	hl, #_paletteTrains
+   006E E5            [11]  122 	push	hl
+   006F CDr00r00      [17]  123 	call	_cpct_fw2hw
+   0072 21 02 00      [10]  124 	ld	hl, #0x0002
+   0075 E5            [11]  125 	push	hl
+   0076 21r00r00      [10]  126 	ld	hl, #_paletteMenusM2
+   0079 E5            [11]  127 	push	hl
+   007A CDr00r00      [17]  128 	call	_cpct_fw2hw
+   007D 21 04 00      [10]  129 	ld	hl, #0x0004
+   0080 E5            [11]  130 	push	hl
+   0081 21r00r00      [10]  131 	ld	hl, #_paletteMenusM1
+   0084 E5            [11]  132 	push	hl
+   0085 CDr00r00      [17]  133 	call	_cpct_fw2hw
+   0088 C1            [10]  134 	pop	bc
+                            135 ;src/main.c:34: cpct_setBorder(paletteTrains[12]);
+   0089 21r0Cr00      [10]  136 	ld	hl, #_paletteTrains + 12
+   008C 56            [ 7]  137 	ld	d, (hl)
+   008D C5            [11]  138 	push	bc
+   008E 1E 10         [ 7]  139 	ld	e, #0x10
+   0090 D5            [11]  140 	push	de
+   0091 CDr00r00      [17]  141 	call	_cpct_setPALColour
+   0094 CDr00r00      [17]  142 	call	_putM2
+   0097 C1            [10]  143 	pop	bc
+                            144 ;src/main.c:38: do{
+   0098 DD 71 FE      [19]  145 	ld	-2 (ix), c
+   009B DD 70 FF      [19]  146 	ld	-1 (ix), b
+   009E                     147 00105$:
+                            148 ;src/main.c:39: menuChoice = drawMenu(menuMain,3);
+   009E DD 4E FC      [19]  149 	ld	c,-4 (ix)
+   00A1 DD 46 FD      [19]  150 	ld	b,-3 (ix)
+   00A4 3E 03         [ 7]  151 	ld	a, #0x03
+   00A6 F5            [11]  152 	push	af
+   00A7 33            [ 6]  153 	inc	sp
+   00A8 C5            [11]  154 	push	bc
+   00A9 CDr00r00      [17]  155 	call	_drawMenu
+   00AC F1            [10]  156 	pop	af
+   00AD 33            [ 6]  157 	inc	sp
+                            158 ;src/main.c:41: if(menuChoice==0)
+   00AE 7D            [ 4]  159 	ld	a, l
+   00AF B7            [ 4]  160 	or	a, a
+   00B0 20 08         [12]  161 	jr	NZ,00102$
+                            162 ;src/main.c:43: game();
+   00B2 E5            [11]  163 	push	hl
+   00B3 CDr00r00      [17]  164 	call	_game
+   00B6 CDr00r00      [17]  165 	call	_putM2
+   00B9 E1            [10]  166 	pop	hl
+   00BA                     167 00102$:
+                            168 ;src/main.c:48: if(menuChoice==1)
+   00BA 7D            [ 4]  169 	ld	a, l
+   00BB 3D            [ 4]  170 	dec	a
+   00BC 20 12         [12]  171 	jr	NZ,00106$
+                            172 ;src/main.c:49: drawWindow(windowCredit,3,0);
+   00BE DD 4E FE      [19]  173 	ld	c,-2 (ix)
+   00C1 DD 46 FF      [19]  174 	ld	b,-1 (ix)
+   00C4 E5            [11]  175 	push	hl
+   00C5 11 03 00      [10]  176 	ld	de, #0x0003
+   00C8 D5            [11]  177 	push	de
+   00C9 C5            [11]  178 	push	bc
+   00CA CDr00r00      [17]  179 	call	_drawWindow
+   00CD F1            [10]  180 	pop	af
+   00CE F1            [10]  181 	pop	af
+   00CF E1            [10]  182 	pop	hl
+   00D0                     183 00106$:
+                            184 ;src/main.c:51: while(menuChoice!=2);
+   00D0 7D            [ 4]  185 	ld	a, l
+                            186 ;src/main.c:53: cpct_setVideoMode(0);
+   00D1 D6 02         [ 7]  187 	sub	a,#0x02
+   00D3 20 C9         [12]  188 	jr	NZ,00105$
+   00D5 6F            [ 4]  189 	ld	l,a
+   00D6 CDr00r00      [17]  190 	call	_cpct_setVideoMode
+                            191 ;src/main.c:54: cpct_reenableFirmware(firmware);
+   00D9 DD 6E FA      [19]  192 	ld	l,-6 (ix)
+   00DC DD 66 FB      [19]  193 	ld	h,-5 (ix)
+   00DF CDr00r00      [17]  194 	call	_cpct_reenableFirmware
+   00E2 DD F9         [10]  195 	ld	sp, ix
+   00E4 DD E1         [14]  196 	pop	ix
+   00E6 C9            [10]  197 	ret
+   00E7                     198 ___str_0:
+   00E7 4E 65 77 20 67 61   199 	.ascii "New game"
         6D 65
-   00FD 00                  213 	.db 0x00
-   00FE                     214 ___str_1:
-   00FE 43 72 65 64 69 74   215 	.ascii "Credits"
+   00EF 00                  200 	.db 0x00
+   00F0                     201 ___str_1:
+   00F0 43 72 65 64 69 74   202 	.ascii "Credits"
         73
-   0105 00                  216 	.db 0x00
-   0106                     217 ___str_2:
-   0106 51 75 69 74         218 	.ascii "Quit"
-   010A 00                  219 	.db 0x00
-   010B                     220 ___str_3:
-   010B 52 61 69 6C 77 61   221 	.ascii "Railways"
+   00F7 00                  203 	.db 0x00
+   00F8                     204 ___str_2:
+   00F8 51 75 69 74         205 	.ascii "Quit"
+   00FC 00                  206 	.db 0x00
+   00FD                     207 ___str_3:
+   00FD 52 61 69 6C 77 61   208 	.ascii "Railways"
         79 73
-   0113 00                  222 	.db 0x00
-   0114                     223 ___str_4:
-   0114 00                  224 	.db 0x00
-   0115                     225 ___str_5:
-   0115 54 72 65 77 64 62   226 	.ascii "Trewdbal  Productions 2016"
+   0105 00                  209 	.db 0x00
+   0106                     210 ___str_4:
+   0106 00                  211 	.db 0x00
+   0107                     212 ___str_5:
+   0107 54 72 65 77 64 62   213 	.ascii "Trewdbal  Productions 2016"
         61 6C 20 20 50 72
         6F 64 75 63 74 69
         6F 6E 73 20 32 30
         31 36
-   012F 00                  227 	.db 0x00
-                            228 	.area _CODE
-                            229 	.area _INITIALIZER
-                            230 	.area _CABS (ABS)
+   0121 00                  214 	.db 0x00
+                            215 	.area _CODE
+                            216 	.area _INITIALIZER
+                            217 	.area _CABS (ABS)

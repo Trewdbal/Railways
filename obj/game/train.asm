@@ -15,8 +15,8 @@
 	.globl _realloc
 	.globl _malloc
 	.globl _trainManagement
-	.globl _confirmBuyLocomotive
-	.globl _buyLocomotive
+	.globl _confirmBuyTrain
+	.globl _buyTrain
 ;--------------------------------------------------------
 ; special function registers
 ;--------------------------------------------------------
@@ -86,8 +86,8 @@ _trainManagement::
 	ld	a, l
 	or	a, a
 	jr	NZ,00102$
-;src/game/train.c:12: buyLocomotive();
-	call	_buyLocomotive
+;src/game/train.c:12: buyTrain();
+	call	_buyTrain
 00102$:
 ;src/game/train.c:14: putM1();
 	call	_putM1
@@ -95,16 +95,16 @@ _trainManagement::
 	pop	ix
 	ret
 ___str_0:
-	.ascii "Buy a locomotive"
+	.ascii "New train"
 	.db 0x00
 ___str_1:
-	.ascii "Back to depot"
+	.ascii "Manage existing"
 	.db 0x00
-;src/game/train.c:18: u8 confirmBuyLocomotive(u8 iSelect)
+;src/game/train.c:18: u8 confirmBuyTrain(u8 iSelect)
 ;	---------------------------------
-; Function confirmBuyLocomotive
+; Function confirmBuyTrain
 ; ---------------------------------
-_confirmBuyLocomotive::
+_confirmBuyTrain::
 	push	ix
 	ld	ix,#0
 	add	ix,sp
@@ -131,8 +131,8 @@ _confirmBuyLocomotive::
 ;src/game/train.c:34: txtWindowLocomotive[3] = "Entry of service: 1909";
 	ld	hl, #0x0006
 	add	hl,bc
-	ld	-4 (ix), l
-	ld	-3 (ix), h
+	ld	-6 (ix), l
+	ld	-5 (ix), h
 ;src/game/train.c:35: txtWindowLocomotive[4] = "Maximum speed: 80 km/h";
 	ld	hl, #0x0008
 	add	hl,bc
@@ -141,8 +141,8 @@ _confirmBuyLocomotive::
 ;src/game/train.c:36: txtWindowLocomotive[5] = "Price: 1000$";
 	ld	hl, #0x000a
 	add	hl,bc
-	ld	-6 (ix), l
-	ld	-5 (ix), h
+	ld	-4 (ix), l
+	ld	-3 (ix), h
 ;src/game/train.c:29: switch(iSelect)
 	ld	a, 4 (ix)
 	or	a, a
@@ -172,8 +172,8 @@ _confirmBuyLocomotive::
 	ld	a, #>(___str_4)
 	ld	(de), a
 ;src/game/train.c:34: txtWindowLocomotive[3] = "Entry of service: 1909";
-	ld	l,-4 (ix)
-	ld	h,-3 (ix)
+	ld	l,-6 (ix)
+	ld	h,-5 (ix)
 	ld	(hl), #<(___str_5)
 	inc	hl
 	ld	(hl), #>(___str_5)
@@ -184,8 +184,8 @@ _confirmBuyLocomotive::
 	inc	hl
 	ld	(hl), #>(___str_6)
 ;src/game/train.c:36: txtWindowLocomotive[5] = "Price: 1000$";
-	ld	l,-6 (ix)
-	ld	h,-5 (ix)
+	ld	l,-4 (ix)
+	ld	h,-3 (ix)
 	ld	(hl), #<(___str_7)
 	inc	hl
 	ld	(hl), #>(___str_7)
@@ -206,8 +206,8 @@ _confirmBuyLocomotive::
 	ld	a, #>(___str_4)
 	ld	(de), a
 ;src/game/train.c:41: txtWindowLocomotive[3] = "Entry of service: 1911";
-	ld	l,-4 (ix)
-	ld	h,-3 (ix)
+	ld	l,-6 (ix)
+	ld	h,-5 (ix)
 	ld	(hl), #<(___str_9)
 	inc	hl
 	ld	(hl), #>(___str_9)
@@ -218,8 +218,8 @@ _confirmBuyLocomotive::
 	inc	hl
 	ld	(hl), #>(___str_10)
 ;src/game/train.c:43: txtWindowLocomotive[5] = "Price: 900$";
-	ld	l,-6 (ix)
-	ld	h,-5 (ix)
+	ld	l,-4 (ix)
+	ld	h,-3 (ix)
 	ld	(hl), #<(___str_11)
 	inc	hl
 	ld	(hl), #>(___str_11)
@@ -240,8 +240,8 @@ _confirmBuyLocomotive::
 	ld	a, #>(___str_4)
 	ld	(de), a
 ;src/game/train.c:48: txtWindowLocomotive[3] = "Entry of service: 1930";
-	ld	l,-4 (ix)
-	ld	h,-3 (ix)
+	ld	l,-6 (ix)
+	ld	h,-5 (ix)
 	ld	(hl), #<(___str_13)
 	inc	hl
 	ld	(hl), #>(___str_13)
@@ -252,8 +252,8 @@ _confirmBuyLocomotive::
 	inc	hl
 	ld	(hl), #>(___str_14)
 ;src/game/train.c:50: txtWindowLocomotive[5] = "Price: 1500$";
-	ld	l,-6 (ix)
-	ld	h,-5 (ix)
+	ld	l,-4 (ix)
+	ld	h,-3 (ix)
 	ld	(hl), #<(___str_15)
 	inc	hl
 	ld	(hl), #>(___str_15)
@@ -274,8 +274,8 @@ _confirmBuyLocomotive::
 	ld	a, #>(___str_4)
 	ld	(de), a
 ;src/game/train.c:56: txtWindowLocomotive[3] = "Entry of service: 1942";
-	ld	l,-4 (ix)
-	ld	h,-3 (ix)
+	ld	l,-6 (ix)
+	ld	h,-5 (ix)
 	ld	(hl), #<(___str_17)
 	inc	hl
 	ld	(hl), #>(___str_17)
@@ -286,8 +286,8 @@ _confirmBuyLocomotive::
 	inc	hl
 	ld	(hl), #>(___str_18)
 ;src/game/train.c:58: txtWindowLocomotive[5] = "Price: 2000$";
-	ld	l,-6 (ix)
-	ld	h,-5 (ix)
+	ld	l,-4 (ix)
+	ld	h,-3 (ix)
 	ld	(hl), #<(___str_19)
 	inc	hl
 	ld	(hl), #>(___str_19)
@@ -310,7 +310,7 @@ _confirmBuyLocomotive::
 	or	a, a
 	jr	NZ,00107$
 ;src/game/train.c:69: trainList = (Train*)malloc(sizeof(Train));
-	ld	hl, #0x0006
+	ld	hl, #0x0007
 	push	hl
 	call	_malloc
 	pop	af
@@ -327,6 +327,7 @@ _confirmBuyLocomotive::
 	add	hl, hl
 	add	hl, bc
 	add	hl, hl
+	add	hl, bc
 	ld	c, l
 	ld	b, h
 	ld	hl, (_trainList)
@@ -344,6 +345,7 @@ _confirmBuyLocomotive::
 	add	hl, hl
 	add	hl, bc
 	add	hl, hl
+	add	hl, bc
 	ld	c, l
 	ld	b, h
 	ld	hl, (_trainList)
@@ -358,6 +360,7 @@ _confirmBuyLocomotive::
 	add	hl, hl
 	add	hl, bc
 	add	hl, hl
+	add	hl, bc
 	ld	c, l
 	ld	b, h
 	ld	hl, (_trainList)
@@ -372,6 +375,7 @@ _confirmBuyLocomotive::
 	add	hl, hl
 	add	hl, bc
 	add	hl, hl
+	add	hl, bc
 	ld	c, l
 	ld	b, h
 	ld	hl, (_trainList)
@@ -387,6 +391,7 @@ _confirmBuyLocomotive::
 	add	hl, hl
 	add	hl, bc
 	add	hl, hl
+	add	hl, bc
 	ld	c, l
 	ld	b, h
 	ld	hl, (_trainList)
@@ -395,14 +400,11 @@ _confirmBuyLocomotive::
 	inc	hl
 	inc	hl
 	ld	(hl), #0x00
-;src/game/train.c:82: nbTrainList++;
-	ld	hl, #_nbTrainList+0
-	inc	(hl)
-;src/game/train.c:83: CURSOR_MODE = PUTTRAIN;
+;src/game/train.c:81: CURSOR_MODE = PUTTRAIN;
 	ld	hl,#_CURSOR_MODE + 0
 	ld	(hl), #0x01
 00110$:
-;src/game/train.c:86: return returnChoice;
+;src/game/train.c:84: return returnChoice;
 	ld	l, -19 (ix)
 	ld	sp, ix
 	pop	ix
@@ -460,18 +462,18 @@ ___str_18:
 ___str_19:
 	.ascii "Price: 2000$"
 	.db 0x00
-;src/game/train.c:89: void buyLocomotive()
+;src/game/train.c:87: void buyTrain()
 ;	---------------------------------
-; Function buyLocomotive
+; Function buyTrain
 ; ---------------------------------
-_buyLocomotive::
+_buyTrain::
 	push	ix
 	ld	ix,#0
 	add	ix,sp
 	ld	hl, #-24
 	add	hl, sp
 	ld	sp, hl
-;src/game/train.c:91: const char *txtMenuLoco[] = { 
+;src/game/train.c:89: const char *txtMenuLoco[] = { 
 	ld	hl, #0x0000
 	add	hl, sp
 	ld	c,l
@@ -547,7 +549,7 @@ _buyLocomotive::
 	ld	(hl), e
 	inc	hl
 	ld	(hl), d
-;src/game/train.c:106: confirmBuyLocomotive( drawMenu(txtMenuLoco,12) );
+;src/game/train.c:104: confirmBuyTrain( drawMenu(txtMenuLoco,12) );
 	ld	a, #0x0c
 	push	af
 	inc	sp
@@ -558,7 +560,7 @@ _buyLocomotive::
 	ld	b, l
 	push	bc
 	inc	sp
-	call	_confirmBuyLocomotive
+	call	_confirmBuyTrain
 	ld	sp,ix
 	pop	ix
 	ret

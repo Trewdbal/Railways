@@ -9,39 +9,39 @@ Symbol Table
     .__.H$L.                                                    =  0000 L
     _CURSOR_MODE                                                   **** GX
   0 ___str_0                                                       0038 R
-  0 ___str_1                                                       0049 R
-  0 ___str_10                                                      028D R
-  0 ___str_11                                                      02A4 R
-  0 ___str_12                                                      02B0 R
-  0 ___str_13                                                      02B7 R
-  0 ___str_14                                                      02CE R
-  0 ___str_15                                                      02E5 R
-  0 ___str_16                                                      02F2 R
-  0 ___str_17                                                      02F8 R
-  0 ___str_18                                                      030F R
-  0 ___str_19                                                      0327 R
-  0 ___str_2                                                       021B R
-  0 ___str_20                                                      03CF R
-  0 ___str_21                                                      03D5 R
-  0 ___str_22                                                      03DC R
-  0 ___str_23                                                      03E3 R
-  0 ___str_24                                                      03E9 R
-  0 ___str_25                                                      03F2 R
-  0 ___str_26                                                      03FC R
-  0 ___str_27                                                      0405 R
-  0 ___str_28                                                      040E R
-  0 ___str_29                                                      0415 R
-  0 ___str_3                                                       021C R
-  0 ___str_30                                                      0422 R
-  0 ___str_31                                                      042B R
-  0 ___str_4                                                       0222 R
-  0 ___str_5                                                       0234 R
-  0 ___str_6                                                       024B R
-  0 ___str_7                                                       0262 R
-  0 ___str_8                                                       026F R
-  0 ___str_9                                                       0276 R
-  0 _buyLocomotive                                                 0334 GR
-  0 _confirmBuyLocomotive                                          0057 GR
+  0 ___str_1                                                       0042 R
+  0 ___str_10                                                      0289 R
+  0 ___str_11                                                      02A0 R
+  0 ___str_12                                                      02AC R
+  0 ___str_13                                                      02B3 R
+  0 ___str_14                                                      02CA R
+  0 ___str_15                                                      02E1 R
+  0 ___str_16                                                      02EE R
+  0 ___str_17                                                      02F4 R
+  0 ___str_18                                                      030B R
+  0 ___str_19                                                      0323 R
+  0 ___str_2                                                       0217 R
+  0 ___str_20                                                      03CB R
+  0 ___str_21                                                      03D1 R
+  0 ___str_22                                                      03D8 R
+  0 ___str_23                                                      03DF R
+  0 ___str_24                                                      03E5 R
+  0 ___str_25                                                      03EE R
+  0 ___str_26                                                      03F8 R
+  0 ___str_27                                                      0401 R
+  0 ___str_28                                                      040A R
+  0 ___str_29                                                      0411 R
+  0 ___str_3                                                       0218 R
+  0 ___str_30                                                      041E R
+  0 ___str_31                                                      0427 R
+  0 ___str_4                                                       021E R
+  0 ___str_5                                                       0230 R
+  0 ___str_6                                                       0247 R
+  0 ___str_7                                                       025E R
+  0 ___str_8                                                       026B R
+  0 ___str_9                                                       0272 R
+  0 _buyTrain                                                      0330 GR
+  0 _confirmBuyTrain                                               0052 GR
     _drawMenu                                                      **** GX
     _drawWindow                                                    **** GX
     _malloc                                                        **** GX
@@ -57,7 +57,7 @@ Hexadecimal [16-Bits]
 
 Area Table
 
-   0 _CODE                                      size  433   flags    0
+   0 _CODE                                      size  42F   flags    0
    1 _DATA                                      size    0   flags    0
    2 _INITIALIZED                               size    0   flags    0
    3 _DABS                                      size    0   flags    8

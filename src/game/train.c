@@ -3,19 +3,19 @@
 void trainManagement()
 {
 	const char *txtMenuChoice[] = { 
-		"Buy a locomotive",
-		"Back to depot"};
+		"New train",
+		"Manage existing"};
 
 	u8 menuChoice = drawMenu(txtMenuChoice,2);
 
 	if(menuChoice == 0)
-		buyLocomotive();
+		buyTrain();
 
 	putM1();
 }
 
 
-u8 confirmBuyLocomotive(u8 iSelect)
+u8 confirmBuyTrain(u8 iSelect)
 {
 	u8 returnChoice=0;
 	const char *txtWindowLocomotive[6];
@@ -78,15 +78,13 @@ u8 confirmBuyLocomotive(u8 iSelect)
 		trainList[nbTrainList].wagon[1] = 0;
 		trainList[nbTrainList].wagon[2] = 0;
 
-		// Increment nb of trains in the list
-		nbTrainList++;
 		CURSOR_MODE = PUTTRAIN;
 	}
 
 	return returnChoice;
 }
 
-void buyLocomotive()
+void buyTrain()
 {
 	const char *txtMenuLoco[] = { 
 		"130 B",
@@ -103,5 +101,5 @@ void buyLocomotive()
 		"ES 64F4"
 		};
 
-	confirmBuyLocomotive( drawMenu(txtMenuLoco,12) );
+	confirmBuyTrain( drawMenu(txtMenuLoco,12) );
 }

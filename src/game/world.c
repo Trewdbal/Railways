@@ -1,5 +1,7 @@
 #include "world.h"
 
+cpctm_createTransparentMaskTable(g_masktable, 0x0100, M1, 0);
+
 void drawCursor(u8 x, u8 y, u8 color)
 {
 	u8 *p_video;
@@ -17,6 +19,9 @@ void drawCursor(u8 x, u8 y, u8 color)
 			cpct_memset (p_video, cpct_px2byteM1(color,color,color,color), 4);
 			p_video = cpct_getScreenPtr(SCR_VMEM, x*TILESIZE_W, (y+1)*TILESIZE_H-2);
 			cpct_memset (p_video, cpct_px2byteM1(color,color,color,color), 4);
+			break;
+		case PUTTRAIN:
+			cpct_drawSpriteMaskedAlignedTable(train_h, p_video, TILESIZE_W, TILESIZE_H, g_masktable);
 			break;
 		case T_SSNS:
 			cpct_drawSprite(station_small_ns, p_video, TILESIZE_W, TILESIZE_H);
@@ -83,7 +88,7 @@ void patternTile(u8 tileType, int index, u8 nBitsX, u8 nBitsY, u8 *pattern)
 				if(tileType == FOREST)
 					p_world[index+iy*WIDTH+ix] = tileType;
 				else if(tileType==DWELLINGS1)
-						p_world[index+iy*WIDTH+ix] = (u8)cpct_getRandomUniform_u8_f(cpct_count2VSYNC ()%256)%3+2;
+					p_world[index+iy*WIDTH+ix] = (u8)cpct_getRandom_mxor_u8 ()%3+2;
 
 			}
 		}
@@ -100,21 +105,22 @@ void generateWorld()
 	CURSOR_MODE = NONE;
 
 	// Initialize random number generator;
-	cpct_srand((u32)cpct_count2VSYNC());
+	cpct_setSeed_mxor ((u32)cpct_count2VSYNC());
 
 	//	Grass();
 
 	for(iy=0; iy<HEIGHT*WIDTH;iy++)
 	{
-		p_world[iy] = cpct_rand()%2;
+		p_world[iy] =  cpct_getRandom_mxor_u16()%2;
+
 	}
 
 	// Forests
 	for(ix=0; ix<NBFOREST; ix++)
 	{
-		iy = cpct_rand16()%(WIDTH*HEIGHT);
+		iy = cpct_getRandom_mxor_u16()%(WIDTH*HEIGHT);
 
-		switch(cpct_rand()%4)
+		switch(cpct_getRandom_mxor_u16()%4)
 		{
 			case 0:
 				p_forest[0] = 0b10000100;
@@ -165,7 +171,7 @@ void generateWorld()
 
 	for(ix=0; ix<NBFARM; ix++)
 	{
-		iy = cpct_rand16()%(WIDTH*HEIGHT);
+		iy = cpct_getRandom_mxor_u16()%(WIDTH*HEIGHT)%(WIDTH*HEIGHT);
 		p_world[iy] = cpct_rand()%2+5;
 	}
 
@@ -173,45 +179,45 @@ void generateWorld()
 
 	for(ix=0; ix<NBURBAN; ix++)
 	{
-		iy = cpct_rand16()%(WIDTH*HEIGHT);
+		iy = cpct_getRandom_mxor_u16()%(WIDTH*HEIGHT);
 		p_world[iy] = cpct_rand()%3+2;
 	}
 
 	for(ix=0; ix<NBURBAN; ix++)
 	{
-		iy = cpct_rand16()%(WIDTH*HEIGHT);
+		iy = cpct_getRandom_mxor_u16()%(WIDTH*HEIGHT);
 
 		switch(cpct_rand()%6)
 		{
 			case 0:
-			p_cities[0] = 0b01110010; // 01001110;
-			p_cities[1] = 0b01000110; // 01100010;
-			break;
+				p_cities[0] = 0b01110010; // 01001110;
+				p_cities[1] = 0b01000110; // 01100010;
+				break;
 
 			case 1:
-			p_cities[0] = 0b01100000; // 00000110;
-			p_cities[1] = 0b00000110; // 01100000;
-			break;
+				p_cities[0] = 0b01100000; // 00000110;
+				p_cities[1] = 0b00000110; // 01100000;
+				break;
 
 			case 2:
-			p_cities[0] = 0b00010000; // 00001000;
-			p_cities[1] = 0b00000110; // 01100000;
-			break;
+				p_cities[0] = 0b00010000; // 00001000;
+				p_cities[1] = 0b00000110; // 01100000;
+				break;
 
 			case 3:
-			p_cities[0] = 0b11000000; // 00000011;
-			p_cities[1] = 0b00110001; // 10001100;
-			break;
+				p_cities[0] = 0b11000000; // 00000011;
+				p_cities[1] = 0b00110001; // 10001100;
+				break;
 
 			case 4:
-			p_cities[0] = 0b11000100; // 00100011;
-			p_cities[1] = 0b00001110; // 01110000;
-			break;
+				p_cities[0] = 0b11000100; // 00100011;
+				p_cities[1] = 0b00001110; // 01110000;
+				break;
 
 			case 5:
-			p_cities[0] = 0b01000000; // 00000010;
-			p_cities[1] = 0b01001110; // 01110010;
-			break;
+				p_cities[0] = 0b01000000; // 00000010;
+				p_cities[1] = 0b01001110; // 01110010;
+				break;
 		}
 
 		patternTile(DWELLINGS1, iy, 4, 4, p_cities);
@@ -221,7 +227,7 @@ void generateWorld()
 
 	for(ix=0; ix<NBLIVESTOCK; ix++)
 	{
-		iy = cpct_rand16()%(WIDTH*HEIGHT);
+		iy = cpct_getRandom_mxor_u16()%(WIDTH*HEIGHT);
 		p_world[iy] = LIVESTOCK;
 	}
 }
@@ -321,7 +327,7 @@ void drawScrolls(u8 x_, u8 y_)
 	u8 scrollx;
 	u8 scrolly;
 	u8 *p_video;	
-	
+
 	scrollx = x_* (WIDTH-TILESIZE_W)/(WIDTH-NBTILE_W);
 	scrolly = y_* (HEIGHT*TILESIZE_W-TILESIZE_H)/(HEIGHT-NBTILE_H);
 
@@ -347,7 +353,101 @@ void drawWorld(u8 x_, u8 y_)
 
 	drawScrolls(x_, y_);
 
+
 	//  sprintf(buff, "%d", p_world[2] );
 	//	cpct_drawStringM1 (buff, SCR_VMEM, 0, 1);
 }
 
+void setTrainHeading(u8 i)
+{
+	// In case of curve, change the heading
+
+	switch(p_world[trainList[i].posY*WIDTH+trainList[i].posX])
+	{
+		case T_REN:
+		if(trainList[i].heading==1) trainList[i].heading=2;
+		else if(trainList[i].heading==3) trainList[i].heading=0;
+		break;
+
+		case T_RES:
+		if(trainList[i].heading==1) trainList[i].heading=3;
+		else if(trainList[i].heading==2) trainList[i].heading=0;
+		break;
+
+		case T_RWN:
+		if(trainList[i].heading==0) trainList[i].heading=2;
+		else if(trainList[i].heading==3) trainList[i].heading=1;
+		break;
+
+		case T_RWS:
+		if(trainList[i].heading==0) trainList[i].heading=3;
+		else if(trainList[i].heading==2) trainList[i].heading=1;
+		break;
+	}
+}
+
+void drawTrains(u8 x_, u8 y_)
+{
+	u8 *p_video;
+	u8 i;
+
+	// Animation
+	for(i=0; i<nbTrainList; i++)
+	{
+		// If the last position of the train is in the screen, clean it
+		if(trainList[i].posX-x_ < NBTILE_W && trainList[i].posY-y_ < NBTILE_H && trainList[i].posX-x_ > 0 && trainList[i].posY-y_ > 0 )
+		{
+			drawTile(0,0,trainList[i].posX,trainList[i].posY);
+		}
+		
+
+		// Move the train
+		switch(trainList[i].heading)
+		{
+			case 0: // Right
+				if(trainList[i].posX < WIDTH)
+				{	
+					if(p_world[trainList[i].posY*WIDTH+trainList[i].posX+1] >= SSNS)
+						trainList[i].posX++;
+				}
+				break;
+			case 1: // Left
+				if(trainList[i].posX >0 )
+				{
+					if(p_world[trainList[i].posY*WIDTH+trainList[i].posX-1] >= SSNS)
+						trainList[i].posX--;
+				}
+				break;
+			case 2: // Up
+				if(trainList[i].posY > 0)
+				{
+					if(p_world[(trainList[i].posY-1)*WIDTH+trainList[i].posX] >= SSNS)
+						trainList[i].posY--;
+				}
+				break;
+			case 3: // Down
+				if(trainList[i].posY < HEIGHT)
+				{
+					if(p_world[(trainList[i].posY+1)*WIDTH+trainList[i].posX] >= SSNS)
+						trainList[i].posY++;
+				}
+				break;
+		}
+		
+		setTrainHeading(i);
+
+		// If the train is is the screen, draw it
+		if(trainList[i].posX-x_ < NBTILE_W && trainList[i].posY-y_ < NBTILE_H && trainList[i].posX-x_ > 0 && trainList[i].posY-y_ > 0 ) // Potentiellement eerreur with WIIDTH and HEIGHT
+		{
+
+			p_video = cpct_getScreenPtr(SCR_VMEM, (trainList[i].posX-x_)*TILESIZE_W, (trainList[i].posY-y_)*TILESIZE_H);
+
+			if(trainList[i].heading <= 1) 
+				cpct_drawSpriteMaskedAlignedTable(train_h, p_video, TILESIZE_W, TILESIZE_H, g_masktable);
+			else
+				cpct_drawSpriteMaskedAlignedTable(train_v, p_video, TILESIZE_W, TILESIZE_H, g_masktable);
+
+		}
+	}
+
+}

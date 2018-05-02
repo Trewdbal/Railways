@@ -11,236 +11,211 @@ Area                                    Addr        Size        Decimal Bytes (A
      00000000  l__CABS                         
      00000000  l__DABS                         
      00000000  l__GSFINAL                      
+     00000000  l__HOME                         
+     00000000  l__g_masktable_                 
      00000000  s__CABS                         
      00000000  s__DABS                         
+     00000000  s__g_masktable_                 
+     00000000  s__g_masktable_0                
      00000001  l__HEAP_END                     
+     00000002  l__INITIALIZED                  
+     00000002  l__INITIALIZER                  
      00000003  l__GSINIT                       
-     00000003  l__INITIALIZED                  
-     00000003  l__INITIALIZER                  
+     00000100  l__g_masktable_0                
      000003FF  l__HEAP                         
-     00000E6F  l__HOME                         
+     00000CF6  l__CSEG                         
      00000F04  l__DATA                         
-     00003BBB  l__CODE                         
+     00002725  l__CODE                         
      00004000  s__CODE                         
-     00007BBB  s__DATA                         
-     00008ABF  s__INITIALIZED                  
-     00008AC2  s__HOME                         
-     00009931  s__GSINIT                       
-     00009934  s__GSFINAL                      
-     00009934  s__INITIALIZER                  
-     00009937  s__HEAP                         
-     00009D36  s__HEAP_END                     
+     00006725  s__DATA                         
+     00007629  s__INITIALIZED                  
+     0000762B  s__GSINIT                       
+     0000762B  s__HOME                         
+     0000762E  s__GSFINAL                      
+     0000762E  s__INITIALIZER                  
+     00007630  s__CSEG                         
+     00008326  s__HEAP                         
+     00008725  s__HEAP_END                     
 
 ASxxxx Linker V03.00 + NoICE + sdld,  page 2.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-_CODE                               00004000    00003BBB =       15291. bytes (REL,CON)
+_CODE                               00004000    00002725 =       10021. bytes (REL,CON)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
      00004000  _main                              main
-     00004130  _drawDepot                         depot
-     0000422E  _railroadDepot                     depot
-     000042AF  _drawLocomotive                    depot
-     00004444  _drawAllLocomotives                depot
-     00004474  _confirmBuyLocomotive              depot
-     000047F6  _buyLocomotive                     depot
-     000048AF  _windowInfoTile                    game
-     00004AA7  _menuStations                      game
-     00004B1C  _menuTile                          game
-     00004CD8  _game                              game
-     000051D9  _drawCursor                        world
-     0000540E  _patternTile                       world
-     0000550B  _generateWorld                     world
-     0000586C  _drawTile                          world
-     00005A94  _drawScrolls                       world
-     00005B2D  _drawWorld                         world
-     00005B66  _putM0                             gui
-     00005B79  _putM1                             gui
-     00005B8D  _putM2                             gui
-     00005BAF  _drawBoxM0                         gui
-     00005CC9  _drawBoxM2                         gui
-     00005DA9  _EraseMenuEntry                    gui
-     00005E63  _drawMenuEntry                     gui
-     00005F93  _drawMenu                          gui
-     00006091  _drawWindow                        gui
-     0000622E  _paletteTrains                     global
-     0000623E  _paletteMenusM1                    global
-     00006242  _paletteMenusM2                    global
-     00006244  _grass1                            sprites
-     00006284  _grass2                            sprites
-     000062C4  _forest                            sprites
-     00006304  _dwellings1                        sprites
-     00006344  _dwellings2                        sprites
-     00006384  _dwellings3                        sprites
-     000063C4  _water                             sprites
-     00006404  _farm1                             sprites
-     00006444  _farm2                             sprites
-     00006484  _livestock                         sprites
-     000064C4  _station_small_ns                  sprites
-     00006504  _station_small_ew                  sprites
-     00006544  _station_medium_ns                 sprites
-     00006584  _station_medium_ew                 sprites
-     000065C4  _station_large_ns                  sprites
-     00006604  _station_large_ew                  sprites
-     00006644  _rail_ew                           sprites
-     00006684  _rail_ns                           sprites
-     000066C4  _rail_en                           sprites
-     00006704  _rail_es                           sprites
-     00006744  _rail_wn                           sprites
+     00004122  _putM0                             gui
+     00004133  _putM1                             gui
+     00004144  _putM2                             gui
+     00004163  _drawBoxM0                         gui
+     00004272  _drawBoxM2                         gui
+     0000434D  _EraseMenuEntry                    gui
+     00004403  _drawMenuEntry                     gui
+     0000452F  _drawMenu                          gui
+     0000462D  _drawWindow                        gui
+     000047BE  _paletteTrains                     global
+     000047CE  _paletteMenusM1                    global
+     000047D2  _paletteMenusM2                    global
+     000047D4  _grass1                            sprites
+     00004814  _grass2                            sprites
+     00004854  _forest                            sprites
+     00004894  _dwellings1                        sprites
+     000048D4  _dwellings2                        sprites
+     00004914  _dwellings3                        sprites
+     00004954  _water                             sprites
+     00004994  _farm1                             sprites
+     000049D4  _farm2                             sprites
+     00004A14  _livestock                         sprites
+     00004A54  _station_small_ns                  sprites
+     00004A94  _station_small_ew                  sprites
+     00004AD4  _station_medium_ns                 sprites
+     00004B14  _station_medium_ew                 sprites
+     00004B54  _station_large_ns                  sprites
+     00004B94  _station_large_ew                  sprites
+     00004BD4  _rail_ew                           sprites
+     00004C14  _rail_ns                           sprites
+     00004C54  _rail_en                           sprites
+     00004C94  _rail_es                           sprites
+     00004CD4  _rail_wn                           sprites
+     00004D14  _rail_ws                           sprites
+     00004D54  _rail_ew_n                         sprites
+     00004D94  _rail_ew_s                         sprites
+     00004DD4  _rail_ns_w                         sprites
+     00004E14  _rail_ns_e                         sprites
+     00004E54  _train_h                           sprites
+     00004E94  _train_v                           sprites
+     00004ED4  _dummy_cpct_transparentMaskTable   world
+     00004ED4  _windowInfoTile                    game
+     000050C0  _menuStations                      game
+     0000512F  _menuTile                          game
+     000052DD  _game                              game
+     000058C9  _trainManagement                   train
+     0000591B  _confirmBuyTrain                   train
+     00005BF9  _buyTrain                          train
+     00005CF8  _realloc                           realloc
 ASxxxx Linker V03.00 + NoICE + sdld,  page 3.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-_CODE                               00004000    00003BBB =       15291. bytes (REL,CON)
+_CODE                               00004000    00002725 =       10021. bytes (REL,CON)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
-     00006784  _rail_ws                           sprites
-     000067C4  _rail_ew_n                         sprites
-     00006804  _rail_ew_s                         sprites
-     00006844  _rail_ns_w                         sprites
-     00006884  _rail_ns_e                         sprites
-     000068C4  _lock                              sprites
-     00006A54  _wagon_M2                          sprites
-     00006A86  _l130B_M2                          sprites
-     00006AEA  _l130B                             sprites
-     00006C7A  _l141TA                            sprites
-     00006E0A  _l142AT                            sprites
-     00006F9A  _l141P                             sprites
-     0000712A  _BB63000                           sprites
-     000072BA  _realloc                           _realloc
-     0000742E  _cpct_setPalette                   cpct_video
-     00007445  _cpct_isKeyPressed                 cpct_keyboard
-     00007445  cpct_isKeyPressed_asm              cpct_keyboard
-     00007451  _cpct_setPALColour                 cpct_video
-     0000745D  _cpct_getBit                       cpct_bitarray
-     0000747C  _cpct_drawStringM2                 cpct_strings
-     00007484  cpct_drawStringM2_asm              cpct_strings
-     0000749D  _cpct_drawSprite                   cpct_sprites
-     00007542  __moduchar                         
-     0000754E  __moduint                          
-     00007559  _cpct_drawCharM2                   cpct_strings
-     0000755F  cpct_drawCharM2_asm                cpct_strings
-     000075A5  _memmove                           
-     000075C4  _cpct_count2VSYNC                  cpct_video
-     000075C4  cpct_count2VSYNC_asm               cpct_video
-     000075D0  _cpct_fw2hw                        cpct_video
-     000075E3  _cpct_keyboardStatusBuffer         cpct_keyboard
-     000075ED  __sdcc_heap_init                   _malloc
-     00007616  _malloc                            _malloc
-     00007720  _cpct_setSeed_mxor                 cpct_random
-     00007720  cpct_setSeed_mxor_asm              cpct_random
-     00007728  __divuint                          
-     00007730  __divuchar                         
-     00007737  __divu8                            
-     0000773A  __divu16                           
-     00007769  ___sdcc_find_memheader             _free
-     00007795  _free                              _free
-     000077F9  cpct_bitWeights                    cpct_bitarray
-     00007801  _cpct_reenableFirmware             cpct_firmware
-     00007801  cpct_reenableFirmware_asm          cpct_firmware
-     0000780C  _floorf                            floorf
-     000078DD  _cpct_getRandom_mxor_u16           cpct_random
-     000078DD  cpct_getRandom_mxor_u16            cpct_random
-     000078FF  cpct_firmware2hw_colour            
-     0000791A  _memcpy                            _memcpy
-     00007969  _cpct_setVideoMode                 cpct_video
-     0000796E  cpct_setVideoMode_asm              cpct_video
+     00006017  _cpct_setPalette                   cpct_video
+     0000602E  _cpct_isKeyPressed                 cpct_keyboard
+     0000602E  cpct_isKeyPressed_asm              cpct_keyboard
+     0000603A  _cpct_setPALColour                 cpct_video
+     00006046  _cpct_getBit                       cpct_bitarray
+     00006065  _cpct_drawStringM2                 cpct_strings
+     0000606D  cpct_drawStringM2_asm              cpct_strings
+     00006086  _cpct_drawSprite                   cpct_sprites
+     0000612B  __moduchar                         
+     00006137  __moduint                          
+     00006142  _cpct_drawCharM2                   cpct_strings
+     00006148  cpct_drawCharM2_asm                cpct_strings
+     0000618E  _memmove                           
+     000061AD  _cpct_count2VSYNC                  cpct_video
+     000061AD  cpct_count2VSYNC_asm               cpct_video
+     000061B9  _cpct_fw2hw                        cpct_video
+     000061CC  _cpct_keyboardStatusBuffer         cpct_keyboard
+     000061D6  ___sdcc_heap_init                  malloc
+     000061F1  _malloc                            malloc
+     000062FC  _cpct_setSeed_mxor                 cpct_random
+     000062FC  cpct_setSeed_mxor_asm              cpct_random
+     00006304  __divuint                          
+     0000630C  __divuchar                         
+     00006313  __divu8                            
+     00006316  __divu16                           
+     00006345  cpct_bitWeights                    cpct_bitarray
+     0000634D  _cpct_reenableFirmware             cpct_firmware
+     0000634D  cpct_reenableFirmware_asm          cpct_firmware
+     00006358  _cpct_getRandom_mxor_u16           cpct_random
+     00006358  cpct_getRandom_mxor_u16            cpct_random
+     0000637A  cpct_firmware2hw_colour            
+     00006395  _memcpy                            _memcpy
+     000063E4  _cpct_setVideoMode                 cpct_video
+     000063F2  _cpct_px2byteM0                    cpct_sprites
+     0000640E  _cpct_memset                       cpct_memutils
+     0000641C  _cpct_px2byteM1                    cpct_sprites
+     00006435  _strlen                            
+     00006444  _cpct_disableFirmware              cpct_firmware
+     00006444  _cpct_removeInterruptHandler       cpct_firmware
+     00006444  cpct_disableFirmware_asm           cpct_firmware
+     00006444  cpct_removeInterruptHandler_asm    cpct_firmware
+     00006454  _cpct_getRandom_mxor_u8            cpct_random
+     00006454  cpct_getRandom_mxor_u8             cpct_random
+     00006455  cpct_randomIdx_mxor_u8             cpct_random
+     00006479  _cpct_drawSolidBox                 cpct_sprites
+     00006531  _cpct_mode_rom_status              cpct_firmware
+     00006532  _cpct_drawSpriteMaskedAlignedTab   cpct_sprites
+     0000656D  _cpct_getScreenPtr                 cpct_video
+     0000658D  _cpct_scanKeyboard                 cpct_keyboard
+     0000658D  cpct_scanKeyboard_asm              cpct_keyboard
+     000065BE  __divsint                          
 ASxxxx Linker V03.00 + NoICE + sdld,  page 4.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-_CODE                               00004000    00003BBB =       15291. bytes (REL,CON)
+_CODE                               00004000    00002725 =       10021. bytes (REL,CON)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
-     0000797B  _cpct_px2byteM0                    cpct_sprites
-     00007997  _cpct_memset                       cpct_memutils
-     000079A5  _cpct_px2byteM1                    cpct_sprites
-     000079BE  _strlen                            
-     000079CD  _cpct_disableFirmware              cpct_firmware
-     000079CD  _cpct_removeInterruptHandler       cpct_firmware
-     000079CD  cpct_disableFirmware_asm           cpct_firmware
-     000079CD  cpct_removeInterruptHandler_asm    cpct_firmware
-     000079DD  _cpct_getRandom_mxor_u8            cpct_random
-     000079DD  cpct_getRandom_mxor_u8             cpct_random
-     00007A01  _cpct_getRandomUniform_u8_f        cpct_random
-     00007A01  cpct_getRandomUniform_u8_f_asm     cpct_random
-     00007A01  cpct_randUnifu8_seed               cpct_random
-     00007A12  _cpct_drawSolidBox                 cpct_sprites
-     00007ACA  _cpct_mode_rom_status              cpct_firmware
-     00007ACB  _cpct_getScreenPtr                 cpct_video
-     00007AEB  _cpct_scanKeyboard                 cpct_keyboard
-     00007AEB  cpct_scanKeyboard_asm              cpct_keyboard
-     00007B1C  __divsint                          
-     00007B25  __divschar                         
-     00007B2C  __div8                             
-     00007B30  __div_signexte                     
-     00007B34  __div16                            
-     00007B5A  __get_remainder                    
-     00007B64  _cpct_mxor32_seed                  cpct_random
-     00007B68  __mulint                           
-     00007B70  __mul16                            
-     00007B84  _cpct_nextRandom_mxor_u32          cpct_random
-     00007B84  cpct_nextRandom_mxor_u32_asm       cpct_random
-     00007BA7  dc_mode0_ct                        cpct_strings
-     00007BB7  dc_mode1_ct                        
+     000065C7  __divschar                         
+     000065CE  __div8                             
+     000065D2  __div_signexte                     
+     000065D6  __div16                            
+     000065FC  __get_remainder                    
+     00006606  _free                              free
+     000066EA  _cpct_mxor32_seed                  cpct_random
+     000066EE  _cpct_nextRandom_mxor_u32          cpct_random
+     000066EE  cpct_nextRandom_mxor_u32_asm       cpct_random
+     00006711  dc_mode0_ct                        cpct_strings
+     00006721  dc_mode1_ct                        
+
 ASxxxx Linker V03.00 + NoICE + sdld,  page 5.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-_DATA                               00007BBB    00000F04 =        3844. bytes (REL,CON)
+_DATA                               00006725    00000F04 =        3844. bytes (REL,CON)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
-     00007BBB  _p_world                           global
-     00008ABB  _trainList                         global
-     00008ABD  ___sdcc_prev_memheader             _free
+     00006725  _p_world                           global
+     00007625  _trainList                         global
+     00007627  ___sdcc_heap_free                  malloc
 ASxxxx Linker V03.00 + NoICE + sdld,  page 6.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-_INITIALIZED                        00008ABF    00000003 =           3. bytes (REL,CON)
+_INITIALIZED                        00007629    00000002 =           2. bytes (REL,CON)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
-     00008ABF  _CURSOR_MODE                       global
-     00008AC0  _locDelocked                       global
-     00008AC1  _nbTrainList                       global
+     00007629  _CURSOR_MODE                       global
+     0000762A  _nbTrainList                       global
+
 ASxxxx Linker V03.00 + NoICE + sdld,  page 7.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-_HOME                               00008AC2    00000E6F =        3695. bytes (REL,CON)
+_GSINIT                             0000762B    00000003 =           3. bytes (REL,CON)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
-     00008AC2  ___fsmul                           _fsmul
-     00008EB0  ___fsadd                           _fsadd
-     00009305  ___uchar2fs                        _uchar2fs
-     0000931B  ___fs2uchar                        _fs2uchar
-     00009349  __mullong                          _mullong
-     000094C7  ___fs2slong                        _fs2slong
-     00009544  ___slong2fs                        _slong2fs
-     0000958C  ___fs2ulong                        _fs2ulong
-     00009651  ___ulong2fs                        _ulong2fs
-     00009737  ___fsgt                            _fsgt
-     00009834  ___fslt                            _fslt
-
 ASxxxx Linker V03.00 + NoICE + sdld,  page 8.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-_GSINIT                             00009931    00000003 =           3. bytes (REL,CON)
+_INITIALIZER                        0000762E    00000002 =           2. bytes (REL,CON)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
@@ -249,155 +224,149 @@ Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-_INITIALIZER                        00009934    00000003 =           3. bytes (REL,CON)
+_g_masktable_0                      00000000    00000100 =         256. bytes (ABS,CON)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
+     00000100  _g_masktable                       world
+
 ASxxxx Linker V03.00 + NoICE + sdld,  page 10.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-_HEAP                               00009937    000003FF =        1023. bytes (REL,CON)
+_CSEG                               00007630    00000CF6 =        3318. bytes (REL,CON)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
-     00009937  __sdcc_heap_start                  
+     00007630  _drawCursor                        world
+     00007868  _patternTile                       world
+     00007952  _generateWorld                     world
+     00007CC0  _drawTile                          world
+     00007EE9  _drawScrolls                       world
+     00007F82  _drawWorld                         world
+     00007FBF  _setTrainHeading                   world
+     0000805D  _drawTrains                        world
 
 ASxxxx Linker V03.00 + NoICE + sdld,  page 11.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-_HEAP_END                           00009D36    00000001 =           1. bytes (REL,CON)
+_HEAP                               00008326    000003FF =        1023. bytes (REL,CON)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
-     00009D36  __sdcc_heap_end                    
+     00008326  ___sdcc_heap                       
 
 ASxxxx Linker V03.00 + NoICE + sdld,  page 12.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+_HEAP_END                           00008725    00000001 =           1. bytes (REL,CON)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+     00008725  ___sdcc_heap_end                   
+
+ASxxxx Linker V03.00 + NoICE + sdld,  page 13.
 
 Files Linked                              [ module(s) ]
 
 obj/main.rel                              [ main ]
-obj/game/depot.rel                        [ depot ]
-obj/game/game.rel                         [ game ]
-obj/game/world.rel                        [ world ]
 obj/gui/gui.rel                           [ gui ]
 obj/data/global.rel                       [ global ]
 obj/data/sprites.rel                      [ sprites ]
+obj/game/world.rel                        [ world ]
+obj/game/game.rel                         [ game ]
+obj/game/train.rel                        [ train ]
 
 
 Libraries Linked                          [ object file ]
 
-/home/arnaud/Téléchargements/cpctelera-master/cpctelera/tools/sdcc-3.5.0/bin/../share/sdcc/lib/z80/z80.lib
-                                          [ _realloc.rel ]
-/home/arnaud/Téléchargements/cpctelera-master/cpctelera/cpctelera.lib
+/home/arnaud/Software/cpctelera/cpctelera/cpctelera/tools/sdcc-3.6.8-r9946/bin/../share/sdcc/lib/z80/z80.lib
+                                          [ realloc.rel ]
+/home/arnaud/Software/cpctelera/cpctelera/cpctelera/cpctelera.lib
                                           [ cpct_setPalette_cbindings.rel ]
-/home/arnaud/Téléchargements/cpctelera-master/cpctelera/cpctelera.lib
+/home/arnaud/Software/cpctelera/cpctelera/cpctelera/cpctelera.lib
                                           [ cpct_isKeyPressed.rel ]
-/home/arnaud/Téléchargements/cpctelera-master/cpctelera/tools/sdcc-3.5.0/bin/../share/sdcc/lib/z80/z80.lib
-                                          [ _fsmul.rel ]
-/home/arnaud/Téléchargements/cpctelera-master/cpctelera/cpctelera.lib
+/home/arnaud/Software/cpctelera/cpctelera/cpctelera/cpctelera.lib
                                           [ cpct_setPALColour_cbindings.rel ]
-/home/arnaud/Téléchargements/cpctelera-master/cpctelera/cpctelera.lib
+/home/arnaud/Software/cpctelera/cpctelera/cpctelera/cpctelera.lib
                                           [ cpct_getBit_cbindings.rel ]
-/home/arnaud/Téléchargements/cpctelera-master/cpctelera/cpctelera.lib
+/home/arnaud/Software/cpctelera/cpctelera/cpctelera/cpctelera.lib
                                           [ cpct_drawStringM2.rel ]
-/home/arnaud/Téléchargements/cpctelera-master/cpctelera/cpctelera.lib
+/home/arnaud/Software/cpctelera/cpctelera/cpctelera/cpctelera.lib
                                           [ cpct_drawSprite_cbindings.rel ]
-/home/arnaud/Téléchargements/cpctelera-master/cpctelera/tools/sdcc-3.5.0/bin/../share/sdcc/lib/z80/z80.lib
+/home/arnaud/Software/cpctelera/cpctelera/cpctelera/tools/sdcc-3.6.8-r9946/bin/../share/sdcc/lib/z80/z80.lib
                                           [ modunsigned.rel ]
-/home/arnaud/Téléchargements/cpctelera-master/cpctelera/cpctelera.lib
+/home/arnaud/Software/cpctelera/cpctelera/cpctelera/cpctelera.lib
                                           [ cpct_drawCharM2.rel ]
-/home/arnaud/Téléchargements/cpctelera-master/cpctelera/tools/sdcc-3.5.0/bin/../share/sdcc/lib/z80/z80.lib
+/home/arnaud/Software/cpctelera/cpctelera/cpctelera/tools/sdcc-3.6.8-r9946/bin/../share/sdcc/lib/z80/z80.lib
                                           [ memmove.rel ]
-/home/arnaud/Téléchargements/cpctelera-master/cpctelera/cpctelera.lib
+/home/arnaud/Software/cpctelera/cpctelera/cpctelera/cpctelera.lib
                                           [ cpct_count2VSYNC.rel ]
-/home/arnaud/Téléchargements/cpctelera-master/cpctelera/cpctelera.lib
+/home/arnaud/Software/cpctelera/cpctelera/cpctelera/cpctelera.lib
                                           [ cpct_fw2hw_cbindings.rel ]
-/home/arnaud/Téléchargements/cpctelera-master/cpctelera/cpctelera.lib
+/home/arnaud/Software/cpctelera/cpctelera/cpctelera/cpctelera.lib
                                           [ keyboard.rel ]
-/home/arnaud/Téléchargements/cpctelera-master/cpctelera/tools/sdcc-3.5.0/bin/../share/sdcc/lib/z80/z80.lib
-                                          [ _malloc.rel ]
-/home/arnaud/Téléchargements/cpctelera-master/cpctelera/cpctelera.lib
+/home/arnaud/Software/cpctelera/cpctelera/cpctelera/tools/sdcc-3.6.8-r9946/bin/../share/sdcc/lib/z80/z80.lib
+                                          [ malloc.rel ]
+/home/arnaud/Software/cpctelera/cpctelera/cpctelera/cpctelera.lib
                                           [ cpct_setSeed_mxor.rel ]
-/home/arnaud/Téléchargements/cpctelera-master/cpctelera/tools/sdcc-3.5.0/bin/../share/sdcc/lib/z80/z80.lib
+/home/arnaud/Software/cpctelera/cpctelera/cpctelera/tools/sdcc-3.6.8-r9946/bin/../share/sdcc/lib/z80/z80.lib
                                           [ divunsigned.rel ]
-/home/arnaud/Téléchargements/cpctelera-master/cpctelera/tools/sdcc-3.5.0/bin/../share/sdcc/lib/z80/z80.lib
-                                          [ _free.rel ]
-/home/arnaud/Téléchargements/cpctelera-master/cpctelera/tools/sdcc-3.5.0/bin/../share/sdcc/lib/z80/z80.lib
-                                          [ _fsadd.rel ]
-/home/arnaud/Téléchargements/cpctelera-master/cpctelera/cpctelera.lib
+/home/arnaud/Software/cpctelera/cpctelera/cpctelera/cpctelera.lib
                                           [ cpct_bitWeightsVector.rel ]
-/home/arnaud/Téléchargements/cpctelera-master/cpctelera/cpctelera.lib
+/home/arnaud/Software/cpctelera/cpctelera/cpctelera/cpctelera.lib
                                           [ cpct_reenableFirmware.rel ]
-/home/arnaud/Téléchargements/cpctelera-master/cpctelera/tools/sdcc-3.5.0/bin/../share/sdcc/lib/z80/z80.lib
-                                          [ heap.rel ]
-/home/arnaud/Téléchargements/cpctelera-master/cpctelera/tools/sdcc-3.5.0/bin/../share/sdcc/lib/z80/z80.lib
-                                          [ floorf.rel ]
-/home/arnaud/Téléchargements/cpctelera-master/cpctelera/cpctelera.lib
+/home/arnaud/Software/cpctelera/cpctelera/cpctelera/cpctelera.lib
                                           [ cpct_getRandom_mxor_u16.rel ]
-/home/arnaud/Téléchargements/cpctelera-master/cpctelera/cpctelera.lib
+/home/arnaud/Software/cpctelera/cpctelera/cpctelera/cpctelera.lib
                                           [ cpct_firmware2hw_colour_table.re ]
-/home/arnaud/Téléchargements/cpctelera-master/cpctelera/tools/sdcc-3.5.0/bin/../share/sdcc/lib/z80/z80.lib
+/home/arnaud/Software/cpctelera/cpctelera/cpctelera/tools/sdcc-3.6.8-r9946/bin/../share/sdcc/lib/z80/z80.lib
                                           [ _memcpy.rel ]
-/home/arnaud/Téléchargements/cpctelera-master/cpctelera/cpctelera.lib
-                                          [ cpct_setVideoMode.rel ]
-/home/arnaud/Téléchargements/cpctelera-master/cpctelera/cpctelera.lib
+/home/arnaud/Software/cpctelera/cpctelera/cpctelera/cpctelera.lib
+                                          [ cpct_setVideoMode_cbindings.rel ]
+/home/arnaud/Software/cpctelera/cpctelera/cpctelera/cpctelera.lib
                                           [ cpct_px2byteM0_cbindings.rel ]
-/home/arnaud/Téléchargements/cpctelera-master/cpctelera/cpctelera.lib
+/home/arnaud/Software/cpctelera/cpctelera/cpctelera/cpctelera.lib
                                           [ cpct_memset_cbinding.rel ]
-/home/arnaud/Téléchargements/cpctelera-master/cpctelera/cpctelera.lib
+/home/arnaud/Software/cpctelera/cpctelera/cpctelera/cpctelera.lib
                                           [ cpct_px2byteM1.rel ]
-/home/arnaud/Téléchargements/cpctelera-master/cpctelera/tools/sdcc-3.5.0/bin/../share/sdcc/lib/z80/z80.lib
+/home/arnaud/Software/cpctelera/cpctelera/cpctelera/tools/sdcc-3.6.8-r9946/bin/../share/sdcc/lib/z80/z80.lib
+                                          [ heap.rel ]
+/home/arnaud/Software/cpctelera/cpctelera/cpctelera/tools/sdcc-3.6.8-r9946/bin/../share/sdcc/lib/z80/z80.lib
                                           [ strlen.rel ]
-/home/arnaud/Téléchargements/cpctelera-master/cpctelera/cpctelera.lib
+/home/arnaud/Software/cpctelera/cpctelera/cpctelera/cpctelera.lib
                                           [ cpct_removeInterruptHandler.rel ]
-/home/arnaud/Téléchargements/cpctelera-master/cpctelera/cpctelera.lib
+/home/arnaud/Software/cpctelera/cpctelera/cpctelera/cpctelera.lib
                                           [ cpct_getRandom_mxor_u8.rel ]
-/home/arnaud/Téléchargements/cpctelera-master/cpctelera/cpctelera.lib
-                                          [ cpct_getRandomUniform_u8_f.rel ]
-/home/arnaud/Téléchargements/cpctelera-master/cpctelera/cpctelera.lib
+/home/arnaud/Software/cpctelera/cpctelera/cpctelera/cpctelera.lib
                                           [ cpct_drawSolidBox_cbindings.rel ]
-/home/arnaud/Téléchargements/cpctelera-master/cpctelera/tools/sdcc-3.5.0/bin/../share/sdcc/lib/z80/z80.lib
-                                          [ _uchar2fs.rel ]
-/home/arnaud/Téléchargements/cpctelera-master/cpctelera/tools/sdcc-3.5.0/bin/../share/sdcc/lib/z80/z80.lib
-                                          [ _fs2uchar.rel ]
-/home/arnaud/Téléchargements/cpctelera-master/cpctelera/tools/sdcc-3.5.0/bin/../share/sdcc/lib/z80/z80.lib
-                                          [ _mullong.rel ]
-/home/arnaud/Téléchargements/cpctelera-master/cpctelera/cpctelera.lib
+/home/arnaud/Software/cpctelera/cpctelera/cpctelera/cpctelera.lib
                                           [ cpc_mode_rom_status.rel ]
-/home/arnaud/Téléchargements/cpctelera-master/cpctelera/cpctelera.lib
+/home/arnaud/Software/cpctelera/cpctelera/cpctelera/cpctelera.lib
+                                          [ cpct_drawSpriteMaskedAlignedTabl ]
+/home/arnaud/Software/cpctelera/cpctelera/cpctelera/cpctelera.lib
                                           [ cpct_getScreenPtr_cbindings.rel ]
-/home/arnaud/Téléchargements/cpctelera-master/cpctelera/cpctelera.lib
+/home/arnaud/Software/cpctelera/cpctelera/cpctelera/cpctelera.lib
                                           [ cpct_scanKeyboard.rel ]
-/home/arnaud/Téléchargements/cpctelera-master/cpctelera/tools/sdcc-3.5.0/bin/../share/sdcc/lib/z80/z80.lib
+/home/arnaud/Software/cpctelera/cpctelera/cpctelera/tools/sdcc-3.6.8-r9946/bin/../share/sdcc/lib/z80/z80.lib
                                           [ divsigned.rel ]
-/home/arnaud/Téléchargements/cpctelera-master/cpctelera/tools/sdcc-3.5.0/bin/../share/sdcc/lib/z80/z80.lib
-                                          [ _fs2slong.rel ]
-/home/arnaud/Téléchargements/cpctelera-master/cpctelera/tools/sdcc-3.5.0/bin/../share/sdcc/lib/z80/z80.lib
-                                          [ _slong2fs.rel ]
-/home/arnaud/Téléchargements/cpctelera-master/cpctelera/tools/sdcc-3.5.0/bin/../share/sdcc/lib/z80/z80.lib
-                                          [ _fs2ulong.rel ]
-/home/arnaud/Téléchargements/cpctelera-master/cpctelera/tools/sdcc-3.5.0/bin/../share/sdcc/lib/z80/z80.lib
-                                          [ _ulong2fs.rel ]
-/home/arnaud/Téléchargements/cpctelera-master/cpctelera/tools/sdcc-3.5.0/bin/../share/sdcc/lib/z80/z80.lib
-                                          [ _fsgt.rel ]
-/home/arnaud/Téléchargements/cpctelera-master/cpctelera/cpctelera.lib
+/home/arnaud/Software/cpctelera/cpctelera/cpctelera/tools/sdcc-3.6.8-r9946/bin/../share/sdcc/lib/z80/z80.lib
+                                          [ free.rel ]
+/home/arnaud/Software/cpctelera/cpctelera/cpctelera/cpctelera.lib
                                           [ cpct_mxor32_seed.rel ]
-/home/arnaud/Téléchargements/cpctelera-master/cpctelera/tools/sdcc-3.5.0/bin/../share/sdcc/lib/z80/z80.lib
-                                          [ _fslt.rel ]
-/home/arnaud/Téléchargements/cpctelera-master/cpctelera/tools/sdcc-3.5.0/bin/../share/sdcc/lib/z80/z80.lib
-                                          [ mul.rel ]
-/home/arnaud/Téléchargements/cpctelera-master/cpctelera/cpctelera.lib
+/home/arnaud/Software/cpctelera/cpctelera/cpctelera/cpctelera.lib
                                           [ cpct_nextRandom_mxor_u32.rel ]
-/home/arnaud/Téléchargements/cpctelera-master/cpctelera/cpctelera.lib
+/home/arnaud/Software/cpctelera/cpctelera/cpctelera/cpctelera.lib
                                           [ cpct_dc_mode0_ct.rel ]
-/home/arnaud/Téléchargements/cpctelera-master/cpctelera/cpctelera.lib
+/home/arnaud/Software/cpctelera/cpctelera/cpctelera/cpctelera.lib
                                           [ cpct_dc_mode1_ct.rel ]
 
-ASxxxx Linker V03.00 + NoICE + sdld,  page 13.
+ASxxxx Linker V03.00 + NoICE + sdld,  page 14.
 
 User Base Address Definitions
 
