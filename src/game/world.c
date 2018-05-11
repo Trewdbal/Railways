@@ -21,7 +21,7 @@ void drawCursor(u8 x, u8 y, u8 color)
 			cpct_memset (p_video, cpct_px2byteM1(color,color,color,color), 4);
 			break;
 		case PUTTRAIN:
-			cpct_drawSpriteMaskedAlignedTable(train_h, p_video, TILESIZE_W, TILESIZE_H, g_masktable);
+		//	cpct_drawSpriteMaskedAlignedTable(train_h, p_video, TILESIZE_W, TILESIZE_H, g_masktable);
 			break;
 		case T_SSNS:
 			cpct_drawSprite(station_small_ns, p_video, TILESIZE_W, TILESIZE_H);
@@ -457,18 +457,65 @@ void drawTrains(u8 x_, u8 y_)
 {
 	u8 *p_video;
 	u8 i;
-
-	setPixel(8, 8, 3);
+	unsigned char *buff;
+	u8 oldTrainX, oldTrainY;
 
 	// Animation
 	for(i=0; i<nbTrainList; i++)
 	{
 		// If the last position of the train is in the screen, clean it
-		if(trainList[i].posX-x_ < NBTILE_W && trainList[i].posY-y_ < NBTILE_H && trainList[i].posX-x_ >= 0 && trainList[i].posY-y_ >= 0 )
-		{
-			drawTile(x_,y_,trainList[i].posX-x_,trainList[i].posY-y_);
-		}
+	//	if(trainList[i].posX-x_ < NBTILE_W && trainList[i].posY-y_ < NBTILE_H && trainList[i].posX-x_ >= 0 && trainList[i].posY-y_ >= 0 )
+	//	{
+	//		drawTile(x_,y_,trainList[i].posX-x_,trainList[i].posY-y_);
+	//	}
 
+	// Restore pixels before calculation of position
+	setPixel(trainList[i].animX-x_*TILESIZE_H,trainList[i].animY-y_*TILESIZE_H, 3);
+	setPixel(trainList[i].animOldX-x_*TILESIZE_H,trainList[i].animOldY-y_*TILESIZE_H, 2);
+
+	// Transfer actual position to "old"
+	oldTrainX = trainList[i].animOldX;
+	oldTrainY = trainList[i].animOldY;
+	trainList[i].animOldX = trainList[i].animX;
+	trainList[i].animOldY = trainList[i].animY;
+
+	// Calculate new position. The idea is based on a cellular automata, Wireworld. There is 8 possible directions
+	if( isPixelBlack(trainList[i].animX-x_*TILESIZE_H +1,trainList[i].animY-y_*TILESIZE_H) )
+		trainList[i].animX+=1;
+	else if( isPixelBlack(trainList[i].animX-x_*TILESIZE_H -1,trainList[i].animY-y_*TILESIZE_H) )
+		trainList[i].animX-=1;
+	else if( isPixelBlack(trainList[i].animX-x_*TILESIZE_H, trainList[i].animY-y_*TILESIZE_H + 1) )
+		trainList[i].animY+=1;
+	else if( isPixelBlack(trainList[i].animX-x_*TILESIZE_H,trainList[i].animY-y_*TILESIZE_H - 1) )
+		trainList[i].animY-=1;
+	else if( isPixelBlack(trainList[i].animX-x_*TILESIZE_H+1,trainList[i].animY-y_*TILESIZE_H + 1) )
+	{
+		trainList[i].animX+=1;
+		trainList[i].animY+=1;
+	}
+	else if( isPixelBlack(trainList[i].animX-x_*TILESIZE_H+1,trainList[i].animY-y_*TILESIZE_H - 1) )
+	{
+		trainList[i].animX+=1;
+		trainList[i].animY-=1;
+	}
+	else if( isPixelBlack(trainList[i].animX-x_*TILESIZE_H-1,trainList[i].animY-y_*TILESIZE_H + 1) )
+	{
+		trainList[i].animX-=1;
+		trainList[i].animY+=1;
+	}
+	else if( isPixelBlack(trainList[i].animX-x_*TILESIZE_H-1,trainList[i].animY-y_*TILESIZE_H - 1) )
+	{
+		trainList[i].animX-=1;
+		trainList[i].animY-=1;
+	}
+
+	// Draw new position
+	setPixel(trainList[i].animX-x_*TILESIZE_H,trainList[i].animY-y_*TILESIZE_H, 3);
+	setPixel(trainList[i].animOldX-x_*TILESIZE_H,trainList[i].animOldY-y_*TILESIZE_H, 2);
+	setPixel(oldTrainX-x_*TILESIZE_H,oldTrainY-y_*TILESIZE_H, 0);
+ 
+ 
+/*
 		switch(trainList[i].heading)
 		{
 			case 0:
@@ -485,8 +532,9 @@ void drawTrains(u8 x_, u8 y_)
 				break;
 
 		}
+		*/
 
-
+/*
 		// Move the train
 		switch(trainList[i].heading)
 		{
@@ -514,7 +562,7 @@ void drawTrains(u8 x_, u8 y_)
 		if(trainList[i].posX-x_ < NBTILE_W && trainList[i].posY-y_ < NBTILE_H && trainList[i].posX-x_ >= 0 && trainList[i].posY-y_ >= 0 ) 
 		{
 
-			p_video = cpct_getScreenPtr(SCR_VMEM, (trainList[i].posX-x_)*TILESIZE_W+trainList[i].shiftX, (trainList[i].posY-y_)*TILESIZE_H+trainList[i].shiftY);
+			p_video = cpct_getScreenPtr(SCR_VMEM, (trainList[i].posX-x_)*TILESIZE_W, (trainList[i].posY-y_)*TILESIZE_H);
 
 			if(trainList[i].heading <= 1) 
 				cpct_drawSpriteMaskedAlignedTable(train_h, p_video, TILESIZE_W, TILESIZE_H, g_masktable);
@@ -522,6 +570,7 @@ void drawTrains(u8 x_, u8 y_)
 				cpct_drawSpriteMaskedAlignedTable(train_v, p_video, TILESIZE_W, TILESIZE_H, g_masktable);
 
 		}
+		*/
 	}
 
 }

@@ -307,8 +307,10 @@ void game()
 					trainList[nbTrainList].posX = ulx+xCursor;
 					trainList[nbTrainList].posY = uly+yCursor;
 					
-					trainList[nbTrainList].shiftX = 0;
-					trainList[nbTrainList].shiftY = 0;
+					trainList[nbTrainList].animX = (ulx+xCursor)*TILESIZE_H+8;
+					trainList[nbTrainList].animY = (uly+yCursor)*TILESIZE_H+8;
+
+
 
 
 					// Update heading
@@ -317,12 +319,19 @@ void game()
 							p_world[trainList[nbTrainList].posY*WIDTH+trainList[nbTrainList].posX] == SMNS ||
 							p_world[trainList[nbTrainList].posY*WIDTH+trainList[nbTrainList].posX] == SLNS )
 					{
+						setPixel((ulx+xCursor)*TILESIZE_H+8, (uly+yCursor)*TILESIZE_H+8, 3);
+						setPixel((ulx+xCursor)*TILESIZE_H+8, (uly+yCursor)*TILESIZE_H+9, 2);
+						
+
 						trainList[nbTrainList].heading = 2;
 
 					}
 					// Horizontal tracks
 					else
 					{
+						setPixel((ulx+xCursor)*TILESIZE_H+8, (uly+yCursor)*TILESIZE_H+8, 3);
+						setPixel((ulx+xCursor)*TILESIZE_H+7, (uly+yCursor)*TILESIZE_H+8, 2);
+						
 						trainList[nbTrainList].heading = 0;
 
 					}
