@@ -86,16 +86,16 @@ _windowInfoTile::
 ;src/game/game.c:8: txtWindowInfoTile[2] = "Production: Nothing";
 	ld	hl, #0x0004
 	add	hl,bc
-	ld	-2 (ix), l
-	ld	-1 (ix), h
+	ld	-4 (ix), l
+	ld	-3 (ix), h
 	ld	(hl), #<(___str_1)
 	inc	hl
 	ld	(hl), #>(___str_1)
 ;src/game/game.c:9: txtWindowInfoTile[3] = "Demand: Nothing";
 	ld	hl, #0x0006
 	add	hl,bc
-	ld	-4 (ix), l
-	ld	-3 (ix), h
+	ld	-2 (ix), l
+	ld	-1 (ix), h
 	ld	(hl), #<(___str_2)
 	inc	hl
 	ld	(hl), #>(___str_2)
@@ -156,14 +156,14 @@ _windowInfoTile::
 	inc	hl
 	ld	(hl), #>(___str_4)
 ;src/game/game.c:21: txtWindowInfoTile[2] = "Production: Passengers, mail";
-	ld	l,-2 (ix)
-	ld	h,-1 (ix)
+	ld	l,-4 (ix)
+	ld	h,-3 (ix)
 	ld	(hl), #<(___str_5)
 	inc	hl
 	ld	(hl), #>(___str_5)
 ;src/game/game.c:22: txtWindowInfoTile[3] = "Demand: Passenger, mail, food, goods";
-	ld	l,-4 (ix)
-	ld	h,-3 (ix)
+	ld	l,-2 (ix)
+	ld	h,-1 (ix)
 	ld	(hl), #<(___str_6)
 	inc	hl
 	ld	(hl), #>(___str_6)
@@ -178,8 +178,8 @@ _windowInfoTile::
 	inc	hl
 	ld	(hl), #>(___str_7)
 ;src/game/game.c:27: txtWindowInfoTile[2] = "Production: Cereal";
-	ld	l,-2 (ix)
-	ld	h,-1 (ix)
+	ld	l,-4 (ix)
+	ld	h,-3 (ix)
 	ld	(hl), #<(___str_8)
 	inc	hl
 	ld	(hl), #>(___str_8)
@@ -214,14 +214,14 @@ _windowInfoTile::
 	inc	hl
 	ld	(hl), #>(___str_11)
 ;src/game/game.c:37: txtWindowInfoTile[2] = "Production: Livestock, wool";
-	ld	l,-2 (ix)
-	ld	h,-1 (ix)
+	ld	l,-4 (ix)
+	ld	h,-3 (ix)
 	ld	(hl), #<(___str_12)
 	inc	hl
 	ld	(hl), #>(___str_12)
 ;src/game/game.c:38: txtWindowInfoTile[3] = "Demand: Cereal";
-	ld	l,-4 (ix)
-	ld	h,-3 (ix)
+	ld	l,-2 (ix)
+	ld	h,-1 (ix)
 	ld	(hl), #<(___str_13)
 	inc	hl
 	ld	(hl), #>(___str_13)
@@ -610,19 +610,19 @@ _game::
 	add	hl, sp
 	ld	sp, hl
 ;src/game/game.c:137: int ulx = 0;
-	ld	-13 (ix), #0x00
-	ld	-12 (ix), #0x00
-;src/game/game.c:138: int uly = 0;
 	ld	-11 (ix), #0x00
 	ld	-10 (ix), #0x00
+;src/game/game.c:138: int uly = 0;
+	ld	-13 (ix), #0x00
+	ld	-12 (ix), #0x00
 ;src/game/game.c:139: int xCursor = 10;
-	ld	-15 (ix), #0x0a
-	ld	-14 (ix), #0x00
+	ld	-20 (ix), #0x0a
+	ld	-19 (ix), #0x00
 ;src/game/game.c:140: int yCursor = 6;
-	ld	-17 (ix), #0x06
-	ld	-16 (ix), #0x00
+	ld	-15 (ix), #0x06
+	ld	-14 (ix), #0x00
 ;src/game/game.c:142: u8 exit=0;
-	ld	-20 (ix), #0x00
+	ld	-18 (ix), #0x00
 ;src/game/game.c:144: nbTrainList=0;
 	ld	hl,#_nbTrainList + 0
 	ld	(hl), #0x00
@@ -684,13 +684,13 @@ _game::
 	call	_cpct_isKeyPressed
 	ld	-9 (ix), l
 ;src/game/game.c:162: drawTile(ulx, uly, xCursor, yCursor);
-	ld	a, -17 (ix)
-	ld	-8 (ix), a
 	ld	a, -15 (ix)
+	ld	-8 (ix), a
+	ld	a, -20 (ix)
 	ld	-1 (ix), a
-	ld	a, -11 (ix)
-	ld	-2 (ix), a
 	ld	a, -13 (ix)
+	ld	-2 (ix), a
+	ld	a, -11 (ix)
 	ld	-3 (ix), a
 ;src/game/game.c:160: if ( cpct_isKeyPressed(Key_CursorUp) )
 	ld	a, -9 (ix)
@@ -707,33 +707,33 @@ _game::
 	pop	af
 	pop	af
 ;src/game/game.c:164: yCursor-=1;
-	ld	l,-17 (ix)
-	ld	h,-16 (ix)
+	ld	l,-15 (ix)
+	ld	h,-14 (ix)
 	dec	hl
-	ld	-17 (ix), l
-	ld	-16 (ix), h
+	ld	-15 (ix), l
+	ld	-14 (ix), h
 ;src/game/game.c:167: if(yCursor<0)
-	bit	7, -16 (ix)
+	bit	7, -14 (ix)
 	jr	Z,00221$
 ;src/game/game.c:169: yCursor=0;
-	ld	-17 (ix), #0x00
-	ld	-16 (ix), #0x00
+	ld	-15 (ix), #0x00
+	ld	-14 (ix), #0x00
 ;src/game/game.c:172: if(uly>0)
 	xor	a, a
-	cp	a, -11 (ix)
-	sbc	a, -10 (ix)
+	cp	a, -13 (ix)
+	sbc	a, -12 (ix)
 	jp	PO, 00418$
 	xor	a, #0x80
 00418$:
 	jp	P, 00221$
 ;src/game/game.c:174: uly-=1;
-	ld	l,-11 (ix)
-	ld	h,-10 (ix)
+	ld	l,-13 (ix)
+	ld	h,-12 (ix)
 	dec	hl
-	ld	-11 (ix), l
-	ld	-10 (ix), h
+	ld	-13 (ix), l
+	ld	-12 (ix), h
 ;src/game/game.c:162: drawTile(ulx, uly, xCursor, yCursor);
-	ld	a, -11 (ix)
+	ld	a, -13 (ix)
 ;src/game/game.c:175: drawWorld(ulx, uly);
 	ld	-2 (ix), a
 	push	af
@@ -745,16 +745,16 @@ _game::
 	pop	af
 ;src/game/game.c:180: for(i=0; i<5000; i++) {}
 00221$:
-	ld	-19 (ix), #0x88
-	ld	-18 (ix), #0x13
+	ld	-17 (ix), #0x88
+	ld	-16 (ix), #0x13
 00197$:
-	ld	l,-19 (ix)
-	ld	h,-18 (ix)
+	ld	l,-17 (ix)
+	ld	h,-16 (ix)
 	dec	hl
-	ld	-19 (ix), l
-	ld	-18 (ix), h
+	ld	-17 (ix), l
+	ld	-16 (ix), h
 	ld	a, h
-	or	a,-19 (ix)
+	or	a,-17 (ix)
 	jr	NZ,00197$
 	jp	00191$
 00190$:
@@ -775,38 +775,38 @@ _game::
 	pop	af
 	pop	af
 ;src/game/game.c:186: yCursor+=1;
-	inc	-17 (ix)
+	inc	-15 (ix)
 	jr	NZ,00419$
-	inc	-16 (ix)
+	inc	-14 (ix)
 00419$:
 ;src/game/game.c:187: if(yCursor>NBTILE_H-1)
 	ld	a, #0x0b
-	cp	a, -17 (ix)
+	cp	a, -15 (ix)
 	ld	a, #0x00
-	sbc	a, -16 (ix)
+	sbc	a, -14 (ix)
 	jp	PO, 00420$
 	xor	a, #0x80
 00420$:
 	jp	P, 00226$
 ;src/game/game.c:189: yCursor=NBTILE_H-1;
-	ld	-17 (ix), #0x0b
-	ld	-16 (ix), #0x00
+	ld	-15 (ix), #0x0b
+	ld	-14 (ix), #0x00
 ;src/game/game.c:190: if(uly<HEIGHT-NBTILE_H)
-	ld	a, -11 (ix)
+	ld	a, -13 (ix)
 	sub	a, #0x24
-	ld	a, -10 (ix)
+	ld	a, -12 (ix)
 	rla
 	ccf
 	rra
 	sbc	a, #0x80
 	jr	NC,00226$
 ;src/game/game.c:192: uly+=1;
-	inc	-11 (ix)
+	inc	-13 (ix)
 	jr	NZ,00421$
-	inc	-10 (ix)
+	inc	-12 (ix)
 00421$:
 ;src/game/game.c:162: drawTile(ulx, uly, xCursor, yCursor);
-	ld	a, -11 (ix)
+	ld	a, -13 (ix)
 ;src/game/game.c:193: drawWorld(ulx, uly);
 	ld	-2 (ix), a
 	push	af
@@ -818,16 +818,16 @@ _game::
 	pop	af
 ;src/game/game.c:198: for(i=0; i<5000; i++) {}
 00226$:
-	ld	-19 (ix), #0x88
-	ld	-18 (ix), #0x13
+	ld	-17 (ix), #0x88
+	ld	-16 (ix), #0x13
 00200$:
-	ld	l,-19 (ix)
-	ld	h,-18 (ix)
+	ld	l,-17 (ix)
+	ld	h,-16 (ix)
 	dec	hl
-	ld	-19 (ix), l
-	ld	-18 (ix), h
+	ld	-17 (ix), l
+	ld	-16 (ix), h
 	ld	a, h
-	or	a,-19 (ix)
+	or	a,-17 (ix)
 	jr	NZ,00200$
 	jp	00191$
 00187$:
@@ -848,33 +848,33 @@ _game::
 	pop	af
 	pop	af
 ;src/game/game.c:204: xCursor-=1;
-	ld	l,-15 (ix)
-	ld	h,-14 (ix)
+	ld	l,-20 (ix)
+	ld	h,-19 (ix)
 	dec	hl
-	ld	-15 (ix), l
-	ld	-14 (ix), h
+	ld	-20 (ix), l
+	ld	-19 (ix), h
 ;src/game/game.c:205: if(xCursor<0)
-	bit	7, -14 (ix)
+	bit	7, -19 (ix)
 	jr	Z,00231$
 ;src/game/game.c:207: xCursor=0;
-	ld	-15 (ix), #0x00
-	ld	-14 (ix), #0x00
+	ld	-20 (ix), #0x00
+	ld	-19 (ix), #0x00
 ;src/game/game.c:208: if(ulx>0)
 	xor	a, a
-	cp	a, -13 (ix)
-	sbc	a, -12 (ix)
+	cp	a, -11 (ix)
+	sbc	a, -10 (ix)
 	jp	PO, 00422$
 	xor	a, #0x80
 00422$:
 	jp	P, 00231$
 ;src/game/game.c:210: ulx-=1;
-	ld	l,-13 (ix)
-	ld	h,-12 (ix)
+	ld	l,-11 (ix)
+	ld	h,-10 (ix)
 	dec	hl
-	ld	-13 (ix), l
-	ld	-12 (ix), h
+	ld	-11 (ix), l
+	ld	-10 (ix), h
 ;src/game/game.c:162: drawTile(ulx, uly, xCursor, yCursor);
-	ld	a, -13 (ix)
+	ld	a, -11 (ix)
 	ld	-3 (ix), a
 ;src/game/game.c:211: drawWorld(ulx, uly);
 	ld	h, -2 (ix)
@@ -909,38 +909,38 @@ _game::
 	pop	af
 	pop	af
 ;src/game/game.c:222: xCursor+=1;
-	inc	-15 (ix)
+	inc	-20 (ix)
 	jr	NZ,00423$
-	inc	-14 (ix)
+	inc	-19 (ix)
 00423$:
 ;src/game/game.c:223: if(xCursor>NBTILE_W-1)
 	ld	a, #0x13
-	cp	a, -15 (ix)
+	cp	a, -20 (ix)
 	ld	a, #0x00
-	sbc	a, -14 (ix)
+	sbc	a, -19 (ix)
 	jp	PO, 00424$
 	xor	a, #0x80
 00424$:
 	jp	P, 00236$
 ;src/game/game.c:225: xCursor=NBTILE_W-1;
-	ld	-15 (ix), #0x13
-	ld	-14 (ix), #0x00
+	ld	-20 (ix), #0x13
+	ld	-19 (ix), #0x00
 ;src/game/game.c:226: if(ulx<WIDTH-NBTILE_W)
-	ld	a, -13 (ix)
+	ld	a, -11 (ix)
 	sub	a, #0x3c
-	ld	a, -12 (ix)
+	ld	a, -10 (ix)
 	rla
 	ccf
 	rra
 	sbc	a, #0x80
 	jr	NC,00236$
 ;src/game/game.c:228: ulx+=1;
-	inc	-13 (ix)
+	inc	-11 (ix)
 	jr	NZ,00425$
-	inc	-12 (ix)
+	inc	-10 (ix)
 00425$:
 ;src/game/game.c:162: drawTile(ulx, uly, xCursor, yCursor);
-	ld	a, -13 (ix)
+	ld	a, -11 (ix)
 	ld	-3 (ix), a
 ;src/game/game.c:229: drawWorld(ulx, uly);
 	ld	h, -2 (ix)
@@ -1105,7 +1105,7 @@ _game::
 	dec	l
 	jr	NZ,00147$
 ;src/game/game.c:274: exit=1;
-	ld	-20 (ix), #0x01
+	ld	-18 (ix), #0x01
 	jr	00253$
 00147$:
 ;src/game/game.c:277: putM1();
@@ -1164,10 +1164,10 @@ _game::
 	or	a, a
 	jp	Z, 00191$
 ;src/game/game.c:297: menuTile(ulx+xCursor, uly+yCursor);
-	ld	e, -11 (ix)
-	ld	l, -17 (ix)
-	ld	c, -13 (ix)
-	ld	a, -15 (ix)
+	ld	e, -13 (ix)
+	ld	l, -15 (ix)
+	ld	c, -11 (ix)
+	ld	a, -20 (ix)
 	ld	-7 (ix), a
 	ld	a, e
 	add	a, l
@@ -1210,17 +1210,17 @@ _game::
 	jp	00264$
 00169$:
 ;src/game/game.c:304: if(p_world[(uly+yCursor)*WIDTH+(ulx+xCursor)] >= SSNS && p_world[(uly+yCursor)*WIDTH+(ulx+xCursor)] <= SLEW )
-	ld	a, -11 (ix)
-	add	a, -17 (ix)
-	ld	c, a
-	ld	a, -10 (ix)
-	adc	a, -16 (ix)
-	ld	b, a
 	ld	a, -13 (ix)
 	add	a, -15 (ix)
-	ld	e, a
+	ld	c, a
 	ld	a, -12 (ix)
 	adc	a, -14 (ix)
+	ld	b, a
+	ld	a, -11 (ix)
+	add	a, -20 (ix)
+	ld	e, a
+	ld	a, -10 (ix)
+	adc	a, -19 (ix)
 	ld	d, a
 	ld	l, c
 	ld	h, b
@@ -1253,7 +1253,7 @@ _game::
 	ld	l, c
 	ld	h, b
 	add	hl, hl
-	add	hl, bc
+	add	hl, hl
 	add	hl, hl
 	add	hl, bc
 	ld	c, l
@@ -1270,7 +1270,7 @@ _game::
 	ld	l, c
 	ld	h, b
 	add	hl, hl
-	add	hl, bc
+	add	hl, hl
 	add	hl, hl
 	add	hl, bc
 	ld	c, l
@@ -1281,18 +1281,50 @@ _game::
 	add	hl, bc
 	ld	a, -5 (ix)
 	ld	(hl), a
+;src/game/game.c:310: trainList[nbTrainList].shiftX = 0;
+	ld	bc, (_nbTrainList)
+	ld	b, #0x00
+	ld	l, c
+	ld	h, b
+	add	hl, hl
+	add	hl, hl
+	add	hl, hl
+	add	hl, bc
+	ld	c, l
+	ld	b, h
+	ld	hl, (_trainList)
+	add	hl, bc
+	ld	bc, #0x0007
+	add	hl, bc
+	ld	(hl), #0x00
+;src/game/game.c:311: trainList[nbTrainList].shiftY = 0;
+	ld	bc, (_nbTrainList)
+	ld	b, #0x00
+	ld	l, c
+	ld	h, b
+	add	hl, hl
+	add	hl, hl
+	add	hl, hl
+	add	hl, bc
+	ld	c, l
+	ld	b, h
+	ld	hl, (_trainList)
+	add	hl, bc
+	ld	bc, #0x0008
+	add	hl, bc
+	ld	(hl), #0x00
 ;src/game/game.c:307: trainList[nbTrainList].posX = ulx+xCursor;
 	ld	bc, (_nbTrainList)
 	ld	b, #0x00
 	ld	l, c
 	ld	h, b
 	add	hl, hl
-	add	hl, bc
+	add	hl, hl
 	add	hl, hl
 	add	hl, bc
 	ld	c, l
 	ld	b, h
-;src/game/game.c:312: if( p_world[trainList[nbTrainList].posY*WIDTH+trainList[nbTrainList].posX] == SSNS ||
+;src/game/game.c:316: if( p_world[trainList[nbTrainList].posY*WIDTH+trainList[nbTrainList].posX] == SSNS ||
 	ld	iy, #_trainList
 	ld	a, 0 (iy)
 	add	a, c
@@ -1327,36 +1359,36 @@ _game::
 	add	hl, de
 	ld	a, (hl)
 	ld	-7 (ix), a
-;src/game/game.c:316: trainList[nbTrainList].heading = 2;
+;src/game/game.c:320: trainList[nbTrainList].heading = 2;
 	ld	hl, #0x0006
 	add	hl, bc
-;src/game/game.c:312: if( p_world[trainList[nbTrainList].posY*WIDTH+trainList[nbTrainList].posX] == SSNS ||
+;src/game/game.c:316: if( p_world[trainList[nbTrainList].posY*WIDTH+trainList[nbTrainList].posX] == SSNS ||
 	ld	a, -7 (ix)
 	sub	a, #0x0a
 	jr	Z,00153$
-;src/game/game.c:313: p_world[trainList[nbTrainList].posY*WIDTH+trainList[nbTrainList].posX] == SMNS ||
+;src/game/game.c:317: p_world[trainList[nbTrainList].posY*WIDTH+trainList[nbTrainList].posX] == SMNS ||
 	ld	a, -7 (ix)
 	sub	a, #0x0c
 	jr	Z,00153$
-;src/game/game.c:314: p_world[trainList[nbTrainList].posY*WIDTH+trainList[nbTrainList].posX] == SLNS )
+;src/game/game.c:318: p_world[trainList[nbTrainList].posY*WIDTH+trainList[nbTrainList].posX] == SLNS )
 	ld	a, -7 (ix)
 	sub	a, #0x0e
 	jr	NZ,00154$
 00153$:
-;src/game/game.c:316: trainList[nbTrainList].heading = 2;
+;src/game/game.c:320: trainList[nbTrainList].heading = 2;
 	ld	(hl), #0x02
 	jr	00155$
 00154$:
-;src/game/game.c:322: trainList[nbTrainList].heading = 0;
+;src/game/game.c:326: trainList[nbTrainList].heading = 0;
 	ld	(hl), #0x00
 00155$:
-;src/game/game.c:328: nbTrainList++;
+;src/game/game.c:332: nbTrainList++;
 	ld	hl, #_nbTrainList+0
 	inc	(hl)
-;src/game/game.c:330: CURSOR_MODE=NONE;
+;src/game/game.c:334: CURSOR_MODE=NONE;
 	ld	hl,#_CURSOR_MODE + 0
 	ld	(hl), #0x00
-;src/game/game.c:331: drawTile(ulx, uly, xCursor, yCursor);
+;src/game/game.c:335: drawTile(ulx, uly, xCursor, yCursor);
 	ld	h, -8 (ix)
 	ld	l, -1 (ix)
 	push	hl
@@ -1368,12 +1400,12 @@ _game::
 	pop	af
 	jr	00264$
 00166$:
-;src/game/game.c:336: else if(CURSOR_MODE>=T_SSNS)
+;src/game/game.c:340: else if(CURSOR_MODE>=T_SSNS)
 	ld	iy, #_CURSOR_MODE
 	ld	a, 0 (iy)
 	sub	a, #0x02
 	jr	C,00264$
-;src/game/game.c:338: p_world[ulx+xCursor+(uly+yCursor)*WIDTH]=CURSOR_MODE+8;
+;src/game/game.c:342: p_world[ulx+xCursor+(uly+yCursor)*WIDTH]=CURSOR_MODE+8;
 	ld	hl, #_p_world
 	add	hl,de
 	ld	c, l
@@ -1381,13 +1413,13 @@ _game::
 	ld	a, 0 (iy)
 	add	a, #0x08
 	ld	(bc), a
-;src/game/game.c:341: if(CURSOR_MODE<=T_SLEW)
+;src/game/game.c:345: if(CURSOR_MODE<=T_SLEW)
 	ld	a, #0x07
 	sub	a, 0 (iy)
 	jr	C,00264$
-;src/game/game.c:342: CURSOR_MODE=NONE;
+;src/game/game.c:346: CURSOR_MODE=NONE;
 	ld	0 (iy), #0x00
-;src/game/game.c:346: for(i=0; i<14000; i++) {}
+;src/game/game.c:350: for(i=0; i<14000; i++) {}
 00264$:
 	ld	bc, #0x36b0
 00215$:
@@ -1396,30 +1428,30 @@ _game::
 	or	a,c
 	jr	NZ,00215$
 00191$:
-;src/game/game.c:350: drawTrains(ulx, uly);
+;src/game/game.c:354: drawTrains(ulx, uly);
 	ld	h, -2 (ix)
 	ld	l, -3 (ix)
 	push	hl
 	call	_drawTrains
 	pop	af
-;src/game/game.c:351: drawCursor(xCursor, yCursor, 0);
-	ld	b, -17 (ix)
-	ld	d, -15 (ix)
+;src/game/game.c:355: drawCursor(xCursor, yCursor, 0);
+	ld	b, -15 (ix)
+	ld	d, -20 (ix)
 	xor	a, a
 	push	af
 	inc	sp
 	ld	c, d
 	push	bc
 	call	_drawCursor
-;src/game/game.c:352: drawScrolls(ulx, uly);
+;src/game/game.c:356: drawScrolls(ulx, uly);
 	inc	sp
 	ld	h, -2 (ix)
 	ld	l, -3 (ix)
 	ex	(sp),hl
 	call	_drawScrolls
 	pop	af
-;src/game/game.c:355: while(!exit);
-	ld	a, -20 (ix)
+;src/game/game.c:359: while(!exit);
+	ld	a, -18 (ix)
 	or	a, a
 	jp	Z, 00192$
 	ld	sp, ix

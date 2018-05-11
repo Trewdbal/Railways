@@ -306,6 +306,10 @@ void game()
 					// Update position
 					trainList[nbTrainList].posX = ulx+xCursor;
 					trainList[nbTrainList].posY = uly+yCursor;
+					
+					trainList[nbTrainList].shiftX = 0;
+					trainList[nbTrainList].shiftY = 0;
+
 
 					// Update heading
 					// Vertical tracks

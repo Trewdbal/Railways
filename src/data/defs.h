@@ -35,6 +35,9 @@ struct Train
 	u8 posX;
 	u8 posY;
 	u8 heading;
+	u8 shiftX;
+	u8 shiftY;
+
 }; 
 
 #endif

@@ -47,6 +47,8 @@ void drawTile(u8, u8, u8, u8);
 void drawScrolls(u8, u8);
 void drawWorld(u8, u8);
 void setTrainHeading(u8);
+void setPixel(int, unsigned char, unsigned char);
+u8 isPixelBlack(int, unsigned char);
 void drawTrains(u8, u8);
 
 #endif

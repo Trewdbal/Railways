@@ -29,11 +29,11 @@ Symbol Table
   0 ___str_25                                                      03DA R
   0 ___str_26                                                      03FD R
   0 ___str_27                                                      03FE R
-  0 ___str_28                                                      09AC R
-  0 ___str_29                                                      09BA R
+  0 ___str_28                                                      09DC R
+  0 ___str_29                                                      09EA R
   0 ___str_3                                                       0125 R
-  0 ___str_30                                                      09BB R
-  0 ___str_31                                                      09E1 R
+  0 ___str_30                                                      09EB R
+  0 ___str_31                                                      0A11 R
   0 ___str_4                                                       012F R
   0 ___str_5                                                       0134 R
   0 ___str_6                                                       0151 R
@@ -77,7 +77,7 @@ Hexadecimal [16-Bits]
 
 Area Table
 
-   0 _CODE                                      size  9F5   flags    0
+   0 _CODE                                      size  A25   flags    0
    1 _DATA                                      size    0   flags    0
    2 _INITIALIZED                               size    0   flags    0
    3 _DABS                                      size    0   flags    8

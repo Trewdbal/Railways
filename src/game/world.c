@@ -364,26 +364,93 @@ void setTrainHeading(u8 i)
 
 	switch(p_world[trainList[i].posY*WIDTH+trainList[i].posX])
 	{
-		case T_REN:
-		if(trainList[i].heading==1) trainList[i].heading=2;
-		else if(trainList[i].heading==3) trainList[i].heading=0;
-		break;
+		case REN:
+			if(trainList[i].heading==1) trainList[i].heading=2;
+			else if(trainList[i].heading==3) trainList[i].heading=0;
+			break;
 
-		case T_RES:
-		if(trainList[i].heading==1) trainList[i].heading=3;
-		else if(trainList[i].heading==2) trainList[i].heading=0;
-		break;
+		case RES:
+			if(trainList[i].heading==1) trainList[i].heading=3;
+			else if(trainList[i].heading==2) trainList[i].heading=0;
+			break;
 
-		case T_RWN:
-		if(trainList[i].heading==0) trainList[i].heading=2;
-		else if(trainList[i].heading==3) trainList[i].heading=1;
-		break;
+		case RWN:
+			if(trainList[i].heading==0) trainList[i].heading=2;   
+			else if(trainList[i].heading==3) trainList[i].heading=1;
+			break;
 
-		case T_RWS:
-		if(trainList[i].heading==0) trainList[i].heading=3;
-		else if(trainList[i].heading==2) trainList[i].heading=1;
-		break;
+		case RWS:
+			if(trainList[i].heading==0) trainList[i].heading=3;
+			else if(trainList[i].heading==2) trainList[i].heading=1;
+			break;
 	}
+}
+
+void setPixel(int nX, unsigned char nY, unsigned char nColor)
+{
+
+	// http://sitedesteph.free.fr/cpc/lec/index.php?page=sdcc&cour=desmd1
+
+	int nPixel = nX % 4;
+	unsigned char *pAddress = (unsigned char *)((unsigned int)(0xC000 + ((nY / 8) * 80) + ((nY % 8) * 2048) + (nX / 4)));
+
+	if(nPixel == 0)
+	{
+		*pAddress &= 119;
+
+		if(nColor & 1)
+			*pAddress |= 128;
+		if(nColor & 2)
+			*pAddress |= 8;
+	}
+	else if(nPixel == 1)
+	{
+		*pAddress &= 187;
+
+		if(nColor & 1)
+			*pAddress |= 64;
+		if(nColor & 2)
+			*pAddress |= 4;
+	}
+	else if(nPixel == 2)
+	{
+		*pAddress &= 221;
+
+		if(nColor & 1)
+			*pAddress |= 32;
+		if(nColor & 2)
+			*pAddress |= 2;
+	}
+	else //nPixel == 3
+	{
+		*pAddress &= 238;
+
+		if(nColor & 1)
+			*pAddress |= 16;
+		if(nColor & 2)
+			*pAddress |= 1;
+	}
+}
+
+u8 isPixelBlack(int nX, unsigned char nY)
+{
+	// Get the rank of the pixel
+	int nPixel = nX % 4;
+
+	// Get the video address
+	unsigned char *pAddress = (unsigned char *)((unsigned int)(0xC000 + ((nY / 8) * 80) + ((nY % 8) * 2048) + (nX / 4)));
+
+
+	if(nPixel == 0 && !(*pAddress & 136)) 
+		return 1;
+	else if(nPixel == 1 && !(*pAddress & 68))
+		return 1;
+	else if(nPixel == 2 && !(*pAddress & 34))
+		return 1;
+	else if(nPixel == 3 && !(*pAddress & 17))
+		return 1;
+
+	return 0;
 }
 
 void drawTrains(u8 x_, u8 y_)
@@ -391,56 +458,64 @@ void drawTrains(u8 x_, u8 y_)
 	u8 *p_video;
 	u8 i;
 
+	setPixel(50, 50, 0);
+	isPixelBlack(50,50);
+
 	// Animation
 	for(i=0; i<nbTrainList; i++)
 	{
 		// If the last position of the train is in the screen, clean it
-		if(trainList[i].posX-x_ < NBTILE_W && trainList[i].posY-y_ < NBTILE_H && trainList[i].posX-x_ > 0 && trainList[i].posY-y_ > 0 )
+		if(trainList[i].posX-x_ < NBTILE_W && trainList[i].posY-y_ < NBTILE_H && trainList[i].posX-x_ >= 0 && trainList[i].posY-y_ >= 0 )
 		{
-			drawTile(0,0,trainList[i].posX,trainList[i].posY);
+			drawTile(x_,y_,trainList[i].posX-x_,trainList[i].posY-y_);
 		}
-		
+
+		switch(trainList[i].heading)
+		{
+			case 0:
+				drawTile(x_,y_,trainList[i].posX-x_+1,trainList[i].posY-y_);
+				break;
+			case 1:
+				drawTile(x_,y_,trainList[i].posX-x_-1,trainList[i].posY-y_);
+				break;
+			case 2:
+				drawTile(x_,y_,trainList[i].posX-x_,trainList[i].posY-y_-1);
+				break;
+			case 3:
+				drawTile(x_,y_,trainList[i].posX-x_,trainList[i].posY-y_+1);
+				break;
+
+		}
+
 
 		// Move the train
 		switch(trainList[i].heading)
 		{
 			case 0: // Right
-				if(trainList[i].posX < WIDTH)
-				{	
-					if(p_world[trainList[i].posY*WIDTH+trainList[i].posX+1] >= SSNS)
-						trainList[i].posX++;
-				}
+				if(trainList[i].posX < WIDTH && p_world[trainList[i].posY*WIDTH+trainList[i].posX+1] >= SSNS )
+					trainList[i].posX++;
 				break;
 			case 1: // Left
-				if(trainList[i].posX >0 )
-				{
-					if(p_world[trainList[i].posY*WIDTH+trainList[i].posX-1] >= SSNS)
-						trainList[i].posX--;
-				}
+				if(trainList[i].posX >0 && p_world[trainList[i].posY*WIDTH+trainList[i].posX-1] >= SSNS )
+					trainList[i].posX--;
 				break;
 			case 2: // Up
-				if(trainList[i].posY > 0)
-				{
-					if(p_world[(trainList[i].posY-1)*WIDTH+trainList[i].posX] >= SSNS)
-						trainList[i].posY--;
-				}
+				if(trainList[i].posY > 0 && p_world[(trainList[i].posY-1)*WIDTH+trainList[i].posX] >= SSNS )
+					trainList[i].posY--;
 				break;
 			case 3: // Down
-				if(trainList[i].posY < HEIGHT)
-				{
-					if(p_world[(trainList[i].posY+1)*WIDTH+trainList[i].posX] >= SSNS)
-						trainList[i].posY++;
-				}
+				if(trainList[i].posY < HEIGHT && p_world[(trainList[i].posY+1)*WIDTH+trainList[i].posX] >= SSNS)
+					trainList[i].posY++;
 				break;
 		}
-		
+
 		setTrainHeading(i);
 
 		// If the train is is the screen, draw it
-		if(trainList[i].posX-x_ < NBTILE_W && trainList[i].posY-y_ < NBTILE_H && trainList[i].posX-x_ > 0 && trainList[i].posY-y_ > 0 ) // Potentiellement eerreur with WIIDTH and HEIGHT
+		if(trainList[i].posX-x_ < NBTILE_W && trainList[i].posY-y_ < NBTILE_H && trainList[i].posX-x_ >= 0 && trainList[i].posY-y_ >= 0 ) 
 		{
 
-			p_video = cpct_getScreenPtr(SCR_VMEM, (trainList[i].posX-x_)*TILESIZE_W, (trainList[i].posY-y_)*TILESIZE_H);
+			p_video = cpct_getScreenPtr(SCR_VMEM, (trainList[i].posX-x_)*TILESIZE_W+trainList[i].shiftX, (trainList[i].posY-y_)*TILESIZE_H+trainList[i].shiftY);
 
 			if(trainList[i].heading <= 1) 
 				cpct_drawSpriteMaskedAlignedTable(train_h, p_video, TILESIZE_W, TILESIZE_H, g_masktable);
