@@ -458,8 +458,7 @@ void drawTrains(u8 x_, u8 y_)
 	u8 *p_video;
 	u8 i;
 
-	setPixel(50, 50, 0);
-	isPixelBlack(50,50);
+	setPixel(8, 8, 3);
 
 	// Animation
 	for(i=0; i<nbTrainList; i++)

@@ -15,7 +15,7 @@ DEF l__GSINIT 0x3
 DEF l__g_masktable_0 0x100
 DEF l__HEAP 0x3FF
 DEF l__DATA 0xF04
-DEF l__CSEG 0xF88
+DEF l__CSEG 0xF7C
 DEF l__CODE 0x276E
 DEF s__CODE 0x4000
 DEF s__DATA 0x676E
@@ -25,8 +25,8 @@ DEF s__HOME 0x7674
 DEF s__GSFINAL 0x7677
 DEF s__INITIALIZER 0x7677
 DEF s__CSEG 0x7679
-DEF s__HEAP 0x8601
-DEF s__HEAP_END 0x8A00
+DEF s__HEAP 0x85F5
+DEF s__HEAP_END 0x89F4
 DEF _main 0x4000
 DEF _putM0 0x4122
 DEF _putM1 0x4133
@@ -157,6 +157,6 @@ DEF _setTrainHeading 0x800C
 DEF _setPixel 0x80AA
 DEF _isPixelBlack 0x8183
 DEF _drawTrains 0x8217
-DEF ___sdcc_heap 0x8601
-DEF ___sdcc_heap_end 0x8A00
+DEF ___sdcc_heap 0x85F5
+DEF ___sdcc_heap_end 0x89F4
 LOAD obj/railways.ihx

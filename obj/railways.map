@@ -24,7 +24,7 @@ Area                                    Addr        Size        Decimal Bytes (A
      00000100  l__g_masktable_0                
      000003FF  l__HEAP                         
      00000F04  l__DATA                         
-     00000F88  l__CSEG                         
+     00000F7C  l__CSEG                         
      0000276E  l__CODE                         
      00004000  s__CODE                         
      0000676E  s__DATA                         
@@ -34,8 +34,8 @@ Area                                    Addr        Size        Decimal Bytes (A
      00007677  s__GSFINAL                      
      00007677  s__INITIALIZER                  
      00007679  s__CSEG                         
-     00008601  s__HEAP                         
-     00008A00  s__HEAP_END                     
+     000085F5  s__HEAP                         
+     000089F4  s__HEAP_END                     
 
 ASxxxx Linker V03.00 + NoICE + sdld,  page 2.
 Hexadecimal  [32-Bits]
@@ -236,7 +236,7 @@ Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-_CSEG                               00007679    00000F88 =        3976. bytes (REL,CON)
+_CSEG                               00007679    00000F7C =        3964. bytes (REL,CON)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
@@ -256,22 +256,22 @@ Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-_HEAP                               00008601    000003FF =        1023. bytes (REL,CON)
+_HEAP                               000085F5    000003FF =        1023. bytes (REL,CON)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
-     00008601  ___sdcc_heap                       
+     000085F5  ___sdcc_heap                       
 
 ASxxxx Linker V03.00 + NoICE + sdld,  page 12.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-_HEAP_END                           00008A00    00000001 =           1. bytes (REL,CON)
+_HEAP_END                           000089F4    00000001 =           1. bytes (REL,CON)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
-     00008A00  ___sdcc_heap_end                   
+     000089F4  ___sdcc_heap_end                   
 
 ASxxxx Linker V03.00 + NoICE + sdld,  page 13.
 

@@ -86,7 +86,7 @@ Area Table
    6 _GSFINAL                                   size    0   flags    0
    7 _g_masktable_                              size    0   flags    8
    8 _g_masktable_0                             size  100   flags    8
-   9 _CSEG                                      size  F88   flags    0
+   9 _CSEG                                      size  F7C   flags    0
    A _INITIALIZER                               size    0   flags    0
    B _CABS                                      size    0   flags    8
 

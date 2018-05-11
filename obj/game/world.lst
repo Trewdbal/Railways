@@ -2191,575 +2191,567 @@
    0BA6 21 F3 FF      [10] 2159 	ld	hl, #-13
    0BA9 39            [11] 2160 	add	hl, sp
    0BAA F9            [ 6] 2161 	ld	sp, hl
-                           2162 ;src/game/world.c:461: setPixel(50, 50, 0);
-   0BAB 21 32 00      [10] 2163 	ld	hl, #0x0032
+                           2162 ;src/game/world.c:461: setPixel(8, 8, 3);
+   0BAB 21 08 03      [10] 2163 	ld	hl, #0x0308
    0BAE E5            [11] 2164 	push	hl
-   0BAF 2E 32         [ 7] 2165 	ld	l, #0x32
+   0BAF 26 00         [ 7] 2165 	ld	h, #0x00
    0BB1 E5            [11] 2166 	push	hl
    0BB2 CDr31r0A      [17] 2167 	call	_setPixel
    0BB5 F1            [10] 2168 	pop	af
-                           2169 ;src/game/world.c:462: isPixelBlack(50,50);
-   0BB6 26 32         [ 7] 2170 	ld	h,#0x32
-   0BB8 E3            [19] 2171 	ex	(sp),hl
-   0BB9 33            [ 6] 2172 	inc	sp
-   0BBA 21 32 00      [10] 2173 	ld	hl, #0x0032
-   0BBD E5            [11] 2174 	push	hl
-   0BBE CDr0Ar0B      [17] 2175 	call	_isPixelBlack
-   0BC1 F1            [10] 2176 	pop	af
-   0BC2 33            [ 6] 2177 	inc	sp
-                           2178 ;src/game/world.c:465: for(i=0; i<nbTrainList; i++)
-   0BC3 DD 36 F3 00   [19] 2179 	ld	-13 (ix), #0x00
-   0BC7                    2180 00138$:
-   0BC7 21r00r00      [10] 2181 	ld	hl, #_nbTrainList
-   0BCA DD 7E F3      [19] 2182 	ld	a, -13 (ix)
-   0BCD 96            [ 7] 2183 	sub	a, (hl)
-   0BCE D2r83r0F      [10] 2184 	jp	NC, 00140$
-                           2185 ;src/game/world.c:468: if(trainList[i].posX-x_ < NBTILE_W && trainList[i].posY-y_ < NBTILE_H && trainList[i].posX-x_ >= 0 && trainList[i].posY-y_ >= 0 )
-   0BD1 DD 4E F3      [19] 2186 	ld	c,-13 (ix)
-   0BD4 06 00         [ 7] 2187 	ld	b,#0x00
-   0BD6 69            [ 4] 2188 	ld	l, c
-   0BD7 60            [ 4] 2189 	ld	h, b
-   0BD8 29            [11] 2190 	add	hl, hl
-   0BD9 29            [11] 2191 	add	hl, hl
-   0BDA 29            [11] 2192 	add	hl, hl
-   0BDB 09            [11] 2193 	add	hl, bc
-   0BDC DD 75 F6      [19] 2194 	ld	-10 (ix), l
-   0BDF DD 74 F7      [19] 2195 	ld	-9 (ix), h
-   0BE2 FD 21r00r00   [14] 2196 	ld	iy, #_trainList
-   0BE6 FD 7E 00      [19] 2197 	ld	a, 0 (iy)
-   0BE9 DD 86 F6      [19] 2198 	add	a, -10 (ix)
-   0BEC 4F            [ 4] 2199 	ld	c, a
-   0BED FD 7E 01      [19] 2200 	ld	a, 1 (iy)
-   0BF0 DD 8E F7      [19] 2201 	adc	a, -9 (ix)
-   0BF3 47            [ 4] 2202 	ld	b, a
-   0BF4 C5            [11] 2203 	push	bc
-   0BF5 FD E1         [14] 2204 	pop	iy
-   0BF7 FD 5E 04      [19] 2205 	ld	e, 4 (iy)
-   0BFA 53            [ 4] 2206 	ld	d, e
-   0BFB 2E 00         [ 7] 2207 	ld	l, #0x00
-   0BFD DD 7E 04      [19] 2208 	ld	a, 4 (ix)
-   0C00 DD 77 F8      [19] 2209 	ld	-8 (ix), a
-   0C03 DD 36 F9 00   [19] 2210 	ld	-7 (ix), #0x00
-   0C07 7A            [ 4] 2211 	ld	a, d
-   0C08 DD 96 F8      [19] 2212 	sub	a, -8 (ix)
-   0C0B DD 77 FE      [19] 2213 	ld	-2 (ix), a
-   0C0E 7D            [ 4] 2214 	ld	a, l
-   0C0F DD 9E F9      [19] 2215 	sbc	a, -7 (ix)
-   0C12 DD 77 FF      [19] 2216 	ld	-1 (ix), a
-   0C15 DD 7E 05      [19] 2217 	ld	a, 5 (ix)
-   0C18 DD 77 FC      [19] 2218 	ld	-4 (ix), a
-   0C1B DD 36 FD 00   [19] 2219 	ld	-3 (ix), #0x00
-   0C1F DD 7E FE      [19] 2220 	ld	a, -2 (ix)
-   0C22 D6 14         [ 7] 2221 	sub	a, #0x14
-   0C24 DD 7E FF      [19] 2222 	ld	a, -1 (ix)
-   0C27 17            [ 4] 2223 	rla
-   0C28 3F            [ 4] 2224 	ccf
-   0C29 1F            [ 4] 2225 	rra
-   0C2A DE 80         [ 7] 2226 	sbc	a, #0x80
-   0C2C 30 40         [12] 2227 	jr	NC,00102$
-   0C2E 69            [ 4] 2228 	ld	l, c
-   0C2F 60            [ 4] 2229 	ld	h, b
-   0C30 01 05 00      [10] 2230 	ld	bc, #0x0005
-   0C33 09            [11] 2231 	add	hl, bc
-   0C34 4E            [ 7] 2232 	ld	c, (hl)
-   0C35 69            [ 4] 2233 	ld	l, c
-   0C36 26 00         [ 7] 2234 	ld	h, #0x00
-   0C38 7D            [ 4] 2235 	ld	a, l
-   0C39 DD 96 FC      [19] 2236 	sub	a, -4 (ix)
-   0C3C 6F            [ 4] 2237 	ld	l, a
-   0C3D 7C            [ 4] 2238 	ld	a, h
-   0C3E DD 9E FD      [19] 2239 	sbc	a, -3 (ix)
-   0C41 47            [ 4] 2240 	ld	b, a
-   0C42 7D            [ 4] 2241 	ld	a, l
-   0C43 D6 0C         [ 7] 2242 	sub	a, #0x0c
-   0C45 78            [ 4] 2243 	ld	a, b
-   0C46 17            [ 4] 2244 	rla
-   0C47 3F            [ 4] 2245 	ccf
-   0C48 1F            [ 4] 2246 	rra
-   0C49 DE 80         [ 7] 2247 	sbc	a, #0x80
-   0C4B 30 21         [12] 2248 	jr	NC,00102$
-   0C4D DD CB FF 7E   [20] 2249 	bit	7, -1 (ix)
-   0C51 20 1B         [12] 2250 	jr	NZ,00102$
-   0C53 CB 78         [ 8] 2251 	bit	7, b
-   0C55 20 17         [12] 2252 	jr	NZ,00102$
-                           2253 ;src/game/world.c:470: drawTile(x_,y_,trainList[i].posX-x_,trainList[i].posY-y_);
-   0C57 79            [ 4] 2254 	ld	a, c
-   0C58 DD 96 05      [19] 2255 	sub	a, 5 (ix)
-   0C5B 57            [ 4] 2256 	ld	d, a
-   0C5C 7B            [ 4] 2257 	ld	a, e
-   0C5D DD 96 04      [19] 2258 	sub	a, 4 (ix)
-   0C60 5F            [ 4] 2259 	ld	e,a
-   0C61 D5            [11] 2260 	push	de
-   0C62 DD 66 05      [19] 2261 	ld	h, 5 (ix)
-   0C65 DD 6E 04      [19] 2262 	ld	l, 4 (ix)
-   0C68 E5            [11] 2263 	push	hl
-   0C69 CDr94r06      [17] 2264 	call	_drawTile
-   0C6C F1            [10] 2265 	pop	af
-   0C6D F1            [10] 2266 	pop	af
-   0C6E                    2267 00102$:
-                           2268 ;src/game/world.c:473: switch(trainList[i].heading)
-   0C6E FD 21r00r00   [14] 2269 	ld	iy, #_trainList
-   0C72 FD 7E 00      [19] 2270 	ld	a, 0 (iy)
-   0C75 DD 86 F6      [19] 2271 	add	a, -10 (ix)
-   0C78 5F            [ 4] 2272 	ld	e, a
-   0C79 FD 7E 01      [19] 2273 	ld	a, 1 (iy)
-   0C7C DD 8E F7      [19] 2274 	adc	a, -9 (ix)
-   0C7F 57            [ 4] 2275 	ld	d, a
-   0C80 D5            [11] 2276 	push	de
-   0C81 FD E1         [14] 2277 	pop	iy
-   0C83 FD 4E 06      [19] 2278 	ld	c, 6 (iy)
-                           2279 ;src/game/world.c:476: drawTile(x_,y_,trainList[i].posX-x_+1,trainList[i].posY-y_);
-   0C86 21 05 00      [10] 2280 	ld	hl, #0x0005
-   0C89 19            [11] 2281 	add	hl,de
-   0C8A DD 75 FE      [19] 2282 	ld	-2 (ix), l
-   0C8D DD 74 FF      [19] 2283 	ld	-1 (ix), h
-   0C90 21 04 00      [10] 2284 	ld	hl, #0x0004
-   0C93 19            [11] 2285 	add	hl,de
-   0C94 DD 75 FA      [19] 2286 	ld	-6 (ix), l
-   0C97 DD 74 FB      [19] 2287 	ld	-5 (ix), h
-                           2288 ;src/game/world.c:473: switch(trainList[i].heading)
-   0C9A 79            [ 4] 2289 	ld	a, c
-   0C9B B7            [ 4] 2290 	or	a, a
-   0C9C 28 10         [12] 2291 	jr	Z,00106$
-   0C9E 79            [ 4] 2292 	ld	a, c
-   0C9F 3D            [ 4] 2293 	dec	a
-   0CA0 28 36         [12] 2294 	jr	Z,00107$
-   0CA2 79            [ 4] 2295 	ld	a,c
-   0CA3 FE 02         [ 7] 2296 	cp	a,#0x02
-   0CA5 28 58         [12] 2297 	jr	Z,00108$
-   0CA7 D6 03         [ 7] 2298 	sub	a, #0x03
-   0CA9 28 7A         [12] 2299 	jr	Z,00109$
-   0CAB C3r49r0D      [10] 2300 	jp	00110$
-                           2301 ;src/game/world.c:475: case 0:
-   0CAE                    2302 00106$:
-                           2303 ;src/game/world.c:476: drawTile(x_,y_,trainList[i].posX-x_+1,trainList[i].posY-y_);
-   0CAE DD 6E FE      [19] 2304 	ld	l,-2 (ix)
-   0CB1 DD 66 FF      [19] 2305 	ld	h,-1 (ix)
-   0CB4 7E            [ 7] 2306 	ld	a, (hl)
-   0CB5 DD 96 05      [19] 2307 	sub	a, 5 (ix)
-   0CB8 4F            [ 4] 2308 	ld	c, a
-   0CB9 DD 6E FA      [19] 2309 	ld	l,-6 (ix)
-   0CBC DD 66 FB      [19] 2310 	ld	h,-5 (ix)
-   0CBF 7E            [ 7] 2311 	ld	a, (hl)
-   0CC0 DD 96 04      [19] 2312 	sub	a, 4 (ix)
-   0CC3 47            [ 4] 2313 	ld	b, a
-   0CC4 04            [ 4] 2314 	inc	b
-   0CC5 79            [ 4] 2315 	ld	a, c
-   0CC6 F5            [11] 2316 	push	af
-   0CC7 33            [ 6] 2317 	inc	sp
-   0CC8 C5            [11] 2318 	push	bc
-   0CC9 33            [ 6] 2319 	inc	sp
-   0CCA DD 66 05      [19] 2320 	ld	h, 5 (ix)
-   0CCD DD 6E 04      [19] 2321 	ld	l, 4 (ix)
-   0CD0 E5            [11] 2322 	push	hl
-   0CD1 CDr94r06      [17] 2323 	call	_drawTile
-   0CD4 F1            [10] 2324 	pop	af
-   0CD5 F1            [10] 2325 	pop	af
-                           2326 ;src/game/world.c:477: break;
-   0CD6 18 71         [12] 2327 	jr	00110$
-                           2328 ;src/game/world.c:478: case 1:
-   0CD8                    2329 00107$:
-                           2330 ;src/game/world.c:479: drawTile(x_,y_,trainList[i].posX-x_-1,trainList[i].posY-y_);
-   0CD8 DD 6E FE      [19] 2331 	ld	l,-2 (ix)
-   0CDB DD 66 FF      [19] 2332 	ld	h,-1 (ix)
-   0CDE 7E            [ 7] 2333 	ld	a, (hl)
-   0CDF DD 96 05      [19] 2334 	sub	a, 5 (ix)
-   0CE2 57            [ 4] 2335 	ld	d, a
-   0CE3 DD 6E FA      [19] 2336 	ld	l,-6 (ix)
-   0CE6 DD 66 FB      [19] 2337 	ld	h,-5 (ix)
-   0CE9 7E            [ 7] 2338 	ld	a, (hl)
-   0CEA DD 96 04      [19] 2339 	sub	a, 4 (ix)
-   0CED 47            [ 4] 2340 	ld	b, a
-   0CEE 05            [ 4] 2341 	dec	b
-   0CEF 58            [ 4] 2342 	ld	e, b
-   0CF0 D5            [11] 2343 	push	de
-   0CF1 DD 66 05      [19] 2344 	ld	h, 5 (ix)
-   0CF4 DD 6E 04      [19] 2345 	ld	l, 4 (ix)
-   0CF7 E5            [11] 2346 	push	hl
-   0CF8 CDr94r06      [17] 2347 	call	_drawTile
-   0CFB F1            [10] 2348 	pop	af
-   0CFC F1            [10] 2349 	pop	af
-                           2350 ;src/game/world.c:480: break;
-   0CFD 18 4A         [12] 2351 	jr	00110$
-                           2352 ;src/game/world.c:481: case 2:
-   0CFF                    2353 00108$:
-                           2354 ;src/game/world.c:482: drawTile(x_,y_,trainList[i].posX-x_,trainList[i].posY-y_-1);
-   0CFF DD 6E FE      [19] 2355 	ld	l,-2 (ix)
-   0D02 DD 66 FF      [19] 2356 	ld	h,-1 (ix)
-   0D05 7E            [ 7] 2357 	ld	a, (hl)
-   0D06 DD 96 05      [19] 2358 	sub	a, 5 (ix)
-   0D09 57            [ 4] 2359 	ld	d, a
-   0D0A 15            [ 4] 2360 	dec	d
-   0D0B DD 6E FA      [19] 2361 	ld	l,-6 (ix)
-   0D0E DD 66 FB      [19] 2362 	ld	h,-5 (ix)
-   0D11 7E            [ 7] 2363 	ld	a, (hl)
-   0D12 DD 96 04      [19] 2364 	sub	a, 4 (ix)
-   0D15 5F            [ 4] 2365 	ld	e,a
-   0D16 D5            [11] 2366 	push	de
-   0D17 DD 66 05      [19] 2367 	ld	h, 5 (ix)
-   0D1A DD 6E 04      [19] 2368 	ld	l, 4 (ix)
-   0D1D E5            [11] 2369 	push	hl
-   0D1E CDr94r06      [17] 2370 	call	_drawTile
-   0D21 F1            [10] 2371 	pop	af
-   0D22 F1            [10] 2372 	pop	af
-                           2373 ;src/game/world.c:483: break;
-   0D23 18 24         [12] 2374 	jr	00110$
-                           2375 ;src/game/world.c:484: case 3:
-   0D25                    2376 00109$:
-                           2377 ;src/game/world.c:485: drawTile(x_,y_,trainList[i].posX-x_,trainList[i].posY-y_+1);
-   0D25 DD 6E FE      [19] 2378 	ld	l,-2 (ix)
-   0D28 DD 66 FF      [19] 2379 	ld	h,-1 (ix)
-   0D2B 7E            [ 7] 2380 	ld	a, (hl)
-   0D2C DD 96 05      [19] 2381 	sub	a, 5 (ix)
-   0D2F 57            [ 4] 2382 	ld	d, a
-   0D30 14            [ 4] 2383 	inc	d
-   0D31 DD 6E FA      [19] 2384 	ld	l,-6 (ix)
-   0D34 DD 66 FB      [19] 2385 	ld	h,-5 (ix)
-   0D37 7E            [ 7] 2386 	ld	a, (hl)
-   0D38 DD 96 04      [19] 2387 	sub	a, 4 (ix)
-   0D3B 5F            [ 4] 2388 	ld	e,a
-   0D3C D5            [11] 2389 	push	de
-   0D3D DD 66 05      [19] 2390 	ld	h, 5 (ix)
-   0D40 DD 6E 04      [19] 2391 	ld	l, 4 (ix)
-   0D43 E5            [11] 2392 	push	hl
-   0D44 CDr94r06      [17] 2393 	call	_drawTile
-   0D47 F1            [10] 2394 	pop	af
-   0D48 F1            [10] 2395 	pop	af
-                           2396 ;src/game/world.c:488: }
-   0D49                    2397 00110$:
-                           2398 ;src/game/world.c:492: switch(trainList[i].heading)
-   0D49 FD 21r00r00   [14] 2399 	ld	iy, #_trainList
-   0D4D FD 7E 00      [19] 2400 	ld	a, 0 (iy)
-   0D50 DD 86 F6      [19] 2401 	add	a, -10 (ix)
-   0D53 5F            [ 4] 2402 	ld	e, a
-   0D54 FD 7E 01      [19] 2403 	ld	a, 1 (iy)
-   0D57 DD 8E F7      [19] 2404 	adc	a, -9 (ix)
-   0D5A 57            [ 4] 2405 	ld	d, a
-   0D5B D5            [11] 2406 	push	de
-   0D5C FD E1         [14] 2407 	pop	iy
-   0D5E FD 4E 06      [19] 2408 	ld	c, 6 (iy)
-                           2409 ;src/game/world.c:495: if(trainList[i].posX < WIDTH && p_world[trainList[i].posY*WIDTH+trainList[i].posX+1] >= SSNS )
-   0D61 21 04 00      [10] 2410 	ld	hl, #0x0004
-   0D64 19            [11] 2411 	add	hl,de
-   0D65 DD 75 FA      [19] 2412 	ld	-6 (ix), l
-   0D68 DD 74 FB      [19] 2413 	ld	-5 (ix), h
-   0D6B 13            [ 6] 2414 	inc	de
-   0D6C 13            [ 6] 2415 	inc	de
-   0D6D 13            [ 6] 2416 	inc	de
-   0D6E 13            [ 6] 2417 	inc	de
-   0D6F 13            [ 6] 2418 	inc	de
-                           2419 ;src/game/world.c:492: switch(trainList[i].heading)
-   0D70 79            [ 4] 2420 	ld	a, c
-   0D71 B7            [ 4] 2421 	or	a, a
-   0D72 28 11         [12] 2422 	jr	Z,00111$
-   0D74 79            [ 4] 2423 	ld	a, c
-   0D75 3D            [ 4] 2424 	dec	a
-   0D76 28 40         [12] 2425 	jr	Z,00115$
-   0D78 79            [ 4] 2426 	ld	a,c
-   0D79 FE 02         [ 7] 2427 	cp	a,#0x02
-   0D7B 28 6B         [12] 2428 	jr	Z,00119$
-   0D7D D6 03         [ 7] 2429 	sub	a, #0x03
-   0D7F CAr1Br0E      [10] 2430 	jp	Z,00123$
-   0D82 C3r4Cr0E      [10] 2431 	jp	00127$
-                           2432 ;src/game/world.c:494: case 0: // Right
-   0D85                    2433 00111$:
-                           2434 ;src/game/world.c:495: if(trainList[i].posX < WIDTH && p_world[trainList[i].posY*WIDTH+trainList[i].posX+1] >= SSNS )
-   0D85 DD 6E FA      [19] 2435 	ld	l,-6 (ix)
-   0D88 DD 66 FB      [19] 2436 	ld	h,-5 (ix)
-   0D8B 4E            [ 7] 2437 	ld	c, (hl)
-   0D8C 79            [ 4] 2438 	ld	a, c
-   0D8D D6 50         [ 7] 2439 	sub	a, #0x50
-   0D8F D2r4Cr0E      [10] 2440 	jp	NC, 00127$
-   0D92 1A            [ 7] 2441 	ld	a, (de)
-   0D93 5F            [ 4] 2442 	ld	e,a
-   0D94 16 00         [ 7] 2443 	ld	d,#0x00
-   0D96 6B            [ 4] 2444 	ld	l, e
-   0D97 62            [ 4] 2445 	ld	h, d
-   0D98 29            [11] 2446 	add	hl, hl
-   0D99 29            [11] 2447 	add	hl, hl
-   0D9A 19            [11] 2448 	add	hl, de
-   0D9B 29            [11] 2449 	add	hl, hl
-   0D9C 29            [11] 2450 	add	hl, hl
-   0D9D 29            [11] 2451 	add	hl, hl
-   0D9E 29            [11] 2452 	add	hl, hl
-   0D9F 59            [ 4] 2453 	ld	e, c
-   0DA0 16 00         [ 7] 2454 	ld	d, #0x00
-   0DA2 19            [11] 2455 	add	hl, de
-   0DA3 11r01r00      [10] 2456 	ld	de,#_p_world+1
-   0DA6 19            [11] 2457 	add	hl,de
-   0DA7 7E            [ 7] 2458 	ld	a, (hl)
-   0DA8 D6 0A         [ 7] 2459 	sub	a, #0x0a
-   0DAA DAr4Cr0E      [10] 2460 	jp	C, 00127$
-                           2461 ;src/game/world.c:496: trainList[i].posX++;
-   0DAD 0C            [ 4] 2462 	inc	c
-   0DAE DD 6E FA      [19] 2463 	ld	l,-6 (ix)
-   0DB1 DD 66 FB      [19] 2464 	ld	h,-5 (ix)
-   0DB4 71            [ 7] 2465 	ld	(hl), c
-                           2466 ;src/game/world.c:497: break;
-   0DB5 C3r4Cr0E      [10] 2467 	jp	00127$
-                           2468 ;src/game/world.c:498: case 1: // Left
-   0DB8                    2469 00115$:
-                           2470 ;src/game/world.c:499: if(trainList[i].posX >0 && p_world[trainList[i].posY*WIDTH+trainList[i].posX-1] >= SSNS )
-   0DB8 DD 6E FA      [19] 2471 	ld	l,-6 (ix)
-   0DBB DD 66 FB      [19] 2472 	ld	h,-5 (ix)
-   0DBE 4E            [ 7] 2473 	ld	c, (hl)
-   0DBF 79            [ 4] 2474 	ld	a, c
-   0DC0 B7            [ 4] 2475 	or	a, a
-   0DC1 CAr4Cr0E      [10] 2476 	jp	Z, 00127$
-   0DC4 1A            [ 7] 2477 	ld	a, (de)
-   0DC5 5F            [ 4] 2478 	ld	e,a
-   0DC6 16 00         [ 7] 2479 	ld	d,#0x00
-   0DC8 6B            [ 4] 2480 	ld	l, e
-   0DC9 62            [ 4] 2481 	ld	h, d
-   0DCA 29            [11] 2482 	add	hl, hl
-   0DCB 29            [11] 2483 	add	hl, hl
-   0DCC 19            [11] 2484 	add	hl, de
-   0DCD 29            [11] 2485 	add	hl, hl
-   0DCE 29            [11] 2486 	add	hl, hl
-   0DCF 29            [11] 2487 	add	hl, hl
-   0DD0 29            [11] 2488 	add	hl, hl
-   0DD1 59            [ 4] 2489 	ld	e, c
-   0DD2 16 00         [ 7] 2490 	ld	d, #0x00
-   0DD4 19            [11] 2491 	add	hl, de
-   0DD5 11rFFrFF      [10] 2492 	ld	de,#_p_world-1
-   0DD8 19            [11] 2493 	add	hl,de
-   0DD9 7E            [ 7] 2494 	ld	a, (hl)
-   0DDA D6 0A         [ 7] 2495 	sub	a, #0x0a
-   0DDC 38 6E         [12] 2496 	jr	C,00127$
-                           2497 ;src/game/world.c:500: trainList[i].posX--;
-   0DDE 0D            [ 4] 2498 	dec	c
-   0DDF DD 6E FA      [19] 2499 	ld	l,-6 (ix)
-   0DE2 DD 66 FB      [19] 2500 	ld	h,-5 (ix)
-   0DE5 71            [ 7] 2501 	ld	(hl), c
-                           2502 ;src/game/world.c:501: break;
-   0DE6 18 64         [12] 2503 	jr	00127$
-                           2504 ;src/game/world.c:502: case 2: // Up
-   0DE8                    2505 00119$:
-                           2506 ;src/game/world.c:503: if(trainList[i].posY > 0 && p_world[(trainList[i].posY-1)*WIDTH+trainList[i].posX] >= SSNS )
-   0DE8 1A            [ 7] 2507 	ld	a, (de)
-   0DE9 DD 77 FE      [19] 2508 	ld	-2 (ix), a
-   0DEC B7            [ 4] 2509 	or	a, a
-   0DED 28 5D         [12] 2510 	jr	Z,00127$
-   0DEF DD 4E FE      [19] 2511 	ld	c, -2 (ix)
-   0DF2 06 00         [ 7] 2512 	ld	b, #0x00
-   0DF4 0B            [ 6] 2513 	dec	bc
-   0DF5 69            [ 4] 2514 	ld	l, c
-   0DF6 60            [ 4] 2515 	ld	h, b
-   0DF7 29            [11] 2516 	add	hl, hl
-   0DF8 29            [11] 2517 	add	hl, hl
-   0DF9 09            [11] 2518 	add	hl, bc
-   0DFA 29            [11] 2519 	add	hl, hl
-   0DFB 29            [11] 2520 	add	hl, hl
-   0DFC 29            [11] 2521 	add	hl, hl
-   0DFD 29            [11] 2522 	add	hl, hl
-   0DFE 4D            [ 4] 2523 	ld	c, l
-   0DFF 44            [ 4] 2524 	ld	b, h
-   0E00 DD 6E FA      [19] 2525 	ld	l,-6 (ix)
-   0E03 DD 66 FB      [19] 2526 	ld	h,-5 (ix)
-   0E06 6E            [ 7] 2527 	ld	l, (hl)
-   0E07 26 00         [ 7] 2528 	ld	h, #0x00
-   0E09 09            [11] 2529 	add	hl, bc
-   0E0A 01r00r00      [10] 2530 	ld	bc, #_p_world
-   0E0D 09            [11] 2531 	add	hl, bc
-   0E0E 7E            [ 7] 2532 	ld	a, (hl)
-   0E0F D6 0A         [ 7] 2533 	sub	a, #0x0a
-   0E11 38 39         [12] 2534 	jr	C,00127$
-                           2535 ;src/game/world.c:504: trainList[i].posY--;
-   0E13 DD 4E FE      [19] 2536 	ld	c, -2 (ix)
-   0E16 0D            [ 4] 2537 	dec	c
-   0E17 79            [ 4] 2538 	ld	a, c
-   0E18 12            [ 7] 2539 	ld	(de), a
-                           2540 ;src/game/world.c:505: break;
-   0E19 18 31         [12] 2541 	jr	00127$
-                           2542 ;src/game/world.c:506: case 3: // Down
-   0E1B                    2543 00123$:
-                           2544 ;src/game/world.c:507: if(trainList[i].posY < HEIGHT && p_world[(trainList[i].posY+1)*WIDTH+trainList[i].posX] >= SSNS)
-   0E1B 1A            [ 7] 2545 	ld	a, (de)
-   0E1C DD 77 FE      [19] 2546 	ld	-2 (ix), a
-   0E1F D6 30         [ 7] 2547 	sub	a, #0x30
-   0E21 30 29         [12] 2548 	jr	NC,00127$
-   0E23 DD 4E FE      [19] 2549 	ld	c, -2 (ix)
-   0E26 06 00         [ 7] 2550 	ld	b, #0x00
-   0E28 03            [ 6] 2551 	inc	bc
-   0E29 69            [ 4] 2552 	ld	l, c
-   0E2A 60            [ 4] 2553 	ld	h, b
-   0E2B 29            [11] 2554 	add	hl, hl
-   0E2C 29            [11] 2555 	add	hl, hl
-   0E2D 09            [11] 2556 	add	hl, bc
-   0E2E 29            [11] 2557 	add	hl, hl
-   0E2F 29            [11] 2558 	add	hl, hl
-   0E30 29            [11] 2559 	add	hl, hl
-   0E31 29            [11] 2560 	add	hl, hl
-   0E32 4D            [ 4] 2561 	ld	c, l
-   0E33 44            [ 4] 2562 	ld	b, h
-   0E34 DD 6E FA      [19] 2563 	ld	l,-6 (ix)
-   0E37 DD 66 FB      [19] 2564 	ld	h,-5 (ix)
-   0E3A 6E            [ 7] 2565 	ld	l, (hl)
-   0E3B 26 00         [ 7] 2566 	ld	h, #0x00
-   0E3D 09            [11] 2567 	add	hl, bc
-   0E3E 01r00r00      [10] 2568 	ld	bc, #_p_world
-   0E41 09            [11] 2569 	add	hl, bc
-   0E42 7E            [ 7] 2570 	ld	a, (hl)
-   0E43 D6 0A         [ 7] 2571 	sub	a, #0x0a
-   0E45 38 05         [12] 2572 	jr	C,00127$
-                           2573 ;src/game/world.c:508: trainList[i].posY++;
-   0E47 DD 7E FE      [19] 2574 	ld	a, -2 (ix)
-   0E4A 3C            [ 4] 2575 	inc	a
-   0E4B 12            [ 7] 2576 	ld	(de), a
-                           2577 ;src/game/world.c:510: }
-   0E4C                    2578 00127$:
-                           2579 ;src/game/world.c:512: setTrainHeading(i);
-   0E4C DD 7E F3      [19] 2580 	ld	a, -13 (ix)
-   0E4F F5            [11] 2581 	push	af
-   0E50 33            [ 6] 2582 	inc	sp
-   0E51 CDr93r09      [17] 2583 	call	_setTrainHeading
-   0E54 33            [ 6] 2584 	inc	sp
-                           2585 ;src/game/world.c:515: if(trainList[i].posX-x_ < NBTILE_W && trainList[i].posY-y_ < NBTILE_H && trainList[i].posX-x_ >= 0 && trainList[i].posY-y_ >= 0 ) 
-   0E55 FD 21r00r00   [14] 2586 	ld	iy, #_trainList
-   0E59 FD 7E 00      [19] 2587 	ld	a, 0 (iy)
-   0E5C DD 86 F6      [19] 2588 	add	a, -10 (ix)
-   0E5F DD 77 FA      [19] 2589 	ld	-6 (ix), a
-   0E62 FD 7E 01      [19] 2590 	ld	a, 1 (iy)
-   0E65 DD 8E F7      [19] 2591 	adc	a, -9 (ix)
-   0E68 DD 77 FB      [19] 2592 	ld	-5 (ix), a
-   0E6B DD 6E FA      [19] 2593 	ld	l,-6 (ix)
-   0E6E DD 66 FB      [19] 2594 	ld	h,-5 (ix)
-   0E71 11 04 00      [10] 2595 	ld	de, #0x0004
-   0E74 19            [11] 2596 	add	hl, de
-   0E75 7E            [ 7] 2597 	ld	a, (hl)
-   0E76 DD 77 FE      [19] 2598 	ld	-2 (ix), a
-   0E79 06 00         [ 7] 2599 	ld	b, #0x00
-   0E7B DD 96 F8      [19] 2600 	sub	a, -8 (ix)
-   0E7E DD 77 F8      [19] 2601 	ld	-8 (ix), a
-   0E81 78            [ 4] 2602 	ld	a, b
-   0E82 DD 9E F9      [19] 2603 	sbc	a, -7 (ix)
-   0E85 DD 77 F9      [19] 2604 	ld	-7 (ix), a
-   0E88 DD 7E F8      [19] 2605 	ld	a, -8 (ix)
-   0E8B D6 14         [ 7] 2606 	sub	a, #0x14
-   0E8D DD 7E F9      [19] 2607 	ld	a, -7 (ix)
-   0E90 17            [ 4] 2608 	rla
-   0E91 3F            [ 4] 2609 	ccf
-   0E92 1F            [ 4] 2610 	rra
-   0E93 DE 80         [ 7] 2611 	sbc	a, #0x80
-   0E95 D2r7Dr0F      [10] 2612 	jp	NC, 00139$
-   0E98 DD 6E FA      [19] 2613 	ld	l,-6 (ix)
-   0E9B DD 66 FB      [19] 2614 	ld	h,-5 (ix)
-   0E9E 11 05 00      [10] 2615 	ld	de, #0x0005
-   0EA1 19            [11] 2616 	add	hl, de
-   0EA2 4E            [ 7] 2617 	ld	c, (hl)
-   0EA3 79            [ 4] 2618 	ld	a, c
-   0EA4 1E 00         [ 7] 2619 	ld	e, #0x00
-   0EA6 DD 96 FC      [19] 2620 	sub	a, -4 (ix)
-   0EA9 6F            [ 4] 2621 	ld	l, a
-   0EAA 7B            [ 4] 2622 	ld	a, e
-   0EAB DD 9E FD      [19] 2623 	sbc	a, -3 (ix)
-   0EAE 67            [ 4] 2624 	ld	h, a
-   0EAF 7D            [ 4] 2625 	ld	a, l
-   0EB0 D6 0C         [ 7] 2626 	sub	a, #0x0c
-   0EB2 7C            [ 4] 2627 	ld	a, h
-   0EB3 17            [ 4] 2628 	rla
-   0EB4 3F            [ 4] 2629 	ccf
-   0EB5 1F            [ 4] 2630 	rra
-   0EB6 DE 80         [ 7] 2631 	sbc	a, #0x80
-   0EB8 D2r7Dr0F      [10] 2632 	jp	NC, 00139$
-   0EBB DD CB F9 7E   [20] 2633 	bit	7, -7 (ix)
-   0EBF C2r7Dr0F      [10] 2634 	jp	NZ, 00139$
-   0EC2 CB 7C         [ 8] 2635 	bit	7, h
-   0EC4 C2r7Dr0F      [10] 2636 	jp	NZ, 00139$
-                           2637 ;src/game/world.c:518: p_video = cpct_getScreenPtr(SCR_VMEM, (trainList[i].posX-x_)*TILESIZE_W+trainList[i].shiftX, (trainList[i].posY-y_)*TILESIZE_H+trainList[i].shiftY);
-   0EC7 79            [ 4] 2638 	ld	a, c
-   0EC8 DD 96 05      [19] 2639 	sub	a, 5 (ix)
-   0ECB 07            [ 4] 2640 	rlca
-   0ECC 07            [ 4] 2641 	rlca
-   0ECD 07            [ 4] 2642 	rlca
-   0ECE 07            [ 4] 2643 	rlca
-   0ECF E6 F0         [ 7] 2644 	and	a, #0xf0
-   0ED1 4F            [ 4] 2645 	ld	c, a
-   0ED2 DD 6E FA      [19] 2646 	ld	l,-6 (ix)
-   0ED5 DD 66 FB      [19] 2647 	ld	h,-5 (ix)
-   0ED8 11 08 00      [10] 2648 	ld	de, #0x0008
-   0EDB 19            [11] 2649 	add	hl, de
-   0EDC 5E            [ 7] 2650 	ld	e, (hl)
-   0EDD 79            [ 4] 2651 	ld	a, c
-   0EDE 83            [ 4] 2652 	add	a, e
-   0EDF DD 77 FC      [19] 2653 	ld	-4 (ix), a
-   0EE2 DD 7E FE      [19] 2654 	ld	a, -2 (ix)
-   0EE5 DD 96 04      [19] 2655 	sub	a, 4 (ix)
-   0EE8 87            [ 4] 2656 	add	a, a
-   0EE9 87            [ 4] 2657 	add	a, a
-   0EEA DD 77 FE      [19] 2658 	ld	-2 (ix), a
-   0EED DD 6E FA      [19] 2659 	ld	l,-6 (ix)
-   0EF0 DD 66 FB      [19] 2660 	ld	h,-5 (ix)
-   0EF3 11 07 00      [10] 2661 	ld	de, #0x0007
-   0EF6 19            [11] 2662 	add	hl, de
-   0EF7 7E            [ 7] 2663 	ld	a, (hl)
-   0EF8 DD 77 FA      [19] 2664 	ld	-6 (ix), a
-   0EFB DD 7E FE      [19] 2665 	ld	a, -2 (ix)
-   0EFE DD 86 FA      [19] 2666 	add	a, -6 (ix)
-   0F01 DD 77 FA      [19] 2667 	ld	-6 (ix), a
-   0F04 DD 66 FC      [19] 2668 	ld	h, -4 (ix)
-   0F07 DD 6E FA      [19] 2669 	ld	l, -6 (ix)
-   0F0A E5            [11] 2670 	push	hl
-   0F0B 21 00 C0      [10] 2671 	ld	hl, #0xc000
-   0F0E E5            [11] 2672 	push	hl
-   0F0F CDr00r00      [17] 2673 	call	_cpct_getScreenPtr
-   0F12 DD 74 F5      [19] 2674 	ld	-11 (ix), h
-   0F15 DD 75 F4      [19] 2675 	ld	-12 (ix), l
-                           2676 ;src/game/world.c:520: if(trainList[i].heading <= 1) 
-   0F18 FD 21r00r00   [14] 2677 	ld	iy, #_trainList
-   0F1C FD 7E 00      [19] 2678 	ld	a, 0 (iy)
-   0F1F DD 86 F6      [19] 2679 	add	a, -10 (ix)
-   0F22 DD 77 FA      [19] 2680 	ld	-6 (ix), a
-   0F25 FD 7E 01      [19] 2681 	ld	a, 1 (iy)
-   0F28 DD 8E F7      [19] 2682 	adc	a, -9 (ix)
-   0F2B DD 77 FB      [19] 2683 	ld	-5 (ix), a
-   0F2E DD 6E FA      [19] 2684 	ld	l,-6 (ix)
-   0F31 DD 66 FB      [19] 2685 	ld	h,-5 (ix)
-   0F34 11 06 00      [10] 2686 	ld	de, #0x0006
-   0F37 19            [11] 2687 	add	hl, de
-   0F38 7E            [ 7] 2688 	ld	a, (hl)
-   0F39 DD 77 FA      [19] 2689 	ld	-6 (ix), a
-                           2690 ;src/game/world.c:521: cpct_drawSpriteMaskedAlignedTable(train_h, p_video, TILESIZE_W, TILESIZE_H, g_masktable);
-   0F3C DD 7E F4      [19] 2691 	ld	a, -12 (ix)
-   0F3F DD 77 FC      [19] 2692 	ld	-4 (ix), a
-   0F42 DD 7E F5      [19] 2693 	ld	a, -11 (ix)
-   0F45 DD 77 FD      [19] 2694 	ld	-3 (ix), a
-                           2695 ;src/game/world.c:520: if(trainList[i].heading <= 1) 
-   0F48 3E 01         [ 7] 2696 	ld	a, #0x01
-   0F4A DD 96 FA      [19] 2697 	sub	a, -6 (ix)
-   0F4D 38 18         [12] 2698 	jr	C,00129$
-                           2699 ;src/game/world.c:521: cpct_drawSpriteMaskedAlignedTable(train_h, p_video, TILESIZE_W, TILESIZE_H, g_masktable);
-   0F4F 21r00r01      [10] 2700 	ld	hl, #_g_masktable
-   0F52 E5            [11] 2701 	push	hl
-   0F53 21 04 10      [10] 2702 	ld	hl, #0x1004
-   0F56 E5            [11] 2703 	push	hl
-   0F57 DD 6E FC      [19] 2704 	ld	l,-4 (ix)
-   0F5A DD 66 FD      [19] 2705 	ld	h,-3 (ix)
-   0F5D E5            [11] 2706 	push	hl
-   0F5E 21r00r00      [10] 2707 	ld	hl, #_train_h
-   0F61 E5            [11] 2708 	push	hl
-   0F62 CDr00r00      [17] 2709 	call	_cpct_drawSpriteMaskedAlignedTable
-   0F65 18 16         [12] 2710 	jr	00139$
-   0F67                    2711 00129$:
-                           2712 ;src/game/world.c:523: cpct_drawSpriteMaskedAlignedTable(train_v, p_video, TILESIZE_W, TILESIZE_H, g_masktable);
-   0F67 21r00r01      [10] 2713 	ld	hl, #_g_masktable
-   0F6A E5            [11] 2714 	push	hl
-   0F6B 21 04 10      [10] 2715 	ld	hl, #0x1004
-   0F6E E5            [11] 2716 	push	hl
-   0F6F DD 6E FC      [19] 2717 	ld	l,-4 (ix)
-   0F72 DD 66 FD      [19] 2718 	ld	h,-3 (ix)
-   0F75 E5            [11] 2719 	push	hl
-   0F76 21r00r00      [10] 2720 	ld	hl, #_train_v
-   0F79 E5            [11] 2721 	push	hl
-   0F7A CDr00r00      [17] 2722 	call	_cpct_drawSpriteMaskedAlignedTable
-   0F7D                    2723 00139$:
-                           2724 ;src/game/world.c:465: for(i=0; i<nbTrainList; i++)
-   0F7D DD 34 F3      [23] 2725 	inc	-13 (ix)
-   0F80 C3rC7r0B      [10] 2726 	jp	00138$
-   0F83                    2727 00140$:
-   0F83 DD F9         [10] 2728 	ld	sp, ix
-   0F85 DD E1         [14] 2729 	pop	ix
-   0F87 C9            [10] 2730 	ret
-                           2731 	.area _CODE
-                           2732 	.area _INITIALIZER
-                           2733 	.area _CABS (ABS)
+   0BB6 F1            [10] 2169 	pop	af
+                           2170 ;src/game/world.c:464: for(i=0; i<nbTrainList; i++)
+   0BB7 DD 36 F3 00   [19] 2171 	ld	-13 (ix), #0x00
+   0BBB                    2172 00138$:
+   0BBB 21r00r00      [10] 2173 	ld	hl, #_nbTrainList
+   0BBE DD 7E F3      [19] 2174 	ld	a, -13 (ix)
+   0BC1 96            [ 7] 2175 	sub	a, (hl)
+   0BC2 D2r77r0F      [10] 2176 	jp	NC, 00140$
+                           2177 ;src/game/world.c:467: if(trainList[i].posX-x_ < NBTILE_W && trainList[i].posY-y_ < NBTILE_H && trainList[i].posX-x_ >= 0 && trainList[i].posY-y_ >= 0 )
+   0BC5 DD 4E F3      [19] 2178 	ld	c,-13 (ix)
+   0BC8 06 00         [ 7] 2179 	ld	b,#0x00
+   0BCA 69            [ 4] 2180 	ld	l, c
+   0BCB 60            [ 4] 2181 	ld	h, b
+   0BCC 29            [11] 2182 	add	hl, hl
+   0BCD 29            [11] 2183 	add	hl, hl
+   0BCE 29            [11] 2184 	add	hl, hl
+   0BCF 09            [11] 2185 	add	hl, bc
+   0BD0 DD 75 FA      [19] 2186 	ld	-6 (ix), l
+   0BD3 DD 74 FB      [19] 2187 	ld	-5 (ix), h
+   0BD6 FD 21r00r00   [14] 2188 	ld	iy, #_trainList
+   0BDA FD 7E 00      [19] 2189 	ld	a, 0 (iy)
+   0BDD DD 86 FA      [19] 2190 	add	a, -6 (ix)
+   0BE0 4F            [ 4] 2191 	ld	c, a
+   0BE1 FD 7E 01      [19] 2192 	ld	a, 1 (iy)
+   0BE4 DD 8E FB      [19] 2193 	adc	a, -5 (ix)
+   0BE7 47            [ 4] 2194 	ld	b, a
+   0BE8 C5            [11] 2195 	push	bc
+   0BE9 FD E1         [14] 2196 	pop	iy
+   0BEB FD 5E 04      [19] 2197 	ld	e, 4 (iy)
+   0BEE 53            [ 4] 2198 	ld	d, e
+   0BEF 2E 00         [ 7] 2199 	ld	l, #0x00
+   0BF1 DD 7E 04      [19] 2200 	ld	a, 4 (ix)
+   0BF4 DD 77 F8      [19] 2201 	ld	-8 (ix), a
+   0BF7 DD 36 F9 00   [19] 2202 	ld	-7 (ix), #0x00
+   0BFB 7A            [ 4] 2203 	ld	a, d
+   0BFC DD 96 F8      [19] 2204 	sub	a, -8 (ix)
+   0BFF DD 77 FE      [19] 2205 	ld	-2 (ix), a
+   0C02 7D            [ 4] 2206 	ld	a, l
+   0C03 DD 9E F9      [19] 2207 	sbc	a, -7 (ix)
+   0C06 DD 77 FF      [19] 2208 	ld	-1 (ix), a
+   0C09 DD 7E 05      [19] 2209 	ld	a, 5 (ix)
+   0C0C DD 77 FC      [19] 2210 	ld	-4 (ix), a
+   0C0F DD 36 FD 00   [19] 2211 	ld	-3 (ix), #0x00
+   0C13 DD 7E FE      [19] 2212 	ld	a, -2 (ix)
+   0C16 D6 14         [ 7] 2213 	sub	a, #0x14
+   0C18 DD 7E FF      [19] 2214 	ld	a, -1 (ix)
+   0C1B 17            [ 4] 2215 	rla
+   0C1C 3F            [ 4] 2216 	ccf
+   0C1D 1F            [ 4] 2217 	rra
+   0C1E DE 80         [ 7] 2218 	sbc	a, #0x80
+   0C20 30 40         [12] 2219 	jr	NC,00102$
+   0C22 69            [ 4] 2220 	ld	l, c
+   0C23 60            [ 4] 2221 	ld	h, b
+   0C24 01 05 00      [10] 2222 	ld	bc, #0x0005
+   0C27 09            [11] 2223 	add	hl, bc
+   0C28 4E            [ 7] 2224 	ld	c, (hl)
+   0C29 69            [ 4] 2225 	ld	l, c
+   0C2A 26 00         [ 7] 2226 	ld	h, #0x00
+   0C2C 7D            [ 4] 2227 	ld	a, l
+   0C2D DD 96 FC      [19] 2228 	sub	a, -4 (ix)
+   0C30 6F            [ 4] 2229 	ld	l, a
+   0C31 7C            [ 4] 2230 	ld	a, h
+   0C32 DD 9E FD      [19] 2231 	sbc	a, -3 (ix)
+   0C35 47            [ 4] 2232 	ld	b, a
+   0C36 7D            [ 4] 2233 	ld	a, l
+   0C37 D6 0C         [ 7] 2234 	sub	a, #0x0c
+   0C39 78            [ 4] 2235 	ld	a, b
+   0C3A 17            [ 4] 2236 	rla
+   0C3B 3F            [ 4] 2237 	ccf
+   0C3C 1F            [ 4] 2238 	rra
+   0C3D DE 80         [ 7] 2239 	sbc	a, #0x80
+   0C3F 30 21         [12] 2240 	jr	NC,00102$
+   0C41 DD CB FF 7E   [20] 2241 	bit	7, -1 (ix)
+   0C45 20 1B         [12] 2242 	jr	NZ,00102$
+   0C47 CB 78         [ 8] 2243 	bit	7, b
+   0C49 20 17         [12] 2244 	jr	NZ,00102$
+                           2245 ;src/game/world.c:469: drawTile(x_,y_,trainList[i].posX-x_,trainList[i].posY-y_);
+   0C4B 79            [ 4] 2246 	ld	a, c
+   0C4C DD 96 05      [19] 2247 	sub	a, 5 (ix)
+   0C4F 57            [ 4] 2248 	ld	d, a
+   0C50 7B            [ 4] 2249 	ld	a, e
+   0C51 DD 96 04      [19] 2250 	sub	a, 4 (ix)
+   0C54 5F            [ 4] 2251 	ld	e,a
+   0C55 D5            [11] 2252 	push	de
+   0C56 DD 66 05      [19] 2253 	ld	h, 5 (ix)
+   0C59 DD 6E 04      [19] 2254 	ld	l, 4 (ix)
+   0C5C E5            [11] 2255 	push	hl
+   0C5D CDr94r06      [17] 2256 	call	_drawTile
+   0C60 F1            [10] 2257 	pop	af
+   0C61 F1            [10] 2258 	pop	af
+   0C62                    2259 00102$:
+                           2260 ;src/game/world.c:472: switch(trainList[i].heading)
+   0C62 FD 21r00r00   [14] 2261 	ld	iy, #_trainList
+   0C66 FD 7E 00      [19] 2262 	ld	a, 0 (iy)
+   0C69 DD 86 FA      [19] 2263 	add	a, -6 (ix)
+   0C6C 5F            [ 4] 2264 	ld	e, a
+   0C6D FD 7E 01      [19] 2265 	ld	a, 1 (iy)
+   0C70 DD 8E FB      [19] 2266 	adc	a, -5 (ix)
+   0C73 57            [ 4] 2267 	ld	d, a
+   0C74 D5            [11] 2268 	push	de
+   0C75 FD E1         [14] 2269 	pop	iy
+   0C77 FD 4E 06      [19] 2270 	ld	c, 6 (iy)
+                           2271 ;src/game/world.c:475: drawTile(x_,y_,trainList[i].posX-x_+1,trainList[i].posY-y_);
+   0C7A 21 05 00      [10] 2272 	ld	hl, #0x0005
+   0C7D 19            [11] 2273 	add	hl,de
+   0C7E DD 75 FE      [19] 2274 	ld	-2 (ix), l
+   0C81 DD 74 FF      [19] 2275 	ld	-1 (ix), h
+   0C84 21 04 00      [10] 2276 	ld	hl, #0x0004
+   0C87 19            [11] 2277 	add	hl,de
+   0C88 DD 75 F6      [19] 2278 	ld	-10 (ix), l
+   0C8B DD 74 F7      [19] 2279 	ld	-9 (ix), h
+                           2280 ;src/game/world.c:472: switch(trainList[i].heading)
+   0C8E 79            [ 4] 2281 	ld	a, c
+   0C8F B7            [ 4] 2282 	or	a, a
+   0C90 28 10         [12] 2283 	jr	Z,00106$
+   0C92 79            [ 4] 2284 	ld	a, c
+   0C93 3D            [ 4] 2285 	dec	a
+   0C94 28 36         [12] 2286 	jr	Z,00107$
+   0C96 79            [ 4] 2287 	ld	a,c
+   0C97 FE 02         [ 7] 2288 	cp	a,#0x02
+   0C99 28 58         [12] 2289 	jr	Z,00108$
+   0C9B D6 03         [ 7] 2290 	sub	a, #0x03
+   0C9D 28 7A         [12] 2291 	jr	Z,00109$
+   0C9F C3r3Dr0D      [10] 2292 	jp	00110$
+                           2293 ;src/game/world.c:474: case 0:
+   0CA2                    2294 00106$:
+                           2295 ;src/game/world.c:475: drawTile(x_,y_,trainList[i].posX-x_+1,trainList[i].posY-y_);
+   0CA2 DD 6E FE      [19] 2296 	ld	l,-2 (ix)
+   0CA5 DD 66 FF      [19] 2297 	ld	h,-1 (ix)
+   0CA8 7E            [ 7] 2298 	ld	a, (hl)
+   0CA9 DD 96 05      [19] 2299 	sub	a, 5 (ix)
+   0CAC 4F            [ 4] 2300 	ld	c, a
+   0CAD DD 6E F6      [19] 2301 	ld	l,-10 (ix)
+   0CB0 DD 66 F7      [19] 2302 	ld	h,-9 (ix)
+   0CB3 7E            [ 7] 2303 	ld	a, (hl)
+   0CB4 DD 96 04      [19] 2304 	sub	a, 4 (ix)
+   0CB7 47            [ 4] 2305 	ld	b, a
+   0CB8 04            [ 4] 2306 	inc	b
+   0CB9 79            [ 4] 2307 	ld	a, c
+   0CBA F5            [11] 2308 	push	af
+   0CBB 33            [ 6] 2309 	inc	sp
+   0CBC C5            [11] 2310 	push	bc
+   0CBD 33            [ 6] 2311 	inc	sp
+   0CBE DD 66 05      [19] 2312 	ld	h, 5 (ix)
+   0CC1 DD 6E 04      [19] 2313 	ld	l, 4 (ix)
+   0CC4 E5            [11] 2314 	push	hl
+   0CC5 CDr94r06      [17] 2315 	call	_drawTile
+   0CC8 F1            [10] 2316 	pop	af
+   0CC9 F1            [10] 2317 	pop	af
+                           2318 ;src/game/world.c:476: break;
+   0CCA 18 71         [12] 2319 	jr	00110$
+                           2320 ;src/game/world.c:477: case 1:
+   0CCC                    2321 00107$:
+                           2322 ;src/game/world.c:478: drawTile(x_,y_,trainList[i].posX-x_-1,trainList[i].posY-y_);
+   0CCC DD 6E FE      [19] 2323 	ld	l,-2 (ix)
+   0CCF DD 66 FF      [19] 2324 	ld	h,-1 (ix)
+   0CD2 7E            [ 7] 2325 	ld	a, (hl)
+   0CD3 DD 96 05      [19] 2326 	sub	a, 5 (ix)
+   0CD6 57            [ 4] 2327 	ld	d, a
+   0CD7 DD 6E F6      [19] 2328 	ld	l,-10 (ix)
+   0CDA DD 66 F7      [19] 2329 	ld	h,-9 (ix)
+   0CDD 7E            [ 7] 2330 	ld	a, (hl)
+   0CDE DD 96 04      [19] 2331 	sub	a, 4 (ix)
+   0CE1 47            [ 4] 2332 	ld	b, a
+   0CE2 05            [ 4] 2333 	dec	b
+   0CE3 58            [ 4] 2334 	ld	e, b
+   0CE4 D5            [11] 2335 	push	de
+   0CE5 DD 66 05      [19] 2336 	ld	h, 5 (ix)
+   0CE8 DD 6E 04      [19] 2337 	ld	l, 4 (ix)
+   0CEB E5            [11] 2338 	push	hl
+   0CEC CDr94r06      [17] 2339 	call	_drawTile
+   0CEF F1            [10] 2340 	pop	af
+   0CF0 F1            [10] 2341 	pop	af
+                           2342 ;src/game/world.c:479: break;
+   0CF1 18 4A         [12] 2343 	jr	00110$
+                           2344 ;src/game/world.c:480: case 2:
+   0CF3                    2345 00108$:
+                           2346 ;src/game/world.c:481: drawTile(x_,y_,trainList[i].posX-x_,trainList[i].posY-y_-1);
+   0CF3 DD 6E FE      [19] 2347 	ld	l,-2 (ix)
+   0CF6 DD 66 FF      [19] 2348 	ld	h,-1 (ix)
+   0CF9 7E            [ 7] 2349 	ld	a, (hl)
+   0CFA DD 96 05      [19] 2350 	sub	a, 5 (ix)
+   0CFD 57            [ 4] 2351 	ld	d, a
+   0CFE 15            [ 4] 2352 	dec	d
+   0CFF DD 6E F6      [19] 2353 	ld	l,-10 (ix)
+   0D02 DD 66 F7      [19] 2354 	ld	h,-9 (ix)
+   0D05 7E            [ 7] 2355 	ld	a, (hl)
+   0D06 DD 96 04      [19] 2356 	sub	a, 4 (ix)
+   0D09 5F            [ 4] 2357 	ld	e,a
+   0D0A D5            [11] 2358 	push	de
+   0D0B DD 66 05      [19] 2359 	ld	h, 5 (ix)
+   0D0E DD 6E 04      [19] 2360 	ld	l, 4 (ix)
+   0D11 E5            [11] 2361 	push	hl
+   0D12 CDr94r06      [17] 2362 	call	_drawTile
+   0D15 F1            [10] 2363 	pop	af
+   0D16 F1            [10] 2364 	pop	af
+                           2365 ;src/game/world.c:482: break;
+   0D17 18 24         [12] 2366 	jr	00110$
+                           2367 ;src/game/world.c:483: case 3:
+   0D19                    2368 00109$:
+                           2369 ;src/game/world.c:484: drawTile(x_,y_,trainList[i].posX-x_,trainList[i].posY-y_+1);
+   0D19 DD 6E FE      [19] 2370 	ld	l,-2 (ix)
+   0D1C DD 66 FF      [19] 2371 	ld	h,-1 (ix)
+   0D1F 7E            [ 7] 2372 	ld	a, (hl)
+   0D20 DD 96 05      [19] 2373 	sub	a, 5 (ix)
+   0D23 57            [ 4] 2374 	ld	d, a
+   0D24 14            [ 4] 2375 	inc	d
+   0D25 DD 6E F6      [19] 2376 	ld	l,-10 (ix)
+   0D28 DD 66 F7      [19] 2377 	ld	h,-9 (ix)
+   0D2B 7E            [ 7] 2378 	ld	a, (hl)
+   0D2C DD 96 04      [19] 2379 	sub	a, 4 (ix)
+   0D2F 5F            [ 4] 2380 	ld	e,a
+   0D30 D5            [11] 2381 	push	de
+   0D31 DD 66 05      [19] 2382 	ld	h, 5 (ix)
+   0D34 DD 6E 04      [19] 2383 	ld	l, 4 (ix)
+   0D37 E5            [11] 2384 	push	hl
+   0D38 CDr94r06      [17] 2385 	call	_drawTile
+   0D3B F1            [10] 2386 	pop	af
+   0D3C F1            [10] 2387 	pop	af
+                           2388 ;src/game/world.c:487: }
+   0D3D                    2389 00110$:
+                           2390 ;src/game/world.c:491: switch(trainList[i].heading)
+   0D3D FD 21r00r00   [14] 2391 	ld	iy, #_trainList
+   0D41 FD 7E 00      [19] 2392 	ld	a, 0 (iy)
+   0D44 DD 86 FA      [19] 2393 	add	a, -6 (ix)
+   0D47 5F            [ 4] 2394 	ld	e, a
+   0D48 FD 7E 01      [19] 2395 	ld	a, 1 (iy)
+   0D4B DD 8E FB      [19] 2396 	adc	a, -5 (ix)
+   0D4E 57            [ 4] 2397 	ld	d, a
+   0D4F D5            [11] 2398 	push	de
+   0D50 FD E1         [14] 2399 	pop	iy
+   0D52 FD 4E 06      [19] 2400 	ld	c, 6 (iy)
+                           2401 ;src/game/world.c:494: if(trainList[i].posX < WIDTH && p_world[trainList[i].posY*WIDTH+trainList[i].posX+1] >= SSNS )
+   0D55 21 04 00      [10] 2402 	ld	hl, #0x0004
+   0D58 19            [11] 2403 	add	hl,de
+   0D59 DD 75 F6      [19] 2404 	ld	-10 (ix), l
+   0D5C DD 74 F7      [19] 2405 	ld	-9 (ix), h
+   0D5F 13            [ 6] 2406 	inc	de
+   0D60 13            [ 6] 2407 	inc	de
+   0D61 13            [ 6] 2408 	inc	de
+   0D62 13            [ 6] 2409 	inc	de
+   0D63 13            [ 6] 2410 	inc	de
+                           2411 ;src/game/world.c:491: switch(trainList[i].heading)
+   0D64 79            [ 4] 2412 	ld	a, c
+   0D65 B7            [ 4] 2413 	or	a, a
+   0D66 28 11         [12] 2414 	jr	Z,00111$
+   0D68 79            [ 4] 2415 	ld	a, c
+   0D69 3D            [ 4] 2416 	dec	a
+   0D6A 28 40         [12] 2417 	jr	Z,00115$
+   0D6C 79            [ 4] 2418 	ld	a,c
+   0D6D FE 02         [ 7] 2419 	cp	a,#0x02
+   0D6F 28 6B         [12] 2420 	jr	Z,00119$
+   0D71 D6 03         [ 7] 2421 	sub	a, #0x03
+   0D73 CAr0Fr0E      [10] 2422 	jp	Z,00123$
+   0D76 C3r40r0E      [10] 2423 	jp	00127$
+                           2424 ;src/game/world.c:493: case 0: // Right
+   0D79                    2425 00111$:
+                           2426 ;src/game/world.c:494: if(trainList[i].posX < WIDTH && p_world[trainList[i].posY*WIDTH+trainList[i].posX+1] >= SSNS )
+   0D79 DD 6E F6      [19] 2427 	ld	l,-10 (ix)
+   0D7C DD 66 F7      [19] 2428 	ld	h,-9 (ix)
+   0D7F 4E            [ 7] 2429 	ld	c, (hl)
+   0D80 79            [ 4] 2430 	ld	a, c
+   0D81 D6 50         [ 7] 2431 	sub	a, #0x50
+   0D83 D2r40r0E      [10] 2432 	jp	NC, 00127$
+   0D86 1A            [ 7] 2433 	ld	a, (de)
+   0D87 5F            [ 4] 2434 	ld	e,a
+   0D88 16 00         [ 7] 2435 	ld	d,#0x00
+   0D8A 6B            [ 4] 2436 	ld	l, e
+   0D8B 62            [ 4] 2437 	ld	h, d
+   0D8C 29            [11] 2438 	add	hl, hl
+   0D8D 29            [11] 2439 	add	hl, hl
+   0D8E 19            [11] 2440 	add	hl, de
+   0D8F 29            [11] 2441 	add	hl, hl
+   0D90 29            [11] 2442 	add	hl, hl
+   0D91 29            [11] 2443 	add	hl, hl
+   0D92 29            [11] 2444 	add	hl, hl
+   0D93 59            [ 4] 2445 	ld	e, c
+   0D94 16 00         [ 7] 2446 	ld	d, #0x00
+   0D96 19            [11] 2447 	add	hl, de
+   0D97 11r01r00      [10] 2448 	ld	de,#_p_world+1
+   0D9A 19            [11] 2449 	add	hl,de
+   0D9B 7E            [ 7] 2450 	ld	a, (hl)
+   0D9C D6 0A         [ 7] 2451 	sub	a, #0x0a
+   0D9E DAr40r0E      [10] 2452 	jp	C, 00127$
+                           2453 ;src/game/world.c:495: trainList[i].posX++;
+   0DA1 0C            [ 4] 2454 	inc	c
+   0DA2 DD 6E F6      [19] 2455 	ld	l,-10 (ix)
+   0DA5 DD 66 F7      [19] 2456 	ld	h,-9 (ix)
+   0DA8 71            [ 7] 2457 	ld	(hl), c
+                           2458 ;src/game/world.c:496: break;
+   0DA9 C3r40r0E      [10] 2459 	jp	00127$
+                           2460 ;src/game/world.c:497: case 1: // Left
+   0DAC                    2461 00115$:
+                           2462 ;src/game/world.c:498: if(trainList[i].posX >0 && p_world[trainList[i].posY*WIDTH+trainList[i].posX-1] >= SSNS )
+   0DAC DD 6E F6      [19] 2463 	ld	l,-10 (ix)
+   0DAF DD 66 F7      [19] 2464 	ld	h,-9 (ix)
+   0DB2 4E            [ 7] 2465 	ld	c, (hl)
+   0DB3 79            [ 4] 2466 	ld	a, c
+   0DB4 B7            [ 4] 2467 	or	a, a
+   0DB5 CAr40r0E      [10] 2468 	jp	Z, 00127$
+   0DB8 1A            [ 7] 2469 	ld	a, (de)
+   0DB9 5F            [ 4] 2470 	ld	e,a
+   0DBA 16 00         [ 7] 2471 	ld	d,#0x00
+   0DBC 6B            [ 4] 2472 	ld	l, e
+   0DBD 62            [ 4] 2473 	ld	h, d
+   0DBE 29            [11] 2474 	add	hl, hl
+   0DBF 29            [11] 2475 	add	hl, hl
+   0DC0 19            [11] 2476 	add	hl, de
+   0DC1 29            [11] 2477 	add	hl, hl
+   0DC2 29            [11] 2478 	add	hl, hl
+   0DC3 29            [11] 2479 	add	hl, hl
+   0DC4 29            [11] 2480 	add	hl, hl
+   0DC5 59            [ 4] 2481 	ld	e, c
+   0DC6 16 00         [ 7] 2482 	ld	d, #0x00
+   0DC8 19            [11] 2483 	add	hl, de
+   0DC9 11rFFrFF      [10] 2484 	ld	de,#_p_world-1
+   0DCC 19            [11] 2485 	add	hl,de
+   0DCD 7E            [ 7] 2486 	ld	a, (hl)
+   0DCE D6 0A         [ 7] 2487 	sub	a, #0x0a
+   0DD0 38 6E         [12] 2488 	jr	C,00127$
+                           2489 ;src/game/world.c:499: trainList[i].posX--;
+   0DD2 0D            [ 4] 2490 	dec	c
+   0DD3 DD 6E F6      [19] 2491 	ld	l,-10 (ix)
+   0DD6 DD 66 F7      [19] 2492 	ld	h,-9 (ix)
+   0DD9 71            [ 7] 2493 	ld	(hl), c
+                           2494 ;src/game/world.c:500: break;
+   0DDA 18 64         [12] 2495 	jr	00127$
+                           2496 ;src/game/world.c:501: case 2: // Up
+   0DDC                    2497 00119$:
+                           2498 ;src/game/world.c:502: if(trainList[i].posY > 0 && p_world[(trainList[i].posY-1)*WIDTH+trainList[i].posX] >= SSNS )
+   0DDC 1A            [ 7] 2499 	ld	a, (de)
+   0DDD DD 77 FE      [19] 2500 	ld	-2 (ix), a
+   0DE0 B7            [ 4] 2501 	or	a, a
+   0DE1 28 5D         [12] 2502 	jr	Z,00127$
+   0DE3 DD 4E FE      [19] 2503 	ld	c, -2 (ix)
+   0DE6 06 00         [ 7] 2504 	ld	b, #0x00
+   0DE8 0B            [ 6] 2505 	dec	bc
+   0DE9 69            [ 4] 2506 	ld	l, c
+   0DEA 60            [ 4] 2507 	ld	h, b
+   0DEB 29            [11] 2508 	add	hl, hl
+   0DEC 29            [11] 2509 	add	hl, hl
+   0DED 09            [11] 2510 	add	hl, bc
+   0DEE 29            [11] 2511 	add	hl, hl
+   0DEF 29            [11] 2512 	add	hl, hl
+   0DF0 29            [11] 2513 	add	hl, hl
+   0DF1 29            [11] 2514 	add	hl, hl
+   0DF2 4D            [ 4] 2515 	ld	c, l
+   0DF3 44            [ 4] 2516 	ld	b, h
+   0DF4 DD 6E F6      [19] 2517 	ld	l,-10 (ix)
+   0DF7 DD 66 F7      [19] 2518 	ld	h,-9 (ix)
+   0DFA 6E            [ 7] 2519 	ld	l, (hl)
+   0DFB 26 00         [ 7] 2520 	ld	h, #0x00
+   0DFD 09            [11] 2521 	add	hl, bc
+   0DFE 01r00r00      [10] 2522 	ld	bc, #_p_world
+   0E01 09            [11] 2523 	add	hl, bc
+   0E02 7E            [ 7] 2524 	ld	a, (hl)
+   0E03 D6 0A         [ 7] 2525 	sub	a, #0x0a
+   0E05 38 39         [12] 2526 	jr	C,00127$
+                           2527 ;src/game/world.c:503: trainList[i].posY--;
+   0E07 DD 4E FE      [19] 2528 	ld	c, -2 (ix)
+   0E0A 0D            [ 4] 2529 	dec	c
+   0E0B 79            [ 4] 2530 	ld	a, c
+   0E0C 12            [ 7] 2531 	ld	(de), a
+                           2532 ;src/game/world.c:504: break;
+   0E0D 18 31         [12] 2533 	jr	00127$
+                           2534 ;src/game/world.c:505: case 3: // Down
+   0E0F                    2535 00123$:
+                           2536 ;src/game/world.c:506: if(trainList[i].posY < HEIGHT && p_world[(trainList[i].posY+1)*WIDTH+trainList[i].posX] >= SSNS)
+   0E0F 1A            [ 7] 2537 	ld	a, (de)
+   0E10 DD 77 FE      [19] 2538 	ld	-2 (ix), a
+   0E13 D6 30         [ 7] 2539 	sub	a, #0x30
+   0E15 30 29         [12] 2540 	jr	NC,00127$
+   0E17 DD 4E FE      [19] 2541 	ld	c, -2 (ix)
+   0E1A 06 00         [ 7] 2542 	ld	b, #0x00
+   0E1C 03            [ 6] 2543 	inc	bc
+   0E1D 69            [ 4] 2544 	ld	l, c
+   0E1E 60            [ 4] 2545 	ld	h, b
+   0E1F 29            [11] 2546 	add	hl, hl
+   0E20 29            [11] 2547 	add	hl, hl
+   0E21 09            [11] 2548 	add	hl, bc
+   0E22 29            [11] 2549 	add	hl, hl
+   0E23 29            [11] 2550 	add	hl, hl
+   0E24 29            [11] 2551 	add	hl, hl
+   0E25 29            [11] 2552 	add	hl, hl
+   0E26 4D            [ 4] 2553 	ld	c, l
+   0E27 44            [ 4] 2554 	ld	b, h
+   0E28 DD 6E F6      [19] 2555 	ld	l,-10 (ix)
+   0E2B DD 66 F7      [19] 2556 	ld	h,-9 (ix)
+   0E2E 6E            [ 7] 2557 	ld	l, (hl)
+   0E2F 26 00         [ 7] 2558 	ld	h, #0x00
+   0E31 09            [11] 2559 	add	hl, bc
+   0E32 01r00r00      [10] 2560 	ld	bc, #_p_world
+   0E35 09            [11] 2561 	add	hl, bc
+   0E36 7E            [ 7] 2562 	ld	a, (hl)
+   0E37 D6 0A         [ 7] 2563 	sub	a, #0x0a
+   0E39 38 05         [12] 2564 	jr	C,00127$
+                           2565 ;src/game/world.c:507: trainList[i].posY++;
+   0E3B DD 7E FE      [19] 2566 	ld	a, -2 (ix)
+   0E3E 3C            [ 4] 2567 	inc	a
+   0E3F 12            [ 7] 2568 	ld	(de), a
+                           2569 ;src/game/world.c:509: }
+   0E40                    2570 00127$:
+                           2571 ;src/game/world.c:511: setTrainHeading(i);
+   0E40 DD 7E F3      [19] 2572 	ld	a, -13 (ix)
+   0E43 F5            [11] 2573 	push	af
+   0E44 33            [ 6] 2574 	inc	sp
+   0E45 CDr93r09      [17] 2575 	call	_setTrainHeading
+   0E48 33            [ 6] 2576 	inc	sp
+                           2577 ;src/game/world.c:514: if(trainList[i].posX-x_ < NBTILE_W && trainList[i].posY-y_ < NBTILE_H && trainList[i].posX-x_ >= 0 && trainList[i].posY-y_ >= 0 ) 
+   0E49 FD 21r00r00   [14] 2578 	ld	iy, #_trainList
+   0E4D FD 7E 00      [19] 2579 	ld	a, 0 (iy)
+   0E50 DD 86 FA      [19] 2580 	add	a, -6 (ix)
+   0E53 DD 77 F6      [19] 2581 	ld	-10 (ix), a
+   0E56 FD 7E 01      [19] 2582 	ld	a, 1 (iy)
+   0E59 DD 8E FB      [19] 2583 	adc	a, -5 (ix)
+   0E5C DD 77 F7      [19] 2584 	ld	-9 (ix), a
+   0E5F DD 6E F6      [19] 2585 	ld	l,-10 (ix)
+   0E62 DD 66 F7      [19] 2586 	ld	h,-9 (ix)
+   0E65 11 04 00      [10] 2587 	ld	de, #0x0004
+   0E68 19            [11] 2588 	add	hl, de
+   0E69 7E            [ 7] 2589 	ld	a, (hl)
+   0E6A DD 77 FE      [19] 2590 	ld	-2 (ix), a
+   0E6D 06 00         [ 7] 2591 	ld	b, #0x00
+   0E6F DD 96 F8      [19] 2592 	sub	a, -8 (ix)
+   0E72 DD 77 F8      [19] 2593 	ld	-8 (ix), a
+   0E75 78            [ 4] 2594 	ld	a, b
+   0E76 DD 9E F9      [19] 2595 	sbc	a, -7 (ix)
+   0E79 DD 77 F9      [19] 2596 	ld	-7 (ix), a
+   0E7C DD 7E F8      [19] 2597 	ld	a, -8 (ix)
+   0E7F D6 14         [ 7] 2598 	sub	a, #0x14
+   0E81 DD 7E F9      [19] 2599 	ld	a, -7 (ix)
+   0E84 17            [ 4] 2600 	rla
+   0E85 3F            [ 4] 2601 	ccf
+   0E86 1F            [ 4] 2602 	rra
+   0E87 DE 80         [ 7] 2603 	sbc	a, #0x80
+   0E89 D2r71r0F      [10] 2604 	jp	NC, 00139$
+   0E8C DD 6E F6      [19] 2605 	ld	l,-10 (ix)
+   0E8F DD 66 F7      [19] 2606 	ld	h,-9 (ix)
+   0E92 11 05 00      [10] 2607 	ld	de, #0x0005
+   0E95 19            [11] 2608 	add	hl, de
+   0E96 4E            [ 7] 2609 	ld	c, (hl)
+   0E97 79            [ 4] 2610 	ld	a, c
+   0E98 1E 00         [ 7] 2611 	ld	e, #0x00
+   0E9A DD 96 FC      [19] 2612 	sub	a, -4 (ix)
+   0E9D 6F            [ 4] 2613 	ld	l, a
+   0E9E 7B            [ 4] 2614 	ld	a, e
+   0E9F DD 9E FD      [19] 2615 	sbc	a, -3 (ix)
+   0EA2 67            [ 4] 2616 	ld	h, a
+   0EA3 7D            [ 4] 2617 	ld	a, l
+   0EA4 D6 0C         [ 7] 2618 	sub	a, #0x0c
+   0EA6 7C            [ 4] 2619 	ld	a, h
+   0EA7 17            [ 4] 2620 	rla
+   0EA8 3F            [ 4] 2621 	ccf
+   0EA9 1F            [ 4] 2622 	rra
+   0EAA DE 80         [ 7] 2623 	sbc	a, #0x80
+   0EAC D2r71r0F      [10] 2624 	jp	NC, 00139$
+   0EAF DD CB F9 7E   [20] 2625 	bit	7, -7 (ix)
+   0EB3 C2r71r0F      [10] 2626 	jp	NZ, 00139$
+   0EB6 CB 7C         [ 8] 2627 	bit	7, h
+   0EB8 C2r71r0F      [10] 2628 	jp	NZ, 00139$
+                           2629 ;src/game/world.c:517: p_video = cpct_getScreenPtr(SCR_VMEM, (trainList[i].posX-x_)*TILESIZE_W+trainList[i].shiftX, (trainList[i].posY-y_)*TILESIZE_H+trainList[i].shiftY);
+   0EBB 79            [ 4] 2630 	ld	a, c
+   0EBC DD 96 05      [19] 2631 	sub	a, 5 (ix)
+   0EBF 07            [ 4] 2632 	rlca
+   0EC0 07            [ 4] 2633 	rlca
+   0EC1 07            [ 4] 2634 	rlca
+   0EC2 07            [ 4] 2635 	rlca
+   0EC3 E6 F0         [ 7] 2636 	and	a, #0xf0
+   0EC5 4F            [ 4] 2637 	ld	c, a
+   0EC6 DD 6E F6      [19] 2638 	ld	l,-10 (ix)
+   0EC9 DD 66 F7      [19] 2639 	ld	h,-9 (ix)
+   0ECC 11 08 00      [10] 2640 	ld	de, #0x0008
+   0ECF 19            [11] 2641 	add	hl, de
+   0ED0 5E            [ 7] 2642 	ld	e, (hl)
+   0ED1 79            [ 4] 2643 	ld	a, c
+   0ED2 83            [ 4] 2644 	add	a, e
+   0ED3 DD 77 FC      [19] 2645 	ld	-4 (ix), a
+   0ED6 DD 7E FE      [19] 2646 	ld	a, -2 (ix)
+   0ED9 DD 96 04      [19] 2647 	sub	a, 4 (ix)
+   0EDC 87            [ 4] 2648 	add	a, a
+   0EDD 87            [ 4] 2649 	add	a, a
+   0EDE DD 77 FE      [19] 2650 	ld	-2 (ix), a
+   0EE1 DD 6E F6      [19] 2651 	ld	l,-10 (ix)
+   0EE4 DD 66 F7      [19] 2652 	ld	h,-9 (ix)
+   0EE7 11 07 00      [10] 2653 	ld	de, #0x0007
+   0EEA 19            [11] 2654 	add	hl, de
+   0EEB 7E            [ 7] 2655 	ld	a, (hl)
+   0EEC DD 77 F6      [19] 2656 	ld	-10 (ix), a
+   0EEF DD 7E FE      [19] 2657 	ld	a, -2 (ix)
+   0EF2 DD 86 F6      [19] 2658 	add	a, -10 (ix)
+   0EF5 DD 77 F6      [19] 2659 	ld	-10 (ix), a
+   0EF8 DD 66 FC      [19] 2660 	ld	h, -4 (ix)
+   0EFB DD 6E F6      [19] 2661 	ld	l, -10 (ix)
+   0EFE E5            [11] 2662 	push	hl
+   0EFF 21 00 C0      [10] 2663 	ld	hl, #0xc000
+   0F02 E5            [11] 2664 	push	hl
+   0F03 CDr00r00      [17] 2665 	call	_cpct_getScreenPtr
+   0F06 DD 74 F5      [19] 2666 	ld	-11 (ix), h
+   0F09 DD 75 F4      [19] 2667 	ld	-12 (ix), l
+                           2668 ;src/game/world.c:519: if(trainList[i].heading <= 1) 
+   0F0C FD 21r00r00   [14] 2669 	ld	iy, #_trainList
+   0F10 FD 7E 00      [19] 2670 	ld	a, 0 (iy)
+   0F13 DD 86 FA      [19] 2671 	add	a, -6 (ix)
+   0F16 DD 77 F6      [19] 2672 	ld	-10 (ix), a
+   0F19 FD 7E 01      [19] 2673 	ld	a, 1 (iy)
+   0F1C DD 8E FB      [19] 2674 	adc	a, -5 (ix)
+   0F1F DD 77 F7      [19] 2675 	ld	-9 (ix), a
+   0F22 DD 6E F6      [19] 2676 	ld	l,-10 (ix)
+   0F25 DD 66 F7      [19] 2677 	ld	h,-9 (ix)
+   0F28 11 06 00      [10] 2678 	ld	de, #0x0006
+   0F2B 19            [11] 2679 	add	hl, de
+   0F2C 7E            [ 7] 2680 	ld	a, (hl)
+   0F2D DD 77 F6      [19] 2681 	ld	-10 (ix), a
+                           2682 ;src/game/world.c:520: cpct_drawSpriteMaskedAlignedTable(train_h, p_video, TILESIZE_W, TILESIZE_H, g_masktable);
+   0F30 DD 7E F4      [19] 2683 	ld	a, -12 (ix)
+   0F33 DD 77 FC      [19] 2684 	ld	-4 (ix), a
+   0F36 DD 7E F5      [19] 2685 	ld	a, -11 (ix)
+   0F39 DD 77 FD      [19] 2686 	ld	-3 (ix), a
+                           2687 ;src/game/world.c:519: if(trainList[i].heading <= 1) 
+   0F3C 3E 01         [ 7] 2688 	ld	a, #0x01
+   0F3E DD 96 F6      [19] 2689 	sub	a, -10 (ix)
+   0F41 38 18         [12] 2690 	jr	C,00129$
+                           2691 ;src/game/world.c:520: cpct_drawSpriteMaskedAlignedTable(train_h, p_video, TILESIZE_W, TILESIZE_H, g_masktable);
+   0F43 21r00r01      [10] 2692 	ld	hl, #_g_masktable
+   0F46 E5            [11] 2693 	push	hl
+   0F47 21 04 10      [10] 2694 	ld	hl, #0x1004
+   0F4A E5            [11] 2695 	push	hl
+   0F4B DD 6E FC      [19] 2696 	ld	l,-4 (ix)
+   0F4E DD 66 FD      [19] 2697 	ld	h,-3 (ix)
+   0F51 E5            [11] 2698 	push	hl
+   0F52 21r00r00      [10] 2699 	ld	hl, #_train_h
+   0F55 E5            [11] 2700 	push	hl
+   0F56 CDr00r00      [17] 2701 	call	_cpct_drawSpriteMaskedAlignedTable
+   0F59 18 16         [12] 2702 	jr	00139$
+   0F5B                    2703 00129$:
+                           2704 ;src/game/world.c:522: cpct_drawSpriteMaskedAlignedTable(train_v, p_video, TILESIZE_W, TILESIZE_H, g_masktable);
+   0F5B 21r00r01      [10] 2705 	ld	hl, #_g_masktable
+   0F5E E5            [11] 2706 	push	hl
+   0F5F 21 04 10      [10] 2707 	ld	hl, #0x1004
+   0F62 E5            [11] 2708 	push	hl
+   0F63 DD 6E FC      [19] 2709 	ld	l,-4 (ix)
+   0F66 DD 66 FD      [19] 2710 	ld	h,-3 (ix)
+   0F69 E5            [11] 2711 	push	hl
+   0F6A 21r00r00      [10] 2712 	ld	hl, #_train_v
+   0F6D E5            [11] 2713 	push	hl
+   0F6E CDr00r00      [17] 2714 	call	_cpct_drawSpriteMaskedAlignedTable
+   0F71                    2715 00139$:
+                           2716 ;src/game/world.c:464: for(i=0; i<nbTrainList; i++)
+   0F71 DD 34 F3      [23] 2717 	inc	-13 (ix)
+   0F74 C3rBBr0B      [10] 2718 	jp	00138$
+   0F77                    2719 00140$:
+   0F77 DD F9         [10] 2720 	ld	sp, ix
+   0F79 DD E1         [14] 2721 	pop	ix
+   0F7B C9            [10] 2722 	ret
+                           2723 	.area _CODE
+                           2724 	.area _INITIALIZER
+                           2725 	.area _CABS (ABS)
