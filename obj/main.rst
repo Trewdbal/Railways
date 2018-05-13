@@ -110,7 +110,7 @@
    405A 72            [ 7]  110 	ld	(hl), d
                             111 ;src/main.c:28: firmware = cpct_disableFirmware();
    405B C5            [11]  112 	push	bc
-   405C CD 4E 65      [17]  113 	call	_cpct_disableFirmware
+   405C CD C9 65      [17]  113 	call	_cpct_disableFirmware
    405F C1            [10]  114 	pop	bc
    4060 DD 75 FA      [19]  115 	ld	-6 (ix), l
    4063 DD 74 FB      [19]  116 	ld	-5 (ix), h
@@ -120,17 +120,17 @@
    406A E5            [11]  120 	push	hl
    406B 21 BE 47      [10]  121 	ld	hl, #_paletteTrains
    406E E5            [11]  122 	push	hl
-   406F CD C3 62      [17]  123 	call	_cpct_fw2hw
+   406F CD 3E 63      [17]  123 	call	_cpct_fw2hw
    4072 21 02 00      [10]  124 	ld	hl, #0x0002
    4075 E5            [11]  125 	push	hl
    4076 21 D2 47      [10]  126 	ld	hl, #_paletteMenusM2
    4079 E5            [11]  127 	push	hl
-   407A CD C3 62      [17]  128 	call	_cpct_fw2hw
+   407A CD 3E 63      [17]  128 	call	_cpct_fw2hw
    407D 21 04 00      [10]  129 	ld	hl, #0x0004
    4080 E5            [11]  130 	push	hl
    4081 21 CE 47      [10]  131 	ld	hl, #_paletteMenusM1
    4084 E5            [11]  132 	push	hl
-   4085 CD C3 62      [17]  133 	call	_cpct_fw2hw
+   4085 CD 3E 63      [17]  133 	call	_cpct_fw2hw
    4088 C1            [10]  134 	pop	bc
                             135 ;src/main.c:34: cpct_setBorder(paletteTrains[12]);
    4089 21 CA 47      [10]  136 	ld	hl, #_paletteTrains + 12
@@ -138,7 +138,7 @@
    408D C5            [11]  138 	push	bc
    408E 1E 10         [ 7]  139 	ld	e, #0x10
    4090 D5            [11]  140 	push	de
-   4091 CD 44 61      [17]  141 	call	_cpct_setPALColour
+   4091 CD BF 61      [17]  141 	call	_cpct_setPALColour
    4094 CD 44 41      [17]  142 	call	_putM2
    4097 C1            [10]  143 	pop	bc
                             144 ;src/main.c:38: do{
@@ -187,11 +187,11 @@
    40D1 D6 02         [ 7]  187 	sub	a,#0x02
    40D3 20 C9         [12]  188 	jr	NZ,00105$
    40D5 6F            [ 4]  189 	ld	l,a
-   40D6 CD EE 64      [17]  190 	call	_cpct_setVideoMode
+   40D6 CD 69 65      [17]  190 	call	_cpct_setVideoMode
                             191 ;src/main.c:54: cpct_reenableFirmware(firmware);
    40D9 DD 6E FA      [19]  192 	ld	l,-6 (ix)
    40DC DD 66 FB      [19]  193 	ld	h,-5 (ix)
-   40DF CD 57 64      [17]  194 	call	_cpct_reenableFirmware
+   40DF CD D2 64      [17]  194 	call	_cpct_reenableFirmware
    40E2 DD F9         [10]  195 	ld	sp, ix
    40E4 DD E1         [14]  196 	pop	ix
    40E6 C9            [10]  197 	ret

@@ -35,10 +35,10 @@ struct Train
 	u8 posX;
 	u8 posY;
 	u8 heading;
-	u8 animX;
-	u8 animY;
-	u8 animOldX;
-	u8 animOldY;
+	int animX;
+	int animY;
+	int animOldX;
+	int animOldY;
 
 }; 
 

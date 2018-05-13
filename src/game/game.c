@@ -152,6 +152,7 @@ void game()
 	putM1();
 	cpct_clearScreen(cpct_px2byteM1(0,0,0,0));
 	drawWorld(ulx, uly);
+	drawCursor(xCursor, yCursor);
 
 
 	do{
@@ -173,8 +174,11 @@ void game()
 				{
 					uly-=1;
 					drawWorld(ulx, uly);
+					drawScrolls(ulx, uly);
 				}
 			}
+		
+			drawCursor(xCursor, yCursor);
 
 			// Wait loop
 			for(i=0; i<5000; i++) {}
@@ -191,8 +195,11 @@ void game()
 				{
 					uly+=1;
 					drawWorld(ulx, uly);
+					drawScrolls(ulx, uly);
 				}
 			}
+			
+			drawCursor(xCursor, yCursor);
 
 			// Wait loop
 			for(i=0; i<5000; i++) {}
@@ -209,8 +216,11 @@ void game()
 				{
 					ulx-=1;
 					drawWorld(ulx, uly);
+					drawScrolls(ulx, uly);
 				}
 			}
+			
+			drawCursor(xCursor, yCursor);
 
 			// Wait loop
 			for(i=0; i<14000; i++) {}
@@ -227,8 +237,11 @@ void game()
 				{
 					ulx+=1;
 					drawWorld(ulx, uly);
+					drawScrolls(ulx, uly);
 				}
 			}
+			
+			drawCursor(xCursor, yCursor);
 
 			// Wait loop
 			for(i=0; i<14000; i++) {}
@@ -253,6 +266,9 @@ void game()
 				CURSOR_MODE+=1;
 			else if(CURSOR_MODE==T_RNSW)
 				CURSOR_MODE=T_REW;
+	
+			drawCursor(xCursor, yCursor);
+	
 			// Wait loop
 			for(i=0; i<14000; i++) {}
 		}
@@ -284,6 +300,8 @@ void game()
 				CURSOR_MODE=NONE;
 				drawTile(ulx, uly, xCursor, yCursor);
 			}
+	
+			drawCursor(xCursor, yCursor);
 
 			// Wait loop
 			for(i=0; i<14000; i++) {}
@@ -307,11 +325,8 @@ void game()
 					trainList[nbTrainList].posX = ulx+xCursor;
 					trainList[nbTrainList].posY = uly+yCursor;
 					
-					trainList[nbTrainList].animX = (ulx+xCursor)*TILESIZE_H+8;
-					trainList[nbTrainList].animY = (uly+yCursor)*TILESIZE_H+8;
-
-
-
+					trainList[nbTrainList].animX = (int)(ulx+xCursor)*TILESIZE_H+8;
+					trainList[nbTrainList].animY = (int)(uly+yCursor)*TILESIZE_H+8;
 
 					// Update heading
 					// Vertical tracks
@@ -354,6 +369,8 @@ void game()
 				if(CURSOR_MODE<=T_SLEW)
 					CURSOR_MODE=NONE;
 			}
+	
+			drawCursor(xCursor, yCursor);
 
 			// Wait loop
 			for(i=0; i<14000; i++) {}
@@ -361,8 +378,6 @@ void game()
 		}
 
 		drawTrains(ulx, uly);
-		drawCursor(xCursor, yCursor, 0);
-		drawScrolls(ulx, uly);
 
 	} 
 	while(!exit);

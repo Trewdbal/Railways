@@ -13,20 +13,17 @@ Symbol Table
     __moduchar                                                     **** GX
     __moduint                                                      **** GX
     _cpct_count2VSYNC                                              **** GX
-    _cpct_drawSolidBox                                             **** GX
     _cpct_drawSprite                                               **** GX
     _cpct_getBit                                                   **** GX
     _cpct_getRandom_mxor_u16                                       **** GX
     _cpct_getRandom_mxor_u8                                        **** GX
     _cpct_getScreenPtr                                             **** GX
-    _cpct_memset                                                   **** GX
-    _cpct_px2byteM1                                                **** GX
     _cpct_setSeed_mxor                                             **** GX
   9 _drawCursor                                                    0000 GR
-  9 _drawScrolls                                                   08A6 GR
-  9 _drawTile                                                      067D GR
-  9 _drawTrains                                                    0B88 GR
-  9 _drawWorld                                                     093F GR
+  9 _drawScrolls                                                   093D GR
+  9 _drawTile                                                      0714 GR
+  9 _drawTrains                                                    0CC4 GR
+  9 _drawWorld                                                     0A7A GR
   0 _dummy_cpct_transparentMaskTable0M1_container                  0000 GR
     _dwellings1                                                    **** GX
     _dwellings2                                                    **** GX
@@ -35,14 +32,14 @@ Symbol Table
     _farm2                                                         **** GX
     _forest                                                        **** GX
   8 _g_masktable                                                   0100 GR
-  9 _generateWorld                                                 030F GR
+  9 _generateWorld                                                 03A6 GR
     _grass1                                                        **** GX
     _grass2                                                        **** GX
-  9 _isPixelBlack                                                  0AF4 GR
+  9 _isPixelBlack                                                  0C30 GR
     _livestock                                                     **** GX
     _nbTrainList                                                   **** GX
     _p_world                                                       **** GX
-  9 _patternTile                                                   0225 GR
+  9 _patternTile                                                   02BC GR
     _rail_en                                                       **** GX
     _rail_es                                                       **** GX
     _rail_ew                                                       **** GX
@@ -53,19 +50,19 @@ Symbol Table
     _rail_ns_w                                                     **** GX
     _rail_wn                                                       **** GX
     _rail_ws                                                       **** GX
-  9 _setPixel                                                      0A1B GR
-  9 _setTrainHeading                                               097C GR
+  9 _setPixel                                                      0B57 GR
+  9 _setTrainHeading                                               0AB7 GR
     _station_large_ew                                              **** GX
     _station_large_ns                                              **** GX
     _station_medium_ew                                             **** GX
+    _station_medium_ns                                             **** GX
+    _station_small_ew                                              **** GX
+    _station_small_ns                                              **** GX
 ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 2.
 Hexadecimal [16-Bits]
 
 Symbol Table
 
-    _station_medium_ns                                             **** GX
-    _station_small_ew                                              **** GX
-    _station_small_ns                                              **** GX
     _trainList                                                     **** GX
     _water                                                         **** GX
 
@@ -83,7 +80,7 @@ Area Table
    6 _GSFINAL                                   size    0   flags    0
    7 _g_masktable_                              size    0   flags    8
    8 _g_masktable_0                             size  100   flags    8
-   9 _CSEG                                      size  FF0   flags    0
+   9 _CSEG                                      size 12D5   flags    0
    A _INITIALIZER                               size    0   flags    0
    B _CABS                                      size    0   flags    8
 
