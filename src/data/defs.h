@@ -30,16 +30,16 @@ enum {NONE, PUTTRAIN, T_SSNS, T_SSEW, T_SMNS, T_SMEW, T_SLNS, T_SLEW, T_REW, T_R
 typedef struct Train Train;
 struct Train
 {
-	u8 loco;
-	u8 wagon[3];
-	u8 posX;
-	u8 posY;
-	u8 heading;
-	int animX;
-	int animY;
-	int animOldX;
-	int animOldY;
-
+	u8 loco;	// Locomotive type
+	u8 wagon[3];	// Wagon type
+	u8 posX;	// X position in tiles coordinates
+	u8 posY;	// Y position in tiles coordinates
+	u8 heading;	// Heading of the train
+	int animX;	// X position of the head in pixel coordinates, if the train is in the screen
+	int animY;	// Y position of the head in pixel coordinates, if the train is in the screen
+	int animOldX;	// X position of the tail in pixel coordinates, if the train is in the screen
+	int animOldY;	// Y position of the tail in pixel coordinates, if the train is in the screen
+	u8 cycles; 	// Number of shift in pixel coordinates. When TILESIZE_H is reach, move X/Y in tiles coordinates 
 }; 
 
 #endif

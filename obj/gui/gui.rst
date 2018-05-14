@@ -65,13 +65,13 @@
    4122                      65 _putM0::
                              66 ;src/gui/gui.c:5: cpct_setVideoMode(0);
    4122 2E 00         [ 7]   67 	ld	l, #0x00
-   4124 CD 69 65      [17]   68 	call	_cpct_setVideoMode
+   4124 CD 54 66      [17]   68 	call	_cpct_setVideoMode
                              69 ;src/gui/gui.c:7: cpct_setPalette(paletteTrains, 16);
    4127 21 10 00      [10]   70 	ld	hl, #0x0010
    412A E5            [11]   71 	push	hl
    412B 21 BE 47      [10]   72 	ld	hl, #_paletteTrains
    412E E5            [11]   73 	push	hl
-   412F CD 9C 61      [17]   74 	call	_cpct_setPalette
+   412F CD 4C 61      [17]   74 	call	_cpct_setPalette
    4132 C9            [10]   75 	ret
                              76 ;src/gui/gui.c:10: void putM1(void)
                              77 ;	---------------------------------
@@ -80,13 +80,13 @@
    4133                      80 _putM1::
                              81 ;src/gui/gui.c:12: cpct_setVideoMode(1);
    4133 2E 01         [ 7]   82 	ld	l, #0x01
-   4135 CD 69 65      [17]   83 	call	_cpct_setVideoMode
+   4135 CD 54 66      [17]   83 	call	_cpct_setVideoMode
                              84 ;src/gui/gui.c:14: cpct_setPalette(paletteMenusM1, 4);
    4138 21 04 00      [10]   85 	ld	hl, #0x0004
    413B E5            [11]   86 	push	hl
    413C 21 CE 47      [10]   87 	ld	hl, #_paletteMenusM1
    413F E5            [11]   88 	push	hl
-   4140 CD 9C 61      [17]   89 	call	_cpct_setPalette
+   4140 CD 4C 61      [17]   89 	call	_cpct_setPalette
    4143 C9            [10]   90 	ret
                              91 ;src/gui/gui.c:17: void putM2(void)
                              92 ;	---------------------------------
@@ -95,13 +95,13 @@
    4144                      95 _putM2::
                              96 ;src/gui/gui.c:19: cpct_setVideoMode(2);
    4144 2E 02         [ 7]   97 	ld	l, #0x02
-   4146 CD 69 65      [17]   98 	call	_cpct_setVideoMode
+   4146 CD 54 66      [17]   98 	call	_cpct_setVideoMode
                              99 ;src/gui/gui.c:21: cpct_setPalette(paletteMenusM2, 2);
    4149 21 02 00      [10]  100 	ld	hl, #0x0002
    414C E5            [11]  101 	push	hl
    414D 21 D2 47      [10]  102 	ld	hl, #_paletteMenusM2
    4150 E5            [11]  103 	push	hl
-   4151 CD 9C 61      [17]  104 	call	_cpct_setPalette
+   4151 CD 4C 61      [17]  104 	call	_cpct_setPalette
                             105 ;src/gui/gui.c:22: cpct_clearScreen(0b11111111);
    4154 21 00 40      [10]  106 	ld	hl, #0x4000
    4157 E5            [11]  107 	push	hl
@@ -110,7 +110,7 @@
    415B 33            [ 6]  110 	inc	sp
    415C 26 C0         [ 7]  111 	ld	h, #0xc0
    415E E5            [11]  112 	push	hl
-   415F CD 93 65      [17]  113 	call	_cpct_memset
+   415F CD 82 66      [17]  113 	call	_cpct_memset
    4162 C9            [10]  114 	ret
                             115 ;src/gui/gui.c:25: void drawBoxM0(int width_, int height_)
                             116 ;	---------------------------------
@@ -163,7 +163,7 @@
    41AC C5            [11]  163 	push	bc
    41AD 21 09 09      [10]  164 	ld	hl, #0x0909
    41B0 E5            [11]  165 	push	hl
-   41B1 CD 77 65      [17]  166 	call	_cpct_px2byteM0
+   41B1 CD 66 66      [17]  166 	call	_cpct_px2byteM0
    41B4 55            [ 4]  167 	ld	d, l
    41B5 21 00 40      [10]  168 	ld	hl, #0x4000
    41B8 E5            [11]  169 	push	hl
@@ -171,7 +171,7 @@
    41BA 33            [ 6]  171 	inc	sp
    41BB 26 C0         [ 7]  172 	ld	h, #0xc0
    41BD E5            [11]  173 	push	hl
-   41BE CD 93 65      [17]  174 	call	_cpct_memset
+   41BE CD 82 66      [17]  174 	call	_cpct_memset
    41C1 C1            [10]  175 	pop	bc
                             176 ;src/gui/gui.c:36: pvid = cpct_getScreenPtr(SCR_VMEM, left+1, top+4);
    41C2 DD 7E F9      [19]  177 	ld	a, -7 (ix)
@@ -190,7 +190,7 @@
    41D7 D5            [11]  190 	push	de
    41D8 21 00 C0      [10]  191 	ld	hl, #0xc000
    41DB E5            [11]  192 	push	hl
-   41DC CD D0 66      [17]  193 	call	_cpct_getScreenPtr
+   41DC CD BF 67      [17]  193 	call	_cpct_getScreenPtr
    41DF C1            [10]  194 	pop	bc
                             195 ;src/gui/gui.c:37: cpct_drawSolidBox(pvid, cpct_px2byteM0(2,2), width_, height_);
    41E0 DD 7E 06      [19]  196 	ld	a, 6 (ix)
@@ -201,7 +201,7 @@
    41ED C5            [11]  201 	push	bc
    41EE 11 02 02      [10]  202 	ld	de, #0x0202
    41F1 D5            [11]  203 	push	de
-   41F2 CD 77 65      [17]  204 	call	_cpct_px2byteM0
+   41F2 CD 66 66      [17]  204 	call	_cpct_px2byteM0
    41F5 DD 75 FD      [19]  205 	ld	-3 (ix), l
    41F8 C1            [10]  206 	pop	bc
    41F9 E1            [10]  207 	pop	hl
@@ -214,7 +214,7 @@
    4206 F5            [11]  214 	push	af
    4207 33            [ 6]  215 	inc	sp
    4208 D5            [11]  216 	push	de
-   4209 CD FE 65      [17]  217 	call	_cpct_drawSolidBox
+   4209 CD ED 66      [17]  217 	call	_cpct_drawSolidBox
    420C F1            [10]  218 	pop	af
    420D F1            [10]  219 	pop	af
    420E 33            [ 6]  220 	inc	sp
@@ -225,12 +225,12 @@
    4214 D5            [11]  225 	push	de
    4215 21 00 C0      [10]  226 	ld	hl, #0xc000
    4218 E5            [11]  227 	push	hl
-   4219 CD D0 66      [17]  228 	call	_cpct_getScreenPtr
+   4219 CD BF 67      [17]  228 	call	_cpct_getScreenPtr
                             229 ;src/gui/gui.c:41: cpct_drawSolidBox(pvid, cpct_px2byteM0(6,6), width_, height_);
    421C E5            [11]  230 	push	hl
    421D 21 06 06      [10]  231 	ld	hl, #0x0606
    4220 E5            [11]  232 	push	hl
-   4221 CD 77 65      [17]  233 	call	_cpct_px2byteM0
+   4221 CD 66 66      [17]  233 	call	_cpct_px2byteM0
    4224 55            [ 4]  234 	ld	d, l
    4225 C1            [10]  235 	pop	bc
    4226 DD 66 FB      [19]  236 	ld	h, -5 (ix)
@@ -239,7 +239,7 @@
    422D D5            [11]  239 	push	de
    422E 33            [ 6]  240 	inc	sp
    422F C5            [11]  241 	push	bc
-   4230 CD FE 65      [17]  242 	call	_cpct_drawSolidBox
+   4230 CD ED 66      [17]  242 	call	_cpct_drawSolidBox
    4233 F1            [10]  243 	pop	af
    4234 F1            [10]  244 	pop	af
    4235 33            [ 6]  245 	inc	sp
@@ -254,7 +254,7 @@
    4241 33            [ 6]  254 	inc	sp
    4242 21 00 C0      [10]  255 	ld	hl, #0xc000
    4245 E5            [11]  256 	push	hl
-   4246 CD D0 66      [17]  257 	call	_cpct_getScreenPtr
+   4246 CD BF 67      [17]  257 	call	_cpct_getScreenPtr
                             258 ;src/gui/gui.c:45: cpct_drawSolidBox(pvid, cpct_px2byteM0(0,0), width_-2, height_-4);
    4249 DD 7E 06      [19]  259 	ld	a, 6 (ix)
    424C C6 FC         [ 7]  260 	add	a, #0xfc
@@ -266,7 +266,7 @@
    4255 C5            [11]  266 	push	bc
    4256 11 00 00      [10]  267 	ld	de, #0x0000
    4259 D5            [11]  268 	push	de
-   425A CD 77 65      [17]  269 	call	_cpct_px2byteM0
+   425A CD 66 66      [17]  269 	call	_cpct_px2byteM0
    425D DD 75 FD      [19]  270 	ld	-3 (ix), l
    4260 C1            [10]  271 	pop	bc
    4261 E1            [10]  272 	pop	hl
@@ -276,7 +276,7 @@
    4267 F5            [11]  276 	push	af
    4268 33            [ 6]  277 	inc	sp
    4269 D5            [11]  278 	push	de
-   426A CD FE 65      [17]  279 	call	_cpct_drawSolidBox
+   426A CD ED 66      [17]  279 	call	_cpct_drawSolidBox
    426D DD F9         [10]  280 	ld	sp,ix
    426F DD E1         [14]  281 	pop	ix
    4271 C9            [10]  282 	ret
@@ -344,7 +344,7 @@
    42CF 33            [ 6]  344 	inc	sp
    42D0 21 00 C0      [10]  345 	ld	hl, #0xc000
    42D3 E5            [11]  346 	push	hl
-   42D4 CD D0 66      [17]  347 	call	_cpct_getScreenPtr
+   42D4 CD BF 67      [17]  347 	call	_cpct_getScreenPtr
    42D7 C1            [10]  348 	pop	bc
                             349 ;src/gui/gui.c:59: cpct_drawSolidBox(pvid, 0b00000000, width_-1, height_);
    42D8 DD 56 06      [19]  350 	ld	d, 6 (ix)
@@ -363,7 +363,7 @@
    42EE DD 6E FD      [19]  363 	ld	l,-3 (ix)
    42F1 DD 66 FE      [19]  364 	ld	h,-2 (ix)
    42F4 E5            [11]  365 	push	hl
-   42F5 CD FE 65      [17]  366 	call	_cpct_drawSolidBox
+   42F5 CD ED 66      [17]  366 	call	_cpct_drawSolidBox
    42F8 F1            [10]  367 	pop	af
    42F9 F1            [10]  368 	pop	af
    42FA 33            [ 6]  369 	inc	sp
@@ -379,7 +379,7 @@
    4305 33            [ 6]  379 	inc	sp
    4306 21 00 C0      [10]  380 	ld	hl, #0xc000
    4309 E5            [11]  381 	push	hl
-   430A CD D0 66      [17]  382 	call	_cpct_getScreenPtr
+   430A CD BF 67      [17]  382 	call	_cpct_getScreenPtr
    430D 4D            [ 4]  383 	ld	c, l
    430E 44            [ 4]  384 	ld	b, h
    430F D1            [10]  385 	pop	de
@@ -392,7 +392,7 @@
    4318 F5            [11]  392 	push	af
    4319 33            [ 6]  393 	inc	sp
    431A C5            [11]  394 	push	bc
-   431B CD FE 65      [17]  395 	call	_cpct_drawSolidBox
+   431B CD ED 66      [17]  395 	call	_cpct_drawSolidBox
    431E F1            [10]  396 	pop	af
    431F F1            [10]  397 	pop	af
    4320 33            [ 6]  398 	inc	sp
@@ -407,7 +407,7 @@
    432C D5            [11]  407 	push	de
    432D 21 00 C0      [10]  408 	ld	hl, #0xc000
    4330 E5            [11]  409 	push	hl
-   4331 CD D0 66      [17]  410 	call	_cpct_getScreenPtr
+   4331 CD BF 67      [17]  410 	call	_cpct_getScreenPtr
    4334 4D            [ 4]  411 	ld	c, l
    4335 44            [ 4]  412 	ld	b, h
    4336 D1            [10]  413 	pop	de
@@ -423,7 +423,7 @@
    4341 1E FF         [ 7]  423 	ld	e,#0xff
    4343 D5            [11]  424 	push	de
    4344 C5            [11]  425 	push	bc
-   4345 CD FE 65      [17]  426 	call	_cpct_drawSolidBox
+   4345 CD ED 66      [17]  426 	call	_cpct_drawSolidBox
    4348 DD F9         [10]  427 	ld	sp,ix
    434A DD E1         [14]  428 	pop	ix
    434C C9            [10]  429 	ret
@@ -479,14 +479,14 @@
    438C D5            [11]  479 	push	de
    438D 21 00 C0      [10]  480 	ld	hl, #0xc000
    4390 E5            [11]  481 	push	hl
-   4391 CD D0 66      [17]  482 	call	_cpct_getScreenPtr
+   4391 CD BF 67      [17]  482 	call	_cpct_getScreenPtr
    4394 11 11 0A      [10]  483 	ld	de, #0x0a11
    4397 D5            [11]  484 	push	de
    4398 3E FF         [ 7]  485 	ld	a, #0xff
    439A F5            [11]  486 	push	af
    439B 33            [ 6]  487 	inc	sp
    439C E5            [11]  488 	push	hl
-   439D CD FE 65      [17]  489 	call	_cpct_drawSolidBox
+   439D CD ED 66      [17]  489 	call	_cpct_drawSolidBox
    43A0 F1            [10]  490 	pop	af
    43A1 F1            [10]  491 	pop	af
    43A2 33            [ 6]  492 	inc	sp
@@ -524,7 +524,7 @@
    43CF 23            [ 6]  524 	inc	hl
    43D0 46            [ 7]  525 	ld	b, (hl)
    43D1 C5            [11]  526 	push	bc
-   43D2 CD BA 65      [17]  527 	call	_strlen
+   43D2 CD A9 66      [17]  527 	call	_strlen
    43D5 F1            [10]  528 	pop	af
    43D6 4D            [ 4]  529 	ld	c, l
    43D7 44            [ 4]  530 	ld	b, h
@@ -542,7 +542,7 @@
    43E7 C5            [11]  542 	push	bc
    43E8 01 00 C0      [10]  543 	ld	bc, #0xc000
    43EB C5            [11]  544 	push	bc
-   43EC CD D0 66      [17]  545 	call	_cpct_getScreenPtr
+   43EC CD BF 67      [17]  545 	call	_cpct_getScreenPtr
    43EF EB            [ 4]  546 	ex	de,hl
    43F0 E1            [10]  547 	pop	hl
                             548 ;src/gui/gui.c:80: cpct_drawStringM2 (menu[iSelect], p_video, 0);
@@ -554,7 +554,7 @@
    43F6 33            [ 6]  554 	inc	sp
    43F7 D5            [11]  555 	push	de
    43F8 C5            [11]  556 	push	bc
-   43F9 CD EA 61      [17]  557 	call	_cpct_drawStringM2
+   43F9 CD BC 61      [17]  557 	call	_cpct_drawStringM2
    43FC F1            [10]  558 	pop	af
    43FD F1            [10]  559 	pop	af
    43FE 33            [ 6]  560 	inc	sp
@@ -614,14 +614,14 @@
    4441 D5            [11]  614 	push	de
    4442 21 00 C0      [10]  615 	ld	hl, #0xc000
    4445 E5            [11]  616 	push	hl
-   4446 CD D0 66      [17]  617 	call	_cpct_getScreenPtr
+   4446 CD BF 67      [17]  617 	call	_cpct_getScreenPtr
    4449 11 11 0A      [10]  618 	ld	de, #0x0a11
    444C D5            [11]  619 	push	de
    444D AF            [ 4]  620 	xor	a, a
    444E F5            [11]  621 	push	af
    444F 33            [ 6]  622 	inc	sp
    4450 E5            [11]  623 	push	hl
-   4451 CD FE 65      [17]  624 	call	_cpct_drawSolidBox
+   4451 CD ED 66      [17]  624 	call	_cpct_drawSolidBox
    4454 F1            [10]  625 	pop	af
    4455 F1            [10]  626 	pop	af
    4456 33            [ 6]  627 	inc	sp
@@ -714,7 +714,7 @@
    44DE 6F            [ 4]  714 	ld	l, a
    44DF C5            [11]  715 	push	bc
    44E0 E5            [11]  716 	push	hl
-   44E1 CD BA 65      [17]  717 	call	_strlen
+   44E1 CD A9 66      [17]  717 	call	_strlen
    44E4 F1            [10]  718 	pop	af
    44E5 C1            [10]  719 	pop	bc
    44E6 3E 52         [ 7]  720 	ld	a, #0x52
@@ -733,7 +733,7 @@
    44FD E5            [11]  733 	push	hl
    44FE 21 00 C0      [10]  734 	ld	hl, #0xc000
    4501 E5            [11]  735 	push	hl
-   4502 CD D0 66      [17]  736 	call	_cpct_getScreenPtr
+   4502 CD BF 67      [17]  736 	call	_cpct_getScreenPtr
    4505 D1            [10]  737 	pop	de
    4506 C1            [10]  738 	pop	bc
                             739 ;src/gui/gui.c:105: cpct_drawStringM2 (menu[i], p_video, penSelected);
@@ -751,7 +751,7 @@
    4513 33            [ 6]  751 	inc	sp
    4514 FD E5         [15]  752 	push	iy
    4516 E5            [11]  753 	push	hl
-   4517 CD EA 61      [17]  754 	call	_cpct_drawStringM2
+   4517 CD BC 61      [17]  754 	call	_cpct_drawStringM2
    451A F1            [10]  755 	pop	af
    451B F1            [10]  756 	pop	af
    451C 33            [ 6]  757 	inc	sp
@@ -785,7 +785,7 @@
    4542 33            [ 6]  785 	inc	sp
    4543 26 C0         [ 7]  786 	ld	h, #0xc0
    4545 E5            [11]  787 	push	hl
-   4546 CD 93 65      [17]  788 	call	_cpct_memset
+   4546 CD 82 66      [17]  788 	call	_cpct_memset
    4549 C1            [10]  789 	pop	bc
                             790 ;src/gui/gui.c:116: drawBoxM2(30,nbEntry*12);
    454A DD 5E 06      [19]  791 	ld	e,6 (ix)
@@ -822,9 +822,9 @@
    4579                     822 00111$:
                             823 ;src/gui/gui.c:121: cpct_scanKeyboard(); 
    4579 C5            [11]  824 	push	bc
-   457A CD F0 66      [17]  825 	call	_cpct_scanKeyboard
+   457A CD DF 67      [17]  825 	call	_cpct_scanKeyboard
    457D 21 00 01      [10]  826 	ld	hl, #0x0100
-   4580 CD B3 61      [17]  827 	call	_cpct_isKeyPressed
+   4580 CD 63 61      [17]  827 	call	_cpct_isKeyPressed
    4583 C1            [10]  828 	pop	bc
    4584 7D            [ 4]  829 	ld	a, l
    4585 B7            [ 4]  830 	or	a, a
@@ -872,7 +872,7 @@
                             872 ;src/gui/gui.c:135: if ( cpct_isKeyPressed(Key_CursorDown) )
    45BA C5            [11]  873 	push	bc
    45BB 21 00 04      [10]  874 	ld	hl, #0x0400
-   45BE CD B3 61      [17]  875 	call	_cpct_isKeyPressed
+   45BE CD 63 61      [17]  875 	call	_cpct_isKeyPressed
    45C1 5D            [ 4]  876 	ld	e, l
    45C2 C1            [10]  877 	pop	bc
    45C3 7B            [ 4]  878 	ld	a, e
@@ -929,7 +929,7 @@
                             929 ;src/gui/gui.c:147: while(!cpct_isKeyPressed(Key_Return));
    460F C5            [11]  930 	push	bc
    4610 21 02 04      [10]  931 	ld	hl, #0x0402
-   4613 CD B3 61      [17]  932 	call	_cpct_isKeyPressed
+   4613 CD 63 61      [17]  932 	call	_cpct_isKeyPressed
    4616 C1            [10]  933 	pop	bc
    4617 7D            [ 4]  934 	ld	a, l
    4618 B7            [ 4]  935 	or	a, a
@@ -1062,7 +1062,7 @@
    46DC 6F            [ 4] 1062 	ld	l, a
    46DD C5            [11] 1063 	push	bc
    46DE E5            [11] 1064 	push	hl
-   46DF CD BA 65      [17] 1065 	call	_strlen
+   46DF CD A9 66      [17] 1065 	call	_strlen
    46E2 F1            [10] 1066 	pop	af
    46E3 C1            [10] 1067 	pop	bc
    46E4 3E 52         [ 7] 1068 	ld	a, #0x52
@@ -1082,7 +1082,7 @@
    46F6 33            [ 6] 1082 	inc	sp
    46F7 21 00 C0      [10] 1083 	ld	hl, #0xc000
    46FA E5            [11] 1084 	push	hl
-   46FB CD D0 66      [17] 1085 	call	_cpct_getScreenPtr
+   46FB CD BF 67      [17] 1085 	call	_cpct_getScreenPtr
    46FE D1            [10] 1086 	pop	de
    46FF C1            [10] 1087 	pop	bc
                            1088 ;src/gui/gui.c:179: cpct_drawStringM2 (text[i], p_video, 0);
@@ -1101,7 +1101,7 @@
    4711 33            [ 6] 1101 	inc	sp
    4712 FD E5         [15] 1102 	push	iy
    4714 E5            [11] 1103 	push	hl
-   4715 CD EA 61      [17] 1104 	call	_cpct_drawStringM2
+   4715 CD BC 61      [17] 1104 	call	_cpct_drawStringM2
    4718 F1            [10] 1105 	pop	af
    4719 F1            [10] 1106 	pop	af
    471A 33            [ 6] 1107 	inc	sp
@@ -1134,7 +1134,7 @@
    4742 47            [ 4] 1134 	ld	b, a
    4743 C5            [11] 1135 	push	bc
    4744 D5            [11] 1136 	push	de
-   4745 CD BA 65      [17] 1137 	call	_strlen
+   4745 CD A9 66      [17] 1137 	call	_strlen
    4748 F1            [10] 1138 	pop	af
    4749 C1            [10] 1139 	pop	bc
    474A 3E 52         [ 7] 1140 	ld	a, #0x52
@@ -1153,7 +1153,7 @@
    475B 33            [ 6] 1153 	inc	sp
    475C 21 00 C0      [10] 1154 	ld	hl, #0xc000
    475F E5            [11] 1155 	push	hl
-   4760 CD D0 66      [17] 1156 	call	_cpct_getScreenPtr
+   4760 CD BF 67      [17] 1156 	call	_cpct_getScreenPtr
    4763 D1            [10] 1157 	pop	de
                            1158 ;src/gui/gui.c:183: cpct_drawStringM2 (buttonTxt, p_video, 0);
    4764 AF            [ 4] 1159 	xor	a, a
@@ -1161,17 +1161,17 @@
    4766 33            [ 6] 1161 	inc	sp
    4767 E5            [11] 1162 	push	hl
    4768 D5            [11] 1163 	push	de
-   4769 CD EA 61      [17] 1164 	call	_cpct_drawStringM2
+   4769 CD BC 61      [17] 1164 	call	_cpct_drawStringM2
    476C F1            [10] 1165 	pop	af
    476D F1            [10] 1166 	pop	af
    476E 33            [ 6] 1167 	inc	sp
                            1168 ;src/gui/gui.c:186: do{
    476F                    1169 00110$:
                            1170 ;src/gui/gui.c:187: cpct_scanKeyboard(); 
-   476F CD F0 66      [17] 1171 	call	_cpct_scanKeyboard
+   476F CD DF 67      [17] 1171 	call	_cpct_scanKeyboard
                            1172 ;src/gui/gui.c:189: if ( cpct_isKeyPressed(Key_Return) )
    4772 21 02 04      [10] 1173 	ld	hl, #0x0402
-   4775 CD B3 61      [17] 1174 	call	_cpct_isKeyPressed
+   4775 CD 63 61      [17] 1174 	call	_cpct_isKeyPressed
    4778 7D            [ 4] 1175 	ld	a, l
    4779 B7            [ 4] 1176 	or	a, a
    477A 28 04         [12] 1177 	jr	Z,00106$
@@ -1180,7 +1180,7 @@
    4780                    1180 00106$:
                            1181 ;src/gui/gui.c:192: if ( cpct_isKeyPressed(Key_Esc) )
    4780 21 08 04      [10] 1182 	ld	hl, #0x0408
-   4783 CD B3 61      [17] 1183 	call	_cpct_isKeyPressed
+   4783 CD 63 61      [17] 1183 	call	_cpct_isKeyPressed
    4786 7D            [ 4] 1184 	ld	a, l
    4787 B7            [ 4] 1185 	or	a, a
    4788 28 04         [12] 1186 	jr	Z,00111$
@@ -1189,12 +1189,12 @@
    478E                    1189 00111$:
                            1190 ;src/gui/gui.c:195: while(!cpct_isKeyPressed(Key_Return) && !cpct_isKeyPressed(Key_Esc));
    478E 21 02 04      [10] 1191 	ld	hl, #0x0402
-   4791 CD B3 61      [17] 1192 	call	_cpct_isKeyPressed
+   4791 CD 63 61      [17] 1192 	call	_cpct_isKeyPressed
    4794 7D            [ 4] 1193 	ld	a, l
    4795 B7            [ 4] 1194 	or	a, a
    4796 20 0A         [12] 1195 	jr	NZ,00112$
    4798 21 08 04      [10] 1196 	ld	hl, #0x0408
-   479B CD B3 61      [17] 1197 	call	_cpct_isKeyPressed
+   479B CD 63 61      [17] 1197 	call	_cpct_isKeyPressed
    479E 7D            [ 4] 1198 	ld	a, l
    479F B7            [ 4] 1199 	or	a, a
    47A0 28 CD         [12] 1200 	jr	Z,00110$

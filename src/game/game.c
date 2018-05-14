@@ -325,8 +325,7 @@ void game()
 					trainList[nbTrainList].posX = ulx+xCursor;
 					trainList[nbTrainList].posY = uly+yCursor;
 					
-					trainList[nbTrainList].animX = (int)(ulx+xCursor)*TILESIZE_H+8;
-					trainList[nbTrainList].animY = (int)(uly+yCursor)*TILESIZE_H+8;
+					trainList[nbTrainList].cycles = 1; // Cycle begin at 1 and not 0 because the position is 1 pixel shifted cause of the tail
 
 					// Update heading
 					// Vertical tracks
@@ -334,9 +333,8 @@ void game()
 							p_world[trainList[nbTrainList].posY*WIDTH+trainList[nbTrainList].posX] == SMNS ||
 							p_world[trainList[nbTrainList].posY*WIDTH+trainList[nbTrainList].posX] == SLNS )
 					{
-						setPixel((ulx+xCursor)*TILESIZE_H+8, (uly+yCursor)*TILESIZE_H+8, 3);
-						setPixel((ulx+xCursor)*TILESIZE_H+8, (uly+yCursor)*TILESIZE_H+9, 2);
-						
+						trainList[nbTrainList].animX = (int)(ulx+xCursor)*TILESIZE_H+8;
+						trainList[nbTrainList].animY = (int)(uly+yCursor)*TILESIZE_H+1;
 
 						trainList[nbTrainList].heading = 2;
 
@@ -344,11 +342,10 @@ void game()
 					// Horizontal tracks
 					else
 					{
-						setPixel((ulx+xCursor)*TILESIZE_H+8, (uly+yCursor)*TILESIZE_H+8, 3);
-						setPixel((ulx+xCursor)*TILESIZE_H+7, (uly+yCursor)*TILESIZE_H+8, 2);
-						
-						trainList[nbTrainList].heading = 0;
+						trainList[nbTrainList].animX = (int)(ulx+xCursor)*TILESIZE_H+1;
+						trainList[nbTrainList].animY = (int)(uly+yCursor)*TILESIZE_H+8;
 
+						trainList[nbTrainList].heading = 0;
 					}
 
 
@@ -356,8 +353,6 @@ void game()
 					nbTrainList++;
 
 					CURSOR_MODE=NONE;
-					drawTile(ulx, uly, xCursor, yCursor);
-
 				}
 			}
 			// If station or rail cursor, apply the tile
@@ -376,7 +371,8 @@ void game()
 			for(i=0; i<14000; i++) {}
 
 		}
-
+		
+		cpct_waitVSYNC ();
 		drawTrains(ulx, uly);
 
 	} 

@@ -29,11 +29,11 @@ Symbol Table
   0 ___str_25                                                      03DA R
   0 ___str_26                                                      03FD R
   0 ___str_27                                                      03FE R
-  0 ___str_28                                                      0B31 R
-  0 ___str_29                                                      0B3F R
+  0 ___str_28                                                      0AE1 R
+  0 ___str_29                                                      0AEF R
   0 ___str_3                                                       0125 R
-  0 ___str_30                                                      0B40 R
-  0 ___str_31                                                      0B66 R
+  0 ___str_30                                                      0AF0 R
+  0 ___str_31                                                      0B16 R
   0 ___str_4                                                       012F R
   0 ___str_5                                                       0134 R
   0 ___str_6                                                       0151 R
@@ -46,6 +46,7 @@ Symbol Table
     _cpct_memset                                                   **** GX
     _cpct_px2byteM1                                                **** GX
     _cpct_scanKeyboard                                             **** GX
+    _cpct_waitVSYNC                                                **** GX
     _drawBoxM2                                                     **** GX
     _drawCursor                                                    **** GX
     _drawMenu                                                      **** GX
@@ -57,17 +58,16 @@ Symbol Table
   0 _game                                                          0409 GR
     _generateWorld                                                 **** GX
   0 _menuStations                                                  01EC GR
-  0 _menuTile                                                      025B GR
 ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 2.
 Hexadecimal [16-Bits]
 
 Symbol Table
 
+  0 _menuTile                                                      025B GR
     _nbTrainList                                                   **** GX
     _p_world                                                       **** GX
     _putM1                                                         **** GX
     _putM2                                                         **** GX
-    _setPixel                                                      **** GX
     _trainList                                                     **** GX
     _trainManagement                                               **** GX
   0 _windowInfoTile                                                0000 GR
@@ -77,7 +77,7 @@ Hexadecimal [16-Bits]
 
 Area Table
 
-   0 _CODE                                      size  B7A   flags    0
+   0 _CODE                                      size  B2A   flags    0
    1 _DATA                                      size    0   flags    0
    2 _INITIALIZED                               size    0   flags    0
    3 _DABS                                      size    0   flags    8

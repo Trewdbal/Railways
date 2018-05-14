@@ -489,7 +489,6 @@ u8 isPixelBlack(int nX, unsigned char nY)
 
 void drawTrains(u8 x_, u8 y_)
 {
-	u8 *p_video;
 	u8 i;
 	unsigned char *buff;
 	int oldTrainX, oldTrainY;
@@ -541,40 +540,35 @@ void drawTrains(u8 x_, u8 y_)
 			}
 
 			// Calculate new position in tile coordinates
+			trainList[i].cycles++; // Update the number of shifts done in pixels
 
-			// Draw new position
+			// If train is on a new tile
+			if(trainList[i].cycles>=TILESIZE_H)
+			{
+			trainList[i].cycles = 0;	// Reset counter
+			trainList[i].posX = (int)(trainList[i].animX/TILESIZE_H); // Update position in tiles coordinates
+			trainList[i].posY = (int)(trainList[i].animY/TILESIZE_H); // Update position in tiles coordinates
+
+// Previous may bug ! Find floor function
+// Bug : block trains during rail construction
+// Bug : there is no 16 cycles in curves !!!
+
+			setTrainHeading(i); // Calculate new heading
+			}
+
+			// Draw new position in pixel coordinates
 			setPixel(trainList[i].animX-x_*TILESIZE_H,trainList[i].animY-y_*TILESIZE_H, 3);
 			setPixel(trainList[i].animOldX-x_*TILESIZE_H,trainList[i].animOldY-y_*TILESIZE_H, 2);
 			setPixel(oldTrainX-x_*TILESIZE_H,oldTrainY-y_*TILESIZE_H, 0);
 
-//	sprintf(buff, "%d", trainList[i].posX );
-//	cpct_drawStringM1 (buff, SCR_VMEM, 0, 1);
-
+  sprintf(buff, "%d ", trainList[i].heading );
+  cpct_drawStringM1 (buff, SCR_VMEM, 0, 1);
 
 		}
 
 		// If the train is not in the screen
 		else
 		{
-			/*
-			   switch(trainList[i].heading)
-			   {
-			   case 0:
-			   drawTile(x_,y_,trainList[i].posX-x_+1,trainList[i].posY-y_);
-			   break;
-			   case 1:
-			   drawTile(x_,y_,trainList[i].posX-x_-1,trainList[i].posY-y_);
-			   break;
-			   case 2:
-			   drawTile(x_,y_,trainList[i].posX-x_,trainList[i].posY-y_-1);
-			   break;
-			   case 3:
-			   drawTile(x_,y_,trainList[i].posX-x_,trainList[i].posY-y_+1);
-			   break;
-
-			   }
-			 */
-
 			/*
 			// Move the train
 			switch(trainList[i].heading)
