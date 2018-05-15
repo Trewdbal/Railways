@@ -22,18 +22,18 @@
                              22 ; ram data
                              23 ;--------------------------------------------------------
                              24 	.area _DATA
-   74B5                      25 _p_world::
-   74B5                      26 	.ds 3840
-   83B5                      27 _trainList::
-   83B5                      28 	.ds 2
+   741D                      25 _p_world::
+   741D                      26 	.ds 3840
+   831D                      27 _trainList::
+   831D                      28 	.ds 2
                              29 ;--------------------------------------------------------
                              30 ; ram data
                              31 ;--------------------------------------------------------
                              32 	.area _INITIALIZED
-   83B9                      33 _CURSOR_MODE::
-   83B9                      34 	.ds 1
-   83BA                      35 _nbTrainList::
-   83BA                      36 	.ds 1
+   8321                      33 _CURSOR_MODE::
+   8321                      34 	.ds 1
+   8322                      35 _nbTrainList::
+   8322                      36 	.ds 1
                              37 ;--------------------------------------------------------
                              38 ; absolute external ram data
                              39 ;--------------------------------------------------------
@@ -81,8 +81,8 @@
    47D2 00                   81 	.db #0x00	; 0
    47D3 14                   82 	.db #0x14	; 20
                              83 	.area _INITIALIZER
-   83BE                      84 __xinit__CURSOR_MODE:
-   83BE 00                   85 	.db #0x00	; 0
-   83BF                      86 __xinit__nbTrainList:
-   83BF 00                   87 	.db #0x00	; 0
+   8326                      84 __xinit__CURSOR_MODE:
+   8326 00                   85 	.db #0x00	; 0
+   8327                      86 __xinit__nbTrainList:
+   8327 00                   87 	.db #0x00	; 0
                              88 	.area _CABS (ABS)

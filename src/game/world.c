@@ -67,17 +67,17 @@ void drawCursor(u8 x, u8 y)
 	setPixel(x*TILESIZE_H+1, y*TILESIZE_H, 0);
 	setPixel(x*TILESIZE_H, y*TILESIZE_H+1, 0);
 	setPixel(x*TILESIZE_H+1, y*TILESIZE_H+1, 0);
-	
+
 	setPixel(x*TILESIZE_H+15, y*TILESIZE_H, 0);
 	setPixel(x*TILESIZE_H+14, y*TILESIZE_H, 0);
 	setPixel(x*TILESIZE_H+15, y*TILESIZE_H+1, 0);
 	setPixel(x*TILESIZE_H+14, y*TILESIZE_H+1, 0);
-	
+
 	setPixel(x*TILESIZE_H, y*TILESIZE_H+15, 0);
 	setPixel(x*TILESIZE_H, y*TILESIZE_H+14, 0);
 	setPixel(x*TILESIZE_H+1, y*TILESIZE_H+14, 0);
 	setPixel(x*TILESIZE_H+1, y*TILESIZE_H+15, 0);
-	
+
 	setPixel(x*TILESIZE_H+15, y*TILESIZE_H+15, 0);
 	setPixel(x*TILESIZE_H+14, y*TILESIZE_H+15, 0);
 	setPixel(x*TILESIZE_H+15, y*TILESIZE_H+14, 0);
@@ -346,29 +346,29 @@ void drawScrolls(u8 x, u8 y)
 	setPixel(scrollx+14, 0, 0);
 	setPixel(scrollx+14, 1, 0);
 	setPixel(scrollx+14, 2, 0);
-		
+
 	setPixel(1, scrolly, 0);
 	setPixel(0, scrolly+1, 0);
 	setPixel(1, scrolly+1, 0);
 	setPixel(2, scrolly+1, 0);
-	
+
 	setPixel(1, scrolly+15, 0);
 	setPixel(0, scrolly+14, 0);
 	setPixel(1, scrolly+14, 0);
 	setPixel(2, scrolly+14, 0);
 
-//	u8 scrollx;
-//	u8 scrolly;
-/*
-	scrollx = x* (WIDTH-TILESIZE_W)/(WIDTH-NBTILE_W);
-	scrolly = y* (HEIGHT*TILESIZE_W-TILESIZE_H)/(HEIGHT-NBTILE_H);
+	//	u8 scrollx;
+	//	u8 scrolly;
+	/*
+	   scrollx = x* (WIDTH-TILESIZE_W)/(WIDTH-NBTILE_W);
+	   scrolly = y* (HEIGHT*TILESIZE_W-TILESIZE_H)/(HEIGHT-NBTILE_H);
 
-	p_video = cpct_getScreenPtr(SCR_VMEM, scrollx, 0);
-	cpct_drawSolidBox(p_video, cpct_px2byteM1(0,0,0,0), 4, TILESIZE_W);
+	   p_video = cpct_getScreenPtr(SCR_VMEM, scrollx, 0);
+	   cpct_drawSolidBox(p_video, cpct_px2byteM1(0,0,0,0), 4, TILESIZE_W);
 
-	p_video = cpct_getScreenPtr(SCR_VMEM, 0, scrolly);
-	cpct_drawSolidBox(p_video, cpct_px2byteM1(0,0,0,0), 1, TILESIZE_H);
-*/
+	   p_video = cpct_getScreenPtr(SCR_VMEM, 0, scrolly);
+	   cpct_drawSolidBox(p_video, cpct_px2byteM1(0,0,0,0), 1, TILESIZE_H);
+	 */
 
 }
 
@@ -386,7 +386,6 @@ void drawWorld(u8 x_, u8 y_)
 	}
 
 	drawScrolls(x_, y_);
-
 
 	//  sprintf(buff, "%d", p_world[2] );
 	//	cpct_drawStringM1 (buff, SCR_VMEM, 0, 1);
@@ -487,11 +486,54 @@ u8 isPixelBlack(int nX, unsigned char nY)
 	return 0;
 }
 
+void drawNewTrain(u8 i, u8 x_, u8 y_)
+{
+	switch(trainList[i].heading)
+	{
+		//right
+		case 0:
+			trainList[i].animX = (int)(trainList[i].posX)*TILESIZE_H+1;
+			trainList[i].animY = (int)(trainList[i].posY)*TILESIZE_H+8;
+			trainList[i].animOldX = (int)(trainList[i].posX)*TILESIZE_H;
+			trainList[i].animOldY = (int)(trainList[i].posY)*TILESIZE_H+8;
+			break;
+
+			// left
+		case 1:
+			trainList[i].animX = (int)(trainList[i].posX)*TILESIZE_H+14;
+			trainList[i].animY = (int)(trainList[i].posY)*TILESIZE_H+8;
+			trainList[i].animOldX = (int)(trainList[i].posX)*TILESIZE_H+15;
+			trainList[i].animOldY = (int)(trainList[i].posY)*TILESIZE_H+8;
+			break;
+
+			// up
+		case 2:
+			trainList[nbTrainList].animX = (int)(trainList[i].posX)*TILESIZE_H+8;
+			trainList[nbTrainList].animY = (int)(trainList[i].posY)*TILESIZE_H+14;
+			trainList[nbTrainList].animOldX = (int)(trainList[i].posX)*TILESIZE_H+8;
+			trainList[nbTrainList].animOldY = (int)(trainList[i].posY)*TILESIZE_H+15;
+			break;
+
+			// down
+		case 3:
+			trainList[nbTrainList].animX = (int)(trainList[i].posX)*TILESIZE_H+8;
+			trainList[nbTrainList].animY = (int)(trainList[i].posY)*TILESIZE_H+1;
+			trainList[nbTrainList].animOldX = (int)(trainList[i].posX)*TILESIZE_H+8;
+			trainList[nbTrainList].animOldY = (int)(trainList[i].posY)*TILESIZE_H;
+			break;
+	}
+
+	setPixel(trainList[i].animX-x_*TILESIZE_H,trainList[i].animY-y_*TILESIZE_H, 3);
+	setPixel(trainList[i].animOldX-x_*TILESIZE_H,trainList[i].animOldY-y_*TILESIZE_H, 2);
+}
+
 void drawTrains(u8 x_, u8 y_)
 {
 	u8 i;
 	unsigned char *buff;
 	int oldTrainX, oldTrainY;
+	int actualPosX, actualPosY;
+	int animPixX, animPixY;
 
 	// Animation
 	for(i=0; i<nbTrainList; i++)
@@ -499,8 +541,11 @@ void drawTrains(u8 x_, u8 y_)
 		// If the last position of the train is in the screen, clean it
 		if(trainList[i].posX-x_ < NBTILE_W && trainList[i].posY-y_ < NBTILE_H && trainList[i].posX-x_ >= 0 && trainList[i].posY-y_ >= 0 )
 		{
-			// Restore pixels before calculation of position
-			setPixel(trainList[i].animX-x_*TILESIZE_H,trainList[i].animY-y_*TILESIZE_H, 3);
+			// Restore pixels before calculation of new anim position. Useful if the screen was scrolled cause tiles were redrawn	
+			animPixX = trainList[i].animX-x_*TILESIZE_H;
+			animPixY = trainList[i].animY-y_*TILESIZE_H;
+
+			setPixel(animPixX, animPixY, 3);
 			setPixel(trainList[i].animOldX-x_*TILESIZE_H,trainList[i].animOldY-y_*TILESIZE_H, 2);
 
 			// Transfer actual position to "old"
@@ -510,89 +555,125 @@ void drawTrains(u8 x_, u8 y_)
 			trainList[i].animOldY = trainList[i].animY;
 
 			// Calculate new position. The idea is based on a cellular automata, Wireworld. There is 8 possible directions
-			if( isPixelBlack(trainList[i].animX-x_*TILESIZE_H +1,trainList[i].animY-y_*TILESIZE_H) )
+			if( isPixelBlack(animPixX +1, animPixY) )
 				trainList[i].animX+=1;
-			else if( isPixelBlack(trainList[i].animX-x_*TILESIZE_H -1,trainList[i].animY-y_*TILESIZE_H) )
+			else if( isPixelBlack(animPixX -1, animPixY) )
 				trainList[i].animX-=1;
-			else if( isPixelBlack(trainList[i].animX-x_*TILESIZE_H, trainList[i].animY-y_*TILESIZE_H + 1) )
+			else if( isPixelBlack(animPixX, animPixY + 1) )
 				trainList[i].animY+=1;
-			else if( isPixelBlack(trainList[i].animX-x_*TILESIZE_H,trainList[i].animY-y_*TILESIZE_H - 1) )
+			else if( isPixelBlack(animPixX, animPixY - 1) )
 				trainList[i].animY-=1;
-			else if( isPixelBlack(trainList[i].animX-x_*TILESIZE_H+1,trainList[i].animY-y_*TILESIZE_H + 1) )
-			{
-				trainList[i].animX+=1;
-				trainList[i].animY+=1;
-			}
-			else if( isPixelBlack(trainList[i].animX-x_*TILESIZE_H+1,trainList[i].animY-y_*TILESIZE_H - 1) )
+			else if( isPixelBlack(animPixX+1,animPixY+ 1) )
 			{
 				trainList[i].animX+=1;
+				trainList[i].animY+=1;
+			}
+			else if( isPixelBlack(animPixX+1, animPixY - 1) )
+			{
+				trainList[i].animX+=1;
 				trainList[i].animY-=1;
 			}
-			else if( isPixelBlack(trainList[i].animX-x_*TILESIZE_H-1,trainList[i].animY-y_*TILESIZE_H + 1) )
+			else if( isPixelBlack(animPixX-1, animPixY+ 1) )
 			{
 				trainList[i].animX-=1;
 				trainList[i].animY+=1;
 			}
-			else if( isPixelBlack(trainList[i].animX-x_*TILESIZE_H-1,trainList[i].animY-y_*TILESIZE_H - 1) )
+			else if( isPixelBlack(animPixX-1, animPixY- 1) )
 			{
 				trainList[i].animX-=1;
 				trainList[i].animY-=1;
 			}
 
-			// Calculate new position in tile coordinates
-			trainList[i].cycles++; // Update the number of shifts done in pixels
-
-			// If train is on a new tile
-			if(trainList[i].cycles>=TILESIZE_H)
+			// If train is on a new tile, update position
+			actualPosX = (int)(trainList[i].animX/TILESIZE_H); // Update position in tiles coordinates
+			actualPosY = (int)(trainList[i].animY/TILESIZE_H); 
+			if( actualPosX != trainList[i].posX || actualPosY != trainList[i].posY )
 			{
-			trainList[i].cycles = 0;	// Reset counter
-			trainList[i].posX = (int)(trainList[i].animX/TILESIZE_H); // Update position in tiles coordinates
-			trainList[i].posY = (int)(trainList[i].animY/TILESIZE_H); // Update position in tiles coordinates
+				trainList[i].posX = actualPosX; // Update position in tiles coordinates
+				trainList[i].posY = actualPosY; // Update position in tiles coordinates
 
-// Previous may bug ! Find floor function
-// Bug : block trains during rail construction
-// Bug : there is no 16 cycles in curves !!!
-
-			setTrainHeading(i); // Calculate new heading
+				setTrainHeading(i); // Calculate new heading
 			}
 
-			// Draw new position in pixel coordinates
-			setPixel(trainList[i].animX-x_*TILESIZE_H,trainList[i].animY-y_*TILESIZE_H, 3);
-			setPixel(trainList[i].animOldX-x_*TILESIZE_H,trainList[i].animOldY-y_*TILESIZE_H, 2);
-			setPixel(oldTrainX-x_*TILESIZE_H,oldTrainY-y_*TILESIZE_H, 0);
+			// Draw new position in pixel coordinates if the pixel is in screen
 
-  sprintf(buff, "%d ", trainList[i].heading );
-  cpct_drawStringM1 (buff, SCR_VMEM, 0, 1);
+			animPixX = trainList[i].animX-x_*TILESIZE_H;
+			animPixY = trainList[i].animY-y_*TILESIZE_H;
+
+			if(animPixX>0 && animPixY>0 && animPixX<319 && animPixY<192)
+			{
+				setPixel(animPixX,animPixY, 3);
+				setPixel(trainList[i].animOldX-x_*TILESIZE_H,trainList[i].animOldY-y_*TILESIZE_H, 2);
+				setPixel(oldTrainX-x_*TILESIZE_H,oldTrainY-y_*TILESIZE_H, 0);
+			}
+			// Else, clean it because it is about to diseapear from the screen
+			else
+			{
+				// Bye bye the train from the screen
+				setPixel(animPixX,animPixY, 0);
+				setPixel(trainList[i].animOldX-x_*TILESIZE_H,trainList[i].animOldY-y_*TILESIZE_H, 0);
+				setPixel(oldTrainX-x_*TILESIZE_H,oldTrainY-y_*TILESIZE_H, 0);
+
+				trainList[i].animOldX = 0;
+				trainList[i].animOldY = 0;
+				trainList[i].animX = 0;
+				trainList[i].animY = 0;
+
+				trainList[i].cycles = 0;
+
+			}
+
+			  sprintf(buff, "%d %d", trainList[i].posX, trainList[i].posY);
+			  cpct_drawStringM1 (buff, SCR_VMEM, 0, 1);
 
 		}
 
 		// If the train is not in the screen
 		else
 		{
-			/*
-			// Move the train
-			switch(trainList[i].heading)
-			{
-			case 0: // Right
-			if(trainList[i].posX < WIDTH && p_world[trainList[i].posY*WIDTH+trainList[i].posX+1] >= SSNS )
-			trainList[i].posX++;
-			break;
-			case 1: // Left
-			if(trainList[i].posX >0 && p_world[trainList[i].posY*WIDTH+trainList[i].posX-1] >= SSNS )
-			trainList[i].posX--;
-			break;
-			case 2: // Up
-			if(trainList[i].posY > 0 && p_world[(trainList[i].posY-1)*WIDTH+trainList[i].posX] >= SSNS )
-			trainList[i].posY--;
-			break;
-			case 3: // Down
-			if(trainList[i].posY < HEIGHT && p_world[(trainList[i].posY+1)*WIDTH+trainList[i].posX] >= SSNS)
-			trainList[i].posY++;
-			break;
-			}
+		//	trainList[i].cycles++;
 
-			setTrainHeading(i);
-			 */
+			// After 16 cycles, move 1 tile
+		//	if(trainList[i].cycles>=TILESIZE_H)
+		//	{
+
+				// Reset counter
+				trainList[i].cycles=0;
+
+				// Move the train
+				switch(trainList[i].heading)
+				{
+					case 0: // Right
+						if(trainList[i].posX < WIDTH && p_world[trainList[i].posY*WIDTH+trainList[i].posX+1] >= SSNS )
+							trainList[i].posX++;
+						break;
+					case 1: // Left
+						if(trainList[i].posX >0 && p_world[trainList[i].posY*WIDTH+trainList[i].posX-1] >= SSNS )
+							trainList[i].posX--;
+						break;
+					case 2: // Up
+						if(trainList[i].posY > 0 && p_world[(trainList[i].posY-1)*WIDTH+trainList[i].posX] >= SSNS )
+							trainList[i].posY--;
+						break;
+					case 3: // Down
+						if(trainList[i].posY < HEIGHT && p_world[(trainList[i].posY+1)*WIDTH+trainList[i].posX] >= SSNS)
+							trainList[i].posY++;
+						break;
+				}
+
+			  sprintf(buff, "%d %d %d", trainList[i].posX, trainList[i].posY, trainList[i].heading );
+			  cpct_drawStringM1 (buff, SCR_VMEM, 0, 1);
+
+				
+				setTrainHeading(i);
+
+				// If now the train is in the screen, we have to restore the pixels
+				if(trainList[i].posX-x_ < NBTILE_W && trainList[i].posY-y_ < NBTILE_H && trainList[i].posX-x_ >= 0 && trainList[i].posY-y_ >= 0 )
+				{
+					drawNewTrain(i, x_, y_);
+				}
+
+		//	}
 		}
 
 	}

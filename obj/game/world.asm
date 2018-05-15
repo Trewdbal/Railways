@@ -26,6 +26,7 @@
 	.globl _setTrainHeading
 	.globl _setPixel
 	.globl _isPixelBlack
+	.globl _drawNewTrain
 	.globl _drawTrains
 ;--------------------------------------------------------
 ; special function registers
@@ -117,12 +118,12 @@ _drawCursor::
 	rlca
 	rlca
 	and	a, #0xf0
-	ld	-1 (ix), a
+	ld	-5 (ix), a
 	ld	a, 4 (ix)
 	add	a, a
 	add	a, a
 	ld	b, a
-	ld	a, -1 (ix)
+	ld	a, -5 (ix)
 	push	af
 	inc	sp
 	push	bc
@@ -351,7 +352,7 @@ _drawCursor::
 	xor	a, a
 	push	af
 	inc	sp
-	ld	a, -1 (ix)
+	ld	a, -5 (ix)
 	push	af
 	inc	sp
 	push	de
@@ -362,24 +363,24 @@ _drawCursor::
 ;src/game/world.c:67: setPixel(x*TILESIZE_H+1, y*TILESIZE_H, 0);
 	ld	hl, #0x0001
 	add	hl,de
-	ld	-3 (ix), l
-	ld	-2 (ix), h
+	ld	-4 (ix), l
+	ld	-3 (ix), h
 	push	de
 	xor	a, a
 	push	af
 	inc	sp
-	ld	a, -1 (ix)
+	ld	a, -5 (ix)
 	push	af
 	inc	sp
-	ld	l,-3 (ix)
-	ld	h,-2 (ix)
+	ld	l,-4 (ix)
+	ld	h,-3 (ix)
 	push	hl
 	call	_setPixel
 	pop	af
 	pop	af
 	pop	de
 ;src/game/world.c:68: setPixel(x*TILESIZE_H, y*TILESIZE_H+1, 0);
-	ld	b, -1 (ix)
+	ld	b, -5 (ix)
 	inc	b
 	push	bc
 	push	de
@@ -402,8 +403,8 @@ _drawCursor::
 	inc	sp
 	push	bc
 	inc	sp
-	ld	l,-3 (ix)
-	ld	h,-2 (ix)
+	ld	l,-4 (ix)
+	ld	h,-3 (ix)
 	push	hl
 	call	_setPixel
 	pop	af
@@ -413,17 +414,18 @@ _drawCursor::
 ;src/game/world.c:71: setPixel(x*TILESIZE_H+15, y*TILESIZE_H, 0);
 	ld	hl, #0x000f
 	add	hl,de
-	ex	(sp), hl
+	ld	-2 (ix), l
+	ld	-1 (ix), h
 	push	bc
 	push	de
 	xor	a, a
 	push	af
 	inc	sp
-	ld	a, -1 (ix)
+	ld	a, -5 (ix)
 	push	af
 	inc	sp
-	ld	l,-7 (ix)
-	ld	h,-6 (ix)
+	ld	l,-2 (ix)
+	ld	h,-1 (ix)
 	push	hl
 	call	_setPixel
 	pop	af
@@ -433,18 +435,17 @@ _drawCursor::
 ;src/game/world.c:72: setPixel(x*TILESIZE_H+14, y*TILESIZE_H, 0);
 	ld	hl, #0x000e
 	add	hl,de
-	ld	-5 (ix), l
-	ld	-4 (ix), h
+	ex	(sp), hl
 	push	bc
 	push	de
 	xor	a, a
 	push	af
 	inc	sp
-	ld	a, -1 (ix)
+	ld	a, -5 (ix)
 	push	af
 	inc	sp
-	ld	l,-5 (ix)
-	ld	h,-4 (ix)
+	ld	l,-7 (ix)
+	ld	h,-6 (ix)
 	push	hl
 	call	_setPixel
 	pop	af
@@ -459,8 +460,8 @@ _drawCursor::
 	inc	sp
 	push	bc
 	inc	sp
-	ld	l,-7 (ix)
-	ld	h,-6 (ix)
+	ld	l,-2 (ix)
+	ld	h,-1 (ix)
 	push	hl
 	call	_setPixel
 	pop	af
@@ -474,15 +475,15 @@ _drawCursor::
 	inc	sp
 	push	bc
 	inc	sp
-	ld	l,-5 (ix)
-	ld	h,-4 (ix)
+	ld	l,-7 (ix)
+	ld	h,-6 (ix)
 	push	hl
 	call	_setPixel
 	pop	af
 	pop	af
 	pop	de
 ;src/game/world.c:76: setPixel(x*TILESIZE_H, y*TILESIZE_H+15, 0);
-	ld	a, -1 (ix)
+	ld	a, -5 (ix)
 	add	a, #0x0f
 	ld	b, a
 	push	bc
@@ -499,7 +500,7 @@ _drawCursor::
 	pop	de
 	pop	bc
 ;src/game/world.c:77: setPixel(x*TILESIZE_H, y*TILESIZE_H+14, 0);
-	ld	a, -1 (ix)
+	ld	a, -5 (ix)
 	add	a, #0x0e
 	ld	c, a
 	push	bc
@@ -516,8 +517,8 @@ _drawCursor::
 	xor	a, a
 	ld	b, a
 	push	bc
-	ld	l,-3 (ix)
-	ld	h,-2 (ix)
+	ld	l,-4 (ix)
+	ld	h,-3 (ix)
 	push	hl
 	call	_setPixel
 	pop	af
@@ -530,8 +531,8 @@ _drawCursor::
 	inc	sp
 	push	bc
 	inc	sp
-	ld	l,-3 (ix)
-	ld	h,-2 (ix)
+	ld	l,-4 (ix)
+	ld	h,-3 (ix)
 	push	hl
 	call	_setPixel
 	pop	af
@@ -544,8 +545,8 @@ _drawCursor::
 	inc	sp
 	push	bc
 	inc	sp
-	ld	l,-7 (ix)
-	ld	h,-6 (ix)
+	ld	l,-2 (ix)
+	ld	h,-1 (ix)
 	push	hl
 	call	_setPixel
 	pop	af
@@ -558,8 +559,8 @@ _drawCursor::
 	inc	sp
 	push	bc
 	inc	sp
-	ld	l,-5 (ix)
-	ld	h,-4 (ix)
+	ld	l,-7 (ix)
+	ld	h,-6 (ix)
 	push	hl
 	call	_setPixel
 	pop	af
@@ -570,8 +571,8 @@ _drawCursor::
 	xor	a, a
 	ld	b, a
 	push	bc
-	ld	l,-7 (ix)
-	ld	h,-6 (ix)
+	ld	l,-2 (ix)
+	ld	h,-1 (ix)
 	push	hl
 	call	_setPixel
 	pop	af
@@ -581,8 +582,10 @@ _drawCursor::
 	xor	a, a
 	ld	b, a
 	push	bc
-	ld	l,-5 (ix)
-	ld	h,-4 (ix)
+	pop	bc
+	pop	hl
+	push	hl
+	push	bc
 	push	hl
 	call	_setPixel
 	ld	sp,ix
@@ -608,7 +611,7 @@ _patternTile::
 00153$:
 	xor	a,a
 00154$:
-	ld	-2 (ix), a
+	ld	-9 (ix), a
 	ld	a, 4 (ix)
 	sub	a, #0x02
 	jr	NZ,00155$
@@ -617,7 +620,7 @@ _patternTile::
 00155$:
 	xor	a,a
 00156$:
-	ld	-9 (ix), a
+	ld	-8 (ix), a
 	ld	e, #0x00
 00115$:
 	ld	a, e
@@ -640,10 +643,10 @@ _patternTile::
 	ld	b, h
 	ld	a, 5 (ix)
 	add	a, c
-	ld	-4 (ix), a
+	ld	-7 (ix), a
 	ld	a, 6 (ix)
 	adc	a, b
-	ld	-3 (ix), a
+	ld	-6 (ix), a
 	push	de
 	ld	h, 7 (ix)
 	ld	l, #0x00
@@ -656,21 +659,21 @@ _patternTile::
 00158$:
 	djnz	00157$
 	pop	de
-	ld	-8 (ix), l
-	ld	-7 (ix), h
+	ld	-5 (ix), l
+	ld	-4 (ix), h
 	ld	d, #0x00
 00112$:
 	ld	a, d
 	sub	a, 7 (ix)
 	jr	NC,00116$
 ;src/game/world.c:96: if(cpct_getBit (pattern, iy*nBitsX+ix)!=0 && index+iy*WIDTH+ix < WIDTH*HEIGHT)
-	ld	-6 (ix), d
-	ld	-5 (ix), #0x00
-	ld	a, -6 (ix)
-	add	a, -8 (ix)
+	ld	-3 (ix), d
+	ld	-2 (ix), #0x00
+	ld	a, -3 (ix)
+	add	a, -5 (ix)
 	ld	c, a
-	ld	a, -5 (ix)
-	adc	a, -7 (ix)
+	ld	a, -2 (ix)
+	adc	a, -4 (ix)
 	ld	b, a
 	ld	l,9 (ix)
 	ld	h,10 (ix)
@@ -683,17 +686,17 @@ _patternTile::
 	ld	a, -1 (ix)
 	or	a, a
 	jr	Z,00113$
-	ld	a, -4 (ix)
-	add	a, -6 (ix)
+	ld	a, -7 (ix)
+	add	a, -3 (ix)
 	ld	c, a
-	ld	a, -3 (ix)
-	adc	a, -5 (ix)
+	ld	a, -6 (ix)
+	adc	a, -2 (ix)
 	ld	b,a
 	xor	a, #0x80
 	sub	a, #0x8f
 	jr	NC,00113$
 ;src/game/world.c:98: if(tileType == FOREST)
-	ld	a, -2 (ix)
+	ld	a, -9 (ix)
 	or	a, a
 	jr	Z,00104$
 ;src/game/world.c:99: p_world[index+iy*WIDTH+ix] = tileType;
@@ -704,7 +707,7 @@ _patternTile::
 	jr	00113$
 00104$:
 ;src/game/world.c:100: else if(tileType==DWELLINGS1)
-	ld	a, -9 (ix)
+	ld	a, -8 (ix)
 	or	a, a
 	jr	Z,00113$
 ;src/game/world.c:101: p_world[index+iy*WIDTH+ix] = (u8)cpct_getRandom_mxor_u8 ()%3+2;
@@ -779,7 +782,7 @@ _generateWorld::
 	sub	a, #0x8f
 	jr	C,00119$
 ;src/game/world.c:129: for(ix=0; ix<NBFOREST; ix++)
-	ld	hl, #0x0000
+	ld	hl, #0x0002
 	add	hl, sp
 	ld	-8 (ix), l
 	ld	-7 (ix), h
@@ -1113,7 +1116,7 @@ _generateWorld::
 	or	a,c
 	jr	NZ,00128$
 ;src/game/world.c:196: for(ix=0; ix<NBURBAN; ix++)
-	ld	hl, #0x0008
+	ld	hl, #0x0000
 	add	hl, sp
 	ld	c, l
 	ld	b, h
@@ -1969,7 +1972,7 @@ _drawWorld::
 	call	_drawScrolls
 	pop	af
 	ret
-;src/game/world.c:395: void setTrainHeading(u8 i)
+;src/game/world.c:394: void setTrainHeading(u8 i)
 ;	---------------------------------
 ; Function setTrainHeading
 ; ---------------------------------
@@ -1977,7 +1980,7 @@ _setTrainHeading::
 	push	ix
 	ld	ix,#0
 	add	ix,sp
-;src/game/world.c:399: switch(p_world[trainList[i].posY*WIDTH+trainList[i].posX])
+;src/game/world.c:398: switch(p_world[trainList[i].posY*WIDTH+trainList[i].posX])
 	ld	l, 4 (ix)
 	ld	h, #0x00
 	add	hl, hl
@@ -2022,10 +2025,10 @@ _setTrainHeading::
 	ld	bc, #_p_world
 	add	hl, bc
 	ld	c, (hl)
-;src/game/world.c:402: if(trainList[i].heading==1) trainList[i].heading=2;
+;src/game/world.c:401: if(trainList[i].heading==1) trainList[i].heading=2;
 	ld	hl, #0x0006
 	add	hl, de
-;src/game/world.c:399: switch(p_world[trainList[i].posY*WIDTH+trainList[i].posX])
+;src/game/world.c:398: switch(p_world[trainList[i].posY*WIDTH+trainList[i].posX])
 	ld	a,c
 	cp	a,#0x12
 	jr	Z,00101$
@@ -2036,69 +2039,69 @@ _setTrainHeading::
 	sub	a, #0x15
 	jr	Z,00119$
 	jr	00126$
-;src/game/world.c:401: case REN:
+;src/game/world.c:400: case REN:
 00101$:
-;src/game/world.c:402: if(trainList[i].heading==1) trainList[i].heading=2;
+;src/game/world.c:401: if(trainList[i].heading==1) trainList[i].heading=2;
 	ld	a, (hl)
 	cp	a, #0x01
 	jr	NZ,00105$
 	ld	(hl), #0x02
 	jr	00126$
 00105$:
-;src/game/world.c:403: else if(trainList[i].heading==3) trainList[i].heading=0;
+;src/game/world.c:402: else if(trainList[i].heading==3) trainList[i].heading=0;
 	sub	a,#0x03
 	jr	NZ,00126$
 	ld	(hl),a
-;src/game/world.c:404: break;
+;src/game/world.c:403: break;
 	jr	00126$
-;src/game/world.c:406: case RES:
+;src/game/world.c:405: case RES:
 00107$:
-;src/game/world.c:407: if(trainList[i].heading==1) trainList[i].heading=3;
+;src/game/world.c:406: if(trainList[i].heading==1) trainList[i].heading=3;
 	ld	a, (hl)
 	cp	a, #0x01
 	jr	NZ,00111$
 	ld	(hl), #0x03
 	jr	00126$
 00111$:
-;src/game/world.c:408: else if(trainList[i].heading==2) trainList[i].heading=0;
+;src/game/world.c:407: else if(trainList[i].heading==2) trainList[i].heading=0;
 	sub	a,#0x02
 	jr	NZ,00126$
 	ld	(hl),a
-;src/game/world.c:409: break;
+;src/game/world.c:408: break;
 	jr	00126$
-;src/game/world.c:411: case RWN:
+;src/game/world.c:410: case RWN:
 00113$:
-;src/game/world.c:412: if(trainList[i].heading==0) trainList[i].heading=2;   
+;src/game/world.c:411: if(trainList[i].heading==0) trainList[i].heading=2;   
 	ld	a, (hl)
 	or	a, a
 	jr	NZ,00117$
 	ld	(hl), #0x02
 	jr	00126$
 00117$:
-;src/game/world.c:413: else if(trainList[i].heading==3) trainList[i].heading=1;
+;src/game/world.c:412: else if(trainList[i].heading==3) trainList[i].heading=1;
 	sub	a, #0x03
 	jr	NZ,00126$
 	ld	(hl), #0x01
-;src/game/world.c:414: break;
+;src/game/world.c:413: break;
 	jr	00126$
-;src/game/world.c:416: case RWS:
+;src/game/world.c:415: case RWS:
 00119$:
-;src/game/world.c:417: if(trainList[i].heading==0) trainList[i].heading=3;
+;src/game/world.c:416: if(trainList[i].heading==0) trainList[i].heading=3;
 	ld	a, (hl)
 	or	a, a
 	jr	NZ,00123$
 	ld	(hl), #0x03
 	jr	00126$
 00123$:
-;src/game/world.c:418: else if(trainList[i].heading==2) trainList[i].heading=1;
+;src/game/world.c:417: else if(trainList[i].heading==2) trainList[i].heading=1;
 	sub	a, #0x02
 	jr	NZ,00126$
 	ld	(hl), #0x01
-;src/game/world.c:420: }
+;src/game/world.c:419: }
 00126$:
 	pop	ix
 	ret
-;src/game/world.c:423: void setPixel(int nX, unsigned char nY, unsigned char nColor)
+;src/game/world.c:422: void setPixel(int nX, unsigned char nY, unsigned char nColor)
 ;	---------------------------------
 ; Function setPixel
 ; ---------------------------------
@@ -2107,7 +2110,7 @@ _setPixel::
 	ld	ix,#0
 	add	ix,sp
 	push	af
-;src/game/world.c:428: int nPixel = nX % 4;
+;src/game/world.c:427: int nPixel = nX % 4;
 	ld	hl, #0x0004
 	push	hl
 	ld	l,4 (ix)
@@ -2117,7 +2120,7 @@ _setPixel::
 	pop	af
 	pop	af
 	ex	de,hl
-;src/game/world.c:429: unsigned char *pAddress = (unsigned char *)((unsigned int)(0xC000 + ((nY / 8) * 80) + ((nY % 8) * 2048) + (nX / 4)));
+;src/game/world.c:428: unsigned char *pAddress = (unsigned char *)((unsigned int)(0xC000 + ((nY / 8) * 80) + ((nY % 8) * 2048) + (nX / 4)));
 	ld	a, 6 (ix)
 	rrca
 	rrca
@@ -2158,117 +2161,117 @@ _setPixel::
 	sra	b
 	rr	c
 	add	hl, bc
-;src/game/world.c:433: *pAddress &= 119;
+;src/game/world.c:432: *pAddress &= 119;
 	ld	c, (hl)
-;src/game/world.c:435: if(nColor & 1)
+;src/game/world.c:434: if(nColor & 1)
 	ld	a, 7 (ix)
 	and	a, #0x01
 	ld	-2 (ix), a
-;src/game/world.c:437: if(nColor & 2)
+;src/game/world.c:436: if(nColor & 2)
 	ld	a, 7 (ix)
 	and	a, #0x02
 	ld	-1 (ix), a
-;src/game/world.c:431: if(nPixel == 0)
+;src/game/world.c:430: if(nPixel == 0)
 	ld	a, d
 	or	a,e
 	jr	NZ,00124$
-;src/game/world.c:433: *pAddress &= 119;
+;src/game/world.c:432: *pAddress &= 119;
 	ld	a, c
 	and	a, #0x77
 	ld	(hl), a
-;src/game/world.c:435: if(nColor & 1)
+;src/game/world.c:434: if(nColor & 1)
 	ld	a, -2 (ix)
 	or	a, a
 	jr	Z,00102$
-;src/game/world.c:436: *pAddress |= 128;
+;src/game/world.c:435: *pAddress |= 128;
 	set	7, (hl)
 	ld	a, (hl)
 00102$:
-;src/game/world.c:437: if(nColor & 2)
+;src/game/world.c:436: if(nColor & 2)
 	ld	a, -1 (ix)
 	or	a, a
 	jr	Z,00126$
-;src/game/world.c:438: *pAddress |= 8;
+;src/game/world.c:437: *pAddress |= 8;
 	set	3, (hl)
 	ld	a, (hl)
 	jr	00126$
 00124$:
-;src/game/world.c:440: else if(nPixel == 1)
+;src/game/world.c:439: else if(nPixel == 1)
 	ld	a, e
 	dec	a
 	or	a, d
 	jr	NZ,00121$
-;src/game/world.c:442: *pAddress &= 187;
+;src/game/world.c:441: *pAddress &= 187;
 	ld	a, c
 	and	a, #0xbb
 	ld	(hl), a
-;src/game/world.c:444: if(nColor & 1)
+;src/game/world.c:443: if(nColor & 1)
 	ld	a, -2 (ix)
 	or	a, a
 	jr	Z,00106$
-;src/game/world.c:445: *pAddress |= 64;
+;src/game/world.c:444: *pAddress |= 64;
 	set	6, (hl)
 	ld	a, (hl)
 00106$:
-;src/game/world.c:446: if(nColor & 2)
+;src/game/world.c:445: if(nColor & 2)
 	ld	a, -1 (ix)
 	or	a, a
 	jr	Z,00126$
-;src/game/world.c:447: *pAddress |= 4;
+;src/game/world.c:446: *pAddress |= 4;
 	set	2, (hl)
 	ld	a, (hl)
 	jr	00126$
 00121$:
-;src/game/world.c:449: else if(nPixel == 2)
+;src/game/world.c:448: else if(nPixel == 2)
 	ld	a, e
 	sub	a, #0x02
 	or	a, d
 	jr	NZ,00118$
-;src/game/world.c:451: *pAddress &= 221;
+;src/game/world.c:450: *pAddress &= 221;
 	ld	a, c
 	and	a, #0xdd
 	ld	(hl), a
-;src/game/world.c:453: if(nColor & 1)
+;src/game/world.c:452: if(nColor & 1)
 	ld	a, -2 (ix)
 	or	a, a
 	jr	Z,00110$
-;src/game/world.c:454: *pAddress |= 32;
+;src/game/world.c:453: *pAddress |= 32;
 	set	5, (hl)
 	ld	a, (hl)
 00110$:
-;src/game/world.c:455: if(nColor & 2)
+;src/game/world.c:454: if(nColor & 2)
 	ld	a, -1 (ix)
 	or	a, a
 	jr	Z,00126$
-;src/game/world.c:456: *pAddress |= 2;
+;src/game/world.c:455: *pAddress |= 2;
 	set	1, (hl)
 	ld	a, (hl)
 	jr	00126$
 00118$:
-;src/game/world.c:460: *pAddress &= 238;
+;src/game/world.c:459: *pAddress &= 238;
 	ld	a, c
 	and	a, #0xee
 	ld	(hl), a
-;src/game/world.c:462: if(nColor & 1)
+;src/game/world.c:461: if(nColor & 1)
 	ld	a, -2 (ix)
 	or	a, a
 	jr	Z,00114$
-;src/game/world.c:463: *pAddress |= 16;
+;src/game/world.c:462: *pAddress |= 16;
 	set	4, (hl)
 	ld	a, (hl)
 00114$:
-;src/game/world.c:464: if(nColor & 2)
+;src/game/world.c:463: if(nColor & 2)
 	ld	a, -1 (ix)
 	or	a, a
 	jr	Z,00126$
-;src/game/world.c:465: *pAddress |= 1;
+;src/game/world.c:464: *pAddress |= 1;
 	set	0, (hl)
 	ld	a, (hl)
 00126$:
 	ld	sp, ix
 	pop	ix
 	ret
-;src/game/world.c:469: u8 isPixelBlack(int nX, unsigned char nY)
+;src/game/world.c:468: u8 isPixelBlack(int nX, unsigned char nY)
 ;	---------------------------------
 ; Function isPixelBlack
 ; ---------------------------------
@@ -2276,7 +2279,7 @@ _isPixelBlack::
 	push	ix
 	ld	ix,#0
 	add	ix,sp
-;src/game/world.c:472: int nPixel = nX % 4;
+;src/game/world.c:471: int nPixel = nX % 4;
 	ld	hl, #0x0004
 	push	hl
 	ld	l,4 (ix)
@@ -2287,7 +2290,7 @@ _isPixelBlack::
 	pop	af
 	ld	c, l
 	ld	b, h
-;src/game/world.c:475: unsigned char *pAddress = (unsigned char *)((unsigned int)(0xC000 + ((nY / 8) * 80) + ((nY % 8) * 2048) + (nX / 4)));
+;src/game/world.c:474: unsigned char *pAddress = (unsigned char *)((unsigned int)(0xC000 + ((nY / 8) * 80) + ((nY % 8) * 2048) + (nX / 4)));
 	ld	a, 6 (ix)
 	rrca
 	rrca
@@ -2328,18 +2331,18 @@ _isPixelBlack::
 	sra	d
 	rr	e
 	add	hl, de
-;src/game/world.c:478: if(nPixel == 0 && !(*pAddress & 136)) 
+;src/game/world.c:477: if(nPixel == 0 && !(*pAddress & 136)) 
 	ld	a, b
 	or	a,c
 	jr	NZ,00113$
 	ld	a, (hl)
 	and	a, #0x88
 	jr	NZ,00113$
-;src/game/world.c:479: return 1;
+;src/game/world.c:478: return 1;
 	ld	l, #0x01
 	jr	00116$
 00113$:
-;src/game/world.c:480: else if(nPixel == 1 && !(*pAddress & 68))
+;src/game/world.c:479: else if(nPixel == 1 && !(*pAddress & 68))
 	ld	a, c
 	dec	a
 	or	a, b
@@ -2347,11 +2350,11 @@ _isPixelBlack::
 	ld	a, (hl)
 	and	a, #0x44
 	jr	NZ,00109$
-;src/game/world.c:481: return 1;
+;src/game/world.c:480: return 1;
 	ld	l, #0x01
 	jr	00116$
 00109$:
-;src/game/world.c:482: else if(nPixel == 2 && !(*pAddress & 34))
+;src/game/world.c:481: else if(nPixel == 2 && !(*pAddress & 34))
 	ld	a, c
 	sub	a, #0x02
 	or	a, b
@@ -2359,11 +2362,11 @@ _isPixelBlack::
 	ld	a, (hl)
 	and	a, #0x22
 	jr	NZ,00105$
-;src/game/world.c:483: return 1;
+;src/game/world.c:482: return 1;
 	ld	l, #0x01
 	jr	00116$
 00105$:
-;src/game/world.c:484: else if(nPixel == 3 && !(*pAddress & 17))
+;src/game/world.c:483: else if(nPixel == 3 && !(*pAddress & 17))
 	ld	a, c
 	sub	a, #0x03
 	or	a, b
@@ -2371,144 +2374,567 @@ _isPixelBlack::
 	ld	a, (hl)
 	and	a, #0x11
 	jr	NZ,00110$
-;src/game/world.c:485: return 1;
+;src/game/world.c:484: return 1;
 	ld	l, #0x01
 	jr	00116$
 00110$:
-;src/game/world.c:487: return 0;
+;src/game/world.c:486: return 0;
 	ld	l, #0x00
 00116$:
 	pop	ix
 	ret
-;src/game/world.c:490: void drawTrains(u8 x_, u8 y_)
+;src/game/world.c:489: void drawNewTrain(u8 i, u8 x_, u8 y_)
 ;	---------------------------------
-; Function drawTrains
+; Function drawNewTrain
 ; ---------------------------------
-_drawTrains::
+_drawNewTrain::
 	push	ix
 	ld	ix,#0
 	add	ix,sp
-	ld	hl, #-22
-	add	hl, sp
-	ld	sp, hl
-;src/game/world.c:497: for(i=0; i<nbTrainList; i++)
-	ld	a, 5 (ix)
+	push	af
+	push	af
+	dec	sp
+;src/game/world.c:491: switch(trainList[i].heading)
+	ld	l, 4 (ix)
+	ld	h, #0x00
+	add	hl, hl
+	add	hl, hl
+	add	hl, hl
+	add	hl, hl
+	ld	-3 (ix), l
+	ld	-2 (ix), h
+	ld	iy, #_trainList
+	ld	a, 0 (iy)
+	add	a, -3 (ix)
+	ld	e, a
+	ld	a, 1 (iy)
+	adc	a, -2 (ix)
+	ld	d, a
+	ld	l, e
+	ld	h, d
+	ld	bc, #0x0006
+	add	hl, bc
+	ld	a, (hl)
+	ld	-1 (ix), a
+;src/game/world.c:495: trainList[i].animX = (int)(trainList[i].posX)*TILESIZE_H+1;
+	ld	hl, #0x0007
+	add	hl,de
+	ld	c, l
+	ld	b, h
+	ld	hl, #0x0004
+	add	hl,de
+	ex	(sp), hl
+;src/game/world.c:491: switch(trainList[i].heading)
+	ld	a, -1 (ix)
+	or	a, a
+	jr	Z,00101$
+	ld	a, -1 (ix)
+	dec	a
+	jp	Z,00102$
+;src/game/world.c:511: trainList[nbTrainList].animX = (int)(trainList[i].posX)*TILESIZE_H+8;
+	ld	iy, #_nbTrainList
+	ld	l, 0 (iy)
+	ld	h, #0x00
+	add	hl, hl
+	add	hl, hl
+	add	hl, hl
+	add	hl, hl
+	ld	c, l
+	ld	b, h
+	ld	hl, (_trainList)
+	add	hl, bc
+	ld	bc, #0x0007
+	add	hl,bc
+	ld	c, l
+	ld	b, h
+;src/game/world.c:491: switch(trainList[i].heading)
+	ld	a, -1 (ix)
+	sub	a, #0x02
+	jp	Z,00103$
+	ld	a, -1 (ix)
+	sub	a, #0x03
+	jp	Z,00104$
+	jp	00105$
+;src/game/world.c:494: case 0:
+00101$:
+;src/game/world.c:495: trainList[i].animX = (int)(trainList[i].posX)*TILESIZE_H+1;
+	pop	hl
+	push	hl
+	ld	l, (hl)
+	ld	h, #0x00
+	add	hl, hl
+	add	hl, hl
+	add	hl, hl
+	add	hl, hl
+	inc	hl
+	ld	d, l
+	ld	e, h
+	ld	a, d
+	ld	(bc), a
+	inc	bc
+	ld	a, e
+	ld	(bc), a
+;src/game/world.c:496: trainList[i].animY = (int)(trainList[i].posY)*TILESIZE_H+8;
+	ld	iy, #_trainList
+	ld	a, 0 (iy)
+	add	a, -3 (ix)
+	ld	c, a
+	ld	a, 1 (iy)
+	adc	a, -2 (ix)
+	ld	b, a
+	ld	iy, #0x0009
+	add	iy, bc
+	ld	l, c
+	ld	h, b
+	ld	de, #0x0005
+	add	hl, de
+	ld	l, (hl)
+	ld	h, #0x00
+	add	hl, hl
+	add	hl, hl
+	add	hl, hl
+	add	hl, hl
+	ld	bc, #0x0008
+	add	hl, bc
+	ld	0 (iy), l
+	ld	1 (iy), h
+;src/game/world.c:497: trainList[i].animOldX = (int)(trainList[i].posX)*TILESIZE_H;
+	ld	iy, #_trainList
+	ld	a, 0 (iy)
+	add	a, -3 (ix)
+	ld	c, a
+	ld	a, 1 (iy)
+	adc	a, -2 (ix)
+	ld	b, a
+	ld	hl, #0x000b
+	add	hl,bc
+	ex	de,hl
+	push	bc
+	pop	iy
+	ld	l, 4 (iy)
+	ld	h, #0x00
+	add	hl, hl
+	add	hl, hl
+	add	hl, hl
+	add	hl, hl
+	ld	c, l
+	ld	b, h
+	ld	a, c
+	ld	(de), a
+	inc	de
+	ld	a, b
+	ld	(de), a
+;src/game/world.c:498: trainList[i].animOldY = (int)(trainList[i].posY)*TILESIZE_H+8;
+	ld	iy, #_trainList
+	ld	a, 0 (iy)
+	add	a, -3 (ix)
+	ld	c, a
+	ld	a, 1 (iy)
+	adc	a, -2 (ix)
+	ld	b, a
+	ld	iy, #0x000d
+	add	iy, bc
+	ld	l, c
+	ld	h, b
+	ld	de, #0x0005
+	add	hl, de
+	ld	l, (hl)
+	ld	h, #0x00
+	add	hl, hl
+	add	hl, hl
+	add	hl, hl
+	add	hl, hl
+	ld	bc, #0x0008
+	add	hl, bc
+	ld	0 (iy), l
+	ld	1 (iy), h
+;src/game/world.c:499: break;
+	jp	00105$
+;src/game/world.c:502: case 1:
+00102$:
+;src/game/world.c:503: trainList[i].animX = (int)(trainList[i].posX)*TILESIZE_H+14;
+	pop	hl
+	push	hl
+	ld	l, (hl)
+	ld	h, #0x00
+	add	hl, hl
+	add	hl, hl
+	add	hl, hl
+	add	hl, hl
+	ex	de,hl
+	ld	hl, #0x000e
+	add	hl,de
+	ex	de,hl
+	ld	a, e
+	ld	(bc), a
+	inc	bc
+	ld	a, d
+	ld	(bc), a
+;src/game/world.c:504: trainList[i].animY = (int)(trainList[i].posY)*TILESIZE_H+8;
+	ld	iy, #_trainList
+	ld	a, 0 (iy)
+	add	a, -3 (ix)
+	ld	c, a
+	ld	a, 1 (iy)
+	adc	a, -2 (ix)
+	ld	b, a
+	ld	iy, #0x0009
+	add	iy, bc
+	ld	l, c
+	ld	h, b
+	ld	de, #0x0005
+	add	hl, de
+	ld	l, (hl)
+	ld	h, #0x00
+	add	hl, hl
+	add	hl, hl
+	add	hl, hl
+	add	hl, hl
+	ld	bc, #0x0008
+	add	hl, bc
+	ld	0 (iy), l
+	ld	1 (iy), h
+;src/game/world.c:505: trainList[i].animOldX = (int)(trainList[i].posX)*TILESIZE_H+15;
+	ld	iy, #_trainList
+	ld	a, 0 (iy)
+	add	a, -3 (ix)
+	ld	c, a
+	ld	a, 1 (iy)
+	adc	a, -2 (ix)
+	ld	b, a
+	ld	iy, #0x000b
+	add	iy, bc
+	ld	l, c
+	ld	h, b
+	ld	de, #0x0004
+	add	hl, de
+	ld	l, (hl)
+	ld	h, #0x00
+	add	hl, hl
+	add	hl, hl
+	add	hl, hl
+	add	hl, hl
+	ld	bc, #0x000f
+	add	hl, bc
+	ld	0 (iy), l
+	ld	1 (iy), h
+;src/game/world.c:506: trainList[i].animOldY = (int)(trainList[i].posY)*TILESIZE_H+8;
+	ld	iy, #_trainList
+	ld	a, 0 (iy)
+	add	a, -3 (ix)
+	ld	c, a
+	ld	a, 1 (iy)
+	adc	a, -2 (ix)
+	ld	b, a
+	ld	iy, #0x000d
+	add	iy, bc
+	ld	l, c
+	ld	h, b
+	ld	de, #0x0005
+	add	hl, de
+	ld	l, (hl)
+	ld	h, #0x00
+	add	hl, hl
+	add	hl, hl
+	add	hl, hl
+	add	hl, hl
+	ld	bc, #0x0008
+	add	hl, bc
+	ld	0 (iy), l
+	ld	1 (iy), h
+;src/game/world.c:507: break;
+	jp	00105$
+;src/game/world.c:510: case 2:
+00103$:
+;src/game/world.c:511: trainList[nbTrainList].animX = (int)(trainList[i].posX)*TILESIZE_H+8;
+	pop	hl
+	push	hl
+	ld	l, (hl)
+	ld	h, #0x00
+	add	hl, hl
+	add	hl, hl
+	add	hl, hl
+	add	hl, hl
+	ex	de,hl
+	ld	hl, #0x0008
+	add	hl,de
+	ex	de,hl
+	ld	a, e
+	ld	(bc), a
+	inc	bc
+	ld	a, d
+	ld	(bc), a
+;src/game/world.c:512: trainList[nbTrainList].animY = (int)(trainList[i].posY)*TILESIZE_H+14;
+	ld	iy, #_nbTrainList
+	ld	l, 0 (iy)
+	ld	h, #0x00
+	add	hl, hl
+	add	hl, hl
+	add	hl, hl
+	add	hl, hl
+	ld	c, l
+	ld	b, h
+	ld	hl, (_trainList)
+	add	hl, bc
+	ld	bc, #0x0009
+	add	hl,bc
+	ld	c, l
+	ld	b, h
+	ld	iy, (_trainList)
+	ld	e,-3 (ix)
+	ld	d,-2 (ix)
+	add	iy, de
+	ld	l, 5 (iy)
+	ld	h, #0x00
+	add	hl, hl
+	add	hl, hl
+	add	hl, hl
+	add	hl, hl
+	ex	de,hl
+	ld	hl, #0x000e
+	add	hl,de
+	ex	de,hl
+	ld	a, e
+	ld	(bc), a
+	inc	bc
+	ld	a, d
+	ld	(bc), a
+;src/game/world.c:513: trainList[nbTrainList].animOldX = (int)(trainList[i].posX)*TILESIZE_H+8;
+	ld	iy, #_nbTrainList
+	ld	l, 0 (iy)
+	ld	h, #0x00
+	add	hl, hl
+	add	hl, hl
+	add	hl, hl
+	add	hl, hl
+	ld	c, l
+	ld	b, h
+	ld	hl, (_trainList)
+	add	hl, bc
+	ld	bc, #0x000b
+	add	hl,bc
+	ld	c, l
+	ld	b, h
+	ld	iy, (_trainList)
+	ld	e,-3 (ix)
+	ld	d,-2 (ix)
+	add	iy, de
+	ld	l, 4 (iy)
+	ld	h, #0x00
+	add	hl, hl
+	add	hl, hl
+	add	hl, hl
+	add	hl, hl
+	ex	de,hl
+	ld	hl, #0x0008
+	add	hl,de
+	ex	de,hl
+	ld	a, e
+	ld	(bc), a
+	inc	bc
+	ld	a, d
+	ld	(bc), a
+;src/game/world.c:514: trainList[nbTrainList].animOldY = (int)(trainList[i].posY)*TILESIZE_H+15;
+	ld	iy, #_nbTrainList
+	ld	l, 0 (iy)
+	ld	h, #0x00
+	add	hl, hl
+	add	hl, hl
+	add	hl, hl
+	add	hl, hl
+	ld	c, l
+	ld	b, h
+	ld	hl, (_trainList)
+	add	hl, bc
+	ld	bc, #0x000d
+	add	hl,bc
+	ld	c, l
+	ld	b, h
+	ld	iy, (_trainList)
+	ld	e,-3 (ix)
+	ld	d,-2 (ix)
+	add	iy, de
+	ld	l, 5 (iy)
+	ld	h, #0x00
+	add	hl, hl
+	add	hl, hl
+	add	hl, hl
+	add	hl, hl
+	ex	de,hl
+	ld	hl, #0x000f
+	add	hl,de
+	ex	de,hl
+	ld	a, e
+	ld	(bc), a
+	inc	bc
+	ld	a, d
+	ld	(bc), a
+;src/game/world.c:515: break;
+	jp	00105$
+;src/game/world.c:518: case 3:
+00104$:
+;src/game/world.c:519: trainList[nbTrainList].animX = (int)(trainList[i].posX)*TILESIZE_H+8;
+	pop	hl
+	push	hl
+	ld	l, (hl)
+	ld	h, #0x00
+	add	hl, hl
+	add	hl, hl
+	add	hl, hl
+	add	hl, hl
+	ex	de,hl
+	ld	hl, #0x0008
+	add	hl,de
+	ex	de,hl
+	ld	a, e
+	ld	(bc), a
+	inc	bc
+	ld	a, d
+	ld	(bc), a
+;src/game/world.c:520: trainList[nbTrainList].animY = (int)(trainList[i].posY)*TILESIZE_H+1;
+	ld	iy, #_nbTrainList
+	ld	l, 0 (iy)
+	ld	h, #0x00
+	add	hl, hl
+	add	hl, hl
+	add	hl, hl
+	add	hl, hl
+	ld	c, l
+	ld	b, h
+	ld	hl, (_trainList)
+	add	hl, bc
+	ld	bc, #0x0009
+	add	hl,bc
+	ld	c, l
+	ld	b, h
+	ld	iy, (_trainList)
+	ld	e,-3 (ix)
+	ld	d,-2 (ix)
+	add	iy, de
+	ld	l, 5 (iy)
+	ld	h, #0x00
+	add	hl, hl
+	add	hl, hl
+	add	hl, hl
+	add	hl, hl
+	ex	de,hl
+	inc	de
+	ld	a, e
+	ld	(bc), a
+	inc	bc
+	ld	a, d
+	ld	(bc), a
+;src/game/world.c:521: trainList[nbTrainList].animOldX = (int)(trainList[i].posX)*TILESIZE_H+8;
+	ld	iy, #_nbTrainList
+	ld	l, 0 (iy)
+	ld	h, #0x00
+	add	hl, hl
+	add	hl, hl
+	add	hl, hl
+	add	hl, hl
+	ld	c, l
+	ld	b, h
+	ld	hl, (_trainList)
+	add	hl, bc
+	ld	bc, #0x000b
+	add	hl,bc
+	ld	c, l
+	ld	b, h
+	ld	iy, (_trainList)
+	ld	e,-3 (ix)
+	ld	d,-2 (ix)
+	add	iy, de
+	ld	l, 4 (iy)
+	ld	h, #0x00
+	add	hl, hl
+	add	hl, hl
+	add	hl, hl
+	add	hl, hl
+	ex	de,hl
+	ld	hl, #0x0008
+	add	hl,de
+	ex	de,hl
+	ld	a, e
+	ld	(bc), a
+	inc	bc
+	ld	a, d
+	ld	(bc), a
+;src/game/world.c:522: trainList[nbTrainList].animOldY = (int)(trainList[i].posY)*TILESIZE_H;
+	ld	iy, #_nbTrainList
+	ld	l, 0 (iy)
+	ld	h, #0x00
+	add	hl, hl
+	add	hl, hl
+	add	hl, hl
+	add	hl, hl
+	ld	c, l
+	ld	b, h
+	ld	hl, (_trainList)
+	add	hl, bc
+	ld	bc, #0x000d
+	add	hl,bc
+	ld	c, l
+	ld	b, h
+	ld	iy, (_trainList)
+	ld	e,-3 (ix)
+	ld	d,-2 (ix)
+	add	iy, de
+	ld	l, 5 (iy)
+	ld	h, #0x00
+	add	hl, hl
+	add	hl, hl
+	add	hl, hl
+	add	hl, hl
+	ex	de,hl
+	ld	a, e
+	ld	(bc), a
+	inc	bc
+	ld	a, d
+	ld	(bc), a
+;src/game/world.c:524: }
+00105$:
+;src/game/world.c:526: setPixel(trainList[i].animX-x_*TILESIZE_H,trainList[i].animY-y_*TILESIZE_H, 3);
+	ld	iy, #_trainList
+	ld	a, 0 (iy)
+	add	a, -3 (ix)
+	ld	c, a
+	ld	a, 1 (iy)
+	adc	a, -2 (ix)
+	ld	b, a
+	push	bc
+	pop	iy
+	ld	l, 9 (iy)
+	ld	a, 6 (ix)
 	rlca
 	rlca
 	rlca
 	rlca
 	and	a, #0xf0
-	ld	-3 (ix), a
-	ld	-16 (ix), #0x00
-00133$:
-	ld	hl, #_nbTrainList
-	ld	a, -16 (ix)
-	sub	a, (hl)
-	jp	NC, 00135$
-;src/game/world.c:500: if(trainList[i].posX-x_ < NBTILE_W && trainList[i].posY-y_ < NBTILE_H && trainList[i].posX-x_ >= 0 && trainList[i].posY-y_ >= 0 )
-	ld	a, -16 (ix)
-	ld	-7 (ix), a
-	ld	-6 (ix), #0x00
-	ld	a, #0x04+1
-	jr	00209$
-00208$:
-	sla	-7 (ix)
-	rl	-6 (ix)
-00209$:
-	dec	a
-	jr	NZ,00208$
-	ld	iy, #_trainList
-	ld	a, 0 (iy)
-	add	a, -7 (ix)
-	ld	-15 (ix), a
-	ld	a, 1 (iy)
-	adc	a, -6 (ix)
-	ld	-14 (ix), a
-	ld	a, -15 (ix)
-	ld	-5 (ix), a
-	ld	a, -14 (ix)
-	ld	-4 (ix), a
-	ld	l,-5 (ix)
-	ld	h,-4 (ix)
-	ld	de, #0x0004
-	add	hl, de
-	ld	a, (hl)
-	ld	-5 (ix), a
-	ld	-5 (ix), a
-	ld	-4 (ix), #0x00
-	ld	a, 4 (ix)
-	ld	-2 (ix), a
-	ld	-1 (ix), #0x00
-	ld	a, -5 (ix)
-	sub	a, -2 (ix)
-	ld	-5 (ix), a
-	ld	a, -4 (ix)
-	sbc	a, -1 (ix)
-	ld	-4 (ix), a
-	ld	a, -5 (ix)
-	sub	a, #0x14
-	ld	a, -4 (ix)
-	rla
-	ccf
-	rra
-	sbc	a, #0x80
-	jp	NC, 00134$
-	ld	l,-15 (ix)
-	ld	h,-14 (ix)
-	ld	de, #0x0005
-	add	hl, de
-	ld	l, (hl)
-	ld	h, #0x00
-	ld	c, 5 (ix)
-	ld	b, #0x00
-	cp	a, a
-	sbc	hl, bc
+	ld	e, a
 	ld	a, l
-	sub	a, #0x0c
-	ld	a, h
-	rla
-	ccf
-	rra
-	sbc	a, #0x80
-	jp	NC, 00134$
-	bit	7, -4 (ix)
-	jp	NZ, 00134$
-	bit	7, h
-	jp	NZ, 00134$
-;src/game/world.c:503: setPixel(trainList[i].animX-x_*TILESIZE_H,trainList[i].animY-y_*TILESIZE_H, 3);
-	ld	l,-15 (ix)
-	ld	h,-14 (ix)
-	ld	de, #0x0009
-	add	hl, de
-	ld	c, (hl)
-	inc	hl
-	ld	b, (hl)
-	ld	a, -3 (ix)
-	ld	-5 (ix), a
-	ld	a, c
-	sub	a, -5 (ix)
+	sub	a, e
 	ld	d, a
-	ld	l,-15 (ix)
-	ld	h,-14 (ix)
+	ld	l, c
+	ld	h, b
 	ld	bc, #0x0007
 	add	hl, bc
 	ld	c, (hl)
 	inc	hl
 	ld	b, (hl)
-	ld	a, #0x04+1
-	jr	00211$
-00210$:
-	sla	-2 (ix)
-	rl	-1 (ix)
-00211$:
-	dec	a
-	jr	NZ,00210$
+	ld	l, 5 (ix)
+	ld	h, #0x00
+	add	hl, hl
+	add	hl, hl
+	add	hl, hl
+	add	hl, hl
+	ex	(sp), hl
 	ld	a, c
-	sub	a, -2 (ix)
+	sub	a, -5 (ix)
 	ld	c, a
 	ld	a, b
-	sbc	a, -1 (ix)
+	sbc	a, -4 (ix)
 	ld	b, a
+	push	de
 	ld	a, #0x03
 	push	af
 	inc	sp
@@ -2518,10 +2944,220 @@ _drawTrains::
 	call	_setPixel
 	pop	af
 	pop	af
-;src/game/world.c:504: setPixel(trainList[i].animOldX-x_*TILESIZE_H,trainList[i].animOldY-y_*TILESIZE_H, 2);
+	pop	de
+;src/game/world.c:527: setPixel(trainList[i].animOldX-x_*TILESIZE_H,trainList[i].animOldY-y_*TILESIZE_H, 2);
+	ld	iy, #_trainList
+	ld	a, 0 (iy)
+	add	a, -3 (ix)
+	ld	c, a
+	ld	a, 1 (iy)
+	adc	a, -2 (ix)
+	ld	b, a
+	push	bc
+	pop	iy
+	ld	a, 13 (iy)
+	sub	a, e
+	ld	d, a
+	ld	l, c
+	ld	h, b
+	ld	bc, #0x000b
+	add	hl, bc
+	ld	c, (hl)
+	inc	hl
+	ld	b, (hl)
+	ld	a, c
+	sub	a, -5 (ix)
+	ld	c, a
+	ld	a, b
+	sbc	a, -4 (ix)
+	ld	b, a
+	ld	a, #0x02
+	push	af
+	inc	sp
+	push	de
+	inc	sp
+	push	bc
+	call	_setPixel
+	ld	sp,ix
+	pop	ix
+	ret
+;src/game/world.c:530: void drawTrains(u8 x_, u8 y_)
+;	---------------------------------
+; Function drawTrains
+; ---------------------------------
+_drawTrains::
+	push	ix
+	ld	ix,#0
+	add	ix,sp
+	ld	hl, #-40
+	add	hl, sp
+	ld	sp, hl
+;src/game/world.c:539: for(i=0; i<nbTrainList; i++)
+	ld	a, 5 (ix)
+	rlca
+	rlca
+	rlca
+	rlca
+	and	a, #0xf0
+	ld	-25 (ix), a
+	ld	-26 (ix), #0x00
+00163$:
+	ld	hl, #_nbTrainList
+	ld	a, -26 (ix)
+	sub	a, (hl)
+	jp	NC, 00165$
+;src/game/world.c:542: if(trainList[i].posX-x_ < NBTILE_W && trainList[i].posY-y_ < NBTILE_H && trainList[i].posX-x_ >= 0 && trainList[i].posY-y_ >= 0 )
+	ld	a, -26 (ix)
+	ld	-24 (ix), a
+	ld	-23 (ix), #0x00
+	ld	a, #0x04+1
+	jr	00319$
+00318$:
+	sla	-24 (ix)
+	rl	-23 (ix)
+00319$:
+	dec	a
+	jr	NZ,00318$
+	ld	iy, #_trainList
+	ld	a, 0 (iy)
+	add	a, -24 (ix)
+	ld	-22 (ix), a
+	ld	a, 1 (iy)
+	adc	a, -23 (ix)
+	ld	-21 (ix), a
+	ld	a, -22 (ix)
+	ld	-20 (ix), a
+	ld	a, -21 (ix)
+	ld	-19 (ix), a
+	ld	l,-20 (ix)
+	ld	h,-19 (ix)
+	ld	de, #0x0004
+	add	hl, de
+	ld	a, (hl)
+	ld	-20 (ix), a
+	ld	-20 (ix), a
+	ld	-19 (ix), #0x00
+	ld	a, 4 (ix)
+	ld	-18 (ix), a
+	ld	-17 (ix), #0x00
+	ld	a, -20 (ix)
+	sub	a, -18 (ix)
+	ld	-20 (ix), a
+	ld	a, -19 (ix)
+	sbc	a, -17 (ix)
+	ld	-19 (ix), a
+	ld	a, 5 (ix)
+	ld	-16 (ix), a
+	ld	-15 (ix), #0x00
+;src/game/world.c:627: cpct_drawStringM1 (buff, SCR_VMEM, 0, 1);
+	ld	a, -28 (ix)
+	ld	-14 (ix), a
+	ld	a, -27 (ix)
+	ld	-13 (ix), a
+;src/game/world.c:542: if(trainList[i].posX-x_ < NBTILE_W && trainList[i].posY-y_ < NBTILE_H && trainList[i].posX-x_ >= 0 && trainList[i].posY-y_ >= 0 )
+	ld	a, -20 (ix)
+	sub	a, #0x14
+	ld	a, -19 (ix)
+	rla
+	ccf
+	rra
+	sbc	a, #0x80
+	jp	NC, 00156$
+	ld	l,-22 (ix)
+	ld	h,-21 (ix)
+	ld	de, #0x0005
+	add	hl, de
+	ld	c, (hl)
+	ld	b, #0x00
+	ld	a, c
+	sub	a, -16 (ix)
+	ld	c, a
+	ld	a, b
+	sbc	a, -15 (ix)
+	ld	b, a
+	ld	a, c
+	sub	a, #0x0c
+	ld	a, b
+	rla
+	ccf
+	rra
+	sbc	a, #0x80
+	jp	NC, 00156$
+	bit	7, -19 (ix)
+	jp	NZ, 00156$
+	bit	7, b
+	jp	NZ, 00156$
+;src/game/world.c:545: animPixX = trainList[i].animX-x_*TILESIZE_H;
+	ld	l,-22 (ix)
+	ld	h,-21 (ix)
+	ld	de, #0x0007
+	add	hl, de
+	ld	c, (hl)
+	inc	hl
+	ld	b, (hl)
+	ld	a, -18 (ix)
+	ld	-20 (ix), a
+	ld	a, -17 (ix)
+	ld	-19 (ix), a
+	ld	a, #0x04+1
+	jr	00321$
+00320$:
+	sla	-20 (ix)
+	rl	-19 (ix)
+00321$:
+	dec	a
+	jr	NZ,00320$
+	ld	a, c
+	sub	a, -20 (ix)
+	ld	-12 (ix), a
+	ld	a, b
+	sbc	a, -19 (ix)
+	ld	-11 (ix), a
+;src/game/world.c:546: animPixY = trainList[i].animY-y_*TILESIZE_H;
+	ld	l,-22 (ix)
+	ld	h,-21 (ix)
+	ld	de, #0x0009
+	add	hl, de
+	ld	c, (hl)
+	inc	hl
+	ld	b, (hl)
+	ld	a, -16 (ix)
+	ld	-9 (ix), a
+	ld	a, -15 (ix)
+	ld	-8 (ix), a
+	ld	a, #0x04+1
+	jr	00323$
+00322$:
+	sla	-9 (ix)
+	rl	-8 (ix)
+00323$:
+	dec	a
+	jr	NZ,00322$
+	ld	a, c
+	sub	a, -9 (ix)
+	ld	-3 (ix), a
+	ld	a, b
+	sbc	a, -8 (ix)
+	ld	-2 (ix), a
+;src/game/world.c:548: setPixel(animPixX, animPixY, 3);
+	ld	a, -3 (ix)
+	ld	-1 (ix), a
+	ld	a, #0x03
+	push	af
+	inc	sp
+	ld	a, -1 (ix)
+	push	af
+	inc	sp
+	ld	l,-12 (ix)
+	ld	h,-11 (ix)
+	push	hl
+	call	_setPixel
+	pop	af
+	pop	af
+;src/game/world.c:549: setPixel(trainList[i].animOldX-x_*TILESIZE_H,trainList[i].animOldY-y_*TILESIZE_H, 2);
 	ld	iy, (_trainList)
-	ld	e,-7 (ix)
-	ld	d,-6 (ix)
+	ld	e,-24 (ix)
+	ld	d,-23 (ix)
 	add	iy, de
 	push	iy
 	pop	hl
@@ -2530,8 +3166,10 @@ _drawTrains::
 	ld	c, (hl)
 	inc	hl
 	ld	b, (hl)
+	ld	a, -25 (ix)
+	ld	-10 (ix), a
 	ld	a, c
-	sub	a, -5 (ix)
+	sub	a, -10 (ix)
 	ld	d, a
 	push	iy
 	pop	hl
@@ -2541,10 +3179,10 @@ _drawTrains::
 	inc	hl
 	ld	b, (hl)
 	ld	a, c
-	sub	a, -2 (ix)
+	sub	a, -20 (ix)
 	ld	c, a
 	ld	a, b
-	sbc	a, -1 (ix)
+	sbc	a, -19 (ix)
 	ld	b, a
 	ld	a, #0x02
 	push	af
@@ -2555,32 +3193,32 @@ _drawTrains::
 	call	_setPixel
 	pop	af
 	pop	af
-;src/game/world.c:507: oldTrainX = trainList[i].animOldX;
+;src/game/world.c:552: oldTrainX = trainList[i].animOldX;
 	ld	iy, #_trainList
 	ld	a, 0 (iy)
-	add	a, -7 (ix)
+	add	a, -24 (ix)
 	ld	e, a
 	ld	a, 1 (iy)
-	adc	a, -6 (ix)
+	adc	a, -23 (ix)
 	ld	d, a
 	ld	hl, #0x000b
 	add	hl,de
 	ld	c, l
 	ld	b, h
 	ld	a, (bc)
-	ld	-20 (ix), a
+	ld	-30 (ix), a
 	inc	bc
 	ld	a, (bc)
-	ld	-19 (ix), a
+	ld	-29 (ix), a
 	dec	bc
-;src/game/world.c:508: oldTrainY = trainList[i].animOldY;
+;src/game/world.c:553: oldTrainY = trainList[i].animOldY;
 	push	de
 	pop	iy
 	ld	a, 13 (iy)
-	ld	-22 (ix), a
+	ld	-32 (ix), a
 	ld	a, 14 (iy)
-	ld	-21 (ix), a
-;src/game/world.c:509: trainList[i].animOldX = trainList[i].animX;
+	ld	-31 (ix), a
+;src/game/world.c:554: trainList[i].animOldX = trainList[i].animX;
 	ex	de,hl
 	ld	de, #0x0007
 	add	hl, de
@@ -2592,13 +3230,13 @@ _drawTrains::
 	inc	bc
 	ld	a, d
 	ld	(bc), a
-;src/game/world.c:510: trainList[i].animOldY = trainList[i].animY;
+;src/game/world.c:555: trainList[i].animOldY = trainList[i].animY;
 	ld	iy, #_trainList
 	ld	a, 0 (iy)
-	add	a, -7 (ix)
+	add	a, -24 (ix)
 	ld	e, a
 	ld	a, 1 (iy)
-	adc	a, -6 (ix)
+	adc	a, -23 (ix)
 	ld	d, a
 	ld	hl, #0x000d
 	add	hl,de
@@ -2615,869 +3253,571 @@ _drawTrains::
 	inc	bc
 	ld	a, d
 	ld	(bc), a
-;src/game/world.c:513: if( isPixelBlack(trainList[i].animX-x_*TILESIZE_H +1,trainList[i].animY-y_*TILESIZE_H) )
-	ld	iy, (_trainList)
-	ld	e,-7 (ix)
-	ld	d,-6 (ix)
-	add	iy, de
-	push	iy
-	pop	hl
-	ld	de, #0x0009
-	add	hl, de
-	ld	c, (hl)
-	inc	hl
-	ld	b, (hl)
-	ld	a, c
-	sub	a, -5 (ix)
-	ld	d, a
-	push	iy
-	pop	hl
-	ld	bc, #0x0007
-	add	hl, bc
-	ld	c, (hl)
-	inc	hl
-	ld	b, (hl)
-	ld	a, c
-	sub	a, -2 (ix)
-	ld	c, a
-	ld	a, b
-	sbc	a, -1 (ix)
-	ld	b, a
-	inc	bc
-	push	de
+;src/game/world.c:558: if( isPixelBlack(animPixX +1, animPixY) )
+	ld	a, -12 (ix)
+	add	a, #0x01
+	ld	-7 (ix), a
+	ld	a, -11 (ix)
+	adc	a, #0x00
+	ld	-6 (ix), a
+	ld	a, -1 (ix)
+	push	af
 	inc	sp
-	push	bc
+	ld	l,-7 (ix)
+	ld	h,-6 (ix)
+	push	hl
 	call	_isPixelBlack
 	pop	af
 	inc	sp
-	ld	-15 (ix), l
-;src/game/world.c:500: if(trainList[i].posX-x_ < NBTILE_W && trainList[i].posY-y_ < NBTILE_H && trainList[i].posX-x_ >= 0 && trainList[i].posY-y_ >= 0 )
-	ld	iy, #_trainList
-	ld	a, 0 (iy)
-	add	a, -7 (ix)
-	ld	-13 (ix), a
-	ld	a, 1 (iy)
-	adc	a, -6 (ix)
-	ld	-12 (ix), a
-;src/game/world.c:514: trainList[i].animX+=1;
-	ld	a, -13 (ix)
-	add	a, #0x07
-	ld	-11 (ix), a
-	ld	a, -12 (ix)
-	adc	a, #0x00
-	ld	-10 (ix), a
-	ld	l,-11 (ix)
-	ld	h,-10 (ix)
-	ld	a, (hl)
-	ld	-9 (ix), a
-	inc	hl
-	ld	a, (hl)
-	ld	-8 (ix), a
-;src/game/world.c:513: if( isPixelBlack(trainList[i].animX-x_*TILESIZE_H +1,trainList[i].animY-y_*TILESIZE_H) )
-	ld	a, -15 (ix)
+	ld	a, l
 	or	a, a
 	jr	Z,00122$
-;src/game/world.c:514: trainList[i].animX+=1;
-	ld	c,-9 (ix)
-	ld	b,-8 (ix)
+;src/game/world.c:559: trainList[i].animX+=1;
+	ld	iy, #_trainList
+	ld	a, 0 (iy)
+	add	a, -24 (ix)
+	ld	c, a
+	ld	a, 1 (iy)
+	adc	a, -23 (ix)
+	ld	b, a
+	ld	hl, #0x0007
+	add	hl, bc
+	push	hl
+	ld	c, (hl)
+	inc	hl
+	ld	b, (hl)
+	pop	hl
 	inc	bc
-	ld	l,-11 (ix)
-	ld	h,-10 (ix)
 	ld	(hl), c
 	inc	hl
 	ld	(hl), b
 	jp	00123$
 00122$:
-;src/game/world.c:515: else if( isPixelBlack(trainList[i].animX-x_*TILESIZE_H -1,trainList[i].animY-y_*TILESIZE_H) )
-	ld	l,-13 (ix)
-	ld	h,-12 (ix)
+;src/game/world.c:560: else if( isPixelBlack(animPixX -1, animPixY) )
+	ld	a, -12 (ix)
+	add	a, #0xff
+	ld	-5 (ix), a
+	ld	a, -11 (ix)
+	adc	a, #0xff
+	ld	-4 (ix), a
+	ld	a, -1 (ix)
+	push	af
+	inc	sp
+	ld	l,-5 (ix)
+	ld	h,-4 (ix)
+	push	hl
+	call	_isPixelBlack
+	pop	af
+	inc	sp
+	ld	a, l
+	or	a, a
+	jr	Z,00119$
+;src/game/world.c:561: trainList[i].animX-=1;
+	ld	iy, #_trainList
+	ld	a, 0 (iy)
+	add	a, -24 (ix)
+	ld	c, a
+	ld	a, 1 (iy)
+	adc	a, -23 (ix)
+	ld	b, a
+	ld	hl, #0x0007
+	add	hl, bc
+	push	hl
+	ld	c, (hl)
+	inc	hl
+	ld	b, (hl)
+	pop	hl
+	dec	bc
+	ld	(hl), c
+	inc	hl
+	ld	(hl), b
+	jp	00123$
+00119$:
+;src/game/world.c:562: else if( isPixelBlack(animPixX, animPixY + 1) )
+	ld	c, -3 (ix)
+	ld	b, c
+	inc	b
+	push	bc
+	push	bc
+	inc	sp
+	ld	l,-12 (ix)
+	ld	h,-11 (ix)
+	push	hl
+	call	_isPixelBlack
+	pop	af
+	inc	sp
+	pop	bc
+	ld	a, l
+	or	a, a
+	jr	Z,00116$
+;src/game/world.c:563: trainList[i].animY+=1;
+	ld	iy, #_trainList
+	ld	a, 0 (iy)
+	add	a, -24 (ix)
+	ld	c, a
+	ld	a, 1 (iy)
+	adc	a, -23 (ix)
+	ld	b, a
+	ld	hl, #0x0009
+	add	hl, bc
+	push	hl
+	ld	c, (hl)
+	inc	hl
+	ld	b, (hl)
+	pop	hl
+	inc	bc
+	ld	(hl), c
+	inc	hl
+	ld	(hl), b
+	jp	00123$
+00116$:
+;src/game/world.c:564: else if( isPixelBlack(animPixX, animPixY - 1) )
+	dec	c
+	push	bc
+	ld	a, c
+	push	af
+	inc	sp
+	ld	l,-12 (ix)
+	ld	h,-11 (ix)
+	push	hl
+	call	_isPixelBlack
+	pop	af
+	inc	sp
+	pop	bc
+	ld	a, l
+	or	a, a
+	jr	Z,00113$
+;src/game/world.c:565: trainList[i].animY-=1;
+	ld	iy, #_trainList
+	ld	a, 0 (iy)
+	add	a, -24 (ix)
+	ld	c, a
+	ld	a, 1 (iy)
+	adc	a, -23 (ix)
+	ld	b, a
+	ld	hl, #0x0009
+	add	hl, bc
+	push	hl
+	ld	c, (hl)
+	inc	hl
+	ld	b, (hl)
+	pop	hl
+	dec	bc
+	ld	(hl), c
+	inc	hl
+	ld	(hl), b
+	jp	00123$
+00113$:
+;src/game/world.c:566: else if( isPixelBlack(animPixX+1,animPixY+ 1) )
+	push	bc
+	push	bc
+	inc	sp
+	ld	l,-7 (ix)
+	ld	h,-6 (ix)
+	push	hl
+	call	_isPixelBlack
+	pop	af
+	inc	sp
+	pop	bc
+	ld	a, l
+	or	a, a
+	jr	Z,00110$
+;src/game/world.c:568: trainList[i].animX+=1;
+	ld	iy, #_trainList
+	ld	a, 0 (iy)
+	add	a, -24 (ix)
+	ld	c, a
+	ld	a, 1 (iy)
+	adc	a, -23 (ix)
+	ld	b, a
+	ld	hl, #0x0007
+	add	hl, bc
+	push	hl
+	ld	c, (hl)
+	inc	hl
+	ld	b, (hl)
+	pop	hl
+	inc	bc
+	ld	(hl), c
+	inc	hl
+	ld	(hl), b
+;src/game/world.c:569: trainList[i].animY+=1;
+	ld	a, 0 (iy)
+	add	a, -24 (ix)
+	ld	c, a
+	ld	a, 1 (iy)
+	adc	a, -23 (ix)
+	ld	b, a
+	ld	hl, #0x0009
+	add	hl, bc
+	push	hl
+	ld	c, (hl)
+	inc	hl
+	ld	b, (hl)
+	pop	hl
+	inc	bc
+	ld	(hl), c
+	inc	hl
+	ld	(hl), b
+	jp	00123$
+00110$:
+;src/game/world.c:571: else if( isPixelBlack(animPixX+1, animPixY - 1) )
+	push	bc
+	ld	a, c
+	push	af
+	inc	sp
+	ld	l,-7 (ix)
+	ld	h,-6 (ix)
+	push	hl
+	call	_isPixelBlack
+	pop	af
+	inc	sp
+	pop	bc
+	ld	a, l
+	or	a, a
+	jr	Z,00107$
+;src/game/world.c:573: trainList[i].animX+=1;
+	ld	iy, #_trainList
+	ld	a, 0 (iy)
+	add	a, -24 (ix)
+	ld	c, a
+	ld	a, 1 (iy)
+	adc	a, -23 (ix)
+	ld	b, a
+	ld	hl, #0x0007
+	add	hl, bc
+	push	hl
+	ld	c, (hl)
+	inc	hl
+	ld	b, (hl)
+	pop	hl
+	inc	bc
+	ld	(hl), c
+	inc	hl
+	ld	(hl), b
+;src/game/world.c:574: trainList[i].animY-=1;
+	ld	a, 0 (iy)
+	add	a, -24 (ix)
+	ld	c, a
+	ld	a, 1 (iy)
+	adc	a, -23 (ix)
+	ld	b, a
+	ld	hl, #0x0009
+	add	hl, bc
+	push	hl
+	ld	c, (hl)
+	inc	hl
+	ld	b, (hl)
+	pop	hl
+	dec	bc
+	ld	(hl), c
+	inc	hl
+	ld	(hl), b
+	jp	00123$
+00107$:
+;src/game/world.c:576: else if( isPixelBlack(animPixX-1, animPixY+ 1) )
+	push	bc
+	push	bc
+	inc	sp
+	ld	l,-5 (ix)
+	ld	h,-4 (ix)
+	push	hl
+	call	_isPixelBlack
+	pop	af
+	inc	sp
+	pop	bc
+	ld	a, l
+	or	a, a
+	jr	Z,00104$
+;src/game/world.c:578: trainList[i].animX-=1;
+	ld	iy, #_trainList
+	ld	a, 0 (iy)
+	add	a, -24 (ix)
+	ld	c, a
+	ld	a, 1 (iy)
+	adc	a, -23 (ix)
+	ld	b, a
+	ld	hl, #0x0007
+	add	hl, bc
+	push	hl
+	ld	c, (hl)
+	inc	hl
+	ld	b, (hl)
+	pop	hl
+	dec	bc
+	ld	(hl), c
+	inc	hl
+	ld	(hl), b
+;src/game/world.c:579: trainList[i].animY+=1;
+	ld	a, 0 (iy)
+	add	a, -24 (ix)
+	ld	c, a
+	ld	a, 1 (iy)
+	adc	a, -23 (ix)
+	ld	b, a
+	ld	hl, #0x0009
+	add	hl, bc
+	push	hl
+	ld	c, (hl)
+	inc	hl
+	ld	b, (hl)
+	pop	hl
+	inc	bc
+	ld	(hl), c
+	inc	hl
+	ld	(hl), b
+	jr	00123$
+00104$:
+;src/game/world.c:581: else if( isPixelBlack(animPixX-1, animPixY- 1) )
+	ld	a, c
+	push	af
+	inc	sp
+	ld	l,-5 (ix)
+	ld	h,-4 (ix)
+	push	hl
+	call	_isPixelBlack
+	pop	af
+	inc	sp
+	ld	a, l
+	or	a, a
+	jr	Z,00123$
+;src/game/world.c:583: trainList[i].animX-=1;
+	ld	iy, (_trainList)
+	ld	e,-24 (ix)
+	ld	d,-23 (ix)
+	add	iy, de
+	ld	de, #0x0007
+	add	iy, de
+	ld	c, 0 (iy)
+	ld	b, 1 (iy)
+	dec	bc
+	ld	0 (iy), c
+	ld	1 (iy), b
+;src/game/world.c:584: trainList[i].animY-=1;
+	ld	iy, (_trainList)
+	ld	e,-24 (ix)
+	ld	d,-23 (ix)
+	add	iy, de
+	ld	de, #0x0009
+	add	iy, de
+	ld	c, 0 (iy)
+	ld	b, 1 (iy)
+	dec	bc
+	ld	0 (iy), c
+	ld	1 (iy), b
+00123$:
+;src/game/world.c:588: actualPosX = (int)(trainList[i].animX/TILESIZE_H); // Update position in tiles coordinates
+	ld	iy, #_trainList
+	ld	a, 0 (iy)
+	add	a, -24 (ix)
+	ld	-5 (ix), a
+	ld	a, 1 (iy)
+	adc	a, -23 (ix)
+	ld	-4 (ix), a
+	ld	l,-5 (ix)
+	ld	h,-4 (ix)
+	ld	de, #0x0007
+	add	hl, de
+	ld	c, (hl)
+	inc	hl
+	ld	b, (hl)
+	ld	l, c
+	ld	h, b
+	bit	7, b
+	jr	Z,00167$
+	ld	hl, #0x000f
+	add	hl, bc
+00167$:
+	ld	-34 (ix), l
+	ld	-33 (ix), h
+	sra	-33 (ix)
+	rr	-34 (ix)
+	sra	-33 (ix)
+	rr	-34 (ix)
+	sra	-33 (ix)
+	rr	-34 (ix)
+	sra	-33 (ix)
+	rr	-34 (ix)
+;src/game/world.c:589: actualPosY = (int)(trainList[i].animY/TILESIZE_H); 
+	ld	l,-5 (ix)
+	ld	h,-4 (ix)
 	ld	de, #0x0009
 	add	hl, de
 	ld	c, (hl)
 	inc	hl
 	ld	b, (hl)
-	ld	a, c
-	sub	a, -5 (ix)
-	ld	b, a
-	ld	a, -9 (ix)
-	sub	a, -2 (ix)
-	ld	e, a
-	ld	a, -8 (ix)
-	sbc	a, -1 (ix)
-	ld	d, a
-	dec	de
-	push	bc
-	inc	sp
-	push	de
-	call	_isPixelBlack
-	pop	af
-	inc	sp
-	ld	c, l
-;src/game/world.c:500: if(trainList[i].posX-x_ < NBTILE_W && trainList[i].posY-y_ < NBTILE_H && trainList[i].posX-x_ >= 0 && trainList[i].posY-y_ >= 0 )
-	ld	iy, #_trainList
-	ld	a, 0 (iy)
-	add	a, -7 (ix)
-	ld	-9 (ix), a
-	ld	a, 1 (iy)
-	adc	a, -6 (ix)
-	ld	-8 (ix), a
-;src/game/world.c:514: trainList[i].animX+=1;
-	ld	a, -9 (ix)
-	add	a, #0x07
-	ld	e, a
-	ld	a, -8 (ix)
-	adc	a, #0x00
-	ld	d, a
-	ld	a, (de)
-	ld	-11 (ix), a
-	inc	de
-	ld	a, (de)
-	ld	-10 (ix), a
-	dec	de
-;src/game/world.c:515: else if( isPixelBlack(trainList[i].animX-x_*TILESIZE_H -1,trainList[i].animY-y_*TILESIZE_H) )
-	ld	a, c
-	or	a, a
-	jr	Z,00119$
-;src/game/world.c:516: trainList[i].animX-=1;
-	ld	c, -11 (ix)
-	ld	b, -10 (ix)
-	dec	bc
-	ld	a, c
-	ld	(de), a
-	inc	de
-	ld	a, b
-	ld	(de), a
-	jp	00123$
-00119$:
-;src/game/world.c:517: else if( isPixelBlack(trainList[i].animX-x_*TILESIZE_H, trainList[i].animY-y_*TILESIZE_H + 1) )
-	ld	l,-9 (ix)
-	ld	h,-8 (ix)
-	ld	de, #0x0009
-	add	hl, de
-	ld	a, (hl)
-	ld	-9 (ix), a
-	inc	hl
-	ld	a, (hl)
-	ld	-8 (ix), a
-	ld	a, -9 (ix)
-	ld	-9 (ix), a
-	sub	a, -5 (ix)
-	ld	-9 (ix), a
-	inc	a
-	ld	-9 (ix), a
-	ld	a, -11 (ix)
-	sub	a, -2 (ix)
-	ld	-11 (ix), a
-	ld	a, -10 (ix)
-	sbc	a, -1 (ix)
-	ld	-10 (ix), a
-	ld	a, -9 (ix)
-	push	af
-	inc	sp
-	ld	l,-11 (ix)
-	ld	h,-10 (ix)
-	push	hl
-	call	_isPixelBlack
-	pop	af
-	inc	sp
-	ld	c, l
-;src/game/world.c:500: if(trainList[i].posX-x_ < NBTILE_W && trainList[i].posY-y_ < NBTILE_H && trainList[i].posX-x_ >= 0 && trainList[i].posY-y_ >= 0 )
-	ld	iy, #_trainList
-	ld	a, 0 (iy)
-	add	a, -7 (ix)
-	ld	-9 (ix), a
-	ld	a, 1 (iy)
-	adc	a, -6 (ix)
-	ld	-8 (ix), a
-;src/game/world.c:515: else if( isPixelBlack(trainList[i].animX-x_*TILESIZE_H -1,trainList[i].animY-y_*TILESIZE_H) )
-	ld	a, -9 (ix)
-	add	a, #0x09
-	ld	-11 (ix), a
-	ld	a, -8 (ix)
-	adc	a, #0x00
-	ld	-10 (ix), a
-;src/game/world.c:518: trainList[i].animY+=1;
-	ld	l,-11 (ix)
-	ld	h,-10 (ix)
-	ld	a, (hl)
-	ld	-13 (ix), a
-	inc	hl
-	ld	a, (hl)
-	ld	-12 (ix), a
-;src/game/world.c:517: else if( isPixelBlack(trainList[i].animX-x_*TILESIZE_H, trainList[i].animY-y_*TILESIZE_H + 1) )
-	ld	a, c
-	or	a, a
-	jr	Z,00116$
-;src/game/world.c:518: trainList[i].animY+=1;
-	ld	a, -13 (ix)
-	add	a, #0x01
-	ld	-15 (ix), a
-	ld	a, -12 (ix)
-	adc	a, #0x00
-	ld	-14 (ix), a
-	ld	l,-11 (ix)
-	ld	h,-10 (ix)
-	ld	a, -15 (ix)
-	ld	(hl), a
-	inc	hl
-	ld	a, -14 (ix)
-	ld	(hl), a
-	jp	00123$
-00116$:
-;src/game/world.c:519: else if( isPixelBlack(trainList[i].animX-x_*TILESIZE_H,trainList[i].animY-y_*TILESIZE_H - 1) )
-	ld	a, -13 (ix)
-	ld	-11 (ix), a
-	sub	a, -5 (ix)
-	ld	-11 (ix), a
-	add	a, #0xff
-	ld	-11 (ix), a
-	ld	l,-9 (ix)
-	ld	h,-8 (ix)
-	ld	de, #0x0007
-	add	hl, de
-	ld	a, (hl)
-	ld	-9 (ix), a
-	inc	hl
-	ld	a, (hl)
-	ld	-8 (ix), a
-	ld	a, -9 (ix)
-	sub	a, -2 (ix)
-	ld	-9 (ix), a
-	ld	a, -8 (ix)
-	sbc	a, -1 (ix)
-	ld	-8 (ix), a
-	ld	a, -11 (ix)
-	push	af
-	inc	sp
-	ld	l,-9 (ix)
-	ld	h,-8 (ix)
-	push	hl
-	call	_isPixelBlack
-	pop	af
-	inc	sp
-	ld	c, l
-;src/game/world.c:500: if(trainList[i].posX-x_ < NBTILE_W && trainList[i].posY-y_ < NBTILE_H && trainList[i].posX-x_ >= 0 && trainList[i].posY-y_ >= 0 )
-	ld	iy, #_trainList
-	ld	a, 0 (iy)
-	add	a, -7 (ix)
-	ld	-9 (ix), a
-	ld	a, 1 (iy)
-	adc	a, -6 (ix)
-	ld	-8 (ix), a
-;src/game/world.c:515: else if( isPixelBlack(trainList[i].animX-x_*TILESIZE_H -1,trainList[i].animY-y_*TILESIZE_H) )
-	ld	a, -9 (ix)
-	add	a, #0x09
-	ld	-11 (ix), a
-	ld	a, -8 (ix)
-	adc	a, #0x00
-	ld	-10 (ix), a
-;src/game/world.c:518: trainList[i].animY+=1;
-	ld	l,-11 (ix)
-	ld	h,-10 (ix)
-	ld	a, (hl)
-	ld	-13 (ix), a
-	inc	hl
-	ld	a, (hl)
-	ld	-12 (ix), a
-;src/game/world.c:519: else if( isPixelBlack(trainList[i].animX-x_*TILESIZE_H,trainList[i].animY-y_*TILESIZE_H - 1) )
-	ld	a, c
-	or	a, a
-	jr	Z,00113$
-;src/game/world.c:520: trainList[i].animY-=1;
-	ld	a, -13 (ix)
-	add	a, #0xff
-	ld	-15 (ix), a
-	ld	a, -12 (ix)
-	adc	a, #0xff
-	ld	-14 (ix), a
-	ld	l,-11 (ix)
-	ld	h,-10 (ix)
-	ld	a, -15 (ix)
-	ld	(hl), a
-	inc	hl
-	ld	a, -14 (ix)
-	ld	(hl), a
-	jp	00123$
-00113$:
-;src/game/world.c:521: else if( isPixelBlack(trainList[i].animX-x_*TILESIZE_H+1,trainList[i].animY-y_*TILESIZE_H + 1) )
-	ld	a, -13 (ix)
-	ld	-11 (ix), a
-	sub	a, -5 (ix)
-	ld	-11 (ix), a
-	inc	a
-	ld	-11 (ix), a
-	ld	l,-9 (ix)
-	ld	h,-8 (ix)
-	ld	de, #0x0007
-	add	hl, de
-	ld	a, (hl)
-	ld	-9 (ix), a
-	inc	hl
-	ld	a, (hl)
-	ld	-8 (ix), a
-	ld	a, -9 (ix)
-	sub	a, -2 (ix)
-	ld	-9 (ix), a
-	ld	a, -8 (ix)
-	sbc	a, -1 (ix)
-	ld	-8 (ix), a
-	inc	-9 (ix)
-	jr	NZ,00212$
-	inc	-8 (ix)
-00212$:
-	ld	a, -11 (ix)
-	push	af
-	inc	sp
-	ld	l,-9 (ix)
-	ld	h,-8 (ix)
-	push	hl
-	call	_isPixelBlack
-	pop	af
-	inc	sp
-	ld	c, l
-;src/game/world.c:500: if(trainList[i].posX-x_ < NBTILE_W && trainList[i].posY-y_ < NBTILE_H && trainList[i].posX-x_ >= 0 && trainList[i].posY-y_ >= 0 )
-	ld	iy, #_trainList
-	ld	a, 0 (iy)
-	add	a, -7 (ix)
-	ld	-9 (ix), a
-	ld	a, 1 (iy)
-	adc	a, -6 (ix)
-	ld	-8 (ix), a
-;src/game/world.c:514: trainList[i].animX+=1;
-	ld	a, -9 (ix)
-	add	a, #0x07
-	ld	-11 (ix), a
-	ld	a, -8 (ix)
-	adc	a, #0x00
-	ld	-10 (ix), a
-	ld	l,-11 (ix)
-	ld	h,-10 (ix)
-	ld	a, (hl)
-	ld	-13 (ix), a
-	inc	hl
-	ld	a, (hl)
-	ld	-12 (ix), a
-;src/game/world.c:521: else if( isPixelBlack(trainList[i].animX-x_*TILESIZE_H+1,trainList[i].animY-y_*TILESIZE_H + 1) )
-	ld	a, c
-	or	a, a
-	jr	Z,00110$
-;src/game/world.c:523: trainList[i].animX+=1;
-	ld	a, -13 (ix)
-	add	a, #0x01
-	ld	-15 (ix), a
-	ld	a, -12 (ix)
-	adc	a, #0x00
-	ld	-14 (ix), a
-	ld	l,-11 (ix)
-	ld	h,-10 (ix)
-	ld	a, -15 (ix)
-	ld	(hl), a
-	inc	hl
-	ld	a, -14 (ix)
-	ld	(hl), a
-;src/game/world.c:524: trainList[i].animY+=1;
-	ld	a, 0 (iy)
-	add	a, -7 (ix)
-	ld	-11 (ix), a
-	ld	a, 1 (iy)
-	adc	a, -6 (ix)
-	ld	-10 (ix), a
-	ld	a, -11 (ix)
-	add	a, #0x09
-	ld	-11 (ix), a
-	ld	a, -10 (ix)
-	adc	a, #0x00
-	ld	-10 (ix), a
-	ld	l,-11 (ix)
-	ld	h,-10 (ix)
-	ld	a, (hl)
-	ld	-15 (ix), a
-	inc	hl
-	ld	a, (hl)
-	ld	-14 (ix), a
-	inc	-15 (ix)
-	jr	NZ,00213$
-	inc	-14 (ix)
-00213$:
-	ld	l,-11 (ix)
-	ld	h,-10 (ix)
-	ld	a, -15 (ix)
-	ld	(hl), a
-	inc	hl
-	ld	a, -14 (ix)
-	ld	(hl), a
-	jp	00123$
-00110$:
-;src/game/world.c:526: else if( isPixelBlack(trainList[i].animX-x_*TILESIZE_H+1,trainList[i].animY-y_*TILESIZE_H - 1) )
-	ld	l,-9 (ix)
-	ld	h,-8 (ix)
-	ld	de, #0x0009
-	add	hl, de
-	ld	a, (hl)
-	ld	-9 (ix), a
-	inc	hl
-	ld	a, (hl)
-	ld	-8 (ix), a
-	ld	a, -9 (ix)
-	ld	-9 (ix), a
-	sub	a, -5 (ix)
-	ld	-9 (ix), a
-	add	a, #0xff
-	ld	-9 (ix), a
-	ld	a, -13 (ix)
-	sub	a, -2 (ix)
-	ld	-11 (ix), a
-	ld	a, -12 (ix)
-	sbc	a, -1 (ix)
-	ld	-10 (ix), a
-	inc	-11 (ix)
-	jr	NZ,00214$
-	inc	-10 (ix)
-00214$:
-	ld	a, -9 (ix)
-	push	af
-	inc	sp
-	ld	l,-11 (ix)
-	ld	h,-10 (ix)
-	push	hl
-	call	_isPixelBlack
-	pop	af
-	inc	sp
-	ld	c, l
-;src/game/world.c:500: if(trainList[i].posX-x_ < NBTILE_W && trainList[i].posY-y_ < NBTILE_H && trainList[i].posX-x_ >= 0 && trainList[i].posY-y_ >= 0 )
-	ld	iy, #_trainList
-	ld	a, 0 (iy)
-	add	a, -7 (ix)
-	ld	-9 (ix), a
-	ld	a, 1 (iy)
-	adc	a, -6 (ix)
-	ld	-8 (ix), a
-;src/game/world.c:514: trainList[i].animX+=1;
-	ld	a, -9 (ix)
-	add	a, #0x07
-	ld	-11 (ix), a
-	ld	a, -8 (ix)
-	adc	a, #0x00
-	ld	-10 (ix), a
-	ld	l,-11 (ix)
-	ld	h,-10 (ix)
-	ld	a, (hl)
-	ld	-13 (ix), a
-	inc	hl
-	ld	a, (hl)
-	ld	-12 (ix), a
-;src/game/world.c:526: else if( isPixelBlack(trainList[i].animX-x_*TILESIZE_H+1,trainList[i].animY-y_*TILESIZE_H - 1) )
-	ld	a, c
-	or	a, a
-	jr	Z,00107$
-;src/game/world.c:528: trainList[i].animX+=1;
-	ld	a, -13 (ix)
-	add	a, #0x01
-	ld	-15 (ix), a
-	ld	a, -12 (ix)
-	adc	a, #0x00
-	ld	-14 (ix), a
-	ld	l,-11 (ix)
-	ld	h,-10 (ix)
-	ld	a, -15 (ix)
-	ld	(hl), a
-	inc	hl
-	ld	a, -14 (ix)
-	ld	(hl), a
-;src/game/world.c:529: trainList[i].animY-=1;
-	ld	a, 0 (iy)
-	add	a, -7 (ix)
-	ld	-11 (ix), a
-	ld	a, 1 (iy)
-	adc	a, -6 (ix)
-	ld	-10 (ix), a
-	ld	a, -11 (ix)
-	add	a, #0x09
-	ld	-11 (ix), a
-	ld	a, -10 (ix)
-	adc	a, #0x00
-	ld	-10 (ix), a
-	ld	l,-11 (ix)
-	ld	h,-10 (ix)
-	ld	a, (hl)
-	ld	-15 (ix), a
-	inc	hl
-	ld	a, (hl)
-	ld	-14 (ix), a
-	ld	l,-15 (ix)
-	ld	h,-14 (ix)
-	dec	hl
-	ld	-15 (ix), l
-	ld	-14 (ix), h
-	ld	l,-11 (ix)
-	ld	h,-10 (ix)
-	ld	a, -15 (ix)
-	ld	(hl), a
-	inc	hl
-	ld	a, -14 (ix)
-	ld	(hl), a
-	jp	00123$
-00107$:
-;src/game/world.c:531: else if( isPixelBlack(trainList[i].animX-x_*TILESIZE_H-1,trainList[i].animY-y_*TILESIZE_H + 1) )
-	ld	l,-9 (ix)
-	ld	h,-8 (ix)
-	ld	de, #0x0009
-	add	hl, de
-	ld	a, (hl)
-	ld	-9 (ix), a
-	inc	hl
-	ld	a, (hl)
-	ld	-8 (ix), a
-	ld	a, -9 (ix)
-	ld	-9 (ix), a
-	sub	a, -5 (ix)
-	ld	-9 (ix), a
-	inc	a
-	ld	-9 (ix), a
-	ld	a, -13 (ix)
-	sub	a, -2 (ix)
-	ld	-11 (ix), a
-	ld	a, -12 (ix)
-	sbc	a, -1 (ix)
-	ld	-10 (ix), a
-	ld	l,-11 (ix)
-	ld	h,-10 (ix)
-	dec	hl
-	ld	-11 (ix), l
-	ld	-10 (ix), h
-	ld	a, -9 (ix)
-	push	af
-	inc	sp
-	ld	l,-11 (ix)
-	ld	h,-10 (ix)
-	push	hl
-	call	_isPixelBlack
-	pop	af
-	inc	sp
-	ld	c, l
-;src/game/world.c:500: if(trainList[i].posX-x_ < NBTILE_W && trainList[i].posY-y_ < NBTILE_H && trainList[i].posX-x_ >= 0 && trainList[i].posY-y_ >= 0 )
-	ld	iy, #_trainList
-	ld	a, 0 (iy)
-	add	a, -7 (ix)
-	ld	-9 (ix), a
-	ld	a, 1 (iy)
-	adc	a, -6 (ix)
-	ld	-8 (ix), a
-;src/game/world.c:514: trainList[i].animX+=1;
-	ld	a, -9 (ix)
-	add	a, #0x07
-	ld	-11 (ix), a
-	ld	a, -8 (ix)
-	adc	a, #0x00
-	ld	-10 (ix), a
-	ld	l,-11 (ix)
-	ld	h,-10 (ix)
-	ld	a, (hl)
-	ld	-13 (ix), a
-	inc	hl
-	ld	a, (hl)
-	ld	-12 (ix), a
-;src/game/world.c:531: else if( isPixelBlack(trainList[i].animX-x_*TILESIZE_H-1,trainList[i].animY-y_*TILESIZE_H + 1) )
-	ld	a, c
-	or	a, a
-	jr	Z,00104$
-;src/game/world.c:533: trainList[i].animX-=1;
-	ld	a, -13 (ix)
-	add	a, #0xff
-	ld	-15 (ix), a
-	ld	a, -12 (ix)
-	adc	a, #0xff
-	ld	-14 (ix), a
-	ld	l,-11 (ix)
-	ld	h,-10 (ix)
-	ld	a, -15 (ix)
-	ld	(hl), a
-	inc	hl
-	ld	a, -14 (ix)
-	ld	(hl), a
-;src/game/world.c:534: trainList[i].animY+=1;
-	ld	a, 0 (iy)
-	add	a, -7 (ix)
-	ld	-11 (ix), a
-	ld	a, 1 (iy)
-	adc	a, -6 (ix)
-	ld	-10 (ix), a
-	ld	a, -11 (ix)
-	add	a, #0x09
-	ld	-11 (ix), a
-	ld	a, -10 (ix)
-	adc	a, #0x00
-	ld	-10 (ix), a
-	ld	l,-11 (ix)
-	ld	h,-10 (ix)
-	ld	a, (hl)
-	ld	-15 (ix), a
-	inc	hl
-	ld	a, (hl)
-	ld	-14 (ix), a
-	inc	-15 (ix)
-	jr	NZ,00215$
-	inc	-14 (ix)
-00215$:
-	ld	l,-11 (ix)
-	ld	h,-10 (ix)
-	ld	a, -15 (ix)
-	ld	(hl), a
-	inc	hl
-	ld	a, -14 (ix)
-	ld	(hl), a
-	jp	00123$
-00104$:
-;src/game/world.c:536: else if( isPixelBlack(trainList[i].animX-x_*TILESIZE_H-1,trainList[i].animY-y_*TILESIZE_H - 1) )
-	ld	l,-9 (ix)
-	ld	h,-8 (ix)
-	ld	de, #0x0009
-	add	hl, de
-	ld	a, (hl)
-	ld	-9 (ix), a
-	inc	hl
-	ld	a, (hl)
-	ld	-8 (ix), a
-	ld	a, -9 (ix)
-	ld	-9 (ix), a
-	sub	a, -5 (ix)
-	ld	-9 (ix), a
-	add	a, #0xff
-	ld	-9 (ix), a
-	ld	a, -13 (ix)
-	sub	a, -2 (ix)
-	ld	-11 (ix), a
-	ld	a, -12 (ix)
-	sbc	a, -1 (ix)
-	ld	-10 (ix), a
-	ld	l,-11 (ix)
-	ld	h,-10 (ix)
-	dec	hl
-	ld	-11 (ix), l
-	ld	-10 (ix), h
-	ld	a, -9 (ix)
-	push	af
-	inc	sp
-	ld	l,-11 (ix)
-	ld	h,-10 (ix)
-	push	hl
-	call	_isPixelBlack
-	pop	af
-	inc	sp
-	ld	-9 (ix), l
-	ld	a, l
-	or	a, a
-	jp	Z, 00123$
-;src/game/world.c:538: trainList[i].animX-=1;
-	ld	iy, #_trainList
-	ld	a, 0 (iy)
-	add	a, -7 (ix)
-	ld	-9 (ix), a
-	ld	a, 1 (iy)
-	adc	a, -6 (ix)
-	ld	-8 (ix), a
-	ld	a, -9 (ix)
-	add	a, #0x07
-	ld	-9 (ix), a
-	ld	a, -8 (ix)
-	adc	a, #0x00
-	ld	-8 (ix), a
-	ld	l,-9 (ix)
-	ld	h,-8 (ix)
-	ld	a, (hl)
-	ld	-11 (ix), a
-	inc	hl
-	ld	a, (hl)
-	ld	-10 (ix), a
-	ld	l,-11 (ix)
-	ld	h,-10 (ix)
-	dec	hl
-	ld	-11 (ix), l
-	ld	-10 (ix), h
-	ld	l,-9 (ix)
-	ld	h,-8 (ix)
-	ld	a, -11 (ix)
-	ld	(hl), a
-	inc	hl
-	ld	a, -10 (ix)
-	ld	(hl), a
-;src/game/world.c:539: trainList[i].animY-=1;
-	ld	a, 0 (iy)
-	add	a, -7 (ix)
-	ld	-9 (ix), a
-	ld	a, 1 (iy)
-	adc	a, -6 (ix)
-	ld	-8 (ix), a
-	ld	a, -9 (ix)
-	add	a, #0x09
-	ld	-9 (ix), a
-	ld	a, -8 (ix)
-	adc	a, #0x00
-	ld	-8 (ix), a
-	ld	l,-9 (ix)
-	ld	h,-8 (ix)
-	ld	a, (hl)
-	ld	-11 (ix), a
-	inc	hl
-	ld	a, (hl)
-	ld	-10 (ix), a
-	ld	l,-11 (ix)
-	ld	h,-10 (ix)
-	dec	hl
-	ld	-11 (ix), l
-	ld	-10 (ix), h
-	ld	l,-9 (ix)
-	ld	h,-8 (ix)
-	ld	a, -11 (ix)
-	ld	(hl), a
-	inc	hl
-	ld	a, -10 (ix)
-	ld	(hl), a
-00123$:
-;src/game/world.c:543: trainList[i].cycles++; // Update the number of shifts done in pixels
-	ld	iy, (_trainList)
-	ld	e,-7 (ix)
-	ld	d,-6 (ix)
-	add	iy, de
-	ld	de, #0x000f
-	add	iy, de
-	inc	0 (iy)
-;src/game/world.c:546: if(trainList[i].cycles>=TILESIZE_H)
-	ld	iy, #_trainList
-	ld	a, 0 (iy)
-	add	a, -7 (ix)
-	ld	c, a
-	ld	a, 1 (iy)
-	adc	a, -6 (ix)
-	ld	b, a
+	ld	l, c
+	ld	h, b
+	bit	7, b
+	jr	Z,00168$
 	ld	hl, #0x000f
-	add	hl,bc
-	ld	-9 (ix), l
-	ld	-8 (ix), h
-	ld	a, (hl)
-	sub	a, #0x10
-	jp	C, 00125$
-;src/game/world.c:548: trainList[i].cycles = 0;	// Reset counter
-	ld	l,-9 (ix)
-	ld	h,-8 (ix)
-	ld	(hl), #0x00
-;src/game/world.c:549: trainList[i].posX = (int)(trainList[i].animX/TILESIZE_H); // Update position in tiles coordinates
-	ld	a, 0 (iy)
-	add	a, -7 (ix)
-	ld	c, a
-	ld	a, 1 (iy)
-	adc	a, -6 (ix)
-	ld	b, a
-	ld	hl, #0x0004
-	add	hl,bc
-	ld	-9 (ix), l
-	ld	-8 (ix), h
-	push	bc
-	pop	iy
-	ld	a, 7 (iy)
-	ld	-11 (ix), a
-	ld	a, 8 (iy)
-	ld	-10 (ix), a
-	ld	a, -11 (ix)
-	ld	-13 (ix), a
-	ld	a, -10 (ix)
-	ld	-12 (ix), a
-	bit	7, -10 (ix)
-	jr	Z,00137$
-	ld	a, -11 (ix)
-	add	a, #0x0f
-	ld	-13 (ix), a
-	ld	a, -10 (ix)
+	add	hl, bc
+00168$:
+	ld	-36 (ix), l
+	ld	-35 (ix), h
+	sra	-35 (ix)
+	rr	-36 (ix)
+	sra	-35 (ix)
+	rr	-36 (ix)
+	sra	-35 (ix)
+	rr	-36 (ix)
+	sra	-35 (ix)
+	rr	-36 (ix)
+;src/game/world.c:590: if( actualPosX != trainList[i].posX || actualPosY != trainList[i].posY )
+	ld	a, -5 (ix)
+	add	a, #0x04
+	ld	-7 (ix), a
+	ld	a, -4 (ix)
 	adc	a, #0x00
-	ld	-12 (ix), a
-00137$:
-	ld	c,-13 (ix)
-	ld	b,-12 (ix)
-	sra	b
-	rr	c
-	sra	b
-	rr	c
-	sra	b
-	rr	c
-	sra	b
-	rr	c
-	ld	l,-9 (ix)
-	ld	h,-8 (ix)
+	ld	-6 (ix), a
+	ld	l,-7 (ix)
+	ld	h,-6 (ix)
+	ld	c, (hl)
+	ld	b, #0x00
+	ld	a, -34 (ix)
+	sub	a, c
+	jr	NZ,00124$
+	ld	a, -33 (ix)
+	sub	a, b
+	jr	NZ,00124$
+	ld	l,-5 (ix)
+	ld	h,-4 (ix)
+	ld	de, #0x0005
+	add	hl, de
+	ld	c, (hl)
+	ld	b, #0x00
+	ld	a, -36 (ix)
+	sub	a, c
+	jr	NZ,00326$
+	ld	a, -35 (ix)
+	sub	a, b
+	jr	Z,00125$
+00326$:
+00124$:
+;src/game/world.c:592: trainList[i].posX = actualPosX; // Update position in tiles coordinates
+	ld	c, -34 (ix)
+	ld	l,-7 (ix)
+	ld	h,-6 (ix)
 	ld	(hl), c
-;src/game/world.c:550: trainList[i].posY = (int)(trainList[i].animY/TILESIZE_H); // Update position in tiles coordinates
-	ld	iy, #_trainList
-	ld	a, 0 (iy)
-	add	a, -7 (ix)
-	ld	e, a
-	ld	a, 1 (iy)
-	adc	a, -6 (ix)
-	ld	d, a
-	ld	hl, #0x0005
-	add	hl,de
-	ld	c, l
-	ld	b, h
-	ex	de,hl
-	ld	de, #0x0009
-	add	hl, de
-	ld	e, (hl)
-	inc	hl
-	ld	d, (hl)
-	ld	l, e
-	ld	h, d
-	bit	7, d
-	jr	Z,00138$
-	ld	hl, #0x000f
-	add	hl, de
-00138$:
-	sra	h
-	rr	l
-	sra	h
-	rr	l
-	sra	h
-	rr	l
-	sra	h
-	rr	l
-	ld	a, l
-	ld	(bc), a
-;src/game/world.c:555: setTrainHeading(i); // Calculate new heading
-	ld	a, -16 (ix)
+;src/game/world.c:593: trainList[i].posY = actualPosY; // Update position in tiles coordinates
+	ld	iy, (_trainList)
+	ld	e,-24 (ix)
+	ld	d,-23 (ix)
+	add	iy, de
+	ld	de, #0x0005
+	add	iy, de
+	ld	c, -36 (ix)
+	ld	0 (iy), c
+;src/game/world.c:595: setTrainHeading(i); // Calculate new heading
+	ld	a, -26 (ix)
 	push	af
 	inc	sp
 	call	_setTrainHeading
 	inc	sp
 00125$:
-;src/game/world.c:559: setPixel(trainList[i].animX-x_*TILESIZE_H,trainList[i].animY-y_*TILESIZE_H, 3);
-	ld	iy, (_trainList)
-	ld	e,-7 (ix)
-	ld	d,-6 (ix)
-	add	iy, de
-	push	iy
-	pop	hl
-	ld	de, #0x0009
-	add	hl, de
-	ld	c, (hl)
-	inc	hl
-	ld	b, (hl)
-	ld	a, c
-	sub	a, -5 (ix)
+;src/game/world.c:600: animPixX = trainList[i].animX-x_*TILESIZE_H;
+	ld	iy, #_trainList
+	ld	a, 0 (iy)
+	add	a, -24 (ix)
 	ld	c, a
-	ld	a, 7 (iy)
-	ld	d, 8 (iy)
-	sub	a, -2 (ix)
+	ld	a, 1 (iy)
+	adc	a, -23 (ix)
+	ld	b, a
+	ld	l, c
+	ld	h, b
+	ld	de, #0x0007
+	add	hl, de
+	ld	e, (hl)
+	inc	hl
+	ld	d, (hl)
+	ld	a, e
+	sub	a, -20 (ix)
 	ld	e, a
 	ld	a, d
-	sbc	a, -1 (ix)
-	ld	d, a
-	ld	b, #0x03
+	sbc	a, -19 (ix)
+	ld	-38 (ix), e
+	ld	-37 (ix), a
+;src/game/world.c:601: animPixY = trainList[i].animY-y_*TILESIZE_H;
+	ld	l, c
+	ld	h, b
+	ld	de, #0x0009
+	add	hl, de
+	ld	a, (hl)
+	ld	-5 (ix), a
+	inc	hl
+	ld	a, (hl)
+	ld	-4 (ix), a
+	ld	a, -5 (ix)
+	sub	a, -9 (ix)
+	ld	c, a
+	ld	a, -4 (ix)
+	sbc	a, -8 (ix)
+	ld	b, a
+	inc	sp
+	inc	sp
 	push	bc
-	push	de
+;src/game/world.c:548: setPixel(animPixX, animPixY, 3);
+	ld	a, -40 (ix)
+	ld	-5 (ix), a
+;src/game/world.c:607: setPixel(oldTrainX-x_*TILESIZE_H,oldTrainY-y_*TILESIZE_H, 0);
+	ld	c, -32 (ix)
+	ld	a, -30 (ix)
+	sub	a, -20 (ix)
+	ld	-7 (ix), a
+	ld	a, -29 (ix)
+	sbc	a, -19 (ix)
+	ld	-6 (ix), a
+	ld	a, c
+	sub	a, -10 (ix)
+	ld	-1 (ix), a
+;src/game/world.c:603: if(animPixX>0 && animPixY>0 && animPixX<319 && animPixY<192)
+	xor	a, a
+	cp	a, -38 (ix)
+	sbc	a, -37 (ix)
+	jp	PO, 00327$
+	xor	a, #0x80
+00327$:
+	jp	P, 00128$
+	xor	a, a
+	cp	a, -40 (ix)
+	sbc	a, -39 (ix)
+	jp	PO, 00328$
+	xor	a, #0x80
+00328$:
+	jp	P, 00128$
+	ld	a, -38 (ix)
+	sub	a, #0x3f
+	ld	a, -37 (ix)
+	rla
+	ccf
+	rra
+	sbc	a, #0x81
+	jr	NC,00128$
+	ld	a, -40 (ix)
+	sub	a, #0xc0
+	ld	a, -39 (ix)
+	rla
+	ccf
+	rra
+	sbc	a, #0x80
+	jr	NC,00128$
+;src/game/world.c:605: setPixel(animPixX,animPixY, 3);
+	ld	a, #0x03
+	push	af
+	inc	sp
+	ld	a, -5 (ix)
+	push	af
+	inc	sp
+	ld	l,-38 (ix)
+	ld	h,-37 (ix)
+	push	hl
 	call	_setPixel
 	pop	af
 	pop	af
-;src/game/world.c:560: setPixel(trainList[i].animOldX-x_*TILESIZE_H,trainList[i].animOldY-y_*TILESIZE_H, 2);
+;src/game/world.c:606: setPixel(trainList[i].animOldX-x_*TILESIZE_H,trainList[i].animOldY-y_*TILESIZE_H, 2);
 	ld	iy, (_trainList)
-	ld	e,-7 (ix)
-	ld	d,-6 (ix)
+	ld	e,-24 (ix)
+	ld	d,-23 (ix)
 	add	iy, de
 	push	iy
 	pop	hl
@@ -3487,80 +3827,513 @@ _drawTrains::
 	inc	hl
 	ld	b, (hl)
 	ld	a, c
-	sub	a, -5 (ix)
-	ld	c, a
-	ld	a, 11 (iy)
-	ld	d, 12 (iy)
-	sub	a, -2 (ix)
-	ld	e, a
-	ld	a, d
-	sbc	a, -1 (ix)
+	sub	a, -10 (ix)
 	ld	d, a
-	ld	b, #0x02
-	push	bc
+	push	iy
+	pop	hl
+	ld	bc, #0x000b
+	add	hl, bc
+	ld	c, (hl)
+	inc	hl
+	ld	b, (hl)
+	ld	a, c
+	sub	a, -20 (ix)
+	ld	c, a
+	ld	a, b
+	sbc	a, -19 (ix)
+	ld	b, a
+	ld	a, #0x02
+	push	af
+	inc	sp
 	push	de
+	inc	sp
+	push	bc
 	call	_setPixel
 	pop	af
 	pop	af
-;src/game/world.c:561: setPixel(oldTrainX-x_*TILESIZE_H,oldTrainY-y_*TILESIZE_H, 0);
-	ld	c, -22 (ix)
-	ld	a, c
-	sub	a, -5 (ix)
-	ld	b, a
-	ld	a, -20 (ix)
-	sub	a, -2 (ix)
-	ld	e, a
-	ld	a, -19 (ix)
-	sbc	a, -1 (ix)
-	ld	d, a
+;src/game/world.c:607: setPixel(oldTrainX-x_*TILESIZE_H,oldTrainY-y_*TILESIZE_H, 0);
 	xor	a, a
 	push	af
 	inc	sp
-	push	bc
+	ld	a, -1 (ix)
+	push	af
 	inc	sp
-	push	de
+	ld	l,-7 (ix)
+	ld	h,-6 (ix)
+	push	hl
 	call	_setPixel
 	pop	af
 	pop	af
-;src/game/world.c:563: sprintf(buff, "%d ", trainList[i].heading );
+	jp	00129$
+00128$:
+;src/game/world.c:613: setPixel(animPixX,animPixY, 0);
+	xor	a, a
+	push	af
+	inc	sp
+	ld	a, -5 (ix)
+	push	af
+	inc	sp
+	ld	l,-38 (ix)
+	ld	h,-37 (ix)
+	push	hl
+	call	_setPixel
+	pop	af
+	pop	af
+;src/game/world.c:614: setPixel(trainList[i].animOldX-x_*TILESIZE_H,trainList[i].animOldY-y_*TILESIZE_H, 0);
 	ld	iy, (_trainList)
-	ld	e,-7 (ix)
-	ld	d,-6 (ix)
+	ld	e,-24 (ix)
+	ld	d,-23 (ix)
 	add	iy, de
-	ld	c, 6 (iy)
-	ld	b, #0x00
+	push	iy
+	pop	hl
+	ld	de, #0x000d
+	add	hl, de
+	ld	c, (hl)
+	inc	hl
+	ld	b, (hl)
+	ld	a, c
+	sub	a, -10 (ix)
+	ld	d, a
+	push	iy
+	pop	hl
+	ld	bc, #0x000b
+	add	hl, bc
+	ld	c, (hl)
+	inc	hl
+	ld	b, (hl)
+	ld	a, c
+	sub	a, -20 (ix)
+	ld	c, a
+	ld	a, b
+	sbc	a, -19 (ix)
+	ld	b, a
+	xor	a, a
+	push	af
+	inc	sp
+	push	de
+	inc	sp
 	push	bc
+	call	_setPixel
+	pop	af
+	pop	af
+;src/game/world.c:615: setPixel(oldTrainX-x_*TILESIZE_H,oldTrainY-y_*TILESIZE_H, 0);
+	xor	a, a
+	push	af
+	inc	sp
+	ld	a, -1 (ix)
+	push	af
+	inc	sp
+	ld	l,-7 (ix)
+	ld	h,-6 (ix)
+	push	hl
+	call	_setPixel
+	pop	af
+	pop	af
+;src/game/world.c:617: trainList[i].animOldX = 0;
+	ld	iy, (_trainList)
+	ld	e,-24 (ix)
+	ld	d,-23 (ix)
+	add	iy, de
+	ld	de, #0x000b
+	add	iy, de
+	ld	0 (iy), #0x00
+	ld	1 (iy), #0x00
+;src/game/world.c:618: trainList[i].animOldY = 0;
+	ld	iy, (_trainList)
+	ld	e,-24 (ix)
+	ld	d,-23 (ix)
+	add	iy, de
+	ld	de, #0x000d
+	add	iy, de
+	ld	0 (iy), #0x00
+	ld	1 (iy), #0x00
+;src/game/world.c:619: trainList[i].animX = 0;
+	ld	iy, (_trainList)
+	ld	e,-24 (ix)
+	ld	d,-23 (ix)
+	add	iy, de
+	ld	de, #0x0007
+	add	iy, de
+	ld	0 (iy), #0x00
+	ld	1 (iy), #0x00
+;src/game/world.c:620: trainList[i].animY = 0;
+	ld	iy, (_trainList)
+	ld	e,-24 (ix)
+	ld	d,-23 (ix)
+	add	iy, de
+	ld	de, #0x0009
+	add	iy, de
+	ld	0 (iy), #0x00
+	ld	1 (iy), #0x00
+;src/game/world.c:622: trainList[i].cycles = 0;
+	ld	iy, (_trainList)
+	ld	e,-24 (ix)
+	ld	d,-23 (ix)
+	add	iy, de
+	ld	de, #0x000f
+	add	iy, de
+	ld	0 (iy), #0x00
+00129$:
+;src/game/world.c:626: sprintf(buff, "%d %d", trainList[i].posX, trainList[i].posY);
+	ld	iy, (_trainList)
+	ld	e,-24 (ix)
+	ld	d,-23 (ix)
+	add	iy, de
+	push	iy
+	pop	hl
+	ld	de, #0x0005
+	add	hl, de
+	ld	c, (hl)
+	ld	b, #0x00
+	push	iy
+	pop	hl
+	ld	de, #0x0004
+	add	hl, de
+	ld	e, (hl)
+	ld	d, #0x00
+	push	bc
+	push	de
 	ld	hl, #___str_0
 	push	hl
-	ld	l,-18 (ix)
-	ld	h,-17 (ix)
+	ld	l,-28 (ix)
+	ld	h,-27 (ix)
 	push	hl
 	call	_sprintf
-	ld	hl, #6
+	ld	hl, #8
 	add	hl, sp
 	ld	sp, hl
-;src/game/world.c:564: cpct_drawStringM1 (buff, SCR_VMEM, 0, 1);
-	ld	c,-18 (ix)
-	ld	b,-17 (ix)
+;src/game/world.c:627: cpct_drawStringM1 (buff, SCR_VMEM, 0, 1);
 	ld	hl, #0x0100
 	push	hl
 	ld	h, #0xc0
 	push	hl
-	push	bc
+	ld	l,-14 (ix)
+	ld	h,-13 (ix)
+	push	hl
 	call	_cpct_drawStringM1
 	ld	hl, #6
 	add	hl, sp
 	ld	sp, hl
-00134$:
-;src/game/world.c:497: for(i=0; i<nbTrainList; i++)
-	inc	-16 (ix)
-	jp	00133$
-00135$:
+	jp	00164$
+00156$:
+;src/game/world.c:641: trainList[i].cycles=0;
+	ld	a, -22 (ix)
+	add	a, #0x0f
+	ld	c, a
+	ld	a, -21 (ix)
+	adc	a, #0x00
+	ld	b, a
+	xor	a, a
+	ld	(bc), a
+;src/game/world.c:644: switch(trainList[i].heading)
+	ld	iy, #_trainList
+	ld	a, 0 (iy)
+	add	a, -24 (ix)
+	ld	c, a
+	ld	a, 1 (iy)
+	adc	a, -23 (ix)
+	ld	b, a
+	push	bc
+	pop	iy
+	ld	e, 6 (iy)
+;src/game/world.c:647: if(trainList[i].posX < WIDTH && p_world[trainList[i].posY*WIDTH+trainList[i].posX+1] >= SSNS )
+	ld	hl, #0x0004
+	add	hl,bc
+	ld	-5 (ix), l
+	ld	-4 (ix), h
+	ld	hl, #0x0005
+	add	hl,bc
+	ld	-7 (ix), l
+	ld	-6 (ix), h
+;src/game/world.c:644: switch(trainList[i].heading)
+	ld	a, e
+	or	a, a
+	jr	Z,00133$
+	ld	a, e
+	dec	a
+	jr	Z,00137$
+	ld	a,e
+	cp	a,#0x02
+	jr	Z,00141$
+	sub	a, #0x03
+	jp	Z,00145$
+	jp	00149$
+;src/game/world.c:646: case 0: // Right
+00133$:
+;src/game/world.c:647: if(trainList[i].posX < WIDTH && p_world[trainList[i].posY*WIDTH+trainList[i].posX+1] >= SSNS )
+	ld	l,-5 (ix)
+	ld	h,-4 (ix)
+	ld	c, (hl)
+	ld	a, c
+	sub	a, #0x50
+	jp	NC, 00149$
+	ld	l,-7 (ix)
+	ld	h,-6 (ix)
+	ld	e, (hl)
+	ld	d,#0x00
+	ld	l, e
+	ld	h, d
+	add	hl, hl
+	add	hl, hl
+	add	hl, de
+	add	hl, hl
+	add	hl, hl
+	add	hl, hl
+	add	hl, hl
+	ld	e, c
+	ld	d, #0x00
+	add	hl, de
+	ld	de,#_p_world+1
+	add	hl,de
+	ld	a, (hl)
+	sub	a, #0x0a
+	jp	C, 00149$
+;src/game/world.c:648: trainList[i].posX++;
+	inc	c
+	ld	l,-5 (ix)
+	ld	h,-4 (ix)
+	ld	(hl), c
+;src/game/world.c:649: break;
+	jp	00149$
+;src/game/world.c:650: case 1: // Left
+00137$:
+;src/game/world.c:651: if(trainList[i].posX >0 && p_world[trainList[i].posY*WIDTH+trainList[i].posX-1] >= SSNS )
+	ld	l,-5 (ix)
+	ld	h,-4 (ix)
+	ld	c, (hl)
+	ld	a, c
+	or	a, a
+	jp	Z, 00149$
+	ld	l,-7 (ix)
+	ld	h,-6 (ix)
+	ld	e, (hl)
+	ld	d,#0x00
+	ld	l, e
+	ld	h, d
+	add	hl, hl
+	add	hl, hl
+	add	hl, de
+	add	hl, hl
+	add	hl, hl
+	add	hl, hl
+	add	hl, hl
+	ld	e, c
+	ld	d, #0x00
+	add	hl, de
+	ld	de,#_p_world-1
+	add	hl,de
+	ld	a, (hl)
+	sub	a, #0x0a
+	jr	C,00149$
+;src/game/world.c:652: trainList[i].posX--;
+	dec	c
+	ld	l,-5 (ix)
+	ld	h,-4 (ix)
+	ld	(hl), c
+;src/game/world.c:653: break;
+	jr	00149$
+;src/game/world.c:654: case 2: // Up
+00141$:
+;src/game/world.c:655: if(trainList[i].posY > 0 && p_world[(trainList[i].posY-1)*WIDTH+trainList[i].posX] >= SSNS )
+	ld	l,-7 (ix)
+	ld	h,-6 (ix)
+	ld	c, (hl)
+	ld	a, c
+	or	a, a
+	jr	Z,00149$
+	ld	e, c
+	ld	d, #0x00
+	dec	de
+	ld	l, e
+	ld	h, d
+	add	hl, hl
+	add	hl, hl
+	add	hl, de
+	add	hl, hl
+	add	hl, hl
+	add	hl, hl
+	add	hl, hl
+	ex	de,hl
+	ld	l,-5 (ix)
+	ld	h,-4 (ix)
+	ld	l, (hl)
+	ld	h, #0x00
+	add	hl, de
+	ld	de, #_p_world
+	add	hl, de
+	ld	a, (hl)
+	sub	a, #0x0a
+	jr	C,00149$
+;src/game/world.c:656: trainList[i].posY--;
+	dec	c
+	ld	l,-7 (ix)
+	ld	h,-6 (ix)
+	ld	(hl), c
+;src/game/world.c:657: break;
+	jr	00149$
+;src/game/world.c:658: case 3: // Down
+00145$:
+;src/game/world.c:659: if(trainList[i].posY < HEIGHT && p_world[(trainList[i].posY+1)*WIDTH+trainList[i].posX] >= SSNS)
+	ld	l,-7 (ix)
+	ld	h,-6 (ix)
+	ld	c, (hl)
+	ld	a, c
+	sub	a, #0x30
+	jr	NC,00149$
+	ld	e, c
+	ld	d, #0x00
+	inc	de
+	ld	l, e
+	ld	h, d
+	add	hl, hl
+	add	hl, hl
+	add	hl, de
+	add	hl, hl
+	add	hl, hl
+	add	hl, hl
+	add	hl, hl
+	ex	de,hl
+	ld	l,-5 (ix)
+	ld	h,-4 (ix)
+	ld	l, (hl)
+	ld	h, #0x00
+	add	hl, de
+	ld	de, #_p_world
+	add	hl, de
+	ld	a, (hl)
+	sub	a, #0x0a
+	jr	C,00149$
+;src/game/world.c:660: trainList[i].posY++;
+	inc	c
+	ld	l,-7 (ix)
+	ld	h,-6 (ix)
+	ld	(hl), c
+;src/game/world.c:662: }
+00149$:
+;src/game/world.c:664: sprintf(buff, "%d %d %d", trainList[i].posX, trainList[i].posY, trainList[i].heading );
+	ld	iy, (_trainList)
+	ld	e,-24 (ix)
+	ld	d,-23 (ix)
+	add	iy, de
+	push	iy
+	pop	hl
+	ld	de, #0x0006
+	add	hl, de
+	ld	c, (hl)
+	ld	b, #0x00
+	push	iy
+	pop	hl
+	ld	de, #0x0005
+	add	hl, de
+	ld	e, (hl)
+	ld	d, #0x00
+	push	iy
+	pop	hl
+	inc	hl
+	inc	hl
+	inc	hl
+	inc	hl
+	ld	l, (hl)
+	ld	h, #0x00
+	push	bc
+	push	de
+	push	hl
+	ld	hl, #___str_1
+	push	hl
+	ld	l,-28 (ix)
+	ld	h,-27 (ix)
+	push	hl
+	call	_sprintf
+	ld	hl, #10
+	add	hl, sp
+	ld	sp, hl
+;src/game/world.c:665: cpct_drawStringM1 (buff, SCR_VMEM, 0, 1);
+	ld	hl, #0x0100
+	push	hl
+	ld	h, #0xc0
+	push	hl
+	ld	l,-14 (ix)
+	ld	h,-13 (ix)
+	push	hl
+	call	_cpct_drawStringM1
+	ld	hl, #6
+	add	hl, sp
+	ld	sp, hl
+;src/game/world.c:668: setTrainHeading(i);
+	ld	a, -26 (ix)
+	push	af
+	inc	sp
+	call	_setTrainHeading
+	inc	sp
+;src/game/world.c:671: if(trainList[i].posX-x_ < NBTILE_W && trainList[i].posY-y_ < NBTILE_H && trainList[i].posX-x_ >= 0 && trainList[i].posY-y_ >= 0 )
+	ld	iy, #_trainList
+	ld	a, 0 (iy)
+	add	a, -24 (ix)
+	ld	c, a
+	ld	a, 1 (iy)
+	adc	a, -23 (ix)
+	ld	b, a
+	push	bc
+	pop	iy
+	ld	a, 4 (iy)
+	ld	d, #0x00
+	sub	a, -18 (ix)
+	ld	e, a
+	ld	a, d
+	sbc	a, -17 (ix)
+	ld	d, a
+	ld	a, e
+	sub	a, #0x14
+	ld	a, d
+	rla
+	ccf
+	rra
+	sbc	a, #0x80
+	jr	NC,00164$
+	push	bc
+	pop	iy
+	ld	a, 5 (iy)
+	ld	b, #0x00
+	sub	a, -16 (ix)
+	ld	c, a
+	ld	a, b
+	sbc	a, -15 (ix)
+	ld	b, a
+	ld	a, c
+	sub	a, #0x0c
+	ld	a, b
+	rla
+	ccf
+	rra
+	sbc	a, #0x80
+	jr	NC,00164$
+	bit	7, d
+	jr	NZ,00164$
+	bit	7, b
+	jr	NZ,00164$
+;src/game/world.c:673: drawNewTrain(i, x_, y_);
+	ld	h, 5 (ix)
+	ld	l, 4 (ix)
+	push	hl
+	ld	a, -26 (ix)
+	push	af
+	inc	sp
+	call	_drawNewTrain
+	pop	af
+	inc	sp
+00164$:
+;src/game/world.c:539: for(i=0; i<nbTrainList; i++)
+	inc	-26 (ix)
+	jp	00163$
+00165$:
 	ld	sp, ix
 	pop	ix
 	ret
 ___str_0:
-	.ascii "%d "
+	.ascii "%d %d"
+	.db 0x00
+___str_1:
+	.ascii "%d %d %d"
 	.db 0x00
 	.area _CODE
 	.area _INITIALIZER

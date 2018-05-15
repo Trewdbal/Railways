@@ -177,7 +177,7 @@ void game()
 					drawScrolls(ulx, uly);
 				}
 			}
-		
+
 			drawCursor(xCursor, yCursor);
 
 			// Wait loop
@@ -198,7 +198,7 @@ void game()
 					drawScrolls(ulx, uly);
 				}
 			}
-			
+
 			drawCursor(xCursor, yCursor);
 
 			// Wait loop
@@ -219,7 +219,7 @@ void game()
 					drawScrolls(ulx, uly);
 				}
 			}
-			
+
 			drawCursor(xCursor, yCursor);
 
 			// Wait loop
@@ -240,7 +240,7 @@ void game()
 					drawScrolls(ulx, uly);
 				}
 			}
-			
+
 			drawCursor(xCursor, yCursor);
 
 			// Wait loop
@@ -266,9 +266,9 @@ void game()
 				CURSOR_MODE+=1;
 			else if(CURSOR_MODE==T_RNSW)
 				CURSOR_MODE=T_REW;
-	
+
 			drawCursor(xCursor, yCursor);
-	
+
 			// Wait loop
 			for(i=0; i<14000; i++) {}
 		}
@@ -300,7 +300,7 @@ void game()
 				CURSOR_MODE=NONE;
 				drawTile(ulx, uly, xCursor, yCursor);
 			}
-	
+
 			drawCursor(xCursor, yCursor);
 
 			// Wait loop
@@ -324,7 +324,6 @@ void game()
 					// Update position
 					trainList[nbTrainList].posX = ulx+xCursor;
 					trainList[nbTrainList].posY = uly+yCursor;
-					
 					trainList[nbTrainList].cycles = 1; // Cycle begin at 1 and not 0 because the position is 1 pixel shifted cause of the tail
 
 					// Update heading
@@ -333,21 +332,15 @@ void game()
 							p_world[trainList[nbTrainList].posY*WIDTH+trainList[nbTrainList].posX] == SMNS ||
 							p_world[trainList[nbTrainList].posY*WIDTH+trainList[nbTrainList].posX] == SLNS )
 					{
-						trainList[nbTrainList].animX = (int)(ulx+xCursor)*TILESIZE_H+8;
-						trainList[nbTrainList].animY = (int)(uly+yCursor)*TILESIZE_H+1;
-
 						trainList[nbTrainList].heading = 2;
-
+						drawNewTrain(nbTrainList, ulx, uly);
 					}
 					// Horizontal tracks
 					else
 					{
-						trainList[nbTrainList].animX = (int)(ulx+xCursor)*TILESIZE_H+1;
-						trainList[nbTrainList].animY = (int)(uly+yCursor)*TILESIZE_H+8;
-
 						trainList[nbTrainList].heading = 0;
+						drawNewTrain(nbTrainList, ulx, uly);
 					}
-
 
 					// Increment nb of trains in the list. Effect: will be considered for animation in DrawTrain
 					nbTrainList++;
@@ -364,16 +357,20 @@ void game()
 				if(CURSOR_MODE<=T_SLEW)
 					CURSOR_MODE=NONE;
 			}
-	
+
 			drawCursor(xCursor, yCursor);
 
 			// Wait loop
 			for(i=0; i<14000; i++) {}
 
 		}
-		
-		cpct_waitVSYNC ();
-		drawTrains(ulx, uly);
+
+
+		if(CURSOR_MODE == NONE)
+		{
+			cpct_waitVSYNC ();
+			drawTrains(ulx, uly);
+		}
 
 	} 
 	while(!exit);

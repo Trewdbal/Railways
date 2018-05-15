@@ -26,3574 +26,4348 @@
                              26 	.globl _setTrainHeading
                              27 	.globl _setPixel
                              28 	.globl _isPixelBlack
-                             29 	.globl _drawTrains
-                             30 ;--------------------------------------------------------
-                             31 ; special function registers
-                             32 ;--------------------------------------------------------
+                             29 	.globl _drawNewTrain
+                             30 	.globl _drawTrains
+                             31 ;--------------------------------------------------------
+                             32 ; special function registers
                              33 ;--------------------------------------------------------
-                             34 ; ram data
-                             35 ;--------------------------------------------------------
-                             36 	.area _DATA
-                             37 ;--------------------------------------------------------
-                             38 ; ram data
-                             39 ;--------------------------------------------------------
-                             40 	.area _INITIALIZED
-                             41 ;--------------------------------------------------------
-                             42 ; absolute external ram data
-                             43 ;--------------------------------------------------------
-                             44 	.area _DABS (ABS)
-                             45 ;--------------------------------------------------------
-                             46 ; global & static initialisations
-                             47 ;--------------------------------------------------------
-                             48 	.area _HOME
-                             49 	.area _GSINIT
-                             50 	.area _GSFINAL
-                             51 	.area _GSINIT
-                             52 ;--------------------------------------------------------
-                             53 ; Home
-                             54 ;--------------------------------------------------------
-                             55 	.area _HOME
+                             34 ;--------------------------------------------------------
+                             35 ; ram data
+                             36 ;--------------------------------------------------------
+                             37 	.area _DATA
+                             38 ;--------------------------------------------------------
+                             39 ; ram data
+                             40 ;--------------------------------------------------------
+                             41 	.area _INITIALIZED
+                             42 ;--------------------------------------------------------
+                             43 ; absolute external ram data
+                             44 ;--------------------------------------------------------
+                             45 	.area _DABS (ABS)
+                             46 ;--------------------------------------------------------
+                             47 ; global & static initialisations
+                             48 ;--------------------------------------------------------
+                             49 	.area _HOME
+                             50 	.area _GSINIT
+                             51 	.area _GSFINAL
+                             52 	.area _GSINIT
+                             53 ;--------------------------------------------------------
+                             54 ; Home
+                             55 ;--------------------------------------------------------
                              56 	.area _HOME
-                             57 ;--------------------------------------------------------
-                             58 ; code
-                             59 ;--------------------------------------------------------
-                             60 	.area _CODE
-                             61 ;src/game/world.c:3: cpctm_createTransparentMaskTable(g_masktable, 0x0100, M1, 0);
-                             62 ;	---------------------------------
-                             63 ; Function dummy_cpct_transparentMaskTable0M1_container
-                             64 ; ---------------------------------
-   4ED4                      65 _dummy_cpct_transparentMaskTable0M1_container::
-                             66 	.area _g_masktable_ (ABS) 
-   0100                      67 	.org 0x0100 
-   0100                      68 	 _g_masktable::
-   0100 FF EE DD CC BB AA    69 	.db 0xFF, 0xEE, 0xDD, 0xCC, 0xBB, 0xAA, 0x99, 0x88 
+                             57 	.area _HOME
+                             58 ;--------------------------------------------------------
+                             59 ; code
+                             60 ;--------------------------------------------------------
+                             61 	.area _CODE
+                             62 ;src/game/world.c:3: cpctm_createTransparentMaskTable(g_masktable, 0x0100, M1, 0);
+                             63 ;	---------------------------------
+                             64 ; Function dummy_cpct_transparentMaskTable0M1_container
+                             65 ; ---------------------------------
+   4ED4                      66 _dummy_cpct_transparentMaskTable0M1_container::
+                             67 	.area _g_masktable_ (ABS) 
+   0100                      68 	.org 0x0100 
+   0100                      69 	 _g_masktable::
+   0100 FF EE DD CC BB AA    70 	.db 0xFF, 0xEE, 0xDD, 0xCC, 0xBB, 0xAA, 0x99, 0x88 
         99 88
-   0108 77 66 55 44 33 22    70 	.db 0x77, 0x66, 0x55, 0x44, 0x33, 0x22, 0x11, 0x00 
+   0108 77 66 55 44 33 22    71 	.db 0x77, 0x66, 0x55, 0x44, 0x33, 0x22, 0x11, 0x00 
         11 00
-   0110 EE EE CC CC AA AA    71 	.db 0xEE, 0xEE, 0xCC, 0xCC, 0xAA, 0xAA, 0x88, 0x88 
+   0110 EE EE CC CC AA AA    72 	.db 0xEE, 0xEE, 0xCC, 0xCC, 0xAA, 0xAA, 0x88, 0x88 
         88 88
-   0118 66 66 44 44 22 22    72 	.db 0x66, 0x66, 0x44, 0x44, 0x22, 0x22, 0x00, 0x00 
+   0118 66 66 44 44 22 22    73 	.db 0x66, 0x66, 0x44, 0x44, 0x22, 0x22, 0x00, 0x00 
         00 00
-   0120 DD CC DD CC 99 88    73 	.db 0xDD, 0xCC, 0xDD, 0xCC, 0x99, 0x88, 0x99, 0x88 
+   0120 DD CC DD CC 99 88    74 	.db 0xDD, 0xCC, 0xDD, 0xCC, 0x99, 0x88, 0x99, 0x88 
         99 88
-   0128 55 44 55 44 11 00    74 	.db 0x55, 0x44, 0x55, 0x44, 0x11, 0x00, 0x11, 0x00 
+   0128 55 44 55 44 11 00    75 	.db 0x55, 0x44, 0x55, 0x44, 0x11, 0x00, 0x11, 0x00 
         11 00
-   0130 CC CC CC CC 88 88    75 	.db 0xCC, 0xCC, 0xCC, 0xCC, 0x88, 0x88, 0x88, 0x88 
+   0130 CC CC CC CC 88 88    76 	.db 0xCC, 0xCC, 0xCC, 0xCC, 0x88, 0x88, 0x88, 0x88 
         88 88
-   0138 44 44 44 44 00 00    76 	.db 0x44, 0x44, 0x44, 0x44, 0x00, 0x00, 0x00, 0x00 
+   0138 44 44 44 44 00 00    77 	.db 0x44, 0x44, 0x44, 0x44, 0x00, 0x00, 0x00, 0x00 
         00 00
-   0140 BB AA 99 88 BB AA    77 	.db 0xBB, 0xAA, 0x99, 0x88, 0xBB, 0xAA, 0x99, 0x88 
+   0140 BB AA 99 88 BB AA    78 	.db 0xBB, 0xAA, 0x99, 0x88, 0xBB, 0xAA, 0x99, 0x88 
         99 88
-   0148 33 22 11 00 33 22    78 	.db 0x33, 0x22, 0x11, 0x00, 0x33, 0x22, 0x11, 0x00 
+   0148 33 22 11 00 33 22    79 	.db 0x33, 0x22, 0x11, 0x00, 0x33, 0x22, 0x11, 0x00 
         11 00
-   0150 AA AA 88 88 AA AA    79 	.db 0xAA, 0xAA, 0x88, 0x88, 0xAA, 0xAA, 0x88, 0x88 
+   0150 AA AA 88 88 AA AA    80 	.db 0xAA, 0xAA, 0x88, 0x88, 0xAA, 0xAA, 0x88, 0x88 
         88 88
-   0158 22 22 00 00 22 22    80 	.db 0x22, 0x22, 0x00, 0x00, 0x22, 0x22, 0x00, 0x00 
+   0158 22 22 00 00 22 22    81 	.db 0x22, 0x22, 0x00, 0x00, 0x22, 0x22, 0x00, 0x00 
         00 00
-   0160 99 88 99 88 99 88    81 	.db 0x99, 0x88, 0x99, 0x88, 0x99, 0x88, 0x99, 0x88 
+   0160 99 88 99 88 99 88    82 	.db 0x99, 0x88, 0x99, 0x88, 0x99, 0x88, 0x99, 0x88 
         99 88
-   0168 11 00 11 00 11 00    82 	.db 0x11, 0x00, 0x11, 0x00, 0x11, 0x00, 0x11, 0x00 
+   0168 11 00 11 00 11 00    83 	.db 0x11, 0x00, 0x11, 0x00, 0x11, 0x00, 0x11, 0x00 
         11 00
-   0170 88 88 88 88 88 88    83 	.db 0x88, 0x88, 0x88, 0x88, 0x88, 0x88, 0x88, 0x88 
+   0170 88 88 88 88 88 88    84 	.db 0x88, 0x88, 0x88, 0x88, 0x88, 0x88, 0x88, 0x88 
         88 88
-   0178 00 00 00 00 00 00    84 	.db 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 
+   0178 00 00 00 00 00 00    85 	.db 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 
         00 00
-   0180 77 66 55 44 33 22    85 	.db 0x77, 0x66, 0x55, 0x44, 0x33, 0x22, 0x11, 0x00 
+   0180 77 66 55 44 33 22    86 	.db 0x77, 0x66, 0x55, 0x44, 0x33, 0x22, 0x11, 0x00 
         11 00
-   0188 77 66 55 44 33 22    86 	.db 0x77, 0x66, 0x55, 0x44, 0x33, 0x22, 0x11, 0x00 
+   0188 77 66 55 44 33 22    87 	.db 0x77, 0x66, 0x55, 0x44, 0x33, 0x22, 0x11, 0x00 
         11 00
-   0190 66 66 44 44 22 22    87 	.db 0x66, 0x66, 0x44, 0x44, 0x22, 0x22, 0x00, 0x00 
+   0190 66 66 44 44 22 22    88 	.db 0x66, 0x66, 0x44, 0x44, 0x22, 0x22, 0x00, 0x00 
         00 00
-   0198 66 66 44 44 22 22    88 	.db 0x66, 0x66, 0x44, 0x44, 0x22, 0x22, 0x00, 0x00 
+   0198 66 66 44 44 22 22    89 	.db 0x66, 0x66, 0x44, 0x44, 0x22, 0x22, 0x00, 0x00 
         00 00
-   01A0 55 44 55 44 11 00    89 	.db 0x55, 0x44, 0x55, 0x44, 0x11, 0x00, 0x11, 0x00 
+   01A0 55 44 55 44 11 00    90 	.db 0x55, 0x44, 0x55, 0x44, 0x11, 0x00, 0x11, 0x00 
         11 00
-   01A8 55 44 55 44 11 00    90 	.db 0x55, 0x44, 0x55, 0x44, 0x11, 0x00, 0x11, 0x00 
+   01A8 55 44 55 44 11 00    91 	.db 0x55, 0x44, 0x55, 0x44, 0x11, 0x00, 0x11, 0x00 
         11 00
-   01B0 44 44 44 44 00 00    91 	.db 0x44, 0x44, 0x44, 0x44, 0x00, 0x00, 0x00, 0x00 
+   01B0 44 44 44 44 00 00    92 	.db 0x44, 0x44, 0x44, 0x44, 0x00, 0x00, 0x00, 0x00 
         00 00
-   01B8 44 44 44 44 00 00    92 	.db 0x44, 0x44, 0x44, 0x44, 0x00, 0x00, 0x00, 0x00 
+   01B8 44 44 44 44 00 00    93 	.db 0x44, 0x44, 0x44, 0x44, 0x00, 0x00, 0x00, 0x00 
         00 00
-   01C0 33 22 11 00 33 22    93 	.db 0x33, 0x22, 0x11, 0x00, 0x33, 0x22, 0x11, 0x00 
+   01C0 33 22 11 00 33 22    94 	.db 0x33, 0x22, 0x11, 0x00, 0x33, 0x22, 0x11, 0x00 
         11 00
-   01C8 33 22 11 00 33 22    94 	.db 0x33, 0x22, 0x11, 0x00, 0x33, 0x22, 0x11, 0x00 
+   01C8 33 22 11 00 33 22    95 	.db 0x33, 0x22, 0x11, 0x00, 0x33, 0x22, 0x11, 0x00 
         11 00
-   01D0 22 22 00 00 22 22    95 	.db 0x22, 0x22, 0x00, 0x00, 0x22, 0x22, 0x00, 0x00 
+   01D0 22 22 00 00 22 22    96 	.db 0x22, 0x22, 0x00, 0x00, 0x22, 0x22, 0x00, 0x00 
         00 00
-   01D8 22 22 00 00 22 22    96 	.db 0x22, 0x22, 0x00, 0x00, 0x22, 0x22, 0x00, 0x00 
+   01D8 22 22 00 00 22 22    97 	.db 0x22, 0x22, 0x00, 0x00, 0x22, 0x22, 0x00, 0x00 
         00 00
-   01E0 11 00 11 00 11 00    97 	.db 0x11, 0x00, 0x11, 0x00, 0x11, 0x00, 0x11, 0x00 
+   01E0 11 00 11 00 11 00    98 	.db 0x11, 0x00, 0x11, 0x00, 0x11, 0x00, 0x11, 0x00 
         11 00
-   01E8 11 00 11 00 11 00    98 	.db 0x11, 0x00, 0x11, 0x00, 0x11, 0x00, 0x11, 0x00 
+   01E8 11 00 11 00 11 00    99 	.db 0x11, 0x00, 0x11, 0x00, 0x11, 0x00, 0x11, 0x00 
         11 00
-   01F0 00 00 00 00 00 00    99 	.db 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 
+   01F0 00 00 00 00 00 00   100 	.db 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 
         00 00
-   01F8 00 00 00 00 00 00   100 	.db 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 
+   01F8 00 00 00 00 00 00   101 	.db 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 
         00 00
-                            101 	.area _CSEG (REL, CON) 
-                            102 ;src/game/world.c:5: void drawCursor(u8 x, u8 y)
-                            103 ;	---------------------------------
-                            104 ; Function drawCursor
-                            105 ; ---------------------------------
-   83C0                     106 _drawCursor::
-   83C0 DD E5         [15]  107 	push	ix
-   83C2 DD 21 00 00   [14]  108 	ld	ix,#0
-   83C6 DD 39         [15]  109 	add	ix,sp
-   83C8 21 F9 FF      [10]  110 	ld	hl, #-7
-   83CB 39            [11]  111 	add	hl, sp
-   83CC F9            [ 6]  112 	ld	sp, hl
-                            113 ;src/game/world.c:8: p_video = cpct_getScreenPtr(SCR_VMEM, x*TILESIZE_W, y*TILESIZE_H);
-   83CD DD 7E 05      [19]  114 	ld	a, 5 (ix)
-   83D0 07            [ 4]  115 	rlca
-   83D1 07            [ 4]  116 	rlca
-   83D2 07            [ 4]  117 	rlca
-   83D3 07            [ 4]  118 	rlca
-   83D4 E6 F0         [ 7]  119 	and	a, #0xf0
-   83D6 DD 77 FF      [19]  120 	ld	-1 (ix), a
-   83D9 DD 7E 04      [19]  121 	ld	a, 4 (ix)
-   83DC 87            [ 4]  122 	add	a, a
-   83DD 87            [ 4]  123 	add	a, a
-   83DE 47            [ 4]  124 	ld	b, a
-   83DF DD 7E FF      [19]  125 	ld	a, -1 (ix)
-   83E2 F5            [11]  126 	push	af
-   83E3 33            [ 6]  127 	inc	sp
-   83E4 C5            [11]  128 	push	bc
-   83E5 33            [ 6]  129 	inc	sp
-   83E6 21 00 C0      [10]  130 	ld	hl, #0xc000
-   83E9 E5            [11]  131 	push	hl
-   83EA CD BF 67      [17]  132 	call	_cpct_getScreenPtr
-   83ED 4D            [ 4]  133 	ld	c, l
-   83EE 44            [ 4]  134 	ld	b, h
-                            135 ;src/game/world.c:11: switch(CURSOR_MODE)
-   83EF 3E 11         [ 7]  136 	ld	a, #0x11
-   83F1 FD 21 B9 83   [14]  137 	ld	iy, #_CURSOR_MODE
-   83F5 FD 96 00      [19]  138 	sub	a, 0 (iy)
-   83F8 DA 22 85      [10]  139 	jp	C, 00118$
-   83FB FD 5E 00      [19]  140 	ld	e, 0 (iy)
-   83FE 16 00         [ 7]  141 	ld	d, #0x00
-   8400 21 07 84      [10]  142 	ld	hl, #00126$
-   8403 19            [11]  143 	add	hl, de
-   8404 19            [11]  144 	add	hl, de
-   8405 19            [11]  145 	add	hl, de
-   8406 E9            [ 4]  146 	jp	(hl)
-   8407                     147 00126$:
-   8407 C3 22 85      [10]  148 	jp	00118$
-   840A C3 22 85      [10]  149 	jp	00118$
-   840D C3 3D 84      [10]  150 	jp	00102$
-   8410 C3 4C 84      [10]  151 	jp	00103$
-   8413 C3 5B 84      [10]  152 	jp	00104$
-   8416 C3 6A 84      [10]  153 	jp	00105$
-   8419 C3 79 84      [10]  154 	jp	00106$
-   841C C3 88 84      [10]  155 	jp	00107$
-   841F C3 97 84      [10]  156 	jp	00108$
-   8422 C3 A6 84      [10]  157 	jp	00109$
-   8425 C3 B4 84      [10]  158 	jp	00110$
-   8428 C3 C2 84      [10]  159 	jp	00111$
-   842B C3 D0 84      [10]  160 	jp	00112$
-   842E C3 DE 84      [10]  161 	jp	00113$
-   8431 C3 EC 84      [10]  162 	jp	00114$
-   8434 C3 FA 84      [10]  163 	jp	00115$
-   8437 C3 08 85      [10]  164 	jp	00116$
-   843A C3 16 85      [10]  165 	jp	00117$
-                            166 ;src/game/world.c:16: case T_SSNS:
-   843D                     167 00102$:
-                            168 ;src/game/world.c:17: cpct_drawSprite(station_small_ns, p_video, TILESIZE_W, TILESIZE_H);
-   843D 21 04 10      [10]  169 	ld	hl, #0x1004
-   8440 E5            [11]  170 	push	hl
-   8441 C5            [11]  171 	push	bc
-   8442 21 54 4A      [10]  172 	ld	hl, #_station_small_ns
-   8445 E5            [11]  173 	push	hl
-   8446 CD DD 61      [17]  174 	call	_cpct_drawSprite
-                            175 ;src/game/world.c:18: break;
-   8449 C3 22 85      [10]  176 	jp	00118$
-                            177 ;src/game/world.c:19: case T_SSEW:
-   844C                     178 00103$:
-                            179 ;src/game/world.c:20: cpct_drawSprite(station_small_ew, p_video, TILESIZE_W, TILESIZE_H);
-   844C 21 04 10      [10]  180 	ld	hl, #0x1004
-   844F E5            [11]  181 	push	hl
-   8450 C5            [11]  182 	push	bc
-   8451 21 94 4A      [10]  183 	ld	hl, #_station_small_ew
-   8454 E5            [11]  184 	push	hl
-   8455 CD DD 61      [17]  185 	call	_cpct_drawSprite
-                            186 ;src/game/world.c:21: break;
-   8458 C3 22 85      [10]  187 	jp	00118$
-                            188 ;src/game/world.c:22: case T_SMNS:
-   845B                     189 00104$:
-                            190 ;src/game/world.c:23: cpct_drawSprite(station_medium_ns, p_video, TILESIZE_W, TILESIZE_H);
-   845B 21 04 10      [10]  191 	ld	hl, #0x1004
-   845E E5            [11]  192 	push	hl
-   845F C5            [11]  193 	push	bc
-   8460 21 D4 4A      [10]  194 	ld	hl, #_station_medium_ns
-   8463 E5            [11]  195 	push	hl
-   8464 CD DD 61      [17]  196 	call	_cpct_drawSprite
-                            197 ;src/game/world.c:24: break;
-   8467 C3 22 85      [10]  198 	jp	00118$
-                            199 ;src/game/world.c:25: case T_SMEW:
-   846A                     200 00105$:
-                            201 ;src/game/world.c:26: cpct_drawSprite(station_medium_ew, p_video, TILESIZE_W, TILESIZE_H);
-   846A 21 04 10      [10]  202 	ld	hl, #0x1004
-   846D E5            [11]  203 	push	hl
-   846E C5            [11]  204 	push	bc
-   846F 21 14 4B      [10]  205 	ld	hl, #_station_medium_ew
-   8472 E5            [11]  206 	push	hl
-   8473 CD DD 61      [17]  207 	call	_cpct_drawSprite
-                            208 ;src/game/world.c:27: break;
-   8476 C3 22 85      [10]  209 	jp	00118$
-                            210 ;src/game/world.c:28: case T_SLNS:
-   8479                     211 00106$:
-                            212 ;src/game/world.c:29: cpct_drawSprite(station_large_ns, p_video, TILESIZE_W, TILESIZE_H);
-   8479 21 04 10      [10]  213 	ld	hl, #0x1004
-   847C E5            [11]  214 	push	hl
-   847D C5            [11]  215 	push	bc
-   847E 21 54 4B      [10]  216 	ld	hl, #_station_large_ns
-   8481 E5            [11]  217 	push	hl
-   8482 CD DD 61      [17]  218 	call	_cpct_drawSprite
-                            219 ;src/game/world.c:30: break;
-   8485 C3 22 85      [10]  220 	jp	00118$
-                            221 ;src/game/world.c:31: case T_SLEW:
-   8488                     222 00107$:
-                            223 ;src/game/world.c:32: cpct_drawSprite(station_large_ew, p_video, TILESIZE_W, TILESIZE_H);
-   8488 21 04 10      [10]  224 	ld	hl, #0x1004
-   848B E5            [11]  225 	push	hl
-   848C C5            [11]  226 	push	bc
-   848D 21 94 4B      [10]  227 	ld	hl, #_station_large_ew
-   8490 E5            [11]  228 	push	hl
-   8491 CD DD 61      [17]  229 	call	_cpct_drawSprite
-                            230 ;src/game/world.c:33: break;
-   8494 C3 22 85      [10]  231 	jp	00118$
-                            232 ;src/game/world.c:34: case T_REW:
-   8497                     233 00108$:
-                            234 ;src/game/world.c:35: cpct_drawSprite(rail_ew, p_video, TILESIZE_W, TILESIZE_H);	
-   8497 21 04 10      [10]  235 	ld	hl, #0x1004
-   849A E5            [11]  236 	push	hl
-   849B C5            [11]  237 	push	bc
-   849C 21 D4 4B      [10]  238 	ld	hl, #_rail_ew
-   849F E5            [11]  239 	push	hl
-   84A0 CD DD 61      [17]  240 	call	_cpct_drawSprite
-                            241 ;src/game/world.c:36: break;
-   84A3 C3 22 85      [10]  242 	jp	00118$
-                            243 ;src/game/world.c:37: case T_RNS:
-   84A6                     244 00109$:
-                            245 ;src/game/world.c:38: cpct_drawSprite(rail_ns, p_video, TILESIZE_W, TILESIZE_H);	
-   84A6 21 04 10      [10]  246 	ld	hl, #0x1004
-   84A9 E5            [11]  247 	push	hl
-   84AA C5            [11]  248 	push	bc
-   84AB 21 14 4C      [10]  249 	ld	hl, #_rail_ns
-   84AE E5            [11]  250 	push	hl
-   84AF CD DD 61      [17]  251 	call	_cpct_drawSprite
-                            252 ;src/game/world.c:39: break;
-   84B2 18 6E         [12]  253 	jr	00118$
-                            254 ;src/game/world.c:40: case T_REN:
-   84B4                     255 00110$:
-                            256 ;src/game/world.c:41: cpct_drawSprite(rail_en, p_video, TILESIZE_W, TILESIZE_H);	
-   84B4 21 04 10      [10]  257 	ld	hl, #0x1004
-   84B7 E5            [11]  258 	push	hl
-   84B8 C5            [11]  259 	push	bc
-   84B9 21 54 4C      [10]  260 	ld	hl, #_rail_en
-   84BC E5            [11]  261 	push	hl
-   84BD CD DD 61      [17]  262 	call	_cpct_drawSprite
-                            263 ;src/game/world.c:42: break;
-   84C0 18 60         [12]  264 	jr	00118$
-                            265 ;src/game/world.c:43: case T_RES:
-   84C2                     266 00111$:
-                            267 ;src/game/world.c:44: cpct_drawSprite(rail_es, p_video, TILESIZE_W, TILESIZE_H);	
-   84C2 21 04 10      [10]  268 	ld	hl, #0x1004
-   84C5 E5            [11]  269 	push	hl
-   84C6 C5            [11]  270 	push	bc
-   84C7 21 94 4C      [10]  271 	ld	hl, #_rail_es
-   84CA E5            [11]  272 	push	hl
-   84CB CD DD 61      [17]  273 	call	_cpct_drawSprite
-                            274 ;src/game/world.c:45: break;
-   84CE 18 52         [12]  275 	jr	00118$
-                            276 ;src/game/world.c:46: case T_RWN:
-   84D0                     277 00112$:
-                            278 ;src/game/world.c:47: cpct_drawSprite(rail_wn, p_video, TILESIZE_W, TILESIZE_H);	
-   84D0 21 04 10      [10]  279 	ld	hl, #0x1004
-   84D3 E5            [11]  280 	push	hl
-   84D4 C5            [11]  281 	push	bc
-   84D5 21 D4 4C      [10]  282 	ld	hl, #_rail_wn
-   84D8 E5            [11]  283 	push	hl
-   84D9 CD DD 61      [17]  284 	call	_cpct_drawSprite
-                            285 ;src/game/world.c:48: break;
-   84DC 18 44         [12]  286 	jr	00118$
-                            287 ;src/game/world.c:49: case T_RWS:
-   84DE                     288 00113$:
-                            289 ;src/game/world.c:50: cpct_drawSprite(rail_ws, p_video, TILESIZE_W, TILESIZE_H);	
-   84DE 21 04 10      [10]  290 	ld	hl, #0x1004
-   84E1 E5            [11]  291 	push	hl
-   84E2 C5            [11]  292 	push	bc
-   84E3 21 14 4D      [10]  293 	ld	hl, #_rail_ws
-   84E6 E5            [11]  294 	push	hl
-   84E7 CD DD 61      [17]  295 	call	_cpct_drawSprite
-                            296 ;src/game/world.c:51: break;
-   84EA 18 36         [12]  297 	jr	00118$
-                            298 ;src/game/world.c:52: case T_REWN:
-   84EC                     299 00114$:
-                            300 ;src/game/world.c:53: cpct_drawSprite(rail_ew_n, p_video, TILESIZE_W, TILESIZE_H);	
-   84EC 21 04 10      [10]  301 	ld	hl, #0x1004
-   84EF E5            [11]  302 	push	hl
-   84F0 C5            [11]  303 	push	bc
-   84F1 21 54 4D      [10]  304 	ld	hl, #_rail_ew_n
-   84F4 E5            [11]  305 	push	hl
-   84F5 CD DD 61      [17]  306 	call	_cpct_drawSprite
-                            307 ;src/game/world.c:54: break;
-   84F8 18 28         [12]  308 	jr	00118$
-                            309 ;src/game/world.c:55: case T_REWS:
-   84FA                     310 00115$:
-                            311 ;src/game/world.c:56: cpct_drawSprite(rail_ew_s, p_video, TILESIZE_W, TILESIZE_H);	
-   84FA 21 04 10      [10]  312 	ld	hl, #0x1004
-   84FD E5            [11]  313 	push	hl
-   84FE C5            [11]  314 	push	bc
-   84FF 21 94 4D      [10]  315 	ld	hl, #_rail_ew_s
-   8502 E5            [11]  316 	push	hl
-   8503 CD DD 61      [17]  317 	call	_cpct_drawSprite
-                            318 ;src/game/world.c:57: break;
-   8506 18 1A         [12]  319 	jr	00118$
-                            320 ;src/game/world.c:58: case T_RNSE:
-   8508                     321 00116$:
-                            322 ;src/game/world.c:59: cpct_drawSprite(rail_ns_e, p_video, TILESIZE_W, TILESIZE_H);	
-   8508 21 04 10      [10]  323 	ld	hl, #0x1004
-   850B E5            [11]  324 	push	hl
-   850C C5            [11]  325 	push	bc
-   850D 21 14 4E      [10]  326 	ld	hl, #_rail_ns_e
-   8510 E5            [11]  327 	push	hl
-   8511 CD DD 61      [17]  328 	call	_cpct_drawSprite
-                            329 ;src/game/world.c:60: break;
-   8514 18 0C         [12]  330 	jr	00118$
-                            331 ;src/game/world.c:61: case T_RNSW:
-   8516                     332 00117$:
-                            333 ;src/game/world.c:62: cpct_drawSprite(rail_ns_w, p_video, TILESIZE_W, TILESIZE_H);
-   8516 21 04 10      [10]  334 	ld	hl, #0x1004
-   8519 E5            [11]  335 	push	hl
-   851A C5            [11]  336 	push	bc
-   851B 21 D4 4D      [10]  337 	ld	hl, #_rail_ns_w
-   851E E5            [11]  338 	push	hl
-   851F CD DD 61      [17]  339 	call	_cpct_drawSprite
-                            340 ;src/game/world.c:64: }
-   8522                     341 00118$:
-                            342 ;src/game/world.c:66: setPixel(x*TILESIZE_H, y*TILESIZE_H, 0);
-   8522 DD 6E 04      [19]  343 	ld	l, 4 (ix)
-   8525 26 00         [ 7]  344 	ld	h, #0x00
-   8527 29            [11]  345 	add	hl, hl
-   8528 29            [11]  346 	add	hl, hl
-   8529 29            [11]  347 	add	hl, hl
-   852A 29            [11]  348 	add	hl, hl
-   852B EB            [ 4]  349 	ex	de,hl
-   852C D5            [11]  350 	push	de
-   852D AF            [ 4]  351 	xor	a, a
-   852E F5            [11]  352 	push	af
-   852F 33            [ 6]  353 	inc	sp
-   8530 DD 7E FF      [19]  354 	ld	a, -1 (ix)
-   8533 F5            [11]  355 	push	af
-   8534 33            [ 6]  356 	inc	sp
-   8535 D5            [11]  357 	push	de
-   8536 CD 19 8F      [17]  358 	call	_setPixel
-   8539 F1            [10]  359 	pop	af
-   853A F1            [10]  360 	pop	af
-   853B D1            [10]  361 	pop	de
-                            362 ;src/game/world.c:67: setPixel(x*TILESIZE_H+1, y*TILESIZE_H, 0);
-   853C 21 01 00      [10]  363 	ld	hl, #0x0001
-   853F 19            [11]  364 	add	hl,de
-   8540 DD 75 FD      [19]  365 	ld	-3 (ix), l
-   8543 DD 74 FE      [19]  366 	ld	-2 (ix), h
-   8546 D5            [11]  367 	push	de
-   8547 AF            [ 4]  368 	xor	a, a
-   8548 F5            [11]  369 	push	af
-   8549 33            [ 6]  370 	inc	sp
-   854A DD 7E FF      [19]  371 	ld	a, -1 (ix)
-   854D F5            [11]  372 	push	af
-   854E 33            [ 6]  373 	inc	sp
-   854F DD 6E FD      [19]  374 	ld	l,-3 (ix)
-   8552 DD 66 FE      [19]  375 	ld	h,-2 (ix)
-   8555 E5            [11]  376 	push	hl
-   8556 CD 19 8F      [17]  377 	call	_setPixel
-   8559 F1            [10]  378 	pop	af
-   855A F1            [10]  379 	pop	af
-   855B D1            [10]  380 	pop	de
-                            381 ;src/game/world.c:68: setPixel(x*TILESIZE_H, y*TILESIZE_H+1, 0);
-   855C DD 46 FF      [19]  382 	ld	b, -1 (ix)
-   855F 04            [ 4]  383 	inc	b
-   8560 C5            [11]  384 	push	bc
-   8561 D5            [11]  385 	push	de
-   8562 AF            [ 4]  386 	xor	a, a
-   8563 F5            [11]  387 	push	af
-   8564 33            [ 6]  388 	inc	sp
-   8565 C5            [11]  389 	push	bc
-   8566 33            [ 6]  390 	inc	sp
-   8567 D5            [11]  391 	push	de
-   8568 CD 19 8F      [17]  392 	call	_setPixel
-   856B F1            [10]  393 	pop	af
-   856C F1            [10]  394 	pop	af
-   856D D1            [10]  395 	pop	de
-   856E C1            [10]  396 	pop	bc
-                            397 ;src/game/world.c:69: setPixel(x*TILESIZE_H+1, y*TILESIZE_H+1, 0);
-   856F C5            [11]  398 	push	bc
-   8570 D5            [11]  399 	push	de
-   8571 AF            [ 4]  400 	xor	a, a
-   8572 F5            [11]  401 	push	af
-   8573 33            [ 6]  402 	inc	sp
-   8574 C5            [11]  403 	push	bc
-   8575 33            [ 6]  404 	inc	sp
-   8576 DD 6E FD      [19]  405 	ld	l,-3 (ix)
-   8579 DD 66 FE      [19]  406 	ld	h,-2 (ix)
-   857C E5            [11]  407 	push	hl
-   857D CD 19 8F      [17]  408 	call	_setPixel
-   8580 F1            [10]  409 	pop	af
-   8581 F1            [10]  410 	pop	af
-   8582 D1            [10]  411 	pop	de
-   8583 C1            [10]  412 	pop	bc
-                            413 ;src/game/world.c:71: setPixel(x*TILESIZE_H+15, y*TILESIZE_H, 0);
-   8584 21 0F 00      [10]  414 	ld	hl, #0x000f
-   8587 19            [11]  415 	add	hl,de
-   8588 E3            [19]  416 	ex	(sp), hl
-   8589 C5            [11]  417 	push	bc
-   858A D5            [11]  418 	push	de
-   858B AF            [ 4]  419 	xor	a, a
-   858C F5            [11]  420 	push	af
-   858D 33            [ 6]  421 	inc	sp
-   858E DD 7E FF      [19]  422 	ld	a, -1 (ix)
-   8591 F5            [11]  423 	push	af
-   8592 33            [ 6]  424 	inc	sp
-   8593 DD 6E F9      [19]  425 	ld	l,-7 (ix)
-   8596 DD 66 FA      [19]  426 	ld	h,-6 (ix)
-   8599 E5            [11]  427 	push	hl
-   859A CD 19 8F      [17]  428 	call	_setPixel
-   859D F1            [10]  429 	pop	af
-   859E F1            [10]  430 	pop	af
-   859F D1            [10]  431 	pop	de
-   85A0 C1            [10]  432 	pop	bc
-                            433 ;src/game/world.c:72: setPixel(x*TILESIZE_H+14, y*TILESIZE_H, 0);
-   85A1 21 0E 00      [10]  434 	ld	hl, #0x000e
-   85A4 19            [11]  435 	add	hl,de
-   85A5 DD 75 FB      [19]  436 	ld	-5 (ix), l
-   85A8 DD 74 FC      [19]  437 	ld	-4 (ix), h
-   85AB C5            [11]  438 	push	bc
-   85AC D5            [11]  439 	push	de
-   85AD AF            [ 4]  440 	xor	a, a
-   85AE F5            [11]  441 	push	af
-   85AF 33            [ 6]  442 	inc	sp
-   85B0 DD 7E FF      [19]  443 	ld	a, -1 (ix)
-   85B3 F5            [11]  444 	push	af
-   85B4 33            [ 6]  445 	inc	sp
-   85B5 DD 6E FB      [19]  446 	ld	l,-5 (ix)
-   85B8 DD 66 FC      [19]  447 	ld	h,-4 (ix)
-   85BB E5            [11]  448 	push	hl
-   85BC CD 19 8F      [17]  449 	call	_setPixel
-   85BF F1            [10]  450 	pop	af
-   85C0 F1            [10]  451 	pop	af
-   85C1 D1            [10]  452 	pop	de
-   85C2 C1            [10]  453 	pop	bc
-                            454 ;src/game/world.c:73: setPixel(x*TILESIZE_H+15, y*TILESIZE_H+1, 0);
-   85C3 C5            [11]  455 	push	bc
-   85C4 D5            [11]  456 	push	de
-   85C5 AF            [ 4]  457 	xor	a, a
-   85C6 F5            [11]  458 	push	af
-   85C7 33            [ 6]  459 	inc	sp
-   85C8 C5            [11]  460 	push	bc
-   85C9 33            [ 6]  461 	inc	sp
-   85CA DD 6E F9      [19]  462 	ld	l,-7 (ix)
-   85CD DD 66 FA      [19]  463 	ld	h,-6 (ix)
-   85D0 E5            [11]  464 	push	hl
-   85D1 CD 19 8F      [17]  465 	call	_setPixel
-   85D4 F1            [10]  466 	pop	af
-   85D5 F1            [10]  467 	pop	af
-   85D6 D1            [10]  468 	pop	de
-   85D7 C1            [10]  469 	pop	bc
-                            470 ;src/game/world.c:74: setPixel(x*TILESIZE_H+14, y*TILESIZE_H+1, 0);
-   85D8 D5            [11]  471 	push	de
-   85D9 AF            [ 4]  472 	xor	a, a
-   85DA F5            [11]  473 	push	af
-   85DB 33            [ 6]  474 	inc	sp
-   85DC C5            [11]  475 	push	bc
-   85DD 33            [ 6]  476 	inc	sp
-   85DE DD 6E FB      [19]  477 	ld	l,-5 (ix)
-   85E1 DD 66 FC      [19]  478 	ld	h,-4 (ix)
-   85E4 E5            [11]  479 	push	hl
-   85E5 CD 19 8F      [17]  480 	call	_setPixel
-   85E8 F1            [10]  481 	pop	af
-   85E9 F1            [10]  482 	pop	af
-   85EA D1            [10]  483 	pop	de
-                            484 ;src/game/world.c:76: setPixel(x*TILESIZE_H, y*TILESIZE_H+15, 0);
-   85EB DD 7E FF      [19]  485 	ld	a, -1 (ix)
-   85EE C6 0F         [ 7]  486 	add	a, #0x0f
-   85F0 47            [ 4]  487 	ld	b, a
-   85F1 C5            [11]  488 	push	bc
-   85F2 D5            [11]  489 	push	de
-   85F3 AF            [ 4]  490 	xor	a, a
-   85F4 F5            [11]  491 	push	af
-   85F5 33            [ 6]  492 	inc	sp
-   85F6 C5            [11]  493 	push	bc
-   85F7 33            [ 6]  494 	inc	sp
-   85F8 D5            [11]  495 	push	de
-   85F9 CD 19 8F      [17]  496 	call	_setPixel
-   85FC F1            [10]  497 	pop	af
-   85FD F1            [10]  498 	pop	af
-   85FE D1            [10]  499 	pop	de
-   85FF C1            [10]  500 	pop	bc
-                            501 ;src/game/world.c:77: setPixel(x*TILESIZE_H, y*TILESIZE_H+14, 0);
-   8600 DD 7E FF      [19]  502 	ld	a, -1 (ix)
-   8603 C6 0E         [ 7]  503 	add	a, #0x0e
-   8605 4F            [ 4]  504 	ld	c, a
-   8606 C5            [11]  505 	push	bc
-   8607 AF            [ 4]  506 	xor	a, a
-   8608 47            [ 4]  507 	ld	b, a
-   8609 C5            [11]  508 	push	bc
-   860A D5            [11]  509 	push	de
-   860B CD 19 8F      [17]  510 	call	_setPixel
-   860E F1            [10]  511 	pop	af
-   860F F1            [10]  512 	pop	af
-   8610 C1            [10]  513 	pop	bc
-                            514 ;src/game/world.c:78: setPixel(x*TILESIZE_H+1, y*TILESIZE_H+14, 0);
-   8611 C5            [11]  515 	push	bc
-   8612 AF            [ 4]  516 	xor	a, a
-   8613 47            [ 4]  517 	ld	b, a
-   8614 C5            [11]  518 	push	bc
-   8615 DD 6E FD      [19]  519 	ld	l,-3 (ix)
-   8618 DD 66 FE      [19]  520 	ld	h,-2 (ix)
-   861B E5            [11]  521 	push	hl
-   861C CD 19 8F      [17]  522 	call	_setPixel
-   861F F1            [10]  523 	pop	af
-   8620 F1            [10]  524 	pop	af
-   8621 C1            [10]  525 	pop	bc
-                            526 ;src/game/world.c:79: setPixel(x*TILESIZE_H+1, y*TILESIZE_H+15, 0);
-   8622 C5            [11]  527 	push	bc
-   8623 AF            [ 4]  528 	xor	a, a
-   8624 F5            [11]  529 	push	af
-   8625 33            [ 6]  530 	inc	sp
-   8626 C5            [11]  531 	push	bc
-   8627 33            [ 6]  532 	inc	sp
-   8628 DD 6E FD      [19]  533 	ld	l,-3 (ix)
-   862B DD 66 FE      [19]  534 	ld	h,-2 (ix)
-   862E E5            [11]  535 	push	hl
-   862F CD 19 8F      [17]  536 	call	_setPixel
-   8632 F1            [10]  537 	pop	af
-   8633 F1            [10]  538 	pop	af
-   8634 C1            [10]  539 	pop	bc
-                            540 ;src/game/world.c:81: setPixel(x*TILESIZE_H+15, y*TILESIZE_H+15, 0);
-   8635 C5            [11]  541 	push	bc
-   8636 AF            [ 4]  542 	xor	a, a
-   8637 F5            [11]  543 	push	af
-   8638 33            [ 6]  544 	inc	sp
-   8639 C5            [11]  545 	push	bc
-   863A 33            [ 6]  546 	inc	sp
-   863B DD 6E F9      [19]  547 	ld	l,-7 (ix)
-   863E DD 66 FA      [19]  548 	ld	h,-6 (ix)
-   8641 E5            [11]  549 	push	hl
-   8642 CD 19 8F      [17]  550 	call	_setPixel
-   8645 F1            [10]  551 	pop	af
-   8646 F1            [10]  552 	pop	af
-   8647 C1            [10]  553 	pop	bc
-                            554 ;src/game/world.c:82: setPixel(x*TILESIZE_H+14, y*TILESIZE_H+15, 0);
-   8648 C5            [11]  555 	push	bc
-   8649 AF            [ 4]  556 	xor	a, a
-   864A F5            [11]  557 	push	af
-   864B 33            [ 6]  558 	inc	sp
-   864C C5            [11]  559 	push	bc
-   864D 33            [ 6]  560 	inc	sp
-   864E DD 6E FB      [19]  561 	ld	l,-5 (ix)
-   8651 DD 66 FC      [19]  562 	ld	h,-4 (ix)
-   8654 E5            [11]  563 	push	hl
-   8655 CD 19 8F      [17]  564 	call	_setPixel
-   8658 F1            [10]  565 	pop	af
-   8659 F1            [10]  566 	pop	af
-   865A C1            [10]  567 	pop	bc
-                            568 ;src/game/world.c:83: setPixel(x*TILESIZE_H+15, y*TILESIZE_H+14, 0);
-   865B C5            [11]  569 	push	bc
-   865C AF            [ 4]  570 	xor	a, a
-   865D 47            [ 4]  571 	ld	b, a
-   865E C5            [11]  572 	push	bc
-   865F DD 6E F9      [19]  573 	ld	l,-7 (ix)
-   8662 DD 66 FA      [19]  574 	ld	h,-6 (ix)
-   8665 E5            [11]  575 	push	hl
-   8666 CD 19 8F      [17]  576 	call	_setPixel
-   8669 F1            [10]  577 	pop	af
-   866A F1            [10]  578 	pop	af
-   866B C1            [10]  579 	pop	bc
-                            580 ;src/game/world.c:84: setPixel(x*TILESIZE_H+14, y*TILESIZE_H+14, 0);
-   866C AF            [ 4]  581 	xor	a, a
-   866D 47            [ 4]  582 	ld	b, a
-   866E C5            [11]  583 	push	bc
-   866F DD 6E FB      [19]  584 	ld	l,-5 (ix)
-   8672 DD 66 FC      [19]  585 	ld	h,-4 (ix)
-   8675 E5            [11]  586 	push	hl
-   8676 CD 19 8F      [17]  587 	call	_setPixel
-   8679 DD F9         [10]  588 	ld	sp,ix
-   867B DD E1         [14]  589 	pop	ix
-   867D C9            [10]  590 	ret
-                            591 ;src/game/world.c:87: void patternTile(u8 tileType, int index, u8 nBitsX, u8 nBitsY, u8 *pattern)
-                            592 ;	---------------------------------
-                            593 ; Function patternTile
-                            594 ; ---------------------------------
-   867E                     595 _patternTile::
-   867E DD E5         [15]  596 	push	ix
-   8680 DD 21 00 00   [14]  597 	ld	ix,#0
-   8684 DD 39         [15]  598 	add	ix,sp
-   8686 21 F7 FF      [10]  599 	ld	hl, #-9
-   8689 39            [11]  600 	add	hl, sp
-   868A F9            [ 6]  601 	ld	sp, hl
-                            602 ;src/game/world.c:92: for(iy=0; iy<nBitsY; iy++)
-   868B DD 7E 04      [19]  603 	ld	a, 4 (ix)
-   868E D6 08         [ 7]  604 	sub	a, #0x08
-   8690 20 04         [12]  605 	jr	NZ,00153$
-   8692 3E 01         [ 7]  606 	ld	a,#0x01
-   8694 18 01         [12]  607 	jr	00154$
-   8696                     608 00153$:
-   8696 AF            [ 4]  609 	xor	a,a
-   8697                     610 00154$:
-   8697 DD 77 FE      [19]  611 	ld	-2 (ix), a
-   869A DD 7E 04      [19]  612 	ld	a, 4 (ix)
-   869D D6 02         [ 7]  613 	sub	a, #0x02
-   869F 20 04         [12]  614 	jr	NZ,00155$
-   86A1 3E 01         [ 7]  615 	ld	a,#0x01
-   86A3 18 01         [12]  616 	jr	00156$
-   86A5                     617 00155$:
-   86A5 AF            [ 4]  618 	xor	a,a
-   86A6                     619 00156$:
-   86A6 DD 77 F7      [19]  620 	ld	-9 (ix), a
-   86A9 1E 00         [ 7]  621 	ld	e, #0x00
-   86AB                     622 00115$:
-   86AB 7B            [ 4]  623 	ld	a, e
-   86AC DD 96 08      [19]  624 	sub	a, 8 (ix)
-   86AF D2 63 87      [10]  625 	jp	NC, 00117$
-                            626 ;src/game/world.c:94: for(ix=0; ix<nBitsX; ix++)
-   86B2 D5            [11]  627 	push	de
-   86B3 16 00         [ 7]  628 	ld	d,#0x00
-   86B5 6B            [ 4]  629 	ld	l, e
-   86B6 62            [ 4]  630 	ld	h, d
-   86B7 29            [11]  631 	add	hl, hl
-   86B8 29            [11]  632 	add	hl, hl
-   86B9 19            [11]  633 	add	hl, de
-   86BA 29            [11]  634 	add	hl, hl
-   86BB 29            [11]  635 	add	hl, hl
-   86BC 29            [11]  636 	add	hl, hl
-   86BD 29            [11]  637 	add	hl, hl
-   86BE D1            [10]  638 	pop	de
-   86BF 4D            [ 4]  639 	ld	c, l
-   86C0 44            [ 4]  640 	ld	b, h
-   86C1 DD 7E 05      [19]  641 	ld	a, 5 (ix)
-   86C4 81            [ 4]  642 	add	a, c
-   86C5 DD 77 FC      [19]  643 	ld	-4 (ix), a
-   86C8 DD 7E 06      [19]  644 	ld	a, 6 (ix)
-   86CB 88            [ 4]  645 	adc	a, b
-   86CC DD 77 FD      [19]  646 	ld	-3 (ix), a
-   86CF D5            [11]  647 	push	de
-   86D0 DD 66 07      [19]  648 	ld	h, 7 (ix)
-   86D3 2E 00         [ 7]  649 	ld	l, #0x00
-   86D5 55            [ 4]  650 	ld	d, l
-   86D6 06 08         [ 7]  651 	ld	b, #0x08
-   86D8                     652 00157$:
-   86D8 29            [11]  653 	add	hl, hl
-   86D9 30 01         [12]  654 	jr	NC,00158$
-   86DB 19            [11]  655 	add	hl, de
-   86DC                     656 00158$:
-   86DC 10 FA         [13]  657 	djnz	00157$
-   86DE D1            [10]  658 	pop	de
-   86DF DD 75 F8      [19]  659 	ld	-8 (ix), l
-   86E2 DD 74 F9      [19]  660 	ld	-7 (ix), h
-   86E5 16 00         [ 7]  661 	ld	d, #0x00
-   86E7                     662 00112$:
-   86E7 7A            [ 4]  663 	ld	a, d
-   86E8 DD 96 07      [19]  664 	sub	a, 7 (ix)
-   86EB 30 72         [12]  665 	jr	NC,00116$
-                            666 ;src/game/world.c:96: if(cpct_getBit (pattern, iy*nBitsX+ix)!=0 && index+iy*WIDTH+ix < WIDTH*HEIGHT)
-   86ED DD 72 FA      [19]  667 	ld	-6 (ix), d
-   86F0 DD 36 FB 00   [19]  668 	ld	-5 (ix), #0x00
-   86F4 DD 7E FA      [19]  669 	ld	a, -6 (ix)
-   86F7 DD 86 F8      [19]  670 	add	a, -8 (ix)
-   86FA 4F            [ 4]  671 	ld	c, a
-   86FB DD 7E FB      [19]  672 	ld	a, -5 (ix)
-   86FE DD 8E F9      [19]  673 	adc	a, -7 (ix)
-   8701 47            [ 4]  674 	ld	b, a
-   8702 DD 6E 09      [19]  675 	ld	l,9 (ix)
-   8705 DD 66 0A      [19]  676 	ld	h,10 (ix)
-   8708 D5            [11]  677 	push	de
-   8709 C5            [11]  678 	push	bc
-   870A E5            [11]  679 	push	hl
-   870B CD 7B 61      [17]  680 	call	_cpct_getBit
-   870E DD 75 FF      [19]  681 	ld	-1 (ix), l
-   8711 D1            [10]  682 	pop	de
-   8712 DD 7E FF      [19]  683 	ld	a, -1 (ix)
-   8715 B7            [ 4]  684 	or	a, a
-   8716 28 44         [12]  685 	jr	Z,00113$
-   8718 DD 7E FC      [19]  686 	ld	a, -4 (ix)
-   871B DD 86 FA      [19]  687 	add	a, -6 (ix)
-   871E 4F            [ 4]  688 	ld	c, a
-   871F DD 7E FD      [19]  689 	ld	a, -3 (ix)
-   8722 DD 8E FB      [19]  690 	adc	a, -5 (ix)
-   8725 47            [ 4]  691 	ld	b,a
-   8726 EE 80         [ 7]  692 	xor	a, #0x80
-   8728 D6 8F         [ 7]  693 	sub	a, #0x8f
-   872A 30 30         [12]  694 	jr	NC,00113$
-                            695 ;src/game/world.c:98: if(tileType == FOREST)
-   872C DD 7E FE      [19]  696 	ld	a, -2 (ix)
-   872F B7            [ 4]  697 	or	a, a
-   8730 28 0A         [12]  698 	jr	Z,00104$
-                            699 ;src/game/world.c:99: p_world[index+iy*WIDTH+ix] = tileType;
-   8732 21 B5 74      [10]  700 	ld	hl, #_p_world
-   8735 09            [11]  701 	add	hl, bc
-   8736 DD 7E 04      [19]  702 	ld	a, 4 (ix)
-   8739 77            [ 7]  703 	ld	(hl), a
-   873A 18 20         [12]  704 	jr	00113$
-   873C                     705 00104$:
-                            706 ;src/game/world.c:100: else if(tileType==DWELLINGS1)
-   873C DD 7E F7      [19]  707 	ld	a, -9 (ix)
-   873F B7            [ 4]  708 	or	a, a
-   8740 28 1A         [12]  709 	jr	Z,00113$
-                            710 ;src/game/world.c:101: p_world[index+iy*WIDTH+ix] = (u8)cpct_getRandom_mxor_u8 ()%3+2;
-   8742 21 B5 74      [10]  711 	ld	hl, #_p_world
-   8745 09            [11]  712 	add	hl, bc
-   8746 E5            [11]  713 	push	hl
-   8747 D5            [11]  714 	push	de
-   8748 CD C8 66      [17]  715 	call	_cpct_getRandom_mxor_u8
-   874B 45            [ 4]  716 	ld	b, l
-   874C 3E 03         [ 7]  717 	ld	a, #0x03
-   874E F5            [11]  718 	push	af
-   874F 33            [ 6]  719 	inc	sp
-   8750 C5            [11]  720 	push	bc
-   8751 33            [ 6]  721 	inc	sp
-   8752 CD 82 62      [17]  722 	call	__moduchar
-   8755 F1            [10]  723 	pop	af
-   8756 4D            [ 4]  724 	ld	c, l
-   8757 D1            [10]  725 	pop	de
-   8758 E1            [10]  726 	pop	hl
-   8759 0C            [ 4]  727 	inc	c
-   875A 0C            [ 4]  728 	inc	c
-   875B 71            [ 7]  729 	ld	(hl), c
-   875C                     730 00113$:
-                            731 ;src/game/world.c:94: for(ix=0; ix<nBitsX; ix++)
-   875C 14            [ 4]  732 	inc	d
-   875D 18 88         [12]  733 	jr	00112$
-   875F                     734 00116$:
-                            735 ;src/game/world.c:92: for(iy=0; iy<nBitsY; iy++)
-   875F 1C            [ 4]  736 	inc	e
-   8760 C3 AB 86      [10]  737 	jp	00115$
-   8763                     738 00117$:
-   8763 DD F9         [10]  739 	ld	sp, ix
-   8765 DD E1         [14]  740 	pop	ix
-   8767 C9            [10]  741 	ret
-                            742 ;src/game/world.c:108: void generateWorld()
-                            743 ;	---------------------------------
-                            744 ; Function generateWorld
-                            745 ; ---------------------------------
-   8768                     746 _generateWorld::
-   8768 DD E5         [15]  747 	push	ix
-   876A DD 21 00 00   [14]  748 	ld	ix,#0
-   876E DD 39         [15]  749 	add	ix,sp
-   8770 21 E4 FF      [10]  750 	ld	hl, #-28
-   8773 39            [11]  751 	add	hl, sp
-   8774 F9            [ 6]  752 	ld	sp, hl
-                            753 ;src/game/world.c:115: CURSOR_MODE = NONE;
-   8775 21 B9 83      [10]  754 	ld	hl,#_CURSOR_MODE + 0
-   8778 36 00         [10]  755 	ld	(hl), #0x00
-                            756 ;src/game/world.c:118: cpct_setSeed_mxor ((u32)cpct_count2VSYNC());
-   877A CD 8B 63      [17]  757 	call	_cpct_count2VSYNC
-   877D 11 00 00      [10]  758 	ld	de,#0x0000
-   8780 CD DA 64      [17]  759 	call	_cpct_setSeed_mxor
-                            760 ;src/game/world.c:122: for(iy=0; iy<HEIGHT*WIDTH;iy++)
-   8783 01 00 00      [10]  761 	ld	bc, #0x0000
-   8786                     762 00119$:
-                            763 ;src/game/world.c:124: p_world[iy] =  cpct_getRandom_mxor_u16()%2;
-   8786 21 B5 74      [10]  764 	ld	hl, #_p_world
-   8789 09            [11]  765 	add	hl, bc
-   878A E5            [11]  766 	push	hl
-   878B C5            [11]  767 	push	bc
-   878C CD C0 65      [17]  768 	call	_cpct_getRandom_mxor_u16
-   878F 5D            [ 4]  769 	ld	e, l
-   8790 C1            [10]  770 	pop	bc
-   8791 E1            [10]  771 	pop	hl
-   8792 7B            [ 4]  772 	ld	a, e
-   8793 E6 01         [ 7]  773 	and	a, #0x01
-   8795 77            [ 7]  774 	ld	(hl), a
-                            775 ;src/game/world.c:122: for(iy=0; iy<HEIGHT*WIDTH;iy++)
-   8796 03            [ 6]  776 	inc	bc
-   8797 78            [ 4]  777 	ld	a, b
-   8798 EE 80         [ 7]  778 	xor	a, #0x80
-   879A D6 8F         [ 7]  779 	sub	a, #0x8f
-   879C 38 E8         [12]  780 	jr	C,00119$
-                            781 ;src/game/world.c:129: for(ix=0; ix<NBFOREST; ix++)
-   879E 21 00 00      [10]  782 	ld	hl, #0x0000
-   87A1 39            [11]  783 	add	hl, sp
-   87A2 DD 75 F8      [19]  784 	ld	-8 (ix), l
-   87A5 DD 74 F9      [19]  785 	ld	-7 (ix), h
-   87A8 01 00 00      [10]  786 	ld	bc, #0x0000
-   87AB                     787 00121$:
-                            788 ;src/game/world.c:131: iy = cpct_getRandom_mxor_u16()%(WIDTH*HEIGHT);
-   87AB C5            [11]  789 	push	bc
-   87AC CD C0 65      [17]  790 	call	_cpct_getRandom_mxor_u16
-   87AF 11 00 0F      [10]  791 	ld	de, #0x0f00
-   87B2 D5            [11]  792 	push	de
-   87B3 E5            [11]  793 	push	hl
-   87B4 CD 8E 62      [17]  794 	call	__moduint
-   87B7 F1            [10]  795 	pop	af
-   87B8 E3            [19]  796 	ex	(sp),hl
-   87B9 CD C0 65      [17]  797 	call	_cpct_getRandom_mxor_u16
-   87BC D1            [10]  798 	pop	de
-   87BD C1            [10]  799 	pop	bc
-   87BE 7D            [ 4]  800 	ld	a, l
-   87BF E6 03         [ 7]  801 	and	a, #0x03
-   87C1 6F            [ 4]  802 	ld	l, a
-   87C2 26 00         [ 7]  803 	ld	h, #0x00
-                            804 ;src/game/world.c:137: p_forest[1] = 0b11000111;
-   87C4 DD 7E F8      [19]  805 	ld	a, -8 (ix)
-   87C7 C6 01         [ 7]  806 	add	a, #0x01
-   87C9 DD 77 FE      [19]  807 	ld	-2 (ix), a
-   87CC DD 7E F9      [19]  808 	ld	a, -7 (ix)
-   87CF CE 00         [ 7]  809 	adc	a, #0x00
-   87D1 DD 77 FF      [19]  810 	ld	-1 (ix), a
-                            811 ;src/game/world.c:138: p_forest[2] = 0b11011110;
-   87D4 DD 7E F8      [19]  812 	ld	a, -8 (ix)
-   87D7 C6 02         [ 7]  813 	add	a, #0x02
-   87D9 DD 77 F6      [19]  814 	ld	-10 (ix), a
-   87DC DD 7E F9      [19]  815 	ld	a, -7 (ix)
-   87DF CE 00         [ 7]  816 	adc	a, #0x00
-   87E1 DD 77 F7      [19]  817 	ld	-9 (ix), a
-                            818 ;src/game/world.c:139: p_forest[3] = 0b01111110;
-   87E4 DD 7E F8      [19]  819 	ld	a, -8 (ix)
-   87E7 C6 03         [ 7]  820 	add	a, #0x03
-   87E9 DD 77 F0      [19]  821 	ld	-16 (ix), a
-   87EC DD 7E F9      [19]  822 	ld	a, -7 (ix)
-   87EF CE 00         [ 7]  823 	adc	a, #0x00
-   87F1 DD 77 F1      [19]  824 	ld	-15 (ix), a
-                            825 ;src/game/world.c:140: p_forest[4] = 0b11111110; 
-   87F4 DD 7E F8      [19]  826 	ld	a, -8 (ix)
-   87F7 C6 04         [ 7]  827 	add	a, #0x04
-   87F9 DD 77 F2      [19]  828 	ld	-14 (ix), a
-   87FC DD 7E F9      [19]  829 	ld	a, -7 (ix)
-   87FF CE 00         [ 7]  830 	adc	a, #0x00
-   8801 DD 77 F3      [19]  831 	ld	-13 (ix), a
-                            832 ;src/game/world.c:141: p_forest[5] = 0b01111111;
-   8804 DD 7E F8      [19]  833 	ld	a, -8 (ix)
-   8807 C6 05         [ 7]  834 	add	a, #0x05
-   8809 DD 77 FC      [19]  835 	ld	-4 (ix), a
-   880C DD 7E F9      [19]  836 	ld	a, -7 (ix)
-   880F CE 00         [ 7]  837 	adc	a, #0x00
-   8811 DD 77 FD      [19]  838 	ld	-3 (ix), a
-                            839 ;src/game/world.c:142: p_forest[6] = 0b11101111;
-   8814 DD 7E F8      [19]  840 	ld	a, -8 (ix)
-   8817 C6 06         [ 7]  841 	add	a, #0x06
-   8819 DD 77 FA      [19]  842 	ld	-6 (ix), a
-   881C DD 7E F9      [19]  843 	ld	a, -7 (ix)
-   881F CE 00         [ 7]  844 	adc	a, #0x00
-   8821 DD 77 FB      [19]  845 	ld	-5 (ix), a
-                            846 ;src/game/world.c:143: p_forest[7] = 0b11001111;
-   8824 DD 7E F8      [19]  847 	ld	a, -8 (ix)
-   8827 C6 07         [ 7]  848 	add	a, #0x07
-   8829 DD 77 F4      [19]  849 	ld	-12 (ix), a
-   882C DD 7E F9      [19]  850 	ld	a, -7 (ix)
-   882F CE 00         [ 7]  851 	adc	a, #0x00
-   8831 DD 77 F5      [19]  852 	ld	-11 (ix), a
-                            853 ;src/game/world.c:133: switch(cpct_getRandom_mxor_u16()%4)
-   8834 7D            [ 4]  854 	ld	a, l
-   8835 B7            [ 4]  855 	or	a, a
-   8836 B4            [ 4]  856 	or	a, h
-   8837 28 16         [12]  857 	jr	Z,00102$
-   8839 7D            [ 4]  858 	ld	a, l
-   883A 3D            [ 4]  859 	dec	a
-   883B B4            [ 4]  860 	or	a, h
-   883C 28 54         [12]  861 	jr	Z,00103$
-   883E 7D            [ 4]  862 	ld	a, l
-   883F D6 02         [ 7]  863 	sub	a, #0x02
-   8841 B4            [ 4]  864 	or	a, h
-   8842 CA D5 88      [10]  865 	jp	Z,00104$
-   8845 7D            [ 4]  866 	ld	a, l
-   8846 D6 03         [ 7]  867 	sub	a, #0x03
-   8848 B4            [ 4]  868 	or	a, h
-   8849 CA 17 89      [10]  869 	jp	Z,00105$
-   884C C3 57 89      [10]  870 	jp	00106$
-                            871 ;src/game/world.c:135: case 0:
-   884F                     872 00102$:
-                            873 ;src/game/world.c:136: p_forest[0] = 0b10000100;
-   884F DD 6E F8      [19]  874 	ld	l,-8 (ix)
-   8852 DD 66 F9      [19]  875 	ld	h,-7 (ix)
-   8855 36 84         [10]  876 	ld	(hl), #0x84
-                            877 ;src/game/world.c:137: p_forest[1] = 0b11000111;
-   8857 DD 6E FE      [19]  878 	ld	l,-2 (ix)
-   885A DD 66 FF      [19]  879 	ld	h,-1 (ix)
-   885D 36 C7         [10]  880 	ld	(hl), #0xc7
-                            881 ;src/game/world.c:138: p_forest[2] = 0b11011110;
-   885F DD 6E F6      [19]  882 	ld	l,-10 (ix)
-   8862 DD 66 F7      [19]  883 	ld	h,-9 (ix)
-   8865 36 DE         [10]  884 	ld	(hl), #0xde
-                            885 ;src/game/world.c:139: p_forest[3] = 0b01111110;
-   8867 DD 6E F0      [19]  886 	ld	l,-16 (ix)
-   886A DD 66 F1      [19]  887 	ld	h,-15 (ix)
-   886D 36 7E         [10]  888 	ld	(hl), #0x7e
-                            889 ;src/game/world.c:140: p_forest[4] = 0b11111110; 
-   886F DD 6E F2      [19]  890 	ld	l,-14 (ix)
-   8872 DD 66 F3      [19]  891 	ld	h,-13 (ix)
-   8875 36 FE         [10]  892 	ld	(hl), #0xfe
-                            893 ;src/game/world.c:141: p_forest[5] = 0b01111111;
-   8877 DD 6E FC      [19]  894 	ld	l,-4 (ix)
-   887A DD 66 FD      [19]  895 	ld	h,-3 (ix)
-   887D 36 7F         [10]  896 	ld	(hl), #0x7f
-                            897 ;src/game/world.c:142: p_forest[6] = 0b11101111;
-   887F DD 6E FA      [19]  898 	ld	l,-6 (ix)
-   8882 DD 66 FB      [19]  899 	ld	h,-5 (ix)
-   8885 36 EF         [10]  900 	ld	(hl), #0xef
-                            901 ;src/game/world.c:143: p_forest[7] = 0b11001111;
-   8887 DD 6E F4      [19]  902 	ld	l,-12 (ix)
-   888A DD 66 F5      [19]  903 	ld	h,-11 (ix)
-   888D 36 CF         [10]  904 	ld	(hl), #0xcf
-                            905 ;src/game/world.c:144: break;
-   888F C3 57 89      [10]  906 	jp	00106$
-                            907 ;src/game/world.c:145: case 1:
-   8892                     908 00103$:
-                            909 ;src/game/world.c:146: p_forest[0] = 0b00001100;
-   8892 DD 6E F8      [19]  910 	ld	l,-8 (ix)
-   8895 DD 66 F9      [19]  911 	ld	h,-7 (ix)
-   8898 36 0C         [10]  912 	ld	(hl), #0x0c
-                            913 ;src/game/world.c:147: p_forest[1] = 0b11111000;
-   889A DD 6E FE      [19]  914 	ld	l,-2 (ix)
-   889D DD 66 FF      [19]  915 	ld	h,-1 (ix)
-   88A0 36 F8         [10]  916 	ld	(hl), #0xf8
-                            917 ;src/game/world.c:148: p_forest[2] = 0b00111111;
-   88A2 DD 6E F6      [19]  918 	ld	l,-10 (ix)
-   88A5 DD 66 F7      [19]  919 	ld	h,-9 (ix)
-   88A8 36 3F         [10]  920 	ld	(hl), #0x3f
-                            921 ;src/game/world.c:149: p_forest[3] = 0b01111110;
-   88AA DD 6E F0      [19]  922 	ld	l,-16 (ix)
-   88AD DD 66 F1      [19]  923 	ld	h,-15 (ix)
-   88B0 36 7E         [10]  924 	ld	(hl), #0x7e
-                            925 ;src/game/world.c:150: p_forest[4] = 0b11111110; 
-   88B2 DD 6E F2      [19]  926 	ld	l,-14 (ix)
-   88B5 DD 66 F3      [19]  927 	ld	h,-13 (ix)
-   88B8 36 FE         [10]  928 	ld	(hl), #0xfe
-                            929 ;src/game/world.c:151: p_forest[5] = 0b01011111;
-   88BA DD 6E FC      [19]  930 	ld	l,-4 (ix)
-   88BD DD 66 FD      [19]  931 	ld	h,-3 (ix)
-   88C0 36 5F         [10]  932 	ld	(hl), #0x5f
-                            933 ;src/game/world.c:152: p_forest[6] = 0b11001111;
-   88C2 DD 6E FA      [19]  934 	ld	l,-6 (ix)
-   88C5 DD 66 FB      [19]  935 	ld	h,-5 (ix)
-   88C8 36 CF         [10]  936 	ld	(hl), #0xcf
-                            937 ;src/game/world.c:153: p_forest[7] = 0b10001100;
-   88CA DD 6E F4      [19]  938 	ld	l,-12 (ix)
-   88CD DD 66 F5      [19]  939 	ld	h,-11 (ix)
-   88D0 36 8C         [10]  940 	ld	(hl), #0x8c
-                            941 ;src/game/world.c:154: break;
-   88D2 C3 57 89      [10]  942 	jp	00106$
-                            943 ;src/game/world.c:155: case 2:
-   88D5                     944 00104$:
-                            945 ;src/game/world.c:156: p_forest[0] = 0b00110000;
-   88D5 DD 6E F8      [19]  946 	ld	l,-8 (ix)
-   88D8 DD 66 F9      [19]  947 	ld	h,-7 (ix)
-   88DB 36 30         [10]  948 	ld	(hl), #0x30
-                            949 ;src/game/world.c:157: p_forest[1] = 0b11110100;
-   88DD DD 6E FE      [19]  950 	ld	l,-2 (ix)
-   88E0 DD 66 FF      [19]  951 	ld	h,-1 (ix)
-   88E3 36 F4         [10]  952 	ld	(hl), #0xf4
-                            953 ;src/game/world.c:158: p_forest[2] = 0b11111111;
-   88E5 DD 6E F6      [19]  954 	ld	l,-10 (ix)
-   88E8 DD 66 F7      [19]  955 	ld	h,-9 (ix)
-   88EB 36 FF         [10]  956 	ld	(hl), #0xff
-                            957 ;src/game/world.c:159: p_forest[3] = 0b11111111;
-   88ED DD 6E F0      [19]  958 	ld	l,-16 (ix)
-   88F0 DD 66 F1      [19]  959 	ld	h,-15 (ix)
-   88F3 36 FF         [10]  960 	ld	(hl), #0xff
-                            961 ;src/game/world.c:160: p_forest[4] = 0b01111100;
-   88F5 DD 6E F2      [19]  962 	ld	l,-14 (ix)
-   88F8 DD 66 F3      [19]  963 	ld	h,-13 (ix)
-   88FB 36 7C         [10]  964 	ld	(hl), #0x7c
-                            965 ;src/game/world.c:161: p_forest[5] = 0b01111110;
-   88FD DD 6E FC      [19]  966 	ld	l,-4 (ix)
-   8900 DD 66 FD      [19]  967 	ld	h,-3 (ix)
-   8903 36 7E         [10]  968 	ld	(hl), #0x7e
-                            969 ;src/game/world.c:162: p_forest[6] = 0b00111110;
-   8905 DD 6E FA      [19]  970 	ld	l,-6 (ix)
-   8908 DD 66 FB      [19]  971 	ld	h,-5 (ix)
-   890B 36 3E         [10]  972 	ld	(hl), #0x3e
-                            973 ;src/game/world.c:163: p_forest[7] = 0b00011000;
-   890D DD 6E F4      [19]  974 	ld	l,-12 (ix)
-   8910 DD 66 F5      [19]  975 	ld	h,-11 (ix)
-   8913 36 18         [10]  976 	ld	(hl), #0x18
-                            977 ;src/game/world.c:164: break;
-   8915 18 40         [12]  978 	jr	00106$
-                            979 ;src/game/world.c:165: case 3:
-   8917                     980 00105$:
-                            981 ;src/game/world.c:166: p_forest[0] = 0b11000000; 
-   8917 DD 6E F8      [19]  982 	ld	l,-8 (ix)
-   891A DD 66 F9      [19]  983 	ld	h,-7 (ix)
-   891D 36 C0         [10]  984 	ld	(hl), #0xc0
-                            985 ;src/game/world.c:167: p_forest[1] = 0b11100111;
-   891F DD 6E FE      [19]  986 	ld	l,-2 (ix)
-   8922 DD 66 FF      [19]  987 	ld	h,-1 (ix)
-   8925 36 E7         [10]  988 	ld	(hl), #0xe7
-                            989 ;src/game/world.c:168: p_forest[2] = 0b01111110;
-   8927 DD 6E F6      [19]  990 	ld	l,-10 (ix)
-   892A DD 66 F7      [19]  991 	ld	h,-9 (ix)
-   892D 36 7E         [10]  992 	ld	(hl), #0x7e
-                            993 ;src/game/world.c:169: p_forest[3] = 0b01111110;
-   892F DD 6E F0      [19]  994 	ld	l,-16 (ix)
-   8932 DD 66 F1      [19]  995 	ld	h,-15 (ix)
-   8935 36 7E         [10]  996 	ld	(hl), #0x7e
-                            997 ;src/game/world.c:170: p_forest[4] = 0b11111110;
-   8937 DD 6E F2      [19]  998 	ld	l,-14 (ix)
-   893A DD 66 F3      [19]  999 	ld	h,-13 (ix)
-   893D 36 FE         [10] 1000 	ld	(hl), #0xfe
-                           1001 ;src/game/world.c:171: p_forest[5] = 0b11111100;
-   893F DD 6E FC      [19] 1002 	ld	l,-4 (ix)
-   8942 DD 66 FD      [19] 1003 	ld	h,-3 (ix)
-   8945 36 FC         [10] 1004 	ld	(hl), #0xfc
-                           1005 ;src/game/world.c:172: p_forest[6] = 0b01111000;
-   8947 DD 6E FA      [19] 1006 	ld	l,-6 (ix)
-   894A DD 66 FB      [19] 1007 	ld	h,-5 (ix)
-   894D 36 78         [10] 1008 	ld	(hl), #0x78
-                           1009 ;src/game/world.c:173: p_forest[7] = 0b00110000;
-   894F DD 6E F4      [19] 1010 	ld	l,-12 (ix)
-   8952 DD 66 F5      [19] 1011 	ld	h,-11 (ix)
-   8955 36 30         [10] 1012 	ld	(hl), #0x30
-                           1013 ;src/game/world.c:175: }
-   8957                    1014 00106$:
-                           1015 ;src/game/world.c:176: patternTile(FOREST, iy, 8, 8, p_forest);
-   8957 DD 6E F8      [19] 1016 	ld	l,-8 (ix)
-   895A DD 66 F9      [19] 1017 	ld	h,-7 (ix)
-   895D C5            [11] 1018 	push	bc
-   895E E5            [11] 1019 	push	hl
-   895F 21 08 08      [10] 1020 	ld	hl, #0x0808
-   8962 E5            [11] 1021 	push	hl
-   8963 D5            [11] 1022 	push	de
-   8964 3E 08         [ 7] 1023 	ld	a, #0x08
-   8966 F5            [11] 1024 	push	af
-   8967 33            [ 6] 1025 	inc	sp
-   8968 CD 7E 86      [17] 1026 	call	_patternTile
-   896B 21 07 00      [10] 1027 	ld	hl, #7
-   896E 39            [11] 1028 	add	hl, sp
-   896F F9            [ 6] 1029 	ld	sp, hl
-   8970 C1            [10] 1030 	pop	bc
-                           1031 ;src/game/world.c:129: for(ix=0; ix<NBFOREST; ix++)
-   8971 03            [ 6] 1032 	inc	bc
-   8972 79            [ 4] 1033 	ld	a, c
-   8973 D6 32         [ 7] 1034 	sub	a, #0x32
-   8975 78            [ 4] 1035 	ld	a, b
-   8976 17            [ 4] 1036 	rla
-   8977 3F            [ 4] 1037 	ccf
-   8978 1F            [ 4] 1038 	rra
-   8979 DE 80         [ 7] 1039 	sbc	a, #0x80
-   897B DA AB 87      [10] 1040 	jp	C, 00121$
-                           1041 ;src/game/world.c:182: for(ix=0; ix<NBFARM; ix++)
-   897E 01 3C 00      [10] 1042 	ld	bc, #0x003c
-   8981                    1043 00125$:
-                           1044 ;src/game/world.c:184: iy = cpct_getRandom_mxor_u16()%(WIDTH*HEIGHT)%(WIDTH*HEIGHT);
-   8981 C5            [11] 1045 	push	bc
-   8982 CD C0 65      [17] 1046 	call	_cpct_getRandom_mxor_u16
-   8985 11 00 0F      [10] 1047 	ld	de, #0x0f00
-   8988 D5            [11] 1048 	push	de
-   8989 E5            [11] 1049 	push	hl
-   898A CD 8E 62      [17] 1050 	call	__moduint
-   898D F1            [10] 1051 	pop	af
-   898E F1            [10] 1052 	pop	af
-   898F 11 00 0F      [10] 1053 	ld	de, #0x0f00
-   8992 D5            [11] 1054 	push	de
-   8993 E5            [11] 1055 	push	hl
-   8994 CD 8E 62      [17] 1056 	call	__moduint
-   8997 F1            [10] 1057 	pop	af
-   8998 F1            [10] 1058 	pop	af
-   8999 C1            [10] 1059 	pop	bc
-                           1060 ;src/game/world.c:185: p_world[iy] = cpct_rand()%2+5;
-   899A 11 B5 74      [10] 1061 	ld	de, #_p_world
-   899D 19            [11] 1062 	add	hl, de
-   899E E5            [11] 1063 	push	hl
-   899F C5            [11] 1064 	push	bc
-   89A0 CD C8 66      [17] 1065 	call	_cpct_getRandom_mxor_u8
-   89A3 7D            [ 4] 1066 	ld	a, l
-   89A4 C1            [10] 1067 	pop	bc
-   89A5 E1            [10] 1068 	pop	hl
-   89A6 E6 01         [ 7] 1069 	and	a, #0x01
-   89A8 C6 05         [ 7] 1070 	add	a, #0x05
-   89AA 77            [ 7] 1071 	ld	(hl), a
-   89AB 0B            [ 6] 1072 	dec	bc
-                           1073 ;src/game/world.c:182: for(ix=0; ix<NBFARM; ix++)
-   89AC 78            [ 4] 1074 	ld	a, b
-   89AD B1            [ 4] 1075 	or	a,c
-   89AE 20 D1         [12] 1076 	jr	NZ,00125$
-                           1077 ;src/game/world.c:190: for(ix=0; ix<NBURBAN; ix++)
-   89B0 01 14 00      [10] 1078 	ld	bc, #0x0014
-   89B3                    1079 00128$:
-                           1080 ;src/game/world.c:192: iy = cpct_getRandom_mxor_u16()%(WIDTH*HEIGHT);
-   89B3 C5            [11] 1081 	push	bc
-   89B4 CD C0 65      [17] 1082 	call	_cpct_getRandom_mxor_u16
-   89B7 11 00 0F      [10] 1083 	ld	de, #0x0f00
-   89BA D5            [11] 1084 	push	de
-   89BB E5            [11] 1085 	push	hl
-   89BC CD 8E 62      [17] 1086 	call	__moduint
-   89BF F1            [10] 1087 	pop	af
-   89C0 F1            [10] 1088 	pop	af
-   89C1 C1            [10] 1089 	pop	bc
-                           1090 ;src/game/world.c:193: p_world[iy] = cpct_rand()%3+2;
-   89C2 11 B5 74      [10] 1091 	ld	de, #_p_world
-   89C5 19            [11] 1092 	add	hl, de
-   89C6 E5            [11] 1093 	push	hl
-   89C7 C5            [11] 1094 	push	bc
-   89C8 CD C8 66      [17] 1095 	call	_cpct_getRandom_mxor_u8
-   89CB 55            [ 4] 1096 	ld	d, l
-   89CC 3E 03         [ 7] 1097 	ld	a, #0x03
-   89CE F5            [11] 1098 	push	af
-   89CF 33            [ 6] 1099 	inc	sp
-   89D0 D5            [11] 1100 	push	de
-   89D1 33            [ 6] 1101 	inc	sp
-   89D2 CD 82 62      [17] 1102 	call	__moduchar
-   89D5 F1            [10] 1103 	pop	af
-   89D6 5D            [ 4] 1104 	ld	e, l
-   89D7 C1            [10] 1105 	pop	bc
-   89D8 E1            [10] 1106 	pop	hl
-   89D9 1C            [ 4] 1107 	inc	e
-   89DA 1C            [ 4] 1108 	inc	e
-   89DB 73            [ 7] 1109 	ld	(hl), e
-   89DC 0B            [ 6] 1110 	dec	bc
-                           1111 ;src/game/world.c:190: for(ix=0; ix<NBURBAN; ix++)
-   89DD 78            [ 4] 1112 	ld	a, b
-   89DE B1            [ 4] 1113 	or	a,c
-   89DF 20 D2         [12] 1114 	jr	NZ,00128$
-                           1115 ;src/game/world.c:196: for(ix=0; ix<NBURBAN; ix++)
-   89E1 21 08 00      [10] 1116 	ld	hl, #0x0008
-   89E4 39            [11] 1117 	add	hl, sp
-   89E5 4D            [ 4] 1118 	ld	c, l
-   89E6 44            [ 4] 1119 	ld	b, h
-   89E7 DD 36 EE 00   [19] 1120 	ld	-18 (ix), #0x00
-   89EB DD 36 EF 00   [19] 1121 	ld	-17 (ix), #0x00
-   89EF                    1122 00129$:
-                           1123 ;src/game/world.c:198: iy = cpct_getRandom_mxor_u16()%(WIDTH*HEIGHT);
-   89EF C5            [11] 1124 	push	bc
-   89F0 CD C0 65      [17] 1125 	call	_cpct_getRandom_mxor_u16
-   89F3 11 00 0F      [10] 1126 	ld	de, #0x0f00
-   89F6 D5            [11] 1127 	push	de
-   89F7 E5            [11] 1128 	push	hl
-   89F8 CD 8E 62      [17] 1129 	call	__moduint
-   89FB F1            [10] 1130 	pop	af
-   89FC F1            [10] 1131 	pop	af
-   89FD C1            [10] 1132 	pop	bc
-   89FE DD 75 F4      [19] 1133 	ld	-12 (ix), l
-   8A01 DD 74 F5      [19] 1134 	ld	-11 (ix), h
-                           1135 ;src/game/world.c:200: switch(cpct_rand()%6)
-   8A04 C5            [11] 1136 	push	bc
-   8A05 CD C8 66      [17] 1137 	call	_cpct_getRandom_mxor_u8
-   8A08 55            [ 4] 1138 	ld	d, l
-   8A09 3E 06         [ 7] 1139 	ld	a, #0x06
-   8A0B F5            [11] 1140 	push	af
-   8A0C 33            [ 6] 1141 	inc	sp
-   8A0D D5            [11] 1142 	push	de
-   8A0E 33            [ 6] 1143 	inc	sp
-   8A0F CD 82 62      [17] 1144 	call	__moduchar
-   8A12 F1            [10] 1145 	pop	af
-   8A13 5D            [ 4] 1146 	ld	e, l
-   8A14 C1            [10] 1147 	pop	bc
-   8A15 3E 05         [ 7] 1148 	ld	a, #0x05
-   8A17 93            [ 4] 1149 	sub	a, e
-   8A18 38 6A         [12] 1150 	jr	C,00116$
-                           1151 ;src/game/world.c:204: p_cities[1] = 0b01000110; // 01100010;
-   8A1A 21 01 00      [10] 1152 	ld	hl, #0x0001
-   8A1D 09            [11] 1153 	add	hl,bc
-   8A1E DD 75 FA      [19] 1154 	ld	-6 (ix), l
-   8A21 DD 74 FB      [19] 1155 	ld	-5 (ix), h
-                           1156 ;src/game/world.c:200: switch(cpct_rand()%6)
-   8A24 16 00         [ 7] 1157 	ld	d, #0x00
-   8A26 21 2C 8A      [10] 1158 	ld	hl, #00211$
-   8A29 19            [11] 1159 	add	hl, de
-   8A2A 19            [11] 1160 	add	hl, de
-                           1161 ;src/game/world.c:202: case 0:
-   8A2B E9            [ 4] 1162 	jp	(hl)
-   8A2C                    1163 00211$:
-   8A2C 18 0A         [12] 1164 	jr	00110$
-   8A2E 18 15         [12] 1165 	jr	00111$
-   8A30 18 20         [12] 1166 	jr	00112$
-   8A32 18 2B         [12] 1167 	jr	00113$
-   8A34 18 36         [12] 1168 	jr	00114$
-   8A36 18 41         [12] 1169 	jr	00115$
-   8A38                    1170 00110$:
-                           1171 ;src/game/world.c:203: p_cities[0] = 0b01110010; // 01001110;
-   8A38 3E 72         [ 7] 1172 	ld	a, #0x72
-   8A3A 02            [ 7] 1173 	ld	(bc), a
-                           1174 ;src/game/world.c:204: p_cities[1] = 0b01000110; // 01100010;
-   8A3B DD 6E FA      [19] 1175 	ld	l,-6 (ix)
-   8A3E DD 66 FB      [19] 1176 	ld	h,-5 (ix)
-   8A41 36 46         [10] 1177 	ld	(hl), #0x46
-                           1178 ;src/game/world.c:205: break;
-   8A43 18 3F         [12] 1179 	jr	00116$
-                           1180 ;src/game/world.c:207: case 1:
-   8A45                    1181 00111$:
-                           1182 ;src/game/world.c:208: p_cities[0] = 0b01100000; // 00000110;
-   8A45 3E 60         [ 7] 1183 	ld	a, #0x60
-   8A47 02            [ 7] 1184 	ld	(bc), a
-                           1185 ;src/game/world.c:209: p_cities[1] = 0b00000110; // 01100000;
-   8A48 DD 6E FA      [19] 1186 	ld	l,-6 (ix)
-   8A4B DD 66 FB      [19] 1187 	ld	h,-5 (ix)
-   8A4E 36 06         [10] 1188 	ld	(hl), #0x06
-                           1189 ;src/game/world.c:210: break;
-   8A50 18 32         [12] 1190 	jr	00116$
-                           1191 ;src/game/world.c:212: case 2:
-   8A52                    1192 00112$:
-                           1193 ;src/game/world.c:213: p_cities[0] = 0b00010000; // 00001000;
-   8A52 3E 10         [ 7] 1194 	ld	a, #0x10
-   8A54 02            [ 7] 1195 	ld	(bc), a
-                           1196 ;src/game/world.c:214: p_cities[1] = 0b00000110; // 01100000;
-   8A55 DD 6E FA      [19] 1197 	ld	l,-6 (ix)
-   8A58 DD 66 FB      [19] 1198 	ld	h,-5 (ix)
-   8A5B 36 06         [10] 1199 	ld	(hl), #0x06
-                           1200 ;src/game/world.c:215: break;
-   8A5D 18 25         [12] 1201 	jr	00116$
-                           1202 ;src/game/world.c:217: case 3:
-   8A5F                    1203 00113$:
-                           1204 ;src/game/world.c:218: p_cities[0] = 0b11000000; // 00000011;
-   8A5F 3E C0         [ 7] 1205 	ld	a, #0xc0
-   8A61 02            [ 7] 1206 	ld	(bc), a
-                           1207 ;src/game/world.c:219: p_cities[1] = 0b00110001; // 10001100;
-   8A62 DD 6E FA      [19] 1208 	ld	l,-6 (ix)
-   8A65 DD 66 FB      [19] 1209 	ld	h,-5 (ix)
-   8A68 36 31         [10] 1210 	ld	(hl), #0x31
-                           1211 ;src/game/world.c:220: break;
-   8A6A 18 18         [12] 1212 	jr	00116$
-                           1213 ;src/game/world.c:222: case 4:
-   8A6C                    1214 00114$:
-                           1215 ;src/game/world.c:223: p_cities[0] = 0b11000100; // 00100011;
-   8A6C 3E C4         [ 7] 1216 	ld	a, #0xc4
-   8A6E 02            [ 7] 1217 	ld	(bc), a
-                           1218 ;src/game/world.c:224: p_cities[1] = 0b00001110; // 01110000;
-   8A6F DD 6E FA      [19] 1219 	ld	l,-6 (ix)
-   8A72 DD 66 FB      [19] 1220 	ld	h,-5 (ix)
-   8A75 36 0E         [10] 1221 	ld	(hl), #0x0e
-                           1222 ;src/game/world.c:225: break;
-   8A77 18 0B         [12] 1223 	jr	00116$
-                           1224 ;src/game/world.c:227: case 5:
-   8A79                    1225 00115$:
-                           1226 ;src/game/world.c:228: p_cities[0] = 0b01000000; // 00000010;
-   8A79 3E 40         [ 7] 1227 	ld	a, #0x40
-   8A7B 02            [ 7] 1228 	ld	(bc), a
-                           1229 ;src/game/world.c:229: p_cities[1] = 0b01001110; // 01110010;
-   8A7C DD 6E FA      [19] 1230 	ld	l,-6 (ix)
-   8A7F DD 66 FB      [19] 1231 	ld	h,-5 (ix)
-   8A82 36 4E         [10] 1232 	ld	(hl), #0x4e
-                           1233 ;src/game/world.c:231: }
-   8A84                    1234 00116$:
-                           1235 ;src/game/world.c:233: patternTile(DWELLINGS1, iy, 4, 4, p_cities);
-   8A84 59            [ 4] 1236 	ld	e, c
-   8A85 50            [ 4] 1237 	ld	d, b
-   8A86 C5            [11] 1238 	push	bc
-   8A87 D5            [11] 1239 	push	de
-   8A88 21 04 04      [10] 1240 	ld	hl, #0x0404
-   8A8B E5            [11] 1241 	push	hl
-   8A8C DD 6E F4      [19] 1242 	ld	l,-12 (ix)
-   8A8F DD 66 F5      [19] 1243 	ld	h,-11 (ix)
-   8A92 E5            [11] 1244 	push	hl
-   8A93 3E 02         [ 7] 1245 	ld	a, #0x02
-   8A95 F5            [11] 1246 	push	af
-   8A96 33            [ 6] 1247 	inc	sp
-   8A97 CD 7E 86      [17] 1248 	call	_patternTile
-   8A9A 21 07 00      [10] 1249 	ld	hl, #7
-   8A9D 39            [11] 1250 	add	hl, sp
-   8A9E F9            [ 6] 1251 	ld	sp, hl
-   8A9F C1            [10] 1252 	pop	bc
-                           1253 ;src/game/world.c:196: for(ix=0; ix<NBURBAN; ix++)
-   8AA0 DD 34 EE      [23] 1254 	inc	-18 (ix)
-   8AA3 20 03         [12] 1255 	jr	NZ,00212$
-   8AA5 DD 34 EF      [23] 1256 	inc	-17 (ix)
-   8AA8                    1257 00212$:
-   8AA8 DD 7E EE      [19] 1258 	ld	a, -18 (ix)
-   8AAB D6 14         [ 7] 1259 	sub	a, #0x14
-   8AAD DD 7E EF      [19] 1260 	ld	a, -17 (ix)
-   8AB0 17            [ 4] 1261 	rla
-   8AB1 3F            [ 4] 1262 	ccf
-   8AB2 1F            [ 4] 1263 	rra
-   8AB3 DE 80         [ 7] 1264 	sbc	a, #0x80
-   8AB5 DA EF 89      [10] 1265 	jp	C, 00129$
-                           1266 ;src/game/world.c:238: for(ix=0; ix<NBLIVESTOCK; ix++)
-   8AB8 01 13 00      [10] 1267 	ld	bc, #0x0013
-   8ABB                    1268 00133$:
-                           1269 ;src/game/world.c:240: iy = cpct_getRandom_mxor_u16()%(WIDTH*HEIGHT);
-   8ABB C5            [11] 1270 	push	bc
-   8ABC CD C0 65      [17] 1271 	call	_cpct_getRandom_mxor_u16
-   8ABF 11 00 0F      [10] 1272 	ld	de, #0x0f00
-   8AC2 D5            [11] 1273 	push	de
-   8AC3 E5            [11] 1274 	push	hl
-   8AC4 CD 8E 62      [17] 1275 	call	__moduint
-   8AC7 F1            [10] 1276 	pop	af
-   8AC8 F1            [10] 1277 	pop	af
-   8AC9 C1            [10] 1278 	pop	bc
-                           1279 ;src/game/world.c:241: p_world[iy] = LIVESTOCK;
-   8ACA 11 B5 74      [10] 1280 	ld	de, #_p_world
-   8ACD 19            [11] 1281 	add	hl, de
-   8ACE 36 09         [10] 1282 	ld	(hl), #0x09
-   8AD0 0B            [ 6] 1283 	dec	bc
-                           1284 ;src/game/world.c:238: for(ix=0; ix<NBLIVESTOCK; ix++)
-   8AD1 78            [ 4] 1285 	ld	a, b
-   8AD2 B1            [ 4] 1286 	or	a,c
-   8AD3 20 E6         [12] 1287 	jr	NZ,00133$
-   8AD5 DD F9         [10] 1288 	ld	sp, ix
-   8AD7 DD E1         [14] 1289 	pop	ix
-   8AD9 C9            [10] 1290 	ret
-                           1291 ;src/game/world.c:245: void drawTile(u8 x_, u8 y_, u8 ix, u8 iy)
-                           1292 ;	---------------------------------
-                           1293 ; Function drawTile
-                           1294 ; ---------------------------------
-   8ADA                    1295 _drawTile::
-   8ADA DD E5         [15] 1296 	push	ix
-   8ADC DD 21 00 00   [14] 1297 	ld	ix,#0
-   8AE0 DD 39         [15] 1298 	add	ix,sp
-                           1299 ;src/game/world.c:248: int adress = (y_+iy)*WIDTH+x_+ix;
-   8AE2 DD 4E 05      [19] 1300 	ld	c, 5 (ix)
-   8AE5 06 00         [ 7] 1301 	ld	b, #0x00
-   8AE7 DD 6E 07      [19] 1302 	ld	l, 7 (ix)
-   8AEA 26 00         [ 7] 1303 	ld	h, #0x00
-   8AEC 09            [11] 1304 	add	hl, bc
-   8AED 4D            [ 4] 1305 	ld	c, l
-   8AEE 44            [ 4] 1306 	ld	b, h
-   8AEF 29            [11] 1307 	add	hl, hl
-   8AF0 29            [11] 1308 	add	hl, hl
-   8AF1 09            [11] 1309 	add	hl, bc
-   8AF2 29            [11] 1310 	add	hl, hl
-   8AF3 29            [11] 1311 	add	hl, hl
-   8AF4 29            [11] 1312 	add	hl, hl
-   8AF5 29            [11] 1313 	add	hl, hl
-   8AF6 DD 4E 04      [19] 1314 	ld	c, 4 (ix)
-   8AF9 06 00         [ 7] 1315 	ld	b, #0x00
-   8AFB 09            [11] 1316 	add	hl, bc
-   8AFC DD 4E 06      [19] 1317 	ld	c, 6 (ix)
-   8AFF 06 00         [ 7] 1318 	ld	b, #0x00
-   8B01 09            [11] 1319 	add	hl,bc
-   8B02 5D            [ 4] 1320 	ld	e, l
-   8B03 54            [ 4] 1321 	ld	d, h
-                           1322 ;src/game/world.c:250: p_video = cpct_getScreenPtr(SCR_VMEM, ix*TILESIZE_W, iy*TILESIZE_H);
-   8B04 DD 7E 07      [19] 1323 	ld	a, 7 (ix)
-   8B07 07            [ 4] 1324 	rlca
-   8B08 07            [ 4] 1325 	rlca
-   8B09 07            [ 4] 1326 	rlca
-   8B0A 07            [ 4] 1327 	rlca
-   8B0B E6 F0         [ 7] 1328 	and	a, #0xf0
-   8B0D 67            [ 4] 1329 	ld	h, a
-   8B0E DD 7E 06      [19] 1330 	ld	a, 6 (ix)
-   8B11 87            [ 4] 1331 	add	a, a
-   8B12 87            [ 4] 1332 	add	a, a
-   8B13 47            [ 4] 1333 	ld	b, a
-   8B14 D5            [11] 1334 	push	de
-   8B15 E5            [11] 1335 	push	hl
-   8B16 33            [ 6] 1336 	inc	sp
-   8B17 C5            [11] 1337 	push	bc
-   8B18 33            [ 6] 1338 	inc	sp
-   8B19 21 00 C0      [10] 1339 	ld	hl, #0xc000
-   8B1C E5            [11] 1340 	push	hl
-   8B1D CD BF 67      [17] 1341 	call	_cpct_getScreenPtr
-   8B20 4D            [ 4] 1342 	ld	c, l
-   8B21 44            [ 4] 1343 	ld	b, h
-   8B22 D1            [10] 1344 	pop	de
-                           1345 ;src/game/world.c:252: switch(p_world[adress])
-   8B23 21 B5 74      [10] 1346 	ld	hl, #_p_world+0
-   8B26 19            [11] 1347 	add	hl, de
-   8B27 5E            [ 7] 1348 	ld	e, (hl)
-   8B28 3E 19         [ 7] 1349 	ld	a, #0x19
-   8B2A 93            [ 4] 1350 	sub	a, e
-   8B2B DA 00 8D      [10] 1351 	jp	C, 00128$
-   8B2E 16 00         [ 7] 1352 	ld	d, #0x00
-   8B30 21 37 8B      [10] 1353 	ld	hl, #00134$
-   8B33 19            [11] 1354 	add	hl, de
-   8B34 19            [11] 1355 	add	hl, de
-   8B35 19            [11] 1356 	add	hl, de
-   8B36 E9            [ 4] 1357 	jp	(hl)
-   8B37                    1358 00134$:
-   8B37 C3 85 8B      [10] 1359 	jp	00101$
-   8B3A C3 94 8B      [10] 1360 	jp	00102$
-   8B3D C3 A3 8B      [10] 1361 	jp	00103$
-   8B40 C3 B2 8B      [10] 1362 	jp	00104$
-   8B43 C3 C1 8B      [10] 1363 	jp	00105$
-   8B46 C3 D0 8B      [10] 1364 	jp	00106$
-   8B49 C3 DF 8B      [10] 1365 	jp	00107$
-   8B4C C3 EE 8B      [10] 1366 	jp	00108$
-   8B4F C3 FD 8B      [10] 1367 	jp	00109$
-   8B52 C3 0C 8C      [10] 1368 	jp	00110$
-   8B55 C3 1B 8C      [10] 1369 	jp	00111$
-   8B58 C3 2A 8C      [10] 1370 	jp	00112$
-   8B5B C3 39 8C      [10] 1371 	jp	00113$
-   8B5E C3 48 8C      [10] 1372 	jp	00114$
-   8B61 C3 57 8C      [10] 1373 	jp	00115$
-   8B64 C3 66 8C      [10] 1374 	jp	00116$
-   8B67 C3 75 8C      [10] 1375 	jp	00117$
-   8B6A C3 84 8C      [10] 1376 	jp	00118$
-   8B6D C3 92 8C      [10] 1377 	jp	00119$
-   8B70 C3 A0 8C      [10] 1378 	jp	00120$
-   8B73 C3 AE 8C      [10] 1379 	jp	00121$
-   8B76 C3 BC 8C      [10] 1380 	jp	00122$
-   8B79 C3 CA 8C      [10] 1381 	jp	00123$
-   8B7C C3 D8 8C      [10] 1382 	jp	00124$
-   8B7F C3 E6 8C      [10] 1383 	jp	00125$
-   8B82 C3 F4 8C      [10] 1384 	jp	00126$
-                           1385 ;src/game/world.c:254: case GRASS1:
-   8B85                    1386 00101$:
-                           1387 ;src/game/world.c:255: cpct_drawSprite(grass1, p_video, TILESIZE_W, TILESIZE_H);
-   8B85 21 04 10      [10] 1388 	ld	hl, #0x1004
-   8B88 E5            [11] 1389 	push	hl
-   8B89 C5            [11] 1390 	push	bc
-   8B8A 21 D4 47      [10] 1391 	ld	hl, #_grass1
-   8B8D E5            [11] 1392 	push	hl
-   8B8E CD DD 61      [17] 1393 	call	_cpct_drawSprite
-                           1394 ;src/game/world.c:256: break;
-   8B91 C3 00 8D      [10] 1395 	jp	00128$
-                           1396 ;src/game/world.c:257: case GRASS2:
-   8B94                    1397 00102$:
-                           1398 ;src/game/world.c:258: cpct_drawSprite(grass2, p_video, TILESIZE_W, TILESIZE_H);
-   8B94 21 04 10      [10] 1399 	ld	hl, #0x1004
-   8B97 E5            [11] 1400 	push	hl
-   8B98 C5            [11] 1401 	push	bc
-   8B99 21 14 48      [10] 1402 	ld	hl, #_grass2
-   8B9C E5            [11] 1403 	push	hl
-   8B9D CD DD 61      [17] 1404 	call	_cpct_drawSprite
-                           1405 ;src/game/world.c:259: break;
-   8BA0 C3 00 8D      [10] 1406 	jp	00128$
-                           1407 ;src/game/world.c:260: case DWELLINGS1:
-   8BA3                    1408 00103$:
-                           1409 ;src/game/world.c:261: cpct_drawSprite(dwellings1, p_video, TILESIZE_W, TILESIZE_H);
-   8BA3 21 04 10      [10] 1410 	ld	hl, #0x1004
-   8BA6 E5            [11] 1411 	push	hl
-   8BA7 C5            [11] 1412 	push	bc
-   8BA8 21 94 48      [10] 1413 	ld	hl, #_dwellings1
-   8BAB E5            [11] 1414 	push	hl
-   8BAC CD DD 61      [17] 1415 	call	_cpct_drawSprite
-                           1416 ;src/game/world.c:262: break;
-   8BAF C3 00 8D      [10] 1417 	jp	00128$
-                           1418 ;src/game/world.c:263: case DWELLINGS2:
-   8BB2                    1419 00104$:
-                           1420 ;src/game/world.c:264: cpct_drawSprite(dwellings2, p_video, TILESIZE_W, TILESIZE_H);
-   8BB2 21 04 10      [10] 1421 	ld	hl, #0x1004
-   8BB5 E5            [11] 1422 	push	hl
-   8BB6 C5            [11] 1423 	push	bc
-   8BB7 21 D4 48      [10] 1424 	ld	hl, #_dwellings2
-   8BBA E5            [11] 1425 	push	hl
-   8BBB CD DD 61      [17] 1426 	call	_cpct_drawSprite
-                           1427 ;src/game/world.c:265: break;
-   8BBE C3 00 8D      [10] 1428 	jp	00128$
-                           1429 ;src/game/world.c:266: case DWELLINGS3:
-   8BC1                    1430 00105$:
-                           1431 ;src/game/world.c:267: cpct_drawSprite(dwellings3, p_video, TILESIZE_W, TILESIZE_H);
-   8BC1 21 04 10      [10] 1432 	ld	hl, #0x1004
-   8BC4 E5            [11] 1433 	push	hl
-   8BC5 C5            [11] 1434 	push	bc
-   8BC6 21 14 49      [10] 1435 	ld	hl, #_dwellings3
-   8BC9 E5            [11] 1436 	push	hl
-   8BCA CD DD 61      [17] 1437 	call	_cpct_drawSprite
-                           1438 ;src/game/world.c:268: break;
-   8BCD C3 00 8D      [10] 1439 	jp	00128$
-                           1440 ;src/game/world.c:269: case FARM1:
-   8BD0                    1441 00106$:
-                           1442 ;src/game/world.c:270: cpct_drawSprite(farm1, p_video, TILESIZE_W, TILESIZE_H);
-   8BD0 21 04 10      [10] 1443 	ld	hl, #0x1004
-   8BD3 E5            [11] 1444 	push	hl
-   8BD4 C5            [11] 1445 	push	bc
-   8BD5 21 94 49      [10] 1446 	ld	hl, #_farm1
-   8BD8 E5            [11] 1447 	push	hl
-   8BD9 CD DD 61      [17] 1448 	call	_cpct_drawSprite
-                           1449 ;src/game/world.c:271: break;
-   8BDC C3 00 8D      [10] 1450 	jp	00128$
-                           1451 ;src/game/world.c:272: case FARM2:
-   8BDF                    1452 00107$:
-                           1453 ;src/game/world.c:273: cpct_drawSprite(farm2, p_video, TILESIZE_W, TILESIZE_H);
-   8BDF 21 04 10      [10] 1454 	ld	hl, #0x1004
-   8BE2 E5            [11] 1455 	push	hl
-   8BE3 C5            [11] 1456 	push	bc
-   8BE4 21 D4 49      [10] 1457 	ld	hl, #_farm2
-   8BE7 E5            [11] 1458 	push	hl
-   8BE8 CD DD 61      [17] 1459 	call	_cpct_drawSprite
-                           1460 ;src/game/world.c:274: break;
-   8BEB C3 00 8D      [10] 1461 	jp	00128$
-                           1462 ;src/game/world.c:275: case WATER:
-   8BEE                    1463 00108$:
-                           1464 ;src/game/world.c:276: cpct_drawSprite(water, p_video, TILESIZE_W, TILESIZE_H);
-   8BEE 21 04 10      [10] 1465 	ld	hl, #0x1004
-   8BF1 E5            [11] 1466 	push	hl
-   8BF2 C5            [11] 1467 	push	bc
-   8BF3 21 54 49      [10] 1468 	ld	hl, #_water
-   8BF6 E5            [11] 1469 	push	hl
-   8BF7 CD DD 61      [17] 1470 	call	_cpct_drawSprite
-                           1471 ;src/game/world.c:277: break;
-   8BFA C3 00 8D      [10] 1472 	jp	00128$
-                           1473 ;src/game/world.c:278: case FOREST:
-   8BFD                    1474 00109$:
-                           1475 ;src/game/world.c:279: cpct_drawSprite(forest, p_video, TILESIZE_W, TILESIZE_H);
-   8BFD 21 04 10      [10] 1476 	ld	hl, #0x1004
-   8C00 E5            [11] 1477 	push	hl
-   8C01 C5            [11] 1478 	push	bc
-   8C02 21 54 48      [10] 1479 	ld	hl, #_forest
-   8C05 E5            [11] 1480 	push	hl
-   8C06 CD DD 61      [17] 1481 	call	_cpct_drawSprite
-                           1482 ;src/game/world.c:280: break;
-   8C09 C3 00 8D      [10] 1483 	jp	00128$
-                           1484 ;src/game/world.c:281: case LIVESTOCK:
-   8C0C                    1485 00110$:
-                           1486 ;src/game/world.c:282: cpct_drawSprite(livestock, p_video, TILESIZE_W, TILESIZE_H);
-   8C0C 21 04 10      [10] 1487 	ld	hl, #0x1004
-   8C0F E5            [11] 1488 	push	hl
-   8C10 C5            [11] 1489 	push	bc
-   8C11 21 14 4A      [10] 1490 	ld	hl, #_livestock
-   8C14 E5            [11] 1491 	push	hl
-   8C15 CD DD 61      [17] 1492 	call	_cpct_drawSprite
-                           1493 ;src/game/world.c:283: break;
-   8C18 C3 00 8D      [10] 1494 	jp	00128$
-                           1495 ;src/game/world.c:284: case SSNS:
-   8C1B                    1496 00111$:
-                           1497 ;src/game/world.c:285: cpct_drawSprite(station_small_ns, p_video, TILESIZE_W, TILESIZE_H);
-   8C1B 21 04 10      [10] 1498 	ld	hl, #0x1004
-   8C1E E5            [11] 1499 	push	hl
-   8C1F C5            [11] 1500 	push	bc
-   8C20 21 54 4A      [10] 1501 	ld	hl, #_station_small_ns
-   8C23 E5            [11] 1502 	push	hl
-   8C24 CD DD 61      [17] 1503 	call	_cpct_drawSprite
-                           1504 ;src/game/world.c:286: break;
-   8C27 C3 00 8D      [10] 1505 	jp	00128$
-                           1506 ;src/game/world.c:287: case SSEW:
-   8C2A                    1507 00112$:
-                           1508 ;src/game/world.c:288: cpct_drawSprite(station_small_ew, p_video, TILESIZE_W, TILESIZE_H);
-   8C2A 21 04 10      [10] 1509 	ld	hl, #0x1004
-   8C2D E5            [11] 1510 	push	hl
-   8C2E C5            [11] 1511 	push	bc
-   8C2F 21 94 4A      [10] 1512 	ld	hl, #_station_small_ew
-   8C32 E5            [11] 1513 	push	hl
-   8C33 CD DD 61      [17] 1514 	call	_cpct_drawSprite
-                           1515 ;src/game/world.c:289: break;
-   8C36 C3 00 8D      [10] 1516 	jp	00128$
-                           1517 ;src/game/world.c:290: case SMNS:
-   8C39                    1518 00113$:
-                           1519 ;src/game/world.c:291: cpct_drawSprite(station_medium_ns, p_video, TILESIZE_W, TILESIZE_H);
-   8C39 21 04 10      [10] 1520 	ld	hl, #0x1004
-   8C3C E5            [11] 1521 	push	hl
-   8C3D C5            [11] 1522 	push	bc
-   8C3E 21 D4 4A      [10] 1523 	ld	hl, #_station_medium_ns
-   8C41 E5            [11] 1524 	push	hl
-   8C42 CD DD 61      [17] 1525 	call	_cpct_drawSprite
-                           1526 ;src/game/world.c:292: break;
-   8C45 C3 00 8D      [10] 1527 	jp	00128$
-                           1528 ;src/game/world.c:293: case SMEW:
-   8C48                    1529 00114$:
-                           1530 ;src/game/world.c:294: cpct_drawSprite(station_medium_ew, p_video, TILESIZE_W, TILESIZE_H);
-   8C48 21 04 10      [10] 1531 	ld	hl, #0x1004
-   8C4B E5            [11] 1532 	push	hl
-   8C4C C5            [11] 1533 	push	bc
-   8C4D 21 14 4B      [10] 1534 	ld	hl, #_station_medium_ew
-   8C50 E5            [11] 1535 	push	hl
-   8C51 CD DD 61      [17] 1536 	call	_cpct_drawSprite
-                           1537 ;src/game/world.c:295: break;
-   8C54 C3 00 8D      [10] 1538 	jp	00128$
-                           1539 ;src/game/world.c:296: case SLNS:
-   8C57                    1540 00115$:
-                           1541 ;src/game/world.c:297: cpct_drawSprite(station_large_ns, p_video, TILESIZE_W, TILESIZE_H);
-   8C57 21 04 10      [10] 1542 	ld	hl, #0x1004
-   8C5A E5            [11] 1543 	push	hl
-   8C5B C5            [11] 1544 	push	bc
-   8C5C 21 54 4B      [10] 1545 	ld	hl, #_station_large_ns
-   8C5F E5            [11] 1546 	push	hl
-   8C60 CD DD 61      [17] 1547 	call	_cpct_drawSprite
-                           1548 ;src/game/world.c:298: break;
-   8C63 C3 00 8D      [10] 1549 	jp	00128$
-                           1550 ;src/game/world.c:299: case SLEW:
-   8C66                    1551 00116$:
-                           1552 ;src/game/world.c:300: cpct_drawSprite(station_large_ew, p_video, TILESIZE_W, TILESIZE_H);
-   8C66 21 04 10      [10] 1553 	ld	hl, #0x1004
-   8C69 E5            [11] 1554 	push	hl
-   8C6A C5            [11] 1555 	push	bc
-   8C6B 21 94 4B      [10] 1556 	ld	hl, #_station_large_ew
-   8C6E E5            [11] 1557 	push	hl
-   8C6F CD DD 61      [17] 1558 	call	_cpct_drawSprite
-                           1559 ;src/game/world.c:301: break;
-   8C72 C3 00 8D      [10] 1560 	jp	00128$
-                           1561 ;src/game/world.c:302: case REW:
-   8C75                    1562 00117$:
-                           1563 ;src/game/world.c:303: cpct_drawSprite(rail_ew, p_video, TILESIZE_W, TILESIZE_H);	
-   8C75 21 04 10      [10] 1564 	ld	hl, #0x1004
-   8C78 E5            [11] 1565 	push	hl
-   8C79 C5            [11] 1566 	push	bc
-   8C7A 21 D4 4B      [10] 1567 	ld	hl, #_rail_ew
-   8C7D E5            [11] 1568 	push	hl
-   8C7E CD DD 61      [17] 1569 	call	_cpct_drawSprite
-                           1570 ;src/game/world.c:304: break;
-   8C81 C3 00 8D      [10] 1571 	jp	00128$
-                           1572 ;src/game/world.c:305: case RNS:
-   8C84                    1573 00118$:
-                           1574 ;src/game/world.c:306: cpct_drawSprite(rail_ns, p_video, TILESIZE_W, TILESIZE_H);	
-   8C84 21 04 10      [10] 1575 	ld	hl, #0x1004
-   8C87 E5            [11] 1576 	push	hl
-   8C88 C5            [11] 1577 	push	bc
-   8C89 21 14 4C      [10] 1578 	ld	hl, #_rail_ns
-   8C8C E5            [11] 1579 	push	hl
-   8C8D CD DD 61      [17] 1580 	call	_cpct_drawSprite
-                           1581 ;src/game/world.c:307: break;
-   8C90 18 6E         [12] 1582 	jr	00128$
-                           1583 ;src/game/world.c:308: case REN:
-   8C92                    1584 00119$:
-                           1585 ;src/game/world.c:309: cpct_drawSprite(rail_en, p_video, TILESIZE_W, TILESIZE_H);	
-   8C92 21 04 10      [10] 1586 	ld	hl, #0x1004
-   8C95 E5            [11] 1587 	push	hl
-   8C96 C5            [11] 1588 	push	bc
-   8C97 21 54 4C      [10] 1589 	ld	hl, #_rail_en
-   8C9A E5            [11] 1590 	push	hl
-   8C9B CD DD 61      [17] 1591 	call	_cpct_drawSprite
-                           1592 ;src/game/world.c:310: break;
-   8C9E 18 60         [12] 1593 	jr	00128$
-                           1594 ;src/game/world.c:311: case RES:
-   8CA0                    1595 00120$:
-                           1596 ;src/game/world.c:312: cpct_drawSprite(rail_es, p_video, TILESIZE_W, TILESIZE_H);	
-   8CA0 21 04 10      [10] 1597 	ld	hl, #0x1004
-   8CA3 E5            [11] 1598 	push	hl
-   8CA4 C5            [11] 1599 	push	bc
-   8CA5 21 94 4C      [10] 1600 	ld	hl, #_rail_es
-   8CA8 E5            [11] 1601 	push	hl
-   8CA9 CD DD 61      [17] 1602 	call	_cpct_drawSprite
-                           1603 ;src/game/world.c:313: break;
-   8CAC 18 52         [12] 1604 	jr	00128$
-                           1605 ;src/game/world.c:314: case RWN:
-   8CAE                    1606 00121$:
-                           1607 ;src/game/world.c:315: cpct_drawSprite(rail_wn, p_video, TILESIZE_W, TILESIZE_H);	
-   8CAE 21 04 10      [10] 1608 	ld	hl, #0x1004
-   8CB1 E5            [11] 1609 	push	hl
-   8CB2 C5            [11] 1610 	push	bc
-   8CB3 21 D4 4C      [10] 1611 	ld	hl, #_rail_wn
-   8CB6 E5            [11] 1612 	push	hl
-   8CB7 CD DD 61      [17] 1613 	call	_cpct_drawSprite
-                           1614 ;src/game/world.c:316: break;
-   8CBA 18 44         [12] 1615 	jr	00128$
-                           1616 ;src/game/world.c:317: case RWS:
-   8CBC                    1617 00122$:
-                           1618 ;src/game/world.c:318: cpct_drawSprite(rail_ws, p_video, TILESIZE_W, TILESIZE_H);	
-   8CBC 21 04 10      [10] 1619 	ld	hl, #0x1004
-   8CBF E5            [11] 1620 	push	hl
-   8CC0 C5            [11] 1621 	push	bc
-   8CC1 21 14 4D      [10] 1622 	ld	hl, #_rail_ws
-   8CC4 E5            [11] 1623 	push	hl
-   8CC5 CD DD 61      [17] 1624 	call	_cpct_drawSprite
-                           1625 ;src/game/world.c:319: break;
-   8CC8 18 36         [12] 1626 	jr	00128$
-                           1627 ;src/game/world.c:320: case REWN:
-   8CCA                    1628 00123$:
-                           1629 ;src/game/world.c:321: cpct_drawSprite(rail_ew_n, p_video, TILESIZE_W, TILESIZE_H);	
-   8CCA 21 04 10      [10] 1630 	ld	hl, #0x1004
-   8CCD E5            [11] 1631 	push	hl
-   8CCE C5            [11] 1632 	push	bc
-   8CCF 21 54 4D      [10] 1633 	ld	hl, #_rail_ew_n
-   8CD2 E5            [11] 1634 	push	hl
-   8CD3 CD DD 61      [17] 1635 	call	_cpct_drawSprite
-                           1636 ;src/game/world.c:322: break;
-   8CD6 18 28         [12] 1637 	jr	00128$
-                           1638 ;src/game/world.c:323: case REWS:
-   8CD8                    1639 00124$:
-                           1640 ;src/game/world.c:324: cpct_drawSprite(rail_ew_s, p_video, TILESIZE_W, TILESIZE_H);	
-   8CD8 21 04 10      [10] 1641 	ld	hl, #0x1004
-   8CDB E5            [11] 1642 	push	hl
-   8CDC C5            [11] 1643 	push	bc
-   8CDD 21 94 4D      [10] 1644 	ld	hl, #_rail_ew_s
-   8CE0 E5            [11] 1645 	push	hl
-   8CE1 CD DD 61      [17] 1646 	call	_cpct_drawSprite
-                           1647 ;src/game/world.c:325: break;
-   8CE4 18 1A         [12] 1648 	jr	00128$
-                           1649 ;src/game/world.c:326: case RNSE:
-   8CE6                    1650 00125$:
-                           1651 ;src/game/world.c:327: cpct_drawSprite(rail_ns_e, p_video, TILESIZE_W, TILESIZE_H);	
-   8CE6 21 04 10      [10] 1652 	ld	hl, #0x1004
-   8CE9 E5            [11] 1653 	push	hl
-   8CEA C5            [11] 1654 	push	bc
-   8CEB 21 14 4E      [10] 1655 	ld	hl, #_rail_ns_e
-   8CEE E5            [11] 1656 	push	hl
-   8CEF CD DD 61      [17] 1657 	call	_cpct_drawSprite
-                           1658 ;src/game/world.c:328: break;
-   8CF2 18 0C         [12] 1659 	jr	00128$
-                           1660 ;src/game/world.c:329: case RNSW:
-   8CF4                    1661 00126$:
-                           1662 ;src/game/world.c:330: cpct_drawSprite(rail_ns_w, p_video, TILESIZE_W, TILESIZE_H);
-   8CF4 21 04 10      [10] 1663 	ld	hl, #0x1004
-   8CF7 E5            [11] 1664 	push	hl
-   8CF8 C5            [11] 1665 	push	bc
-   8CF9 21 D4 4D      [10] 1666 	ld	hl, #_rail_ns_w
-   8CFC E5            [11] 1667 	push	hl
-   8CFD CD DD 61      [17] 1668 	call	_cpct_drawSprite
-                           1669 ;src/game/world.c:332: }
-   8D00                    1670 00128$:
-   8D00 DD E1         [14] 1671 	pop	ix
-   8D02 C9            [10] 1672 	ret
-                           1673 ;src/game/world.c:335: void drawScrolls(u8 x, u8 y)
-                           1674 ;	---------------------------------
-                           1675 ; Function drawScrolls
-                           1676 ; ---------------------------------
-   8D03                    1677 _drawScrolls::
-   8D03 DD E5         [15] 1678 	push	ix
-   8D05 DD 21 00 00   [14] 1679 	ld	ix,#0
-   8D09 DD 39         [15] 1680 	add	ix,sp
-   8D0B F5            [11] 1681 	push	af
-                           1682 ;src/game/world.c:337: int scrollx = x* (WIDTH-TILESIZE_W)*4/(WIDTH-NBTILE_W);
-   8D0C DD 4E 04      [19] 1683 	ld	c, 4 (ix)
-   8D0F 06 00         [ 7] 1684 	ld	b, #0x00
-   8D11 69            [ 4] 1685 	ld	l, c
-   8D12 60            [ 4] 1686 	ld	h, b
-   8D13 29            [11] 1687 	add	hl, hl
-   8D14 29            [11] 1688 	add	hl, hl
-   8D15 29            [11] 1689 	add	hl, hl
-   8D16 09            [11] 1690 	add	hl, bc
-   8D17 29            [11] 1691 	add	hl, hl
-   8D18 09            [11] 1692 	add	hl, bc
-   8D19 29            [11] 1693 	add	hl, hl
-   8D1A 29            [11] 1694 	add	hl, hl
-   8D1B 29            [11] 1695 	add	hl, hl
-   8D1C 29            [11] 1696 	add	hl, hl
-   8D1D 01 3C 00      [10] 1697 	ld	bc, #0x003c
-   8D20 C5            [11] 1698 	push	bc
-   8D21 E5            [11] 1699 	push	hl
-   8D22 CD 10 68      [17] 1700 	call	__divsint
-   8D25 F1            [10] 1701 	pop	af
-   8D26 F1            [10] 1702 	pop	af
-   8D27 4D            [ 4] 1703 	ld	c, l
-   8D28 44            [ 4] 1704 	ld	b, h
-                           1705 ;src/game/world.c:338: int scrolly = y* (HEIGHT*TILESIZE_W-TILESIZE_H)/(HEIGHT-NBTILE_H);
-   8D29 DD 5E 05      [19] 1706 	ld	e,5 (ix)
-   8D2C 16 00         [ 7] 1707 	ld	d,#0x00
-   8D2E 6B            [ 4] 1708 	ld	l, e
-   8D2F 62            [ 4] 1709 	ld	h, d
-   8D30 29            [11] 1710 	add	hl, hl
-   8D31 29            [11] 1711 	add	hl, hl
-   8D32 19            [11] 1712 	add	hl, de
-   8D33 29            [11] 1713 	add	hl, hl
-   8D34 19            [11] 1714 	add	hl, de
-   8D35 29            [11] 1715 	add	hl, hl
-   8D36 29            [11] 1716 	add	hl, hl
-   8D37 29            [11] 1717 	add	hl, hl
-   8D38 29            [11] 1718 	add	hl, hl
-   8D39 C5            [11] 1719 	push	bc
-   8D3A 11 24 00      [10] 1720 	ld	de, #0x0024
-   8D3D D5            [11] 1721 	push	de
-   8D3E E5            [11] 1722 	push	hl
-   8D3F CD 10 68      [17] 1723 	call	__divsint
-   8D42 F1            [10] 1724 	pop	af
-   8D43 F1            [10] 1725 	pop	af
-   8D44 C1            [10] 1726 	pop	bc
-   8D45 33            [ 6] 1727 	inc	sp
-   8D46 33            [ 6] 1728 	inc	sp
-   8D47 E5            [11] 1729 	push	hl
-                           1730 ;src/game/world.c:340: setPixel(scrollx, 1, 0);
-   8D48 C5            [11] 1731 	push	bc
-   8D49 21 01 00      [10] 1732 	ld	hl, #0x0001
-   8D4C E5            [11] 1733 	push	hl
-   8D4D C5            [11] 1734 	push	bc
-   8D4E CD 19 8F      [17] 1735 	call	_setPixel
-   8D51 F1            [10] 1736 	pop	af
-   8D52 F1            [10] 1737 	pop	af
-   8D53 C1            [10] 1738 	pop	bc
-                           1739 ;src/game/world.c:341: setPixel(scrollx+1, 0, 0);
-   8D54 59            [ 4] 1740 	ld	e, c
-   8D55 50            [ 4] 1741 	ld	d, b
-   8D56 13            [ 6] 1742 	inc	de
-   8D57 C5            [11] 1743 	push	bc
-   8D58 D5            [11] 1744 	push	de
-   8D59 21 00 00      [10] 1745 	ld	hl, #0x0000
-   8D5C E5            [11] 1746 	push	hl
-   8D5D D5            [11] 1747 	push	de
-   8D5E CD 19 8F      [17] 1748 	call	_setPixel
-   8D61 F1            [10] 1749 	pop	af
-   8D62 F1            [10] 1750 	pop	af
-   8D63 D1            [10] 1751 	pop	de
-   8D64 D5            [11] 1752 	push	de
-   8D65 21 01 00      [10] 1753 	ld	hl, #0x0001
-   8D68 E5            [11] 1754 	push	hl
-   8D69 D5            [11] 1755 	push	de
-   8D6A CD 19 8F      [17] 1756 	call	_setPixel
-   8D6D F1            [10] 1757 	pop	af
-   8D6E F1            [10] 1758 	pop	af
-   8D6F D1            [10] 1759 	pop	de
-   8D70 21 02 00      [10] 1760 	ld	hl, #0x0002
-   8D73 E5            [11] 1761 	push	hl
-   8D74 D5            [11] 1762 	push	de
-   8D75 CD 19 8F      [17] 1763 	call	_setPixel
-   8D78 F1            [10] 1764 	pop	af
-   8D79 F1            [10] 1765 	pop	af
-   8D7A C1            [10] 1766 	pop	bc
-                           1767 ;src/game/world.c:345: setPixel(scrollx+15, 1, 0);
-   8D7B 21 0F 00      [10] 1768 	ld	hl, #0x000f
-   8D7E 09            [11] 1769 	add	hl, bc
-   8D7F C5            [11] 1770 	push	bc
-   8D80 11 01 00      [10] 1771 	ld	de, #0x0001
-   8D83 D5            [11] 1772 	push	de
-   8D84 E5            [11] 1773 	push	hl
-   8D85 CD 19 8F      [17] 1774 	call	_setPixel
-   8D88 F1            [10] 1775 	pop	af
-   8D89 F1            [10] 1776 	pop	af
-   8D8A C1            [10] 1777 	pop	bc
-                           1778 ;src/game/world.c:346: setPixel(scrollx+14, 0, 0);
-   8D8B 21 0E 00      [10] 1779 	ld	hl, #0x000e
-   8D8E 09            [11] 1780 	add	hl, bc
-   8D8F E5            [11] 1781 	push	hl
-   8D90 01 00 00      [10] 1782 	ld	bc, #0x0000
-   8D93 C5            [11] 1783 	push	bc
-   8D94 E5            [11] 1784 	push	hl
-   8D95 CD 19 8F      [17] 1785 	call	_setPixel
-   8D98 F1            [10] 1786 	pop	af
-   8D99 F1            [10] 1787 	pop	af
-   8D9A E1            [10] 1788 	pop	hl
-                           1789 ;src/game/world.c:347: setPixel(scrollx+14, 1, 0);
-   8D9B E5            [11] 1790 	push	hl
-   8D9C 01 01 00      [10] 1791 	ld	bc, #0x0001
-   8D9F C5            [11] 1792 	push	bc
-   8DA0 E5            [11] 1793 	push	hl
-   8DA1 CD 19 8F      [17] 1794 	call	_setPixel
-   8DA4 F1            [10] 1795 	pop	af
-   8DA5 F1            [10] 1796 	pop	af
-   8DA6 E1            [10] 1797 	pop	hl
-                           1798 ;src/game/world.c:348: setPixel(scrollx+14, 2, 0);
-   8DA7 01 02 00      [10] 1799 	ld	bc, #0x0002
-   8DAA C5            [11] 1800 	push	bc
-   8DAB E5            [11] 1801 	push	hl
-   8DAC CD 19 8F      [17] 1802 	call	_setPixel
-   8DAF F1            [10] 1803 	pop	af
-   8DB0 F1            [10] 1804 	pop	af
-                           1805 ;src/game/world.c:350: setPixel(1, scrolly, 0);
-   8DB1 DD 46 FE      [19] 1806 	ld	b, -2 (ix)
-   8DB4 AF            [ 4] 1807 	xor	a, a
-   8DB5 F5            [11] 1808 	push	af
-   8DB6 33            [ 6] 1809 	inc	sp
-   8DB7 C5            [11] 1810 	push	bc
-   8DB8 33            [ 6] 1811 	inc	sp
-   8DB9 21 01 00      [10] 1812 	ld	hl, #0x0001
-   8DBC E5            [11] 1813 	push	hl
-   8DBD CD 19 8F      [17] 1814 	call	_setPixel
-   8DC0 F1            [10] 1815 	pop	af
-   8DC1 F1            [10] 1816 	pop	af
-                           1817 ;src/game/world.c:351: setPixel(0, scrolly+1, 0);
-   8DC2 DD 4E FE      [19] 1818 	ld	c, -2 (ix)
-   8DC5 41            [ 4] 1819 	ld	b, c
-   8DC6 04            [ 4] 1820 	inc	b
-   8DC7 C5            [11] 1821 	push	bc
-   8DC8 AF            [ 4] 1822 	xor	a, a
-   8DC9 F5            [11] 1823 	push	af
-   8DCA 33            [ 6] 1824 	inc	sp
-   8DCB C5            [11] 1825 	push	bc
-   8DCC 33            [ 6] 1826 	inc	sp
-   8DCD 21 00 00      [10] 1827 	ld	hl, #0x0000
-   8DD0 E5            [11] 1828 	push	hl
-   8DD1 CD 19 8F      [17] 1829 	call	_setPixel
-   8DD4 F1            [10] 1830 	pop	af
-   8DD5 F1            [10] 1831 	pop	af
-   8DD6 C1            [10] 1832 	pop	bc
-                           1833 ;src/game/world.c:352: setPixel(1, scrolly+1, 0);
-   8DD7 C5            [11] 1834 	push	bc
-   8DD8 AF            [ 4] 1835 	xor	a, a
-   8DD9 F5            [11] 1836 	push	af
-   8DDA 33            [ 6] 1837 	inc	sp
-   8DDB C5            [11] 1838 	push	bc
-   8DDC 33            [ 6] 1839 	inc	sp
-   8DDD 21 01 00      [10] 1840 	ld	hl, #0x0001
-   8DE0 E5            [11] 1841 	push	hl
-   8DE1 CD 19 8F      [17] 1842 	call	_setPixel
-   8DE4 F1            [10] 1843 	pop	af
-   8DE5 F1            [10] 1844 	pop	af
-   8DE6 C1            [10] 1845 	pop	bc
-                           1846 ;src/game/world.c:353: setPixel(2, scrolly+1, 0);
-   8DE7 C5            [11] 1847 	push	bc
-   8DE8 AF            [ 4] 1848 	xor	a, a
-   8DE9 F5            [11] 1849 	push	af
-   8DEA 33            [ 6] 1850 	inc	sp
-   8DEB C5            [11] 1851 	push	bc
-   8DEC 33            [ 6] 1852 	inc	sp
-   8DED 21 02 00      [10] 1853 	ld	hl, #0x0002
-   8DF0 E5            [11] 1854 	push	hl
-   8DF1 CD 19 8F      [17] 1855 	call	_setPixel
-   8DF4 F1            [10] 1856 	pop	af
-   8DF5 F1            [10] 1857 	pop	af
-   8DF6 C1            [10] 1858 	pop	bc
-                           1859 ;src/game/world.c:355: setPixel(1, scrolly+15, 0);
-   8DF7 79            [ 4] 1860 	ld	a, c
-   8DF8 C6 0F         [ 7] 1861 	add	a, #0x0f
-   8DFA 47            [ 4] 1862 	ld	b, a
-   8DFB C5            [11] 1863 	push	bc
-   8DFC AF            [ 4] 1864 	xor	a, a
-   8DFD F5            [11] 1865 	push	af
-   8DFE 33            [ 6] 1866 	inc	sp
-   8DFF C5            [11] 1867 	push	bc
-   8E00 33            [ 6] 1868 	inc	sp
-   8E01 21 01 00      [10] 1869 	ld	hl, #0x0001
-   8E04 E5            [11] 1870 	push	hl
-   8E05 CD 19 8F      [17] 1871 	call	_setPixel
-   8E08 F1            [10] 1872 	pop	af
-   8E09 F1            [10] 1873 	pop	af
-   8E0A C1            [10] 1874 	pop	bc
-                           1875 ;src/game/world.c:356: setPixel(0, scrolly+14, 0);
-   8E0B 79            [ 4] 1876 	ld	a, c
-   8E0C C6 0E         [ 7] 1877 	add	a, #0x0e
-   8E0E 47            [ 4] 1878 	ld	b, a
-   8E0F C5            [11] 1879 	push	bc
-   8E10 AF            [ 4] 1880 	xor	a, a
-   8E11 F5            [11] 1881 	push	af
-   8E12 33            [ 6] 1882 	inc	sp
-   8E13 C5            [11] 1883 	push	bc
-   8E14 33            [ 6] 1884 	inc	sp
-   8E15 21 00 00      [10] 1885 	ld	hl, #0x0000
-   8E18 E5            [11] 1886 	push	hl
-   8E19 CD 19 8F      [17] 1887 	call	_setPixel
-   8E1C F1            [10] 1888 	pop	af
-   8E1D F1            [10] 1889 	pop	af
-   8E1E C1            [10] 1890 	pop	bc
-                           1891 ;src/game/world.c:357: setPixel(1, scrolly+14, 0);
-   8E1F C5            [11] 1892 	push	bc
-   8E20 AF            [ 4] 1893 	xor	a, a
-   8E21 F5            [11] 1894 	push	af
-   8E22 33            [ 6] 1895 	inc	sp
-   8E23 C5            [11] 1896 	push	bc
-   8E24 33            [ 6] 1897 	inc	sp
-   8E25 21 01 00      [10] 1898 	ld	hl, #0x0001
-   8E28 E5            [11] 1899 	push	hl
-   8E29 CD 19 8F      [17] 1900 	call	_setPixel
-   8E2C F1            [10] 1901 	pop	af
-   8E2D F1            [10] 1902 	pop	af
-   8E2E C1            [10] 1903 	pop	bc
-                           1904 ;src/game/world.c:358: setPixel(2, scrolly+14, 0);
-   8E2F AF            [ 4] 1905 	xor	a, a
-   8E30 F5            [11] 1906 	push	af
-   8E31 33            [ 6] 1907 	inc	sp
-   8E32 C5            [11] 1908 	push	bc
-   8E33 33            [ 6] 1909 	inc	sp
-   8E34 21 02 00      [10] 1910 	ld	hl, #0x0002
-   8E37 E5            [11] 1911 	push	hl
-   8E38 CD 19 8F      [17] 1912 	call	_setPixel
-   8E3B DD F9         [10] 1913 	ld	sp,ix
-   8E3D DD E1         [14] 1914 	pop	ix
-   8E3F C9            [10] 1915 	ret
-                           1916 ;src/game/world.c:375: void drawWorld(u8 x_, u8 y_)
-                           1917 ;	---------------------------------
-                           1918 ; Function drawWorld
-                           1919 ; ---------------------------------
-   8E40                    1920 _drawWorld::
-                           1921 ;src/game/world.c:380: for(iy=0; iy<NBTILE_H;iy++)
-   8E40 0E 00         [ 7] 1922 	ld	c, #0x00
-                           1923 ;src/game/world.c:382: for(ix=0; ix<NBTILE_W;ix++)
-   8E42                    1924 00109$:
-   8E42 06 00         [ 7] 1925 	ld	b, #0x00
-   8E44                    1926 00103$:
-                           1927 ;src/game/world.c:384: drawTile(x_, y_, ix, iy);
-   8E44 C5            [11] 1928 	push	bc
-   8E45 79            [ 4] 1929 	ld	a, c
-   8E46 F5            [11] 1930 	push	af
-   8E47 33            [ 6] 1931 	inc	sp
-   8E48 C5            [11] 1932 	push	bc
-   8E49 33            [ 6] 1933 	inc	sp
-   8E4A 21 07 00      [10] 1934 	ld	hl, #7+0
-   8E4D 39            [11] 1935 	add	hl, sp
-   8E4E 7E            [ 7] 1936 	ld	a, (hl)
-   8E4F F5            [11] 1937 	push	af
-   8E50 33            [ 6] 1938 	inc	sp
-   8E51 21 07 00      [10] 1939 	ld	hl, #7+0
-   8E54 39            [11] 1940 	add	hl, sp
-   8E55 7E            [ 7] 1941 	ld	a, (hl)
-   8E56 F5            [11] 1942 	push	af
-   8E57 33            [ 6] 1943 	inc	sp
-   8E58 CD DA 8A      [17] 1944 	call	_drawTile
-   8E5B F1            [10] 1945 	pop	af
-   8E5C F1            [10] 1946 	pop	af
-   8E5D C1            [10] 1947 	pop	bc
-                           1948 ;src/game/world.c:382: for(ix=0; ix<NBTILE_W;ix++)
-   8E5E 04            [ 4] 1949 	inc	b
-   8E5F 78            [ 4] 1950 	ld	a, b
-   8E60 D6 14         [ 7] 1951 	sub	a, #0x14
-   8E62 38 E0         [12] 1952 	jr	C,00103$
-                           1953 ;src/game/world.c:380: for(iy=0; iy<NBTILE_H;iy++)
-   8E64 0C            [ 4] 1954 	inc	c
-   8E65 79            [ 4] 1955 	ld	a, c
-   8E66 D6 0C         [ 7] 1956 	sub	a, #0x0c
-   8E68 38 D8         [12] 1957 	jr	C,00109$
-                           1958 ;src/game/world.c:388: drawScrolls(x_, y_);
-   8E6A 21 03 00      [10] 1959 	ld	hl, #3+0
-   8E6D 39            [11] 1960 	add	hl, sp
-   8E6E 7E            [ 7] 1961 	ld	a, (hl)
-   8E6F F5            [11] 1962 	push	af
-   8E70 33            [ 6] 1963 	inc	sp
-   8E71 21 03 00      [10] 1964 	ld	hl, #3+0
-   8E74 39            [11] 1965 	add	hl, sp
-   8E75 7E            [ 7] 1966 	ld	a, (hl)
-   8E76 F5            [11] 1967 	push	af
-   8E77 33            [ 6] 1968 	inc	sp
-   8E78 CD 03 8D      [17] 1969 	call	_drawScrolls
-   8E7B F1            [10] 1970 	pop	af
-   8E7C C9            [10] 1971 	ret
-                           1972 ;src/game/world.c:395: void setTrainHeading(u8 i)
-                           1973 ;	---------------------------------
-                           1974 ; Function setTrainHeading
-                           1975 ; ---------------------------------
-   8E7D                    1976 _setTrainHeading::
-   8E7D DD E5         [15] 1977 	push	ix
-   8E7F DD 21 00 00   [14] 1978 	ld	ix,#0
-   8E83 DD 39         [15] 1979 	add	ix,sp
-                           1980 ;src/game/world.c:399: switch(p_world[trainList[i].posY*WIDTH+trainList[i].posX])
-   8E85 DD 6E 04      [19] 1981 	ld	l, 4 (ix)
-   8E88 26 00         [ 7] 1982 	ld	h, #0x00
-   8E8A 29            [11] 1983 	add	hl, hl
-   8E8B 29            [11] 1984 	add	hl, hl
-   8E8C 29            [11] 1985 	add	hl, hl
-   8E8D 29            [11] 1986 	add	hl, hl
-   8E8E 4D            [ 4] 1987 	ld	c, l
-   8E8F 44            [ 4] 1988 	ld	b, h
-   8E90 FD 21 B5 83   [14] 1989 	ld	iy, #_trainList
-   8E94 FD 7E 00      [19] 1990 	ld	a, 0 (iy)
-   8E97 81            [ 4] 1991 	add	a, c
-   8E98 5F            [ 4] 1992 	ld	e, a
-   8E99 FD 7E 01      [19] 1993 	ld	a, 1 (iy)
-   8E9C 88            [ 4] 1994 	adc	a, b
-   8E9D 57            [ 4] 1995 	ld	d, a
-   8E9E 6B            [ 4] 1996 	ld	l, e
-   8E9F 62            [ 4] 1997 	ld	h, d
-   8EA0 01 05 00      [10] 1998 	ld	bc, #0x0005
-   8EA3 09            [11] 1999 	add	hl, bc
-   8EA4 4E            [ 7] 2000 	ld	c, (hl)
-   8EA5 06 00         [ 7] 2001 	ld	b,#0x00
-   8EA7 69            [ 4] 2002 	ld	l, c
-   8EA8 60            [ 4] 2003 	ld	h, b
-   8EA9 29            [11] 2004 	add	hl, hl
-   8EAA 29            [11] 2005 	add	hl, hl
-   8EAB 09            [11] 2006 	add	hl, bc
-   8EAC 29            [11] 2007 	add	hl, hl
-   8EAD 29            [11] 2008 	add	hl, hl
-   8EAE 29            [11] 2009 	add	hl, hl
-   8EAF 29            [11] 2010 	add	hl, hl
-   8EB0 4D            [ 4] 2011 	ld	c, l
-   8EB1 44            [ 4] 2012 	ld	b, h
-   8EB2 6B            [ 4] 2013 	ld	l, e
-   8EB3 62            [ 4] 2014 	ld	h, d
-   8EB4 23            [ 6] 2015 	inc	hl
-   8EB5 23            [ 6] 2016 	inc	hl
-   8EB6 23            [ 6] 2017 	inc	hl
-   8EB7 23            [ 6] 2018 	inc	hl
-   8EB8 6E            [ 7] 2019 	ld	l, (hl)
-   8EB9 26 00         [ 7] 2020 	ld	h, #0x00
-   8EBB 09            [11] 2021 	add	hl, bc
-   8EBC 01 B5 74      [10] 2022 	ld	bc, #_p_world
-   8EBF 09            [11] 2023 	add	hl, bc
-   8EC0 4E            [ 7] 2024 	ld	c, (hl)
-                           2025 ;src/game/world.c:402: if(trainList[i].heading==1) trainList[i].heading=2;
-   8EC1 21 06 00      [10] 2026 	ld	hl, #0x0006
-   8EC4 19            [11] 2027 	add	hl, de
-                           2028 ;src/game/world.c:399: switch(p_world[trainList[i].posY*WIDTH+trainList[i].posX])
-   8EC5 79            [ 4] 2029 	ld	a,c
-   8EC6 FE 12         [ 7] 2030 	cp	a,#0x12
-   8EC8 28 0E         [12] 2031 	jr	Z,00101$
-   8ECA FE 13         [ 7] 2032 	cp	a,#0x13
-   8ECC 28 1A         [12] 2033 	jr	Z,00107$
-   8ECE FE 14         [ 7] 2034 	cp	a,#0x14
-   8ED0 28 26         [12] 2035 	jr	Z,00113$
-   8ED2 D6 15         [ 7] 2036 	sub	a, #0x15
-   8ED4 28 32         [12] 2037 	jr	Z,00119$
-   8ED6 18 3E         [12] 2038 	jr	00126$
-                           2039 ;src/game/world.c:401: case REN:
-   8ED8                    2040 00101$:
-                           2041 ;src/game/world.c:402: if(trainList[i].heading==1) trainList[i].heading=2;
-   8ED8 7E            [ 7] 2042 	ld	a, (hl)
-   8ED9 FE 01         [ 7] 2043 	cp	a, #0x01
-   8EDB 20 04         [12] 2044 	jr	NZ,00105$
-   8EDD 36 02         [10] 2045 	ld	(hl), #0x02
-   8EDF 18 35         [12] 2046 	jr	00126$
-   8EE1                    2047 00105$:
-                           2048 ;src/game/world.c:403: else if(trainList[i].heading==3) trainList[i].heading=0;
-   8EE1 D6 03         [ 7] 2049 	sub	a,#0x03
-   8EE3 20 31         [12] 2050 	jr	NZ,00126$
-   8EE5 77            [ 7] 2051 	ld	(hl),a
-                           2052 ;src/game/world.c:404: break;
-   8EE6 18 2E         [12] 2053 	jr	00126$
-                           2054 ;src/game/world.c:406: case RES:
-   8EE8                    2055 00107$:
-                           2056 ;src/game/world.c:407: if(trainList[i].heading==1) trainList[i].heading=3;
-   8EE8 7E            [ 7] 2057 	ld	a, (hl)
-   8EE9 FE 01         [ 7] 2058 	cp	a, #0x01
-   8EEB 20 04         [12] 2059 	jr	NZ,00111$
-   8EED 36 03         [10] 2060 	ld	(hl), #0x03
-   8EEF 18 25         [12] 2061 	jr	00126$
-   8EF1                    2062 00111$:
-                           2063 ;src/game/world.c:408: else if(trainList[i].heading==2) trainList[i].heading=0;
-   8EF1 D6 02         [ 7] 2064 	sub	a,#0x02
-   8EF3 20 21         [12] 2065 	jr	NZ,00126$
-   8EF5 77            [ 7] 2066 	ld	(hl),a
-                           2067 ;src/game/world.c:409: break;
-   8EF6 18 1E         [12] 2068 	jr	00126$
-                           2069 ;src/game/world.c:411: case RWN:
-   8EF8                    2070 00113$:
-                           2071 ;src/game/world.c:412: if(trainList[i].heading==0) trainList[i].heading=2;   
-   8EF8 7E            [ 7] 2072 	ld	a, (hl)
-   8EF9 B7            [ 4] 2073 	or	a, a
-   8EFA 20 04         [12] 2074 	jr	NZ,00117$
-   8EFC 36 02         [10] 2075 	ld	(hl), #0x02
-   8EFE 18 16         [12] 2076 	jr	00126$
-   8F00                    2077 00117$:
-                           2078 ;src/game/world.c:413: else if(trainList[i].heading==3) trainList[i].heading=1;
-   8F00 D6 03         [ 7] 2079 	sub	a, #0x03
-   8F02 20 12         [12] 2080 	jr	NZ,00126$
-   8F04 36 01         [10] 2081 	ld	(hl), #0x01
-                           2082 ;src/game/world.c:414: break;
-   8F06 18 0E         [12] 2083 	jr	00126$
-                           2084 ;src/game/world.c:416: case RWS:
-   8F08                    2085 00119$:
-                           2086 ;src/game/world.c:417: if(trainList[i].heading==0) trainList[i].heading=3;
-   8F08 7E            [ 7] 2087 	ld	a, (hl)
-   8F09 B7            [ 4] 2088 	or	a, a
-   8F0A 20 04         [12] 2089 	jr	NZ,00123$
-   8F0C 36 03         [10] 2090 	ld	(hl), #0x03
-   8F0E 18 06         [12] 2091 	jr	00126$
-   8F10                    2092 00123$:
-                           2093 ;src/game/world.c:418: else if(trainList[i].heading==2) trainList[i].heading=1;
-   8F10 D6 02         [ 7] 2094 	sub	a, #0x02
-   8F12 20 02         [12] 2095 	jr	NZ,00126$
-   8F14 36 01         [10] 2096 	ld	(hl), #0x01
-                           2097 ;src/game/world.c:420: }
-   8F16                    2098 00126$:
-   8F16 DD E1         [14] 2099 	pop	ix
-   8F18 C9            [10] 2100 	ret
-                           2101 ;src/game/world.c:423: void setPixel(int nX, unsigned char nY, unsigned char nColor)
-                           2102 ;	---------------------------------
-                           2103 ; Function setPixel
-                           2104 ; ---------------------------------
-   8F19                    2105 _setPixel::
-   8F19 DD E5         [15] 2106 	push	ix
-   8F1B DD 21 00 00   [14] 2107 	ld	ix,#0
-   8F1F DD 39         [15] 2108 	add	ix,sp
-   8F21 F5            [11] 2109 	push	af
-                           2110 ;src/game/world.c:428: int nPixel = nX % 4;
-   8F22 21 04 00      [10] 2111 	ld	hl, #0x0004
-   8F25 E5            [11] 2112 	push	hl
-   8F26 DD 6E 04      [19] 2113 	ld	l,4 (ix)
-   8F29 DD 66 05      [19] 2114 	ld	h,5 (ix)
-   8F2C E5            [11] 2115 	push	hl
-   8F2D CD B2 67      [17] 2116 	call	__modsint
-   8F30 F1            [10] 2117 	pop	af
-   8F31 F1            [10] 2118 	pop	af
-   8F32 EB            [ 4] 2119 	ex	de,hl
-                           2120 ;src/game/world.c:429: unsigned char *pAddress = (unsigned char *)((unsigned int)(0xC000 + ((nY / 8) * 80) + ((nY % 8) * 2048) + (nX / 4)));
-   8F33 DD 7E 06      [19] 2121 	ld	a, 6 (ix)
-   8F36 0F            [ 4] 2122 	rrca
-   8F37 0F            [ 4] 2123 	rrca
-   8F38 0F            [ 4] 2124 	rrca
-   8F39 E6 1F         [ 7] 2125 	and	a, #0x1f
-   8F3B 4F            [ 4] 2126 	ld	c,a
-   8F3C 06 00         [ 7] 2127 	ld	b,#0x00
-   8F3E 69            [ 4] 2128 	ld	l, c
-   8F3F 60            [ 4] 2129 	ld	h, b
-   8F40 29            [11] 2130 	add	hl, hl
-   8F41 29            [11] 2131 	add	hl, hl
-   8F42 09            [11] 2132 	add	hl, bc
-   8F43 29            [11] 2133 	add	hl, hl
-   8F44 29            [11] 2134 	add	hl, hl
-   8F45 29            [11] 2135 	add	hl, hl
-   8F46 29            [11] 2136 	add	hl, hl
-   8F47 01 00 C0      [10] 2137 	ld	bc, #0xc000
-   8F4A 09            [11] 2138 	add	hl, bc
-   8F4B DD 7E 06      [19] 2139 	ld	a, 6 (ix)
-   8F4E E6 07         [ 7] 2140 	and	a, #0x07
-   8F50 07            [ 4] 2141 	rlca
-   8F51 07            [ 4] 2142 	rlca
-   8F52 07            [ 4] 2143 	rlca
-   8F53 E6 F8         [ 7] 2144 	and	a, #0xf8
-   8F55 47            [ 4] 2145 	ld	b, a
-   8F56 0E 00         [ 7] 2146 	ld	c, #0x00
-   8F58 09            [11] 2147 	add	hl, bc
-   8F59 DD 4E 04      [19] 2148 	ld	c,4 (ix)
-   8F5C DD 46 05      [19] 2149 	ld	b,5 (ix)
-   8F5F CB 78         [ 8] 2150 	bit	7, b
-   8F61 28 03         [12] 2151 	jr	Z,00128$
-   8F63 03            [ 6] 2152 	inc	bc
-   8F64 03            [ 6] 2153 	inc	bc
-   8F65 03            [ 6] 2154 	inc	bc
-   8F66                    2155 00128$:
-   8F66 CB 28         [ 8] 2156 	sra	b
-   8F68 CB 19         [ 8] 2157 	rr	c
-   8F6A CB 28         [ 8] 2158 	sra	b
-   8F6C CB 19         [ 8] 2159 	rr	c
-   8F6E 09            [11] 2160 	add	hl, bc
-                           2161 ;src/game/world.c:433: *pAddress &= 119;
-   8F6F 4E            [ 7] 2162 	ld	c, (hl)
-                           2163 ;src/game/world.c:435: if(nColor & 1)
-   8F70 DD 7E 07      [19] 2164 	ld	a, 7 (ix)
-   8F73 E6 01         [ 7] 2165 	and	a, #0x01
-   8F75 DD 77 FE      [19] 2166 	ld	-2 (ix), a
-                           2167 ;src/game/world.c:437: if(nColor & 2)
-   8F78 DD 7E 07      [19] 2168 	ld	a, 7 (ix)
-   8F7B E6 02         [ 7] 2169 	and	a, #0x02
-   8F7D DD 77 FF      [19] 2170 	ld	-1 (ix), a
-                           2171 ;src/game/world.c:431: if(nPixel == 0)
-   8F80 7A            [ 4] 2172 	ld	a, d
-   8F81 B3            [ 4] 2173 	or	a,e
-   8F82 20 18         [12] 2174 	jr	NZ,00124$
-                           2175 ;src/game/world.c:433: *pAddress &= 119;
-   8F84 79            [ 4] 2176 	ld	a, c
-   8F85 E6 77         [ 7] 2177 	and	a, #0x77
-   8F87 77            [ 7] 2178 	ld	(hl), a
-                           2179 ;src/game/world.c:435: if(nColor & 1)
-   8F88 DD 7E FE      [19] 2180 	ld	a, -2 (ix)
-   8F8B B7            [ 4] 2181 	or	a, a
-   8F8C 28 03         [12] 2182 	jr	Z,00102$
-                           2183 ;src/game/world.c:436: *pAddress |= 128;
-   8F8E CB FE         [15] 2184 	set	7, (hl)
-   8F90 7E            [ 7] 2185 	ld	a, (hl)
-   8F91                    2186 00102$:
-                           2187 ;src/game/world.c:437: if(nColor & 2)
-   8F91 DD 7E FF      [19] 2188 	ld	a, -1 (ix)
-   8F94 B7            [ 4] 2189 	or	a, a
-   8F95 28 56         [12] 2190 	jr	Z,00126$
-                           2191 ;src/game/world.c:438: *pAddress |= 8;
-   8F97 CB DE         [15] 2192 	set	3, (hl)
-   8F99 7E            [ 7] 2193 	ld	a, (hl)
-   8F9A 18 51         [12] 2194 	jr	00126$
-   8F9C                    2195 00124$:
-                           2196 ;src/game/world.c:440: else if(nPixel == 1)
-   8F9C 7B            [ 4] 2197 	ld	a, e
-   8F9D 3D            [ 4] 2198 	dec	a
-   8F9E B2            [ 4] 2199 	or	a, d
-   8F9F 20 18         [12] 2200 	jr	NZ,00121$
-                           2201 ;src/game/world.c:442: *pAddress &= 187;
-   8FA1 79            [ 4] 2202 	ld	a, c
-   8FA2 E6 BB         [ 7] 2203 	and	a, #0xbb
-   8FA4 77            [ 7] 2204 	ld	(hl), a
-                           2205 ;src/game/world.c:444: if(nColor & 1)
-   8FA5 DD 7E FE      [19] 2206 	ld	a, -2 (ix)
-   8FA8 B7            [ 4] 2207 	or	a, a
-   8FA9 28 03         [12] 2208 	jr	Z,00106$
-                           2209 ;src/game/world.c:445: *pAddress |= 64;
-   8FAB CB F6         [15] 2210 	set	6, (hl)
-   8FAD 7E            [ 7] 2211 	ld	a, (hl)
-   8FAE                    2212 00106$:
-                           2213 ;src/game/world.c:446: if(nColor & 2)
-   8FAE DD 7E FF      [19] 2214 	ld	a, -1 (ix)
-   8FB1 B7            [ 4] 2215 	or	a, a
-   8FB2 28 39         [12] 2216 	jr	Z,00126$
-                           2217 ;src/game/world.c:447: *pAddress |= 4;
-   8FB4 CB D6         [15] 2218 	set	2, (hl)
-   8FB6 7E            [ 7] 2219 	ld	a, (hl)
-   8FB7 18 34         [12] 2220 	jr	00126$
-   8FB9                    2221 00121$:
-                           2222 ;src/game/world.c:449: else if(nPixel == 2)
-   8FB9 7B            [ 4] 2223 	ld	a, e
-   8FBA D6 02         [ 7] 2224 	sub	a, #0x02
-   8FBC B2            [ 4] 2225 	or	a, d
-   8FBD 20 18         [12] 2226 	jr	NZ,00118$
-                           2227 ;src/game/world.c:451: *pAddress &= 221;
-   8FBF 79            [ 4] 2228 	ld	a, c
-   8FC0 E6 DD         [ 7] 2229 	and	a, #0xdd
-   8FC2 77            [ 7] 2230 	ld	(hl), a
-                           2231 ;src/game/world.c:453: if(nColor & 1)
-   8FC3 DD 7E FE      [19] 2232 	ld	a, -2 (ix)
-   8FC6 B7            [ 4] 2233 	or	a, a
-   8FC7 28 03         [12] 2234 	jr	Z,00110$
-                           2235 ;src/game/world.c:454: *pAddress |= 32;
-   8FC9 CB EE         [15] 2236 	set	5, (hl)
-   8FCB 7E            [ 7] 2237 	ld	a, (hl)
-   8FCC                    2238 00110$:
-                           2239 ;src/game/world.c:455: if(nColor & 2)
-   8FCC DD 7E FF      [19] 2240 	ld	a, -1 (ix)
-   8FCF B7            [ 4] 2241 	or	a, a
-   8FD0 28 1B         [12] 2242 	jr	Z,00126$
-                           2243 ;src/game/world.c:456: *pAddress |= 2;
-   8FD2 CB CE         [15] 2244 	set	1, (hl)
-   8FD4 7E            [ 7] 2245 	ld	a, (hl)
-   8FD5 18 16         [12] 2246 	jr	00126$
-   8FD7                    2247 00118$:
-                           2248 ;src/game/world.c:460: *pAddress &= 238;
-   8FD7 79            [ 4] 2249 	ld	a, c
-   8FD8 E6 EE         [ 7] 2250 	and	a, #0xee
-   8FDA 77            [ 7] 2251 	ld	(hl), a
-                           2252 ;src/game/world.c:462: if(nColor & 1)
-   8FDB DD 7E FE      [19] 2253 	ld	a, -2 (ix)
-   8FDE B7            [ 4] 2254 	or	a, a
-   8FDF 28 03         [12] 2255 	jr	Z,00114$
-                           2256 ;src/game/world.c:463: *pAddress |= 16;
-   8FE1 CB E6         [15] 2257 	set	4, (hl)
-   8FE3 7E            [ 7] 2258 	ld	a, (hl)
-   8FE4                    2259 00114$:
-                           2260 ;src/game/world.c:464: if(nColor & 2)
-   8FE4 DD 7E FF      [19] 2261 	ld	a, -1 (ix)
-   8FE7 B7            [ 4] 2262 	or	a, a
-   8FE8 28 03         [12] 2263 	jr	Z,00126$
-                           2264 ;src/game/world.c:465: *pAddress |= 1;
-   8FEA CB C6         [15] 2265 	set	0, (hl)
-   8FEC 7E            [ 7] 2266 	ld	a, (hl)
-   8FED                    2267 00126$:
-   8FED DD F9         [10] 2268 	ld	sp, ix
-   8FEF DD E1         [14] 2269 	pop	ix
-   8FF1 C9            [10] 2270 	ret
-                           2271 ;src/game/world.c:469: u8 isPixelBlack(int nX, unsigned char nY)
-                           2272 ;	---------------------------------
-                           2273 ; Function isPixelBlack
-                           2274 ; ---------------------------------
-   8FF2                    2275 _isPixelBlack::
-   8FF2 DD E5         [15] 2276 	push	ix
-   8FF4 DD 21 00 00   [14] 2277 	ld	ix,#0
-   8FF8 DD 39         [15] 2278 	add	ix,sp
-                           2279 ;src/game/world.c:472: int nPixel = nX % 4;
-   8FFA 21 04 00      [10] 2280 	ld	hl, #0x0004
-   8FFD E5            [11] 2281 	push	hl
-   8FFE DD 6E 04      [19] 2282 	ld	l,4 (ix)
-   9001 DD 66 05      [19] 2283 	ld	h,5 (ix)
-   9004 E5            [11] 2284 	push	hl
-   9005 CD B2 67      [17] 2285 	call	__modsint
-   9008 F1            [10] 2286 	pop	af
-   9009 F1            [10] 2287 	pop	af
-   900A 4D            [ 4] 2288 	ld	c, l
-   900B 44            [ 4] 2289 	ld	b, h
-                           2290 ;src/game/world.c:475: unsigned char *pAddress = (unsigned char *)((unsigned int)(0xC000 + ((nY / 8) * 80) + ((nY % 8) * 2048) + (nX / 4)));
-   900C DD 7E 06      [19] 2291 	ld	a, 6 (ix)
-   900F 0F            [ 4] 2292 	rrca
-   9010 0F            [ 4] 2293 	rrca
-   9011 0F            [ 4] 2294 	rrca
-   9012 E6 1F         [ 7] 2295 	and	a, #0x1f
-   9014 5F            [ 4] 2296 	ld	e,a
-   9015 16 00         [ 7] 2297 	ld	d,#0x00
-   9017 6B            [ 4] 2298 	ld	l, e
-   9018 62            [ 4] 2299 	ld	h, d
-   9019 29            [11] 2300 	add	hl, hl
-   901A 29            [11] 2301 	add	hl, hl
-   901B 19            [11] 2302 	add	hl, de
-   901C 29            [11] 2303 	add	hl, hl
-   901D 29            [11] 2304 	add	hl, hl
-   901E 29            [11] 2305 	add	hl, hl
-   901F 29            [11] 2306 	add	hl, hl
-   9020 11 00 C0      [10] 2307 	ld	de, #0xc000
-   9023 19            [11] 2308 	add	hl, de
-   9024 DD 7E 06      [19] 2309 	ld	a, 6 (ix)
-   9027 E6 07         [ 7] 2310 	and	a, #0x07
-   9029 07            [ 4] 2311 	rlca
-   902A 07            [ 4] 2312 	rlca
-   902B 07            [ 4] 2313 	rlca
-   902C E6 F8         [ 7] 2314 	and	a, #0xf8
-   902E 57            [ 4] 2315 	ld	d, a
-   902F 1E 00         [ 7] 2316 	ld	e, #0x00
-   9031 19            [11] 2317 	add	hl, de
-   9032 DD 5E 04      [19] 2318 	ld	e,4 (ix)
-   9035 DD 56 05      [19] 2319 	ld	d,5 (ix)
-   9038 CB 7A         [ 8] 2320 	bit	7, d
-   903A 28 03         [12] 2321 	jr	Z,00118$
-   903C 13            [ 6] 2322 	inc	de
-   903D 13            [ 6] 2323 	inc	de
-   903E 13            [ 6] 2324 	inc	de
-   903F                    2325 00118$:
-   903F CB 2A         [ 8] 2326 	sra	d
-   9041 CB 1B         [ 8] 2327 	rr	e
-   9043 CB 2A         [ 8] 2328 	sra	d
-   9045 CB 1B         [ 8] 2329 	rr	e
-   9047 19            [11] 2330 	add	hl, de
-                           2331 ;src/game/world.c:478: if(nPixel == 0 && !(*pAddress & 136)) 
-   9048 78            [ 4] 2332 	ld	a, b
-   9049 B1            [ 4] 2333 	or	a,c
-   904A 20 09         [12] 2334 	jr	NZ,00113$
-   904C 7E            [ 7] 2335 	ld	a, (hl)
-   904D E6 88         [ 7] 2336 	and	a, #0x88
-   904F 20 04         [12] 2337 	jr	NZ,00113$
-                           2338 ;src/game/world.c:479: return 1;
-   9051 2E 01         [ 7] 2339 	ld	l, #0x01
-   9053 18 2E         [12] 2340 	jr	00116$
-   9055                    2341 00113$:
-                           2342 ;src/game/world.c:480: else if(nPixel == 1 && !(*pAddress & 68))
-   9055 79            [ 4] 2343 	ld	a, c
-   9056 3D            [ 4] 2344 	dec	a
-   9057 B0            [ 4] 2345 	or	a, b
-   9058 20 09         [12] 2346 	jr	NZ,00109$
-   905A 7E            [ 7] 2347 	ld	a, (hl)
-   905B E6 44         [ 7] 2348 	and	a, #0x44
-   905D 20 04         [12] 2349 	jr	NZ,00109$
-                           2350 ;src/game/world.c:481: return 1;
-   905F 2E 01         [ 7] 2351 	ld	l, #0x01
-   9061 18 20         [12] 2352 	jr	00116$
-   9063                    2353 00109$:
-                           2354 ;src/game/world.c:482: else if(nPixel == 2 && !(*pAddress & 34))
-   9063 79            [ 4] 2355 	ld	a, c
-   9064 D6 02         [ 7] 2356 	sub	a, #0x02
-   9066 B0            [ 4] 2357 	or	a, b
-   9067 20 09         [12] 2358 	jr	NZ,00105$
-   9069 7E            [ 7] 2359 	ld	a, (hl)
-   906A E6 22         [ 7] 2360 	and	a, #0x22
-   906C 20 04         [12] 2361 	jr	NZ,00105$
-                           2362 ;src/game/world.c:483: return 1;
-   906E 2E 01         [ 7] 2363 	ld	l, #0x01
-   9070 18 11         [12] 2364 	jr	00116$
-   9072                    2365 00105$:
-                           2366 ;src/game/world.c:484: else if(nPixel == 3 && !(*pAddress & 17))
-   9072 79            [ 4] 2367 	ld	a, c
-   9073 D6 03         [ 7] 2368 	sub	a, #0x03
-   9075 B0            [ 4] 2369 	or	a, b
-   9076 20 09         [12] 2370 	jr	NZ,00110$
-   9078 7E            [ 7] 2371 	ld	a, (hl)
-   9079 E6 11         [ 7] 2372 	and	a, #0x11
-   907B 20 04         [12] 2373 	jr	NZ,00110$
-                           2374 ;src/game/world.c:485: return 1;
-   907D 2E 01         [ 7] 2375 	ld	l, #0x01
-   907F 18 02         [12] 2376 	jr	00116$
-   9081                    2377 00110$:
-                           2378 ;src/game/world.c:487: return 0;
-   9081 2E 00         [ 7] 2379 	ld	l, #0x00
-   9083                    2380 00116$:
-   9083 DD E1         [14] 2381 	pop	ix
-   9085 C9            [10] 2382 	ret
-                           2383 ;src/game/world.c:490: void drawTrains(u8 x_, u8 y_)
-                           2384 ;	---------------------------------
-                           2385 ; Function drawTrains
-                           2386 ; ---------------------------------
-   9086                    2387 _drawTrains::
-   9086 DD E5         [15] 2388 	push	ix
-   9088 DD 21 00 00   [14] 2389 	ld	ix,#0
-   908C DD 39         [15] 2390 	add	ix,sp
-   908E 21 EA FF      [10] 2391 	ld	hl, #-22
-   9091 39            [11] 2392 	add	hl, sp
-   9092 F9            [ 6] 2393 	ld	sp, hl
-                           2394 ;src/game/world.c:497: for(i=0; i<nbTrainList; i++)
-   9093 DD 7E 05      [19] 2395 	ld	a, 5 (ix)
-   9096 07            [ 4] 2396 	rlca
-   9097 07            [ 4] 2397 	rlca
-   9098 07            [ 4] 2398 	rlca
-   9099 07            [ 4] 2399 	rlca
-   909A E6 F0         [ 7] 2400 	and	a, #0xf0
-   909C DD 77 FD      [19] 2401 	ld	-3 (ix), a
-   909F DD 36 F0 00   [19] 2402 	ld	-16 (ix), #0x00
-   90A3                    2403 00133$:
-   90A3 21 BA 83      [10] 2404 	ld	hl, #_nbTrainList
-   90A6 DD 7E F0      [19] 2405 	ld	a, -16 (ix)
-   90A9 96            [ 7] 2406 	sub	a, (hl)
-   90AA D2 01 9A      [10] 2407 	jp	NC, 00135$
-                           2408 ;src/game/world.c:500: if(trainList[i].posX-x_ < NBTILE_W && trainList[i].posY-y_ < NBTILE_H && trainList[i].posX-x_ >= 0 && trainList[i].posY-y_ >= 0 )
-   90AD DD 7E F0      [19] 2409 	ld	a, -16 (ix)
-   90B0 DD 77 F9      [19] 2410 	ld	-7 (ix), a
-   90B3 DD 36 FA 00   [19] 2411 	ld	-6 (ix), #0x00
-   90B7 3E 05         [ 7] 2412 	ld	a, #0x04+1
-   90B9 18 08         [12] 2413 	jr	00209$
-   90BB                    2414 00208$:
-   90BB DD CB F9 26   [23] 2415 	sla	-7 (ix)
-   90BF DD CB FA 16   [23] 2416 	rl	-6 (ix)
-   90C3                    2417 00209$:
-   90C3 3D            [ 4] 2418 	dec	a
-   90C4 20 F5         [12] 2419 	jr	NZ,00208$
-   90C6 FD 21 B5 83   [14] 2420 	ld	iy, #_trainList
-   90CA FD 7E 00      [19] 2421 	ld	a, 0 (iy)
-   90CD DD 86 F9      [19] 2422 	add	a, -7 (ix)
-   90D0 DD 77 F1      [19] 2423 	ld	-15 (ix), a
-   90D3 FD 7E 01      [19] 2424 	ld	a, 1 (iy)
-   90D6 DD 8E FA      [19] 2425 	adc	a, -6 (ix)
-   90D9 DD 77 F2      [19] 2426 	ld	-14 (ix), a
-   90DC DD 7E F1      [19] 2427 	ld	a, -15 (ix)
-   90DF DD 77 FB      [19] 2428 	ld	-5 (ix), a
-   90E2 DD 7E F2      [19] 2429 	ld	a, -14 (ix)
-   90E5 DD 77 FC      [19] 2430 	ld	-4 (ix), a
-   90E8 DD 6E FB      [19] 2431 	ld	l,-5 (ix)
-   90EB DD 66 FC      [19] 2432 	ld	h,-4 (ix)
-   90EE 11 04 00      [10] 2433 	ld	de, #0x0004
-   90F1 19            [11] 2434 	add	hl, de
-   90F2 7E            [ 7] 2435 	ld	a, (hl)
-   90F3 DD 77 FB      [19] 2436 	ld	-5 (ix), a
-   90F6 DD 77 FB      [19] 2437 	ld	-5 (ix), a
-   90F9 DD 36 FC 00   [19] 2438 	ld	-4 (ix), #0x00
-   90FD DD 7E 04      [19] 2439 	ld	a, 4 (ix)
-   9100 DD 77 FE      [19] 2440 	ld	-2 (ix), a
-   9103 DD 36 FF 00   [19] 2441 	ld	-1 (ix), #0x00
-   9107 DD 7E FB      [19] 2442 	ld	a, -5 (ix)
-   910A DD 96 FE      [19] 2443 	sub	a, -2 (ix)
-   910D DD 77 FB      [19] 2444 	ld	-5 (ix), a
-   9110 DD 7E FC      [19] 2445 	ld	a, -4 (ix)
-   9113 DD 9E FF      [19] 2446 	sbc	a, -1 (ix)
-   9116 DD 77 FC      [19] 2447 	ld	-4 (ix), a
-   9119 DD 7E FB      [19] 2448 	ld	a, -5 (ix)
-   911C D6 14         [ 7] 2449 	sub	a, #0x14
-   911E DD 7E FC      [19] 2450 	ld	a, -4 (ix)
-   9121 17            [ 4] 2451 	rla
-   9122 3F            [ 4] 2452 	ccf
-   9123 1F            [ 4] 2453 	rra
-   9124 DE 80         [ 7] 2454 	sbc	a, #0x80
-   9126 D2 FB 99      [10] 2455 	jp	NC, 00134$
-   9129 DD 6E F1      [19] 2456 	ld	l,-15 (ix)
-   912C DD 66 F2      [19] 2457 	ld	h,-14 (ix)
-   912F 11 05 00      [10] 2458 	ld	de, #0x0005
-   9132 19            [11] 2459 	add	hl, de
-   9133 6E            [ 7] 2460 	ld	l, (hl)
-   9134 26 00         [ 7] 2461 	ld	h, #0x00
-   9136 DD 4E 05      [19] 2462 	ld	c, 5 (ix)
-   9139 06 00         [ 7] 2463 	ld	b, #0x00
-   913B BF            [ 4] 2464 	cp	a, a
-   913C ED 42         [15] 2465 	sbc	hl, bc
-   913E 7D            [ 4] 2466 	ld	a, l
-   913F D6 0C         [ 7] 2467 	sub	a, #0x0c
-   9141 7C            [ 4] 2468 	ld	a, h
-   9142 17            [ 4] 2469 	rla
-   9143 3F            [ 4] 2470 	ccf
-   9144 1F            [ 4] 2471 	rra
-   9145 DE 80         [ 7] 2472 	sbc	a, #0x80
-   9147 D2 FB 99      [10] 2473 	jp	NC, 00134$
-   914A DD CB FC 7E   [20] 2474 	bit	7, -4 (ix)
-   914E C2 FB 99      [10] 2475 	jp	NZ, 00134$
-   9151 CB 7C         [ 8] 2476 	bit	7, h
-   9153 C2 FB 99      [10] 2477 	jp	NZ, 00134$
-                           2478 ;src/game/world.c:503: setPixel(trainList[i].animX-x_*TILESIZE_H,trainList[i].animY-y_*TILESIZE_H, 3);
-   9156 DD 6E F1      [19] 2479 	ld	l,-15 (ix)
-   9159 DD 66 F2      [19] 2480 	ld	h,-14 (ix)
-   915C 11 09 00      [10] 2481 	ld	de, #0x0009
-   915F 19            [11] 2482 	add	hl, de
-   9160 4E            [ 7] 2483 	ld	c, (hl)
-   9161 23            [ 6] 2484 	inc	hl
-   9162 46            [ 7] 2485 	ld	b, (hl)
-   9163 DD 7E FD      [19] 2486 	ld	a, -3 (ix)
-   9166 DD 77 FB      [19] 2487 	ld	-5 (ix), a
-   9169 79            [ 4] 2488 	ld	a, c
-   916A DD 96 FB      [19] 2489 	sub	a, -5 (ix)
-   916D 57            [ 4] 2490 	ld	d, a
-   916E DD 6E F1      [19] 2491 	ld	l,-15 (ix)
-   9171 DD 66 F2      [19] 2492 	ld	h,-14 (ix)
-   9174 01 07 00      [10] 2493 	ld	bc, #0x0007
-   9177 09            [11] 2494 	add	hl, bc
-   9178 4E            [ 7] 2495 	ld	c, (hl)
-   9179 23            [ 6] 2496 	inc	hl
-   917A 46            [ 7] 2497 	ld	b, (hl)
-   917B 3E 05         [ 7] 2498 	ld	a, #0x04+1
-   917D 18 08         [12] 2499 	jr	00211$
-   917F                    2500 00210$:
-   917F DD CB FE 26   [23] 2501 	sla	-2 (ix)
-   9183 DD CB FF 16   [23] 2502 	rl	-1 (ix)
-   9187                    2503 00211$:
-   9187 3D            [ 4] 2504 	dec	a
-   9188 20 F5         [12] 2505 	jr	NZ,00210$
-   918A 79            [ 4] 2506 	ld	a, c
-   918B DD 96 FE      [19] 2507 	sub	a, -2 (ix)
-   918E 4F            [ 4] 2508 	ld	c, a
-   918F 78            [ 4] 2509 	ld	a, b
-   9190 DD 9E FF      [19] 2510 	sbc	a, -1 (ix)
-   9193 47            [ 4] 2511 	ld	b, a
-   9194 3E 03         [ 7] 2512 	ld	a, #0x03
-   9196 F5            [11] 2513 	push	af
-   9197 33            [ 6] 2514 	inc	sp
-   9198 D5            [11] 2515 	push	de
-   9199 33            [ 6] 2516 	inc	sp
-   919A C5            [11] 2517 	push	bc
-   919B CD 19 8F      [17] 2518 	call	_setPixel
-   919E F1            [10] 2519 	pop	af
-   919F F1            [10] 2520 	pop	af
-                           2521 ;src/game/world.c:504: setPixel(trainList[i].animOldX-x_*TILESIZE_H,trainList[i].animOldY-y_*TILESIZE_H, 2);
-   91A0 FD 2A B5 83   [20] 2522 	ld	iy, (_trainList)
-   91A4 DD 5E F9      [19] 2523 	ld	e,-7 (ix)
-   91A7 DD 56 FA      [19] 2524 	ld	d,-6 (ix)
-   91AA FD 19         [15] 2525 	add	iy, de
-   91AC FD E5         [15] 2526 	push	iy
-   91AE E1            [10] 2527 	pop	hl
-   91AF 11 0D 00      [10] 2528 	ld	de, #0x000d
-   91B2 19            [11] 2529 	add	hl, de
-   91B3 4E            [ 7] 2530 	ld	c, (hl)
-   91B4 23            [ 6] 2531 	inc	hl
-   91B5 46            [ 7] 2532 	ld	b, (hl)
-   91B6 79            [ 4] 2533 	ld	a, c
-   91B7 DD 96 FB      [19] 2534 	sub	a, -5 (ix)
-   91BA 57            [ 4] 2535 	ld	d, a
-   91BB FD E5         [15] 2536 	push	iy
-   91BD E1            [10] 2537 	pop	hl
-   91BE 01 0B 00      [10] 2538 	ld	bc, #0x000b
-   91C1 09            [11] 2539 	add	hl, bc
-   91C2 4E            [ 7] 2540 	ld	c, (hl)
-   91C3 23            [ 6] 2541 	inc	hl
-   91C4 46            [ 7] 2542 	ld	b, (hl)
-   91C5 79            [ 4] 2543 	ld	a, c
-   91C6 DD 96 FE      [19] 2544 	sub	a, -2 (ix)
-   91C9 4F            [ 4] 2545 	ld	c, a
-   91CA 78            [ 4] 2546 	ld	a, b
-   91CB DD 9E FF      [19] 2547 	sbc	a, -1 (ix)
-   91CE 47            [ 4] 2548 	ld	b, a
-   91CF 3E 02         [ 7] 2549 	ld	a, #0x02
-   91D1 F5            [11] 2550 	push	af
-   91D2 33            [ 6] 2551 	inc	sp
-   91D3 D5            [11] 2552 	push	de
-   91D4 33            [ 6] 2553 	inc	sp
-   91D5 C5            [11] 2554 	push	bc
-   91D6 CD 19 8F      [17] 2555 	call	_setPixel
-   91D9 F1            [10] 2556 	pop	af
-   91DA F1            [10] 2557 	pop	af
-                           2558 ;src/game/world.c:507: oldTrainX = trainList[i].animOldX;
-   91DB FD 21 B5 83   [14] 2559 	ld	iy, #_trainList
-   91DF FD 7E 00      [19] 2560 	ld	a, 0 (iy)
-   91E2 DD 86 F9      [19] 2561 	add	a, -7 (ix)
-   91E5 5F            [ 4] 2562 	ld	e, a
-   91E6 FD 7E 01      [19] 2563 	ld	a, 1 (iy)
-   91E9 DD 8E FA      [19] 2564 	adc	a, -6 (ix)
-   91EC 57            [ 4] 2565 	ld	d, a
-   91ED 21 0B 00      [10] 2566 	ld	hl, #0x000b
-   91F0 19            [11] 2567 	add	hl,de
-   91F1 4D            [ 4] 2568 	ld	c, l
-   91F2 44            [ 4] 2569 	ld	b, h
-   91F3 0A            [ 7] 2570 	ld	a, (bc)
-   91F4 DD 77 EC      [19] 2571 	ld	-20 (ix), a
-   91F7 03            [ 6] 2572 	inc	bc
-   91F8 0A            [ 7] 2573 	ld	a, (bc)
-   91F9 DD 77 ED      [19] 2574 	ld	-19 (ix), a
-   91FC 0B            [ 6] 2575 	dec	bc
-                           2576 ;src/game/world.c:508: oldTrainY = trainList[i].animOldY;
-   91FD D5            [11] 2577 	push	de
-   91FE FD E1         [14] 2578 	pop	iy
-   9200 FD 7E 0D      [19] 2579 	ld	a, 13 (iy)
-   9203 DD 77 EA      [19] 2580 	ld	-22 (ix), a
-   9206 FD 7E 0E      [19] 2581 	ld	a, 14 (iy)
-   9209 DD 77 EB      [19] 2582 	ld	-21 (ix), a
-                           2583 ;src/game/world.c:509: trainList[i].animOldX = trainList[i].animX;
-   920C EB            [ 4] 2584 	ex	de,hl
-   920D 11 07 00      [10] 2585 	ld	de, #0x0007
-   9210 19            [11] 2586 	add	hl, de
-   9211 5E            [ 7] 2587 	ld	e, (hl)
-   9212 23            [ 6] 2588 	inc	hl
-   9213 56            [ 7] 2589 	ld	d, (hl)
-   9214 7B            [ 4] 2590 	ld	a, e
-   9215 02            [ 7] 2591 	ld	(bc), a
-   9216 03            [ 6] 2592 	inc	bc
-   9217 7A            [ 4] 2593 	ld	a, d
-   9218 02            [ 7] 2594 	ld	(bc), a
-                           2595 ;src/game/world.c:510: trainList[i].animOldY = trainList[i].animY;
-   9219 FD 21 B5 83   [14] 2596 	ld	iy, #_trainList
-   921D FD 7E 00      [19] 2597 	ld	a, 0 (iy)
-   9220 DD 86 F9      [19] 2598 	add	a, -7 (ix)
-   9223 5F            [ 4] 2599 	ld	e, a
-   9224 FD 7E 01      [19] 2600 	ld	a, 1 (iy)
-   9227 DD 8E FA      [19] 2601 	adc	a, -6 (ix)
-   922A 57            [ 4] 2602 	ld	d, a
-   922B 21 0D 00      [10] 2603 	ld	hl, #0x000d
-   922E 19            [11] 2604 	add	hl,de
-   922F 4D            [ 4] 2605 	ld	c, l
-   9230 44            [ 4] 2606 	ld	b, h
-   9231 EB            [ 4] 2607 	ex	de,hl
-   9232 11 09 00      [10] 2608 	ld	de, #0x0009
-   9235 19            [11] 2609 	add	hl, de
-   9236 5E            [ 7] 2610 	ld	e, (hl)
-   9237 23            [ 6] 2611 	inc	hl
-   9238 56            [ 7] 2612 	ld	d, (hl)
-   9239 7B            [ 4] 2613 	ld	a, e
-   923A 02            [ 7] 2614 	ld	(bc), a
-   923B 03            [ 6] 2615 	inc	bc
-   923C 7A            [ 4] 2616 	ld	a, d
-   923D 02            [ 7] 2617 	ld	(bc), a
-                           2618 ;src/game/world.c:513: if( isPixelBlack(trainList[i].animX-x_*TILESIZE_H +1,trainList[i].animY-y_*TILESIZE_H) )
-   923E FD 2A B5 83   [20] 2619 	ld	iy, (_trainList)
-   9242 DD 5E F9      [19] 2620 	ld	e,-7 (ix)
-   9245 DD 56 FA      [19] 2621 	ld	d,-6 (ix)
-   9248 FD 19         [15] 2622 	add	iy, de
-   924A FD E5         [15] 2623 	push	iy
-   924C E1            [10] 2624 	pop	hl
-   924D 11 09 00      [10] 2625 	ld	de, #0x0009
-   9250 19            [11] 2626 	add	hl, de
-   9251 4E            [ 7] 2627 	ld	c, (hl)
-   9252 23            [ 6] 2628 	inc	hl
-   9253 46            [ 7] 2629 	ld	b, (hl)
-   9254 79            [ 4] 2630 	ld	a, c
-   9255 DD 96 FB      [19] 2631 	sub	a, -5 (ix)
-   9258 57            [ 4] 2632 	ld	d, a
-   9259 FD E5         [15] 2633 	push	iy
-   925B E1            [10] 2634 	pop	hl
-   925C 01 07 00      [10] 2635 	ld	bc, #0x0007
-   925F 09            [11] 2636 	add	hl, bc
-   9260 4E            [ 7] 2637 	ld	c, (hl)
-   9261 23            [ 6] 2638 	inc	hl
-   9262 46            [ 7] 2639 	ld	b, (hl)
-   9263 79            [ 4] 2640 	ld	a, c
-   9264 DD 96 FE      [19] 2641 	sub	a, -2 (ix)
-   9267 4F            [ 4] 2642 	ld	c, a
-   9268 78            [ 4] 2643 	ld	a, b
-   9269 DD 9E FF      [19] 2644 	sbc	a, -1 (ix)
-   926C 47            [ 4] 2645 	ld	b, a
-   926D 03            [ 6] 2646 	inc	bc
-   926E D5            [11] 2647 	push	de
-   926F 33            [ 6] 2648 	inc	sp
-   9270 C5            [11] 2649 	push	bc
-   9271 CD F2 8F      [17] 2650 	call	_isPixelBlack
-   9274 F1            [10] 2651 	pop	af
-   9275 33            [ 6] 2652 	inc	sp
-   9276 DD 75 F1      [19] 2653 	ld	-15 (ix), l
-                           2654 ;src/game/world.c:500: if(trainList[i].posX-x_ < NBTILE_W && trainList[i].posY-y_ < NBTILE_H && trainList[i].posX-x_ >= 0 && trainList[i].posY-y_ >= 0 )
-   9279 FD 21 B5 83   [14] 2655 	ld	iy, #_trainList
-   927D FD 7E 00      [19] 2656 	ld	a, 0 (iy)
-   9280 DD 86 F9      [19] 2657 	add	a, -7 (ix)
-   9283 DD 77 F3      [19] 2658 	ld	-13 (ix), a
-   9286 FD 7E 01      [19] 2659 	ld	a, 1 (iy)
-   9289 DD 8E FA      [19] 2660 	adc	a, -6 (ix)
-   928C DD 77 F4      [19] 2661 	ld	-12 (ix), a
-                           2662 ;src/game/world.c:514: trainList[i].animX+=1;
-   928F DD 7E F3      [19] 2663 	ld	a, -13 (ix)
-   9292 C6 07         [ 7] 2664 	add	a, #0x07
-   9294 DD 77 F5      [19] 2665 	ld	-11 (ix), a
-   9297 DD 7E F4      [19] 2666 	ld	a, -12 (ix)
-   929A CE 00         [ 7] 2667 	adc	a, #0x00
-   929C DD 77 F6      [19] 2668 	ld	-10 (ix), a
-   929F DD 6E F5      [19] 2669 	ld	l,-11 (ix)
-   92A2 DD 66 F6      [19] 2670 	ld	h,-10 (ix)
-   92A5 7E            [ 7] 2671 	ld	a, (hl)
-   92A6 DD 77 F7      [19] 2672 	ld	-9 (ix), a
-   92A9 23            [ 6] 2673 	inc	hl
-   92AA 7E            [ 7] 2674 	ld	a, (hl)
-   92AB DD 77 F8      [19] 2675 	ld	-8 (ix), a
-                           2676 ;src/game/world.c:513: if( isPixelBlack(trainList[i].animX-x_*TILESIZE_H +1,trainList[i].animY-y_*TILESIZE_H) )
-   92AE DD 7E F1      [19] 2677 	ld	a, -15 (ix)
-   92B1 B7            [ 4] 2678 	or	a, a
-   92B2 28 13         [12] 2679 	jr	Z,00122$
-                           2680 ;src/game/world.c:514: trainList[i].animX+=1;
-   92B4 DD 4E F7      [19] 2681 	ld	c,-9 (ix)
-   92B7 DD 46 F8      [19] 2682 	ld	b,-8 (ix)
-   92BA 03            [ 6] 2683 	inc	bc
-   92BB DD 6E F5      [19] 2684 	ld	l,-11 (ix)
-   92BE DD 66 F6      [19] 2685 	ld	h,-10 (ix)
-   92C1 71            [ 7] 2686 	ld	(hl), c
-   92C2 23            [ 6] 2687 	inc	hl
-   92C3 70            [ 7] 2688 	ld	(hl), b
-   92C4 C3 50 98      [10] 2689 	jp	00123$
-   92C7                    2690 00122$:
-                           2691 ;src/game/world.c:515: else if( isPixelBlack(trainList[i].animX-x_*TILESIZE_H -1,trainList[i].animY-y_*TILESIZE_H) )
-   92C7 DD 6E F3      [19] 2692 	ld	l,-13 (ix)
-   92CA DD 66 F4      [19] 2693 	ld	h,-12 (ix)
-   92CD 11 09 00      [10] 2694 	ld	de, #0x0009
-   92D0 19            [11] 2695 	add	hl, de
-   92D1 4E            [ 7] 2696 	ld	c, (hl)
-   92D2 23            [ 6] 2697 	inc	hl
-   92D3 46            [ 7] 2698 	ld	b, (hl)
-   92D4 79            [ 4] 2699 	ld	a, c
-   92D5 DD 96 FB      [19] 2700 	sub	a, -5 (ix)
-   92D8 47            [ 4] 2701 	ld	b, a
-   92D9 DD 7E F7      [19] 2702 	ld	a, -9 (ix)
-   92DC DD 96 FE      [19] 2703 	sub	a, -2 (ix)
-   92DF 5F            [ 4] 2704 	ld	e, a
-   92E0 DD 7E F8      [19] 2705 	ld	a, -8 (ix)
-   92E3 DD 9E FF      [19] 2706 	sbc	a, -1 (ix)
-   92E6 57            [ 4] 2707 	ld	d, a
-   92E7 1B            [ 6] 2708 	dec	de
-   92E8 C5            [11] 2709 	push	bc
-   92E9 33            [ 6] 2710 	inc	sp
-   92EA D5            [11] 2711 	push	de
-   92EB CD F2 8F      [17] 2712 	call	_isPixelBlack
-   92EE F1            [10] 2713 	pop	af
-   92EF 33            [ 6] 2714 	inc	sp
-   92F0 4D            [ 4] 2715 	ld	c, l
-                           2716 ;src/game/world.c:500: if(trainList[i].posX-x_ < NBTILE_W && trainList[i].posY-y_ < NBTILE_H && trainList[i].posX-x_ >= 0 && trainList[i].posY-y_ >= 0 )
-   92F1 FD 21 B5 83   [14] 2717 	ld	iy, #_trainList
-   92F5 FD 7E 00      [19] 2718 	ld	a, 0 (iy)
-   92F8 DD 86 F9      [19] 2719 	add	a, -7 (ix)
-   92FB DD 77 F7      [19] 2720 	ld	-9 (ix), a
-   92FE FD 7E 01      [19] 2721 	ld	a, 1 (iy)
-   9301 DD 8E FA      [19] 2722 	adc	a, -6 (ix)
-   9304 DD 77 F8      [19] 2723 	ld	-8 (ix), a
-                           2724 ;src/game/world.c:514: trainList[i].animX+=1;
-   9307 DD 7E F7      [19] 2725 	ld	a, -9 (ix)
-   930A C6 07         [ 7] 2726 	add	a, #0x07
-   930C 5F            [ 4] 2727 	ld	e, a
-   930D DD 7E F8      [19] 2728 	ld	a, -8 (ix)
-   9310 CE 00         [ 7] 2729 	adc	a, #0x00
-   9312 57            [ 4] 2730 	ld	d, a
-   9313 1A            [ 7] 2731 	ld	a, (de)
-   9314 DD 77 F5      [19] 2732 	ld	-11 (ix), a
-   9317 13            [ 6] 2733 	inc	de
-   9318 1A            [ 7] 2734 	ld	a, (de)
-   9319 DD 77 F6      [19] 2735 	ld	-10 (ix), a
-   931C 1B            [ 6] 2736 	dec	de
-                           2737 ;src/game/world.c:515: else if( isPixelBlack(trainList[i].animX-x_*TILESIZE_H -1,trainList[i].animY-y_*TILESIZE_H) )
-   931D 79            [ 4] 2738 	ld	a, c
-   931E B7            [ 4] 2739 	or	a, a
-   931F 28 0F         [12] 2740 	jr	Z,00119$
-                           2741 ;src/game/world.c:516: trainList[i].animX-=1;
-   9321 DD 4E F5      [19] 2742 	ld	c, -11 (ix)
-   9324 DD 46 F6      [19] 2743 	ld	b, -10 (ix)
-   9327 0B            [ 6] 2744 	dec	bc
-   9328 79            [ 4] 2745 	ld	a, c
-   9329 12            [ 7] 2746 	ld	(de), a
-   932A 13            [ 6] 2747 	inc	de
-   932B 78            [ 4] 2748 	ld	a, b
-   932C 12            [ 7] 2749 	ld	(de), a
-   932D C3 50 98      [10] 2750 	jp	00123$
-   9330                    2751 00119$:
-                           2752 ;src/game/world.c:517: else if( isPixelBlack(trainList[i].animX-x_*TILESIZE_H, trainList[i].animY-y_*TILESIZE_H + 1) )
-   9330 DD 6E F7      [19] 2753 	ld	l,-9 (ix)
-   9333 DD 66 F8      [19] 2754 	ld	h,-8 (ix)
-   9336 11 09 00      [10] 2755 	ld	de, #0x0009
-   9339 19            [11] 2756 	add	hl, de
-   933A 7E            [ 7] 2757 	ld	a, (hl)
-   933B DD 77 F7      [19] 2758 	ld	-9 (ix), a
-   933E 23            [ 6] 2759 	inc	hl
-   933F 7E            [ 7] 2760 	ld	a, (hl)
-   9340 DD 77 F8      [19] 2761 	ld	-8 (ix), a
-   9343 DD 7E F7      [19] 2762 	ld	a, -9 (ix)
-   9346 DD 77 F7      [19] 2763 	ld	-9 (ix), a
-   9349 DD 96 FB      [19] 2764 	sub	a, -5 (ix)
-   934C DD 77 F7      [19] 2765 	ld	-9 (ix), a
-   934F 3C            [ 4] 2766 	inc	a
-   9350 DD 77 F7      [19] 2767 	ld	-9 (ix), a
-   9353 DD 7E F5      [19] 2768 	ld	a, -11 (ix)
-   9356 DD 96 FE      [19] 2769 	sub	a, -2 (ix)
-   9359 DD 77 F5      [19] 2770 	ld	-11 (ix), a
-   935C DD 7E F6      [19] 2771 	ld	a, -10 (ix)
-   935F DD 9E FF      [19] 2772 	sbc	a, -1 (ix)
-   9362 DD 77 F6      [19] 2773 	ld	-10 (ix), a
-   9365 DD 7E F7      [19] 2774 	ld	a, -9 (ix)
-   9368 F5            [11] 2775 	push	af
-   9369 33            [ 6] 2776 	inc	sp
-   936A DD 6E F5      [19] 2777 	ld	l,-11 (ix)
-   936D DD 66 F6      [19] 2778 	ld	h,-10 (ix)
-   9370 E5            [11] 2779 	push	hl
-   9371 CD F2 8F      [17] 2780 	call	_isPixelBlack
-   9374 F1            [10] 2781 	pop	af
-   9375 33            [ 6] 2782 	inc	sp
-   9376 4D            [ 4] 2783 	ld	c, l
-                           2784 ;src/game/world.c:500: if(trainList[i].posX-x_ < NBTILE_W && trainList[i].posY-y_ < NBTILE_H && trainList[i].posX-x_ >= 0 && trainList[i].posY-y_ >= 0 )
-   9377 FD 21 B5 83   [14] 2785 	ld	iy, #_trainList
-   937B FD 7E 00      [19] 2786 	ld	a, 0 (iy)
-   937E DD 86 F9      [19] 2787 	add	a, -7 (ix)
-   9381 DD 77 F7      [19] 2788 	ld	-9 (ix), a
-   9384 FD 7E 01      [19] 2789 	ld	a, 1 (iy)
-   9387 DD 8E FA      [19] 2790 	adc	a, -6 (ix)
-   938A DD 77 F8      [19] 2791 	ld	-8 (ix), a
-                           2792 ;src/game/world.c:515: else if( isPixelBlack(trainList[i].animX-x_*TILESIZE_H -1,trainList[i].animY-y_*TILESIZE_H) )
-   938D DD 7E F7      [19] 2793 	ld	a, -9 (ix)
-   9390 C6 09         [ 7] 2794 	add	a, #0x09
-   9392 DD 77 F5      [19] 2795 	ld	-11 (ix), a
-   9395 DD 7E F8      [19] 2796 	ld	a, -8 (ix)
-   9398 CE 00         [ 7] 2797 	adc	a, #0x00
-   939A DD 77 F6      [19] 2798 	ld	-10 (ix), a
-                           2799 ;src/game/world.c:518: trainList[i].animY+=1;
-   939D DD 6E F5      [19] 2800 	ld	l,-11 (ix)
-   93A0 DD 66 F6      [19] 2801 	ld	h,-10 (ix)
-   93A3 7E            [ 7] 2802 	ld	a, (hl)
-   93A4 DD 77 F3      [19] 2803 	ld	-13 (ix), a
-   93A7 23            [ 6] 2804 	inc	hl
-   93A8 7E            [ 7] 2805 	ld	a, (hl)
-   93A9 DD 77 F4      [19] 2806 	ld	-12 (ix), a
-                           2807 ;src/game/world.c:517: else if( isPixelBlack(trainList[i].animX-x_*TILESIZE_H, trainList[i].animY-y_*TILESIZE_H + 1) )
-   93AC 79            [ 4] 2808 	ld	a, c
-   93AD B7            [ 4] 2809 	or	a, a
-   93AE 28 22         [12] 2810 	jr	Z,00116$
-                           2811 ;src/game/world.c:518: trainList[i].animY+=1;
-   93B0 DD 7E F3      [19] 2812 	ld	a, -13 (ix)
-   93B3 C6 01         [ 7] 2813 	add	a, #0x01
-   93B5 DD 77 F1      [19] 2814 	ld	-15 (ix), a
-   93B8 DD 7E F4      [19] 2815 	ld	a, -12 (ix)
-   93BB CE 00         [ 7] 2816 	adc	a, #0x00
-   93BD DD 77 F2      [19] 2817 	ld	-14 (ix), a
-   93C0 DD 6E F5      [19] 2818 	ld	l,-11 (ix)
-   93C3 DD 66 F6      [19] 2819 	ld	h,-10 (ix)
-   93C6 DD 7E F1      [19] 2820 	ld	a, -15 (ix)
-   93C9 77            [ 7] 2821 	ld	(hl), a
-   93CA 23            [ 6] 2822 	inc	hl
-   93CB DD 7E F2      [19] 2823 	ld	a, -14 (ix)
-   93CE 77            [ 7] 2824 	ld	(hl), a
-   93CF C3 50 98      [10] 2825 	jp	00123$
-   93D2                    2826 00116$:
-                           2827 ;src/game/world.c:519: else if( isPixelBlack(trainList[i].animX-x_*TILESIZE_H,trainList[i].animY-y_*TILESIZE_H - 1) )
-   93D2 DD 7E F3      [19] 2828 	ld	a, -13 (ix)
-   93D5 DD 77 F5      [19] 2829 	ld	-11 (ix), a
-   93D8 DD 96 FB      [19] 2830 	sub	a, -5 (ix)
-   93DB DD 77 F5      [19] 2831 	ld	-11 (ix), a
-   93DE C6 FF         [ 7] 2832 	add	a, #0xff
-   93E0 DD 77 F5      [19] 2833 	ld	-11 (ix), a
-   93E3 DD 6E F7      [19] 2834 	ld	l,-9 (ix)
-   93E6 DD 66 F8      [19] 2835 	ld	h,-8 (ix)
-   93E9 11 07 00      [10] 2836 	ld	de, #0x0007
-   93EC 19            [11] 2837 	add	hl, de
-   93ED 7E            [ 7] 2838 	ld	a, (hl)
-   93EE DD 77 F7      [19] 2839 	ld	-9 (ix), a
-   93F1 23            [ 6] 2840 	inc	hl
-   93F2 7E            [ 7] 2841 	ld	a, (hl)
-   93F3 DD 77 F8      [19] 2842 	ld	-8 (ix), a
-   93F6 DD 7E F7      [19] 2843 	ld	a, -9 (ix)
-   93F9 DD 96 FE      [19] 2844 	sub	a, -2 (ix)
-   93FC DD 77 F7      [19] 2845 	ld	-9 (ix), a
-   93FF DD 7E F8      [19] 2846 	ld	a, -8 (ix)
-   9402 DD 9E FF      [19] 2847 	sbc	a, -1 (ix)
-   9405 DD 77 F8      [19] 2848 	ld	-8 (ix), a
-   9408 DD 7E F5      [19] 2849 	ld	a, -11 (ix)
-   940B F5            [11] 2850 	push	af
-   940C 33            [ 6] 2851 	inc	sp
-   940D DD 6E F7      [19] 2852 	ld	l,-9 (ix)
-   9410 DD 66 F8      [19] 2853 	ld	h,-8 (ix)
-   9413 E5            [11] 2854 	push	hl
-   9414 CD F2 8F      [17] 2855 	call	_isPixelBlack
-   9417 F1            [10] 2856 	pop	af
-   9418 33            [ 6] 2857 	inc	sp
-   9419 4D            [ 4] 2858 	ld	c, l
-                           2859 ;src/game/world.c:500: if(trainList[i].posX-x_ < NBTILE_W && trainList[i].posY-y_ < NBTILE_H && trainList[i].posX-x_ >= 0 && trainList[i].posY-y_ >= 0 )
-   941A FD 21 B5 83   [14] 2860 	ld	iy, #_trainList
-   941E FD 7E 00      [19] 2861 	ld	a, 0 (iy)
-   9421 DD 86 F9      [19] 2862 	add	a, -7 (ix)
-   9424 DD 77 F7      [19] 2863 	ld	-9 (ix), a
-   9427 FD 7E 01      [19] 2864 	ld	a, 1 (iy)
-   942A DD 8E FA      [19] 2865 	adc	a, -6 (ix)
-   942D DD 77 F8      [19] 2866 	ld	-8 (ix), a
-                           2867 ;src/game/world.c:515: else if( isPixelBlack(trainList[i].animX-x_*TILESIZE_H -1,trainList[i].animY-y_*TILESIZE_H) )
-   9430 DD 7E F7      [19] 2868 	ld	a, -9 (ix)
-   9433 C6 09         [ 7] 2869 	add	a, #0x09
-   9435 DD 77 F5      [19] 2870 	ld	-11 (ix), a
-   9438 DD 7E F8      [19] 2871 	ld	a, -8 (ix)
-   943B CE 00         [ 7] 2872 	adc	a, #0x00
-   943D DD 77 F6      [19] 2873 	ld	-10 (ix), a
-                           2874 ;src/game/world.c:518: trainList[i].animY+=1;
-   9440 DD 6E F5      [19] 2875 	ld	l,-11 (ix)
-   9443 DD 66 F6      [19] 2876 	ld	h,-10 (ix)
-   9446 7E            [ 7] 2877 	ld	a, (hl)
-   9447 DD 77 F3      [19] 2878 	ld	-13 (ix), a
-   944A 23            [ 6] 2879 	inc	hl
-   944B 7E            [ 7] 2880 	ld	a, (hl)
-   944C DD 77 F4      [19] 2881 	ld	-12 (ix), a
-                           2882 ;src/game/world.c:519: else if( isPixelBlack(trainList[i].animX-x_*TILESIZE_H,trainList[i].animY-y_*TILESIZE_H - 1) )
-   944F 79            [ 4] 2883 	ld	a, c
-   9450 B7            [ 4] 2884 	or	a, a
-   9451 28 22         [12] 2885 	jr	Z,00113$
-                           2886 ;src/game/world.c:520: trainList[i].animY-=1;
-   9453 DD 7E F3      [19] 2887 	ld	a, -13 (ix)
-   9456 C6 FF         [ 7] 2888 	add	a, #0xff
-   9458 DD 77 F1      [19] 2889 	ld	-15 (ix), a
-   945B DD 7E F4      [19] 2890 	ld	a, -12 (ix)
-   945E CE FF         [ 7] 2891 	adc	a, #0xff
-   9460 DD 77 F2      [19] 2892 	ld	-14 (ix), a
-   9463 DD 6E F5      [19] 2893 	ld	l,-11 (ix)
-   9466 DD 66 F6      [19] 2894 	ld	h,-10 (ix)
-   9469 DD 7E F1      [19] 2895 	ld	a, -15 (ix)
-   946C 77            [ 7] 2896 	ld	(hl), a
-   946D 23            [ 6] 2897 	inc	hl
-   946E DD 7E F2      [19] 2898 	ld	a, -14 (ix)
-   9471 77            [ 7] 2899 	ld	(hl), a
-   9472 C3 50 98      [10] 2900 	jp	00123$
-   9475                    2901 00113$:
-                           2902 ;src/game/world.c:521: else if( isPixelBlack(trainList[i].animX-x_*TILESIZE_H+1,trainList[i].animY-y_*TILESIZE_H + 1) )
-   9475 DD 7E F3      [19] 2903 	ld	a, -13 (ix)
-   9478 DD 77 F5      [19] 2904 	ld	-11 (ix), a
-   947B DD 96 FB      [19] 2905 	sub	a, -5 (ix)
-   947E DD 77 F5      [19] 2906 	ld	-11 (ix), a
-   9481 3C            [ 4] 2907 	inc	a
-   9482 DD 77 F5      [19] 2908 	ld	-11 (ix), a
-   9485 DD 6E F7      [19] 2909 	ld	l,-9 (ix)
-   9488 DD 66 F8      [19] 2910 	ld	h,-8 (ix)
-   948B 11 07 00      [10] 2911 	ld	de, #0x0007
-   948E 19            [11] 2912 	add	hl, de
-   948F 7E            [ 7] 2913 	ld	a, (hl)
-   9490 DD 77 F7      [19] 2914 	ld	-9 (ix), a
-   9493 23            [ 6] 2915 	inc	hl
-   9494 7E            [ 7] 2916 	ld	a, (hl)
-   9495 DD 77 F8      [19] 2917 	ld	-8 (ix), a
-   9498 DD 7E F7      [19] 2918 	ld	a, -9 (ix)
-   949B DD 96 FE      [19] 2919 	sub	a, -2 (ix)
-   949E DD 77 F7      [19] 2920 	ld	-9 (ix), a
-   94A1 DD 7E F8      [19] 2921 	ld	a, -8 (ix)
-   94A4 DD 9E FF      [19] 2922 	sbc	a, -1 (ix)
-   94A7 DD 77 F8      [19] 2923 	ld	-8 (ix), a
-   94AA DD 34 F7      [23] 2924 	inc	-9 (ix)
-   94AD 20 03         [12] 2925 	jr	NZ,00212$
-   94AF DD 34 F8      [23] 2926 	inc	-8 (ix)
-   94B2                    2927 00212$:
-   94B2 DD 7E F5      [19] 2928 	ld	a, -11 (ix)
-   94B5 F5            [11] 2929 	push	af
-   94B6 33            [ 6] 2930 	inc	sp
-   94B7 DD 6E F7      [19] 2931 	ld	l,-9 (ix)
-   94BA DD 66 F8      [19] 2932 	ld	h,-8 (ix)
-   94BD E5            [11] 2933 	push	hl
-   94BE CD F2 8F      [17] 2934 	call	_isPixelBlack
-   94C1 F1            [10] 2935 	pop	af
-   94C2 33            [ 6] 2936 	inc	sp
-   94C3 4D            [ 4] 2937 	ld	c, l
-                           2938 ;src/game/world.c:500: if(trainList[i].posX-x_ < NBTILE_W && trainList[i].posY-y_ < NBTILE_H && trainList[i].posX-x_ >= 0 && trainList[i].posY-y_ >= 0 )
-   94C4 FD 21 B5 83   [14] 2939 	ld	iy, #_trainList
-   94C8 FD 7E 00      [19] 2940 	ld	a, 0 (iy)
-   94CB DD 86 F9      [19] 2941 	add	a, -7 (ix)
-   94CE DD 77 F7      [19] 2942 	ld	-9 (ix), a
-   94D1 FD 7E 01      [19] 2943 	ld	a, 1 (iy)
-   94D4 DD 8E FA      [19] 2944 	adc	a, -6 (ix)
-   94D7 DD 77 F8      [19] 2945 	ld	-8 (ix), a
-                           2946 ;src/game/world.c:514: trainList[i].animX+=1;
-   94DA DD 7E F7      [19] 2947 	ld	a, -9 (ix)
-   94DD C6 07         [ 7] 2948 	add	a, #0x07
-   94DF DD 77 F5      [19] 2949 	ld	-11 (ix), a
-   94E2 DD 7E F8      [19] 2950 	ld	a, -8 (ix)
-   94E5 CE 00         [ 7] 2951 	adc	a, #0x00
-   94E7 DD 77 F6      [19] 2952 	ld	-10 (ix), a
-   94EA DD 6E F5      [19] 2953 	ld	l,-11 (ix)
-   94ED DD 66 F6      [19] 2954 	ld	h,-10 (ix)
-   94F0 7E            [ 7] 2955 	ld	a, (hl)
-   94F1 DD 77 F3      [19] 2956 	ld	-13 (ix), a
-   94F4 23            [ 6] 2957 	inc	hl
-   94F5 7E            [ 7] 2958 	ld	a, (hl)
-   94F6 DD 77 F4      [19] 2959 	ld	-12 (ix), a
-                           2960 ;src/game/world.c:521: else if( isPixelBlack(trainList[i].animX-x_*TILESIZE_H+1,trainList[i].animY-y_*TILESIZE_H + 1) )
-   94F9 79            [ 4] 2961 	ld	a, c
-   94FA B7            [ 4] 2962 	or	a, a
-   94FB 28 6A         [12] 2963 	jr	Z,00110$
-                           2964 ;src/game/world.c:523: trainList[i].animX+=1;
-   94FD DD 7E F3      [19] 2965 	ld	a, -13 (ix)
-   9500 C6 01         [ 7] 2966 	add	a, #0x01
-   9502 DD 77 F1      [19] 2967 	ld	-15 (ix), a
-   9505 DD 7E F4      [19] 2968 	ld	a, -12 (ix)
-   9508 CE 00         [ 7] 2969 	adc	a, #0x00
-   950A DD 77 F2      [19] 2970 	ld	-14 (ix), a
-   950D DD 6E F5      [19] 2971 	ld	l,-11 (ix)
-   9510 DD 66 F6      [19] 2972 	ld	h,-10 (ix)
-   9513 DD 7E F1      [19] 2973 	ld	a, -15 (ix)
-   9516 77            [ 7] 2974 	ld	(hl), a
-   9517 23            [ 6] 2975 	inc	hl
-   9518 DD 7E F2      [19] 2976 	ld	a, -14 (ix)
-   951B 77            [ 7] 2977 	ld	(hl), a
-                           2978 ;src/game/world.c:524: trainList[i].animY+=1;
-   951C FD 7E 00      [19] 2979 	ld	a, 0 (iy)
-   951F DD 86 F9      [19] 2980 	add	a, -7 (ix)
-   9522 DD 77 F5      [19] 2981 	ld	-11 (ix), a
-   9525 FD 7E 01      [19] 2982 	ld	a, 1 (iy)
-   9528 DD 8E FA      [19] 2983 	adc	a, -6 (ix)
-   952B DD 77 F6      [19] 2984 	ld	-10 (ix), a
-   952E DD 7E F5      [19] 2985 	ld	a, -11 (ix)
-   9531 C6 09         [ 7] 2986 	add	a, #0x09
-   9533 DD 77 F5      [19] 2987 	ld	-11 (ix), a
-   9536 DD 7E F6      [19] 2988 	ld	a, -10 (ix)
-   9539 CE 00         [ 7] 2989 	adc	a, #0x00
-   953B DD 77 F6      [19] 2990 	ld	-10 (ix), a
-   953E DD 6E F5      [19] 2991 	ld	l,-11 (ix)
-   9541 DD 66 F6      [19] 2992 	ld	h,-10 (ix)
-   9544 7E            [ 7] 2993 	ld	a, (hl)
-   9545 DD 77 F1      [19] 2994 	ld	-15 (ix), a
-   9548 23            [ 6] 2995 	inc	hl
-   9549 7E            [ 7] 2996 	ld	a, (hl)
-   954A DD 77 F2      [19] 2997 	ld	-14 (ix), a
-   954D DD 34 F1      [23] 2998 	inc	-15 (ix)
-   9550 20 03         [12] 2999 	jr	NZ,00213$
-   9552 DD 34 F2      [23] 3000 	inc	-14 (ix)
-   9555                    3001 00213$:
-   9555 DD 6E F5      [19] 3002 	ld	l,-11 (ix)
-   9558 DD 66 F6      [19] 3003 	ld	h,-10 (ix)
-   955B DD 7E F1      [19] 3004 	ld	a, -15 (ix)
-   955E 77            [ 7] 3005 	ld	(hl), a
-   955F 23            [ 6] 3006 	inc	hl
-   9560 DD 7E F2      [19] 3007 	ld	a, -14 (ix)
-   9563 77            [ 7] 3008 	ld	(hl), a
-   9564 C3 50 98      [10] 3009 	jp	00123$
-   9567                    3010 00110$:
-                           3011 ;src/game/world.c:526: else if( isPixelBlack(trainList[i].animX-x_*TILESIZE_H+1,trainList[i].animY-y_*TILESIZE_H - 1) )
-   9567 DD 6E F7      [19] 3012 	ld	l,-9 (ix)
-   956A DD 66 F8      [19] 3013 	ld	h,-8 (ix)
-   956D 11 09 00      [10] 3014 	ld	de, #0x0009
-   9570 19            [11] 3015 	add	hl, de
-   9571 7E            [ 7] 3016 	ld	a, (hl)
-   9572 DD 77 F7      [19] 3017 	ld	-9 (ix), a
-   9575 23            [ 6] 3018 	inc	hl
-   9576 7E            [ 7] 3019 	ld	a, (hl)
-   9577 DD 77 F8      [19] 3020 	ld	-8 (ix), a
-   957A DD 7E F7      [19] 3021 	ld	a, -9 (ix)
-   957D DD 77 F7      [19] 3022 	ld	-9 (ix), a
-   9580 DD 96 FB      [19] 3023 	sub	a, -5 (ix)
-   9583 DD 77 F7      [19] 3024 	ld	-9 (ix), a
-   9586 C6 FF         [ 7] 3025 	add	a, #0xff
-   9588 DD 77 F7      [19] 3026 	ld	-9 (ix), a
-   958B DD 7E F3      [19] 3027 	ld	a, -13 (ix)
-   958E DD 96 FE      [19] 3028 	sub	a, -2 (ix)
-   9591 DD 77 F5      [19] 3029 	ld	-11 (ix), a
-   9594 DD 7E F4      [19] 3030 	ld	a, -12 (ix)
-   9597 DD 9E FF      [19] 3031 	sbc	a, -1 (ix)
-   959A DD 77 F6      [19] 3032 	ld	-10 (ix), a
-   959D DD 34 F5      [23] 3033 	inc	-11 (ix)
-   95A0 20 03         [12] 3034 	jr	NZ,00214$
-   95A2 DD 34 F6      [23] 3035 	inc	-10 (ix)
-   95A5                    3036 00214$:
-   95A5 DD 7E F7      [19] 3037 	ld	a, -9 (ix)
-   95A8 F5            [11] 3038 	push	af
-   95A9 33            [ 6] 3039 	inc	sp
-   95AA DD 6E F5      [19] 3040 	ld	l,-11 (ix)
-   95AD DD 66 F6      [19] 3041 	ld	h,-10 (ix)
-   95B0 E5            [11] 3042 	push	hl
-   95B1 CD F2 8F      [17] 3043 	call	_isPixelBlack
-   95B4 F1            [10] 3044 	pop	af
-   95B5 33            [ 6] 3045 	inc	sp
-   95B6 4D            [ 4] 3046 	ld	c, l
-                           3047 ;src/game/world.c:500: if(trainList[i].posX-x_ < NBTILE_W && trainList[i].posY-y_ < NBTILE_H && trainList[i].posX-x_ >= 0 && trainList[i].posY-y_ >= 0 )
-   95B7 FD 21 B5 83   [14] 3048 	ld	iy, #_trainList
-   95BB FD 7E 00      [19] 3049 	ld	a, 0 (iy)
-   95BE DD 86 F9      [19] 3050 	add	a, -7 (ix)
-   95C1 DD 77 F7      [19] 3051 	ld	-9 (ix), a
-   95C4 FD 7E 01      [19] 3052 	ld	a, 1 (iy)
-   95C7 DD 8E FA      [19] 3053 	adc	a, -6 (ix)
-   95CA DD 77 F8      [19] 3054 	ld	-8 (ix), a
-                           3055 ;src/game/world.c:514: trainList[i].animX+=1;
-   95CD DD 7E F7      [19] 3056 	ld	a, -9 (ix)
-   95D0 C6 07         [ 7] 3057 	add	a, #0x07
-   95D2 DD 77 F5      [19] 3058 	ld	-11 (ix), a
-   95D5 DD 7E F8      [19] 3059 	ld	a, -8 (ix)
-   95D8 CE 00         [ 7] 3060 	adc	a, #0x00
-   95DA DD 77 F6      [19] 3061 	ld	-10 (ix), a
-   95DD DD 6E F5      [19] 3062 	ld	l,-11 (ix)
-   95E0 DD 66 F6      [19] 3063 	ld	h,-10 (ix)
-   95E3 7E            [ 7] 3064 	ld	a, (hl)
-   95E4 DD 77 F3      [19] 3065 	ld	-13 (ix), a
-   95E7 23            [ 6] 3066 	inc	hl
-   95E8 7E            [ 7] 3067 	ld	a, (hl)
-   95E9 DD 77 F4      [19] 3068 	ld	-12 (ix), a
-                           3069 ;src/game/world.c:526: else if( isPixelBlack(trainList[i].animX-x_*TILESIZE_H+1,trainList[i].animY-y_*TILESIZE_H - 1) )
-   95EC 79            [ 4] 3070 	ld	a, c
-   95ED B7            [ 4] 3071 	or	a, a
-   95EE 28 6F         [12] 3072 	jr	Z,00107$
-                           3073 ;src/game/world.c:528: trainList[i].animX+=1;
-   95F0 DD 7E F3      [19] 3074 	ld	a, -13 (ix)
-   95F3 C6 01         [ 7] 3075 	add	a, #0x01
-   95F5 DD 77 F1      [19] 3076 	ld	-15 (ix), a
-   95F8 DD 7E F4      [19] 3077 	ld	a, -12 (ix)
-   95FB CE 00         [ 7] 3078 	adc	a, #0x00
-   95FD DD 77 F2      [19] 3079 	ld	-14 (ix), a
-   9600 DD 6E F5      [19] 3080 	ld	l,-11 (ix)
-   9603 DD 66 F6      [19] 3081 	ld	h,-10 (ix)
-   9606 DD 7E F1      [19] 3082 	ld	a, -15 (ix)
-   9609 77            [ 7] 3083 	ld	(hl), a
-   960A 23            [ 6] 3084 	inc	hl
-   960B DD 7E F2      [19] 3085 	ld	a, -14 (ix)
-   960E 77            [ 7] 3086 	ld	(hl), a
-                           3087 ;src/game/world.c:529: trainList[i].animY-=1;
-   960F FD 7E 00      [19] 3088 	ld	a, 0 (iy)
-   9612 DD 86 F9      [19] 3089 	add	a, -7 (ix)
-   9615 DD 77 F5      [19] 3090 	ld	-11 (ix), a
-   9618 FD 7E 01      [19] 3091 	ld	a, 1 (iy)
-   961B DD 8E FA      [19] 3092 	adc	a, -6 (ix)
-   961E DD 77 F6      [19] 3093 	ld	-10 (ix), a
-   9621 DD 7E F5      [19] 3094 	ld	a, -11 (ix)
-   9624 C6 09         [ 7] 3095 	add	a, #0x09
-   9626 DD 77 F5      [19] 3096 	ld	-11 (ix), a
-   9629 DD 7E F6      [19] 3097 	ld	a, -10 (ix)
-   962C CE 00         [ 7] 3098 	adc	a, #0x00
-   962E DD 77 F6      [19] 3099 	ld	-10 (ix), a
-   9631 DD 6E F5      [19] 3100 	ld	l,-11 (ix)
-   9634 DD 66 F6      [19] 3101 	ld	h,-10 (ix)
-   9637 7E            [ 7] 3102 	ld	a, (hl)
-   9638 DD 77 F1      [19] 3103 	ld	-15 (ix), a
-   963B 23            [ 6] 3104 	inc	hl
-   963C 7E            [ 7] 3105 	ld	a, (hl)
-   963D DD 77 F2      [19] 3106 	ld	-14 (ix), a
-   9640 DD 6E F1      [19] 3107 	ld	l,-15 (ix)
-   9643 DD 66 F2      [19] 3108 	ld	h,-14 (ix)
-   9646 2B            [ 6] 3109 	dec	hl
-   9647 DD 75 F1      [19] 3110 	ld	-15 (ix), l
-   964A DD 74 F2      [19] 3111 	ld	-14 (ix), h
-   964D DD 6E F5      [19] 3112 	ld	l,-11 (ix)
-   9650 DD 66 F6      [19] 3113 	ld	h,-10 (ix)
-   9653 DD 7E F1      [19] 3114 	ld	a, -15 (ix)
-   9656 77            [ 7] 3115 	ld	(hl), a
-   9657 23            [ 6] 3116 	inc	hl
-   9658 DD 7E F2      [19] 3117 	ld	a, -14 (ix)
-   965B 77            [ 7] 3118 	ld	(hl), a
-   965C C3 50 98      [10] 3119 	jp	00123$
-   965F                    3120 00107$:
-                           3121 ;src/game/world.c:531: else if( isPixelBlack(trainList[i].animX-x_*TILESIZE_H-1,trainList[i].animY-y_*TILESIZE_H + 1) )
-   965F DD 6E F7      [19] 3122 	ld	l,-9 (ix)
-   9662 DD 66 F8      [19] 3123 	ld	h,-8 (ix)
-   9665 11 09 00      [10] 3124 	ld	de, #0x0009
-   9668 19            [11] 3125 	add	hl, de
-   9669 7E            [ 7] 3126 	ld	a, (hl)
-   966A DD 77 F7      [19] 3127 	ld	-9 (ix), a
-   966D 23            [ 6] 3128 	inc	hl
-   966E 7E            [ 7] 3129 	ld	a, (hl)
-   966F DD 77 F8      [19] 3130 	ld	-8 (ix), a
-   9672 DD 7E F7      [19] 3131 	ld	a, -9 (ix)
-   9675 DD 77 F7      [19] 3132 	ld	-9 (ix), a
-   9678 DD 96 FB      [19] 3133 	sub	a, -5 (ix)
-   967B DD 77 F7      [19] 3134 	ld	-9 (ix), a
-   967E 3C            [ 4] 3135 	inc	a
-   967F DD 77 F7      [19] 3136 	ld	-9 (ix), a
-   9682 DD 7E F3      [19] 3137 	ld	a, -13 (ix)
-   9685 DD 96 FE      [19] 3138 	sub	a, -2 (ix)
-   9688 DD 77 F5      [19] 3139 	ld	-11 (ix), a
-   968B DD 7E F4      [19] 3140 	ld	a, -12 (ix)
-   968E DD 9E FF      [19] 3141 	sbc	a, -1 (ix)
-   9691 DD 77 F6      [19] 3142 	ld	-10 (ix), a
-   9694 DD 6E F5      [19] 3143 	ld	l,-11 (ix)
-   9697 DD 66 F6      [19] 3144 	ld	h,-10 (ix)
-   969A 2B            [ 6] 3145 	dec	hl
-   969B DD 75 F5      [19] 3146 	ld	-11 (ix), l
-   969E DD 74 F6      [19] 3147 	ld	-10 (ix), h
-   96A1 DD 7E F7      [19] 3148 	ld	a, -9 (ix)
-   96A4 F5            [11] 3149 	push	af
-   96A5 33            [ 6] 3150 	inc	sp
-   96A6 DD 6E F5      [19] 3151 	ld	l,-11 (ix)
-   96A9 DD 66 F6      [19] 3152 	ld	h,-10 (ix)
-   96AC E5            [11] 3153 	push	hl
-   96AD CD F2 8F      [17] 3154 	call	_isPixelBlack
-   96B0 F1            [10] 3155 	pop	af
-   96B1 33            [ 6] 3156 	inc	sp
-   96B2 4D            [ 4] 3157 	ld	c, l
-                           3158 ;src/game/world.c:500: if(trainList[i].posX-x_ < NBTILE_W && trainList[i].posY-y_ < NBTILE_H && trainList[i].posX-x_ >= 0 && trainList[i].posY-y_ >= 0 )
-   96B3 FD 21 B5 83   [14] 3159 	ld	iy, #_trainList
-   96B7 FD 7E 00      [19] 3160 	ld	a, 0 (iy)
-   96BA DD 86 F9      [19] 3161 	add	a, -7 (ix)
-   96BD DD 77 F7      [19] 3162 	ld	-9 (ix), a
-   96C0 FD 7E 01      [19] 3163 	ld	a, 1 (iy)
-   96C3 DD 8E FA      [19] 3164 	adc	a, -6 (ix)
-   96C6 DD 77 F8      [19] 3165 	ld	-8 (ix), a
-                           3166 ;src/game/world.c:514: trainList[i].animX+=1;
-   96C9 DD 7E F7      [19] 3167 	ld	a, -9 (ix)
-   96CC C6 07         [ 7] 3168 	add	a, #0x07
-   96CE DD 77 F5      [19] 3169 	ld	-11 (ix), a
-   96D1 DD 7E F8      [19] 3170 	ld	a, -8 (ix)
-   96D4 CE 00         [ 7] 3171 	adc	a, #0x00
-   96D6 DD 77 F6      [19] 3172 	ld	-10 (ix), a
-   96D9 DD 6E F5      [19] 3173 	ld	l,-11 (ix)
-   96DC DD 66 F6      [19] 3174 	ld	h,-10 (ix)
-   96DF 7E            [ 7] 3175 	ld	a, (hl)
-   96E0 DD 77 F3      [19] 3176 	ld	-13 (ix), a
-   96E3 23            [ 6] 3177 	inc	hl
-   96E4 7E            [ 7] 3178 	ld	a, (hl)
-   96E5 DD 77 F4      [19] 3179 	ld	-12 (ix), a
-                           3180 ;src/game/world.c:531: else if( isPixelBlack(trainList[i].animX-x_*TILESIZE_H-1,trainList[i].animY-y_*TILESIZE_H + 1) )
-   96E8 79            [ 4] 3181 	ld	a, c
-   96E9 B7            [ 4] 3182 	or	a, a
-   96EA 28 6A         [12] 3183 	jr	Z,00104$
-                           3184 ;src/game/world.c:533: trainList[i].animX-=1;
-   96EC DD 7E F3      [19] 3185 	ld	a, -13 (ix)
-   96EF C6 FF         [ 7] 3186 	add	a, #0xff
-   96F1 DD 77 F1      [19] 3187 	ld	-15 (ix), a
-   96F4 DD 7E F4      [19] 3188 	ld	a, -12 (ix)
-   96F7 CE FF         [ 7] 3189 	adc	a, #0xff
-   96F9 DD 77 F2      [19] 3190 	ld	-14 (ix), a
-   96FC DD 6E F5      [19] 3191 	ld	l,-11 (ix)
-   96FF DD 66 F6      [19] 3192 	ld	h,-10 (ix)
-   9702 DD 7E F1      [19] 3193 	ld	a, -15 (ix)
-   9705 77            [ 7] 3194 	ld	(hl), a
-   9706 23            [ 6] 3195 	inc	hl
-   9707 DD 7E F2      [19] 3196 	ld	a, -14 (ix)
-   970A 77            [ 7] 3197 	ld	(hl), a
-                           3198 ;src/game/world.c:534: trainList[i].animY+=1;
-   970B FD 7E 00      [19] 3199 	ld	a, 0 (iy)
-   970E DD 86 F9      [19] 3200 	add	a, -7 (ix)
-   9711 DD 77 F5      [19] 3201 	ld	-11 (ix), a
-   9714 FD 7E 01      [19] 3202 	ld	a, 1 (iy)
-   9717 DD 8E FA      [19] 3203 	adc	a, -6 (ix)
-   971A DD 77 F6      [19] 3204 	ld	-10 (ix), a
-   971D DD 7E F5      [19] 3205 	ld	a, -11 (ix)
-   9720 C6 09         [ 7] 3206 	add	a, #0x09
-   9722 DD 77 F5      [19] 3207 	ld	-11 (ix), a
-   9725 DD 7E F6      [19] 3208 	ld	a, -10 (ix)
-   9728 CE 00         [ 7] 3209 	adc	a, #0x00
-   972A DD 77 F6      [19] 3210 	ld	-10 (ix), a
-   972D DD 6E F5      [19] 3211 	ld	l,-11 (ix)
-   9730 DD 66 F6      [19] 3212 	ld	h,-10 (ix)
-   9733 7E            [ 7] 3213 	ld	a, (hl)
-   9734 DD 77 F1      [19] 3214 	ld	-15 (ix), a
-   9737 23            [ 6] 3215 	inc	hl
-   9738 7E            [ 7] 3216 	ld	a, (hl)
-   9739 DD 77 F2      [19] 3217 	ld	-14 (ix), a
-   973C DD 34 F1      [23] 3218 	inc	-15 (ix)
-   973F 20 03         [12] 3219 	jr	NZ,00215$
-   9741 DD 34 F2      [23] 3220 	inc	-14 (ix)
-   9744                    3221 00215$:
-   9744 DD 6E F5      [19] 3222 	ld	l,-11 (ix)
-   9747 DD 66 F6      [19] 3223 	ld	h,-10 (ix)
-   974A DD 7E F1      [19] 3224 	ld	a, -15 (ix)
-   974D 77            [ 7] 3225 	ld	(hl), a
-   974E 23            [ 6] 3226 	inc	hl
-   974F DD 7E F2      [19] 3227 	ld	a, -14 (ix)
-   9752 77            [ 7] 3228 	ld	(hl), a
-   9753 C3 50 98      [10] 3229 	jp	00123$
-   9756                    3230 00104$:
-                           3231 ;src/game/world.c:536: else if( isPixelBlack(trainList[i].animX-x_*TILESIZE_H-1,trainList[i].animY-y_*TILESIZE_H - 1) )
-   9756 DD 6E F7      [19] 3232 	ld	l,-9 (ix)
-   9759 DD 66 F8      [19] 3233 	ld	h,-8 (ix)
-   975C 11 09 00      [10] 3234 	ld	de, #0x0009
-   975F 19            [11] 3235 	add	hl, de
-   9760 7E            [ 7] 3236 	ld	a, (hl)
-   9761 DD 77 F7      [19] 3237 	ld	-9 (ix), a
-   9764 23            [ 6] 3238 	inc	hl
-   9765 7E            [ 7] 3239 	ld	a, (hl)
-   9766 DD 77 F8      [19] 3240 	ld	-8 (ix), a
-   9769 DD 7E F7      [19] 3241 	ld	a, -9 (ix)
-   976C DD 77 F7      [19] 3242 	ld	-9 (ix), a
-   976F DD 96 FB      [19] 3243 	sub	a, -5 (ix)
-   9772 DD 77 F7      [19] 3244 	ld	-9 (ix), a
-   9775 C6 FF         [ 7] 3245 	add	a, #0xff
-   9777 DD 77 F7      [19] 3246 	ld	-9 (ix), a
-   977A DD 7E F3      [19] 3247 	ld	a, -13 (ix)
-   977D DD 96 FE      [19] 3248 	sub	a, -2 (ix)
-   9780 DD 77 F5      [19] 3249 	ld	-11 (ix), a
-   9783 DD 7E F4      [19] 3250 	ld	a, -12 (ix)
-   9786 DD 9E FF      [19] 3251 	sbc	a, -1 (ix)
-   9789 DD 77 F6      [19] 3252 	ld	-10 (ix), a
-   978C DD 6E F5      [19] 3253 	ld	l,-11 (ix)
-   978F DD 66 F6      [19] 3254 	ld	h,-10 (ix)
-   9792 2B            [ 6] 3255 	dec	hl
-   9793 DD 75 F5      [19] 3256 	ld	-11 (ix), l
-   9796 DD 74 F6      [19] 3257 	ld	-10 (ix), h
-   9799 DD 7E F7      [19] 3258 	ld	a, -9 (ix)
-   979C F5            [11] 3259 	push	af
-   979D 33            [ 6] 3260 	inc	sp
-   979E DD 6E F5      [19] 3261 	ld	l,-11 (ix)
-   97A1 DD 66 F6      [19] 3262 	ld	h,-10 (ix)
-   97A4 E5            [11] 3263 	push	hl
-   97A5 CD F2 8F      [17] 3264 	call	_isPixelBlack
-   97A8 F1            [10] 3265 	pop	af
-   97A9 33            [ 6] 3266 	inc	sp
-   97AA DD 75 F7      [19] 3267 	ld	-9 (ix), l
-   97AD 7D            [ 4] 3268 	ld	a, l
-   97AE B7            [ 4] 3269 	or	a, a
-   97AF CA 50 98      [10] 3270 	jp	Z, 00123$
-                           3271 ;src/game/world.c:538: trainList[i].animX-=1;
-   97B2 FD 21 B5 83   [14] 3272 	ld	iy, #_trainList
-   97B6 FD 7E 00      [19] 3273 	ld	a, 0 (iy)
-   97B9 DD 86 F9      [19] 3274 	add	a, -7 (ix)
-   97BC DD 77 F7      [19] 3275 	ld	-9 (ix), a
-   97BF FD 7E 01      [19] 3276 	ld	a, 1 (iy)
-   97C2 DD 8E FA      [19] 3277 	adc	a, -6 (ix)
-   97C5 DD 77 F8      [19] 3278 	ld	-8 (ix), a
-   97C8 DD 7E F7      [19] 3279 	ld	a, -9 (ix)
-   97CB C6 07         [ 7] 3280 	add	a, #0x07
-   97CD DD 77 F7      [19] 3281 	ld	-9 (ix), a
-   97D0 DD 7E F8      [19] 3282 	ld	a, -8 (ix)
-   97D3 CE 00         [ 7] 3283 	adc	a, #0x00
-   97D5 DD 77 F8      [19] 3284 	ld	-8 (ix), a
-   97D8 DD 6E F7      [19] 3285 	ld	l,-9 (ix)
-   97DB DD 66 F8      [19] 3286 	ld	h,-8 (ix)
-   97DE 7E            [ 7] 3287 	ld	a, (hl)
-   97DF DD 77 F5      [19] 3288 	ld	-11 (ix), a
-   97E2 23            [ 6] 3289 	inc	hl
-   97E3 7E            [ 7] 3290 	ld	a, (hl)
-   97E4 DD 77 F6      [19] 3291 	ld	-10 (ix), a
-   97E7 DD 6E F5      [19] 3292 	ld	l,-11 (ix)
-   97EA DD 66 F6      [19] 3293 	ld	h,-10 (ix)
-   97ED 2B            [ 6] 3294 	dec	hl
-   97EE DD 75 F5      [19] 3295 	ld	-11 (ix), l
-   97F1 DD 74 F6      [19] 3296 	ld	-10 (ix), h
-   97F4 DD 6E F7      [19] 3297 	ld	l,-9 (ix)
-   97F7 DD 66 F8      [19] 3298 	ld	h,-8 (ix)
-   97FA DD 7E F5      [19] 3299 	ld	a, -11 (ix)
-   97FD 77            [ 7] 3300 	ld	(hl), a
-   97FE 23            [ 6] 3301 	inc	hl
-   97FF DD 7E F6      [19] 3302 	ld	a, -10 (ix)
-   9802 77            [ 7] 3303 	ld	(hl), a
-                           3304 ;src/game/world.c:539: trainList[i].animY-=1;
-   9803 FD 7E 00      [19] 3305 	ld	a, 0 (iy)
-   9806 DD 86 F9      [19] 3306 	add	a, -7 (ix)
-   9809 DD 77 F7      [19] 3307 	ld	-9 (ix), a
-   980C FD 7E 01      [19] 3308 	ld	a, 1 (iy)
-   980F DD 8E FA      [19] 3309 	adc	a, -6 (ix)
-   9812 DD 77 F8      [19] 3310 	ld	-8 (ix), a
-   9815 DD 7E F7      [19] 3311 	ld	a, -9 (ix)
-   9818 C6 09         [ 7] 3312 	add	a, #0x09
-   981A DD 77 F7      [19] 3313 	ld	-9 (ix), a
-   981D DD 7E F8      [19] 3314 	ld	a, -8 (ix)
-   9820 CE 00         [ 7] 3315 	adc	a, #0x00
-   9822 DD 77 F8      [19] 3316 	ld	-8 (ix), a
-   9825 DD 6E F7      [19] 3317 	ld	l,-9 (ix)
-   9828 DD 66 F8      [19] 3318 	ld	h,-8 (ix)
-   982B 7E            [ 7] 3319 	ld	a, (hl)
-   982C DD 77 F5      [19] 3320 	ld	-11 (ix), a
-   982F 23            [ 6] 3321 	inc	hl
-   9830 7E            [ 7] 3322 	ld	a, (hl)
-   9831 DD 77 F6      [19] 3323 	ld	-10 (ix), a
-   9834 DD 6E F5      [19] 3324 	ld	l,-11 (ix)
-   9837 DD 66 F6      [19] 3325 	ld	h,-10 (ix)
-   983A 2B            [ 6] 3326 	dec	hl
-   983B DD 75 F5      [19] 3327 	ld	-11 (ix), l
-   983E DD 74 F6      [19] 3328 	ld	-10 (ix), h
-   9841 DD 6E F7      [19] 3329 	ld	l,-9 (ix)
-   9844 DD 66 F8      [19] 3330 	ld	h,-8 (ix)
-   9847 DD 7E F5      [19] 3331 	ld	a, -11 (ix)
-   984A 77            [ 7] 3332 	ld	(hl), a
-   984B 23            [ 6] 3333 	inc	hl
-   984C DD 7E F6      [19] 3334 	ld	a, -10 (ix)
-   984F 77            [ 7] 3335 	ld	(hl), a
-   9850                    3336 00123$:
-                           3337 ;src/game/world.c:543: trainList[i].cycles++; // Update the number of shifts done in pixels
-   9850 FD 2A B5 83   [20] 3338 	ld	iy, (_trainList)
-   9854 DD 5E F9      [19] 3339 	ld	e,-7 (ix)
-   9857 DD 56 FA      [19] 3340 	ld	d,-6 (ix)
-   985A FD 19         [15] 3341 	add	iy, de
-   985C 11 0F 00      [10] 3342 	ld	de, #0x000f
-   985F FD 19         [15] 3343 	add	iy, de
-   9861 FD 34 00      [23] 3344 	inc	0 (iy)
-                           3345 ;src/game/world.c:546: if(trainList[i].cycles>=TILESIZE_H)
-   9864 FD 21 B5 83   [14] 3346 	ld	iy, #_trainList
-   9868 FD 7E 00      [19] 3347 	ld	a, 0 (iy)
-   986B DD 86 F9      [19] 3348 	add	a, -7 (ix)
-   986E 4F            [ 4] 3349 	ld	c, a
-   986F FD 7E 01      [19] 3350 	ld	a, 1 (iy)
-   9872 DD 8E FA      [19] 3351 	adc	a, -6 (ix)
-   9875 47            [ 4] 3352 	ld	b, a
-   9876 21 0F 00      [10] 3353 	ld	hl, #0x000f
-   9879 09            [11] 3354 	add	hl,bc
-   987A DD 75 F7      [19] 3355 	ld	-9 (ix), l
-   987D DD 74 F8      [19] 3356 	ld	-8 (ix), h
-   9880 7E            [ 7] 3357 	ld	a, (hl)
-   9881 D6 10         [ 7] 3358 	sub	a, #0x10
-   9883 DA 39 99      [10] 3359 	jp	C, 00125$
-                           3360 ;src/game/world.c:548: trainList[i].cycles = 0;	// Reset counter
-   9886 DD 6E F7      [19] 3361 	ld	l,-9 (ix)
-   9889 DD 66 F8      [19] 3362 	ld	h,-8 (ix)
-   988C 36 00         [10] 3363 	ld	(hl), #0x00
-                           3364 ;src/game/world.c:549: trainList[i].posX = (int)(trainList[i].animX/TILESIZE_H); // Update position in tiles coordinates
-   988E FD 7E 00      [19] 3365 	ld	a, 0 (iy)
-   9891 DD 86 F9      [19] 3366 	add	a, -7 (ix)
-   9894 4F            [ 4] 3367 	ld	c, a
-   9895 FD 7E 01      [19] 3368 	ld	a, 1 (iy)
-   9898 DD 8E FA      [19] 3369 	adc	a, -6 (ix)
-   989B 47            [ 4] 3370 	ld	b, a
-   989C 21 04 00      [10] 3371 	ld	hl, #0x0004
-   989F 09            [11] 3372 	add	hl,bc
-   98A0 DD 75 F7      [19] 3373 	ld	-9 (ix), l
-   98A3 DD 74 F8      [19] 3374 	ld	-8 (ix), h
-   98A6 C5            [11] 3375 	push	bc
-   98A7 FD E1         [14] 3376 	pop	iy
-   98A9 FD 7E 07      [19] 3377 	ld	a, 7 (iy)
-   98AC DD 77 F5      [19] 3378 	ld	-11 (ix), a
-   98AF FD 7E 08      [19] 3379 	ld	a, 8 (iy)
-   98B2 DD 77 F6      [19] 3380 	ld	-10 (ix), a
-   98B5 DD 7E F5      [19] 3381 	ld	a, -11 (ix)
-   98B8 DD 77 F3      [19] 3382 	ld	-13 (ix), a
-   98BB DD 7E F6      [19] 3383 	ld	a, -10 (ix)
-   98BE DD 77 F4      [19] 3384 	ld	-12 (ix), a
-   98C1 DD CB F6 7E   [20] 3385 	bit	7, -10 (ix)
-   98C5 28 10         [12] 3386 	jr	Z,00137$
-   98C7 DD 7E F5      [19] 3387 	ld	a, -11 (ix)
-   98CA C6 0F         [ 7] 3388 	add	a, #0x0f
-   98CC DD 77 F3      [19] 3389 	ld	-13 (ix), a
-   98CF DD 7E F6      [19] 3390 	ld	a, -10 (ix)
-   98D2 CE 00         [ 7] 3391 	adc	a, #0x00
-   98D4 DD 77 F4      [19] 3392 	ld	-12 (ix), a
-   98D7                    3393 00137$:
-   98D7 DD 4E F3      [19] 3394 	ld	c,-13 (ix)
-   98DA DD 46 F4      [19] 3395 	ld	b,-12 (ix)
-   98DD CB 28         [ 8] 3396 	sra	b
-   98DF CB 19         [ 8] 3397 	rr	c
-   98E1 CB 28         [ 8] 3398 	sra	b
-   98E3 CB 19         [ 8] 3399 	rr	c
-   98E5 CB 28         [ 8] 3400 	sra	b
-   98E7 CB 19         [ 8] 3401 	rr	c
-   98E9 CB 28         [ 8] 3402 	sra	b
-   98EB CB 19         [ 8] 3403 	rr	c
-   98ED DD 6E F7      [19] 3404 	ld	l,-9 (ix)
-   98F0 DD 66 F8      [19] 3405 	ld	h,-8 (ix)
-   98F3 71            [ 7] 3406 	ld	(hl), c
-                           3407 ;src/game/world.c:550: trainList[i].posY = (int)(trainList[i].animY/TILESIZE_H); // Update position in tiles coordinates
-   98F4 FD 21 B5 83   [14] 3408 	ld	iy, #_trainList
-   98F8 FD 7E 00      [19] 3409 	ld	a, 0 (iy)
-   98FB DD 86 F9      [19] 3410 	add	a, -7 (ix)
-   98FE 5F            [ 4] 3411 	ld	e, a
-   98FF FD 7E 01      [19] 3412 	ld	a, 1 (iy)
-   9902 DD 8E FA      [19] 3413 	adc	a, -6 (ix)
-   9905 57            [ 4] 3414 	ld	d, a
-   9906 21 05 00      [10] 3415 	ld	hl, #0x0005
-   9909 19            [11] 3416 	add	hl,de
-   990A 4D            [ 4] 3417 	ld	c, l
-   990B 44            [ 4] 3418 	ld	b, h
-   990C EB            [ 4] 3419 	ex	de,hl
-   990D 11 09 00      [10] 3420 	ld	de, #0x0009
-   9910 19            [11] 3421 	add	hl, de
-   9911 5E            [ 7] 3422 	ld	e, (hl)
-   9912 23            [ 6] 3423 	inc	hl
-   9913 56            [ 7] 3424 	ld	d, (hl)
-   9914 6B            [ 4] 3425 	ld	l, e
-   9915 62            [ 4] 3426 	ld	h, d
-   9916 CB 7A         [ 8] 3427 	bit	7, d
-   9918 28 04         [12] 3428 	jr	Z,00138$
-   991A 21 0F 00      [10] 3429 	ld	hl, #0x000f
-   991D 19            [11] 3430 	add	hl, de
-   991E                    3431 00138$:
-   991E CB 2C         [ 8] 3432 	sra	h
-   9920 CB 1D         [ 8] 3433 	rr	l
-   9922 CB 2C         [ 8] 3434 	sra	h
-   9924 CB 1D         [ 8] 3435 	rr	l
-   9926 CB 2C         [ 8] 3436 	sra	h
-   9928 CB 1D         [ 8] 3437 	rr	l
-   992A CB 2C         [ 8] 3438 	sra	h
-   992C CB 1D         [ 8] 3439 	rr	l
-   992E 7D            [ 4] 3440 	ld	a, l
-   992F 02            [ 7] 3441 	ld	(bc), a
-                           3442 ;src/game/world.c:555: setTrainHeading(i); // Calculate new heading
-   9930 DD 7E F0      [19] 3443 	ld	a, -16 (ix)
-   9933 F5            [11] 3444 	push	af
-   9934 33            [ 6] 3445 	inc	sp
-   9935 CD 7D 8E      [17] 3446 	call	_setTrainHeading
-   9938 33            [ 6] 3447 	inc	sp
-   9939                    3448 00125$:
-                           3449 ;src/game/world.c:559: setPixel(trainList[i].animX-x_*TILESIZE_H,trainList[i].animY-y_*TILESIZE_H, 3);
-   9939 FD 2A B5 83   [20] 3450 	ld	iy, (_trainList)
-   993D DD 5E F9      [19] 3451 	ld	e,-7 (ix)
-   9940 DD 56 FA      [19] 3452 	ld	d,-6 (ix)
-   9943 FD 19         [15] 3453 	add	iy, de
-   9945 FD E5         [15] 3454 	push	iy
-   9947 E1            [10] 3455 	pop	hl
-   9948 11 09 00      [10] 3456 	ld	de, #0x0009
-   994B 19            [11] 3457 	add	hl, de
-   994C 4E            [ 7] 3458 	ld	c, (hl)
-   994D 23            [ 6] 3459 	inc	hl
-   994E 46            [ 7] 3460 	ld	b, (hl)
-   994F 79            [ 4] 3461 	ld	a, c
-   9950 DD 96 FB      [19] 3462 	sub	a, -5 (ix)
-   9953 4F            [ 4] 3463 	ld	c, a
-   9954 FD 7E 07      [19] 3464 	ld	a, 7 (iy)
-   9957 FD 56 08      [19] 3465 	ld	d, 8 (iy)
-   995A DD 96 FE      [19] 3466 	sub	a, -2 (ix)
-   995D 5F            [ 4] 3467 	ld	e, a
-   995E 7A            [ 4] 3468 	ld	a, d
-   995F DD 9E FF      [19] 3469 	sbc	a, -1 (ix)
-   9962 57            [ 4] 3470 	ld	d, a
-   9963 06 03         [ 7] 3471 	ld	b, #0x03
-   9965 C5            [11] 3472 	push	bc
-   9966 D5            [11] 3473 	push	de
-   9967 CD 19 8F      [17] 3474 	call	_setPixel
-   996A F1            [10] 3475 	pop	af
-   996B F1            [10] 3476 	pop	af
-                           3477 ;src/game/world.c:560: setPixel(trainList[i].animOldX-x_*TILESIZE_H,trainList[i].animOldY-y_*TILESIZE_H, 2);
-   996C FD 2A B5 83   [20] 3478 	ld	iy, (_trainList)
-   9970 DD 5E F9      [19] 3479 	ld	e,-7 (ix)
-   9973 DD 56 FA      [19] 3480 	ld	d,-6 (ix)
-   9976 FD 19         [15] 3481 	add	iy, de
-   9978 FD E5         [15] 3482 	push	iy
-   997A E1            [10] 3483 	pop	hl
-   997B 11 0D 00      [10] 3484 	ld	de, #0x000d
-   997E 19            [11] 3485 	add	hl, de
-   997F 4E            [ 7] 3486 	ld	c, (hl)
-   9980 23            [ 6] 3487 	inc	hl
-   9981 46            [ 7] 3488 	ld	b, (hl)
-   9982 79            [ 4] 3489 	ld	a, c
-   9983 DD 96 FB      [19] 3490 	sub	a, -5 (ix)
-   9986 4F            [ 4] 3491 	ld	c, a
-   9987 FD 7E 0B      [19] 3492 	ld	a, 11 (iy)
-   998A FD 56 0C      [19] 3493 	ld	d, 12 (iy)
-   998D DD 96 FE      [19] 3494 	sub	a, -2 (ix)
-   9990 5F            [ 4] 3495 	ld	e, a
-   9991 7A            [ 4] 3496 	ld	a, d
-   9992 DD 9E FF      [19] 3497 	sbc	a, -1 (ix)
-   9995 57            [ 4] 3498 	ld	d, a
-   9996 06 02         [ 7] 3499 	ld	b, #0x02
-   9998 C5            [11] 3500 	push	bc
-   9999 D5            [11] 3501 	push	de
-   999A CD 19 8F      [17] 3502 	call	_setPixel
-   999D F1            [10] 3503 	pop	af
-   999E F1            [10] 3504 	pop	af
-                           3505 ;src/game/world.c:561: setPixel(oldTrainX-x_*TILESIZE_H,oldTrainY-y_*TILESIZE_H, 0);
-   999F DD 4E EA      [19] 3506 	ld	c, -22 (ix)
-   99A2 79            [ 4] 3507 	ld	a, c
-   99A3 DD 96 FB      [19] 3508 	sub	a, -5 (ix)
-   99A6 47            [ 4] 3509 	ld	b, a
-   99A7 DD 7E EC      [19] 3510 	ld	a, -20 (ix)
-   99AA DD 96 FE      [19] 3511 	sub	a, -2 (ix)
-   99AD 5F            [ 4] 3512 	ld	e, a
-   99AE DD 7E ED      [19] 3513 	ld	a, -19 (ix)
-   99B1 DD 9E FF      [19] 3514 	sbc	a, -1 (ix)
-   99B4 57            [ 4] 3515 	ld	d, a
-   99B5 AF            [ 4] 3516 	xor	a, a
-   99B6 F5            [11] 3517 	push	af
-   99B7 33            [ 6] 3518 	inc	sp
-   99B8 C5            [11] 3519 	push	bc
-   99B9 33            [ 6] 3520 	inc	sp
-   99BA D5            [11] 3521 	push	de
-   99BB CD 19 8F      [17] 3522 	call	_setPixel
-   99BE F1            [10] 3523 	pop	af
-   99BF F1            [10] 3524 	pop	af
-                           3525 ;src/game/world.c:563: sprintf(buff, "%d ", trainList[i].heading );
-   99C0 FD 2A B5 83   [20] 3526 	ld	iy, (_trainList)
-   99C4 DD 5E F9      [19] 3527 	ld	e,-7 (ix)
-   99C7 DD 56 FA      [19] 3528 	ld	d,-6 (ix)
-   99CA FD 19         [15] 3529 	add	iy, de
-   99CC FD 4E 06      [19] 3530 	ld	c, 6 (iy)
-   99CF 06 00         [ 7] 3531 	ld	b, #0x00
-   99D1 C5            [11] 3532 	push	bc
-   99D2 21 06 9A      [10] 3533 	ld	hl, #___str_0
-   99D5 E5            [11] 3534 	push	hl
-   99D6 DD 6E EE      [19] 3535 	ld	l,-18 (ix)
-   99D9 DD 66 EF      [19] 3536 	ld	h,-17 (ix)
-   99DC E5            [11] 3537 	push	hl
-   99DD CD 8B 65      [17] 3538 	call	_sprintf
-   99E0 21 06 00      [10] 3539 	ld	hl, #6
-   99E3 39            [11] 3540 	add	hl, sp
-   99E4 F9            [ 6] 3541 	ld	sp, hl
-                           3542 ;src/game/world.c:564: cpct_drawStringM1 (buff, SCR_VMEM, 0, 1);
-   99E5 DD 4E EE      [19] 3543 	ld	c,-18 (ix)
-   99E8 DD 46 EF      [19] 3544 	ld	b,-17 (ix)
-   99EB 21 00 01      [10] 3545 	ld	hl, #0x0100
-   99EE E5            [11] 3546 	push	hl
-   99EF 26 C0         [ 7] 3547 	ld	h, #0xc0
-   99F1 E5            [11] 3548 	push	hl
-   99F2 C5            [11] 3549 	push	bc
-   99F3 CD 9A 61      [17] 3550 	call	_cpct_drawStringM1
-   99F6 21 06 00      [10] 3551 	ld	hl, #6
-   99F9 39            [11] 3552 	add	hl, sp
-   99FA F9            [ 6] 3553 	ld	sp, hl
-   99FB                    3554 00134$:
-                           3555 ;src/game/world.c:497: for(i=0; i<nbTrainList; i++)
-   99FB DD 34 F0      [23] 3556 	inc	-16 (ix)
-   99FE C3 A3 90      [10] 3557 	jp	00133$
-   9A01                    3558 00135$:
-   9A01 DD F9         [10] 3559 	ld	sp, ix
-   9A03 DD E1         [14] 3560 	pop	ix
-   9A05 C9            [10] 3561 	ret
-   9A06                    3562 ___str_0:
-   9A06 25 64 20           3563 	.ascii "%d "
-   9A09 00                 3564 	.db 0x00
-                           3565 	.area _CODE
-                           3566 	.area _INITIALIZER
-                           3567 	.area _CABS (ABS)
+                            102 	.area _CSEG (REL, CON) 
+                            103 ;src/game/world.c:5: void drawCursor(u8 x, u8 y)
+                            104 ;	---------------------------------
+                            105 ; Function drawCursor
+                            106 ; ---------------------------------
+   8328                     107 _drawCursor::
+   8328 DD E5         [15]  108 	push	ix
+   832A DD 21 00 00   [14]  109 	ld	ix,#0
+   832E DD 39         [15]  110 	add	ix,sp
+   8330 21 F9 FF      [10]  111 	ld	hl, #-7
+   8333 39            [11]  112 	add	hl, sp
+   8334 F9            [ 6]  113 	ld	sp, hl
+                            114 ;src/game/world.c:8: p_video = cpct_getScreenPtr(SCR_VMEM, x*TILESIZE_W, y*TILESIZE_H);
+   8335 DD 7E 05      [19]  115 	ld	a, 5 (ix)
+   8338 07            [ 4]  116 	rlca
+   8339 07            [ 4]  117 	rlca
+   833A 07            [ 4]  118 	rlca
+   833B 07            [ 4]  119 	rlca
+   833C E6 F0         [ 7]  120 	and	a, #0xf0
+   833E DD 77 FB      [19]  121 	ld	-5 (ix), a
+   8341 DD 7E 04      [19]  122 	ld	a, 4 (ix)
+   8344 87            [ 4]  123 	add	a, a
+   8345 87            [ 4]  124 	add	a, a
+   8346 47            [ 4]  125 	ld	b, a
+   8347 DD 7E FB      [19]  126 	ld	a, -5 (ix)
+   834A F5            [11]  127 	push	af
+   834B 33            [ 6]  128 	inc	sp
+   834C C5            [11]  129 	push	bc
+   834D 33            [ 6]  130 	inc	sp
+   834E 21 00 C0      [10]  131 	ld	hl, #0xc000
+   8351 E5            [11]  132 	push	hl
+   8352 CD 27 67      [17]  133 	call	_cpct_getScreenPtr
+   8355 4D            [ 4]  134 	ld	c, l
+   8356 44            [ 4]  135 	ld	b, h
+                            136 ;src/game/world.c:11: switch(CURSOR_MODE)
+   8357 3E 11         [ 7]  137 	ld	a, #0x11
+   8359 FD 21 21 83   [14]  138 	ld	iy, #_CURSOR_MODE
+   835D FD 96 00      [19]  139 	sub	a, 0 (iy)
+   8360 DA 8A 84      [10]  140 	jp	C, 00118$
+   8363 FD 5E 00      [19]  141 	ld	e, 0 (iy)
+   8366 16 00         [ 7]  142 	ld	d, #0x00
+   8368 21 6F 83      [10]  143 	ld	hl, #00126$
+   836B 19            [11]  144 	add	hl, de
+   836C 19            [11]  145 	add	hl, de
+   836D 19            [11]  146 	add	hl, de
+   836E E9            [ 4]  147 	jp	(hl)
+   836F                     148 00126$:
+   836F C3 8A 84      [10]  149 	jp	00118$
+   8372 C3 8A 84      [10]  150 	jp	00118$
+   8375 C3 A5 83      [10]  151 	jp	00102$
+   8378 C3 B4 83      [10]  152 	jp	00103$
+   837B C3 C3 83      [10]  153 	jp	00104$
+   837E C3 D2 83      [10]  154 	jp	00105$
+   8381 C3 E1 83      [10]  155 	jp	00106$
+   8384 C3 F0 83      [10]  156 	jp	00107$
+   8387 C3 FF 83      [10]  157 	jp	00108$
+   838A C3 0E 84      [10]  158 	jp	00109$
+   838D C3 1C 84      [10]  159 	jp	00110$
+   8390 C3 2A 84      [10]  160 	jp	00111$
+   8393 C3 38 84      [10]  161 	jp	00112$
+   8396 C3 46 84      [10]  162 	jp	00113$
+   8399 C3 54 84      [10]  163 	jp	00114$
+   839C C3 62 84      [10]  164 	jp	00115$
+   839F C3 70 84      [10]  165 	jp	00116$
+   83A2 C3 7E 84      [10]  166 	jp	00117$
+                            167 ;src/game/world.c:16: case T_SSNS:
+   83A5                     168 00102$:
+                            169 ;src/game/world.c:17: cpct_drawSprite(station_small_ns, p_video, TILESIZE_W, TILESIZE_H);
+   83A5 21 04 10      [10]  170 	ld	hl, #0x1004
+   83A8 E5            [11]  171 	push	hl
+   83A9 C5            [11]  172 	push	bc
+   83AA 21 54 4A      [10]  173 	ld	hl, #_station_small_ns
+   83AD E5            [11]  174 	push	hl
+   83AE CD 45 61      [17]  175 	call	_cpct_drawSprite
+                            176 ;src/game/world.c:18: break;
+   83B1 C3 8A 84      [10]  177 	jp	00118$
+                            178 ;src/game/world.c:19: case T_SSEW:
+   83B4                     179 00103$:
+                            180 ;src/game/world.c:20: cpct_drawSprite(station_small_ew, p_video, TILESIZE_W, TILESIZE_H);
+   83B4 21 04 10      [10]  181 	ld	hl, #0x1004
+   83B7 E5            [11]  182 	push	hl
+   83B8 C5            [11]  183 	push	bc
+   83B9 21 94 4A      [10]  184 	ld	hl, #_station_small_ew
+   83BC E5            [11]  185 	push	hl
+   83BD CD 45 61      [17]  186 	call	_cpct_drawSprite
+                            187 ;src/game/world.c:21: break;
+   83C0 C3 8A 84      [10]  188 	jp	00118$
+                            189 ;src/game/world.c:22: case T_SMNS:
+   83C3                     190 00104$:
+                            191 ;src/game/world.c:23: cpct_drawSprite(station_medium_ns, p_video, TILESIZE_W, TILESIZE_H);
+   83C3 21 04 10      [10]  192 	ld	hl, #0x1004
+   83C6 E5            [11]  193 	push	hl
+   83C7 C5            [11]  194 	push	bc
+   83C8 21 D4 4A      [10]  195 	ld	hl, #_station_medium_ns
+   83CB E5            [11]  196 	push	hl
+   83CC CD 45 61      [17]  197 	call	_cpct_drawSprite
+                            198 ;src/game/world.c:24: break;
+   83CF C3 8A 84      [10]  199 	jp	00118$
+                            200 ;src/game/world.c:25: case T_SMEW:
+   83D2                     201 00105$:
+                            202 ;src/game/world.c:26: cpct_drawSprite(station_medium_ew, p_video, TILESIZE_W, TILESIZE_H);
+   83D2 21 04 10      [10]  203 	ld	hl, #0x1004
+   83D5 E5            [11]  204 	push	hl
+   83D6 C5            [11]  205 	push	bc
+   83D7 21 14 4B      [10]  206 	ld	hl, #_station_medium_ew
+   83DA E5            [11]  207 	push	hl
+   83DB CD 45 61      [17]  208 	call	_cpct_drawSprite
+                            209 ;src/game/world.c:27: break;
+   83DE C3 8A 84      [10]  210 	jp	00118$
+                            211 ;src/game/world.c:28: case T_SLNS:
+   83E1                     212 00106$:
+                            213 ;src/game/world.c:29: cpct_drawSprite(station_large_ns, p_video, TILESIZE_W, TILESIZE_H);
+   83E1 21 04 10      [10]  214 	ld	hl, #0x1004
+   83E4 E5            [11]  215 	push	hl
+   83E5 C5            [11]  216 	push	bc
+   83E6 21 54 4B      [10]  217 	ld	hl, #_station_large_ns
+   83E9 E5            [11]  218 	push	hl
+   83EA CD 45 61      [17]  219 	call	_cpct_drawSprite
+                            220 ;src/game/world.c:30: break;
+   83ED C3 8A 84      [10]  221 	jp	00118$
+                            222 ;src/game/world.c:31: case T_SLEW:
+   83F0                     223 00107$:
+                            224 ;src/game/world.c:32: cpct_drawSprite(station_large_ew, p_video, TILESIZE_W, TILESIZE_H);
+   83F0 21 04 10      [10]  225 	ld	hl, #0x1004
+   83F3 E5            [11]  226 	push	hl
+   83F4 C5            [11]  227 	push	bc
+   83F5 21 94 4B      [10]  228 	ld	hl, #_station_large_ew
+   83F8 E5            [11]  229 	push	hl
+   83F9 CD 45 61      [17]  230 	call	_cpct_drawSprite
+                            231 ;src/game/world.c:33: break;
+   83FC C3 8A 84      [10]  232 	jp	00118$
+                            233 ;src/game/world.c:34: case T_REW:
+   83FF                     234 00108$:
+                            235 ;src/game/world.c:35: cpct_drawSprite(rail_ew, p_video, TILESIZE_W, TILESIZE_H);	
+   83FF 21 04 10      [10]  236 	ld	hl, #0x1004
+   8402 E5            [11]  237 	push	hl
+   8403 C5            [11]  238 	push	bc
+   8404 21 D4 4B      [10]  239 	ld	hl, #_rail_ew
+   8407 E5            [11]  240 	push	hl
+   8408 CD 45 61      [17]  241 	call	_cpct_drawSprite
+                            242 ;src/game/world.c:36: break;
+   840B C3 8A 84      [10]  243 	jp	00118$
+                            244 ;src/game/world.c:37: case T_RNS:
+   840E                     245 00109$:
+                            246 ;src/game/world.c:38: cpct_drawSprite(rail_ns, p_video, TILESIZE_W, TILESIZE_H);	
+   840E 21 04 10      [10]  247 	ld	hl, #0x1004
+   8411 E5            [11]  248 	push	hl
+   8412 C5            [11]  249 	push	bc
+   8413 21 14 4C      [10]  250 	ld	hl, #_rail_ns
+   8416 E5            [11]  251 	push	hl
+   8417 CD 45 61      [17]  252 	call	_cpct_drawSprite
+                            253 ;src/game/world.c:39: break;
+   841A 18 6E         [12]  254 	jr	00118$
+                            255 ;src/game/world.c:40: case T_REN:
+   841C                     256 00110$:
+                            257 ;src/game/world.c:41: cpct_drawSprite(rail_en, p_video, TILESIZE_W, TILESIZE_H);	
+   841C 21 04 10      [10]  258 	ld	hl, #0x1004
+   841F E5            [11]  259 	push	hl
+   8420 C5            [11]  260 	push	bc
+   8421 21 54 4C      [10]  261 	ld	hl, #_rail_en
+   8424 E5            [11]  262 	push	hl
+   8425 CD 45 61      [17]  263 	call	_cpct_drawSprite
+                            264 ;src/game/world.c:42: break;
+   8428 18 60         [12]  265 	jr	00118$
+                            266 ;src/game/world.c:43: case T_RES:
+   842A                     267 00111$:
+                            268 ;src/game/world.c:44: cpct_drawSprite(rail_es, p_video, TILESIZE_W, TILESIZE_H);	
+   842A 21 04 10      [10]  269 	ld	hl, #0x1004
+   842D E5            [11]  270 	push	hl
+   842E C5            [11]  271 	push	bc
+   842F 21 94 4C      [10]  272 	ld	hl, #_rail_es
+   8432 E5            [11]  273 	push	hl
+   8433 CD 45 61      [17]  274 	call	_cpct_drawSprite
+                            275 ;src/game/world.c:45: break;
+   8436 18 52         [12]  276 	jr	00118$
+                            277 ;src/game/world.c:46: case T_RWN:
+   8438                     278 00112$:
+                            279 ;src/game/world.c:47: cpct_drawSprite(rail_wn, p_video, TILESIZE_W, TILESIZE_H);	
+   8438 21 04 10      [10]  280 	ld	hl, #0x1004
+   843B E5            [11]  281 	push	hl
+   843C C5            [11]  282 	push	bc
+   843D 21 D4 4C      [10]  283 	ld	hl, #_rail_wn
+   8440 E5            [11]  284 	push	hl
+   8441 CD 45 61      [17]  285 	call	_cpct_drawSprite
+                            286 ;src/game/world.c:48: break;
+   8444 18 44         [12]  287 	jr	00118$
+                            288 ;src/game/world.c:49: case T_RWS:
+   8446                     289 00113$:
+                            290 ;src/game/world.c:50: cpct_drawSprite(rail_ws, p_video, TILESIZE_W, TILESIZE_H);	
+   8446 21 04 10      [10]  291 	ld	hl, #0x1004
+   8449 E5            [11]  292 	push	hl
+   844A C5            [11]  293 	push	bc
+   844B 21 14 4D      [10]  294 	ld	hl, #_rail_ws
+   844E E5            [11]  295 	push	hl
+   844F CD 45 61      [17]  296 	call	_cpct_drawSprite
+                            297 ;src/game/world.c:51: break;
+   8452 18 36         [12]  298 	jr	00118$
+                            299 ;src/game/world.c:52: case T_REWN:
+   8454                     300 00114$:
+                            301 ;src/game/world.c:53: cpct_drawSprite(rail_ew_n, p_video, TILESIZE_W, TILESIZE_H);	
+   8454 21 04 10      [10]  302 	ld	hl, #0x1004
+   8457 E5            [11]  303 	push	hl
+   8458 C5            [11]  304 	push	bc
+   8459 21 54 4D      [10]  305 	ld	hl, #_rail_ew_n
+   845C E5            [11]  306 	push	hl
+   845D CD 45 61      [17]  307 	call	_cpct_drawSprite
+                            308 ;src/game/world.c:54: break;
+   8460 18 28         [12]  309 	jr	00118$
+                            310 ;src/game/world.c:55: case T_REWS:
+   8462                     311 00115$:
+                            312 ;src/game/world.c:56: cpct_drawSprite(rail_ew_s, p_video, TILESIZE_W, TILESIZE_H);	
+   8462 21 04 10      [10]  313 	ld	hl, #0x1004
+   8465 E5            [11]  314 	push	hl
+   8466 C5            [11]  315 	push	bc
+   8467 21 94 4D      [10]  316 	ld	hl, #_rail_ew_s
+   846A E5            [11]  317 	push	hl
+   846B CD 45 61      [17]  318 	call	_cpct_drawSprite
+                            319 ;src/game/world.c:57: break;
+   846E 18 1A         [12]  320 	jr	00118$
+                            321 ;src/game/world.c:58: case T_RNSE:
+   8470                     322 00116$:
+                            323 ;src/game/world.c:59: cpct_drawSprite(rail_ns_e, p_video, TILESIZE_W, TILESIZE_H);	
+   8470 21 04 10      [10]  324 	ld	hl, #0x1004
+   8473 E5            [11]  325 	push	hl
+   8474 C5            [11]  326 	push	bc
+   8475 21 14 4E      [10]  327 	ld	hl, #_rail_ns_e
+   8478 E5            [11]  328 	push	hl
+   8479 CD 45 61      [17]  329 	call	_cpct_drawSprite
+                            330 ;src/game/world.c:60: break;
+   847C 18 0C         [12]  331 	jr	00118$
+                            332 ;src/game/world.c:61: case T_RNSW:
+   847E                     333 00117$:
+                            334 ;src/game/world.c:62: cpct_drawSprite(rail_ns_w, p_video, TILESIZE_W, TILESIZE_H);
+   847E 21 04 10      [10]  335 	ld	hl, #0x1004
+   8481 E5            [11]  336 	push	hl
+   8482 C5            [11]  337 	push	bc
+   8483 21 D4 4D      [10]  338 	ld	hl, #_rail_ns_w
+   8486 E5            [11]  339 	push	hl
+   8487 CD 45 61      [17]  340 	call	_cpct_drawSprite
+                            341 ;src/game/world.c:64: }
+   848A                     342 00118$:
+                            343 ;src/game/world.c:66: setPixel(x*TILESIZE_H, y*TILESIZE_H, 0);
+   848A DD 6E 04      [19]  344 	ld	l, 4 (ix)
+   848D 26 00         [ 7]  345 	ld	h, #0x00
+   848F 29            [11]  346 	add	hl, hl
+   8490 29            [11]  347 	add	hl, hl
+   8491 29            [11]  348 	add	hl, hl
+   8492 29            [11]  349 	add	hl, hl
+   8493 EB            [ 4]  350 	ex	de,hl
+   8494 D5            [11]  351 	push	de
+   8495 AF            [ 4]  352 	xor	a, a
+   8496 F5            [11]  353 	push	af
+   8497 33            [ 6]  354 	inc	sp
+   8498 DD 7E FB      [19]  355 	ld	a, -5 (ix)
+   849B F5            [11]  356 	push	af
+   849C 33            [ 6]  357 	inc	sp
+   849D D5            [11]  358 	push	de
+   849E CD 7F 8E      [17]  359 	call	_setPixel
+   84A1 F1            [10]  360 	pop	af
+   84A2 F1            [10]  361 	pop	af
+   84A3 D1            [10]  362 	pop	de
+                            363 ;src/game/world.c:67: setPixel(x*TILESIZE_H+1, y*TILESIZE_H, 0);
+   84A4 21 01 00      [10]  364 	ld	hl, #0x0001
+   84A7 19            [11]  365 	add	hl,de
+   84A8 DD 75 FC      [19]  366 	ld	-4 (ix), l
+   84AB DD 74 FD      [19]  367 	ld	-3 (ix), h
+   84AE D5            [11]  368 	push	de
+   84AF AF            [ 4]  369 	xor	a, a
+   84B0 F5            [11]  370 	push	af
+   84B1 33            [ 6]  371 	inc	sp
+   84B2 DD 7E FB      [19]  372 	ld	a, -5 (ix)
+   84B5 F5            [11]  373 	push	af
+   84B6 33            [ 6]  374 	inc	sp
+   84B7 DD 6E FC      [19]  375 	ld	l,-4 (ix)
+   84BA DD 66 FD      [19]  376 	ld	h,-3 (ix)
+   84BD E5            [11]  377 	push	hl
+   84BE CD 7F 8E      [17]  378 	call	_setPixel
+   84C1 F1            [10]  379 	pop	af
+   84C2 F1            [10]  380 	pop	af
+   84C3 D1            [10]  381 	pop	de
+                            382 ;src/game/world.c:68: setPixel(x*TILESIZE_H, y*TILESIZE_H+1, 0);
+   84C4 DD 46 FB      [19]  383 	ld	b, -5 (ix)
+   84C7 04            [ 4]  384 	inc	b
+   84C8 C5            [11]  385 	push	bc
+   84C9 D5            [11]  386 	push	de
+   84CA AF            [ 4]  387 	xor	a, a
+   84CB F5            [11]  388 	push	af
+   84CC 33            [ 6]  389 	inc	sp
+   84CD C5            [11]  390 	push	bc
+   84CE 33            [ 6]  391 	inc	sp
+   84CF D5            [11]  392 	push	de
+   84D0 CD 7F 8E      [17]  393 	call	_setPixel
+   84D3 F1            [10]  394 	pop	af
+   84D4 F1            [10]  395 	pop	af
+   84D5 D1            [10]  396 	pop	de
+   84D6 C1            [10]  397 	pop	bc
+                            398 ;src/game/world.c:69: setPixel(x*TILESIZE_H+1, y*TILESIZE_H+1, 0);
+   84D7 C5            [11]  399 	push	bc
+   84D8 D5            [11]  400 	push	de
+   84D9 AF            [ 4]  401 	xor	a, a
+   84DA F5            [11]  402 	push	af
+   84DB 33            [ 6]  403 	inc	sp
+   84DC C5            [11]  404 	push	bc
+   84DD 33            [ 6]  405 	inc	sp
+   84DE DD 6E FC      [19]  406 	ld	l,-4 (ix)
+   84E1 DD 66 FD      [19]  407 	ld	h,-3 (ix)
+   84E4 E5            [11]  408 	push	hl
+   84E5 CD 7F 8E      [17]  409 	call	_setPixel
+   84E8 F1            [10]  410 	pop	af
+   84E9 F1            [10]  411 	pop	af
+   84EA D1            [10]  412 	pop	de
+   84EB C1            [10]  413 	pop	bc
+                            414 ;src/game/world.c:71: setPixel(x*TILESIZE_H+15, y*TILESIZE_H, 0);
+   84EC 21 0F 00      [10]  415 	ld	hl, #0x000f
+   84EF 19            [11]  416 	add	hl,de
+   84F0 DD 75 FE      [19]  417 	ld	-2 (ix), l
+   84F3 DD 74 FF      [19]  418 	ld	-1 (ix), h
+   84F6 C5            [11]  419 	push	bc
+   84F7 D5            [11]  420 	push	de
+   84F8 AF            [ 4]  421 	xor	a, a
+   84F9 F5            [11]  422 	push	af
+   84FA 33            [ 6]  423 	inc	sp
+   84FB DD 7E FB      [19]  424 	ld	a, -5 (ix)
+   84FE F5            [11]  425 	push	af
+   84FF 33            [ 6]  426 	inc	sp
+   8500 DD 6E FE      [19]  427 	ld	l,-2 (ix)
+   8503 DD 66 FF      [19]  428 	ld	h,-1 (ix)
+   8506 E5            [11]  429 	push	hl
+   8507 CD 7F 8E      [17]  430 	call	_setPixel
+   850A F1            [10]  431 	pop	af
+   850B F1            [10]  432 	pop	af
+   850C D1            [10]  433 	pop	de
+   850D C1            [10]  434 	pop	bc
+                            435 ;src/game/world.c:72: setPixel(x*TILESIZE_H+14, y*TILESIZE_H, 0);
+   850E 21 0E 00      [10]  436 	ld	hl, #0x000e
+   8511 19            [11]  437 	add	hl,de
+   8512 E3            [19]  438 	ex	(sp), hl
+   8513 C5            [11]  439 	push	bc
+   8514 D5            [11]  440 	push	de
+   8515 AF            [ 4]  441 	xor	a, a
+   8516 F5            [11]  442 	push	af
+   8517 33            [ 6]  443 	inc	sp
+   8518 DD 7E FB      [19]  444 	ld	a, -5 (ix)
+   851B F5            [11]  445 	push	af
+   851C 33            [ 6]  446 	inc	sp
+   851D DD 6E F9      [19]  447 	ld	l,-7 (ix)
+   8520 DD 66 FA      [19]  448 	ld	h,-6 (ix)
+   8523 E5            [11]  449 	push	hl
+   8524 CD 7F 8E      [17]  450 	call	_setPixel
+   8527 F1            [10]  451 	pop	af
+   8528 F1            [10]  452 	pop	af
+   8529 D1            [10]  453 	pop	de
+   852A C1            [10]  454 	pop	bc
+                            455 ;src/game/world.c:73: setPixel(x*TILESIZE_H+15, y*TILESIZE_H+1, 0);
+   852B C5            [11]  456 	push	bc
+   852C D5            [11]  457 	push	de
+   852D AF            [ 4]  458 	xor	a, a
+   852E F5            [11]  459 	push	af
+   852F 33            [ 6]  460 	inc	sp
+   8530 C5            [11]  461 	push	bc
+   8531 33            [ 6]  462 	inc	sp
+   8532 DD 6E FE      [19]  463 	ld	l,-2 (ix)
+   8535 DD 66 FF      [19]  464 	ld	h,-1 (ix)
+   8538 E5            [11]  465 	push	hl
+   8539 CD 7F 8E      [17]  466 	call	_setPixel
+   853C F1            [10]  467 	pop	af
+   853D F1            [10]  468 	pop	af
+   853E D1            [10]  469 	pop	de
+   853F C1            [10]  470 	pop	bc
+                            471 ;src/game/world.c:74: setPixel(x*TILESIZE_H+14, y*TILESIZE_H+1, 0);
+   8540 D5            [11]  472 	push	de
+   8541 AF            [ 4]  473 	xor	a, a
+   8542 F5            [11]  474 	push	af
+   8543 33            [ 6]  475 	inc	sp
+   8544 C5            [11]  476 	push	bc
+   8545 33            [ 6]  477 	inc	sp
+   8546 DD 6E F9      [19]  478 	ld	l,-7 (ix)
+   8549 DD 66 FA      [19]  479 	ld	h,-6 (ix)
+   854C E5            [11]  480 	push	hl
+   854D CD 7F 8E      [17]  481 	call	_setPixel
+   8550 F1            [10]  482 	pop	af
+   8551 F1            [10]  483 	pop	af
+   8552 D1            [10]  484 	pop	de
+                            485 ;src/game/world.c:76: setPixel(x*TILESIZE_H, y*TILESIZE_H+15, 0);
+   8553 DD 7E FB      [19]  486 	ld	a, -5 (ix)
+   8556 C6 0F         [ 7]  487 	add	a, #0x0f
+   8558 47            [ 4]  488 	ld	b, a
+   8559 C5            [11]  489 	push	bc
+   855A D5            [11]  490 	push	de
+   855B AF            [ 4]  491 	xor	a, a
+   855C F5            [11]  492 	push	af
+   855D 33            [ 6]  493 	inc	sp
+   855E C5            [11]  494 	push	bc
+   855F 33            [ 6]  495 	inc	sp
+   8560 D5            [11]  496 	push	de
+   8561 CD 7F 8E      [17]  497 	call	_setPixel
+   8564 F1            [10]  498 	pop	af
+   8565 F1            [10]  499 	pop	af
+   8566 D1            [10]  500 	pop	de
+   8567 C1            [10]  501 	pop	bc
+                            502 ;src/game/world.c:77: setPixel(x*TILESIZE_H, y*TILESIZE_H+14, 0);
+   8568 DD 7E FB      [19]  503 	ld	a, -5 (ix)
+   856B C6 0E         [ 7]  504 	add	a, #0x0e
+   856D 4F            [ 4]  505 	ld	c, a
+   856E C5            [11]  506 	push	bc
+   856F AF            [ 4]  507 	xor	a, a
+   8570 47            [ 4]  508 	ld	b, a
+   8571 C5            [11]  509 	push	bc
+   8572 D5            [11]  510 	push	de
+   8573 CD 7F 8E      [17]  511 	call	_setPixel
+   8576 F1            [10]  512 	pop	af
+   8577 F1            [10]  513 	pop	af
+   8578 C1            [10]  514 	pop	bc
+                            515 ;src/game/world.c:78: setPixel(x*TILESIZE_H+1, y*TILESIZE_H+14, 0);
+   8579 C5            [11]  516 	push	bc
+   857A AF            [ 4]  517 	xor	a, a
+   857B 47            [ 4]  518 	ld	b, a
+   857C C5            [11]  519 	push	bc
+   857D DD 6E FC      [19]  520 	ld	l,-4 (ix)
+   8580 DD 66 FD      [19]  521 	ld	h,-3 (ix)
+   8583 E5            [11]  522 	push	hl
+   8584 CD 7F 8E      [17]  523 	call	_setPixel
+   8587 F1            [10]  524 	pop	af
+   8588 F1            [10]  525 	pop	af
+   8589 C1            [10]  526 	pop	bc
+                            527 ;src/game/world.c:79: setPixel(x*TILESIZE_H+1, y*TILESIZE_H+15, 0);
+   858A C5            [11]  528 	push	bc
+   858B AF            [ 4]  529 	xor	a, a
+   858C F5            [11]  530 	push	af
+   858D 33            [ 6]  531 	inc	sp
+   858E C5            [11]  532 	push	bc
+   858F 33            [ 6]  533 	inc	sp
+   8590 DD 6E FC      [19]  534 	ld	l,-4 (ix)
+   8593 DD 66 FD      [19]  535 	ld	h,-3 (ix)
+   8596 E5            [11]  536 	push	hl
+   8597 CD 7F 8E      [17]  537 	call	_setPixel
+   859A F1            [10]  538 	pop	af
+   859B F1            [10]  539 	pop	af
+   859C C1            [10]  540 	pop	bc
+                            541 ;src/game/world.c:81: setPixel(x*TILESIZE_H+15, y*TILESIZE_H+15, 0);
+   859D C5            [11]  542 	push	bc
+   859E AF            [ 4]  543 	xor	a, a
+   859F F5            [11]  544 	push	af
+   85A0 33            [ 6]  545 	inc	sp
+   85A1 C5            [11]  546 	push	bc
+   85A2 33            [ 6]  547 	inc	sp
+   85A3 DD 6E FE      [19]  548 	ld	l,-2 (ix)
+   85A6 DD 66 FF      [19]  549 	ld	h,-1 (ix)
+   85A9 E5            [11]  550 	push	hl
+   85AA CD 7F 8E      [17]  551 	call	_setPixel
+   85AD F1            [10]  552 	pop	af
+   85AE F1            [10]  553 	pop	af
+   85AF C1            [10]  554 	pop	bc
+                            555 ;src/game/world.c:82: setPixel(x*TILESIZE_H+14, y*TILESIZE_H+15, 0);
+   85B0 C5            [11]  556 	push	bc
+   85B1 AF            [ 4]  557 	xor	a, a
+   85B2 F5            [11]  558 	push	af
+   85B3 33            [ 6]  559 	inc	sp
+   85B4 C5            [11]  560 	push	bc
+   85B5 33            [ 6]  561 	inc	sp
+   85B6 DD 6E F9      [19]  562 	ld	l,-7 (ix)
+   85B9 DD 66 FA      [19]  563 	ld	h,-6 (ix)
+   85BC E5            [11]  564 	push	hl
+   85BD CD 7F 8E      [17]  565 	call	_setPixel
+   85C0 F1            [10]  566 	pop	af
+   85C1 F1            [10]  567 	pop	af
+   85C2 C1            [10]  568 	pop	bc
+                            569 ;src/game/world.c:83: setPixel(x*TILESIZE_H+15, y*TILESIZE_H+14, 0);
+   85C3 C5            [11]  570 	push	bc
+   85C4 AF            [ 4]  571 	xor	a, a
+   85C5 47            [ 4]  572 	ld	b, a
+   85C6 C5            [11]  573 	push	bc
+   85C7 DD 6E FE      [19]  574 	ld	l,-2 (ix)
+   85CA DD 66 FF      [19]  575 	ld	h,-1 (ix)
+   85CD E5            [11]  576 	push	hl
+   85CE CD 7F 8E      [17]  577 	call	_setPixel
+   85D1 F1            [10]  578 	pop	af
+   85D2 F1            [10]  579 	pop	af
+   85D3 C1            [10]  580 	pop	bc
+                            581 ;src/game/world.c:84: setPixel(x*TILESIZE_H+14, y*TILESIZE_H+14, 0);
+   85D4 AF            [ 4]  582 	xor	a, a
+   85D5 47            [ 4]  583 	ld	b, a
+   85D6 C5            [11]  584 	push	bc
+   85D7 C1            [10]  585 	pop	bc
+   85D8 E1            [10]  586 	pop	hl
+   85D9 E5            [11]  587 	push	hl
+   85DA C5            [11]  588 	push	bc
+   85DB E5            [11]  589 	push	hl
+   85DC CD 7F 8E      [17]  590 	call	_setPixel
+   85DF DD F9         [10]  591 	ld	sp,ix
+   85E1 DD E1         [14]  592 	pop	ix
+   85E3 C9            [10]  593 	ret
+                            594 ;src/game/world.c:87: void patternTile(u8 tileType, int index, u8 nBitsX, u8 nBitsY, u8 *pattern)
+                            595 ;	---------------------------------
+                            596 ; Function patternTile
+                            597 ; ---------------------------------
+   85E4                     598 _patternTile::
+   85E4 DD E5         [15]  599 	push	ix
+   85E6 DD 21 00 00   [14]  600 	ld	ix,#0
+   85EA DD 39         [15]  601 	add	ix,sp
+   85EC 21 F7 FF      [10]  602 	ld	hl, #-9
+   85EF 39            [11]  603 	add	hl, sp
+   85F0 F9            [ 6]  604 	ld	sp, hl
+                            605 ;src/game/world.c:92: for(iy=0; iy<nBitsY; iy++)
+   85F1 DD 7E 04      [19]  606 	ld	a, 4 (ix)
+   85F4 D6 08         [ 7]  607 	sub	a, #0x08
+   85F6 20 04         [12]  608 	jr	NZ,00153$
+   85F8 3E 01         [ 7]  609 	ld	a,#0x01
+   85FA 18 01         [12]  610 	jr	00154$
+   85FC                     611 00153$:
+   85FC AF            [ 4]  612 	xor	a,a
+   85FD                     613 00154$:
+   85FD DD 77 F7      [19]  614 	ld	-9 (ix), a
+   8600 DD 7E 04      [19]  615 	ld	a, 4 (ix)
+   8603 D6 02         [ 7]  616 	sub	a, #0x02
+   8605 20 04         [12]  617 	jr	NZ,00155$
+   8607 3E 01         [ 7]  618 	ld	a,#0x01
+   8609 18 01         [12]  619 	jr	00156$
+   860B                     620 00155$:
+   860B AF            [ 4]  621 	xor	a,a
+   860C                     622 00156$:
+   860C DD 77 F8      [19]  623 	ld	-8 (ix), a
+   860F 1E 00         [ 7]  624 	ld	e, #0x00
+   8611                     625 00115$:
+   8611 7B            [ 4]  626 	ld	a, e
+   8612 DD 96 08      [19]  627 	sub	a, 8 (ix)
+   8615 D2 C9 86      [10]  628 	jp	NC, 00117$
+                            629 ;src/game/world.c:94: for(ix=0; ix<nBitsX; ix++)
+   8618 D5            [11]  630 	push	de
+   8619 16 00         [ 7]  631 	ld	d,#0x00
+   861B 6B            [ 4]  632 	ld	l, e
+   861C 62            [ 4]  633 	ld	h, d
+   861D 29            [11]  634 	add	hl, hl
+   861E 29            [11]  635 	add	hl, hl
+   861F 19            [11]  636 	add	hl, de
+   8620 29            [11]  637 	add	hl, hl
+   8621 29            [11]  638 	add	hl, hl
+   8622 29            [11]  639 	add	hl, hl
+   8623 29            [11]  640 	add	hl, hl
+   8624 D1            [10]  641 	pop	de
+   8625 4D            [ 4]  642 	ld	c, l
+   8626 44            [ 4]  643 	ld	b, h
+   8627 DD 7E 05      [19]  644 	ld	a, 5 (ix)
+   862A 81            [ 4]  645 	add	a, c
+   862B DD 77 F9      [19]  646 	ld	-7 (ix), a
+   862E DD 7E 06      [19]  647 	ld	a, 6 (ix)
+   8631 88            [ 4]  648 	adc	a, b
+   8632 DD 77 FA      [19]  649 	ld	-6 (ix), a
+   8635 D5            [11]  650 	push	de
+   8636 DD 66 07      [19]  651 	ld	h, 7 (ix)
+   8639 2E 00         [ 7]  652 	ld	l, #0x00
+   863B 55            [ 4]  653 	ld	d, l
+   863C 06 08         [ 7]  654 	ld	b, #0x08
+   863E                     655 00157$:
+   863E 29            [11]  656 	add	hl, hl
+   863F 30 01         [12]  657 	jr	NC,00158$
+   8641 19            [11]  658 	add	hl, de
+   8642                     659 00158$:
+   8642 10 FA         [13]  660 	djnz	00157$
+   8644 D1            [10]  661 	pop	de
+   8645 DD 75 FB      [19]  662 	ld	-5 (ix), l
+   8648 DD 74 FC      [19]  663 	ld	-4 (ix), h
+   864B 16 00         [ 7]  664 	ld	d, #0x00
+   864D                     665 00112$:
+   864D 7A            [ 4]  666 	ld	a, d
+   864E DD 96 07      [19]  667 	sub	a, 7 (ix)
+   8651 30 72         [12]  668 	jr	NC,00116$
+                            669 ;src/game/world.c:96: if(cpct_getBit (pattern, iy*nBitsX+ix)!=0 && index+iy*WIDTH+ix < WIDTH*HEIGHT)
+   8653 DD 72 FD      [19]  670 	ld	-3 (ix), d
+   8656 DD 36 FE 00   [19]  671 	ld	-2 (ix), #0x00
+   865A DD 7E FD      [19]  672 	ld	a, -3 (ix)
+   865D DD 86 FB      [19]  673 	add	a, -5 (ix)
+   8660 4F            [ 4]  674 	ld	c, a
+   8661 DD 7E FE      [19]  675 	ld	a, -2 (ix)
+   8664 DD 8E FC      [19]  676 	adc	a, -4 (ix)
+   8667 47            [ 4]  677 	ld	b, a
+   8668 DD 6E 09      [19]  678 	ld	l,9 (ix)
+   866B DD 66 0A      [19]  679 	ld	h,10 (ix)
+   866E D5            [11]  680 	push	de
+   866F C5            [11]  681 	push	bc
+   8670 E5            [11]  682 	push	hl
+   8671 CD E3 60      [17]  683 	call	_cpct_getBit
+   8674 DD 75 FF      [19]  684 	ld	-1 (ix), l
+   8677 D1            [10]  685 	pop	de
+   8678 DD 7E FF      [19]  686 	ld	a, -1 (ix)
+   867B B7            [ 4]  687 	or	a, a
+   867C 28 44         [12]  688 	jr	Z,00113$
+   867E DD 7E F9      [19]  689 	ld	a, -7 (ix)
+   8681 DD 86 FD      [19]  690 	add	a, -3 (ix)
+   8684 4F            [ 4]  691 	ld	c, a
+   8685 DD 7E FA      [19]  692 	ld	a, -6 (ix)
+   8688 DD 8E FE      [19]  693 	adc	a, -2 (ix)
+   868B 47            [ 4]  694 	ld	b,a
+   868C EE 80         [ 7]  695 	xor	a, #0x80
+   868E D6 8F         [ 7]  696 	sub	a, #0x8f
+   8690 30 30         [12]  697 	jr	NC,00113$
+                            698 ;src/game/world.c:98: if(tileType == FOREST)
+   8692 DD 7E F7      [19]  699 	ld	a, -9 (ix)
+   8695 B7            [ 4]  700 	or	a, a
+   8696 28 0A         [12]  701 	jr	Z,00104$
+                            702 ;src/game/world.c:99: p_world[index+iy*WIDTH+ix] = tileType;
+   8698 21 1D 74      [10]  703 	ld	hl, #_p_world
+   869B 09            [11]  704 	add	hl, bc
+   869C DD 7E 04      [19]  705 	ld	a, 4 (ix)
+   869F 77            [ 7]  706 	ld	(hl), a
+   86A0 18 20         [12]  707 	jr	00113$
+   86A2                     708 00104$:
+                            709 ;src/game/world.c:100: else if(tileType==DWELLINGS1)
+   86A2 DD 7E F8      [19]  710 	ld	a, -8 (ix)
+   86A5 B7            [ 4]  711 	or	a, a
+   86A6 28 1A         [12]  712 	jr	Z,00113$
+                            713 ;src/game/world.c:101: p_world[index+iy*WIDTH+ix] = (u8)cpct_getRandom_mxor_u8 ()%3+2;
+   86A8 21 1D 74      [10]  714 	ld	hl, #_p_world
+   86AB 09            [11]  715 	add	hl, bc
+   86AC E5            [11]  716 	push	hl
+   86AD D5            [11]  717 	push	de
+   86AE CD 30 66      [17]  718 	call	_cpct_getRandom_mxor_u8
+   86B1 45            [ 4]  719 	ld	b, l
+   86B2 3E 03         [ 7]  720 	ld	a, #0x03
+   86B4 F5            [11]  721 	push	af
+   86B5 33            [ 6]  722 	inc	sp
+   86B6 C5            [11]  723 	push	bc
+   86B7 33            [ 6]  724 	inc	sp
+   86B8 CD EA 61      [17]  725 	call	__moduchar
+   86BB F1            [10]  726 	pop	af
+   86BC 4D            [ 4]  727 	ld	c, l
+   86BD D1            [10]  728 	pop	de
+   86BE E1            [10]  729 	pop	hl
+   86BF 0C            [ 4]  730 	inc	c
+   86C0 0C            [ 4]  731 	inc	c
+   86C1 71            [ 7]  732 	ld	(hl), c
+   86C2                     733 00113$:
+                            734 ;src/game/world.c:94: for(ix=0; ix<nBitsX; ix++)
+   86C2 14            [ 4]  735 	inc	d
+   86C3 18 88         [12]  736 	jr	00112$
+   86C5                     737 00116$:
+                            738 ;src/game/world.c:92: for(iy=0; iy<nBitsY; iy++)
+   86C5 1C            [ 4]  739 	inc	e
+   86C6 C3 11 86      [10]  740 	jp	00115$
+   86C9                     741 00117$:
+   86C9 DD F9         [10]  742 	ld	sp, ix
+   86CB DD E1         [14]  743 	pop	ix
+   86CD C9            [10]  744 	ret
+                            745 ;src/game/world.c:108: void generateWorld()
+                            746 ;	---------------------------------
+                            747 ; Function generateWorld
+                            748 ; ---------------------------------
+   86CE                     749 _generateWorld::
+   86CE DD E5         [15]  750 	push	ix
+   86D0 DD 21 00 00   [14]  751 	ld	ix,#0
+   86D4 DD 39         [15]  752 	add	ix,sp
+   86D6 21 E4 FF      [10]  753 	ld	hl, #-28
+   86D9 39            [11]  754 	add	hl, sp
+   86DA F9            [ 6]  755 	ld	sp, hl
+                            756 ;src/game/world.c:115: CURSOR_MODE = NONE;
+   86DB 21 21 83      [10]  757 	ld	hl,#_CURSOR_MODE + 0
+   86DE 36 00         [10]  758 	ld	(hl), #0x00
+                            759 ;src/game/world.c:118: cpct_setSeed_mxor ((u32)cpct_count2VSYNC());
+   86E0 CD F3 62      [17]  760 	call	_cpct_count2VSYNC
+   86E3 11 00 00      [10]  761 	ld	de,#0x0000
+   86E6 CD 42 64      [17]  762 	call	_cpct_setSeed_mxor
+                            763 ;src/game/world.c:122: for(iy=0; iy<HEIGHT*WIDTH;iy++)
+   86E9 01 00 00      [10]  764 	ld	bc, #0x0000
+   86EC                     765 00119$:
+                            766 ;src/game/world.c:124: p_world[iy] =  cpct_getRandom_mxor_u16()%2;
+   86EC 21 1D 74      [10]  767 	ld	hl, #_p_world
+   86EF 09            [11]  768 	add	hl, bc
+   86F0 E5            [11]  769 	push	hl
+   86F1 C5            [11]  770 	push	bc
+   86F2 CD 28 65      [17]  771 	call	_cpct_getRandom_mxor_u16
+   86F5 5D            [ 4]  772 	ld	e, l
+   86F6 C1            [10]  773 	pop	bc
+   86F7 E1            [10]  774 	pop	hl
+   86F8 7B            [ 4]  775 	ld	a, e
+   86F9 E6 01         [ 7]  776 	and	a, #0x01
+   86FB 77            [ 7]  777 	ld	(hl), a
+                            778 ;src/game/world.c:122: for(iy=0; iy<HEIGHT*WIDTH;iy++)
+   86FC 03            [ 6]  779 	inc	bc
+   86FD 78            [ 4]  780 	ld	a, b
+   86FE EE 80         [ 7]  781 	xor	a, #0x80
+   8700 D6 8F         [ 7]  782 	sub	a, #0x8f
+   8702 38 E8         [12]  783 	jr	C,00119$
+                            784 ;src/game/world.c:129: for(ix=0; ix<NBFOREST; ix++)
+   8704 21 02 00      [10]  785 	ld	hl, #0x0002
+   8707 39            [11]  786 	add	hl, sp
+   8708 DD 75 F8      [19]  787 	ld	-8 (ix), l
+   870B DD 74 F9      [19]  788 	ld	-7 (ix), h
+   870E 01 00 00      [10]  789 	ld	bc, #0x0000
+   8711                     790 00121$:
+                            791 ;src/game/world.c:131: iy = cpct_getRandom_mxor_u16()%(WIDTH*HEIGHT);
+   8711 C5            [11]  792 	push	bc
+   8712 CD 28 65      [17]  793 	call	_cpct_getRandom_mxor_u16
+   8715 11 00 0F      [10]  794 	ld	de, #0x0f00
+   8718 D5            [11]  795 	push	de
+   8719 E5            [11]  796 	push	hl
+   871A CD F6 61      [17]  797 	call	__moduint
+   871D F1            [10]  798 	pop	af
+   871E E3            [19]  799 	ex	(sp),hl
+   871F CD 28 65      [17]  800 	call	_cpct_getRandom_mxor_u16
+   8722 D1            [10]  801 	pop	de
+   8723 C1            [10]  802 	pop	bc
+   8724 7D            [ 4]  803 	ld	a, l
+   8725 E6 03         [ 7]  804 	and	a, #0x03
+   8727 6F            [ 4]  805 	ld	l, a
+   8728 26 00         [ 7]  806 	ld	h, #0x00
+                            807 ;src/game/world.c:137: p_forest[1] = 0b11000111;
+   872A DD 7E F8      [19]  808 	ld	a, -8 (ix)
+   872D C6 01         [ 7]  809 	add	a, #0x01
+   872F DD 77 FE      [19]  810 	ld	-2 (ix), a
+   8732 DD 7E F9      [19]  811 	ld	a, -7 (ix)
+   8735 CE 00         [ 7]  812 	adc	a, #0x00
+   8737 DD 77 FF      [19]  813 	ld	-1 (ix), a
+                            814 ;src/game/world.c:138: p_forest[2] = 0b11011110;
+   873A DD 7E F8      [19]  815 	ld	a, -8 (ix)
+   873D C6 02         [ 7]  816 	add	a, #0x02
+   873F DD 77 F6      [19]  817 	ld	-10 (ix), a
+   8742 DD 7E F9      [19]  818 	ld	a, -7 (ix)
+   8745 CE 00         [ 7]  819 	adc	a, #0x00
+   8747 DD 77 F7      [19]  820 	ld	-9 (ix), a
+                            821 ;src/game/world.c:139: p_forest[3] = 0b01111110;
+   874A DD 7E F8      [19]  822 	ld	a, -8 (ix)
+   874D C6 03         [ 7]  823 	add	a, #0x03
+   874F DD 77 F0      [19]  824 	ld	-16 (ix), a
+   8752 DD 7E F9      [19]  825 	ld	a, -7 (ix)
+   8755 CE 00         [ 7]  826 	adc	a, #0x00
+   8757 DD 77 F1      [19]  827 	ld	-15 (ix), a
+                            828 ;src/game/world.c:140: p_forest[4] = 0b11111110; 
+   875A DD 7E F8      [19]  829 	ld	a, -8 (ix)
+   875D C6 04         [ 7]  830 	add	a, #0x04
+   875F DD 77 F2      [19]  831 	ld	-14 (ix), a
+   8762 DD 7E F9      [19]  832 	ld	a, -7 (ix)
+   8765 CE 00         [ 7]  833 	adc	a, #0x00
+   8767 DD 77 F3      [19]  834 	ld	-13 (ix), a
+                            835 ;src/game/world.c:141: p_forest[5] = 0b01111111;
+   876A DD 7E F8      [19]  836 	ld	a, -8 (ix)
+   876D C6 05         [ 7]  837 	add	a, #0x05
+   876F DD 77 FC      [19]  838 	ld	-4 (ix), a
+   8772 DD 7E F9      [19]  839 	ld	a, -7 (ix)
+   8775 CE 00         [ 7]  840 	adc	a, #0x00
+   8777 DD 77 FD      [19]  841 	ld	-3 (ix), a
+                            842 ;src/game/world.c:142: p_forest[6] = 0b11101111;
+   877A DD 7E F8      [19]  843 	ld	a, -8 (ix)
+   877D C6 06         [ 7]  844 	add	a, #0x06
+   877F DD 77 FA      [19]  845 	ld	-6 (ix), a
+   8782 DD 7E F9      [19]  846 	ld	a, -7 (ix)
+   8785 CE 00         [ 7]  847 	adc	a, #0x00
+   8787 DD 77 FB      [19]  848 	ld	-5 (ix), a
+                            849 ;src/game/world.c:143: p_forest[7] = 0b11001111;
+   878A DD 7E F8      [19]  850 	ld	a, -8 (ix)
+   878D C6 07         [ 7]  851 	add	a, #0x07
+   878F DD 77 F4      [19]  852 	ld	-12 (ix), a
+   8792 DD 7E F9      [19]  853 	ld	a, -7 (ix)
+   8795 CE 00         [ 7]  854 	adc	a, #0x00
+   8797 DD 77 F5      [19]  855 	ld	-11 (ix), a
+                            856 ;src/game/world.c:133: switch(cpct_getRandom_mxor_u16()%4)
+   879A 7D            [ 4]  857 	ld	a, l
+   879B B7            [ 4]  858 	or	a, a
+   879C B4            [ 4]  859 	or	a, h
+   879D 28 16         [12]  860 	jr	Z,00102$
+   879F 7D            [ 4]  861 	ld	a, l
+   87A0 3D            [ 4]  862 	dec	a
+   87A1 B4            [ 4]  863 	or	a, h
+   87A2 28 54         [12]  864 	jr	Z,00103$
+   87A4 7D            [ 4]  865 	ld	a, l
+   87A5 D6 02         [ 7]  866 	sub	a, #0x02
+   87A7 B4            [ 4]  867 	or	a, h
+   87A8 CA 3B 88      [10]  868 	jp	Z,00104$
+   87AB 7D            [ 4]  869 	ld	a, l
+   87AC D6 03         [ 7]  870 	sub	a, #0x03
+   87AE B4            [ 4]  871 	or	a, h
+   87AF CA 7D 88      [10]  872 	jp	Z,00105$
+   87B2 C3 BD 88      [10]  873 	jp	00106$
+                            874 ;src/game/world.c:135: case 0:
+   87B5                     875 00102$:
+                            876 ;src/game/world.c:136: p_forest[0] = 0b10000100;
+   87B5 DD 6E F8      [19]  877 	ld	l,-8 (ix)
+   87B8 DD 66 F9      [19]  878 	ld	h,-7 (ix)
+   87BB 36 84         [10]  879 	ld	(hl), #0x84
+                            880 ;src/game/world.c:137: p_forest[1] = 0b11000111;
+   87BD DD 6E FE      [19]  881 	ld	l,-2 (ix)
+   87C0 DD 66 FF      [19]  882 	ld	h,-1 (ix)
+   87C3 36 C7         [10]  883 	ld	(hl), #0xc7
+                            884 ;src/game/world.c:138: p_forest[2] = 0b11011110;
+   87C5 DD 6E F6      [19]  885 	ld	l,-10 (ix)
+   87C8 DD 66 F7      [19]  886 	ld	h,-9 (ix)
+   87CB 36 DE         [10]  887 	ld	(hl), #0xde
+                            888 ;src/game/world.c:139: p_forest[3] = 0b01111110;
+   87CD DD 6E F0      [19]  889 	ld	l,-16 (ix)
+   87D0 DD 66 F1      [19]  890 	ld	h,-15 (ix)
+   87D3 36 7E         [10]  891 	ld	(hl), #0x7e
+                            892 ;src/game/world.c:140: p_forest[4] = 0b11111110; 
+   87D5 DD 6E F2      [19]  893 	ld	l,-14 (ix)
+   87D8 DD 66 F3      [19]  894 	ld	h,-13 (ix)
+   87DB 36 FE         [10]  895 	ld	(hl), #0xfe
+                            896 ;src/game/world.c:141: p_forest[5] = 0b01111111;
+   87DD DD 6E FC      [19]  897 	ld	l,-4 (ix)
+   87E0 DD 66 FD      [19]  898 	ld	h,-3 (ix)
+   87E3 36 7F         [10]  899 	ld	(hl), #0x7f
+                            900 ;src/game/world.c:142: p_forest[6] = 0b11101111;
+   87E5 DD 6E FA      [19]  901 	ld	l,-6 (ix)
+   87E8 DD 66 FB      [19]  902 	ld	h,-5 (ix)
+   87EB 36 EF         [10]  903 	ld	(hl), #0xef
+                            904 ;src/game/world.c:143: p_forest[7] = 0b11001111;
+   87ED DD 6E F4      [19]  905 	ld	l,-12 (ix)
+   87F0 DD 66 F5      [19]  906 	ld	h,-11 (ix)
+   87F3 36 CF         [10]  907 	ld	(hl), #0xcf
+                            908 ;src/game/world.c:144: break;
+   87F5 C3 BD 88      [10]  909 	jp	00106$
+                            910 ;src/game/world.c:145: case 1:
+   87F8                     911 00103$:
+                            912 ;src/game/world.c:146: p_forest[0] = 0b00001100;
+   87F8 DD 6E F8      [19]  913 	ld	l,-8 (ix)
+   87FB DD 66 F9      [19]  914 	ld	h,-7 (ix)
+   87FE 36 0C         [10]  915 	ld	(hl), #0x0c
+                            916 ;src/game/world.c:147: p_forest[1] = 0b11111000;
+   8800 DD 6E FE      [19]  917 	ld	l,-2 (ix)
+   8803 DD 66 FF      [19]  918 	ld	h,-1 (ix)
+   8806 36 F8         [10]  919 	ld	(hl), #0xf8
+                            920 ;src/game/world.c:148: p_forest[2] = 0b00111111;
+   8808 DD 6E F6      [19]  921 	ld	l,-10 (ix)
+   880B DD 66 F7      [19]  922 	ld	h,-9 (ix)
+   880E 36 3F         [10]  923 	ld	(hl), #0x3f
+                            924 ;src/game/world.c:149: p_forest[3] = 0b01111110;
+   8810 DD 6E F0      [19]  925 	ld	l,-16 (ix)
+   8813 DD 66 F1      [19]  926 	ld	h,-15 (ix)
+   8816 36 7E         [10]  927 	ld	(hl), #0x7e
+                            928 ;src/game/world.c:150: p_forest[4] = 0b11111110; 
+   8818 DD 6E F2      [19]  929 	ld	l,-14 (ix)
+   881B DD 66 F3      [19]  930 	ld	h,-13 (ix)
+   881E 36 FE         [10]  931 	ld	(hl), #0xfe
+                            932 ;src/game/world.c:151: p_forest[5] = 0b01011111;
+   8820 DD 6E FC      [19]  933 	ld	l,-4 (ix)
+   8823 DD 66 FD      [19]  934 	ld	h,-3 (ix)
+   8826 36 5F         [10]  935 	ld	(hl), #0x5f
+                            936 ;src/game/world.c:152: p_forest[6] = 0b11001111;
+   8828 DD 6E FA      [19]  937 	ld	l,-6 (ix)
+   882B DD 66 FB      [19]  938 	ld	h,-5 (ix)
+   882E 36 CF         [10]  939 	ld	(hl), #0xcf
+                            940 ;src/game/world.c:153: p_forest[7] = 0b10001100;
+   8830 DD 6E F4      [19]  941 	ld	l,-12 (ix)
+   8833 DD 66 F5      [19]  942 	ld	h,-11 (ix)
+   8836 36 8C         [10]  943 	ld	(hl), #0x8c
+                            944 ;src/game/world.c:154: break;
+   8838 C3 BD 88      [10]  945 	jp	00106$
+                            946 ;src/game/world.c:155: case 2:
+   883B                     947 00104$:
+                            948 ;src/game/world.c:156: p_forest[0] = 0b00110000;
+   883B DD 6E F8      [19]  949 	ld	l,-8 (ix)
+   883E DD 66 F9      [19]  950 	ld	h,-7 (ix)
+   8841 36 30         [10]  951 	ld	(hl), #0x30
+                            952 ;src/game/world.c:157: p_forest[1] = 0b11110100;
+   8843 DD 6E FE      [19]  953 	ld	l,-2 (ix)
+   8846 DD 66 FF      [19]  954 	ld	h,-1 (ix)
+   8849 36 F4         [10]  955 	ld	(hl), #0xf4
+                            956 ;src/game/world.c:158: p_forest[2] = 0b11111111;
+   884B DD 6E F6      [19]  957 	ld	l,-10 (ix)
+   884E DD 66 F7      [19]  958 	ld	h,-9 (ix)
+   8851 36 FF         [10]  959 	ld	(hl), #0xff
+                            960 ;src/game/world.c:159: p_forest[3] = 0b11111111;
+   8853 DD 6E F0      [19]  961 	ld	l,-16 (ix)
+   8856 DD 66 F1      [19]  962 	ld	h,-15 (ix)
+   8859 36 FF         [10]  963 	ld	(hl), #0xff
+                            964 ;src/game/world.c:160: p_forest[4] = 0b01111100;
+   885B DD 6E F2      [19]  965 	ld	l,-14 (ix)
+   885E DD 66 F3      [19]  966 	ld	h,-13 (ix)
+   8861 36 7C         [10]  967 	ld	(hl), #0x7c
+                            968 ;src/game/world.c:161: p_forest[5] = 0b01111110;
+   8863 DD 6E FC      [19]  969 	ld	l,-4 (ix)
+   8866 DD 66 FD      [19]  970 	ld	h,-3 (ix)
+   8869 36 7E         [10]  971 	ld	(hl), #0x7e
+                            972 ;src/game/world.c:162: p_forest[6] = 0b00111110;
+   886B DD 6E FA      [19]  973 	ld	l,-6 (ix)
+   886E DD 66 FB      [19]  974 	ld	h,-5 (ix)
+   8871 36 3E         [10]  975 	ld	(hl), #0x3e
+                            976 ;src/game/world.c:163: p_forest[7] = 0b00011000;
+   8873 DD 6E F4      [19]  977 	ld	l,-12 (ix)
+   8876 DD 66 F5      [19]  978 	ld	h,-11 (ix)
+   8879 36 18         [10]  979 	ld	(hl), #0x18
+                            980 ;src/game/world.c:164: break;
+   887B 18 40         [12]  981 	jr	00106$
+                            982 ;src/game/world.c:165: case 3:
+   887D                     983 00105$:
+                            984 ;src/game/world.c:166: p_forest[0] = 0b11000000; 
+   887D DD 6E F8      [19]  985 	ld	l,-8 (ix)
+   8880 DD 66 F9      [19]  986 	ld	h,-7 (ix)
+   8883 36 C0         [10]  987 	ld	(hl), #0xc0
+                            988 ;src/game/world.c:167: p_forest[1] = 0b11100111;
+   8885 DD 6E FE      [19]  989 	ld	l,-2 (ix)
+   8888 DD 66 FF      [19]  990 	ld	h,-1 (ix)
+   888B 36 E7         [10]  991 	ld	(hl), #0xe7
+                            992 ;src/game/world.c:168: p_forest[2] = 0b01111110;
+   888D DD 6E F6      [19]  993 	ld	l,-10 (ix)
+   8890 DD 66 F7      [19]  994 	ld	h,-9 (ix)
+   8893 36 7E         [10]  995 	ld	(hl), #0x7e
+                            996 ;src/game/world.c:169: p_forest[3] = 0b01111110;
+   8895 DD 6E F0      [19]  997 	ld	l,-16 (ix)
+   8898 DD 66 F1      [19]  998 	ld	h,-15 (ix)
+   889B 36 7E         [10]  999 	ld	(hl), #0x7e
+                           1000 ;src/game/world.c:170: p_forest[4] = 0b11111110;
+   889D DD 6E F2      [19] 1001 	ld	l,-14 (ix)
+   88A0 DD 66 F3      [19] 1002 	ld	h,-13 (ix)
+   88A3 36 FE         [10] 1003 	ld	(hl), #0xfe
+                           1004 ;src/game/world.c:171: p_forest[5] = 0b11111100;
+   88A5 DD 6E FC      [19] 1005 	ld	l,-4 (ix)
+   88A8 DD 66 FD      [19] 1006 	ld	h,-3 (ix)
+   88AB 36 FC         [10] 1007 	ld	(hl), #0xfc
+                           1008 ;src/game/world.c:172: p_forest[6] = 0b01111000;
+   88AD DD 6E FA      [19] 1009 	ld	l,-6 (ix)
+   88B0 DD 66 FB      [19] 1010 	ld	h,-5 (ix)
+   88B3 36 78         [10] 1011 	ld	(hl), #0x78
+                           1012 ;src/game/world.c:173: p_forest[7] = 0b00110000;
+   88B5 DD 6E F4      [19] 1013 	ld	l,-12 (ix)
+   88B8 DD 66 F5      [19] 1014 	ld	h,-11 (ix)
+   88BB 36 30         [10] 1015 	ld	(hl), #0x30
+                           1016 ;src/game/world.c:175: }
+   88BD                    1017 00106$:
+                           1018 ;src/game/world.c:176: patternTile(FOREST, iy, 8, 8, p_forest);
+   88BD DD 6E F8      [19] 1019 	ld	l,-8 (ix)
+   88C0 DD 66 F9      [19] 1020 	ld	h,-7 (ix)
+   88C3 C5            [11] 1021 	push	bc
+   88C4 E5            [11] 1022 	push	hl
+   88C5 21 08 08      [10] 1023 	ld	hl, #0x0808
+   88C8 E5            [11] 1024 	push	hl
+   88C9 D5            [11] 1025 	push	de
+   88CA 3E 08         [ 7] 1026 	ld	a, #0x08
+   88CC F5            [11] 1027 	push	af
+   88CD 33            [ 6] 1028 	inc	sp
+   88CE CD E4 85      [17] 1029 	call	_patternTile
+   88D1 21 07 00      [10] 1030 	ld	hl, #7
+   88D4 39            [11] 1031 	add	hl, sp
+   88D5 F9            [ 6] 1032 	ld	sp, hl
+   88D6 C1            [10] 1033 	pop	bc
+                           1034 ;src/game/world.c:129: for(ix=0; ix<NBFOREST; ix++)
+   88D7 03            [ 6] 1035 	inc	bc
+   88D8 79            [ 4] 1036 	ld	a, c
+   88D9 D6 32         [ 7] 1037 	sub	a, #0x32
+   88DB 78            [ 4] 1038 	ld	a, b
+   88DC 17            [ 4] 1039 	rla
+   88DD 3F            [ 4] 1040 	ccf
+   88DE 1F            [ 4] 1041 	rra
+   88DF DE 80         [ 7] 1042 	sbc	a, #0x80
+   88E1 DA 11 87      [10] 1043 	jp	C, 00121$
+                           1044 ;src/game/world.c:182: for(ix=0; ix<NBFARM; ix++)
+   88E4 01 3C 00      [10] 1045 	ld	bc, #0x003c
+   88E7                    1046 00125$:
+                           1047 ;src/game/world.c:184: iy = cpct_getRandom_mxor_u16()%(WIDTH*HEIGHT)%(WIDTH*HEIGHT);
+   88E7 C5            [11] 1048 	push	bc
+   88E8 CD 28 65      [17] 1049 	call	_cpct_getRandom_mxor_u16
+   88EB 11 00 0F      [10] 1050 	ld	de, #0x0f00
+   88EE D5            [11] 1051 	push	de
+   88EF E5            [11] 1052 	push	hl
+   88F0 CD F6 61      [17] 1053 	call	__moduint
+   88F3 F1            [10] 1054 	pop	af
+   88F4 F1            [10] 1055 	pop	af
+   88F5 11 00 0F      [10] 1056 	ld	de, #0x0f00
+   88F8 D5            [11] 1057 	push	de
+   88F9 E5            [11] 1058 	push	hl
+   88FA CD F6 61      [17] 1059 	call	__moduint
+   88FD F1            [10] 1060 	pop	af
+   88FE F1            [10] 1061 	pop	af
+   88FF C1            [10] 1062 	pop	bc
+                           1063 ;src/game/world.c:185: p_world[iy] = cpct_rand()%2+5;
+   8900 11 1D 74      [10] 1064 	ld	de, #_p_world
+   8903 19            [11] 1065 	add	hl, de
+   8904 E5            [11] 1066 	push	hl
+   8905 C5            [11] 1067 	push	bc
+   8906 CD 30 66      [17] 1068 	call	_cpct_getRandom_mxor_u8
+   8909 7D            [ 4] 1069 	ld	a, l
+   890A C1            [10] 1070 	pop	bc
+   890B E1            [10] 1071 	pop	hl
+   890C E6 01         [ 7] 1072 	and	a, #0x01
+   890E C6 05         [ 7] 1073 	add	a, #0x05
+   8910 77            [ 7] 1074 	ld	(hl), a
+   8911 0B            [ 6] 1075 	dec	bc
+                           1076 ;src/game/world.c:182: for(ix=0; ix<NBFARM; ix++)
+   8912 78            [ 4] 1077 	ld	a, b
+   8913 B1            [ 4] 1078 	or	a,c
+   8914 20 D1         [12] 1079 	jr	NZ,00125$
+                           1080 ;src/game/world.c:190: for(ix=0; ix<NBURBAN; ix++)
+   8916 01 14 00      [10] 1081 	ld	bc, #0x0014
+   8919                    1082 00128$:
+                           1083 ;src/game/world.c:192: iy = cpct_getRandom_mxor_u16()%(WIDTH*HEIGHT);
+   8919 C5            [11] 1084 	push	bc
+   891A CD 28 65      [17] 1085 	call	_cpct_getRandom_mxor_u16
+   891D 11 00 0F      [10] 1086 	ld	de, #0x0f00
+   8920 D5            [11] 1087 	push	de
+   8921 E5            [11] 1088 	push	hl
+   8922 CD F6 61      [17] 1089 	call	__moduint
+   8925 F1            [10] 1090 	pop	af
+   8926 F1            [10] 1091 	pop	af
+   8927 C1            [10] 1092 	pop	bc
+                           1093 ;src/game/world.c:193: p_world[iy] = cpct_rand()%3+2;
+   8928 11 1D 74      [10] 1094 	ld	de, #_p_world
+   892B 19            [11] 1095 	add	hl, de
+   892C E5            [11] 1096 	push	hl
+   892D C5            [11] 1097 	push	bc
+   892E CD 30 66      [17] 1098 	call	_cpct_getRandom_mxor_u8
+   8931 55            [ 4] 1099 	ld	d, l
+   8932 3E 03         [ 7] 1100 	ld	a, #0x03
+   8934 F5            [11] 1101 	push	af
+   8935 33            [ 6] 1102 	inc	sp
+   8936 D5            [11] 1103 	push	de
+   8937 33            [ 6] 1104 	inc	sp
+   8938 CD EA 61      [17] 1105 	call	__moduchar
+   893B F1            [10] 1106 	pop	af
+   893C 5D            [ 4] 1107 	ld	e, l
+   893D C1            [10] 1108 	pop	bc
+   893E E1            [10] 1109 	pop	hl
+   893F 1C            [ 4] 1110 	inc	e
+   8940 1C            [ 4] 1111 	inc	e
+   8941 73            [ 7] 1112 	ld	(hl), e
+   8942 0B            [ 6] 1113 	dec	bc
+                           1114 ;src/game/world.c:190: for(ix=0; ix<NBURBAN; ix++)
+   8943 78            [ 4] 1115 	ld	a, b
+   8944 B1            [ 4] 1116 	or	a,c
+   8945 20 D2         [12] 1117 	jr	NZ,00128$
+                           1118 ;src/game/world.c:196: for(ix=0; ix<NBURBAN; ix++)
+   8947 21 00 00      [10] 1119 	ld	hl, #0x0000
+   894A 39            [11] 1120 	add	hl, sp
+   894B 4D            [ 4] 1121 	ld	c, l
+   894C 44            [ 4] 1122 	ld	b, h
+   894D DD 36 EE 00   [19] 1123 	ld	-18 (ix), #0x00
+   8951 DD 36 EF 00   [19] 1124 	ld	-17 (ix), #0x00
+   8955                    1125 00129$:
+                           1126 ;src/game/world.c:198: iy = cpct_getRandom_mxor_u16()%(WIDTH*HEIGHT);
+   8955 C5            [11] 1127 	push	bc
+   8956 CD 28 65      [17] 1128 	call	_cpct_getRandom_mxor_u16
+   8959 11 00 0F      [10] 1129 	ld	de, #0x0f00
+   895C D5            [11] 1130 	push	de
+   895D E5            [11] 1131 	push	hl
+   895E CD F6 61      [17] 1132 	call	__moduint
+   8961 F1            [10] 1133 	pop	af
+   8962 F1            [10] 1134 	pop	af
+   8963 C1            [10] 1135 	pop	bc
+   8964 DD 75 F4      [19] 1136 	ld	-12 (ix), l
+   8967 DD 74 F5      [19] 1137 	ld	-11 (ix), h
+                           1138 ;src/game/world.c:200: switch(cpct_rand()%6)
+   896A C5            [11] 1139 	push	bc
+   896B CD 30 66      [17] 1140 	call	_cpct_getRandom_mxor_u8
+   896E 55            [ 4] 1141 	ld	d, l
+   896F 3E 06         [ 7] 1142 	ld	a, #0x06
+   8971 F5            [11] 1143 	push	af
+   8972 33            [ 6] 1144 	inc	sp
+   8973 D5            [11] 1145 	push	de
+   8974 33            [ 6] 1146 	inc	sp
+   8975 CD EA 61      [17] 1147 	call	__moduchar
+   8978 F1            [10] 1148 	pop	af
+   8979 5D            [ 4] 1149 	ld	e, l
+   897A C1            [10] 1150 	pop	bc
+   897B 3E 05         [ 7] 1151 	ld	a, #0x05
+   897D 93            [ 4] 1152 	sub	a, e
+   897E 38 6A         [12] 1153 	jr	C,00116$
+                           1154 ;src/game/world.c:204: p_cities[1] = 0b01000110; // 01100010;
+   8980 21 01 00      [10] 1155 	ld	hl, #0x0001
+   8983 09            [11] 1156 	add	hl,bc
+   8984 DD 75 FA      [19] 1157 	ld	-6 (ix), l
+   8987 DD 74 FB      [19] 1158 	ld	-5 (ix), h
+                           1159 ;src/game/world.c:200: switch(cpct_rand()%6)
+   898A 16 00         [ 7] 1160 	ld	d, #0x00
+   898C 21 92 89      [10] 1161 	ld	hl, #00211$
+   898F 19            [11] 1162 	add	hl, de
+   8990 19            [11] 1163 	add	hl, de
+                           1164 ;src/game/world.c:202: case 0:
+   8991 E9            [ 4] 1165 	jp	(hl)
+   8992                    1166 00211$:
+   8992 18 0A         [12] 1167 	jr	00110$
+   8994 18 15         [12] 1168 	jr	00111$
+   8996 18 20         [12] 1169 	jr	00112$
+   8998 18 2B         [12] 1170 	jr	00113$
+   899A 18 36         [12] 1171 	jr	00114$
+   899C 18 41         [12] 1172 	jr	00115$
+   899E                    1173 00110$:
+                           1174 ;src/game/world.c:203: p_cities[0] = 0b01110010; // 01001110;
+   899E 3E 72         [ 7] 1175 	ld	a, #0x72
+   89A0 02            [ 7] 1176 	ld	(bc), a
+                           1177 ;src/game/world.c:204: p_cities[1] = 0b01000110; // 01100010;
+   89A1 DD 6E FA      [19] 1178 	ld	l,-6 (ix)
+   89A4 DD 66 FB      [19] 1179 	ld	h,-5 (ix)
+   89A7 36 46         [10] 1180 	ld	(hl), #0x46
+                           1181 ;src/game/world.c:205: break;
+   89A9 18 3F         [12] 1182 	jr	00116$
+                           1183 ;src/game/world.c:207: case 1:
+   89AB                    1184 00111$:
+                           1185 ;src/game/world.c:208: p_cities[0] = 0b01100000; // 00000110;
+   89AB 3E 60         [ 7] 1186 	ld	a, #0x60
+   89AD 02            [ 7] 1187 	ld	(bc), a
+                           1188 ;src/game/world.c:209: p_cities[1] = 0b00000110; // 01100000;
+   89AE DD 6E FA      [19] 1189 	ld	l,-6 (ix)
+   89B1 DD 66 FB      [19] 1190 	ld	h,-5 (ix)
+   89B4 36 06         [10] 1191 	ld	(hl), #0x06
+                           1192 ;src/game/world.c:210: break;
+   89B6 18 32         [12] 1193 	jr	00116$
+                           1194 ;src/game/world.c:212: case 2:
+   89B8                    1195 00112$:
+                           1196 ;src/game/world.c:213: p_cities[0] = 0b00010000; // 00001000;
+   89B8 3E 10         [ 7] 1197 	ld	a, #0x10
+   89BA 02            [ 7] 1198 	ld	(bc), a
+                           1199 ;src/game/world.c:214: p_cities[1] = 0b00000110; // 01100000;
+   89BB DD 6E FA      [19] 1200 	ld	l,-6 (ix)
+   89BE DD 66 FB      [19] 1201 	ld	h,-5 (ix)
+   89C1 36 06         [10] 1202 	ld	(hl), #0x06
+                           1203 ;src/game/world.c:215: break;
+   89C3 18 25         [12] 1204 	jr	00116$
+                           1205 ;src/game/world.c:217: case 3:
+   89C5                    1206 00113$:
+                           1207 ;src/game/world.c:218: p_cities[0] = 0b11000000; // 00000011;
+   89C5 3E C0         [ 7] 1208 	ld	a, #0xc0
+   89C7 02            [ 7] 1209 	ld	(bc), a
+                           1210 ;src/game/world.c:219: p_cities[1] = 0b00110001; // 10001100;
+   89C8 DD 6E FA      [19] 1211 	ld	l,-6 (ix)
+   89CB DD 66 FB      [19] 1212 	ld	h,-5 (ix)
+   89CE 36 31         [10] 1213 	ld	(hl), #0x31
+                           1214 ;src/game/world.c:220: break;
+   89D0 18 18         [12] 1215 	jr	00116$
+                           1216 ;src/game/world.c:222: case 4:
+   89D2                    1217 00114$:
+                           1218 ;src/game/world.c:223: p_cities[0] = 0b11000100; // 00100011;
+   89D2 3E C4         [ 7] 1219 	ld	a, #0xc4
+   89D4 02            [ 7] 1220 	ld	(bc), a
+                           1221 ;src/game/world.c:224: p_cities[1] = 0b00001110; // 01110000;
+   89D5 DD 6E FA      [19] 1222 	ld	l,-6 (ix)
+   89D8 DD 66 FB      [19] 1223 	ld	h,-5 (ix)
+   89DB 36 0E         [10] 1224 	ld	(hl), #0x0e
+                           1225 ;src/game/world.c:225: break;
+   89DD 18 0B         [12] 1226 	jr	00116$
+                           1227 ;src/game/world.c:227: case 5:
+   89DF                    1228 00115$:
+                           1229 ;src/game/world.c:228: p_cities[0] = 0b01000000; // 00000010;
+   89DF 3E 40         [ 7] 1230 	ld	a, #0x40
+   89E1 02            [ 7] 1231 	ld	(bc), a
+                           1232 ;src/game/world.c:229: p_cities[1] = 0b01001110; // 01110010;
+   89E2 DD 6E FA      [19] 1233 	ld	l,-6 (ix)
+   89E5 DD 66 FB      [19] 1234 	ld	h,-5 (ix)
+   89E8 36 4E         [10] 1235 	ld	(hl), #0x4e
+                           1236 ;src/game/world.c:231: }
+   89EA                    1237 00116$:
+                           1238 ;src/game/world.c:233: patternTile(DWELLINGS1, iy, 4, 4, p_cities);
+   89EA 59            [ 4] 1239 	ld	e, c
+   89EB 50            [ 4] 1240 	ld	d, b
+   89EC C5            [11] 1241 	push	bc
+   89ED D5            [11] 1242 	push	de
+   89EE 21 04 04      [10] 1243 	ld	hl, #0x0404
+   89F1 E5            [11] 1244 	push	hl
+   89F2 DD 6E F4      [19] 1245 	ld	l,-12 (ix)
+   89F5 DD 66 F5      [19] 1246 	ld	h,-11 (ix)
+   89F8 E5            [11] 1247 	push	hl
+   89F9 3E 02         [ 7] 1248 	ld	a, #0x02
+   89FB F5            [11] 1249 	push	af
+   89FC 33            [ 6] 1250 	inc	sp
+   89FD CD E4 85      [17] 1251 	call	_patternTile
+   8A00 21 07 00      [10] 1252 	ld	hl, #7
+   8A03 39            [11] 1253 	add	hl, sp
+   8A04 F9            [ 6] 1254 	ld	sp, hl
+   8A05 C1            [10] 1255 	pop	bc
+                           1256 ;src/game/world.c:196: for(ix=0; ix<NBURBAN; ix++)
+   8A06 DD 34 EE      [23] 1257 	inc	-18 (ix)
+   8A09 20 03         [12] 1258 	jr	NZ,00212$
+   8A0B DD 34 EF      [23] 1259 	inc	-17 (ix)
+   8A0E                    1260 00212$:
+   8A0E DD 7E EE      [19] 1261 	ld	a, -18 (ix)
+   8A11 D6 14         [ 7] 1262 	sub	a, #0x14
+   8A13 DD 7E EF      [19] 1263 	ld	a, -17 (ix)
+   8A16 17            [ 4] 1264 	rla
+   8A17 3F            [ 4] 1265 	ccf
+   8A18 1F            [ 4] 1266 	rra
+   8A19 DE 80         [ 7] 1267 	sbc	a, #0x80
+   8A1B DA 55 89      [10] 1268 	jp	C, 00129$
+                           1269 ;src/game/world.c:238: for(ix=0; ix<NBLIVESTOCK; ix++)
+   8A1E 01 13 00      [10] 1270 	ld	bc, #0x0013
+   8A21                    1271 00133$:
+                           1272 ;src/game/world.c:240: iy = cpct_getRandom_mxor_u16()%(WIDTH*HEIGHT);
+   8A21 C5            [11] 1273 	push	bc
+   8A22 CD 28 65      [17] 1274 	call	_cpct_getRandom_mxor_u16
+   8A25 11 00 0F      [10] 1275 	ld	de, #0x0f00
+   8A28 D5            [11] 1276 	push	de
+   8A29 E5            [11] 1277 	push	hl
+   8A2A CD F6 61      [17] 1278 	call	__moduint
+   8A2D F1            [10] 1279 	pop	af
+   8A2E F1            [10] 1280 	pop	af
+   8A2F C1            [10] 1281 	pop	bc
+                           1282 ;src/game/world.c:241: p_world[iy] = LIVESTOCK;
+   8A30 11 1D 74      [10] 1283 	ld	de, #_p_world
+   8A33 19            [11] 1284 	add	hl, de
+   8A34 36 09         [10] 1285 	ld	(hl), #0x09
+   8A36 0B            [ 6] 1286 	dec	bc
+                           1287 ;src/game/world.c:238: for(ix=0; ix<NBLIVESTOCK; ix++)
+   8A37 78            [ 4] 1288 	ld	a, b
+   8A38 B1            [ 4] 1289 	or	a,c
+   8A39 20 E6         [12] 1290 	jr	NZ,00133$
+   8A3B DD F9         [10] 1291 	ld	sp, ix
+   8A3D DD E1         [14] 1292 	pop	ix
+   8A3F C9            [10] 1293 	ret
+                           1294 ;src/game/world.c:245: void drawTile(u8 x_, u8 y_, u8 ix, u8 iy)
+                           1295 ;	---------------------------------
+                           1296 ; Function drawTile
+                           1297 ; ---------------------------------
+   8A40                    1298 _drawTile::
+   8A40 DD E5         [15] 1299 	push	ix
+   8A42 DD 21 00 00   [14] 1300 	ld	ix,#0
+   8A46 DD 39         [15] 1301 	add	ix,sp
+                           1302 ;src/game/world.c:248: int adress = (y_+iy)*WIDTH+x_+ix;
+   8A48 DD 4E 05      [19] 1303 	ld	c, 5 (ix)
+   8A4B 06 00         [ 7] 1304 	ld	b, #0x00
+   8A4D DD 6E 07      [19] 1305 	ld	l, 7 (ix)
+   8A50 26 00         [ 7] 1306 	ld	h, #0x00
+   8A52 09            [11] 1307 	add	hl, bc
+   8A53 4D            [ 4] 1308 	ld	c, l
+   8A54 44            [ 4] 1309 	ld	b, h
+   8A55 29            [11] 1310 	add	hl, hl
+   8A56 29            [11] 1311 	add	hl, hl
+   8A57 09            [11] 1312 	add	hl, bc
+   8A58 29            [11] 1313 	add	hl, hl
+   8A59 29            [11] 1314 	add	hl, hl
+   8A5A 29            [11] 1315 	add	hl, hl
+   8A5B 29            [11] 1316 	add	hl, hl
+   8A5C DD 4E 04      [19] 1317 	ld	c, 4 (ix)
+   8A5F 06 00         [ 7] 1318 	ld	b, #0x00
+   8A61 09            [11] 1319 	add	hl, bc
+   8A62 DD 4E 06      [19] 1320 	ld	c, 6 (ix)
+   8A65 06 00         [ 7] 1321 	ld	b, #0x00
+   8A67 09            [11] 1322 	add	hl,bc
+   8A68 5D            [ 4] 1323 	ld	e, l
+   8A69 54            [ 4] 1324 	ld	d, h
+                           1325 ;src/game/world.c:250: p_video = cpct_getScreenPtr(SCR_VMEM, ix*TILESIZE_W, iy*TILESIZE_H);
+   8A6A DD 7E 07      [19] 1326 	ld	a, 7 (ix)
+   8A6D 07            [ 4] 1327 	rlca
+   8A6E 07            [ 4] 1328 	rlca
+   8A6F 07            [ 4] 1329 	rlca
+   8A70 07            [ 4] 1330 	rlca
+   8A71 E6 F0         [ 7] 1331 	and	a, #0xf0
+   8A73 67            [ 4] 1332 	ld	h, a
+   8A74 DD 7E 06      [19] 1333 	ld	a, 6 (ix)
+   8A77 87            [ 4] 1334 	add	a, a
+   8A78 87            [ 4] 1335 	add	a, a
+   8A79 47            [ 4] 1336 	ld	b, a
+   8A7A D5            [11] 1337 	push	de
+   8A7B E5            [11] 1338 	push	hl
+   8A7C 33            [ 6] 1339 	inc	sp
+   8A7D C5            [11] 1340 	push	bc
+   8A7E 33            [ 6] 1341 	inc	sp
+   8A7F 21 00 C0      [10] 1342 	ld	hl, #0xc000
+   8A82 E5            [11] 1343 	push	hl
+   8A83 CD 27 67      [17] 1344 	call	_cpct_getScreenPtr
+   8A86 4D            [ 4] 1345 	ld	c, l
+   8A87 44            [ 4] 1346 	ld	b, h
+   8A88 D1            [10] 1347 	pop	de
+                           1348 ;src/game/world.c:252: switch(p_world[adress])
+   8A89 21 1D 74      [10] 1349 	ld	hl, #_p_world+0
+   8A8C 19            [11] 1350 	add	hl, de
+   8A8D 5E            [ 7] 1351 	ld	e, (hl)
+   8A8E 3E 19         [ 7] 1352 	ld	a, #0x19
+   8A90 93            [ 4] 1353 	sub	a, e
+   8A91 DA 66 8C      [10] 1354 	jp	C, 00128$
+   8A94 16 00         [ 7] 1355 	ld	d, #0x00
+   8A96 21 9D 8A      [10] 1356 	ld	hl, #00134$
+   8A99 19            [11] 1357 	add	hl, de
+   8A9A 19            [11] 1358 	add	hl, de
+   8A9B 19            [11] 1359 	add	hl, de
+   8A9C E9            [ 4] 1360 	jp	(hl)
+   8A9D                    1361 00134$:
+   8A9D C3 EB 8A      [10] 1362 	jp	00101$
+   8AA0 C3 FA 8A      [10] 1363 	jp	00102$
+   8AA3 C3 09 8B      [10] 1364 	jp	00103$
+   8AA6 C3 18 8B      [10] 1365 	jp	00104$
+   8AA9 C3 27 8B      [10] 1366 	jp	00105$
+   8AAC C3 36 8B      [10] 1367 	jp	00106$
+   8AAF C3 45 8B      [10] 1368 	jp	00107$
+   8AB2 C3 54 8B      [10] 1369 	jp	00108$
+   8AB5 C3 63 8B      [10] 1370 	jp	00109$
+   8AB8 C3 72 8B      [10] 1371 	jp	00110$
+   8ABB C3 81 8B      [10] 1372 	jp	00111$
+   8ABE C3 90 8B      [10] 1373 	jp	00112$
+   8AC1 C3 9F 8B      [10] 1374 	jp	00113$
+   8AC4 C3 AE 8B      [10] 1375 	jp	00114$
+   8AC7 C3 BD 8B      [10] 1376 	jp	00115$
+   8ACA C3 CC 8B      [10] 1377 	jp	00116$
+   8ACD C3 DB 8B      [10] 1378 	jp	00117$
+   8AD0 C3 EA 8B      [10] 1379 	jp	00118$
+   8AD3 C3 F8 8B      [10] 1380 	jp	00119$
+   8AD6 C3 06 8C      [10] 1381 	jp	00120$
+   8AD9 C3 14 8C      [10] 1382 	jp	00121$
+   8ADC C3 22 8C      [10] 1383 	jp	00122$
+   8ADF C3 30 8C      [10] 1384 	jp	00123$
+   8AE2 C3 3E 8C      [10] 1385 	jp	00124$
+   8AE5 C3 4C 8C      [10] 1386 	jp	00125$
+   8AE8 C3 5A 8C      [10] 1387 	jp	00126$
+                           1388 ;src/game/world.c:254: case GRASS1:
+   8AEB                    1389 00101$:
+                           1390 ;src/game/world.c:255: cpct_drawSprite(grass1, p_video, TILESIZE_W, TILESIZE_H);
+   8AEB 21 04 10      [10] 1391 	ld	hl, #0x1004
+   8AEE E5            [11] 1392 	push	hl
+   8AEF C5            [11] 1393 	push	bc
+   8AF0 21 D4 47      [10] 1394 	ld	hl, #_grass1
+   8AF3 E5            [11] 1395 	push	hl
+   8AF4 CD 45 61      [17] 1396 	call	_cpct_drawSprite
+                           1397 ;src/game/world.c:256: break;
+   8AF7 C3 66 8C      [10] 1398 	jp	00128$
+                           1399 ;src/game/world.c:257: case GRASS2:
+   8AFA                    1400 00102$:
+                           1401 ;src/game/world.c:258: cpct_drawSprite(grass2, p_video, TILESIZE_W, TILESIZE_H);
+   8AFA 21 04 10      [10] 1402 	ld	hl, #0x1004
+   8AFD E5            [11] 1403 	push	hl
+   8AFE C5            [11] 1404 	push	bc
+   8AFF 21 14 48      [10] 1405 	ld	hl, #_grass2
+   8B02 E5            [11] 1406 	push	hl
+   8B03 CD 45 61      [17] 1407 	call	_cpct_drawSprite
+                           1408 ;src/game/world.c:259: break;
+   8B06 C3 66 8C      [10] 1409 	jp	00128$
+                           1410 ;src/game/world.c:260: case DWELLINGS1:
+   8B09                    1411 00103$:
+                           1412 ;src/game/world.c:261: cpct_drawSprite(dwellings1, p_video, TILESIZE_W, TILESIZE_H);
+   8B09 21 04 10      [10] 1413 	ld	hl, #0x1004
+   8B0C E5            [11] 1414 	push	hl
+   8B0D C5            [11] 1415 	push	bc
+   8B0E 21 94 48      [10] 1416 	ld	hl, #_dwellings1
+   8B11 E5            [11] 1417 	push	hl
+   8B12 CD 45 61      [17] 1418 	call	_cpct_drawSprite
+                           1419 ;src/game/world.c:262: break;
+   8B15 C3 66 8C      [10] 1420 	jp	00128$
+                           1421 ;src/game/world.c:263: case DWELLINGS2:
+   8B18                    1422 00104$:
+                           1423 ;src/game/world.c:264: cpct_drawSprite(dwellings2, p_video, TILESIZE_W, TILESIZE_H);
+   8B18 21 04 10      [10] 1424 	ld	hl, #0x1004
+   8B1B E5            [11] 1425 	push	hl
+   8B1C C5            [11] 1426 	push	bc
+   8B1D 21 D4 48      [10] 1427 	ld	hl, #_dwellings2
+   8B20 E5            [11] 1428 	push	hl
+   8B21 CD 45 61      [17] 1429 	call	_cpct_drawSprite
+                           1430 ;src/game/world.c:265: break;
+   8B24 C3 66 8C      [10] 1431 	jp	00128$
+                           1432 ;src/game/world.c:266: case DWELLINGS3:
+   8B27                    1433 00105$:
+                           1434 ;src/game/world.c:267: cpct_drawSprite(dwellings3, p_video, TILESIZE_W, TILESIZE_H);
+   8B27 21 04 10      [10] 1435 	ld	hl, #0x1004
+   8B2A E5            [11] 1436 	push	hl
+   8B2B C5            [11] 1437 	push	bc
+   8B2C 21 14 49      [10] 1438 	ld	hl, #_dwellings3
+   8B2F E5            [11] 1439 	push	hl
+   8B30 CD 45 61      [17] 1440 	call	_cpct_drawSprite
+                           1441 ;src/game/world.c:268: break;
+   8B33 C3 66 8C      [10] 1442 	jp	00128$
+                           1443 ;src/game/world.c:269: case FARM1:
+   8B36                    1444 00106$:
+                           1445 ;src/game/world.c:270: cpct_drawSprite(farm1, p_video, TILESIZE_W, TILESIZE_H);
+   8B36 21 04 10      [10] 1446 	ld	hl, #0x1004
+   8B39 E5            [11] 1447 	push	hl
+   8B3A C5            [11] 1448 	push	bc
+   8B3B 21 94 49      [10] 1449 	ld	hl, #_farm1
+   8B3E E5            [11] 1450 	push	hl
+   8B3F CD 45 61      [17] 1451 	call	_cpct_drawSprite
+                           1452 ;src/game/world.c:271: break;
+   8B42 C3 66 8C      [10] 1453 	jp	00128$
+                           1454 ;src/game/world.c:272: case FARM2:
+   8B45                    1455 00107$:
+                           1456 ;src/game/world.c:273: cpct_drawSprite(farm2, p_video, TILESIZE_W, TILESIZE_H);
+   8B45 21 04 10      [10] 1457 	ld	hl, #0x1004
+   8B48 E5            [11] 1458 	push	hl
+   8B49 C5            [11] 1459 	push	bc
+   8B4A 21 D4 49      [10] 1460 	ld	hl, #_farm2
+   8B4D E5            [11] 1461 	push	hl
+   8B4E CD 45 61      [17] 1462 	call	_cpct_drawSprite
+                           1463 ;src/game/world.c:274: break;
+   8B51 C3 66 8C      [10] 1464 	jp	00128$
+                           1465 ;src/game/world.c:275: case WATER:
+   8B54                    1466 00108$:
+                           1467 ;src/game/world.c:276: cpct_drawSprite(water, p_video, TILESIZE_W, TILESIZE_H);
+   8B54 21 04 10      [10] 1468 	ld	hl, #0x1004
+   8B57 E5            [11] 1469 	push	hl
+   8B58 C5            [11] 1470 	push	bc
+   8B59 21 54 49      [10] 1471 	ld	hl, #_water
+   8B5C E5            [11] 1472 	push	hl
+   8B5D CD 45 61      [17] 1473 	call	_cpct_drawSprite
+                           1474 ;src/game/world.c:277: break;
+   8B60 C3 66 8C      [10] 1475 	jp	00128$
+                           1476 ;src/game/world.c:278: case FOREST:
+   8B63                    1477 00109$:
+                           1478 ;src/game/world.c:279: cpct_drawSprite(forest, p_video, TILESIZE_W, TILESIZE_H);
+   8B63 21 04 10      [10] 1479 	ld	hl, #0x1004
+   8B66 E5            [11] 1480 	push	hl
+   8B67 C5            [11] 1481 	push	bc
+   8B68 21 54 48      [10] 1482 	ld	hl, #_forest
+   8B6B E5            [11] 1483 	push	hl
+   8B6C CD 45 61      [17] 1484 	call	_cpct_drawSprite
+                           1485 ;src/game/world.c:280: break;
+   8B6F C3 66 8C      [10] 1486 	jp	00128$
+                           1487 ;src/game/world.c:281: case LIVESTOCK:
+   8B72                    1488 00110$:
+                           1489 ;src/game/world.c:282: cpct_drawSprite(livestock, p_video, TILESIZE_W, TILESIZE_H);
+   8B72 21 04 10      [10] 1490 	ld	hl, #0x1004
+   8B75 E5            [11] 1491 	push	hl
+   8B76 C5            [11] 1492 	push	bc
+   8B77 21 14 4A      [10] 1493 	ld	hl, #_livestock
+   8B7A E5            [11] 1494 	push	hl
+   8B7B CD 45 61      [17] 1495 	call	_cpct_drawSprite
+                           1496 ;src/game/world.c:283: break;
+   8B7E C3 66 8C      [10] 1497 	jp	00128$
+                           1498 ;src/game/world.c:284: case SSNS:
+   8B81                    1499 00111$:
+                           1500 ;src/game/world.c:285: cpct_drawSprite(station_small_ns, p_video, TILESIZE_W, TILESIZE_H);
+   8B81 21 04 10      [10] 1501 	ld	hl, #0x1004
+   8B84 E5            [11] 1502 	push	hl
+   8B85 C5            [11] 1503 	push	bc
+   8B86 21 54 4A      [10] 1504 	ld	hl, #_station_small_ns
+   8B89 E5            [11] 1505 	push	hl
+   8B8A CD 45 61      [17] 1506 	call	_cpct_drawSprite
+                           1507 ;src/game/world.c:286: break;
+   8B8D C3 66 8C      [10] 1508 	jp	00128$
+                           1509 ;src/game/world.c:287: case SSEW:
+   8B90                    1510 00112$:
+                           1511 ;src/game/world.c:288: cpct_drawSprite(station_small_ew, p_video, TILESIZE_W, TILESIZE_H);
+   8B90 21 04 10      [10] 1512 	ld	hl, #0x1004
+   8B93 E5            [11] 1513 	push	hl
+   8B94 C5            [11] 1514 	push	bc
+   8B95 21 94 4A      [10] 1515 	ld	hl, #_station_small_ew
+   8B98 E5            [11] 1516 	push	hl
+   8B99 CD 45 61      [17] 1517 	call	_cpct_drawSprite
+                           1518 ;src/game/world.c:289: break;
+   8B9C C3 66 8C      [10] 1519 	jp	00128$
+                           1520 ;src/game/world.c:290: case SMNS:
+   8B9F                    1521 00113$:
+                           1522 ;src/game/world.c:291: cpct_drawSprite(station_medium_ns, p_video, TILESIZE_W, TILESIZE_H);
+   8B9F 21 04 10      [10] 1523 	ld	hl, #0x1004
+   8BA2 E5            [11] 1524 	push	hl
+   8BA3 C5            [11] 1525 	push	bc
+   8BA4 21 D4 4A      [10] 1526 	ld	hl, #_station_medium_ns
+   8BA7 E5            [11] 1527 	push	hl
+   8BA8 CD 45 61      [17] 1528 	call	_cpct_drawSprite
+                           1529 ;src/game/world.c:292: break;
+   8BAB C3 66 8C      [10] 1530 	jp	00128$
+                           1531 ;src/game/world.c:293: case SMEW:
+   8BAE                    1532 00114$:
+                           1533 ;src/game/world.c:294: cpct_drawSprite(station_medium_ew, p_video, TILESIZE_W, TILESIZE_H);
+   8BAE 21 04 10      [10] 1534 	ld	hl, #0x1004
+   8BB1 E5            [11] 1535 	push	hl
+   8BB2 C5            [11] 1536 	push	bc
+   8BB3 21 14 4B      [10] 1537 	ld	hl, #_station_medium_ew
+   8BB6 E5            [11] 1538 	push	hl
+   8BB7 CD 45 61      [17] 1539 	call	_cpct_drawSprite
+                           1540 ;src/game/world.c:295: break;
+   8BBA C3 66 8C      [10] 1541 	jp	00128$
+                           1542 ;src/game/world.c:296: case SLNS:
+   8BBD                    1543 00115$:
+                           1544 ;src/game/world.c:297: cpct_drawSprite(station_large_ns, p_video, TILESIZE_W, TILESIZE_H);
+   8BBD 21 04 10      [10] 1545 	ld	hl, #0x1004
+   8BC0 E5            [11] 1546 	push	hl
+   8BC1 C5            [11] 1547 	push	bc
+   8BC2 21 54 4B      [10] 1548 	ld	hl, #_station_large_ns
+   8BC5 E5            [11] 1549 	push	hl
+   8BC6 CD 45 61      [17] 1550 	call	_cpct_drawSprite
+                           1551 ;src/game/world.c:298: break;
+   8BC9 C3 66 8C      [10] 1552 	jp	00128$
+                           1553 ;src/game/world.c:299: case SLEW:
+   8BCC                    1554 00116$:
+                           1555 ;src/game/world.c:300: cpct_drawSprite(station_large_ew, p_video, TILESIZE_W, TILESIZE_H);
+   8BCC 21 04 10      [10] 1556 	ld	hl, #0x1004
+   8BCF E5            [11] 1557 	push	hl
+   8BD0 C5            [11] 1558 	push	bc
+   8BD1 21 94 4B      [10] 1559 	ld	hl, #_station_large_ew
+   8BD4 E5            [11] 1560 	push	hl
+   8BD5 CD 45 61      [17] 1561 	call	_cpct_drawSprite
+                           1562 ;src/game/world.c:301: break;
+   8BD8 C3 66 8C      [10] 1563 	jp	00128$
+                           1564 ;src/game/world.c:302: case REW:
+   8BDB                    1565 00117$:
+                           1566 ;src/game/world.c:303: cpct_drawSprite(rail_ew, p_video, TILESIZE_W, TILESIZE_H);	
+   8BDB 21 04 10      [10] 1567 	ld	hl, #0x1004
+   8BDE E5            [11] 1568 	push	hl
+   8BDF C5            [11] 1569 	push	bc
+   8BE0 21 D4 4B      [10] 1570 	ld	hl, #_rail_ew
+   8BE3 E5            [11] 1571 	push	hl
+   8BE4 CD 45 61      [17] 1572 	call	_cpct_drawSprite
+                           1573 ;src/game/world.c:304: break;
+   8BE7 C3 66 8C      [10] 1574 	jp	00128$
+                           1575 ;src/game/world.c:305: case RNS:
+   8BEA                    1576 00118$:
+                           1577 ;src/game/world.c:306: cpct_drawSprite(rail_ns, p_video, TILESIZE_W, TILESIZE_H);	
+   8BEA 21 04 10      [10] 1578 	ld	hl, #0x1004
+   8BED E5            [11] 1579 	push	hl
+   8BEE C5            [11] 1580 	push	bc
+   8BEF 21 14 4C      [10] 1581 	ld	hl, #_rail_ns
+   8BF2 E5            [11] 1582 	push	hl
+   8BF3 CD 45 61      [17] 1583 	call	_cpct_drawSprite
+                           1584 ;src/game/world.c:307: break;
+   8BF6 18 6E         [12] 1585 	jr	00128$
+                           1586 ;src/game/world.c:308: case REN:
+   8BF8                    1587 00119$:
+                           1588 ;src/game/world.c:309: cpct_drawSprite(rail_en, p_video, TILESIZE_W, TILESIZE_H);	
+   8BF8 21 04 10      [10] 1589 	ld	hl, #0x1004
+   8BFB E5            [11] 1590 	push	hl
+   8BFC C5            [11] 1591 	push	bc
+   8BFD 21 54 4C      [10] 1592 	ld	hl, #_rail_en
+   8C00 E5            [11] 1593 	push	hl
+   8C01 CD 45 61      [17] 1594 	call	_cpct_drawSprite
+                           1595 ;src/game/world.c:310: break;
+   8C04 18 60         [12] 1596 	jr	00128$
+                           1597 ;src/game/world.c:311: case RES:
+   8C06                    1598 00120$:
+                           1599 ;src/game/world.c:312: cpct_drawSprite(rail_es, p_video, TILESIZE_W, TILESIZE_H);	
+   8C06 21 04 10      [10] 1600 	ld	hl, #0x1004
+   8C09 E5            [11] 1601 	push	hl
+   8C0A C5            [11] 1602 	push	bc
+   8C0B 21 94 4C      [10] 1603 	ld	hl, #_rail_es
+   8C0E E5            [11] 1604 	push	hl
+   8C0F CD 45 61      [17] 1605 	call	_cpct_drawSprite
+                           1606 ;src/game/world.c:313: break;
+   8C12 18 52         [12] 1607 	jr	00128$
+                           1608 ;src/game/world.c:314: case RWN:
+   8C14                    1609 00121$:
+                           1610 ;src/game/world.c:315: cpct_drawSprite(rail_wn, p_video, TILESIZE_W, TILESIZE_H);	
+   8C14 21 04 10      [10] 1611 	ld	hl, #0x1004
+   8C17 E5            [11] 1612 	push	hl
+   8C18 C5            [11] 1613 	push	bc
+   8C19 21 D4 4C      [10] 1614 	ld	hl, #_rail_wn
+   8C1C E5            [11] 1615 	push	hl
+   8C1D CD 45 61      [17] 1616 	call	_cpct_drawSprite
+                           1617 ;src/game/world.c:316: break;
+   8C20 18 44         [12] 1618 	jr	00128$
+                           1619 ;src/game/world.c:317: case RWS:
+   8C22                    1620 00122$:
+                           1621 ;src/game/world.c:318: cpct_drawSprite(rail_ws, p_video, TILESIZE_W, TILESIZE_H);	
+   8C22 21 04 10      [10] 1622 	ld	hl, #0x1004
+   8C25 E5            [11] 1623 	push	hl
+   8C26 C5            [11] 1624 	push	bc
+   8C27 21 14 4D      [10] 1625 	ld	hl, #_rail_ws
+   8C2A E5            [11] 1626 	push	hl
+   8C2B CD 45 61      [17] 1627 	call	_cpct_drawSprite
+                           1628 ;src/game/world.c:319: break;
+   8C2E 18 36         [12] 1629 	jr	00128$
+                           1630 ;src/game/world.c:320: case REWN:
+   8C30                    1631 00123$:
+                           1632 ;src/game/world.c:321: cpct_drawSprite(rail_ew_n, p_video, TILESIZE_W, TILESIZE_H);	
+   8C30 21 04 10      [10] 1633 	ld	hl, #0x1004
+   8C33 E5            [11] 1634 	push	hl
+   8C34 C5            [11] 1635 	push	bc
+   8C35 21 54 4D      [10] 1636 	ld	hl, #_rail_ew_n
+   8C38 E5            [11] 1637 	push	hl
+   8C39 CD 45 61      [17] 1638 	call	_cpct_drawSprite
+                           1639 ;src/game/world.c:322: break;
+   8C3C 18 28         [12] 1640 	jr	00128$
+                           1641 ;src/game/world.c:323: case REWS:
+   8C3E                    1642 00124$:
+                           1643 ;src/game/world.c:324: cpct_drawSprite(rail_ew_s, p_video, TILESIZE_W, TILESIZE_H);	
+   8C3E 21 04 10      [10] 1644 	ld	hl, #0x1004
+   8C41 E5            [11] 1645 	push	hl
+   8C42 C5            [11] 1646 	push	bc
+   8C43 21 94 4D      [10] 1647 	ld	hl, #_rail_ew_s
+   8C46 E5            [11] 1648 	push	hl
+   8C47 CD 45 61      [17] 1649 	call	_cpct_drawSprite
+                           1650 ;src/game/world.c:325: break;
+   8C4A 18 1A         [12] 1651 	jr	00128$
+                           1652 ;src/game/world.c:326: case RNSE:
+   8C4C                    1653 00125$:
+                           1654 ;src/game/world.c:327: cpct_drawSprite(rail_ns_e, p_video, TILESIZE_W, TILESIZE_H);	
+   8C4C 21 04 10      [10] 1655 	ld	hl, #0x1004
+   8C4F E5            [11] 1656 	push	hl
+   8C50 C5            [11] 1657 	push	bc
+   8C51 21 14 4E      [10] 1658 	ld	hl, #_rail_ns_e
+   8C54 E5            [11] 1659 	push	hl
+   8C55 CD 45 61      [17] 1660 	call	_cpct_drawSprite
+                           1661 ;src/game/world.c:328: break;
+   8C58 18 0C         [12] 1662 	jr	00128$
+                           1663 ;src/game/world.c:329: case RNSW:
+   8C5A                    1664 00126$:
+                           1665 ;src/game/world.c:330: cpct_drawSprite(rail_ns_w, p_video, TILESIZE_W, TILESIZE_H);
+   8C5A 21 04 10      [10] 1666 	ld	hl, #0x1004
+   8C5D E5            [11] 1667 	push	hl
+   8C5E C5            [11] 1668 	push	bc
+   8C5F 21 D4 4D      [10] 1669 	ld	hl, #_rail_ns_w
+   8C62 E5            [11] 1670 	push	hl
+   8C63 CD 45 61      [17] 1671 	call	_cpct_drawSprite
+                           1672 ;src/game/world.c:332: }
+   8C66                    1673 00128$:
+   8C66 DD E1         [14] 1674 	pop	ix
+   8C68 C9            [10] 1675 	ret
+                           1676 ;src/game/world.c:335: void drawScrolls(u8 x, u8 y)
+                           1677 ;	---------------------------------
+                           1678 ; Function drawScrolls
+                           1679 ; ---------------------------------
+   8C69                    1680 _drawScrolls::
+   8C69 DD E5         [15] 1681 	push	ix
+   8C6B DD 21 00 00   [14] 1682 	ld	ix,#0
+   8C6F DD 39         [15] 1683 	add	ix,sp
+   8C71 F5            [11] 1684 	push	af
+                           1685 ;src/game/world.c:337: int scrollx = x* (WIDTH-TILESIZE_W)*4/(WIDTH-NBTILE_W);
+   8C72 DD 4E 04      [19] 1686 	ld	c, 4 (ix)
+   8C75 06 00         [ 7] 1687 	ld	b, #0x00
+   8C77 69            [ 4] 1688 	ld	l, c
+   8C78 60            [ 4] 1689 	ld	h, b
+   8C79 29            [11] 1690 	add	hl, hl
+   8C7A 29            [11] 1691 	add	hl, hl
+   8C7B 29            [11] 1692 	add	hl, hl
+   8C7C 09            [11] 1693 	add	hl, bc
+   8C7D 29            [11] 1694 	add	hl, hl
+   8C7E 09            [11] 1695 	add	hl, bc
+   8C7F 29            [11] 1696 	add	hl, hl
+   8C80 29            [11] 1697 	add	hl, hl
+   8C81 29            [11] 1698 	add	hl, hl
+   8C82 29            [11] 1699 	add	hl, hl
+   8C83 01 3C 00      [10] 1700 	ld	bc, #0x003c
+   8C86 C5            [11] 1701 	push	bc
+   8C87 E5            [11] 1702 	push	hl
+   8C88 CD 78 67      [17] 1703 	call	__divsint
+   8C8B F1            [10] 1704 	pop	af
+   8C8C F1            [10] 1705 	pop	af
+   8C8D 4D            [ 4] 1706 	ld	c, l
+   8C8E 44            [ 4] 1707 	ld	b, h
+                           1708 ;src/game/world.c:338: int scrolly = y* (HEIGHT*TILESIZE_W-TILESIZE_H)/(HEIGHT-NBTILE_H);
+   8C8F DD 5E 05      [19] 1709 	ld	e,5 (ix)
+   8C92 16 00         [ 7] 1710 	ld	d,#0x00
+   8C94 6B            [ 4] 1711 	ld	l, e
+   8C95 62            [ 4] 1712 	ld	h, d
+   8C96 29            [11] 1713 	add	hl, hl
+   8C97 29            [11] 1714 	add	hl, hl
+   8C98 19            [11] 1715 	add	hl, de
+   8C99 29            [11] 1716 	add	hl, hl
+   8C9A 19            [11] 1717 	add	hl, de
+   8C9B 29            [11] 1718 	add	hl, hl
+   8C9C 29            [11] 1719 	add	hl, hl
+   8C9D 29            [11] 1720 	add	hl, hl
+   8C9E 29            [11] 1721 	add	hl, hl
+   8C9F C5            [11] 1722 	push	bc
+   8CA0 11 24 00      [10] 1723 	ld	de, #0x0024
+   8CA3 D5            [11] 1724 	push	de
+   8CA4 E5            [11] 1725 	push	hl
+   8CA5 CD 78 67      [17] 1726 	call	__divsint
+   8CA8 F1            [10] 1727 	pop	af
+   8CA9 F1            [10] 1728 	pop	af
+   8CAA C1            [10] 1729 	pop	bc
+   8CAB 33            [ 6] 1730 	inc	sp
+   8CAC 33            [ 6] 1731 	inc	sp
+   8CAD E5            [11] 1732 	push	hl
+                           1733 ;src/game/world.c:340: setPixel(scrollx, 1, 0);
+   8CAE C5            [11] 1734 	push	bc
+   8CAF 21 01 00      [10] 1735 	ld	hl, #0x0001
+   8CB2 E5            [11] 1736 	push	hl
+   8CB3 C5            [11] 1737 	push	bc
+   8CB4 CD 7F 8E      [17] 1738 	call	_setPixel
+   8CB7 F1            [10] 1739 	pop	af
+   8CB8 F1            [10] 1740 	pop	af
+   8CB9 C1            [10] 1741 	pop	bc
+                           1742 ;src/game/world.c:341: setPixel(scrollx+1, 0, 0);
+   8CBA 59            [ 4] 1743 	ld	e, c
+   8CBB 50            [ 4] 1744 	ld	d, b
+   8CBC 13            [ 6] 1745 	inc	de
+   8CBD C5            [11] 1746 	push	bc
+   8CBE D5            [11] 1747 	push	de
+   8CBF 21 00 00      [10] 1748 	ld	hl, #0x0000
+   8CC2 E5            [11] 1749 	push	hl
+   8CC3 D5            [11] 1750 	push	de
+   8CC4 CD 7F 8E      [17] 1751 	call	_setPixel
+   8CC7 F1            [10] 1752 	pop	af
+   8CC8 F1            [10] 1753 	pop	af
+   8CC9 D1            [10] 1754 	pop	de
+   8CCA D5            [11] 1755 	push	de
+   8CCB 21 01 00      [10] 1756 	ld	hl, #0x0001
+   8CCE E5            [11] 1757 	push	hl
+   8CCF D5            [11] 1758 	push	de
+   8CD0 CD 7F 8E      [17] 1759 	call	_setPixel
+   8CD3 F1            [10] 1760 	pop	af
+   8CD4 F1            [10] 1761 	pop	af
+   8CD5 D1            [10] 1762 	pop	de
+   8CD6 21 02 00      [10] 1763 	ld	hl, #0x0002
+   8CD9 E5            [11] 1764 	push	hl
+   8CDA D5            [11] 1765 	push	de
+   8CDB CD 7F 8E      [17] 1766 	call	_setPixel
+   8CDE F1            [10] 1767 	pop	af
+   8CDF F1            [10] 1768 	pop	af
+   8CE0 C1            [10] 1769 	pop	bc
+                           1770 ;src/game/world.c:345: setPixel(scrollx+15, 1, 0);
+   8CE1 21 0F 00      [10] 1771 	ld	hl, #0x000f
+   8CE4 09            [11] 1772 	add	hl, bc
+   8CE5 C5            [11] 1773 	push	bc
+   8CE6 11 01 00      [10] 1774 	ld	de, #0x0001
+   8CE9 D5            [11] 1775 	push	de
+   8CEA E5            [11] 1776 	push	hl
+   8CEB CD 7F 8E      [17] 1777 	call	_setPixel
+   8CEE F1            [10] 1778 	pop	af
+   8CEF F1            [10] 1779 	pop	af
+   8CF0 C1            [10] 1780 	pop	bc
+                           1781 ;src/game/world.c:346: setPixel(scrollx+14, 0, 0);
+   8CF1 21 0E 00      [10] 1782 	ld	hl, #0x000e
+   8CF4 09            [11] 1783 	add	hl, bc
+   8CF5 E5            [11] 1784 	push	hl
+   8CF6 01 00 00      [10] 1785 	ld	bc, #0x0000
+   8CF9 C5            [11] 1786 	push	bc
+   8CFA E5            [11] 1787 	push	hl
+   8CFB CD 7F 8E      [17] 1788 	call	_setPixel
+   8CFE F1            [10] 1789 	pop	af
+   8CFF F1            [10] 1790 	pop	af
+   8D00 E1            [10] 1791 	pop	hl
+                           1792 ;src/game/world.c:347: setPixel(scrollx+14, 1, 0);
+   8D01 E5            [11] 1793 	push	hl
+   8D02 01 01 00      [10] 1794 	ld	bc, #0x0001
+   8D05 C5            [11] 1795 	push	bc
+   8D06 E5            [11] 1796 	push	hl
+   8D07 CD 7F 8E      [17] 1797 	call	_setPixel
+   8D0A F1            [10] 1798 	pop	af
+   8D0B F1            [10] 1799 	pop	af
+   8D0C E1            [10] 1800 	pop	hl
+                           1801 ;src/game/world.c:348: setPixel(scrollx+14, 2, 0);
+   8D0D 01 02 00      [10] 1802 	ld	bc, #0x0002
+   8D10 C5            [11] 1803 	push	bc
+   8D11 E5            [11] 1804 	push	hl
+   8D12 CD 7F 8E      [17] 1805 	call	_setPixel
+   8D15 F1            [10] 1806 	pop	af
+   8D16 F1            [10] 1807 	pop	af
+                           1808 ;src/game/world.c:350: setPixel(1, scrolly, 0);
+   8D17 DD 46 FE      [19] 1809 	ld	b, -2 (ix)
+   8D1A AF            [ 4] 1810 	xor	a, a
+   8D1B F5            [11] 1811 	push	af
+   8D1C 33            [ 6] 1812 	inc	sp
+   8D1D C5            [11] 1813 	push	bc
+   8D1E 33            [ 6] 1814 	inc	sp
+   8D1F 21 01 00      [10] 1815 	ld	hl, #0x0001
+   8D22 E5            [11] 1816 	push	hl
+   8D23 CD 7F 8E      [17] 1817 	call	_setPixel
+   8D26 F1            [10] 1818 	pop	af
+   8D27 F1            [10] 1819 	pop	af
+                           1820 ;src/game/world.c:351: setPixel(0, scrolly+1, 0);
+   8D28 DD 4E FE      [19] 1821 	ld	c, -2 (ix)
+   8D2B 41            [ 4] 1822 	ld	b, c
+   8D2C 04            [ 4] 1823 	inc	b
+   8D2D C5            [11] 1824 	push	bc
+   8D2E AF            [ 4] 1825 	xor	a, a
+   8D2F F5            [11] 1826 	push	af
+   8D30 33            [ 6] 1827 	inc	sp
+   8D31 C5            [11] 1828 	push	bc
+   8D32 33            [ 6] 1829 	inc	sp
+   8D33 21 00 00      [10] 1830 	ld	hl, #0x0000
+   8D36 E5            [11] 1831 	push	hl
+   8D37 CD 7F 8E      [17] 1832 	call	_setPixel
+   8D3A F1            [10] 1833 	pop	af
+   8D3B F1            [10] 1834 	pop	af
+   8D3C C1            [10] 1835 	pop	bc
+                           1836 ;src/game/world.c:352: setPixel(1, scrolly+1, 0);
+   8D3D C5            [11] 1837 	push	bc
+   8D3E AF            [ 4] 1838 	xor	a, a
+   8D3F F5            [11] 1839 	push	af
+   8D40 33            [ 6] 1840 	inc	sp
+   8D41 C5            [11] 1841 	push	bc
+   8D42 33            [ 6] 1842 	inc	sp
+   8D43 21 01 00      [10] 1843 	ld	hl, #0x0001
+   8D46 E5            [11] 1844 	push	hl
+   8D47 CD 7F 8E      [17] 1845 	call	_setPixel
+   8D4A F1            [10] 1846 	pop	af
+   8D4B F1            [10] 1847 	pop	af
+   8D4C C1            [10] 1848 	pop	bc
+                           1849 ;src/game/world.c:353: setPixel(2, scrolly+1, 0);
+   8D4D C5            [11] 1850 	push	bc
+   8D4E AF            [ 4] 1851 	xor	a, a
+   8D4F F5            [11] 1852 	push	af
+   8D50 33            [ 6] 1853 	inc	sp
+   8D51 C5            [11] 1854 	push	bc
+   8D52 33            [ 6] 1855 	inc	sp
+   8D53 21 02 00      [10] 1856 	ld	hl, #0x0002
+   8D56 E5            [11] 1857 	push	hl
+   8D57 CD 7F 8E      [17] 1858 	call	_setPixel
+   8D5A F1            [10] 1859 	pop	af
+   8D5B F1            [10] 1860 	pop	af
+   8D5C C1            [10] 1861 	pop	bc
+                           1862 ;src/game/world.c:355: setPixel(1, scrolly+15, 0);
+   8D5D 79            [ 4] 1863 	ld	a, c
+   8D5E C6 0F         [ 7] 1864 	add	a, #0x0f
+   8D60 47            [ 4] 1865 	ld	b, a
+   8D61 C5            [11] 1866 	push	bc
+   8D62 AF            [ 4] 1867 	xor	a, a
+   8D63 F5            [11] 1868 	push	af
+   8D64 33            [ 6] 1869 	inc	sp
+   8D65 C5            [11] 1870 	push	bc
+   8D66 33            [ 6] 1871 	inc	sp
+   8D67 21 01 00      [10] 1872 	ld	hl, #0x0001
+   8D6A E5            [11] 1873 	push	hl
+   8D6B CD 7F 8E      [17] 1874 	call	_setPixel
+   8D6E F1            [10] 1875 	pop	af
+   8D6F F1            [10] 1876 	pop	af
+   8D70 C1            [10] 1877 	pop	bc
+                           1878 ;src/game/world.c:356: setPixel(0, scrolly+14, 0);
+   8D71 79            [ 4] 1879 	ld	a, c
+   8D72 C6 0E         [ 7] 1880 	add	a, #0x0e
+   8D74 47            [ 4] 1881 	ld	b, a
+   8D75 C5            [11] 1882 	push	bc
+   8D76 AF            [ 4] 1883 	xor	a, a
+   8D77 F5            [11] 1884 	push	af
+   8D78 33            [ 6] 1885 	inc	sp
+   8D79 C5            [11] 1886 	push	bc
+   8D7A 33            [ 6] 1887 	inc	sp
+   8D7B 21 00 00      [10] 1888 	ld	hl, #0x0000
+   8D7E E5            [11] 1889 	push	hl
+   8D7F CD 7F 8E      [17] 1890 	call	_setPixel
+   8D82 F1            [10] 1891 	pop	af
+   8D83 F1            [10] 1892 	pop	af
+   8D84 C1            [10] 1893 	pop	bc
+                           1894 ;src/game/world.c:357: setPixel(1, scrolly+14, 0);
+   8D85 C5            [11] 1895 	push	bc
+   8D86 AF            [ 4] 1896 	xor	a, a
+   8D87 F5            [11] 1897 	push	af
+   8D88 33            [ 6] 1898 	inc	sp
+   8D89 C5            [11] 1899 	push	bc
+   8D8A 33            [ 6] 1900 	inc	sp
+   8D8B 21 01 00      [10] 1901 	ld	hl, #0x0001
+   8D8E E5            [11] 1902 	push	hl
+   8D8F CD 7F 8E      [17] 1903 	call	_setPixel
+   8D92 F1            [10] 1904 	pop	af
+   8D93 F1            [10] 1905 	pop	af
+   8D94 C1            [10] 1906 	pop	bc
+                           1907 ;src/game/world.c:358: setPixel(2, scrolly+14, 0);
+   8D95 AF            [ 4] 1908 	xor	a, a
+   8D96 F5            [11] 1909 	push	af
+   8D97 33            [ 6] 1910 	inc	sp
+   8D98 C5            [11] 1911 	push	bc
+   8D99 33            [ 6] 1912 	inc	sp
+   8D9A 21 02 00      [10] 1913 	ld	hl, #0x0002
+   8D9D E5            [11] 1914 	push	hl
+   8D9E CD 7F 8E      [17] 1915 	call	_setPixel
+   8DA1 DD F9         [10] 1916 	ld	sp,ix
+   8DA3 DD E1         [14] 1917 	pop	ix
+   8DA5 C9            [10] 1918 	ret
+                           1919 ;src/game/world.c:375: void drawWorld(u8 x_, u8 y_)
+                           1920 ;	---------------------------------
+                           1921 ; Function drawWorld
+                           1922 ; ---------------------------------
+   8DA6                    1923 _drawWorld::
+                           1924 ;src/game/world.c:380: for(iy=0; iy<NBTILE_H;iy++)
+   8DA6 0E 00         [ 7] 1925 	ld	c, #0x00
+                           1926 ;src/game/world.c:382: for(ix=0; ix<NBTILE_W;ix++)
+   8DA8                    1927 00109$:
+   8DA8 06 00         [ 7] 1928 	ld	b, #0x00
+   8DAA                    1929 00103$:
+                           1930 ;src/game/world.c:384: drawTile(x_, y_, ix, iy);
+   8DAA C5            [11] 1931 	push	bc
+   8DAB 79            [ 4] 1932 	ld	a, c
+   8DAC F5            [11] 1933 	push	af
+   8DAD 33            [ 6] 1934 	inc	sp
+   8DAE C5            [11] 1935 	push	bc
+   8DAF 33            [ 6] 1936 	inc	sp
+   8DB0 21 07 00      [10] 1937 	ld	hl, #7+0
+   8DB3 39            [11] 1938 	add	hl, sp
+   8DB4 7E            [ 7] 1939 	ld	a, (hl)
+   8DB5 F5            [11] 1940 	push	af
+   8DB6 33            [ 6] 1941 	inc	sp
+   8DB7 21 07 00      [10] 1942 	ld	hl, #7+0
+   8DBA 39            [11] 1943 	add	hl, sp
+   8DBB 7E            [ 7] 1944 	ld	a, (hl)
+   8DBC F5            [11] 1945 	push	af
+   8DBD 33            [ 6] 1946 	inc	sp
+   8DBE CD 40 8A      [17] 1947 	call	_drawTile
+   8DC1 F1            [10] 1948 	pop	af
+   8DC2 F1            [10] 1949 	pop	af
+   8DC3 C1            [10] 1950 	pop	bc
+                           1951 ;src/game/world.c:382: for(ix=0; ix<NBTILE_W;ix++)
+   8DC4 04            [ 4] 1952 	inc	b
+   8DC5 78            [ 4] 1953 	ld	a, b
+   8DC6 D6 14         [ 7] 1954 	sub	a, #0x14
+   8DC8 38 E0         [12] 1955 	jr	C,00103$
+                           1956 ;src/game/world.c:380: for(iy=0; iy<NBTILE_H;iy++)
+   8DCA 0C            [ 4] 1957 	inc	c
+   8DCB 79            [ 4] 1958 	ld	a, c
+   8DCC D6 0C         [ 7] 1959 	sub	a, #0x0c
+   8DCE 38 D8         [12] 1960 	jr	C,00109$
+                           1961 ;src/game/world.c:388: drawScrolls(x_, y_);
+   8DD0 21 03 00      [10] 1962 	ld	hl, #3+0
+   8DD3 39            [11] 1963 	add	hl, sp
+   8DD4 7E            [ 7] 1964 	ld	a, (hl)
+   8DD5 F5            [11] 1965 	push	af
+   8DD6 33            [ 6] 1966 	inc	sp
+   8DD7 21 03 00      [10] 1967 	ld	hl, #3+0
+   8DDA 39            [11] 1968 	add	hl, sp
+   8DDB 7E            [ 7] 1969 	ld	a, (hl)
+   8DDC F5            [11] 1970 	push	af
+   8DDD 33            [ 6] 1971 	inc	sp
+   8DDE CD 69 8C      [17] 1972 	call	_drawScrolls
+   8DE1 F1            [10] 1973 	pop	af
+   8DE2 C9            [10] 1974 	ret
+                           1975 ;src/game/world.c:394: void setTrainHeading(u8 i)
+                           1976 ;	---------------------------------
+                           1977 ; Function setTrainHeading
+                           1978 ; ---------------------------------
+   8DE3                    1979 _setTrainHeading::
+   8DE3 DD E5         [15] 1980 	push	ix
+   8DE5 DD 21 00 00   [14] 1981 	ld	ix,#0
+   8DE9 DD 39         [15] 1982 	add	ix,sp
+                           1983 ;src/game/world.c:398: switch(p_world[trainList[i].posY*WIDTH+trainList[i].posX])
+   8DEB DD 6E 04      [19] 1984 	ld	l, 4 (ix)
+   8DEE 26 00         [ 7] 1985 	ld	h, #0x00
+   8DF0 29            [11] 1986 	add	hl, hl
+   8DF1 29            [11] 1987 	add	hl, hl
+   8DF2 29            [11] 1988 	add	hl, hl
+   8DF3 29            [11] 1989 	add	hl, hl
+   8DF4 4D            [ 4] 1990 	ld	c, l
+   8DF5 44            [ 4] 1991 	ld	b, h
+   8DF6 FD 21 1D 83   [14] 1992 	ld	iy, #_trainList
+   8DFA FD 7E 00      [19] 1993 	ld	a, 0 (iy)
+   8DFD 81            [ 4] 1994 	add	a, c
+   8DFE 5F            [ 4] 1995 	ld	e, a
+   8DFF FD 7E 01      [19] 1996 	ld	a, 1 (iy)
+   8E02 88            [ 4] 1997 	adc	a, b
+   8E03 57            [ 4] 1998 	ld	d, a
+   8E04 6B            [ 4] 1999 	ld	l, e
+   8E05 62            [ 4] 2000 	ld	h, d
+   8E06 01 05 00      [10] 2001 	ld	bc, #0x0005
+   8E09 09            [11] 2002 	add	hl, bc
+   8E0A 4E            [ 7] 2003 	ld	c, (hl)
+   8E0B 06 00         [ 7] 2004 	ld	b,#0x00
+   8E0D 69            [ 4] 2005 	ld	l, c
+   8E0E 60            [ 4] 2006 	ld	h, b
+   8E0F 29            [11] 2007 	add	hl, hl
+   8E10 29            [11] 2008 	add	hl, hl
+   8E11 09            [11] 2009 	add	hl, bc
+   8E12 29            [11] 2010 	add	hl, hl
+   8E13 29            [11] 2011 	add	hl, hl
+   8E14 29            [11] 2012 	add	hl, hl
+   8E15 29            [11] 2013 	add	hl, hl
+   8E16 4D            [ 4] 2014 	ld	c, l
+   8E17 44            [ 4] 2015 	ld	b, h
+   8E18 6B            [ 4] 2016 	ld	l, e
+   8E19 62            [ 4] 2017 	ld	h, d
+   8E1A 23            [ 6] 2018 	inc	hl
+   8E1B 23            [ 6] 2019 	inc	hl
+   8E1C 23            [ 6] 2020 	inc	hl
+   8E1D 23            [ 6] 2021 	inc	hl
+   8E1E 6E            [ 7] 2022 	ld	l, (hl)
+   8E1F 26 00         [ 7] 2023 	ld	h, #0x00
+   8E21 09            [11] 2024 	add	hl, bc
+   8E22 01 1D 74      [10] 2025 	ld	bc, #_p_world
+   8E25 09            [11] 2026 	add	hl, bc
+   8E26 4E            [ 7] 2027 	ld	c, (hl)
+                           2028 ;src/game/world.c:401: if(trainList[i].heading==1) trainList[i].heading=2;
+   8E27 21 06 00      [10] 2029 	ld	hl, #0x0006
+   8E2A 19            [11] 2030 	add	hl, de
+                           2031 ;src/game/world.c:398: switch(p_world[trainList[i].posY*WIDTH+trainList[i].posX])
+   8E2B 79            [ 4] 2032 	ld	a,c
+   8E2C FE 12         [ 7] 2033 	cp	a,#0x12
+   8E2E 28 0E         [12] 2034 	jr	Z,00101$
+   8E30 FE 13         [ 7] 2035 	cp	a,#0x13
+   8E32 28 1A         [12] 2036 	jr	Z,00107$
+   8E34 FE 14         [ 7] 2037 	cp	a,#0x14
+   8E36 28 26         [12] 2038 	jr	Z,00113$
+   8E38 D6 15         [ 7] 2039 	sub	a, #0x15
+   8E3A 28 32         [12] 2040 	jr	Z,00119$
+   8E3C 18 3E         [12] 2041 	jr	00126$
+                           2042 ;src/game/world.c:400: case REN:
+   8E3E                    2043 00101$:
+                           2044 ;src/game/world.c:401: if(trainList[i].heading==1) trainList[i].heading=2;
+   8E3E 7E            [ 7] 2045 	ld	a, (hl)
+   8E3F FE 01         [ 7] 2046 	cp	a, #0x01
+   8E41 20 04         [12] 2047 	jr	NZ,00105$
+   8E43 36 02         [10] 2048 	ld	(hl), #0x02
+   8E45 18 35         [12] 2049 	jr	00126$
+   8E47                    2050 00105$:
+                           2051 ;src/game/world.c:402: else if(trainList[i].heading==3) trainList[i].heading=0;
+   8E47 D6 03         [ 7] 2052 	sub	a,#0x03
+   8E49 20 31         [12] 2053 	jr	NZ,00126$
+   8E4B 77            [ 7] 2054 	ld	(hl),a
+                           2055 ;src/game/world.c:403: break;
+   8E4C 18 2E         [12] 2056 	jr	00126$
+                           2057 ;src/game/world.c:405: case RES:
+   8E4E                    2058 00107$:
+                           2059 ;src/game/world.c:406: if(trainList[i].heading==1) trainList[i].heading=3;
+   8E4E 7E            [ 7] 2060 	ld	a, (hl)
+   8E4F FE 01         [ 7] 2061 	cp	a, #0x01
+   8E51 20 04         [12] 2062 	jr	NZ,00111$
+   8E53 36 03         [10] 2063 	ld	(hl), #0x03
+   8E55 18 25         [12] 2064 	jr	00126$
+   8E57                    2065 00111$:
+                           2066 ;src/game/world.c:407: else if(trainList[i].heading==2) trainList[i].heading=0;
+   8E57 D6 02         [ 7] 2067 	sub	a,#0x02
+   8E59 20 21         [12] 2068 	jr	NZ,00126$
+   8E5B 77            [ 7] 2069 	ld	(hl),a
+                           2070 ;src/game/world.c:408: break;
+   8E5C 18 1E         [12] 2071 	jr	00126$
+                           2072 ;src/game/world.c:410: case RWN:
+   8E5E                    2073 00113$:
+                           2074 ;src/game/world.c:411: if(trainList[i].heading==0) trainList[i].heading=2;   
+   8E5E 7E            [ 7] 2075 	ld	a, (hl)
+   8E5F B7            [ 4] 2076 	or	a, a
+   8E60 20 04         [12] 2077 	jr	NZ,00117$
+   8E62 36 02         [10] 2078 	ld	(hl), #0x02
+   8E64 18 16         [12] 2079 	jr	00126$
+   8E66                    2080 00117$:
+                           2081 ;src/game/world.c:412: else if(trainList[i].heading==3) trainList[i].heading=1;
+   8E66 D6 03         [ 7] 2082 	sub	a, #0x03
+   8E68 20 12         [12] 2083 	jr	NZ,00126$
+   8E6A 36 01         [10] 2084 	ld	(hl), #0x01
+                           2085 ;src/game/world.c:413: break;
+   8E6C 18 0E         [12] 2086 	jr	00126$
+                           2087 ;src/game/world.c:415: case RWS:
+   8E6E                    2088 00119$:
+                           2089 ;src/game/world.c:416: if(trainList[i].heading==0) trainList[i].heading=3;
+   8E6E 7E            [ 7] 2090 	ld	a, (hl)
+   8E6F B7            [ 4] 2091 	or	a, a
+   8E70 20 04         [12] 2092 	jr	NZ,00123$
+   8E72 36 03         [10] 2093 	ld	(hl), #0x03
+   8E74 18 06         [12] 2094 	jr	00126$
+   8E76                    2095 00123$:
+                           2096 ;src/game/world.c:417: else if(trainList[i].heading==2) trainList[i].heading=1;
+   8E76 D6 02         [ 7] 2097 	sub	a, #0x02
+   8E78 20 02         [12] 2098 	jr	NZ,00126$
+   8E7A 36 01         [10] 2099 	ld	(hl), #0x01
+                           2100 ;src/game/world.c:419: }
+   8E7C                    2101 00126$:
+   8E7C DD E1         [14] 2102 	pop	ix
+   8E7E C9            [10] 2103 	ret
+                           2104 ;src/game/world.c:422: void setPixel(int nX, unsigned char nY, unsigned char nColor)
+                           2105 ;	---------------------------------
+                           2106 ; Function setPixel
+                           2107 ; ---------------------------------
+   8E7F                    2108 _setPixel::
+   8E7F DD E5         [15] 2109 	push	ix
+   8E81 DD 21 00 00   [14] 2110 	ld	ix,#0
+   8E85 DD 39         [15] 2111 	add	ix,sp
+   8E87 F5            [11] 2112 	push	af
+                           2113 ;src/game/world.c:427: int nPixel = nX % 4;
+   8E88 21 04 00      [10] 2114 	ld	hl, #0x0004
+   8E8B E5            [11] 2115 	push	hl
+   8E8C DD 6E 04      [19] 2116 	ld	l,4 (ix)
+   8E8F DD 66 05      [19] 2117 	ld	h,5 (ix)
+   8E92 E5            [11] 2118 	push	hl
+   8E93 CD 1A 67      [17] 2119 	call	__modsint
+   8E96 F1            [10] 2120 	pop	af
+   8E97 F1            [10] 2121 	pop	af
+   8E98 EB            [ 4] 2122 	ex	de,hl
+                           2123 ;src/game/world.c:428: unsigned char *pAddress = (unsigned char *)((unsigned int)(0xC000 + ((nY / 8) * 80) + ((nY % 8) * 2048) + (nX / 4)));
+   8E99 DD 7E 06      [19] 2124 	ld	a, 6 (ix)
+   8E9C 0F            [ 4] 2125 	rrca
+   8E9D 0F            [ 4] 2126 	rrca
+   8E9E 0F            [ 4] 2127 	rrca
+   8E9F E6 1F         [ 7] 2128 	and	a, #0x1f
+   8EA1 4F            [ 4] 2129 	ld	c,a
+   8EA2 06 00         [ 7] 2130 	ld	b,#0x00
+   8EA4 69            [ 4] 2131 	ld	l, c
+   8EA5 60            [ 4] 2132 	ld	h, b
+   8EA6 29            [11] 2133 	add	hl, hl
+   8EA7 29            [11] 2134 	add	hl, hl
+   8EA8 09            [11] 2135 	add	hl, bc
+   8EA9 29            [11] 2136 	add	hl, hl
+   8EAA 29            [11] 2137 	add	hl, hl
+   8EAB 29            [11] 2138 	add	hl, hl
+   8EAC 29            [11] 2139 	add	hl, hl
+   8EAD 01 00 C0      [10] 2140 	ld	bc, #0xc000
+   8EB0 09            [11] 2141 	add	hl, bc
+   8EB1 DD 7E 06      [19] 2142 	ld	a, 6 (ix)
+   8EB4 E6 07         [ 7] 2143 	and	a, #0x07
+   8EB6 07            [ 4] 2144 	rlca
+   8EB7 07            [ 4] 2145 	rlca
+   8EB8 07            [ 4] 2146 	rlca
+   8EB9 E6 F8         [ 7] 2147 	and	a, #0xf8
+   8EBB 47            [ 4] 2148 	ld	b, a
+   8EBC 0E 00         [ 7] 2149 	ld	c, #0x00
+   8EBE 09            [11] 2150 	add	hl, bc
+   8EBF DD 4E 04      [19] 2151 	ld	c,4 (ix)
+   8EC2 DD 46 05      [19] 2152 	ld	b,5 (ix)
+   8EC5 CB 78         [ 8] 2153 	bit	7, b
+   8EC7 28 03         [12] 2154 	jr	Z,00128$
+   8EC9 03            [ 6] 2155 	inc	bc
+   8ECA 03            [ 6] 2156 	inc	bc
+   8ECB 03            [ 6] 2157 	inc	bc
+   8ECC                    2158 00128$:
+   8ECC CB 28         [ 8] 2159 	sra	b
+   8ECE CB 19         [ 8] 2160 	rr	c
+   8ED0 CB 28         [ 8] 2161 	sra	b
+   8ED2 CB 19         [ 8] 2162 	rr	c
+   8ED4 09            [11] 2163 	add	hl, bc
+                           2164 ;src/game/world.c:432: *pAddress &= 119;
+   8ED5 4E            [ 7] 2165 	ld	c, (hl)
+                           2166 ;src/game/world.c:434: if(nColor & 1)
+   8ED6 DD 7E 07      [19] 2167 	ld	a, 7 (ix)
+   8ED9 E6 01         [ 7] 2168 	and	a, #0x01
+   8EDB DD 77 FE      [19] 2169 	ld	-2 (ix), a
+                           2170 ;src/game/world.c:436: if(nColor & 2)
+   8EDE DD 7E 07      [19] 2171 	ld	a, 7 (ix)
+   8EE1 E6 02         [ 7] 2172 	and	a, #0x02
+   8EE3 DD 77 FF      [19] 2173 	ld	-1 (ix), a
+                           2174 ;src/game/world.c:430: if(nPixel == 0)
+   8EE6 7A            [ 4] 2175 	ld	a, d
+   8EE7 B3            [ 4] 2176 	or	a,e
+   8EE8 20 18         [12] 2177 	jr	NZ,00124$
+                           2178 ;src/game/world.c:432: *pAddress &= 119;
+   8EEA 79            [ 4] 2179 	ld	a, c
+   8EEB E6 77         [ 7] 2180 	and	a, #0x77
+   8EED 77            [ 7] 2181 	ld	(hl), a
+                           2182 ;src/game/world.c:434: if(nColor & 1)
+   8EEE DD 7E FE      [19] 2183 	ld	a, -2 (ix)
+   8EF1 B7            [ 4] 2184 	or	a, a
+   8EF2 28 03         [12] 2185 	jr	Z,00102$
+                           2186 ;src/game/world.c:435: *pAddress |= 128;
+   8EF4 CB FE         [15] 2187 	set	7, (hl)
+   8EF6 7E            [ 7] 2188 	ld	a, (hl)
+   8EF7                    2189 00102$:
+                           2190 ;src/game/world.c:436: if(nColor & 2)
+   8EF7 DD 7E FF      [19] 2191 	ld	a, -1 (ix)
+   8EFA B7            [ 4] 2192 	or	a, a
+   8EFB 28 56         [12] 2193 	jr	Z,00126$
+                           2194 ;src/game/world.c:437: *pAddress |= 8;
+   8EFD CB DE         [15] 2195 	set	3, (hl)
+   8EFF 7E            [ 7] 2196 	ld	a, (hl)
+   8F00 18 51         [12] 2197 	jr	00126$
+   8F02                    2198 00124$:
+                           2199 ;src/game/world.c:439: else if(nPixel == 1)
+   8F02 7B            [ 4] 2200 	ld	a, e
+   8F03 3D            [ 4] 2201 	dec	a
+   8F04 B2            [ 4] 2202 	or	a, d
+   8F05 20 18         [12] 2203 	jr	NZ,00121$
+                           2204 ;src/game/world.c:441: *pAddress &= 187;
+   8F07 79            [ 4] 2205 	ld	a, c
+   8F08 E6 BB         [ 7] 2206 	and	a, #0xbb
+   8F0A 77            [ 7] 2207 	ld	(hl), a
+                           2208 ;src/game/world.c:443: if(nColor & 1)
+   8F0B DD 7E FE      [19] 2209 	ld	a, -2 (ix)
+   8F0E B7            [ 4] 2210 	or	a, a
+   8F0F 28 03         [12] 2211 	jr	Z,00106$
+                           2212 ;src/game/world.c:444: *pAddress |= 64;
+   8F11 CB F6         [15] 2213 	set	6, (hl)
+   8F13 7E            [ 7] 2214 	ld	a, (hl)
+   8F14                    2215 00106$:
+                           2216 ;src/game/world.c:445: if(nColor & 2)
+   8F14 DD 7E FF      [19] 2217 	ld	a, -1 (ix)
+   8F17 B7            [ 4] 2218 	or	a, a
+   8F18 28 39         [12] 2219 	jr	Z,00126$
+                           2220 ;src/game/world.c:446: *pAddress |= 4;
+   8F1A CB D6         [15] 2221 	set	2, (hl)
+   8F1C 7E            [ 7] 2222 	ld	a, (hl)
+   8F1D 18 34         [12] 2223 	jr	00126$
+   8F1F                    2224 00121$:
+                           2225 ;src/game/world.c:448: else if(nPixel == 2)
+   8F1F 7B            [ 4] 2226 	ld	a, e
+   8F20 D6 02         [ 7] 2227 	sub	a, #0x02
+   8F22 B2            [ 4] 2228 	or	a, d
+   8F23 20 18         [12] 2229 	jr	NZ,00118$
+                           2230 ;src/game/world.c:450: *pAddress &= 221;
+   8F25 79            [ 4] 2231 	ld	a, c
+   8F26 E6 DD         [ 7] 2232 	and	a, #0xdd
+   8F28 77            [ 7] 2233 	ld	(hl), a
+                           2234 ;src/game/world.c:452: if(nColor & 1)
+   8F29 DD 7E FE      [19] 2235 	ld	a, -2 (ix)
+   8F2C B7            [ 4] 2236 	or	a, a
+   8F2D 28 03         [12] 2237 	jr	Z,00110$
+                           2238 ;src/game/world.c:453: *pAddress |= 32;
+   8F2F CB EE         [15] 2239 	set	5, (hl)
+   8F31 7E            [ 7] 2240 	ld	a, (hl)
+   8F32                    2241 00110$:
+                           2242 ;src/game/world.c:454: if(nColor & 2)
+   8F32 DD 7E FF      [19] 2243 	ld	a, -1 (ix)
+   8F35 B7            [ 4] 2244 	or	a, a
+   8F36 28 1B         [12] 2245 	jr	Z,00126$
+                           2246 ;src/game/world.c:455: *pAddress |= 2;
+   8F38 CB CE         [15] 2247 	set	1, (hl)
+   8F3A 7E            [ 7] 2248 	ld	a, (hl)
+   8F3B 18 16         [12] 2249 	jr	00126$
+   8F3D                    2250 00118$:
+                           2251 ;src/game/world.c:459: *pAddress &= 238;
+   8F3D 79            [ 4] 2252 	ld	a, c
+   8F3E E6 EE         [ 7] 2253 	and	a, #0xee
+   8F40 77            [ 7] 2254 	ld	(hl), a
+                           2255 ;src/game/world.c:461: if(nColor & 1)
+   8F41 DD 7E FE      [19] 2256 	ld	a, -2 (ix)
+   8F44 B7            [ 4] 2257 	or	a, a
+   8F45 28 03         [12] 2258 	jr	Z,00114$
+                           2259 ;src/game/world.c:462: *pAddress |= 16;
+   8F47 CB E6         [15] 2260 	set	4, (hl)
+   8F49 7E            [ 7] 2261 	ld	a, (hl)
+   8F4A                    2262 00114$:
+                           2263 ;src/game/world.c:463: if(nColor & 2)
+   8F4A DD 7E FF      [19] 2264 	ld	a, -1 (ix)
+   8F4D B7            [ 4] 2265 	or	a, a
+   8F4E 28 03         [12] 2266 	jr	Z,00126$
+                           2267 ;src/game/world.c:464: *pAddress |= 1;
+   8F50 CB C6         [15] 2268 	set	0, (hl)
+   8F52 7E            [ 7] 2269 	ld	a, (hl)
+   8F53                    2270 00126$:
+   8F53 DD F9         [10] 2271 	ld	sp, ix
+   8F55 DD E1         [14] 2272 	pop	ix
+   8F57 C9            [10] 2273 	ret
+                           2274 ;src/game/world.c:468: u8 isPixelBlack(int nX, unsigned char nY)
+                           2275 ;	---------------------------------
+                           2276 ; Function isPixelBlack
+                           2277 ; ---------------------------------
+   8F58                    2278 _isPixelBlack::
+   8F58 DD E5         [15] 2279 	push	ix
+   8F5A DD 21 00 00   [14] 2280 	ld	ix,#0
+   8F5E DD 39         [15] 2281 	add	ix,sp
+                           2282 ;src/game/world.c:471: int nPixel = nX % 4;
+   8F60 21 04 00      [10] 2283 	ld	hl, #0x0004
+   8F63 E5            [11] 2284 	push	hl
+   8F64 DD 6E 04      [19] 2285 	ld	l,4 (ix)
+   8F67 DD 66 05      [19] 2286 	ld	h,5 (ix)
+   8F6A E5            [11] 2287 	push	hl
+   8F6B CD 1A 67      [17] 2288 	call	__modsint
+   8F6E F1            [10] 2289 	pop	af
+   8F6F F1            [10] 2290 	pop	af
+   8F70 4D            [ 4] 2291 	ld	c, l
+   8F71 44            [ 4] 2292 	ld	b, h
+                           2293 ;src/game/world.c:474: unsigned char *pAddress = (unsigned char *)((unsigned int)(0xC000 + ((nY / 8) * 80) + ((nY % 8) * 2048) + (nX / 4)));
+   8F72 DD 7E 06      [19] 2294 	ld	a, 6 (ix)
+   8F75 0F            [ 4] 2295 	rrca
+   8F76 0F            [ 4] 2296 	rrca
+   8F77 0F            [ 4] 2297 	rrca
+   8F78 E6 1F         [ 7] 2298 	and	a, #0x1f
+   8F7A 5F            [ 4] 2299 	ld	e,a
+   8F7B 16 00         [ 7] 2300 	ld	d,#0x00
+   8F7D 6B            [ 4] 2301 	ld	l, e
+   8F7E 62            [ 4] 2302 	ld	h, d
+   8F7F 29            [11] 2303 	add	hl, hl
+   8F80 29            [11] 2304 	add	hl, hl
+   8F81 19            [11] 2305 	add	hl, de
+   8F82 29            [11] 2306 	add	hl, hl
+   8F83 29            [11] 2307 	add	hl, hl
+   8F84 29            [11] 2308 	add	hl, hl
+   8F85 29            [11] 2309 	add	hl, hl
+   8F86 11 00 C0      [10] 2310 	ld	de, #0xc000
+   8F89 19            [11] 2311 	add	hl, de
+   8F8A DD 7E 06      [19] 2312 	ld	a, 6 (ix)
+   8F8D E6 07         [ 7] 2313 	and	a, #0x07
+   8F8F 07            [ 4] 2314 	rlca
+   8F90 07            [ 4] 2315 	rlca
+   8F91 07            [ 4] 2316 	rlca
+   8F92 E6 F8         [ 7] 2317 	and	a, #0xf8
+   8F94 57            [ 4] 2318 	ld	d, a
+   8F95 1E 00         [ 7] 2319 	ld	e, #0x00
+   8F97 19            [11] 2320 	add	hl, de
+   8F98 DD 5E 04      [19] 2321 	ld	e,4 (ix)
+   8F9B DD 56 05      [19] 2322 	ld	d,5 (ix)
+   8F9E CB 7A         [ 8] 2323 	bit	7, d
+   8FA0 28 03         [12] 2324 	jr	Z,00118$
+   8FA2 13            [ 6] 2325 	inc	de
+   8FA3 13            [ 6] 2326 	inc	de
+   8FA4 13            [ 6] 2327 	inc	de
+   8FA5                    2328 00118$:
+   8FA5 CB 2A         [ 8] 2329 	sra	d
+   8FA7 CB 1B         [ 8] 2330 	rr	e
+   8FA9 CB 2A         [ 8] 2331 	sra	d
+   8FAB CB 1B         [ 8] 2332 	rr	e
+   8FAD 19            [11] 2333 	add	hl, de
+                           2334 ;src/game/world.c:477: if(nPixel == 0 && !(*pAddress & 136)) 
+   8FAE 78            [ 4] 2335 	ld	a, b
+   8FAF B1            [ 4] 2336 	or	a,c
+   8FB0 20 09         [12] 2337 	jr	NZ,00113$
+   8FB2 7E            [ 7] 2338 	ld	a, (hl)
+   8FB3 E6 88         [ 7] 2339 	and	a, #0x88
+   8FB5 20 04         [12] 2340 	jr	NZ,00113$
+                           2341 ;src/game/world.c:478: return 1;
+   8FB7 2E 01         [ 7] 2342 	ld	l, #0x01
+   8FB9 18 2E         [12] 2343 	jr	00116$
+   8FBB                    2344 00113$:
+                           2345 ;src/game/world.c:479: else if(nPixel == 1 && !(*pAddress & 68))
+   8FBB 79            [ 4] 2346 	ld	a, c
+   8FBC 3D            [ 4] 2347 	dec	a
+   8FBD B0            [ 4] 2348 	or	a, b
+   8FBE 20 09         [12] 2349 	jr	NZ,00109$
+   8FC0 7E            [ 7] 2350 	ld	a, (hl)
+   8FC1 E6 44         [ 7] 2351 	and	a, #0x44
+   8FC3 20 04         [12] 2352 	jr	NZ,00109$
+                           2353 ;src/game/world.c:480: return 1;
+   8FC5 2E 01         [ 7] 2354 	ld	l, #0x01
+   8FC7 18 20         [12] 2355 	jr	00116$
+   8FC9                    2356 00109$:
+                           2357 ;src/game/world.c:481: else if(nPixel == 2 && !(*pAddress & 34))
+   8FC9 79            [ 4] 2358 	ld	a, c
+   8FCA D6 02         [ 7] 2359 	sub	a, #0x02
+   8FCC B0            [ 4] 2360 	or	a, b
+   8FCD 20 09         [12] 2361 	jr	NZ,00105$
+   8FCF 7E            [ 7] 2362 	ld	a, (hl)
+   8FD0 E6 22         [ 7] 2363 	and	a, #0x22
+   8FD2 20 04         [12] 2364 	jr	NZ,00105$
+                           2365 ;src/game/world.c:482: return 1;
+   8FD4 2E 01         [ 7] 2366 	ld	l, #0x01
+   8FD6 18 11         [12] 2367 	jr	00116$
+   8FD8                    2368 00105$:
+                           2369 ;src/game/world.c:483: else if(nPixel == 3 && !(*pAddress & 17))
+   8FD8 79            [ 4] 2370 	ld	a, c
+   8FD9 D6 03         [ 7] 2371 	sub	a, #0x03
+   8FDB B0            [ 4] 2372 	or	a, b
+   8FDC 20 09         [12] 2373 	jr	NZ,00110$
+   8FDE 7E            [ 7] 2374 	ld	a, (hl)
+   8FDF E6 11         [ 7] 2375 	and	a, #0x11
+   8FE1 20 04         [12] 2376 	jr	NZ,00110$
+                           2377 ;src/game/world.c:484: return 1;
+   8FE3 2E 01         [ 7] 2378 	ld	l, #0x01
+   8FE5 18 02         [12] 2379 	jr	00116$
+   8FE7                    2380 00110$:
+                           2381 ;src/game/world.c:486: return 0;
+   8FE7 2E 00         [ 7] 2382 	ld	l, #0x00
+   8FE9                    2383 00116$:
+   8FE9 DD E1         [14] 2384 	pop	ix
+   8FEB C9            [10] 2385 	ret
+                           2386 ;src/game/world.c:489: void drawNewTrain(u8 i, u8 x_, u8 y_)
+                           2387 ;	---------------------------------
+                           2388 ; Function drawNewTrain
+                           2389 ; ---------------------------------
+   8FEC                    2390 _drawNewTrain::
+   8FEC DD E5         [15] 2391 	push	ix
+   8FEE DD 21 00 00   [14] 2392 	ld	ix,#0
+   8FF2 DD 39         [15] 2393 	add	ix,sp
+   8FF4 F5            [11] 2394 	push	af
+   8FF5 F5            [11] 2395 	push	af
+   8FF6 3B            [ 6] 2396 	dec	sp
+                           2397 ;src/game/world.c:491: switch(trainList[i].heading)
+   8FF7 DD 6E 04      [19] 2398 	ld	l, 4 (ix)
+   8FFA 26 00         [ 7] 2399 	ld	h, #0x00
+   8FFC 29            [11] 2400 	add	hl, hl
+   8FFD 29            [11] 2401 	add	hl, hl
+   8FFE 29            [11] 2402 	add	hl, hl
+   8FFF 29            [11] 2403 	add	hl, hl
+   9000 DD 75 FD      [19] 2404 	ld	-3 (ix), l
+   9003 DD 74 FE      [19] 2405 	ld	-2 (ix), h
+   9006 FD 21 1D 83   [14] 2406 	ld	iy, #_trainList
+   900A FD 7E 00      [19] 2407 	ld	a, 0 (iy)
+   900D DD 86 FD      [19] 2408 	add	a, -3 (ix)
+   9010 5F            [ 4] 2409 	ld	e, a
+   9011 FD 7E 01      [19] 2410 	ld	a, 1 (iy)
+   9014 DD 8E FE      [19] 2411 	adc	a, -2 (ix)
+   9017 57            [ 4] 2412 	ld	d, a
+   9018 6B            [ 4] 2413 	ld	l, e
+   9019 62            [ 4] 2414 	ld	h, d
+   901A 01 06 00      [10] 2415 	ld	bc, #0x0006
+   901D 09            [11] 2416 	add	hl, bc
+   901E 7E            [ 7] 2417 	ld	a, (hl)
+   901F DD 77 FF      [19] 2418 	ld	-1 (ix), a
+                           2419 ;src/game/world.c:495: trainList[i].animX = (int)(trainList[i].posX)*TILESIZE_H+1;
+   9022 21 07 00      [10] 2420 	ld	hl, #0x0007
+   9025 19            [11] 2421 	add	hl,de
+   9026 4D            [ 4] 2422 	ld	c, l
+   9027 44            [ 4] 2423 	ld	b, h
+   9028 21 04 00      [10] 2424 	ld	hl, #0x0004
+   902B 19            [11] 2425 	add	hl,de
+   902C E3            [19] 2426 	ex	(sp), hl
+                           2427 ;src/game/world.c:491: switch(trainList[i].heading)
+   902D DD 7E FF      [19] 2428 	ld	a, -1 (ix)
+   9030 B7            [ 4] 2429 	or	a, a
+   9031 28 33         [12] 2430 	jr	Z,00101$
+   9033 DD 7E FF      [19] 2431 	ld	a, -1 (ix)
+   9036 3D            [ 4] 2432 	dec	a
+   9037 CA 02 91      [10] 2433 	jp	Z,00102$
+                           2434 ;src/game/world.c:511: trainList[nbTrainList].animX = (int)(trainList[i].posX)*TILESIZE_H+8;
+   903A FD 21 22 83   [14] 2435 	ld	iy, #_nbTrainList
+   903E FD 6E 00      [19] 2436 	ld	l, 0 (iy)
+   9041 26 00         [ 7] 2437 	ld	h, #0x00
+   9043 29            [11] 2438 	add	hl, hl
+   9044 29            [11] 2439 	add	hl, hl
+   9045 29            [11] 2440 	add	hl, hl
+   9046 29            [11] 2441 	add	hl, hl
+   9047 4D            [ 4] 2442 	ld	c, l
+   9048 44            [ 4] 2443 	ld	b, h
+   9049 2A 1D 83      [16] 2444 	ld	hl, (_trainList)
+   904C 09            [11] 2445 	add	hl, bc
+   904D 01 07 00      [10] 2446 	ld	bc, #0x0007
+   9050 09            [11] 2447 	add	hl,bc
+   9051 4D            [ 4] 2448 	ld	c, l
+   9052 44            [ 4] 2449 	ld	b, h
+                           2450 ;src/game/world.c:491: switch(trainList[i].heading)
+   9053 DD 7E FF      [19] 2451 	ld	a, -1 (ix)
+   9056 D6 02         [ 7] 2452 	sub	a, #0x02
+   9058 CA A6 91      [10] 2453 	jp	Z,00103$
+   905B DD 7E FF      [19] 2454 	ld	a, -1 (ix)
+   905E D6 03         [ 7] 2455 	sub	a, #0x03
+   9060 CA 68 92      [10] 2456 	jp	Z,00104$
+   9063 C3 1E 93      [10] 2457 	jp	00105$
+                           2458 ;src/game/world.c:494: case 0:
+   9066                    2459 00101$:
+                           2460 ;src/game/world.c:495: trainList[i].animX = (int)(trainList[i].posX)*TILESIZE_H+1;
+   9066 E1            [10] 2461 	pop	hl
+   9067 E5            [11] 2462 	push	hl
+   9068 6E            [ 7] 2463 	ld	l, (hl)
+   9069 26 00         [ 7] 2464 	ld	h, #0x00
+   906B 29            [11] 2465 	add	hl, hl
+   906C 29            [11] 2466 	add	hl, hl
+   906D 29            [11] 2467 	add	hl, hl
+   906E 29            [11] 2468 	add	hl, hl
+   906F 23            [ 6] 2469 	inc	hl
+   9070 55            [ 4] 2470 	ld	d, l
+   9071 5C            [ 4] 2471 	ld	e, h
+   9072 7A            [ 4] 2472 	ld	a, d
+   9073 02            [ 7] 2473 	ld	(bc), a
+   9074 03            [ 6] 2474 	inc	bc
+   9075 7B            [ 4] 2475 	ld	a, e
+   9076 02            [ 7] 2476 	ld	(bc), a
+                           2477 ;src/game/world.c:496: trainList[i].animY = (int)(trainList[i].posY)*TILESIZE_H+8;
+   9077 FD 21 1D 83   [14] 2478 	ld	iy, #_trainList
+   907B FD 7E 00      [19] 2479 	ld	a, 0 (iy)
+   907E DD 86 FD      [19] 2480 	add	a, -3 (ix)
+   9081 4F            [ 4] 2481 	ld	c, a
+   9082 FD 7E 01      [19] 2482 	ld	a, 1 (iy)
+   9085 DD 8E FE      [19] 2483 	adc	a, -2 (ix)
+   9088 47            [ 4] 2484 	ld	b, a
+   9089 FD 21 09 00   [14] 2485 	ld	iy, #0x0009
+   908D FD 09         [15] 2486 	add	iy, bc
+   908F 69            [ 4] 2487 	ld	l, c
+   9090 60            [ 4] 2488 	ld	h, b
+   9091 11 05 00      [10] 2489 	ld	de, #0x0005
+   9094 19            [11] 2490 	add	hl, de
+   9095 6E            [ 7] 2491 	ld	l, (hl)
+   9096 26 00         [ 7] 2492 	ld	h, #0x00
+   9098 29            [11] 2493 	add	hl, hl
+   9099 29            [11] 2494 	add	hl, hl
+   909A 29            [11] 2495 	add	hl, hl
+   909B 29            [11] 2496 	add	hl, hl
+   909C 01 08 00      [10] 2497 	ld	bc, #0x0008
+   909F 09            [11] 2498 	add	hl, bc
+   90A0 FD 75 00      [19] 2499 	ld	0 (iy), l
+   90A3 FD 74 01      [19] 2500 	ld	1 (iy), h
+                           2501 ;src/game/world.c:497: trainList[i].animOldX = (int)(trainList[i].posX)*TILESIZE_H;
+   90A6 FD 21 1D 83   [14] 2502 	ld	iy, #_trainList
+   90AA FD 7E 00      [19] 2503 	ld	a, 0 (iy)
+   90AD DD 86 FD      [19] 2504 	add	a, -3 (ix)
+   90B0 4F            [ 4] 2505 	ld	c, a
+   90B1 FD 7E 01      [19] 2506 	ld	a, 1 (iy)
+   90B4 DD 8E FE      [19] 2507 	adc	a, -2 (ix)
+   90B7 47            [ 4] 2508 	ld	b, a
+   90B8 21 0B 00      [10] 2509 	ld	hl, #0x000b
+   90BB 09            [11] 2510 	add	hl,bc
+   90BC EB            [ 4] 2511 	ex	de,hl
+   90BD C5            [11] 2512 	push	bc
+   90BE FD E1         [14] 2513 	pop	iy
+   90C0 FD 6E 04      [19] 2514 	ld	l, 4 (iy)
+   90C3 26 00         [ 7] 2515 	ld	h, #0x00
+   90C5 29            [11] 2516 	add	hl, hl
+   90C6 29            [11] 2517 	add	hl, hl
+   90C7 29            [11] 2518 	add	hl, hl
+   90C8 29            [11] 2519 	add	hl, hl
+   90C9 4D            [ 4] 2520 	ld	c, l
+   90CA 44            [ 4] 2521 	ld	b, h
+   90CB 79            [ 4] 2522 	ld	a, c
+   90CC 12            [ 7] 2523 	ld	(de), a
+   90CD 13            [ 6] 2524 	inc	de
+   90CE 78            [ 4] 2525 	ld	a, b
+   90CF 12            [ 7] 2526 	ld	(de), a
+                           2527 ;src/game/world.c:498: trainList[i].animOldY = (int)(trainList[i].posY)*TILESIZE_H+8;
+   90D0 FD 21 1D 83   [14] 2528 	ld	iy, #_trainList
+   90D4 FD 7E 00      [19] 2529 	ld	a, 0 (iy)
+   90D7 DD 86 FD      [19] 2530 	add	a, -3 (ix)
+   90DA 4F            [ 4] 2531 	ld	c, a
+   90DB FD 7E 01      [19] 2532 	ld	a, 1 (iy)
+   90DE DD 8E FE      [19] 2533 	adc	a, -2 (ix)
+   90E1 47            [ 4] 2534 	ld	b, a
+   90E2 FD 21 0D 00   [14] 2535 	ld	iy, #0x000d
+   90E6 FD 09         [15] 2536 	add	iy, bc
+   90E8 69            [ 4] 2537 	ld	l, c
+   90E9 60            [ 4] 2538 	ld	h, b
+   90EA 11 05 00      [10] 2539 	ld	de, #0x0005
+   90ED 19            [11] 2540 	add	hl, de
+   90EE 6E            [ 7] 2541 	ld	l, (hl)
+   90EF 26 00         [ 7] 2542 	ld	h, #0x00
+   90F1 29            [11] 2543 	add	hl, hl
+   90F2 29            [11] 2544 	add	hl, hl
+   90F3 29            [11] 2545 	add	hl, hl
+   90F4 29            [11] 2546 	add	hl, hl
+   90F5 01 08 00      [10] 2547 	ld	bc, #0x0008
+   90F8 09            [11] 2548 	add	hl, bc
+   90F9 FD 75 00      [19] 2549 	ld	0 (iy), l
+   90FC FD 74 01      [19] 2550 	ld	1 (iy), h
+                           2551 ;src/game/world.c:499: break;
+   90FF C3 1E 93      [10] 2552 	jp	00105$
+                           2553 ;src/game/world.c:502: case 1:
+   9102                    2554 00102$:
+                           2555 ;src/game/world.c:503: trainList[i].animX = (int)(trainList[i].posX)*TILESIZE_H+14;
+   9102 E1            [10] 2556 	pop	hl
+   9103 E5            [11] 2557 	push	hl
+   9104 6E            [ 7] 2558 	ld	l, (hl)
+   9105 26 00         [ 7] 2559 	ld	h, #0x00
+   9107 29            [11] 2560 	add	hl, hl
+   9108 29            [11] 2561 	add	hl, hl
+   9109 29            [11] 2562 	add	hl, hl
+   910A 29            [11] 2563 	add	hl, hl
+   910B EB            [ 4] 2564 	ex	de,hl
+   910C 21 0E 00      [10] 2565 	ld	hl, #0x000e
+   910F 19            [11] 2566 	add	hl,de
+   9110 EB            [ 4] 2567 	ex	de,hl
+   9111 7B            [ 4] 2568 	ld	a, e
+   9112 02            [ 7] 2569 	ld	(bc), a
+   9113 03            [ 6] 2570 	inc	bc
+   9114 7A            [ 4] 2571 	ld	a, d
+   9115 02            [ 7] 2572 	ld	(bc), a
+                           2573 ;src/game/world.c:504: trainList[i].animY = (int)(trainList[i].posY)*TILESIZE_H+8;
+   9116 FD 21 1D 83   [14] 2574 	ld	iy, #_trainList
+   911A FD 7E 00      [19] 2575 	ld	a, 0 (iy)
+   911D DD 86 FD      [19] 2576 	add	a, -3 (ix)
+   9120 4F            [ 4] 2577 	ld	c, a
+   9121 FD 7E 01      [19] 2578 	ld	a, 1 (iy)
+   9124 DD 8E FE      [19] 2579 	adc	a, -2 (ix)
+   9127 47            [ 4] 2580 	ld	b, a
+   9128 FD 21 09 00   [14] 2581 	ld	iy, #0x0009
+   912C FD 09         [15] 2582 	add	iy, bc
+   912E 69            [ 4] 2583 	ld	l, c
+   912F 60            [ 4] 2584 	ld	h, b
+   9130 11 05 00      [10] 2585 	ld	de, #0x0005
+   9133 19            [11] 2586 	add	hl, de
+   9134 6E            [ 7] 2587 	ld	l, (hl)
+   9135 26 00         [ 7] 2588 	ld	h, #0x00
+   9137 29            [11] 2589 	add	hl, hl
+   9138 29            [11] 2590 	add	hl, hl
+   9139 29            [11] 2591 	add	hl, hl
+   913A 29            [11] 2592 	add	hl, hl
+   913B 01 08 00      [10] 2593 	ld	bc, #0x0008
+   913E 09            [11] 2594 	add	hl, bc
+   913F FD 75 00      [19] 2595 	ld	0 (iy), l
+   9142 FD 74 01      [19] 2596 	ld	1 (iy), h
+                           2597 ;src/game/world.c:505: trainList[i].animOldX = (int)(trainList[i].posX)*TILESIZE_H+15;
+   9145 FD 21 1D 83   [14] 2598 	ld	iy, #_trainList
+   9149 FD 7E 00      [19] 2599 	ld	a, 0 (iy)
+   914C DD 86 FD      [19] 2600 	add	a, -3 (ix)
+   914F 4F            [ 4] 2601 	ld	c, a
+   9150 FD 7E 01      [19] 2602 	ld	a, 1 (iy)
+   9153 DD 8E FE      [19] 2603 	adc	a, -2 (ix)
+   9156 47            [ 4] 2604 	ld	b, a
+   9157 FD 21 0B 00   [14] 2605 	ld	iy, #0x000b
+   915B FD 09         [15] 2606 	add	iy, bc
+   915D 69            [ 4] 2607 	ld	l, c
+   915E 60            [ 4] 2608 	ld	h, b
+   915F 11 04 00      [10] 2609 	ld	de, #0x0004
+   9162 19            [11] 2610 	add	hl, de
+   9163 6E            [ 7] 2611 	ld	l, (hl)
+   9164 26 00         [ 7] 2612 	ld	h, #0x00
+   9166 29            [11] 2613 	add	hl, hl
+   9167 29            [11] 2614 	add	hl, hl
+   9168 29            [11] 2615 	add	hl, hl
+   9169 29            [11] 2616 	add	hl, hl
+   916A 01 0F 00      [10] 2617 	ld	bc, #0x000f
+   916D 09            [11] 2618 	add	hl, bc
+   916E FD 75 00      [19] 2619 	ld	0 (iy), l
+   9171 FD 74 01      [19] 2620 	ld	1 (iy), h
+                           2621 ;src/game/world.c:506: trainList[i].animOldY = (int)(trainList[i].posY)*TILESIZE_H+8;
+   9174 FD 21 1D 83   [14] 2622 	ld	iy, #_trainList
+   9178 FD 7E 00      [19] 2623 	ld	a, 0 (iy)
+   917B DD 86 FD      [19] 2624 	add	a, -3 (ix)
+   917E 4F            [ 4] 2625 	ld	c, a
+   917F FD 7E 01      [19] 2626 	ld	a, 1 (iy)
+   9182 DD 8E FE      [19] 2627 	adc	a, -2 (ix)
+   9185 47            [ 4] 2628 	ld	b, a
+   9186 FD 21 0D 00   [14] 2629 	ld	iy, #0x000d
+   918A FD 09         [15] 2630 	add	iy, bc
+   918C 69            [ 4] 2631 	ld	l, c
+   918D 60            [ 4] 2632 	ld	h, b
+   918E 11 05 00      [10] 2633 	ld	de, #0x0005
+   9191 19            [11] 2634 	add	hl, de
+   9192 6E            [ 7] 2635 	ld	l, (hl)
+   9193 26 00         [ 7] 2636 	ld	h, #0x00
+   9195 29            [11] 2637 	add	hl, hl
+   9196 29            [11] 2638 	add	hl, hl
+   9197 29            [11] 2639 	add	hl, hl
+   9198 29            [11] 2640 	add	hl, hl
+   9199 01 08 00      [10] 2641 	ld	bc, #0x0008
+   919C 09            [11] 2642 	add	hl, bc
+   919D FD 75 00      [19] 2643 	ld	0 (iy), l
+   91A0 FD 74 01      [19] 2644 	ld	1 (iy), h
+                           2645 ;src/game/world.c:507: break;
+   91A3 C3 1E 93      [10] 2646 	jp	00105$
+                           2647 ;src/game/world.c:510: case 2:
+   91A6                    2648 00103$:
+                           2649 ;src/game/world.c:511: trainList[nbTrainList].animX = (int)(trainList[i].posX)*TILESIZE_H+8;
+   91A6 E1            [10] 2650 	pop	hl
+   91A7 E5            [11] 2651 	push	hl
+   91A8 6E            [ 7] 2652 	ld	l, (hl)
+   91A9 26 00         [ 7] 2653 	ld	h, #0x00
+   91AB 29            [11] 2654 	add	hl, hl
+   91AC 29            [11] 2655 	add	hl, hl
+   91AD 29            [11] 2656 	add	hl, hl
+   91AE 29            [11] 2657 	add	hl, hl
+   91AF EB            [ 4] 2658 	ex	de,hl
+   91B0 21 08 00      [10] 2659 	ld	hl, #0x0008
+   91B3 19            [11] 2660 	add	hl,de
+   91B4 EB            [ 4] 2661 	ex	de,hl
+   91B5 7B            [ 4] 2662 	ld	a, e
+   91B6 02            [ 7] 2663 	ld	(bc), a
+   91B7 03            [ 6] 2664 	inc	bc
+   91B8 7A            [ 4] 2665 	ld	a, d
+   91B9 02            [ 7] 2666 	ld	(bc), a
+                           2667 ;src/game/world.c:512: trainList[nbTrainList].animY = (int)(trainList[i].posY)*TILESIZE_H+14;
+   91BA FD 21 22 83   [14] 2668 	ld	iy, #_nbTrainList
+   91BE FD 6E 00      [19] 2669 	ld	l, 0 (iy)
+   91C1 26 00         [ 7] 2670 	ld	h, #0x00
+   91C3 29            [11] 2671 	add	hl, hl
+   91C4 29            [11] 2672 	add	hl, hl
+   91C5 29            [11] 2673 	add	hl, hl
+   91C6 29            [11] 2674 	add	hl, hl
+   91C7 4D            [ 4] 2675 	ld	c, l
+   91C8 44            [ 4] 2676 	ld	b, h
+   91C9 2A 1D 83      [16] 2677 	ld	hl, (_trainList)
+   91CC 09            [11] 2678 	add	hl, bc
+   91CD 01 09 00      [10] 2679 	ld	bc, #0x0009
+   91D0 09            [11] 2680 	add	hl,bc
+   91D1 4D            [ 4] 2681 	ld	c, l
+   91D2 44            [ 4] 2682 	ld	b, h
+   91D3 FD 2A 1D 83   [20] 2683 	ld	iy, (_trainList)
+   91D7 DD 5E FD      [19] 2684 	ld	e,-3 (ix)
+   91DA DD 56 FE      [19] 2685 	ld	d,-2 (ix)
+   91DD FD 19         [15] 2686 	add	iy, de
+   91DF FD 6E 05      [19] 2687 	ld	l, 5 (iy)
+   91E2 26 00         [ 7] 2688 	ld	h, #0x00
+   91E4 29            [11] 2689 	add	hl, hl
+   91E5 29            [11] 2690 	add	hl, hl
+   91E6 29            [11] 2691 	add	hl, hl
+   91E7 29            [11] 2692 	add	hl, hl
+   91E8 EB            [ 4] 2693 	ex	de,hl
+   91E9 21 0E 00      [10] 2694 	ld	hl, #0x000e
+   91EC 19            [11] 2695 	add	hl,de
+   91ED EB            [ 4] 2696 	ex	de,hl
+   91EE 7B            [ 4] 2697 	ld	a, e
+   91EF 02            [ 7] 2698 	ld	(bc), a
+   91F0 03            [ 6] 2699 	inc	bc
+   91F1 7A            [ 4] 2700 	ld	a, d
+   91F2 02            [ 7] 2701 	ld	(bc), a
+                           2702 ;src/game/world.c:513: trainList[nbTrainList].animOldX = (int)(trainList[i].posX)*TILESIZE_H+8;
+   91F3 FD 21 22 83   [14] 2703 	ld	iy, #_nbTrainList
+   91F7 FD 6E 00      [19] 2704 	ld	l, 0 (iy)
+   91FA 26 00         [ 7] 2705 	ld	h, #0x00
+   91FC 29            [11] 2706 	add	hl, hl
+   91FD 29            [11] 2707 	add	hl, hl
+   91FE 29            [11] 2708 	add	hl, hl
+   91FF 29            [11] 2709 	add	hl, hl
+   9200 4D            [ 4] 2710 	ld	c, l
+   9201 44            [ 4] 2711 	ld	b, h
+   9202 2A 1D 83      [16] 2712 	ld	hl, (_trainList)
+   9205 09            [11] 2713 	add	hl, bc
+   9206 01 0B 00      [10] 2714 	ld	bc, #0x000b
+   9209 09            [11] 2715 	add	hl,bc
+   920A 4D            [ 4] 2716 	ld	c, l
+   920B 44            [ 4] 2717 	ld	b, h
+   920C FD 2A 1D 83   [20] 2718 	ld	iy, (_trainList)
+   9210 DD 5E FD      [19] 2719 	ld	e,-3 (ix)
+   9213 DD 56 FE      [19] 2720 	ld	d,-2 (ix)
+   9216 FD 19         [15] 2721 	add	iy, de
+   9218 FD 6E 04      [19] 2722 	ld	l, 4 (iy)
+   921B 26 00         [ 7] 2723 	ld	h, #0x00
+   921D 29            [11] 2724 	add	hl, hl
+   921E 29            [11] 2725 	add	hl, hl
+   921F 29            [11] 2726 	add	hl, hl
+   9220 29            [11] 2727 	add	hl, hl
+   9221 EB            [ 4] 2728 	ex	de,hl
+   9222 21 08 00      [10] 2729 	ld	hl, #0x0008
+   9225 19            [11] 2730 	add	hl,de
+   9226 EB            [ 4] 2731 	ex	de,hl
+   9227 7B            [ 4] 2732 	ld	a, e
+   9228 02            [ 7] 2733 	ld	(bc), a
+   9229 03            [ 6] 2734 	inc	bc
+   922A 7A            [ 4] 2735 	ld	a, d
+   922B 02            [ 7] 2736 	ld	(bc), a
+                           2737 ;src/game/world.c:514: trainList[nbTrainList].animOldY = (int)(trainList[i].posY)*TILESIZE_H+15;
+   922C FD 21 22 83   [14] 2738 	ld	iy, #_nbTrainList
+   9230 FD 6E 00      [19] 2739 	ld	l, 0 (iy)
+   9233 26 00         [ 7] 2740 	ld	h, #0x00
+   9235 29            [11] 2741 	add	hl, hl
+   9236 29            [11] 2742 	add	hl, hl
+   9237 29            [11] 2743 	add	hl, hl
+   9238 29            [11] 2744 	add	hl, hl
+   9239 4D            [ 4] 2745 	ld	c, l
+   923A 44            [ 4] 2746 	ld	b, h
+   923B 2A 1D 83      [16] 2747 	ld	hl, (_trainList)
+   923E 09            [11] 2748 	add	hl, bc
+   923F 01 0D 00      [10] 2749 	ld	bc, #0x000d
+   9242 09            [11] 2750 	add	hl,bc
+   9243 4D            [ 4] 2751 	ld	c, l
+   9244 44            [ 4] 2752 	ld	b, h
+   9245 FD 2A 1D 83   [20] 2753 	ld	iy, (_trainList)
+   9249 DD 5E FD      [19] 2754 	ld	e,-3 (ix)
+   924C DD 56 FE      [19] 2755 	ld	d,-2 (ix)
+   924F FD 19         [15] 2756 	add	iy, de
+   9251 FD 6E 05      [19] 2757 	ld	l, 5 (iy)
+   9254 26 00         [ 7] 2758 	ld	h, #0x00
+   9256 29            [11] 2759 	add	hl, hl
+   9257 29            [11] 2760 	add	hl, hl
+   9258 29            [11] 2761 	add	hl, hl
+   9259 29            [11] 2762 	add	hl, hl
+   925A EB            [ 4] 2763 	ex	de,hl
+   925B 21 0F 00      [10] 2764 	ld	hl, #0x000f
+   925E 19            [11] 2765 	add	hl,de
+   925F EB            [ 4] 2766 	ex	de,hl
+   9260 7B            [ 4] 2767 	ld	a, e
+   9261 02            [ 7] 2768 	ld	(bc), a
+   9262 03            [ 6] 2769 	inc	bc
+   9263 7A            [ 4] 2770 	ld	a, d
+   9264 02            [ 7] 2771 	ld	(bc), a
+                           2772 ;src/game/world.c:515: break;
+   9265 C3 1E 93      [10] 2773 	jp	00105$
+                           2774 ;src/game/world.c:518: case 3:
+   9268                    2775 00104$:
+                           2776 ;src/game/world.c:519: trainList[nbTrainList].animX = (int)(trainList[i].posX)*TILESIZE_H+8;
+   9268 E1            [10] 2777 	pop	hl
+   9269 E5            [11] 2778 	push	hl
+   926A 6E            [ 7] 2779 	ld	l, (hl)
+   926B 26 00         [ 7] 2780 	ld	h, #0x00
+   926D 29            [11] 2781 	add	hl, hl
+   926E 29            [11] 2782 	add	hl, hl
+   926F 29            [11] 2783 	add	hl, hl
+   9270 29            [11] 2784 	add	hl, hl
+   9271 EB            [ 4] 2785 	ex	de,hl
+   9272 21 08 00      [10] 2786 	ld	hl, #0x0008
+   9275 19            [11] 2787 	add	hl,de
+   9276 EB            [ 4] 2788 	ex	de,hl
+   9277 7B            [ 4] 2789 	ld	a, e
+   9278 02            [ 7] 2790 	ld	(bc), a
+   9279 03            [ 6] 2791 	inc	bc
+   927A 7A            [ 4] 2792 	ld	a, d
+   927B 02            [ 7] 2793 	ld	(bc), a
+                           2794 ;src/game/world.c:520: trainList[nbTrainList].animY = (int)(trainList[i].posY)*TILESIZE_H+1;
+   927C FD 21 22 83   [14] 2795 	ld	iy, #_nbTrainList
+   9280 FD 6E 00      [19] 2796 	ld	l, 0 (iy)
+   9283 26 00         [ 7] 2797 	ld	h, #0x00
+   9285 29            [11] 2798 	add	hl, hl
+   9286 29            [11] 2799 	add	hl, hl
+   9287 29            [11] 2800 	add	hl, hl
+   9288 29            [11] 2801 	add	hl, hl
+   9289 4D            [ 4] 2802 	ld	c, l
+   928A 44            [ 4] 2803 	ld	b, h
+   928B 2A 1D 83      [16] 2804 	ld	hl, (_trainList)
+   928E 09            [11] 2805 	add	hl, bc
+   928F 01 09 00      [10] 2806 	ld	bc, #0x0009
+   9292 09            [11] 2807 	add	hl,bc
+   9293 4D            [ 4] 2808 	ld	c, l
+   9294 44            [ 4] 2809 	ld	b, h
+   9295 FD 2A 1D 83   [20] 2810 	ld	iy, (_trainList)
+   9299 DD 5E FD      [19] 2811 	ld	e,-3 (ix)
+   929C DD 56 FE      [19] 2812 	ld	d,-2 (ix)
+   929F FD 19         [15] 2813 	add	iy, de
+   92A1 FD 6E 05      [19] 2814 	ld	l, 5 (iy)
+   92A4 26 00         [ 7] 2815 	ld	h, #0x00
+   92A6 29            [11] 2816 	add	hl, hl
+   92A7 29            [11] 2817 	add	hl, hl
+   92A8 29            [11] 2818 	add	hl, hl
+   92A9 29            [11] 2819 	add	hl, hl
+   92AA EB            [ 4] 2820 	ex	de,hl
+   92AB 13            [ 6] 2821 	inc	de
+   92AC 7B            [ 4] 2822 	ld	a, e
+   92AD 02            [ 7] 2823 	ld	(bc), a
+   92AE 03            [ 6] 2824 	inc	bc
+   92AF 7A            [ 4] 2825 	ld	a, d
+   92B0 02            [ 7] 2826 	ld	(bc), a
+                           2827 ;src/game/world.c:521: trainList[nbTrainList].animOldX = (int)(trainList[i].posX)*TILESIZE_H+8;
+   92B1 FD 21 22 83   [14] 2828 	ld	iy, #_nbTrainList
+   92B5 FD 6E 00      [19] 2829 	ld	l, 0 (iy)
+   92B8 26 00         [ 7] 2830 	ld	h, #0x00
+   92BA 29            [11] 2831 	add	hl, hl
+   92BB 29            [11] 2832 	add	hl, hl
+   92BC 29            [11] 2833 	add	hl, hl
+   92BD 29            [11] 2834 	add	hl, hl
+   92BE 4D            [ 4] 2835 	ld	c, l
+   92BF 44            [ 4] 2836 	ld	b, h
+   92C0 2A 1D 83      [16] 2837 	ld	hl, (_trainList)
+   92C3 09            [11] 2838 	add	hl, bc
+   92C4 01 0B 00      [10] 2839 	ld	bc, #0x000b
+   92C7 09            [11] 2840 	add	hl,bc
+   92C8 4D            [ 4] 2841 	ld	c, l
+   92C9 44            [ 4] 2842 	ld	b, h
+   92CA FD 2A 1D 83   [20] 2843 	ld	iy, (_trainList)
+   92CE DD 5E FD      [19] 2844 	ld	e,-3 (ix)
+   92D1 DD 56 FE      [19] 2845 	ld	d,-2 (ix)
+   92D4 FD 19         [15] 2846 	add	iy, de
+   92D6 FD 6E 04      [19] 2847 	ld	l, 4 (iy)
+   92D9 26 00         [ 7] 2848 	ld	h, #0x00
+   92DB 29            [11] 2849 	add	hl, hl
+   92DC 29            [11] 2850 	add	hl, hl
+   92DD 29            [11] 2851 	add	hl, hl
+   92DE 29            [11] 2852 	add	hl, hl
+   92DF EB            [ 4] 2853 	ex	de,hl
+   92E0 21 08 00      [10] 2854 	ld	hl, #0x0008
+   92E3 19            [11] 2855 	add	hl,de
+   92E4 EB            [ 4] 2856 	ex	de,hl
+   92E5 7B            [ 4] 2857 	ld	a, e
+   92E6 02            [ 7] 2858 	ld	(bc), a
+   92E7 03            [ 6] 2859 	inc	bc
+   92E8 7A            [ 4] 2860 	ld	a, d
+   92E9 02            [ 7] 2861 	ld	(bc), a
+                           2862 ;src/game/world.c:522: trainList[nbTrainList].animOldY = (int)(trainList[i].posY)*TILESIZE_H;
+   92EA FD 21 22 83   [14] 2863 	ld	iy, #_nbTrainList
+   92EE FD 6E 00      [19] 2864 	ld	l, 0 (iy)
+   92F1 26 00         [ 7] 2865 	ld	h, #0x00
+   92F3 29            [11] 2866 	add	hl, hl
+   92F4 29            [11] 2867 	add	hl, hl
+   92F5 29            [11] 2868 	add	hl, hl
+   92F6 29            [11] 2869 	add	hl, hl
+   92F7 4D            [ 4] 2870 	ld	c, l
+   92F8 44            [ 4] 2871 	ld	b, h
+   92F9 2A 1D 83      [16] 2872 	ld	hl, (_trainList)
+   92FC 09            [11] 2873 	add	hl, bc
+   92FD 01 0D 00      [10] 2874 	ld	bc, #0x000d
+   9300 09            [11] 2875 	add	hl,bc
+   9301 4D            [ 4] 2876 	ld	c, l
+   9302 44            [ 4] 2877 	ld	b, h
+   9303 FD 2A 1D 83   [20] 2878 	ld	iy, (_trainList)
+   9307 DD 5E FD      [19] 2879 	ld	e,-3 (ix)
+   930A DD 56 FE      [19] 2880 	ld	d,-2 (ix)
+   930D FD 19         [15] 2881 	add	iy, de
+   930F FD 6E 05      [19] 2882 	ld	l, 5 (iy)
+   9312 26 00         [ 7] 2883 	ld	h, #0x00
+   9314 29            [11] 2884 	add	hl, hl
+   9315 29            [11] 2885 	add	hl, hl
+   9316 29            [11] 2886 	add	hl, hl
+   9317 29            [11] 2887 	add	hl, hl
+   9318 EB            [ 4] 2888 	ex	de,hl
+   9319 7B            [ 4] 2889 	ld	a, e
+   931A 02            [ 7] 2890 	ld	(bc), a
+   931B 03            [ 6] 2891 	inc	bc
+   931C 7A            [ 4] 2892 	ld	a, d
+   931D 02            [ 7] 2893 	ld	(bc), a
+                           2894 ;src/game/world.c:524: }
+   931E                    2895 00105$:
+                           2896 ;src/game/world.c:526: setPixel(trainList[i].animX-x_*TILESIZE_H,trainList[i].animY-y_*TILESIZE_H, 3);
+   931E FD 21 1D 83   [14] 2897 	ld	iy, #_trainList
+   9322 FD 7E 00      [19] 2898 	ld	a, 0 (iy)
+   9325 DD 86 FD      [19] 2899 	add	a, -3 (ix)
+   9328 4F            [ 4] 2900 	ld	c, a
+   9329 FD 7E 01      [19] 2901 	ld	a, 1 (iy)
+   932C DD 8E FE      [19] 2902 	adc	a, -2 (ix)
+   932F 47            [ 4] 2903 	ld	b, a
+   9330 C5            [11] 2904 	push	bc
+   9331 FD E1         [14] 2905 	pop	iy
+   9333 FD 6E 09      [19] 2906 	ld	l, 9 (iy)
+   9336 DD 7E 06      [19] 2907 	ld	a, 6 (ix)
+   9339 07            [ 4] 2908 	rlca
+   933A 07            [ 4] 2909 	rlca
+   933B 07            [ 4] 2910 	rlca
+   933C 07            [ 4] 2911 	rlca
+   933D E6 F0         [ 7] 2912 	and	a, #0xf0
+   933F 5F            [ 4] 2913 	ld	e, a
+   9340 7D            [ 4] 2914 	ld	a, l
+   9341 93            [ 4] 2915 	sub	a, e
+   9342 57            [ 4] 2916 	ld	d, a
+   9343 69            [ 4] 2917 	ld	l, c
+   9344 60            [ 4] 2918 	ld	h, b
+   9345 01 07 00      [10] 2919 	ld	bc, #0x0007
+   9348 09            [11] 2920 	add	hl, bc
+   9349 4E            [ 7] 2921 	ld	c, (hl)
+   934A 23            [ 6] 2922 	inc	hl
+   934B 46            [ 7] 2923 	ld	b, (hl)
+   934C DD 6E 05      [19] 2924 	ld	l, 5 (ix)
+   934F 26 00         [ 7] 2925 	ld	h, #0x00
+   9351 29            [11] 2926 	add	hl, hl
+   9352 29            [11] 2927 	add	hl, hl
+   9353 29            [11] 2928 	add	hl, hl
+   9354 29            [11] 2929 	add	hl, hl
+   9355 E3            [19] 2930 	ex	(sp), hl
+   9356 79            [ 4] 2931 	ld	a, c
+   9357 DD 96 FB      [19] 2932 	sub	a, -5 (ix)
+   935A 4F            [ 4] 2933 	ld	c, a
+   935B 78            [ 4] 2934 	ld	a, b
+   935C DD 9E FC      [19] 2935 	sbc	a, -4 (ix)
+   935F 47            [ 4] 2936 	ld	b, a
+   9360 D5            [11] 2937 	push	de
+   9361 3E 03         [ 7] 2938 	ld	a, #0x03
+   9363 F5            [11] 2939 	push	af
+   9364 33            [ 6] 2940 	inc	sp
+   9365 D5            [11] 2941 	push	de
+   9366 33            [ 6] 2942 	inc	sp
+   9367 C5            [11] 2943 	push	bc
+   9368 CD 7F 8E      [17] 2944 	call	_setPixel
+   936B F1            [10] 2945 	pop	af
+   936C F1            [10] 2946 	pop	af
+   936D D1            [10] 2947 	pop	de
+                           2948 ;src/game/world.c:527: setPixel(trainList[i].animOldX-x_*TILESIZE_H,trainList[i].animOldY-y_*TILESIZE_H, 2);
+   936E FD 21 1D 83   [14] 2949 	ld	iy, #_trainList
+   9372 FD 7E 00      [19] 2950 	ld	a, 0 (iy)
+   9375 DD 86 FD      [19] 2951 	add	a, -3 (ix)
+   9378 4F            [ 4] 2952 	ld	c, a
+   9379 FD 7E 01      [19] 2953 	ld	a, 1 (iy)
+   937C DD 8E FE      [19] 2954 	adc	a, -2 (ix)
+   937F 47            [ 4] 2955 	ld	b, a
+   9380 C5            [11] 2956 	push	bc
+   9381 FD E1         [14] 2957 	pop	iy
+   9383 FD 7E 0D      [19] 2958 	ld	a, 13 (iy)
+   9386 93            [ 4] 2959 	sub	a, e
+   9387 57            [ 4] 2960 	ld	d, a
+   9388 69            [ 4] 2961 	ld	l, c
+   9389 60            [ 4] 2962 	ld	h, b
+   938A 01 0B 00      [10] 2963 	ld	bc, #0x000b
+   938D 09            [11] 2964 	add	hl, bc
+   938E 4E            [ 7] 2965 	ld	c, (hl)
+   938F 23            [ 6] 2966 	inc	hl
+   9390 46            [ 7] 2967 	ld	b, (hl)
+   9391 79            [ 4] 2968 	ld	a, c
+   9392 DD 96 FB      [19] 2969 	sub	a, -5 (ix)
+   9395 4F            [ 4] 2970 	ld	c, a
+   9396 78            [ 4] 2971 	ld	a, b
+   9397 DD 9E FC      [19] 2972 	sbc	a, -4 (ix)
+   939A 47            [ 4] 2973 	ld	b, a
+   939B 3E 02         [ 7] 2974 	ld	a, #0x02
+   939D F5            [11] 2975 	push	af
+   939E 33            [ 6] 2976 	inc	sp
+   939F D5            [11] 2977 	push	de
+   93A0 33            [ 6] 2978 	inc	sp
+   93A1 C5            [11] 2979 	push	bc
+   93A2 CD 7F 8E      [17] 2980 	call	_setPixel
+   93A5 DD F9         [10] 2981 	ld	sp,ix
+   93A7 DD E1         [14] 2982 	pop	ix
+   93A9 C9            [10] 2983 	ret
+                           2984 ;src/game/world.c:530: void drawTrains(u8 x_, u8 y_)
+                           2985 ;	---------------------------------
+                           2986 ; Function drawTrains
+                           2987 ; ---------------------------------
+   93AA                    2988 _drawTrains::
+   93AA DD E5         [15] 2989 	push	ix
+   93AC DD 21 00 00   [14] 2990 	ld	ix,#0
+   93B0 DD 39         [15] 2991 	add	ix,sp
+   93B2 21 D8 FF      [10] 2992 	ld	hl, #-40
+   93B5 39            [11] 2993 	add	hl, sp
+   93B6 F9            [ 6] 2994 	ld	sp, hl
+                           2995 ;src/game/world.c:539: for(i=0; i<nbTrainList; i++)
+   93B7 DD 7E 05      [19] 2996 	ld	a, 5 (ix)
+   93BA 07            [ 4] 2997 	rlca
+   93BB 07            [ 4] 2998 	rlca
+   93BC 07            [ 4] 2999 	rlca
+   93BD 07            [ 4] 3000 	rlca
+   93BE E6 F0         [ 7] 3001 	and	a, #0xf0
+   93C0 DD 77 E7      [19] 3002 	ld	-25 (ix), a
+   93C3 DD 36 E6 00   [19] 3003 	ld	-26 (ix), #0x00
+   93C7                    3004 00163$:
+   93C7 21 22 83      [10] 3005 	ld	hl, #_nbTrainList
+   93CA DD 7E E6      [19] 3006 	ld	a, -26 (ix)
+   93CD 96            [ 7] 3007 	sub	a, (hl)
+   93CE D2 1F 9D      [10] 3008 	jp	NC, 00165$
+                           3009 ;src/game/world.c:542: if(trainList[i].posX-x_ < NBTILE_W && trainList[i].posY-y_ < NBTILE_H && trainList[i].posX-x_ >= 0 && trainList[i].posY-y_ >= 0 )
+   93D1 DD 7E E6      [19] 3010 	ld	a, -26 (ix)
+   93D4 DD 77 E8      [19] 3011 	ld	-24 (ix), a
+   93D7 DD 36 E9 00   [19] 3012 	ld	-23 (ix), #0x00
+   93DB 3E 05         [ 7] 3013 	ld	a, #0x04+1
+   93DD 18 08         [12] 3014 	jr	00319$
+   93DF                    3015 00318$:
+   93DF DD CB E8 26   [23] 3016 	sla	-24 (ix)
+   93E3 DD CB E9 16   [23] 3017 	rl	-23 (ix)
+   93E7                    3018 00319$:
+   93E7 3D            [ 4] 3019 	dec	a
+   93E8 20 F5         [12] 3020 	jr	NZ,00318$
+   93EA FD 21 1D 83   [14] 3021 	ld	iy, #_trainList
+   93EE FD 7E 00      [19] 3022 	ld	a, 0 (iy)
+   93F1 DD 86 E8      [19] 3023 	add	a, -24 (ix)
+   93F4 DD 77 EA      [19] 3024 	ld	-22 (ix), a
+   93F7 FD 7E 01      [19] 3025 	ld	a, 1 (iy)
+   93FA DD 8E E9      [19] 3026 	adc	a, -23 (ix)
+   93FD DD 77 EB      [19] 3027 	ld	-21 (ix), a
+   9400 DD 7E EA      [19] 3028 	ld	a, -22 (ix)
+   9403 DD 77 EC      [19] 3029 	ld	-20 (ix), a
+   9406 DD 7E EB      [19] 3030 	ld	a, -21 (ix)
+   9409 DD 77 ED      [19] 3031 	ld	-19 (ix), a
+   940C DD 6E EC      [19] 3032 	ld	l,-20 (ix)
+   940F DD 66 ED      [19] 3033 	ld	h,-19 (ix)
+   9412 11 04 00      [10] 3034 	ld	de, #0x0004
+   9415 19            [11] 3035 	add	hl, de
+   9416 7E            [ 7] 3036 	ld	a, (hl)
+   9417 DD 77 EC      [19] 3037 	ld	-20 (ix), a
+   941A DD 77 EC      [19] 3038 	ld	-20 (ix), a
+   941D DD 36 ED 00   [19] 3039 	ld	-19 (ix), #0x00
+   9421 DD 7E 04      [19] 3040 	ld	a, 4 (ix)
+   9424 DD 77 EE      [19] 3041 	ld	-18 (ix), a
+   9427 DD 36 EF 00   [19] 3042 	ld	-17 (ix), #0x00
+   942B DD 7E EC      [19] 3043 	ld	a, -20 (ix)
+   942E DD 96 EE      [19] 3044 	sub	a, -18 (ix)
+   9431 DD 77 EC      [19] 3045 	ld	-20 (ix), a
+   9434 DD 7E ED      [19] 3046 	ld	a, -19 (ix)
+   9437 DD 9E EF      [19] 3047 	sbc	a, -17 (ix)
+   943A DD 77 ED      [19] 3048 	ld	-19 (ix), a
+   943D DD 7E 05      [19] 3049 	ld	a, 5 (ix)
+   9440 DD 77 F0      [19] 3050 	ld	-16 (ix), a
+   9443 DD 36 F1 00   [19] 3051 	ld	-15 (ix), #0x00
+                           3052 ;src/game/world.c:627: cpct_drawStringM1 (buff, SCR_VMEM, 0, 1);
+   9447 DD 7E E4      [19] 3053 	ld	a, -28 (ix)
+   944A DD 77 F2      [19] 3054 	ld	-14 (ix), a
+   944D DD 7E E5      [19] 3055 	ld	a, -27 (ix)
+   9450 DD 77 F3      [19] 3056 	ld	-13 (ix), a
+                           3057 ;src/game/world.c:542: if(trainList[i].posX-x_ < NBTILE_W && trainList[i].posY-y_ < NBTILE_H && trainList[i].posX-x_ >= 0 && trainList[i].posY-y_ >= 0 )
+   9453 DD 7E EC      [19] 3058 	ld	a, -20 (ix)
+   9456 D6 14         [ 7] 3059 	sub	a, #0x14
+   9458 DD 7E ED      [19] 3060 	ld	a, -19 (ix)
+   945B 17            [ 4] 3061 	rla
+   945C 3F            [ 4] 3062 	ccf
+   945D 1F            [ 4] 3063 	rra
+   945E DE 80         [ 7] 3064 	sbc	a, #0x80
+   9460 D2 30 9B      [10] 3065 	jp	NC, 00156$
+   9463 DD 6E EA      [19] 3066 	ld	l,-22 (ix)
+   9466 DD 66 EB      [19] 3067 	ld	h,-21 (ix)
+   9469 11 05 00      [10] 3068 	ld	de, #0x0005
+   946C 19            [11] 3069 	add	hl, de
+   946D 4E            [ 7] 3070 	ld	c, (hl)
+   946E 06 00         [ 7] 3071 	ld	b, #0x00
+   9470 79            [ 4] 3072 	ld	a, c
+   9471 DD 96 F0      [19] 3073 	sub	a, -16 (ix)
+   9474 4F            [ 4] 3074 	ld	c, a
+   9475 78            [ 4] 3075 	ld	a, b
+   9476 DD 9E F1      [19] 3076 	sbc	a, -15 (ix)
+   9479 47            [ 4] 3077 	ld	b, a
+   947A 79            [ 4] 3078 	ld	a, c
+   947B D6 0C         [ 7] 3079 	sub	a, #0x0c
+   947D 78            [ 4] 3080 	ld	a, b
+   947E 17            [ 4] 3081 	rla
+   947F 3F            [ 4] 3082 	ccf
+   9480 1F            [ 4] 3083 	rra
+   9481 DE 80         [ 7] 3084 	sbc	a, #0x80
+   9483 D2 30 9B      [10] 3085 	jp	NC, 00156$
+   9486 DD CB ED 7E   [20] 3086 	bit	7, -19 (ix)
+   948A C2 30 9B      [10] 3087 	jp	NZ, 00156$
+   948D CB 78         [ 8] 3088 	bit	7, b
+   948F C2 30 9B      [10] 3089 	jp	NZ, 00156$
+                           3090 ;src/game/world.c:545: animPixX = trainList[i].animX-x_*TILESIZE_H;
+   9492 DD 6E EA      [19] 3091 	ld	l,-22 (ix)
+   9495 DD 66 EB      [19] 3092 	ld	h,-21 (ix)
+   9498 11 07 00      [10] 3093 	ld	de, #0x0007
+   949B 19            [11] 3094 	add	hl, de
+   949C 4E            [ 7] 3095 	ld	c, (hl)
+   949D 23            [ 6] 3096 	inc	hl
+   949E 46            [ 7] 3097 	ld	b, (hl)
+   949F DD 7E EE      [19] 3098 	ld	a, -18 (ix)
+   94A2 DD 77 EC      [19] 3099 	ld	-20 (ix), a
+   94A5 DD 7E EF      [19] 3100 	ld	a, -17 (ix)
+   94A8 DD 77 ED      [19] 3101 	ld	-19 (ix), a
+   94AB 3E 05         [ 7] 3102 	ld	a, #0x04+1
+   94AD 18 08         [12] 3103 	jr	00321$
+   94AF                    3104 00320$:
+   94AF DD CB EC 26   [23] 3105 	sla	-20 (ix)
+   94B3 DD CB ED 16   [23] 3106 	rl	-19 (ix)
+   94B7                    3107 00321$:
+   94B7 3D            [ 4] 3108 	dec	a
+   94B8 20 F5         [12] 3109 	jr	NZ,00320$
+   94BA 79            [ 4] 3110 	ld	a, c
+   94BB DD 96 EC      [19] 3111 	sub	a, -20 (ix)
+   94BE DD 77 F4      [19] 3112 	ld	-12 (ix), a
+   94C1 78            [ 4] 3113 	ld	a, b
+   94C2 DD 9E ED      [19] 3114 	sbc	a, -19 (ix)
+   94C5 DD 77 F5      [19] 3115 	ld	-11 (ix), a
+                           3116 ;src/game/world.c:546: animPixY = trainList[i].animY-y_*TILESIZE_H;
+   94C8 DD 6E EA      [19] 3117 	ld	l,-22 (ix)
+   94CB DD 66 EB      [19] 3118 	ld	h,-21 (ix)
+   94CE 11 09 00      [10] 3119 	ld	de, #0x0009
+   94D1 19            [11] 3120 	add	hl, de
+   94D2 4E            [ 7] 3121 	ld	c, (hl)
+   94D3 23            [ 6] 3122 	inc	hl
+   94D4 46            [ 7] 3123 	ld	b, (hl)
+   94D5 DD 7E F0      [19] 3124 	ld	a, -16 (ix)
+   94D8 DD 77 F7      [19] 3125 	ld	-9 (ix), a
+   94DB DD 7E F1      [19] 3126 	ld	a, -15 (ix)
+   94DE DD 77 F8      [19] 3127 	ld	-8 (ix), a
+   94E1 3E 05         [ 7] 3128 	ld	a, #0x04+1
+   94E3 18 08         [12] 3129 	jr	00323$
+   94E5                    3130 00322$:
+   94E5 DD CB F7 26   [23] 3131 	sla	-9 (ix)
+   94E9 DD CB F8 16   [23] 3132 	rl	-8 (ix)
+   94ED                    3133 00323$:
+   94ED 3D            [ 4] 3134 	dec	a
+   94EE 20 F5         [12] 3135 	jr	NZ,00322$
+   94F0 79            [ 4] 3136 	ld	a, c
+   94F1 DD 96 F7      [19] 3137 	sub	a, -9 (ix)
+   94F4 DD 77 FD      [19] 3138 	ld	-3 (ix), a
+   94F7 78            [ 4] 3139 	ld	a, b
+   94F8 DD 9E F8      [19] 3140 	sbc	a, -8 (ix)
+   94FB DD 77 FE      [19] 3141 	ld	-2 (ix), a
+                           3142 ;src/game/world.c:548: setPixel(animPixX, animPixY, 3);
+   94FE DD 7E FD      [19] 3143 	ld	a, -3 (ix)
+   9501 DD 77 FF      [19] 3144 	ld	-1 (ix), a
+   9504 3E 03         [ 7] 3145 	ld	a, #0x03
+   9506 F5            [11] 3146 	push	af
+   9507 33            [ 6] 3147 	inc	sp
+   9508 DD 7E FF      [19] 3148 	ld	a, -1 (ix)
+   950B F5            [11] 3149 	push	af
+   950C 33            [ 6] 3150 	inc	sp
+   950D DD 6E F4      [19] 3151 	ld	l,-12 (ix)
+   9510 DD 66 F5      [19] 3152 	ld	h,-11 (ix)
+   9513 E5            [11] 3153 	push	hl
+   9514 CD 7F 8E      [17] 3154 	call	_setPixel
+   9517 F1            [10] 3155 	pop	af
+   9518 F1            [10] 3156 	pop	af
+                           3157 ;src/game/world.c:549: setPixel(trainList[i].animOldX-x_*TILESIZE_H,trainList[i].animOldY-y_*TILESIZE_H, 2);
+   9519 FD 2A 1D 83   [20] 3158 	ld	iy, (_trainList)
+   951D DD 5E E8      [19] 3159 	ld	e,-24 (ix)
+   9520 DD 56 E9      [19] 3160 	ld	d,-23 (ix)
+   9523 FD 19         [15] 3161 	add	iy, de
+   9525 FD E5         [15] 3162 	push	iy
+   9527 E1            [10] 3163 	pop	hl
+   9528 11 0D 00      [10] 3164 	ld	de, #0x000d
+   952B 19            [11] 3165 	add	hl, de
+   952C 4E            [ 7] 3166 	ld	c, (hl)
+   952D 23            [ 6] 3167 	inc	hl
+   952E 46            [ 7] 3168 	ld	b, (hl)
+   952F DD 7E E7      [19] 3169 	ld	a, -25 (ix)
+   9532 DD 77 F6      [19] 3170 	ld	-10 (ix), a
+   9535 79            [ 4] 3171 	ld	a, c
+   9536 DD 96 F6      [19] 3172 	sub	a, -10 (ix)
+   9539 57            [ 4] 3173 	ld	d, a
+   953A FD E5         [15] 3174 	push	iy
+   953C E1            [10] 3175 	pop	hl
+   953D 01 0B 00      [10] 3176 	ld	bc, #0x000b
+   9540 09            [11] 3177 	add	hl, bc
+   9541 4E            [ 7] 3178 	ld	c, (hl)
+   9542 23            [ 6] 3179 	inc	hl
+   9543 46            [ 7] 3180 	ld	b, (hl)
+   9544 79            [ 4] 3181 	ld	a, c
+   9545 DD 96 EC      [19] 3182 	sub	a, -20 (ix)
+   9548 4F            [ 4] 3183 	ld	c, a
+   9549 78            [ 4] 3184 	ld	a, b
+   954A DD 9E ED      [19] 3185 	sbc	a, -19 (ix)
+   954D 47            [ 4] 3186 	ld	b, a
+   954E 3E 02         [ 7] 3187 	ld	a, #0x02
+   9550 F5            [11] 3188 	push	af
+   9551 33            [ 6] 3189 	inc	sp
+   9552 D5            [11] 3190 	push	de
+   9553 33            [ 6] 3191 	inc	sp
+   9554 C5            [11] 3192 	push	bc
+   9555 CD 7F 8E      [17] 3193 	call	_setPixel
+   9558 F1            [10] 3194 	pop	af
+   9559 F1            [10] 3195 	pop	af
+                           3196 ;src/game/world.c:552: oldTrainX = trainList[i].animOldX;
+   955A FD 21 1D 83   [14] 3197 	ld	iy, #_trainList
+   955E FD 7E 00      [19] 3198 	ld	a, 0 (iy)
+   9561 DD 86 E8      [19] 3199 	add	a, -24 (ix)
+   9564 5F            [ 4] 3200 	ld	e, a
+   9565 FD 7E 01      [19] 3201 	ld	a, 1 (iy)
+   9568 DD 8E E9      [19] 3202 	adc	a, -23 (ix)
+   956B 57            [ 4] 3203 	ld	d, a
+   956C 21 0B 00      [10] 3204 	ld	hl, #0x000b
+   956F 19            [11] 3205 	add	hl,de
+   9570 4D            [ 4] 3206 	ld	c, l
+   9571 44            [ 4] 3207 	ld	b, h
+   9572 0A            [ 7] 3208 	ld	a, (bc)
+   9573 DD 77 E2      [19] 3209 	ld	-30 (ix), a
+   9576 03            [ 6] 3210 	inc	bc
+   9577 0A            [ 7] 3211 	ld	a, (bc)
+   9578 DD 77 E3      [19] 3212 	ld	-29 (ix), a
+   957B 0B            [ 6] 3213 	dec	bc
+                           3214 ;src/game/world.c:553: oldTrainY = trainList[i].animOldY;
+   957C D5            [11] 3215 	push	de
+   957D FD E1         [14] 3216 	pop	iy
+   957F FD 7E 0D      [19] 3217 	ld	a, 13 (iy)
+   9582 DD 77 E0      [19] 3218 	ld	-32 (ix), a
+   9585 FD 7E 0E      [19] 3219 	ld	a, 14 (iy)
+   9588 DD 77 E1      [19] 3220 	ld	-31 (ix), a
+                           3221 ;src/game/world.c:554: trainList[i].animOldX = trainList[i].animX;
+   958B EB            [ 4] 3222 	ex	de,hl
+   958C 11 07 00      [10] 3223 	ld	de, #0x0007
+   958F 19            [11] 3224 	add	hl, de
+   9590 5E            [ 7] 3225 	ld	e, (hl)
+   9591 23            [ 6] 3226 	inc	hl
+   9592 56            [ 7] 3227 	ld	d, (hl)
+   9593 7B            [ 4] 3228 	ld	a, e
+   9594 02            [ 7] 3229 	ld	(bc), a
+   9595 03            [ 6] 3230 	inc	bc
+   9596 7A            [ 4] 3231 	ld	a, d
+   9597 02            [ 7] 3232 	ld	(bc), a
+                           3233 ;src/game/world.c:555: trainList[i].animOldY = trainList[i].animY;
+   9598 FD 21 1D 83   [14] 3234 	ld	iy, #_trainList
+   959C FD 7E 00      [19] 3235 	ld	a, 0 (iy)
+   959F DD 86 E8      [19] 3236 	add	a, -24 (ix)
+   95A2 5F            [ 4] 3237 	ld	e, a
+   95A3 FD 7E 01      [19] 3238 	ld	a, 1 (iy)
+   95A6 DD 8E E9      [19] 3239 	adc	a, -23 (ix)
+   95A9 57            [ 4] 3240 	ld	d, a
+   95AA 21 0D 00      [10] 3241 	ld	hl, #0x000d
+   95AD 19            [11] 3242 	add	hl,de
+   95AE 4D            [ 4] 3243 	ld	c, l
+   95AF 44            [ 4] 3244 	ld	b, h
+   95B0 EB            [ 4] 3245 	ex	de,hl
+   95B1 11 09 00      [10] 3246 	ld	de, #0x0009
+   95B4 19            [11] 3247 	add	hl, de
+   95B5 5E            [ 7] 3248 	ld	e, (hl)
+   95B6 23            [ 6] 3249 	inc	hl
+   95B7 56            [ 7] 3250 	ld	d, (hl)
+   95B8 7B            [ 4] 3251 	ld	a, e
+   95B9 02            [ 7] 3252 	ld	(bc), a
+   95BA 03            [ 6] 3253 	inc	bc
+   95BB 7A            [ 4] 3254 	ld	a, d
+   95BC 02            [ 7] 3255 	ld	(bc), a
+                           3256 ;src/game/world.c:558: if( isPixelBlack(animPixX +1, animPixY) )
+   95BD DD 7E F4      [19] 3257 	ld	a, -12 (ix)
+   95C0 C6 01         [ 7] 3258 	add	a, #0x01
+   95C2 DD 77 F9      [19] 3259 	ld	-7 (ix), a
+   95C5 DD 7E F5      [19] 3260 	ld	a, -11 (ix)
+   95C8 CE 00         [ 7] 3261 	adc	a, #0x00
+   95CA DD 77 FA      [19] 3262 	ld	-6 (ix), a
+   95CD DD 7E FF      [19] 3263 	ld	a, -1 (ix)
+   95D0 F5            [11] 3264 	push	af
+   95D1 33            [ 6] 3265 	inc	sp
+   95D2 DD 6E F9      [19] 3266 	ld	l,-7 (ix)
+   95D5 DD 66 FA      [19] 3267 	ld	h,-6 (ix)
+   95D8 E5            [11] 3268 	push	hl
+   95D9 CD 58 8F      [17] 3269 	call	_isPixelBlack
+   95DC F1            [10] 3270 	pop	af
+   95DD 33            [ 6] 3271 	inc	sp
+   95DE 7D            [ 4] 3272 	ld	a, l
+   95DF B7            [ 4] 3273 	or	a, a
+   95E0 28 22         [12] 3274 	jr	Z,00122$
+                           3275 ;src/game/world.c:559: trainList[i].animX+=1;
+   95E2 FD 21 1D 83   [14] 3276 	ld	iy, #_trainList
+   95E6 FD 7E 00      [19] 3277 	ld	a, 0 (iy)
+   95E9 DD 86 E8      [19] 3278 	add	a, -24 (ix)
+   95EC 4F            [ 4] 3279 	ld	c, a
+   95ED FD 7E 01      [19] 3280 	ld	a, 1 (iy)
+   95F0 DD 8E E9      [19] 3281 	adc	a, -23 (ix)
+   95F3 47            [ 4] 3282 	ld	b, a
+   95F4 21 07 00      [10] 3283 	ld	hl, #0x0007
+   95F7 09            [11] 3284 	add	hl, bc
+   95F8 E5            [11] 3285 	push	hl
+   95F9 4E            [ 7] 3286 	ld	c, (hl)
+   95FA 23            [ 6] 3287 	inc	hl
+   95FB 46            [ 7] 3288 	ld	b, (hl)
+   95FC E1            [10] 3289 	pop	hl
+   95FD 03            [ 6] 3290 	inc	bc
+   95FE 71            [ 7] 3291 	ld	(hl), c
+   95FF 23            [ 6] 3292 	inc	hl
+   9600 70            [ 7] 3293 	ld	(hl), b
+   9601 C3 00 98      [10] 3294 	jp	00123$
+   9604                    3295 00122$:
+                           3296 ;src/game/world.c:560: else if( isPixelBlack(animPixX -1, animPixY) )
+   9604 DD 7E F4      [19] 3297 	ld	a, -12 (ix)
+   9607 C6 FF         [ 7] 3298 	add	a, #0xff
+   9609 DD 77 FB      [19] 3299 	ld	-5 (ix), a
+   960C DD 7E F5      [19] 3300 	ld	a, -11 (ix)
+   960F CE FF         [ 7] 3301 	adc	a, #0xff
+   9611 DD 77 FC      [19] 3302 	ld	-4 (ix), a
+   9614 DD 7E FF      [19] 3303 	ld	a, -1 (ix)
+   9617 F5            [11] 3304 	push	af
+   9618 33            [ 6] 3305 	inc	sp
+   9619 DD 6E FB      [19] 3306 	ld	l,-5 (ix)
+   961C DD 66 FC      [19] 3307 	ld	h,-4 (ix)
+   961F E5            [11] 3308 	push	hl
+   9620 CD 58 8F      [17] 3309 	call	_isPixelBlack
+   9623 F1            [10] 3310 	pop	af
+   9624 33            [ 6] 3311 	inc	sp
+   9625 7D            [ 4] 3312 	ld	a, l
+   9626 B7            [ 4] 3313 	or	a, a
+   9627 28 22         [12] 3314 	jr	Z,00119$
+                           3315 ;src/game/world.c:561: trainList[i].animX-=1;
+   9629 FD 21 1D 83   [14] 3316 	ld	iy, #_trainList
+   962D FD 7E 00      [19] 3317 	ld	a, 0 (iy)
+   9630 DD 86 E8      [19] 3318 	add	a, -24 (ix)
+   9633 4F            [ 4] 3319 	ld	c, a
+   9634 FD 7E 01      [19] 3320 	ld	a, 1 (iy)
+   9637 DD 8E E9      [19] 3321 	adc	a, -23 (ix)
+   963A 47            [ 4] 3322 	ld	b, a
+   963B 21 07 00      [10] 3323 	ld	hl, #0x0007
+   963E 09            [11] 3324 	add	hl, bc
+   963F E5            [11] 3325 	push	hl
+   9640 4E            [ 7] 3326 	ld	c, (hl)
+   9641 23            [ 6] 3327 	inc	hl
+   9642 46            [ 7] 3328 	ld	b, (hl)
+   9643 E1            [10] 3329 	pop	hl
+   9644 0B            [ 6] 3330 	dec	bc
+   9645 71            [ 7] 3331 	ld	(hl), c
+   9646 23            [ 6] 3332 	inc	hl
+   9647 70            [ 7] 3333 	ld	(hl), b
+   9648 C3 00 98      [10] 3334 	jp	00123$
+   964B                    3335 00119$:
+                           3336 ;src/game/world.c:562: else if( isPixelBlack(animPixX, animPixY + 1) )
+   964B DD 4E FD      [19] 3337 	ld	c, -3 (ix)
+   964E 41            [ 4] 3338 	ld	b, c
+   964F 04            [ 4] 3339 	inc	b
+   9650 C5            [11] 3340 	push	bc
+   9651 C5            [11] 3341 	push	bc
+   9652 33            [ 6] 3342 	inc	sp
+   9653 DD 6E F4      [19] 3343 	ld	l,-12 (ix)
+   9656 DD 66 F5      [19] 3344 	ld	h,-11 (ix)
+   9659 E5            [11] 3345 	push	hl
+   965A CD 58 8F      [17] 3346 	call	_isPixelBlack
+   965D F1            [10] 3347 	pop	af
+   965E 33            [ 6] 3348 	inc	sp
+   965F C1            [10] 3349 	pop	bc
+   9660 7D            [ 4] 3350 	ld	a, l
+   9661 B7            [ 4] 3351 	or	a, a
+   9662 28 22         [12] 3352 	jr	Z,00116$
+                           3353 ;src/game/world.c:563: trainList[i].animY+=1;
+   9664 FD 21 1D 83   [14] 3354 	ld	iy, #_trainList
+   9668 FD 7E 00      [19] 3355 	ld	a, 0 (iy)
+   966B DD 86 E8      [19] 3356 	add	a, -24 (ix)
+   966E 4F            [ 4] 3357 	ld	c, a
+   966F FD 7E 01      [19] 3358 	ld	a, 1 (iy)
+   9672 DD 8E E9      [19] 3359 	adc	a, -23 (ix)
+   9675 47            [ 4] 3360 	ld	b, a
+   9676 21 09 00      [10] 3361 	ld	hl, #0x0009
+   9679 09            [11] 3362 	add	hl, bc
+   967A E5            [11] 3363 	push	hl
+   967B 4E            [ 7] 3364 	ld	c, (hl)
+   967C 23            [ 6] 3365 	inc	hl
+   967D 46            [ 7] 3366 	ld	b, (hl)
+   967E E1            [10] 3367 	pop	hl
+   967F 03            [ 6] 3368 	inc	bc
+   9680 71            [ 7] 3369 	ld	(hl), c
+   9681 23            [ 6] 3370 	inc	hl
+   9682 70            [ 7] 3371 	ld	(hl), b
+   9683 C3 00 98      [10] 3372 	jp	00123$
+   9686                    3373 00116$:
+                           3374 ;src/game/world.c:564: else if( isPixelBlack(animPixX, animPixY - 1) )
+   9686 0D            [ 4] 3375 	dec	c
+   9687 C5            [11] 3376 	push	bc
+   9688 79            [ 4] 3377 	ld	a, c
+   9689 F5            [11] 3378 	push	af
+   968A 33            [ 6] 3379 	inc	sp
+   968B DD 6E F4      [19] 3380 	ld	l,-12 (ix)
+   968E DD 66 F5      [19] 3381 	ld	h,-11 (ix)
+   9691 E5            [11] 3382 	push	hl
+   9692 CD 58 8F      [17] 3383 	call	_isPixelBlack
+   9695 F1            [10] 3384 	pop	af
+   9696 33            [ 6] 3385 	inc	sp
+   9697 C1            [10] 3386 	pop	bc
+   9698 7D            [ 4] 3387 	ld	a, l
+   9699 B7            [ 4] 3388 	or	a, a
+   969A 28 22         [12] 3389 	jr	Z,00113$
+                           3390 ;src/game/world.c:565: trainList[i].animY-=1;
+   969C FD 21 1D 83   [14] 3391 	ld	iy, #_trainList
+   96A0 FD 7E 00      [19] 3392 	ld	a, 0 (iy)
+   96A3 DD 86 E8      [19] 3393 	add	a, -24 (ix)
+   96A6 4F            [ 4] 3394 	ld	c, a
+   96A7 FD 7E 01      [19] 3395 	ld	a, 1 (iy)
+   96AA DD 8E E9      [19] 3396 	adc	a, -23 (ix)
+   96AD 47            [ 4] 3397 	ld	b, a
+   96AE 21 09 00      [10] 3398 	ld	hl, #0x0009
+   96B1 09            [11] 3399 	add	hl, bc
+   96B2 E5            [11] 3400 	push	hl
+   96B3 4E            [ 7] 3401 	ld	c, (hl)
+   96B4 23            [ 6] 3402 	inc	hl
+   96B5 46            [ 7] 3403 	ld	b, (hl)
+   96B6 E1            [10] 3404 	pop	hl
+   96B7 0B            [ 6] 3405 	dec	bc
+   96B8 71            [ 7] 3406 	ld	(hl), c
+   96B9 23            [ 6] 3407 	inc	hl
+   96BA 70            [ 7] 3408 	ld	(hl), b
+   96BB C3 00 98      [10] 3409 	jp	00123$
+   96BE                    3410 00113$:
+                           3411 ;src/game/world.c:566: else if( isPixelBlack(animPixX+1,animPixY+ 1) )
+   96BE C5            [11] 3412 	push	bc
+   96BF C5            [11] 3413 	push	bc
+   96C0 33            [ 6] 3414 	inc	sp
+   96C1 DD 6E F9      [19] 3415 	ld	l,-7 (ix)
+   96C4 DD 66 FA      [19] 3416 	ld	h,-6 (ix)
+   96C7 E5            [11] 3417 	push	hl
+   96C8 CD 58 8F      [17] 3418 	call	_isPixelBlack
+   96CB F1            [10] 3419 	pop	af
+   96CC 33            [ 6] 3420 	inc	sp
+   96CD C1            [10] 3421 	pop	bc
+   96CE 7D            [ 4] 3422 	ld	a, l
+   96CF B7            [ 4] 3423 	or	a, a
+   96D0 28 3D         [12] 3424 	jr	Z,00110$
+                           3425 ;src/game/world.c:568: trainList[i].animX+=1;
+   96D2 FD 21 1D 83   [14] 3426 	ld	iy, #_trainList
+   96D6 FD 7E 00      [19] 3427 	ld	a, 0 (iy)
+   96D9 DD 86 E8      [19] 3428 	add	a, -24 (ix)
+   96DC 4F            [ 4] 3429 	ld	c, a
+   96DD FD 7E 01      [19] 3430 	ld	a, 1 (iy)
+   96E0 DD 8E E9      [19] 3431 	adc	a, -23 (ix)
+   96E3 47            [ 4] 3432 	ld	b, a
+   96E4 21 07 00      [10] 3433 	ld	hl, #0x0007
+   96E7 09            [11] 3434 	add	hl, bc
+   96E8 E5            [11] 3435 	push	hl
+   96E9 4E            [ 7] 3436 	ld	c, (hl)
+   96EA 23            [ 6] 3437 	inc	hl
+   96EB 46            [ 7] 3438 	ld	b, (hl)
+   96EC E1            [10] 3439 	pop	hl
+   96ED 03            [ 6] 3440 	inc	bc
+   96EE 71            [ 7] 3441 	ld	(hl), c
+   96EF 23            [ 6] 3442 	inc	hl
+   96F0 70            [ 7] 3443 	ld	(hl), b
+                           3444 ;src/game/world.c:569: trainList[i].animY+=1;
+   96F1 FD 7E 00      [19] 3445 	ld	a, 0 (iy)
+   96F4 DD 86 E8      [19] 3446 	add	a, -24 (ix)
+   96F7 4F            [ 4] 3447 	ld	c, a
+   96F8 FD 7E 01      [19] 3448 	ld	a, 1 (iy)
+   96FB DD 8E E9      [19] 3449 	adc	a, -23 (ix)
+   96FE 47            [ 4] 3450 	ld	b, a
+   96FF 21 09 00      [10] 3451 	ld	hl, #0x0009
+   9702 09            [11] 3452 	add	hl, bc
+   9703 E5            [11] 3453 	push	hl
+   9704 4E            [ 7] 3454 	ld	c, (hl)
+   9705 23            [ 6] 3455 	inc	hl
+   9706 46            [ 7] 3456 	ld	b, (hl)
+   9707 E1            [10] 3457 	pop	hl
+   9708 03            [ 6] 3458 	inc	bc
+   9709 71            [ 7] 3459 	ld	(hl), c
+   970A 23            [ 6] 3460 	inc	hl
+   970B 70            [ 7] 3461 	ld	(hl), b
+   970C C3 00 98      [10] 3462 	jp	00123$
+   970F                    3463 00110$:
+                           3464 ;src/game/world.c:571: else if( isPixelBlack(animPixX+1, animPixY - 1) )
+   970F C5            [11] 3465 	push	bc
+   9710 79            [ 4] 3466 	ld	a, c
+   9711 F5            [11] 3467 	push	af
+   9712 33            [ 6] 3468 	inc	sp
+   9713 DD 6E F9      [19] 3469 	ld	l,-7 (ix)
+   9716 DD 66 FA      [19] 3470 	ld	h,-6 (ix)
+   9719 E5            [11] 3471 	push	hl
+   971A CD 58 8F      [17] 3472 	call	_isPixelBlack
+   971D F1            [10] 3473 	pop	af
+   971E 33            [ 6] 3474 	inc	sp
+   971F C1            [10] 3475 	pop	bc
+   9720 7D            [ 4] 3476 	ld	a, l
+   9721 B7            [ 4] 3477 	or	a, a
+   9722 28 3D         [12] 3478 	jr	Z,00107$
+                           3479 ;src/game/world.c:573: trainList[i].animX+=1;
+   9724 FD 21 1D 83   [14] 3480 	ld	iy, #_trainList
+   9728 FD 7E 00      [19] 3481 	ld	a, 0 (iy)
+   972B DD 86 E8      [19] 3482 	add	a, -24 (ix)
+   972E 4F            [ 4] 3483 	ld	c, a
+   972F FD 7E 01      [19] 3484 	ld	a, 1 (iy)
+   9732 DD 8E E9      [19] 3485 	adc	a, -23 (ix)
+   9735 47            [ 4] 3486 	ld	b, a
+   9736 21 07 00      [10] 3487 	ld	hl, #0x0007
+   9739 09            [11] 3488 	add	hl, bc
+   973A E5            [11] 3489 	push	hl
+   973B 4E            [ 7] 3490 	ld	c, (hl)
+   973C 23            [ 6] 3491 	inc	hl
+   973D 46            [ 7] 3492 	ld	b, (hl)
+   973E E1            [10] 3493 	pop	hl
+   973F 03            [ 6] 3494 	inc	bc
+   9740 71            [ 7] 3495 	ld	(hl), c
+   9741 23            [ 6] 3496 	inc	hl
+   9742 70            [ 7] 3497 	ld	(hl), b
+                           3498 ;src/game/world.c:574: trainList[i].animY-=1;
+   9743 FD 7E 00      [19] 3499 	ld	a, 0 (iy)
+   9746 DD 86 E8      [19] 3500 	add	a, -24 (ix)
+   9749 4F            [ 4] 3501 	ld	c, a
+   974A FD 7E 01      [19] 3502 	ld	a, 1 (iy)
+   974D DD 8E E9      [19] 3503 	adc	a, -23 (ix)
+   9750 47            [ 4] 3504 	ld	b, a
+   9751 21 09 00      [10] 3505 	ld	hl, #0x0009
+   9754 09            [11] 3506 	add	hl, bc
+   9755 E5            [11] 3507 	push	hl
+   9756 4E            [ 7] 3508 	ld	c, (hl)
+   9757 23            [ 6] 3509 	inc	hl
+   9758 46            [ 7] 3510 	ld	b, (hl)
+   9759 E1            [10] 3511 	pop	hl
+   975A 0B            [ 6] 3512 	dec	bc
+   975B 71            [ 7] 3513 	ld	(hl), c
+   975C 23            [ 6] 3514 	inc	hl
+   975D 70            [ 7] 3515 	ld	(hl), b
+   975E C3 00 98      [10] 3516 	jp	00123$
+   9761                    3517 00107$:
+                           3518 ;src/game/world.c:576: else if( isPixelBlack(animPixX-1, animPixY+ 1) )
+   9761 C5            [11] 3519 	push	bc
+   9762 C5            [11] 3520 	push	bc
+   9763 33            [ 6] 3521 	inc	sp
+   9764 DD 6E FB      [19] 3522 	ld	l,-5 (ix)
+   9767 DD 66 FC      [19] 3523 	ld	h,-4 (ix)
+   976A E5            [11] 3524 	push	hl
+   976B CD 58 8F      [17] 3525 	call	_isPixelBlack
+   976E F1            [10] 3526 	pop	af
+   976F 33            [ 6] 3527 	inc	sp
+   9770 C1            [10] 3528 	pop	bc
+   9771 7D            [ 4] 3529 	ld	a, l
+   9772 B7            [ 4] 3530 	or	a, a
+   9773 28 3C         [12] 3531 	jr	Z,00104$
+                           3532 ;src/game/world.c:578: trainList[i].animX-=1;
+   9775 FD 21 1D 83   [14] 3533 	ld	iy, #_trainList
+   9779 FD 7E 00      [19] 3534 	ld	a, 0 (iy)
+   977C DD 86 E8      [19] 3535 	add	a, -24 (ix)
+   977F 4F            [ 4] 3536 	ld	c, a
+   9780 FD 7E 01      [19] 3537 	ld	a, 1 (iy)
+   9783 DD 8E E9      [19] 3538 	adc	a, -23 (ix)
+   9786 47            [ 4] 3539 	ld	b, a
+   9787 21 07 00      [10] 3540 	ld	hl, #0x0007
+   978A 09            [11] 3541 	add	hl, bc
+   978B E5            [11] 3542 	push	hl
+   978C 4E            [ 7] 3543 	ld	c, (hl)
+   978D 23            [ 6] 3544 	inc	hl
+   978E 46            [ 7] 3545 	ld	b, (hl)
+   978F E1            [10] 3546 	pop	hl
+   9790 0B            [ 6] 3547 	dec	bc
+   9791 71            [ 7] 3548 	ld	(hl), c
+   9792 23            [ 6] 3549 	inc	hl
+   9793 70            [ 7] 3550 	ld	(hl), b
+                           3551 ;src/game/world.c:579: trainList[i].animY+=1;
+   9794 FD 7E 00      [19] 3552 	ld	a, 0 (iy)
+   9797 DD 86 E8      [19] 3553 	add	a, -24 (ix)
+   979A 4F            [ 4] 3554 	ld	c, a
+   979B FD 7E 01      [19] 3555 	ld	a, 1 (iy)
+   979E DD 8E E9      [19] 3556 	adc	a, -23 (ix)
+   97A1 47            [ 4] 3557 	ld	b, a
+   97A2 21 09 00      [10] 3558 	ld	hl, #0x0009
+   97A5 09            [11] 3559 	add	hl, bc
+   97A6 E5            [11] 3560 	push	hl
+   97A7 4E            [ 7] 3561 	ld	c, (hl)
+   97A8 23            [ 6] 3562 	inc	hl
+   97A9 46            [ 7] 3563 	ld	b, (hl)
+   97AA E1            [10] 3564 	pop	hl
+   97AB 03            [ 6] 3565 	inc	bc
+   97AC 71            [ 7] 3566 	ld	(hl), c
+   97AD 23            [ 6] 3567 	inc	hl
+   97AE 70            [ 7] 3568 	ld	(hl), b
+   97AF 18 4F         [12] 3569 	jr	00123$
+   97B1                    3570 00104$:
+                           3571 ;src/game/world.c:581: else if( isPixelBlack(animPixX-1, animPixY- 1) )
+   97B1 79            [ 4] 3572 	ld	a, c
+   97B2 F5            [11] 3573 	push	af
+   97B3 33            [ 6] 3574 	inc	sp
+   97B4 DD 6E FB      [19] 3575 	ld	l,-5 (ix)
+   97B7 DD 66 FC      [19] 3576 	ld	h,-4 (ix)
+   97BA E5            [11] 3577 	push	hl
+   97BB CD 58 8F      [17] 3578 	call	_isPixelBlack
+   97BE F1            [10] 3579 	pop	af
+   97BF 33            [ 6] 3580 	inc	sp
+   97C0 7D            [ 4] 3581 	ld	a, l
+   97C1 B7            [ 4] 3582 	or	a, a
+   97C2 28 3C         [12] 3583 	jr	Z,00123$
+                           3584 ;src/game/world.c:583: trainList[i].animX-=1;
+   97C4 FD 2A 1D 83   [20] 3585 	ld	iy, (_trainList)
+   97C8 DD 5E E8      [19] 3586 	ld	e,-24 (ix)
+   97CB DD 56 E9      [19] 3587 	ld	d,-23 (ix)
+   97CE FD 19         [15] 3588 	add	iy, de
+   97D0 11 07 00      [10] 3589 	ld	de, #0x0007
+   97D3 FD 19         [15] 3590 	add	iy, de
+   97D5 FD 4E 00      [19] 3591 	ld	c, 0 (iy)
+   97D8 FD 46 01      [19] 3592 	ld	b, 1 (iy)
+   97DB 0B            [ 6] 3593 	dec	bc
+   97DC FD 71 00      [19] 3594 	ld	0 (iy), c
+   97DF FD 70 01      [19] 3595 	ld	1 (iy), b
+                           3596 ;src/game/world.c:584: trainList[i].animY-=1;
+   97E2 FD 2A 1D 83   [20] 3597 	ld	iy, (_trainList)
+   97E6 DD 5E E8      [19] 3598 	ld	e,-24 (ix)
+   97E9 DD 56 E9      [19] 3599 	ld	d,-23 (ix)
+   97EC FD 19         [15] 3600 	add	iy, de
+   97EE 11 09 00      [10] 3601 	ld	de, #0x0009
+   97F1 FD 19         [15] 3602 	add	iy, de
+   97F3 FD 4E 00      [19] 3603 	ld	c, 0 (iy)
+   97F6 FD 46 01      [19] 3604 	ld	b, 1 (iy)
+   97F9 0B            [ 6] 3605 	dec	bc
+   97FA FD 71 00      [19] 3606 	ld	0 (iy), c
+   97FD FD 70 01      [19] 3607 	ld	1 (iy), b
+   9800                    3608 00123$:
+                           3609 ;src/game/world.c:588: actualPosX = (int)(trainList[i].animX/TILESIZE_H); // Update position in tiles coordinates
+   9800 FD 21 1D 83   [14] 3610 	ld	iy, #_trainList
+   9804 FD 7E 00      [19] 3611 	ld	a, 0 (iy)
+   9807 DD 86 E8      [19] 3612 	add	a, -24 (ix)
+   980A DD 77 FB      [19] 3613 	ld	-5 (ix), a
+   980D FD 7E 01      [19] 3614 	ld	a, 1 (iy)
+   9810 DD 8E E9      [19] 3615 	adc	a, -23 (ix)
+   9813 DD 77 FC      [19] 3616 	ld	-4 (ix), a
+   9816 DD 6E FB      [19] 3617 	ld	l,-5 (ix)
+   9819 DD 66 FC      [19] 3618 	ld	h,-4 (ix)
+   981C 11 07 00      [10] 3619 	ld	de, #0x0007
+   981F 19            [11] 3620 	add	hl, de
+   9820 4E            [ 7] 3621 	ld	c, (hl)
+   9821 23            [ 6] 3622 	inc	hl
+   9822 46            [ 7] 3623 	ld	b, (hl)
+   9823 69            [ 4] 3624 	ld	l, c
+   9824 60            [ 4] 3625 	ld	h, b
+   9825 CB 78         [ 8] 3626 	bit	7, b
+   9827 28 04         [12] 3627 	jr	Z,00167$
+   9829 21 0F 00      [10] 3628 	ld	hl, #0x000f
+   982C 09            [11] 3629 	add	hl, bc
+   982D                    3630 00167$:
+   982D DD 75 DE      [19] 3631 	ld	-34 (ix), l
+   9830 DD 74 DF      [19] 3632 	ld	-33 (ix), h
+   9833 DD CB DF 2E   [23] 3633 	sra	-33 (ix)
+   9837 DD CB DE 1E   [23] 3634 	rr	-34 (ix)
+   983B DD CB DF 2E   [23] 3635 	sra	-33 (ix)
+   983F DD CB DE 1E   [23] 3636 	rr	-34 (ix)
+   9843 DD CB DF 2E   [23] 3637 	sra	-33 (ix)
+   9847 DD CB DE 1E   [23] 3638 	rr	-34 (ix)
+   984B DD CB DF 2E   [23] 3639 	sra	-33 (ix)
+   984F DD CB DE 1E   [23] 3640 	rr	-34 (ix)
+                           3641 ;src/game/world.c:589: actualPosY = (int)(trainList[i].animY/TILESIZE_H); 
+   9853 DD 6E FB      [19] 3642 	ld	l,-5 (ix)
+   9856 DD 66 FC      [19] 3643 	ld	h,-4 (ix)
+   9859 11 09 00      [10] 3644 	ld	de, #0x0009
+   985C 19            [11] 3645 	add	hl, de
+   985D 4E            [ 7] 3646 	ld	c, (hl)
+   985E 23            [ 6] 3647 	inc	hl
+   985F 46            [ 7] 3648 	ld	b, (hl)
+   9860 69            [ 4] 3649 	ld	l, c
+   9861 60            [ 4] 3650 	ld	h, b
+   9862 CB 78         [ 8] 3651 	bit	7, b
+   9864 28 04         [12] 3652 	jr	Z,00168$
+   9866 21 0F 00      [10] 3653 	ld	hl, #0x000f
+   9869 09            [11] 3654 	add	hl, bc
+   986A                    3655 00168$:
+   986A DD 75 DC      [19] 3656 	ld	-36 (ix), l
+   986D DD 74 DD      [19] 3657 	ld	-35 (ix), h
+   9870 DD CB DD 2E   [23] 3658 	sra	-35 (ix)
+   9874 DD CB DC 1E   [23] 3659 	rr	-36 (ix)
+   9878 DD CB DD 2E   [23] 3660 	sra	-35 (ix)
+   987C DD CB DC 1E   [23] 3661 	rr	-36 (ix)
+   9880 DD CB DD 2E   [23] 3662 	sra	-35 (ix)
+   9884 DD CB DC 1E   [23] 3663 	rr	-36 (ix)
+   9888 DD CB DD 2E   [23] 3664 	sra	-35 (ix)
+   988C DD CB DC 1E   [23] 3665 	rr	-36 (ix)
+                           3666 ;src/game/world.c:590: if( actualPosX != trainList[i].posX || actualPosY != trainList[i].posY )
+   9890 DD 7E FB      [19] 3667 	ld	a, -5 (ix)
+   9893 C6 04         [ 7] 3668 	add	a, #0x04
+   9895 DD 77 F9      [19] 3669 	ld	-7 (ix), a
+   9898 DD 7E FC      [19] 3670 	ld	a, -4 (ix)
+   989B CE 00         [ 7] 3671 	adc	a, #0x00
+   989D DD 77 FA      [19] 3672 	ld	-6 (ix), a
+   98A0 DD 6E F9      [19] 3673 	ld	l,-7 (ix)
+   98A3 DD 66 FA      [19] 3674 	ld	h,-6 (ix)
+   98A6 4E            [ 7] 3675 	ld	c, (hl)
+   98A7 06 00         [ 7] 3676 	ld	b, #0x00
+   98A9 DD 7E DE      [19] 3677 	ld	a, -34 (ix)
+   98AC 91            [ 4] 3678 	sub	a, c
+   98AD 20 1F         [12] 3679 	jr	NZ,00124$
+   98AF DD 7E DF      [19] 3680 	ld	a, -33 (ix)
+   98B2 90            [ 4] 3681 	sub	a, b
+   98B3 20 19         [12] 3682 	jr	NZ,00124$
+   98B5 DD 6E FB      [19] 3683 	ld	l,-5 (ix)
+   98B8 DD 66 FC      [19] 3684 	ld	h,-4 (ix)
+   98BB 11 05 00      [10] 3685 	ld	de, #0x0005
+   98BE 19            [11] 3686 	add	hl, de
+   98BF 4E            [ 7] 3687 	ld	c, (hl)
+   98C0 06 00         [ 7] 3688 	ld	b, #0x00
+   98C2 DD 7E DC      [19] 3689 	ld	a, -36 (ix)
+   98C5 91            [ 4] 3690 	sub	a, c
+   98C6 20 06         [12] 3691 	jr	NZ,00326$
+   98C8 DD 7E DD      [19] 3692 	ld	a, -35 (ix)
+   98CB 90            [ 4] 3693 	sub	a, b
+   98CC 28 2A         [12] 3694 	jr	Z,00125$
+   98CE                    3695 00326$:
+   98CE                    3696 00124$:
+                           3697 ;src/game/world.c:592: trainList[i].posX = actualPosX; // Update position in tiles coordinates
+   98CE DD 4E DE      [19] 3698 	ld	c, -34 (ix)
+   98D1 DD 6E F9      [19] 3699 	ld	l,-7 (ix)
+   98D4 DD 66 FA      [19] 3700 	ld	h,-6 (ix)
+   98D7 71            [ 7] 3701 	ld	(hl), c
+                           3702 ;src/game/world.c:593: trainList[i].posY = actualPosY; // Update position in tiles coordinates
+   98D8 FD 2A 1D 83   [20] 3703 	ld	iy, (_trainList)
+   98DC DD 5E E8      [19] 3704 	ld	e,-24 (ix)
+   98DF DD 56 E9      [19] 3705 	ld	d,-23 (ix)
+   98E2 FD 19         [15] 3706 	add	iy, de
+   98E4 11 05 00      [10] 3707 	ld	de, #0x0005
+   98E7 FD 19         [15] 3708 	add	iy, de
+   98E9 DD 4E DC      [19] 3709 	ld	c, -36 (ix)
+   98EC FD 71 00      [19] 3710 	ld	0 (iy), c
+                           3711 ;src/game/world.c:595: setTrainHeading(i); // Calculate new heading
+   98EF DD 7E E6      [19] 3712 	ld	a, -26 (ix)
+   98F2 F5            [11] 3713 	push	af
+   98F3 33            [ 6] 3714 	inc	sp
+   98F4 CD E3 8D      [17] 3715 	call	_setTrainHeading
+   98F7 33            [ 6] 3716 	inc	sp
+   98F8                    3717 00125$:
+                           3718 ;src/game/world.c:600: animPixX = trainList[i].animX-x_*TILESIZE_H;
+   98F8 FD 21 1D 83   [14] 3719 	ld	iy, #_trainList
+   98FC FD 7E 00      [19] 3720 	ld	a, 0 (iy)
+   98FF DD 86 E8      [19] 3721 	add	a, -24 (ix)
+   9902 4F            [ 4] 3722 	ld	c, a
+   9903 FD 7E 01      [19] 3723 	ld	a, 1 (iy)
+   9906 DD 8E E9      [19] 3724 	adc	a, -23 (ix)
+   9909 47            [ 4] 3725 	ld	b, a
+   990A 69            [ 4] 3726 	ld	l, c
+   990B 60            [ 4] 3727 	ld	h, b
+   990C 11 07 00      [10] 3728 	ld	de, #0x0007
+   990F 19            [11] 3729 	add	hl, de
+   9910 5E            [ 7] 3730 	ld	e, (hl)
+   9911 23            [ 6] 3731 	inc	hl
+   9912 56            [ 7] 3732 	ld	d, (hl)
+   9913 7B            [ 4] 3733 	ld	a, e
+   9914 DD 96 EC      [19] 3734 	sub	a, -20 (ix)
+   9917 5F            [ 4] 3735 	ld	e, a
+   9918 7A            [ 4] 3736 	ld	a, d
+   9919 DD 9E ED      [19] 3737 	sbc	a, -19 (ix)
+   991C DD 73 DA      [19] 3738 	ld	-38 (ix), e
+   991F DD 77 DB      [19] 3739 	ld	-37 (ix), a
+                           3740 ;src/game/world.c:601: animPixY = trainList[i].animY-y_*TILESIZE_H;
+   9922 69            [ 4] 3741 	ld	l, c
+   9923 60            [ 4] 3742 	ld	h, b
+   9924 11 09 00      [10] 3743 	ld	de, #0x0009
+   9927 19            [11] 3744 	add	hl, de
+   9928 7E            [ 7] 3745 	ld	a, (hl)
+   9929 DD 77 FB      [19] 3746 	ld	-5 (ix), a
+   992C 23            [ 6] 3747 	inc	hl
+   992D 7E            [ 7] 3748 	ld	a, (hl)
+   992E DD 77 FC      [19] 3749 	ld	-4 (ix), a
+   9931 DD 7E FB      [19] 3750 	ld	a, -5 (ix)
+   9934 DD 96 F7      [19] 3751 	sub	a, -9 (ix)
+   9937 4F            [ 4] 3752 	ld	c, a
+   9938 DD 7E FC      [19] 3753 	ld	a, -4 (ix)
+   993B DD 9E F8      [19] 3754 	sbc	a, -8 (ix)
+   993E 47            [ 4] 3755 	ld	b, a
+   993F 33            [ 6] 3756 	inc	sp
+   9940 33            [ 6] 3757 	inc	sp
+   9941 C5            [11] 3758 	push	bc
+                           3759 ;src/game/world.c:548: setPixel(animPixX, animPixY, 3);
+   9942 DD 7E D8      [19] 3760 	ld	a, -40 (ix)
+   9945 DD 77 FB      [19] 3761 	ld	-5 (ix), a
+                           3762 ;src/game/world.c:607: setPixel(oldTrainX-x_*TILESIZE_H,oldTrainY-y_*TILESIZE_H, 0);
+   9948 DD 4E E0      [19] 3763 	ld	c, -32 (ix)
+   994B DD 7E E2      [19] 3764 	ld	a, -30 (ix)
+   994E DD 96 EC      [19] 3765 	sub	a, -20 (ix)
+   9951 DD 77 F9      [19] 3766 	ld	-7 (ix), a
+   9954 DD 7E E3      [19] 3767 	ld	a, -29 (ix)
+   9957 DD 9E ED      [19] 3768 	sbc	a, -19 (ix)
+   995A DD 77 FA      [19] 3769 	ld	-6 (ix), a
+   995D 79            [ 4] 3770 	ld	a, c
+   995E DD 96 F6      [19] 3771 	sub	a, -10 (ix)
+   9961 DD 77 FF      [19] 3772 	ld	-1 (ix), a
+                           3773 ;src/game/world.c:603: if(animPixX>0 && animPixY>0 && animPixX<319 && animPixY<192)
+   9964 AF            [ 4] 3774 	xor	a, a
+   9965 DD BE DA      [19] 3775 	cp	a, -38 (ix)
+   9968 DD 9E DB      [19] 3776 	sbc	a, -37 (ix)
+   996B E2 70 99      [10] 3777 	jp	PO, 00327$
+   996E EE 80         [ 7] 3778 	xor	a, #0x80
+   9970                    3779 00327$:
+   9970 F2 07 9A      [10] 3780 	jp	P, 00128$
+   9973 AF            [ 4] 3781 	xor	a, a
+   9974 DD BE D8      [19] 3782 	cp	a, -40 (ix)
+   9977 DD 9E D9      [19] 3783 	sbc	a, -39 (ix)
+   997A E2 7F 99      [10] 3784 	jp	PO, 00328$
+   997D EE 80         [ 7] 3785 	xor	a, #0x80
+   997F                    3786 00328$:
+   997F F2 07 9A      [10] 3787 	jp	P, 00128$
+   9982 DD 7E DA      [19] 3788 	ld	a, -38 (ix)
+   9985 D6 3F         [ 7] 3789 	sub	a, #0x3f
+   9987 DD 7E DB      [19] 3790 	ld	a, -37 (ix)
+   998A 17            [ 4] 3791 	rla
+   998B 3F            [ 4] 3792 	ccf
+   998C 1F            [ 4] 3793 	rra
+   998D DE 81         [ 7] 3794 	sbc	a, #0x81
+   998F 30 76         [12] 3795 	jr	NC,00128$
+   9991 DD 7E D8      [19] 3796 	ld	a, -40 (ix)
+   9994 D6 C0         [ 7] 3797 	sub	a, #0xc0
+   9996 DD 7E D9      [19] 3798 	ld	a, -39 (ix)
+   9999 17            [ 4] 3799 	rla
+   999A 3F            [ 4] 3800 	ccf
+   999B 1F            [ 4] 3801 	rra
+   999C DE 80         [ 7] 3802 	sbc	a, #0x80
+   999E 30 67         [12] 3803 	jr	NC,00128$
+                           3804 ;src/game/world.c:605: setPixel(animPixX,animPixY, 3);
+   99A0 3E 03         [ 7] 3805 	ld	a, #0x03
+   99A2 F5            [11] 3806 	push	af
+   99A3 33            [ 6] 3807 	inc	sp
+   99A4 DD 7E FB      [19] 3808 	ld	a, -5 (ix)
+   99A7 F5            [11] 3809 	push	af
+   99A8 33            [ 6] 3810 	inc	sp
+   99A9 DD 6E DA      [19] 3811 	ld	l,-38 (ix)
+   99AC DD 66 DB      [19] 3812 	ld	h,-37 (ix)
+   99AF E5            [11] 3813 	push	hl
+   99B0 CD 7F 8E      [17] 3814 	call	_setPixel
+   99B3 F1            [10] 3815 	pop	af
+   99B4 F1            [10] 3816 	pop	af
+                           3817 ;src/game/world.c:606: setPixel(trainList[i].animOldX-x_*TILESIZE_H,trainList[i].animOldY-y_*TILESIZE_H, 2);
+   99B5 FD 2A 1D 83   [20] 3818 	ld	iy, (_trainList)
+   99B9 DD 5E E8      [19] 3819 	ld	e,-24 (ix)
+   99BC DD 56 E9      [19] 3820 	ld	d,-23 (ix)
+   99BF FD 19         [15] 3821 	add	iy, de
+   99C1 FD E5         [15] 3822 	push	iy
+   99C3 E1            [10] 3823 	pop	hl
+   99C4 11 0D 00      [10] 3824 	ld	de, #0x000d
+   99C7 19            [11] 3825 	add	hl, de
+   99C8 4E            [ 7] 3826 	ld	c, (hl)
+   99C9 23            [ 6] 3827 	inc	hl
+   99CA 46            [ 7] 3828 	ld	b, (hl)
+   99CB 79            [ 4] 3829 	ld	a, c
+   99CC DD 96 F6      [19] 3830 	sub	a, -10 (ix)
+   99CF 57            [ 4] 3831 	ld	d, a
+   99D0 FD E5         [15] 3832 	push	iy
+   99D2 E1            [10] 3833 	pop	hl
+   99D3 01 0B 00      [10] 3834 	ld	bc, #0x000b
+   99D6 09            [11] 3835 	add	hl, bc
+   99D7 4E            [ 7] 3836 	ld	c, (hl)
+   99D8 23            [ 6] 3837 	inc	hl
+   99D9 46            [ 7] 3838 	ld	b, (hl)
+   99DA 79            [ 4] 3839 	ld	a, c
+   99DB DD 96 EC      [19] 3840 	sub	a, -20 (ix)
+   99DE 4F            [ 4] 3841 	ld	c, a
+   99DF 78            [ 4] 3842 	ld	a, b
+   99E0 DD 9E ED      [19] 3843 	sbc	a, -19 (ix)
+   99E3 47            [ 4] 3844 	ld	b, a
+   99E4 3E 02         [ 7] 3845 	ld	a, #0x02
+   99E6 F5            [11] 3846 	push	af
+   99E7 33            [ 6] 3847 	inc	sp
+   99E8 D5            [11] 3848 	push	de
+   99E9 33            [ 6] 3849 	inc	sp
+   99EA C5            [11] 3850 	push	bc
+   99EB CD 7F 8E      [17] 3851 	call	_setPixel
+   99EE F1            [10] 3852 	pop	af
+   99EF F1            [10] 3853 	pop	af
+                           3854 ;src/game/world.c:607: setPixel(oldTrainX-x_*TILESIZE_H,oldTrainY-y_*TILESIZE_H, 0);
+   99F0 AF            [ 4] 3855 	xor	a, a
+   99F1 F5            [11] 3856 	push	af
+   99F2 33            [ 6] 3857 	inc	sp
+   99F3 DD 7E FF      [19] 3858 	ld	a, -1 (ix)
+   99F6 F5            [11] 3859 	push	af
+   99F7 33            [ 6] 3860 	inc	sp
+   99F8 DD 6E F9      [19] 3861 	ld	l,-7 (ix)
+   99FB DD 66 FA      [19] 3862 	ld	h,-6 (ix)
+   99FE E5            [11] 3863 	push	hl
+   99FF CD 7F 8E      [17] 3864 	call	_setPixel
+   9A02 F1            [10] 3865 	pop	af
+   9A03 F1            [10] 3866 	pop	af
+   9A04 C3 E2 9A      [10] 3867 	jp	00129$
+   9A07                    3868 00128$:
+                           3869 ;src/game/world.c:613: setPixel(animPixX,animPixY, 0);
+   9A07 AF            [ 4] 3870 	xor	a, a
+   9A08 F5            [11] 3871 	push	af
+   9A09 33            [ 6] 3872 	inc	sp
+   9A0A DD 7E FB      [19] 3873 	ld	a, -5 (ix)
+   9A0D F5            [11] 3874 	push	af
+   9A0E 33            [ 6] 3875 	inc	sp
+   9A0F DD 6E DA      [19] 3876 	ld	l,-38 (ix)
+   9A12 DD 66 DB      [19] 3877 	ld	h,-37 (ix)
+   9A15 E5            [11] 3878 	push	hl
+   9A16 CD 7F 8E      [17] 3879 	call	_setPixel
+   9A19 F1            [10] 3880 	pop	af
+   9A1A F1            [10] 3881 	pop	af
+                           3882 ;src/game/world.c:614: setPixel(trainList[i].animOldX-x_*TILESIZE_H,trainList[i].animOldY-y_*TILESIZE_H, 0);
+   9A1B FD 2A 1D 83   [20] 3883 	ld	iy, (_trainList)
+   9A1F DD 5E E8      [19] 3884 	ld	e,-24 (ix)
+   9A22 DD 56 E9      [19] 3885 	ld	d,-23 (ix)
+   9A25 FD 19         [15] 3886 	add	iy, de
+   9A27 FD E5         [15] 3887 	push	iy
+   9A29 E1            [10] 3888 	pop	hl
+   9A2A 11 0D 00      [10] 3889 	ld	de, #0x000d
+   9A2D 19            [11] 3890 	add	hl, de
+   9A2E 4E            [ 7] 3891 	ld	c, (hl)
+   9A2F 23            [ 6] 3892 	inc	hl
+   9A30 46            [ 7] 3893 	ld	b, (hl)
+   9A31 79            [ 4] 3894 	ld	a, c
+   9A32 DD 96 F6      [19] 3895 	sub	a, -10 (ix)
+   9A35 57            [ 4] 3896 	ld	d, a
+   9A36 FD E5         [15] 3897 	push	iy
+   9A38 E1            [10] 3898 	pop	hl
+   9A39 01 0B 00      [10] 3899 	ld	bc, #0x000b
+   9A3C 09            [11] 3900 	add	hl, bc
+   9A3D 4E            [ 7] 3901 	ld	c, (hl)
+   9A3E 23            [ 6] 3902 	inc	hl
+   9A3F 46            [ 7] 3903 	ld	b, (hl)
+   9A40 79            [ 4] 3904 	ld	a, c
+   9A41 DD 96 EC      [19] 3905 	sub	a, -20 (ix)
+   9A44 4F            [ 4] 3906 	ld	c, a
+   9A45 78            [ 4] 3907 	ld	a, b
+   9A46 DD 9E ED      [19] 3908 	sbc	a, -19 (ix)
+   9A49 47            [ 4] 3909 	ld	b, a
+   9A4A AF            [ 4] 3910 	xor	a, a
+   9A4B F5            [11] 3911 	push	af
+   9A4C 33            [ 6] 3912 	inc	sp
+   9A4D D5            [11] 3913 	push	de
+   9A4E 33            [ 6] 3914 	inc	sp
+   9A4F C5            [11] 3915 	push	bc
+   9A50 CD 7F 8E      [17] 3916 	call	_setPixel
+   9A53 F1            [10] 3917 	pop	af
+   9A54 F1            [10] 3918 	pop	af
+                           3919 ;src/game/world.c:615: setPixel(oldTrainX-x_*TILESIZE_H,oldTrainY-y_*TILESIZE_H, 0);
+   9A55 AF            [ 4] 3920 	xor	a, a
+   9A56 F5            [11] 3921 	push	af
+   9A57 33            [ 6] 3922 	inc	sp
+   9A58 DD 7E FF      [19] 3923 	ld	a, -1 (ix)
+   9A5B F5            [11] 3924 	push	af
+   9A5C 33            [ 6] 3925 	inc	sp
+   9A5D DD 6E F9      [19] 3926 	ld	l,-7 (ix)
+   9A60 DD 66 FA      [19] 3927 	ld	h,-6 (ix)
+   9A63 E5            [11] 3928 	push	hl
+   9A64 CD 7F 8E      [17] 3929 	call	_setPixel
+   9A67 F1            [10] 3930 	pop	af
+   9A68 F1            [10] 3931 	pop	af
+                           3932 ;src/game/world.c:617: trainList[i].animOldX = 0;
+   9A69 FD 2A 1D 83   [20] 3933 	ld	iy, (_trainList)
+   9A6D DD 5E E8      [19] 3934 	ld	e,-24 (ix)
+   9A70 DD 56 E9      [19] 3935 	ld	d,-23 (ix)
+   9A73 FD 19         [15] 3936 	add	iy, de
+   9A75 11 0B 00      [10] 3937 	ld	de, #0x000b
+   9A78 FD 19         [15] 3938 	add	iy, de
+   9A7A FD 36 00 00   [19] 3939 	ld	0 (iy), #0x00
+   9A7E FD 36 01 00   [19] 3940 	ld	1 (iy), #0x00
+                           3941 ;src/game/world.c:618: trainList[i].animOldY = 0;
+   9A82 FD 2A 1D 83   [20] 3942 	ld	iy, (_trainList)
+   9A86 DD 5E E8      [19] 3943 	ld	e,-24 (ix)
+   9A89 DD 56 E9      [19] 3944 	ld	d,-23 (ix)
+   9A8C FD 19         [15] 3945 	add	iy, de
+   9A8E 11 0D 00      [10] 3946 	ld	de, #0x000d
+   9A91 FD 19         [15] 3947 	add	iy, de
+   9A93 FD 36 00 00   [19] 3948 	ld	0 (iy), #0x00
+   9A97 FD 36 01 00   [19] 3949 	ld	1 (iy), #0x00
+                           3950 ;src/game/world.c:619: trainList[i].animX = 0;
+   9A9B FD 2A 1D 83   [20] 3951 	ld	iy, (_trainList)
+   9A9F DD 5E E8      [19] 3952 	ld	e,-24 (ix)
+   9AA2 DD 56 E9      [19] 3953 	ld	d,-23 (ix)
+   9AA5 FD 19         [15] 3954 	add	iy, de
+   9AA7 11 07 00      [10] 3955 	ld	de, #0x0007
+   9AAA FD 19         [15] 3956 	add	iy, de
+   9AAC FD 36 00 00   [19] 3957 	ld	0 (iy), #0x00
+   9AB0 FD 36 01 00   [19] 3958 	ld	1 (iy), #0x00
+                           3959 ;src/game/world.c:620: trainList[i].animY = 0;
+   9AB4 FD 2A 1D 83   [20] 3960 	ld	iy, (_trainList)
+   9AB8 DD 5E E8      [19] 3961 	ld	e,-24 (ix)
+   9ABB DD 56 E9      [19] 3962 	ld	d,-23 (ix)
+   9ABE FD 19         [15] 3963 	add	iy, de
+   9AC0 11 09 00      [10] 3964 	ld	de, #0x0009
+   9AC3 FD 19         [15] 3965 	add	iy, de
+   9AC5 FD 36 00 00   [19] 3966 	ld	0 (iy), #0x00
+   9AC9 FD 36 01 00   [19] 3967 	ld	1 (iy), #0x00
+                           3968 ;src/game/world.c:622: trainList[i].cycles = 0;
+   9ACD FD 2A 1D 83   [20] 3969 	ld	iy, (_trainList)
+   9AD1 DD 5E E8      [19] 3970 	ld	e,-24 (ix)
+   9AD4 DD 56 E9      [19] 3971 	ld	d,-23 (ix)
+   9AD7 FD 19         [15] 3972 	add	iy, de
+   9AD9 11 0F 00      [10] 3973 	ld	de, #0x000f
+   9ADC FD 19         [15] 3974 	add	iy, de
+   9ADE FD 36 00 00   [19] 3975 	ld	0 (iy), #0x00
+   9AE2                    3976 00129$:
+                           3977 ;src/game/world.c:626: sprintf(buff, "%d %d", trainList[i].posX, trainList[i].posY);
+   9AE2 FD 2A 1D 83   [20] 3978 	ld	iy, (_trainList)
+   9AE6 DD 5E E8      [19] 3979 	ld	e,-24 (ix)
+   9AE9 DD 56 E9      [19] 3980 	ld	d,-23 (ix)
+   9AEC FD 19         [15] 3981 	add	iy, de
+   9AEE FD E5         [15] 3982 	push	iy
+   9AF0 E1            [10] 3983 	pop	hl
+   9AF1 11 05 00      [10] 3984 	ld	de, #0x0005
+   9AF4 19            [11] 3985 	add	hl, de
+   9AF5 4E            [ 7] 3986 	ld	c, (hl)
+   9AF6 06 00         [ 7] 3987 	ld	b, #0x00
+   9AF8 FD E5         [15] 3988 	push	iy
+   9AFA E1            [10] 3989 	pop	hl
+   9AFB 11 04 00      [10] 3990 	ld	de, #0x0004
+   9AFE 19            [11] 3991 	add	hl, de
+   9AFF 5E            [ 7] 3992 	ld	e, (hl)
+   9B00 16 00         [ 7] 3993 	ld	d, #0x00
+   9B02 C5            [11] 3994 	push	bc
+   9B03 D5            [11] 3995 	push	de
+   9B04 21 24 9D      [10] 3996 	ld	hl, #___str_0
+   9B07 E5            [11] 3997 	push	hl
+   9B08 DD 6E E4      [19] 3998 	ld	l,-28 (ix)
+   9B0B DD 66 E5      [19] 3999 	ld	h,-27 (ix)
+   9B0E E5            [11] 4000 	push	hl
+   9B0F CD F3 64      [17] 4001 	call	_sprintf
+   9B12 21 08 00      [10] 4002 	ld	hl, #8
+   9B15 39            [11] 4003 	add	hl, sp
+   9B16 F9            [ 6] 4004 	ld	sp, hl
+                           4005 ;src/game/world.c:627: cpct_drawStringM1 (buff, SCR_VMEM, 0, 1);
+   9B17 21 00 01      [10] 4006 	ld	hl, #0x0100
+   9B1A E5            [11] 4007 	push	hl
+   9B1B 26 C0         [ 7] 4008 	ld	h, #0xc0
+   9B1D E5            [11] 4009 	push	hl
+   9B1E DD 6E F2      [19] 4010 	ld	l,-14 (ix)
+   9B21 DD 66 F3      [19] 4011 	ld	h,-13 (ix)
+   9B24 E5            [11] 4012 	push	hl
+   9B25 CD 02 61      [17] 4013 	call	_cpct_drawStringM1
+   9B28 21 06 00      [10] 4014 	ld	hl, #6
+   9B2B 39            [11] 4015 	add	hl, sp
+   9B2C F9            [ 6] 4016 	ld	sp, hl
+   9B2D C3 19 9D      [10] 4017 	jp	00164$
+   9B30                    4018 00156$:
+                           4019 ;src/game/world.c:641: trainList[i].cycles=0;
+   9B30 DD 7E EA      [19] 4020 	ld	a, -22 (ix)
+   9B33 C6 0F         [ 7] 4021 	add	a, #0x0f
+   9B35 4F            [ 4] 4022 	ld	c, a
+   9B36 DD 7E EB      [19] 4023 	ld	a, -21 (ix)
+   9B39 CE 00         [ 7] 4024 	adc	a, #0x00
+   9B3B 47            [ 4] 4025 	ld	b, a
+   9B3C AF            [ 4] 4026 	xor	a, a
+   9B3D 02            [ 7] 4027 	ld	(bc), a
+                           4028 ;src/game/world.c:644: switch(trainList[i].heading)
+   9B3E FD 21 1D 83   [14] 4029 	ld	iy, #_trainList
+   9B42 FD 7E 00      [19] 4030 	ld	a, 0 (iy)
+   9B45 DD 86 E8      [19] 4031 	add	a, -24 (ix)
+   9B48 4F            [ 4] 4032 	ld	c, a
+   9B49 FD 7E 01      [19] 4033 	ld	a, 1 (iy)
+   9B4C DD 8E E9      [19] 4034 	adc	a, -23 (ix)
+   9B4F 47            [ 4] 4035 	ld	b, a
+   9B50 C5            [11] 4036 	push	bc
+   9B51 FD E1         [14] 4037 	pop	iy
+   9B53 FD 5E 06      [19] 4038 	ld	e, 6 (iy)
+                           4039 ;src/game/world.c:647: if(trainList[i].posX < WIDTH && p_world[trainList[i].posY*WIDTH+trainList[i].posX+1] >= SSNS )
+   9B56 21 04 00      [10] 4040 	ld	hl, #0x0004
+   9B59 09            [11] 4041 	add	hl,bc
+   9B5A DD 75 FB      [19] 4042 	ld	-5 (ix), l
+   9B5D DD 74 FC      [19] 4043 	ld	-4 (ix), h
+   9B60 21 05 00      [10] 4044 	ld	hl, #0x0005
+   9B63 09            [11] 4045 	add	hl,bc
+   9B64 DD 75 F9      [19] 4046 	ld	-7 (ix), l
+   9B67 DD 74 FA      [19] 4047 	ld	-6 (ix), h
+                           4048 ;src/game/world.c:644: switch(trainList[i].heading)
+   9B6A 7B            [ 4] 4049 	ld	a, e
+   9B6B B7            [ 4] 4050 	or	a, a
+   9B6C 28 11         [12] 4051 	jr	Z,00133$
+   9B6E 7B            [ 4] 4052 	ld	a, e
+   9B6F 3D            [ 4] 4053 	dec	a
+   9B70 28 45         [12] 4054 	jr	Z,00137$
+   9B72 7B            [ 4] 4055 	ld	a,e
+   9B73 FE 02         [ 7] 4056 	cp	a,#0x02
+   9B75 28 75         [12] 4057 	jr	Z,00141$
+   9B77 D6 03         [ 7] 4058 	sub	a, #0x03
+   9B79 CA 22 9C      [10] 4059 	jp	Z,00145$
+   9B7C C3 57 9C      [10] 4060 	jp	00149$
+                           4061 ;src/game/world.c:646: case 0: // Right
+   9B7F                    4062 00133$:
+                           4063 ;src/game/world.c:647: if(trainList[i].posX < WIDTH && p_world[trainList[i].posY*WIDTH+trainList[i].posX+1] >= SSNS )
+   9B7F DD 6E FB      [19] 4064 	ld	l,-5 (ix)
+   9B82 DD 66 FC      [19] 4065 	ld	h,-4 (ix)
+   9B85 4E            [ 7] 4066 	ld	c, (hl)
+   9B86 79            [ 4] 4067 	ld	a, c
+   9B87 D6 50         [ 7] 4068 	sub	a, #0x50
+   9B89 D2 57 9C      [10] 4069 	jp	NC, 00149$
+   9B8C DD 6E F9      [19] 4070 	ld	l,-7 (ix)
+   9B8F DD 66 FA      [19] 4071 	ld	h,-6 (ix)
+   9B92 5E            [ 7] 4072 	ld	e, (hl)
+   9B93 16 00         [ 7] 4073 	ld	d,#0x00
+   9B95 6B            [ 4] 4074 	ld	l, e
+   9B96 62            [ 4] 4075 	ld	h, d
+   9B97 29            [11] 4076 	add	hl, hl
+   9B98 29            [11] 4077 	add	hl, hl
+   9B99 19            [11] 4078 	add	hl, de
+   9B9A 29            [11] 4079 	add	hl, hl
+   9B9B 29            [11] 4080 	add	hl, hl
+   9B9C 29            [11] 4081 	add	hl, hl
+   9B9D 29            [11] 4082 	add	hl, hl
+   9B9E 59            [ 4] 4083 	ld	e, c
+   9B9F 16 00         [ 7] 4084 	ld	d, #0x00
+   9BA1 19            [11] 4085 	add	hl, de
+   9BA2 11 1E 74      [10] 4086 	ld	de,#_p_world+1
+   9BA5 19            [11] 4087 	add	hl,de
+   9BA6 7E            [ 7] 4088 	ld	a, (hl)
+   9BA7 D6 0A         [ 7] 4089 	sub	a, #0x0a
+   9BA9 DA 57 9C      [10] 4090 	jp	C, 00149$
+                           4091 ;src/game/world.c:648: trainList[i].posX++;
+   9BAC 0C            [ 4] 4092 	inc	c
+   9BAD DD 6E FB      [19] 4093 	ld	l,-5 (ix)
+   9BB0 DD 66 FC      [19] 4094 	ld	h,-4 (ix)
+   9BB3 71            [ 7] 4095 	ld	(hl), c
+                           4096 ;src/game/world.c:649: break;
+   9BB4 C3 57 9C      [10] 4097 	jp	00149$
+                           4098 ;src/game/world.c:650: case 1: // Left
+   9BB7                    4099 00137$:
+                           4100 ;src/game/world.c:651: if(trainList[i].posX >0 && p_world[trainList[i].posY*WIDTH+trainList[i].posX-1] >= SSNS )
+   9BB7 DD 6E FB      [19] 4101 	ld	l,-5 (ix)
+   9BBA DD 66 FC      [19] 4102 	ld	h,-4 (ix)
+   9BBD 4E            [ 7] 4103 	ld	c, (hl)
+   9BBE 79            [ 4] 4104 	ld	a, c
+   9BBF B7            [ 4] 4105 	or	a, a
+   9BC0 CA 57 9C      [10] 4106 	jp	Z, 00149$
+   9BC3 DD 6E F9      [19] 4107 	ld	l,-7 (ix)
+   9BC6 DD 66 FA      [19] 4108 	ld	h,-6 (ix)
+   9BC9 5E            [ 7] 4109 	ld	e, (hl)
+   9BCA 16 00         [ 7] 4110 	ld	d,#0x00
+   9BCC 6B            [ 4] 4111 	ld	l, e
+   9BCD 62            [ 4] 4112 	ld	h, d
+   9BCE 29            [11] 4113 	add	hl, hl
+   9BCF 29            [11] 4114 	add	hl, hl
+   9BD0 19            [11] 4115 	add	hl, de
+   9BD1 29            [11] 4116 	add	hl, hl
+   9BD2 29            [11] 4117 	add	hl, hl
+   9BD3 29            [11] 4118 	add	hl, hl
+   9BD4 29            [11] 4119 	add	hl, hl
+   9BD5 59            [ 4] 4120 	ld	e, c
+   9BD6 16 00         [ 7] 4121 	ld	d, #0x00
+   9BD8 19            [11] 4122 	add	hl, de
+   9BD9 11 1C 74      [10] 4123 	ld	de,#_p_world-1
+   9BDC 19            [11] 4124 	add	hl,de
+   9BDD 7E            [ 7] 4125 	ld	a, (hl)
+   9BDE D6 0A         [ 7] 4126 	sub	a, #0x0a
+   9BE0 38 75         [12] 4127 	jr	C,00149$
+                           4128 ;src/game/world.c:652: trainList[i].posX--;
+   9BE2 0D            [ 4] 4129 	dec	c
+   9BE3 DD 6E FB      [19] 4130 	ld	l,-5 (ix)
+   9BE6 DD 66 FC      [19] 4131 	ld	h,-4 (ix)
+   9BE9 71            [ 7] 4132 	ld	(hl), c
+                           4133 ;src/game/world.c:653: break;
+   9BEA 18 6B         [12] 4134 	jr	00149$
+                           4135 ;src/game/world.c:654: case 2: // Up
+   9BEC                    4136 00141$:
+                           4137 ;src/game/world.c:655: if(trainList[i].posY > 0 && p_world[(trainList[i].posY-1)*WIDTH+trainList[i].posX] >= SSNS )
+   9BEC DD 6E F9      [19] 4138 	ld	l,-7 (ix)
+   9BEF DD 66 FA      [19] 4139 	ld	h,-6 (ix)
+   9BF2 4E            [ 7] 4140 	ld	c, (hl)
+   9BF3 79            [ 4] 4141 	ld	a, c
+   9BF4 B7            [ 4] 4142 	or	a, a
+   9BF5 28 60         [12] 4143 	jr	Z,00149$
+   9BF7 59            [ 4] 4144 	ld	e, c
+   9BF8 16 00         [ 7] 4145 	ld	d, #0x00
+   9BFA 1B            [ 6] 4146 	dec	de
+   9BFB 6B            [ 4] 4147 	ld	l, e
+   9BFC 62            [ 4] 4148 	ld	h, d
+   9BFD 29            [11] 4149 	add	hl, hl
+   9BFE 29            [11] 4150 	add	hl, hl
+   9BFF 19            [11] 4151 	add	hl, de
+   9C00 29            [11] 4152 	add	hl, hl
+   9C01 29            [11] 4153 	add	hl, hl
+   9C02 29            [11] 4154 	add	hl, hl
+   9C03 29            [11] 4155 	add	hl, hl
+   9C04 EB            [ 4] 4156 	ex	de,hl
+   9C05 DD 6E FB      [19] 4157 	ld	l,-5 (ix)
+   9C08 DD 66 FC      [19] 4158 	ld	h,-4 (ix)
+   9C0B 6E            [ 7] 4159 	ld	l, (hl)
+   9C0C 26 00         [ 7] 4160 	ld	h, #0x00
+   9C0E 19            [11] 4161 	add	hl, de
+   9C0F 11 1D 74      [10] 4162 	ld	de, #_p_world
+   9C12 19            [11] 4163 	add	hl, de
+   9C13 7E            [ 7] 4164 	ld	a, (hl)
+   9C14 D6 0A         [ 7] 4165 	sub	a, #0x0a
+   9C16 38 3F         [12] 4166 	jr	C,00149$
+                           4167 ;src/game/world.c:656: trainList[i].posY--;
+   9C18 0D            [ 4] 4168 	dec	c
+   9C19 DD 6E F9      [19] 4169 	ld	l,-7 (ix)
+   9C1C DD 66 FA      [19] 4170 	ld	h,-6 (ix)
+   9C1F 71            [ 7] 4171 	ld	(hl), c
+                           4172 ;src/game/world.c:657: break;
+   9C20 18 35         [12] 4173 	jr	00149$
+                           4174 ;src/game/world.c:658: case 3: // Down
+   9C22                    4175 00145$:
+                           4176 ;src/game/world.c:659: if(trainList[i].posY < HEIGHT && p_world[(trainList[i].posY+1)*WIDTH+trainList[i].posX] >= SSNS)
+   9C22 DD 6E F9      [19] 4177 	ld	l,-7 (ix)
+   9C25 DD 66 FA      [19] 4178 	ld	h,-6 (ix)
+   9C28 4E            [ 7] 4179 	ld	c, (hl)
+   9C29 79            [ 4] 4180 	ld	a, c
+   9C2A D6 30         [ 7] 4181 	sub	a, #0x30
+   9C2C 30 29         [12] 4182 	jr	NC,00149$
+   9C2E 59            [ 4] 4183 	ld	e, c
+   9C2F 16 00         [ 7] 4184 	ld	d, #0x00
+   9C31 13            [ 6] 4185 	inc	de
+   9C32 6B            [ 4] 4186 	ld	l, e
+   9C33 62            [ 4] 4187 	ld	h, d
+   9C34 29            [11] 4188 	add	hl, hl
+   9C35 29            [11] 4189 	add	hl, hl
+   9C36 19            [11] 4190 	add	hl, de
+   9C37 29            [11] 4191 	add	hl, hl
+   9C38 29            [11] 4192 	add	hl, hl
+   9C39 29            [11] 4193 	add	hl, hl
+   9C3A 29            [11] 4194 	add	hl, hl
+   9C3B EB            [ 4] 4195 	ex	de,hl
+   9C3C DD 6E FB      [19] 4196 	ld	l,-5 (ix)
+   9C3F DD 66 FC      [19] 4197 	ld	h,-4 (ix)
+   9C42 6E            [ 7] 4198 	ld	l, (hl)
+   9C43 26 00         [ 7] 4199 	ld	h, #0x00
+   9C45 19            [11] 4200 	add	hl, de
+   9C46 11 1D 74      [10] 4201 	ld	de, #_p_world
+   9C49 19            [11] 4202 	add	hl, de
+   9C4A 7E            [ 7] 4203 	ld	a, (hl)
+   9C4B D6 0A         [ 7] 4204 	sub	a, #0x0a
+   9C4D 38 08         [12] 4205 	jr	C,00149$
+                           4206 ;src/game/world.c:660: trainList[i].posY++;
+   9C4F 0C            [ 4] 4207 	inc	c
+   9C50 DD 6E F9      [19] 4208 	ld	l,-7 (ix)
+   9C53 DD 66 FA      [19] 4209 	ld	h,-6 (ix)
+   9C56 71            [ 7] 4210 	ld	(hl), c
+                           4211 ;src/game/world.c:662: }
+   9C57                    4212 00149$:
+                           4213 ;src/game/world.c:664: sprintf(buff, "%d %d %d", trainList[i].posX, trainList[i].posY, trainList[i].heading );
+   9C57 FD 2A 1D 83   [20] 4214 	ld	iy, (_trainList)
+   9C5B DD 5E E8      [19] 4215 	ld	e,-24 (ix)
+   9C5E DD 56 E9      [19] 4216 	ld	d,-23 (ix)
+   9C61 FD 19         [15] 4217 	add	iy, de
+   9C63 FD E5         [15] 4218 	push	iy
+   9C65 E1            [10] 4219 	pop	hl
+   9C66 11 06 00      [10] 4220 	ld	de, #0x0006
+   9C69 19            [11] 4221 	add	hl, de
+   9C6A 4E            [ 7] 4222 	ld	c, (hl)
+   9C6B 06 00         [ 7] 4223 	ld	b, #0x00
+   9C6D FD E5         [15] 4224 	push	iy
+   9C6F E1            [10] 4225 	pop	hl
+   9C70 11 05 00      [10] 4226 	ld	de, #0x0005
+   9C73 19            [11] 4227 	add	hl, de
+   9C74 5E            [ 7] 4228 	ld	e, (hl)
+   9C75 16 00         [ 7] 4229 	ld	d, #0x00
+   9C77 FD E5         [15] 4230 	push	iy
+   9C79 E1            [10] 4231 	pop	hl
+   9C7A 23            [ 6] 4232 	inc	hl
+   9C7B 23            [ 6] 4233 	inc	hl
+   9C7C 23            [ 6] 4234 	inc	hl
+   9C7D 23            [ 6] 4235 	inc	hl
+   9C7E 6E            [ 7] 4236 	ld	l, (hl)
+   9C7F 26 00         [ 7] 4237 	ld	h, #0x00
+   9C81 C5            [11] 4238 	push	bc
+   9C82 D5            [11] 4239 	push	de
+   9C83 E5            [11] 4240 	push	hl
+   9C84 21 2A 9D      [10] 4241 	ld	hl, #___str_1
+   9C87 E5            [11] 4242 	push	hl
+   9C88 DD 6E E4      [19] 4243 	ld	l,-28 (ix)
+   9C8B DD 66 E5      [19] 4244 	ld	h,-27 (ix)
+   9C8E E5            [11] 4245 	push	hl
+   9C8F CD F3 64      [17] 4246 	call	_sprintf
+   9C92 21 0A 00      [10] 4247 	ld	hl, #10
+   9C95 39            [11] 4248 	add	hl, sp
+   9C96 F9            [ 6] 4249 	ld	sp, hl
+                           4250 ;src/game/world.c:665: cpct_drawStringM1 (buff, SCR_VMEM, 0, 1);
+   9C97 21 00 01      [10] 4251 	ld	hl, #0x0100
+   9C9A E5            [11] 4252 	push	hl
+   9C9B 26 C0         [ 7] 4253 	ld	h, #0xc0
+   9C9D E5            [11] 4254 	push	hl
+   9C9E DD 6E F2      [19] 4255 	ld	l,-14 (ix)
+   9CA1 DD 66 F3      [19] 4256 	ld	h,-13 (ix)
+   9CA4 E5            [11] 4257 	push	hl
+   9CA5 CD 02 61      [17] 4258 	call	_cpct_drawStringM1
+   9CA8 21 06 00      [10] 4259 	ld	hl, #6
+   9CAB 39            [11] 4260 	add	hl, sp
+   9CAC F9            [ 6] 4261 	ld	sp, hl
+                           4262 ;src/game/world.c:668: setTrainHeading(i);
+   9CAD DD 7E E6      [19] 4263 	ld	a, -26 (ix)
+   9CB0 F5            [11] 4264 	push	af
+   9CB1 33            [ 6] 4265 	inc	sp
+   9CB2 CD E3 8D      [17] 4266 	call	_setTrainHeading
+   9CB5 33            [ 6] 4267 	inc	sp
+                           4268 ;src/game/world.c:671: if(trainList[i].posX-x_ < NBTILE_W && trainList[i].posY-y_ < NBTILE_H && trainList[i].posX-x_ >= 0 && trainList[i].posY-y_ >= 0 )
+   9CB6 FD 21 1D 83   [14] 4269 	ld	iy, #_trainList
+   9CBA FD 7E 00      [19] 4270 	ld	a, 0 (iy)
+   9CBD DD 86 E8      [19] 4271 	add	a, -24 (ix)
+   9CC0 4F            [ 4] 4272 	ld	c, a
+   9CC1 FD 7E 01      [19] 4273 	ld	a, 1 (iy)
+   9CC4 DD 8E E9      [19] 4274 	adc	a, -23 (ix)
+   9CC7 47            [ 4] 4275 	ld	b, a
+   9CC8 C5            [11] 4276 	push	bc
+   9CC9 FD E1         [14] 4277 	pop	iy
+   9CCB FD 7E 04      [19] 4278 	ld	a, 4 (iy)
+   9CCE 16 00         [ 7] 4279 	ld	d, #0x00
+   9CD0 DD 96 EE      [19] 4280 	sub	a, -18 (ix)
+   9CD3 5F            [ 4] 4281 	ld	e, a
+   9CD4 7A            [ 4] 4282 	ld	a, d
+   9CD5 DD 9E EF      [19] 4283 	sbc	a, -17 (ix)
+   9CD8 57            [ 4] 4284 	ld	d, a
+   9CD9 7B            [ 4] 4285 	ld	a, e
+   9CDA D6 14         [ 7] 4286 	sub	a, #0x14
+   9CDC 7A            [ 4] 4287 	ld	a, d
+   9CDD 17            [ 4] 4288 	rla
+   9CDE 3F            [ 4] 4289 	ccf
+   9CDF 1F            [ 4] 4290 	rra
+   9CE0 DE 80         [ 7] 4291 	sbc	a, #0x80
+   9CE2 30 35         [12] 4292 	jr	NC,00164$
+   9CE4 C5            [11] 4293 	push	bc
+   9CE5 FD E1         [14] 4294 	pop	iy
+   9CE7 FD 7E 05      [19] 4295 	ld	a, 5 (iy)
+   9CEA 06 00         [ 7] 4296 	ld	b, #0x00
+   9CEC DD 96 F0      [19] 4297 	sub	a, -16 (ix)
+   9CEF 4F            [ 4] 4298 	ld	c, a
+   9CF0 78            [ 4] 4299 	ld	a, b
+   9CF1 DD 9E F1      [19] 4300 	sbc	a, -15 (ix)
+   9CF4 47            [ 4] 4301 	ld	b, a
+   9CF5 79            [ 4] 4302 	ld	a, c
+   9CF6 D6 0C         [ 7] 4303 	sub	a, #0x0c
+   9CF8 78            [ 4] 4304 	ld	a, b
+   9CF9 17            [ 4] 4305 	rla
+   9CFA 3F            [ 4] 4306 	ccf
+   9CFB 1F            [ 4] 4307 	rra
+   9CFC DE 80         [ 7] 4308 	sbc	a, #0x80
+   9CFE 30 19         [12] 4309 	jr	NC,00164$
+   9D00 CB 7A         [ 8] 4310 	bit	7, d
+   9D02 20 15         [12] 4311 	jr	NZ,00164$
+   9D04 CB 78         [ 8] 4312 	bit	7, b
+   9D06 20 11         [12] 4313 	jr	NZ,00164$
+                           4314 ;src/game/world.c:673: drawNewTrain(i, x_, y_);
+   9D08 DD 66 05      [19] 4315 	ld	h, 5 (ix)
+   9D0B DD 6E 04      [19] 4316 	ld	l, 4 (ix)
+   9D0E E5            [11] 4317 	push	hl
+   9D0F DD 7E E6      [19] 4318 	ld	a, -26 (ix)
+   9D12 F5            [11] 4319 	push	af
+   9D13 33            [ 6] 4320 	inc	sp
+   9D14 CD EC 8F      [17] 4321 	call	_drawNewTrain
+   9D17 F1            [10] 4322 	pop	af
+   9D18 33            [ 6] 4323 	inc	sp
+   9D19                    4324 00164$:
+                           4325 ;src/game/world.c:539: for(i=0; i<nbTrainList; i++)
+   9D19 DD 34 E6      [23] 4326 	inc	-26 (ix)
+   9D1C C3 C7 93      [10] 4327 	jp	00163$
+   9D1F                    4328 00165$:
+   9D1F DD F9         [10] 4329 	ld	sp, ix
+   9D21 DD E1         [14] 4330 	pop	ix
+   9D23 C9            [10] 4331 	ret
+   9D24                    4332 ___str_0:
+   9D24 25 64 20 25 64     4333 	.ascii "%d %d"
+   9D29 00                 4334 	.db 0x00
+   9D2A                    4335 ___str_1:
+   9D2A 25 64 20 25 64 20  4336 	.ascii "%d %d %d"
+        25 64
+   9D32 00                 4337 	.db 0x00
+                           4338 	.area _CODE
+                           4339 	.area _INITIALIZER
+                           4340 	.area _CABS (ABS)

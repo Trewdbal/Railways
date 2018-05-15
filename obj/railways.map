@@ -24,25 +24,25 @@ Area                                    Addr        Size        Decimal Bytes (A
      00000100  l__g_masktable_0                
      000003FF  l__HEAP                         
      00000F04  l__DATA                         
-     0000164A  l__CSEG                         
-     000034B5  l__CODE                         
+     00001A0B  l__CSEG                         
+     0000341D  l__CODE                         
      00004000  s__CODE                         
-     000074B5  s__DATA                         
-     000083B9  s__INITIALIZED                  
-     000083BB  s__GSINIT                       
-     000083BB  s__HOME                         
-     000083BE  s__GSFINAL                      
-     000083BE  s__INITIALIZER                  
-     000083C0  s__CSEG                         
-     00009A0A  s__HEAP                         
-     00009E09  s__HEAP_END                     
+     0000741D  s__DATA                         
+     00008321  s__INITIALIZED                  
+     00008323  s__GSINIT                       
+     00008323  s__HOME                         
+     00008326  s__GSFINAL                      
+     00008326  s__INITIALIZER                  
+     00008328  s__CSEG                         
+     00009D33  s__HEAP                         
+     0000A132  s__HEAP_END                     
 
 ASxxxx Linker V03.00 + NoICE + sdld,  page 2.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-_CODE                               00004000    000034B5 =       13493. bytes (REL,CON)
+_CODE                               00004000    0000341D =       13341. bytes (REL,CON)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
@@ -92,131 +92,131 @@ _CODE                               00004000    000034B5 =       13493. bytes (R
      000050C0  _menuStations                      game
      0000512F  _menuTile                          game
      000052DD  _game                              game
-     000059FE  _trainManagement                   train
-     00005A50  _confirmBuyTrain                   train
-     00005D2E  _buyTrain                          train
-     00005E2D  _realloc                           realloc
+     00005966  _trainManagement                   train
+     000059B8  _confirmBuyTrain                   train
+     00005C96  _buyTrain                          train
+     00005D95  _realloc                           realloc
 ASxxxx Linker V03.00 + NoICE + sdld,  page 3.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-_CODE                               00004000    000034B5 =       13493. bytes (REL,CON)
+_CODE                               00004000    0000341D =       13341. bytes (REL,CON)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
-     0000614C  _cpct_setPalette                   cpct_video
-     00006163  _cpct_isKeyPressed                 cpct_keyboard
-     00006163  cpct_isKeyPressed_asm              cpct_keyboard
-     0000616F  _cpct_setPALColour                 cpct_video
-     0000617B  _cpct_getBit                       cpct_bitarray
-     0000619A  _cpct_drawStringM1                 cpct_strings
-     000061A2  cpct_drawStringM1_asm              cpct_strings
-     000061BC  _cpct_drawStringM2                 cpct_strings
-     000061C4  cpct_drawStringM2_asm              cpct_strings
-     000061DD  _cpct_drawSprite                   cpct_sprites
-     00006282  __moduchar                         
-     0000628E  __moduint                          
-     00006299  _cpct_drawCharM1                   cpct_strings
-     000062A6  cpct_drawCharM1_asm                cpct_strings
-     00006320  _cpct_drawCharM2                   cpct_strings
-     00006326  cpct_drawCharM2_asm                cpct_strings
-     0000636C  _memmove                           
-     0000638B  _cpct_count2VSYNC                  cpct_video
-     0000638B  cpct_count2VSYNC_asm               cpct_video
-     00006397  _cpct_fw2hw                        cpct_video
-     000063AA  _cpct_keyboardStatusBuffer         cpct_keyboard
-     000063B4  ___sdcc_heap_init                  malloc
-     000063CF  _malloc                            malloc
-     000064DA  _cpct_setSeed_mxor                 cpct_random
-     000064DA  cpct_setSeed_mxor_asm              cpct_random
-     000064E2  __divuint                          
-     000064EA  __divuchar                         
-     000064F1  __divu8                            
-     000064F4  __divu16                           
-     00006523  cpct_bitWeights                    cpct_bitarray
-     0000652B  _cpct_reenableFirmware             cpct_firmware
-     0000652B  cpct_reenableFirmware_asm          cpct_firmware
-     00006556  _vsprintf                          sprintf
-     0000658B  _sprintf                           sprintf
-     000065C0  _cpct_getRandom_mxor_u16           cpct_random
-     000065C0  cpct_getRandom_mxor_u16            cpct_random
-     000065E2  cpct_firmware2hw_colour            
-     000065FD  _memcpy                            _memcpy
-     0000664C  _cpct_waitVSYNC                    cpct_video
-     0000664C  cpct_waitVSYNC_asm                 cpct_video
-     00006654  _cpct_setVideoMode                 cpct_video
-     00006662  dc_mode1_ct                        
-     00006666  _cpct_px2byteM0                    cpct_sprites
-     00006682  _cpct_memset                       cpct_memutils
-     00006690  _cpct_px2byteM1                    cpct_sprites
-     000066A9  _strlen                            
-     000066B8  _cpct_disableFirmware              cpct_firmware
-     000066B8  _cpct_removeInterruptHandler       cpct_firmware
-     000066B8  cpct_disableFirmware_asm           cpct_firmware
-     000066B8  cpct_removeInterruptHandler_asm    cpct_firmware
-     000066C8  _cpct_getRandom_mxor_u8            cpct_random
+     000060B4  _cpct_setPalette                   cpct_video
+     000060CB  _cpct_isKeyPressed                 cpct_keyboard
+     000060CB  cpct_isKeyPressed_asm              cpct_keyboard
+     000060D7  _cpct_setPALColour                 cpct_video
+     000060E3  _cpct_getBit                       cpct_bitarray
+     00006102  _cpct_drawStringM1                 cpct_strings
+     0000610A  cpct_drawStringM1_asm              cpct_strings
+     00006124  _cpct_drawStringM2                 cpct_strings
+     0000612C  cpct_drawStringM2_asm              cpct_strings
+     00006145  _cpct_drawSprite                   cpct_sprites
+     000061EA  __moduchar                         
+     000061F6  __moduint                          
+     00006201  _cpct_drawCharM1                   cpct_strings
+     0000620E  cpct_drawCharM1_asm                cpct_strings
+     00006288  _cpct_drawCharM2                   cpct_strings
+     0000628E  cpct_drawCharM2_asm                cpct_strings
+     000062D4  _memmove                           
+     000062F3  _cpct_count2VSYNC                  cpct_video
+     000062F3  cpct_count2VSYNC_asm               cpct_video
+     000062FF  _cpct_fw2hw                        cpct_video
+     00006312  _cpct_keyboardStatusBuffer         cpct_keyboard
+     0000631C  ___sdcc_heap_init                  malloc
+     00006337  _malloc                            malloc
+     00006442  _cpct_setSeed_mxor                 cpct_random
+     00006442  cpct_setSeed_mxor_asm              cpct_random
+     0000644A  __divuint                          
+     00006452  __divuchar                         
+     00006459  __divu8                            
+     0000645C  __divu16                           
+     0000648B  cpct_bitWeights                    cpct_bitarray
+     00006493  _cpct_reenableFirmware             cpct_firmware
+     00006493  cpct_reenableFirmware_asm          cpct_firmware
+     000064BE  _vsprintf                          sprintf
+     000064F3  _sprintf                           sprintf
+     00006528  _cpct_getRandom_mxor_u16           cpct_random
+     00006528  cpct_getRandom_mxor_u16            cpct_random
+     0000654A  cpct_firmware2hw_colour            
+     00006565  _memcpy                            _memcpy
+     000065B4  _cpct_waitVSYNC                    cpct_video
+     000065B4  cpct_waitVSYNC_asm                 cpct_video
+     000065BC  _cpct_setVideoMode                 cpct_video
+     000065CA  dc_mode1_ct                        
+     000065CE  _cpct_px2byteM0                    cpct_sprites
+     000065EA  _cpct_memset                       cpct_memutils
+     000065F8  _cpct_px2byteM1                    cpct_sprites
+     00006611  _strlen                            
+     00006620  _cpct_disableFirmware              cpct_firmware
+     00006620  _cpct_removeInterruptHandler       cpct_firmware
+     00006620  cpct_disableFirmware_asm           cpct_firmware
+     00006620  cpct_removeInterruptHandler_asm    cpct_firmware
+     00006630  _cpct_getRandom_mxor_u8            cpct_random
 ASxxxx Linker V03.00 + NoICE + sdld,  page 4.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-_CODE                               00004000    000034B5 =       13493. bytes (REL,CON)
+_CODE                               00004000    0000341D =       13341. bytes (REL,CON)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
-     000066C8  cpct_getRandom_mxor_u8             cpct_random
-     000066C9  cpct_randomIdx_mxor_u8             cpct_random
-     000066ED  _cpct_drawSolidBox                 cpct_sprites
-     000067A5  __modschar                         
-     000067B2  __modsint                          
-     000067BE  _cpct_mode_rom_status              cpct_firmware
-     000067BF  _cpct_getScreenPtr                 cpct_video
-     000067DF  _cpct_scanKeyboard                 cpct_keyboard
-     000067DF  cpct_scanKeyboard_asm              cpct_keyboard
-     00006810  __divsint                          
-     00006819  __divschar                         
-     00006820  __div8                             
-     00006824  __div_signexte                     
-     00006828  __div16                            
-     0000684E  __get_remainder                    
-     00006858  _free                              free
-     00006A3B  __print_format                     printf_large
-     0000747D  _cpct_mxor32_seed                  cpct_random
-     00007481  _cpct_nextRandom_mxor_u32          cpct_random
-     00007481  cpct_nextRandom_mxor_u32_asm       cpct_random
-     000074A4  ___sdcc_call_hl                    
-     000074A5  dc_mode0_ct                        cpct_strings
+     00006630  cpct_getRandom_mxor_u8             cpct_random
+     00006631  cpct_randomIdx_mxor_u8             cpct_random
+     00006655  _cpct_drawSolidBox                 cpct_sprites
+     0000670D  __modschar                         
+     0000671A  __modsint                          
+     00006726  _cpct_mode_rom_status              cpct_firmware
+     00006727  _cpct_getScreenPtr                 cpct_video
+     00006747  _cpct_scanKeyboard                 cpct_keyboard
+     00006747  cpct_scanKeyboard_asm              cpct_keyboard
+     00006778  __divsint                          
+     00006781  __divschar                         
+     00006788  __div8                             
+     0000678C  __div_signexte                     
+     00006790  __div16                            
+     000067B6  __get_remainder                    
+     000067C0  _free                              free
+     000069A3  __print_format                     printf_large
+     000073E5  _cpct_mxor32_seed                  cpct_random
+     000073E9  _cpct_nextRandom_mxor_u32          cpct_random
+     000073E9  cpct_nextRandom_mxor_u32_asm       cpct_random
+     0000740C  ___sdcc_call_hl                    
+     0000740D  dc_mode0_ct                        cpct_strings
 ASxxxx Linker V03.00 + NoICE + sdld,  page 5.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-_DATA                               000074B5    00000F04 =        3844. bytes (REL,CON)
+_DATA                               0000741D    00000F04 =        3844. bytes (REL,CON)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
-     000074B5  _p_world                           global
-     000083B5  _trainList                         global
-     000083B7  ___sdcc_heap_free                  malloc
+     0000741D  _p_world                           global
+     0000831D  _trainList                         global
+     0000831F  ___sdcc_heap_free                  malloc
 ASxxxx Linker V03.00 + NoICE + sdld,  page 6.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-_INITIALIZED                        000083B9    00000002 =           2. bytes (REL,CON)
+_INITIALIZED                        00008321    00000002 =           2. bytes (REL,CON)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
-     000083B9  _CURSOR_MODE                       global
-     000083BA  _nbTrainList                       global
+     00008321  _CURSOR_MODE                       global
+     00008322  _nbTrainList                       global
 
 ASxxxx Linker V03.00 + NoICE + sdld,  page 7.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-_GSINIT                             000083BB    00000003 =           3. bytes (REL,CON)
+_GSINIT                             00008323    00000003 =           3. bytes (REL,CON)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
@@ -225,7 +225,7 @@ Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-_INITIALIZER                        000083BE    00000002 =           2. bytes (REL,CON)
+_INITIALIZER                        00008326    00000002 =           2. bytes (REL,CON)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
@@ -245,42 +245,43 @@ Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-_CSEG                               000083C0    0000164A =        5706. bytes (REL,CON)
+_CSEG                               00008328    00001A0B =        6667. bytes (REL,CON)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
-     000083C0  _drawCursor                        world
-     0000867E  _patternTile                       world
-     00008768  _generateWorld                     world
-     00008ADA  _drawTile                          world
-     00008D03  _drawScrolls                       world
-     00008E40  _drawWorld                         world
-     00008E7D  _setTrainHeading                   world
-     00008F19  _setPixel                          world
-     00008FF2  _isPixelBlack                      world
-     00009086  _drawTrains                        world
+     00008328  _drawCursor                        world
+     000085E4  _patternTile                       world
+     000086CE  _generateWorld                     world
+     00008A40  _drawTile                          world
+     00008C69  _drawScrolls                       world
+     00008DA6  _drawWorld                         world
+     00008DE3  _setTrainHeading                   world
+     00008E7F  _setPixel                          world
+     00008F58  _isPixelBlack                      world
+     00008FEC  _drawNewTrain                      world
+     000093AA  _drawTrains                        world
 
 ASxxxx Linker V03.00 + NoICE + sdld,  page 11.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-_HEAP                               00009A0A    000003FF =        1023. bytes (REL,CON)
+_HEAP                               00009D33    000003FF =        1023. bytes (REL,CON)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
-     00009A0A  ___sdcc_heap                       
+     00009D33  ___sdcc_heap                       
 
 ASxxxx Linker V03.00 + NoICE + sdld,  page 12.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-_HEAP_END                           00009E09    00000001 =           1. bytes (REL,CON)
+_HEAP_END                           0000A132    00000001 =           1. bytes (REL,CON)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
-     00009E09  ___sdcc_heap_end                   
+     0000A132  ___sdcc_heap_end                   
 
 ASxxxx Linker V03.00 + NoICE + sdld,  page 13.
 
